@@ -6,6 +6,8 @@
         <meta name="viewport" content="initial-scale=1, width=device-width" />
         <title></title>
         <meta name="description" content="" />
+        <meta name="google-signin-scope" content="profile email">
+        <meta name="google-signin-client_id" content="243057477675-ti2g5mjdpfrnq5vsgqgdtj3ph3j4ert6.apps.googleusercontent.com">
 
 
         <link
@@ -33,9 +35,9 @@
             href="https://fonts.googleapis.com/css2?family=Abhaya Libre:wght@700&display=swap"
             />
         <link href="assets/css/fontawesome-free-6.1.1-web/css/all.min.css" rel="stylesheet" type="text/css"/>
+        <script src="https://apis.google.com/js/platform.js?onload=init" async defer></script>
         <!--<link href="assets/css/bootstrap-4.3.1.min.css" rel="stylesheet" type="text/css"/>-->
         <link rel="stylesheet" href="assets/css/login.css" />
-
     </head>
     <body>
         <section class="logindone-section " id="Login">
@@ -73,7 +75,7 @@
                 </div>
 
             </header>
-            <div class="section-div d-none">
+            <div class="section-div ">
                 <form class="register-form" action="home" id="register">
                     <div class="join-bakeryrecipe-div">Join BakeryRecipe!</div>
                     <div class="joining-bakeryrecipe-is-quick">
@@ -137,11 +139,12 @@
                             <img src="assets/public/Google.png" alt=""/>
                         </div>
                     </div>
+                    <div class="g-signin2" data-onsuccess="onSignIn" data-theme="dark"></div>
+
                 </form>
             </div>
 
         </section>
-
         <script>
             var submitButton = document.getElementById("submitButton");
             if (submitButton) {
@@ -155,6 +158,26 @@
                 submitButton1.addEventListener("click", function (e) {
                     window.location.href = "./home.html";
                 });
+            }
+            function init() {
+                gapi.load('auth2', function () {
+                    /* Ready. Make a call to gapi.auth2.init or some other API */
+                    
+                });
+            }
+            function onSignIn(googleUser) {
+                // Useful data for your client-side scripts:
+                var profile = googleUser.getBasicProfile();
+                console.log("ID: " + profile.getId()); // Don't send this directly to your server!
+                console.log('Full Name: ' + profile.getName());
+                console.log('Given Name: ' + profile.getGivenName());
+                console.log('Family Name: ' + profile.getFamilyName());
+                console.log("Image URL: " + profile.getImageUrl());
+                console.log("Email: " + profile.getEmail());
+
+                // The ID token you need to pass to your backend:
+                var id_token = googleUser.getAuthResponse().id_token;
+                console.log("ID Token: " + id_token);
             }
         </script>
     </body>
