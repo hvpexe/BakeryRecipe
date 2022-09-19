@@ -5,6 +5,7 @@
 body {
     margin: 0;
     line-height: normal;
+    background:  #e3a587;
 }
 .join-bakeryrecipe-div,
 .joining-bakeryrecipe-is-quick {
@@ -99,6 +100,7 @@ body {
     flex-shrink: 0;
     overflow: hidden;
     outline: none;
+    font-size: 0.5em;
 }
 .submit-button,
 .submit-button:hover {
@@ -116,11 +118,14 @@ body {
     gap: 21px;
 }
 .line-div {
-    position: relative;
-    border-right: 2px solid #fff;
+    position: absolute;
+    top: 2rem;
+    bottom: 2rem;
+    border: 2px solid #fff;
     box-sizing: border-box;
-    width: 2px;
-    height: 100%;
+    border-radius: 100px;
+    width: 0;
+    background: #fff;
     flex-shrink: 0;
 }
 .email-input1,
@@ -128,11 +133,9 @@ body {
     border: 0;
     background-color: #fff;
     position: relative;
-    width: 523px;
-    height: 52px;
-    flex-shrink: 0;
     overflow: hidden;
-    font-size: 24px;
+    font-size: 1.2em;
+    padding: 11px 0;
     text-align: center;
     font-family: san-serif;
 }
@@ -147,11 +150,10 @@ form *:is( input , button ){
     box-shadow: 0 4px 4px rgba(0, 0, 0, 0.25);
 }
 .login-b, .join-b {
-    font-size: 32px;
+    font-size: 1.5rem;
     display: inline-block;
     font-family: Gelasio;
     color: #fff;
-    
     text-align: center;
 }
 .submit-button1 {
@@ -190,15 +192,16 @@ form *:is( input , button ){
 .section-div {
     align-self: stretch;
     background-color: #e3a587;
-    box-shadow: 0 4px 4px rgb(0 0 0 / 25%);
-    height: 750px;
+    min-height: 500px;
     flex-shrink: 0;
     flex-direction: row;
     padding: 40px 0;
     box-sizing: border-box;
-    gap: 75px;
     z-index: 0;
     flex-wrap: wrap;
+    align-items: start;
+    position: relative;
+    box-shadow: 0 0 0 2px #e3a587;
 }
 .header-logo {
     text-decoration: none;
@@ -286,18 +289,24 @@ form *:is( input , button ){
     gap: 5px;
     padding: 8px 20px;
 }
-.sign-up-div {
+.select {
     position: absolute;
     top: 8.25px;
     left: 15.5px;
     font-weight: 500;
     display: inline-block;
 }
-.log-in-div {
+.unselect {
+    color:#fff;
+}
+.select{
     color:#db5a42;
 }
-.sign-up-div{
-    color:#fff;
+a[class^=header-button]{
+    max-width: 15em;
+}
+a[class^=header-button]:active{
+    box-shadow: 0 0 2px 1px #db5a42;
 }
 .header-button {
     text-decoration: none;
@@ -308,12 +317,13 @@ form *:is( input , button ){
     overflow: hidden;
     cursor: pointer;
     color: #fff;
+    max-width: 10em;
 }
 .header-button:hover {
     background-color: #fff;
     width: 89px;
     border: 1px solid #db5a42;
-    
+
     font-weight: 400;
 }
 .header-button:hover div{
@@ -363,16 +373,15 @@ form *:is( input , button ){
 }
 .group-div {
     position: relative;
-    width: 192px;
-    height: 37.5px;
     flex-shrink: 0;
     color: #fff;
 }
 .header  > [class^=header]{
     display: flex;
-    gap:inherit;
+    row-gap: inherit;
     flex-wrap: wrap;
     justify-content: space-between;
+    align-items: center;
 }
 .header,
 .logindone-section {
@@ -392,7 +401,7 @@ form *:is( input , button ){
     height:60px;
     flex-direction: row;
     padding: 3px 0;
-    gap: 10px;
+    row-gap: 10px;
     z-index: 1;
     text-align: left;
     font-size: 16px;
@@ -412,8 +421,8 @@ form *:is( input , button ){
 .header-container{
     height: 60px;
 }
-@media (max-width:768px){
-    
+@media (max-width:997px){
+
     .header-logo {
         padding-top: 10px;
         width: 100%;
@@ -422,7 +431,7 @@ form *:is( input , button ){
     .header-logo img{
         margin:auto;
         width: 50%!important;
-        
+
     }
     [class^=header-button] {
         flex-basis: 33%;
@@ -435,16 +444,18 @@ form *:is( input , button ){
     }
     .header {
         position: static;
-        height: auto;
+        height: auto!important;
         padding-bottom: 10px;
     }
     .header-container{
-        height:auto;
+        height:auto!important;
     }
     .section-div{
         font-size: 12px;
     }
-    .line-div {
+}
+@media (max-width:1127px){
+    .line-div{
         display: none;
     }
 }
