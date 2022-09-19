@@ -1,3 +1,0 @@
-ERD đc vẽ bằng https://erdplus.com/
-chưa hoàn thiện lắm, còn chỉnh sửa nhiều
-bao giờ ổn sẽ chuyển sang Relational Schema

@@ -21,7 +21,7 @@ Baker/Cooker:
 - Quản lý nội dung đăng tải: hình ảnh, video, công thức,...
 - Quản lý tương tác bài viết (text,video,công thức,...)
 - Xem, comments, vote bài viết khác
-- Nhận suggestions các nhà bán lẻ có nguyên liệu, dụng cụ làm bánh tương ứng với công thức đánh dấu ""làm theo"".
+- Nhận suggestions các nhà bán lẻ có nguyên liệu, dụng cụ làm bánh tương ứng với công thức đánh dấu "làm theo".
 - Có thể order nguyên liệu, dụng cụ
 
 Retail store: quản lý các sản phẩm của cửa hàng. Xem được danh sách đơn hàng và thông tin đặt hàng.
