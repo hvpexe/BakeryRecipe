@@ -9,17 +9,17 @@ body {
 .join-bakeryrecipe-div,
 .joining-bakeryrecipe-is-quick {
     position: relative;
-    font-size: 32px;
+    font-size: 2em;
     font-family: Gelasio;
     color: #fff;
     text-align: center;
     display: inline-block;
-    width: 515px;
+    width: 100%;
     color: #444;
     font-weight: bolder;
 }
 .joining-bakeryrecipe-is-quick {
-    font-size: 16px;
+    font-size: inherit;
     width: 523px;
     color: #555;
 }
@@ -29,14 +29,14 @@ body {
     background-color: #fff;
     position: relative;
     box-shadow: 0 4px 4px rgba(0, 0, 0, 0.25);
-    width: 523px;
-    height: 52px;
+    width: 100%;
+    padding: 11px 0;
     flex-shrink: 0;
     text-align: center;
-    font-size: 24px;
+    font-size: 1.2em;
 }
 .firstname-input {
-    width: 245px;
+    width: 100%;
 }
 .login-with-api{
     display: flex;
@@ -80,33 +80,25 @@ body {
     translate: 0 0;
 }
 .name-div {
-    width: 519px;
+    width: 100%;
     display: flex;
     flex-direction: row;
     align-items: center;
     justify-content: center;
     gap: 33px;
 }
-.join-b {
-    position: absolute;
-    top: 15px;
-    left: 219px;
-    font-size: 32px;
-    display: inline-block;
-    font-family: Gelasio;
-    color: #fff;
-    text-align: left;
-}
+
 .submit-button {
     cursor: pointer;
     border: 0;
     padding: 0;
     background-color: #db5a42;
     position: relative;
-    width: 524px;
-    height: 72px;
+    width: 100%;
+    padding:11px 0 ;
     flex-shrink: 0;
     overflow: hidden;
+    outline: none;
 }
 .submit-button,
 .submit-button:hover {
@@ -117,6 +109,7 @@ body {
 }
 .register-form {
     display: flex;
+    width: 100%;
     flex-direction: column;
     align-items: center;
     justify-content: center;
@@ -127,7 +120,7 @@ body {
     border-right: 2px solid #fff;
     box-sizing: border-box;
     width: 2px;
-    height: 613px;
+    height: 100%;
     flex-shrink: 0;
 }
 .email-input1,
@@ -143,6 +136,9 @@ body {
     text-align: center;
     font-family: san-serif;
 }
+form *:is( input , button ){
+    border-radius:10px;
+}
 .email-input1 {
     box-shadow: 0 4px 4px rgba(0 0 0 / 0.25);
     color: #000000;
@@ -150,15 +146,13 @@ body {
 .password-input1 {
     box-shadow: 0 4px 4px rgba(0, 0, 0, 0.25);
 }
-.login-b {
-    position: absolute;
-    top: calc(50% - 20px);
-    left: calc(50% - 58.5px);
+.login-b, .join-b {
     font-size: 32px;
     display: inline-block;
     font-family: Gelasio;
     color: #fff;
-    text-align: left;
+    
+    text-align: center;
 }
 .submit-button1 {
     cursor: pointer;
@@ -200,10 +194,12 @@ body {
     height: 750px;
     flex-shrink: 0;
     flex-direction: row;
-    padding: 100px 0;
+    padding: 40px 0;
     box-sizing: border-box;
     gap: 75px;
     z-index: 0;
+    flex-wrap: wrap;
+    margin: 1em 0 0;
     align-items: start;
 }
 .header-logo {
@@ -236,8 +232,8 @@ body {
 .header-link.active{
     color: #db5a42;
 }
-.header-link:hover {
-    mix-blend-mode: normal;
+.header-link:not(.active):hover {
+    color:#000;
 }
 .header-link:active {
     font-weight: 700;
@@ -376,6 +372,7 @@ body {
 }
 .header  > [class^=header]{
     display: flex;
+    gap:inherit;
     flex-wrap: wrap;
     justify-content: space-between;
 }
@@ -388,15 +385,16 @@ body {
 }
 .header {
     margin: 0 !important;
-    position: absolute;
+    position: fixed;
     top: 0;
     left: 0;
     background-color: #fff;
     box-shadow: 0 1px 12px rgb(79 79 255 / 6%);
     width: 100%;
+    height:60px;
     flex-direction: row;
     padding: 3px 0;
-    gap: inherit;
+    gap: 10px;
     z-index: 1;
     text-align: left;
     font-size: 16px;
@@ -413,7 +411,11 @@ body {
     flex-direction: column;
 
 }
+.header-container{
+    height: 60px;
+}
 @media (max-width:768px){
+    
     .header-logo {
         padding-top: 100px;
         width: 100%;
@@ -435,5 +437,15 @@ body {
     }
     .header {
         position: static;
+        height: auto;
+    }
+    .header-container{
+        height:auto;
+    }
+    .section-div{
+        font-size: 12px;
+    }
+    .line-div {
+        display: none;
     }
 }
