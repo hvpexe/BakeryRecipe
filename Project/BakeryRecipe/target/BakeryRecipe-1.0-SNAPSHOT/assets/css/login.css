@@ -102,9 +102,11 @@ body {
     outline: none;
     font-size: 0.5em;
 }
-.submit-button,
+.submit-button{
+    box-shadow: 0 4px 4px 0 rgba(0 0 0 / 0.25);
+}
 .submit-button:hover {
-    box-shadow: 0 4px 4px rgba(0, 0, 0, 0.25);
+    box-shadow: 0 0 4px 0 rgba(0 0 0 / 0.5);
 }
 .submit-button:active {
     background-color: #c5513d;
@@ -117,10 +119,9 @@ body {
     justify-content: center;
     gap: 21px;
 }
+
 .line-div {
-    position: absolute;
-    top: 2rem;
-    bottom: 2rem;
+    min-height: 450px;
     border: 2px solid #fff;
     box-sizing: border-box;
     border-radius: 100px;
@@ -142,6 +143,10 @@ body {
 form *:is( input , button ){
     border-radius:10px;
 }
+form *:is( input , button ):hover, form *:is( input , button ):focus{
+    box-shadow: 0 0 4px 2px rgb(0 0 0 / 25%);
+    outline: none;
+}
 .email-input1 {
     box-shadow: 0 4px 4px rgba(0 0 0 / 0.25);
     color: #000000;
@@ -156,24 +161,7 @@ form *:is( input , button ){
     color: #fff;
     text-align: center;
 }
-.submit-button1 {
-    cursor: pointer;
-    border: 0;
-    padding: 0;
-    background-color: #db5a42;
-    position: relative;
-    box-shadow: 0 4px 4px rgba(0, 0, 0, 0.25);
-    width: 523px;
-    height: 68px;
-    flex-shrink: 0;
-    overflow: hidden;
-}
-.submit-button1:hover {
-    box-shadow: 0 4px 4px rgba(0, 0, 0, 0.25), 0 4px 4px rgba(219, 90, 66, 0.75);
-}
-.submit-button1:active {
-    background-color: #c5513d;
-}
+
 .image-14-icon {
     position: relative;
     width: 338.91px;
@@ -187,8 +175,29 @@ form *:is( input , button ){
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    gap: 22px;
+    row-gap: 22px;
 }
+.header-button,.header-button:focus {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: #fff;
+    box-shadow: 0 0 0 1px #c5513d;
+    border-radius: 25px;
+    transition: background 1s ,color 0.2s;
+    color: #c5513d!important;
+}
+.header-button:hover {
+    background: #c5513d;
+    box-shadow: 0 0 0 2px #c5513d;
+    color:#fff!important;
+}
+.header-button.active, .header-button.active:focus{
+    color:#fff!important;
+    background: #c5513d;
+
+}
+
 .section-div {
     align-self: stretch;
     background-color: #e3a587;
@@ -204,6 +213,7 @@ form *:is( input , button ){
     box-shadow: 0 0 0 2px #e3a587;
 }
 .header-logo {
+
     text-decoration: none;
     position: relative;
     flex-shrink: 0;
@@ -211,6 +221,7 @@ form *:is( input , button ){
 }
 .header-logo img {
     aspect-ratio: 318/106;
+    transform-origin: center;
 }
 .header-links {
     display: flex;
@@ -274,7 +285,6 @@ form *:is( input , button ){
     overflow: hidden;
     outline: 0;
 }
-.header-button:hover,
 .searchbar-div {
     display: flex;
     box-sizing: border-box;
@@ -289,92 +299,11 @@ form *:is( input , button ){
     gap: 5px;
     padding: 8px 20px;
 }
-.select {
-    position: absolute;
-    top: 8.25px;
-    left: 15.5px;
-    font-weight: 500;
-    display: inline-block;
-}
-.unselect {
-    color:#fff;
-}
-.select{
-    color:#db5a42;
-}
-a[class^=header-button]{
-    max-width: 15em;
-}
-a[class^=header-button]:active{
-    box-shadow: 0 0 2px 1px #db5a42;
-}
-.header-button {
-    text-decoration: none;
-    position: relative;
-    border-radius: 20px;
-    background-color: #db5a42;
-    height: 37px;
-    overflow: hidden;
-    cursor: pointer;
-    color: #fff;
-    max-width: 10em;
-}
-.header-button:hover {
-    background-color: #fff;
-    width: 89px;
-    border: 1px solid #db5a42;
 
-    font-weight: 400;
-}
-.header-button:hover div{
-    color: #db5a42!important;
-}
-.header-button,
-.header-button:active {
-    transition: background 0.3s;
-    font-weight: 400;
-}
-.header-button:active {
-    box-shadow: 0 0 0 2px;
-}
-[class^=header-button] div {
-    position: absolute;
-    top: 9px;
-    left: 0;
-    right: 0;
-    margin: auto;
-    text-align: center;
-    display: inline-block;
-}
-.header-button1 {
-    text-decoration: none;
-    position: relative;
-    border-radius: 20px;
-    background-color: #fff;
-    border: 1px solid #db5a42;
-    box-sizing: border-box;
-    height: 37px;
-    overflow: hidden;
-    cursor: pointer;
-    color: #db5a42;
-    transition: background 0.3s;
-}
-.header-button1:hover {
-    background-color: #db5a42;
-    color: #db5a42;
-}
-.header-button1:hover div{
-    color: #fff!important;
-}
-.header-button1:active {
-    cursor: auto;
-    color: #fff;
-    box-shadow: 0 0 0 2px #db5a42;
-}
+
 .group-div {
     position: relative;
     flex-shrink: 0;
-    color: #fff;
 }
 .header  > [class^=header]{
     display: flex;
@@ -393,10 +322,10 @@ a[class^=header-button]:active{
 .header {
     margin: 0 !important;
     position: fixed;
-    top: 0;
+    top: 2px;
     left: 0;
     background-color: #fff;
-    box-shadow: 0 1px 12px rgb(79 79 255 / 6%);
+    box-shadow: 0 1px 12px rgb(79 79 255 / 6%), 0 -60px 0 60px #fff ;
     width: 100%;
     height:60px;
     flex-direction: row;
@@ -409,6 +338,7 @@ a[class^=header-button]:active{
     font-family: Gelasio;
     justify-content: space-between;
     flex-wrap: wrap;
+    box-sizing: content-box;
 }
 .logindone-section {
     position: relative;
@@ -421,21 +351,14 @@ a[class^=header-button]:active{
 .header-container{
     height: 60px;
 }
-@media (max-width:997px){
+@media (max-width:996px){
 
     .header-logo {
         padding-top: 10px;
         width: 100%;
         display: flex;
     }
-    .header-logo img{
-        margin:auto;
-        width: 50%!important;
 
-    }
-    [class^=header-button] {
-        flex-basis: 33%;
-    }
     .header-link{
         border: 1px solid var(--gray);
     }
@@ -453,9 +376,13 @@ a[class^=header-button]:active{
     .section-div{
         font-size: 12px;
     }
+    .section-div form {
+    }
 }
-@media (max-width:1127px){
-    .line-div{
-        display: none;
+@media (max-width:767px){
+    .header-logo img{
+        margin:auto;
+        width: 50%!important;
+
     }
 }

@@ -1,15 +1,18 @@
-$('.header-button').on('click',changeForm);
+$('.header-button:not(.active)').on('click',changeForm);
 function changeForm() {
-    let select = $('.select');
-    let unselect = $('.unselect');
-    let headerButton1 = $('.header-button1');
-    let headerButton = $('.header-button');
-    select.addClass('unselect').removeClass('select');
-    unselect.addClass('select').removeClass('unselect');
-    headerButton1.addClass('header-button').removeClass('header-button1').on('click',changeForm);
-    headerButton.addClass('header-button1').removeClass('header-button').unbind();
+    let headerButton  = $(this);
+
+    let form = $('[class^='+this.getAttribute('data-type')+'-form]');
+    $('.header-button').removeClass('active');
+    headerButton.addClass('active');
+    $('.section-div form[class*=form]').removeClass('d-none');
+    $('.header-button:not(.active)').on('click',changeForm);
+    $(this).unbind();
+    form.addClass('d-none');
     
     console.log('running');
-    console.log(select);
-    console.log(unselect);
+    console.log('[class^='+this.getAttribute('data-type')+'-form]');
+    console.log($('.section-div form'));
+    console.log(form);
+    $(document).focus();
 }

@@ -8,7 +8,7 @@ $(window).resize(function () {
 
 });
 function changeHeight() {
-    $('header').css('height', 'calc( ' + $('.header-logo').css('height') + ' + 5px');
+    $('header').css('height', 'calc( ' + $('.header-logo img').css('height') + ' + 5px');
     $("#test").html($('header').css('height'));
     $('.line-div').css('height', $('section-div', 'height'));
 }

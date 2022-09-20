@@ -1,7 +1,8 @@
 CREATE DATABASE BakeryRecipe
 USE BakeryRecipe
 -- DROP DATABASE BakeryRecipe
-
+DBCC FREEPROCCACHE
+DBCC DROPCLEANBUFFERS
 CREATE TABLE Comment (ID int IDENTITY(1, 1) NOT NULL, Comment nvarchar(500) NOT NULL, Rate bit NOT NULL, DateComment datetime NOT NULL, LastDateEdit datetime NULL, IsDeleted bit NOT NULL, UserID int NOT NULL, RecipeID int NOT NULL, CONSTRAINT PK__Comments__C3B4DFAABAE3DA4F PRIMARY KEY (ID));
 CREATE TABLE Follow (UserID int NOT NULL, UserID2 int NOT NULL, PRIMARY KEY (UserID, UserID2));
 CREATE TABLE Ingredient (ID int IDENTITY(1, 1) NOT NULL, Name nvarchar(50) NOT NULL, Img varchar(100) NOT NULL, CONSTRAINT PK_Ingredient PRIMARY KEY (ID));

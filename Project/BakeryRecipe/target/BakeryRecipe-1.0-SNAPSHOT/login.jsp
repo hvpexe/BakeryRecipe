@@ -3,7 +3,7 @@
 <!DOCTYPE html>
 <html>
     <head>
-        
+
         <meta charset="utf-8" />
         <meta name="viewport" content="initial-scale=1, width=device-width" />
         <title>Welcome to Bakery Recipe</title>
@@ -37,13 +37,16 @@
         <!--<script src="https://apis.google.com/js/platform.js" async defer></script>-->
         <!--<meta name="google-signin-client_id" content="243057477675-ti2g5mjdpfrnq5vsgqgdtj3ph3j4ert6">-->
         <!--<link href="assets/css/bootstrap-4.3.1.min.css" rel="stylesheet" type="text/css"/>-->
+        <script src="assets/js/Jquery/jquery-core.js" ></script>
         <link rel="stylesheet" href="assets/css/login.css" />
     </head>
     <body>
         <section class="logindone-section " id="Login">
             <jsp:include page="header.jsp"/>
-            <div class="section-div ">
-                <form class="register-form col-lg mx-auto" action="home" id="register">
+
+            <div class="section-div flex-wrap flex-lg-nowrap">
+
+                <form class="register-form col-lg mx-auto d-lg-flex" action="home" id="register">
                     <div class="join-bakeryrecipe-div col-10">Join BakeryRecipe!</div>
                     <div class="joining-bakeryrecipe-is-quick col-10">
                         JOINING BAKERYRECIPE IS QUICK, EASY, AND FREE.
@@ -56,10 +59,8 @@
                         <b class="join-b">JOIN</b>
                     </button>
                 </form>
-
-                <div class="line-div mx-auto"></div>
-
-                <form class="login-form col-lg mx-auto" action="Home" method="post" id="login">
+                <div class="line-div mx-auto d-none d-lg-block"></div>
+                <form class="login-form col-lg mx-auto d-lg-flex" action="Home" method="post" id="login">
                     <div class="join-bakeryrecipe-div col-10">Already A Member? Sign-In</div>
                     <div class="joining-bakeryrecipe-is-quick col-10">WELCOME BACK</div>
                     <input class="email-input1 col-10" type="text" placeholder="Email" required="" name="email">
@@ -67,17 +68,17 @@
                     <div class="joining-bakeryrecipe-is-quick col-10">Forgot your password?</div>
                     <button class="submit-button col-10" type="submit" id="submitButton1">
                         <b class="login-b">LOGIN</b></button>
-<!--                    <img class="image-14-icon" alt="" src="assets/public/image-14@2x.png" />
-                    <div class="login-with-api">
-                        <div class="google">
-                            <img src="assets/public/Google.png" alt=""/>
-                        </div>
-                    </div>-->
+                    <!--                    <img class="image-14-icon" alt="" src="assets/public/image-14@2x.png" />
+                                        <div class="login-with-api">
+                                            <div class="google">
+                                                <img src="assets/public/Google.png" alt=""/>
+                                            </div>
+                                        </div>-->
                     <!--<script src="https://accounts.google.com/gsi/client" async="" defer=""></script>-->
                     <div id="g_id_onload" data-client_id="243057477675-ti2g5mjdpfrnq5vsgqgdtj3ph3j4ert6" data-context="signin" data-ux_mode="popup" data-login_uri="http://localhost:8080/BakeryRecipe/login.jsp" data-auto_select="true" data-itp_support="true">
                     </div>
                     <div id="test"></div>
-                    
+
                 </form>
             </div>
 
