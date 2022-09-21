@@ -4,6 +4,7 @@
  */
 package controller;
 
+import dao.UserDAO;
 import java.io.IOException;
 import java.io.PrintWriter;
 import javax.servlet.ServletException;
@@ -21,11 +22,28 @@ public class ChangePasswordController extends HttpServlet {
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
         String url = ERROR;
-        try ( PrintWriter out = response.getWriter()) {
+        try{
             String userID = request.getParameter("userID");
             String oldPassword = request.getParameter("oldPassword");
             String newPassword = request.getParameter("newPassword");
             String confirmNewPassword = request.getParameter("confirmNewPassword");
+            
+            if (!UserDAO.checkOldPassword(userID, oldPassword)) {
+                request.setAttribute("PASSWORD_ERROR", "Old password wrong!");
+            } else if (newPassword.length() < 8 && newPassword.length() > 40) {
+                request.setAttribute("PASSWORD_ERROR", "password must be 8 to 40 characters !");
+            } else if (!newPassword.equals(confirmNewPassword)) {
+                request.setAttribute("PASSWORD_ERROR", "Confirmation mismatched");
+            } else if (!newPassword.equals(confirmNewPassword)) {
+                request.setAttribute("PASSWORD_ERROR", "Confirmation mismatched");
+            } else if (UserDAO.changePassword(userID, newPassword)) {
+                request.setAttribute("PASSWORD_SUCCESS", "Change password successfully");
+                url = SUCCESS;
+            }
+        }catch (Exception e){
+            System.out.println("Error at ProfileChangePasswordController: " + e.toString());
+        }finally{
+            request.getRequestDispatcher(url).forward(request, response);
         }
     }
 
