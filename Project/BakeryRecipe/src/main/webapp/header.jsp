@@ -4,7 +4,7 @@
             <a class="header-logo col-md-3 p-0 pt-4 pt-md-0" href="./home.html">
                 <img class="w-100 " src="assets/public/800250px1@2x.png" alt="">
             </a>
-            <nav class="header-links col-md-8 col p-0 ">
+            <nav class="header-links col-md col p-0 ">
                 <a class="header-link  col-md col-12 p-md-0 p-2 border-0 active" href="./home.jsp">Home</a>
                 <a class="header-link  col-md col-12 p-md-0 p-2 border-0" href="./community.jsp">Community</a>
                 <a class="header-link  col-md col-12 p-md-0 p-2 border-0" href="./saved.jsp">Saved</a>
