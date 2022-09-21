@@ -1,4 +1,4 @@
-package utilities;
+package com.demo.utils;
 
 /*
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
@@ -14,8 +14,6 @@ import java.sql.SQLException;
  */
 public class DBUtils {
 
-    private static Connection conn;
-
     public static Connection getConnection() {
         try {
             String url = "jdbc:sqlserver://" + serverName + ":" + portNumber + "\\" + instance + ";databaseName=" + dbName;
@@ -24,8 +22,8 @@ public class DBUtils {
             }
             url += ";CharacterSet=UTF-8";//important to add UTF-8 format
             Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver");
-            conn = DriverManager.getConnection(url, userID, password);
-            return conn;
+
+            return DriverManager.getConnection(url, userID, password);
         } catch (SQLException ex) {
             System.out.println("Connection error! " + ex.getMessage());
         } catch (ClassNotFoundException ex) {

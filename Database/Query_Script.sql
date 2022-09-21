@@ -1,5 +1,5 @@
-Select ID||Role||Email from [User]
-
+Select ID from [User]
+where Email = ? and Password = ?
  UPDATE [User]
  SET 
  Password = ?

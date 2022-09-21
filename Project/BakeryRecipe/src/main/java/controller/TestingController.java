@@ -11,7 +11,7 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import utilities.DBUtils;
+import utils.DBUtils;
 
 /**
  *
@@ -34,7 +34,6 @@ public class TestingController extends HttpServlet {
         try ( PrintWriter out = response.getWriter()) {
             /* TODO output your page here. You may use following sample code. */
             out.print(DBUtils.getConnection());
-            out.print(UserDAO.getUserByID(1));
         }
     }
 
