@@ -1,0 +1,124 @@
+body {
+  margin: 0;
+  line-height: normal;
+}
+.add-recipe-video-url {
+  position: relative;
+  display: inline-block;
+  z-index: 0;
+}
+.frame-input {
+  border: 0.5px solid rgba(0, 0, 0, 0.5);
+  background-color: rgba(250, 248, 248, 0.5);
+  border-radius: 5px;
+  box-sizing: border-box;
+  position: relative;
+  width: 378px;
+  display: flex;
+  flex-direction: row;
+  padding: 10px 9px;
+  align-items: flex-start;
+  justify-content: flex-start;
+  z-index: 1;
+}
+.vector-icon2 {
+  position: absolute;
+  height: 100%;
+  width: 100%;
+  top: 496.25%;
+  right: -967.21%;
+  bottom: -496.25%;
+  left: 967.21%;
+  max-width: 100%;
+  max-height: 100%;
+  opacity: 0;
+}
+.icon-plus-button {
+  cursor: pointer;
+  border: 0;
+  padding: 0;
+  background-color: transparent;
+  position: relative;
+  width: 27.58px;
+  height: 23.97px;
+  flex-shrink: 0;
+  z-index: 2;
+}
+.facebook-08-1,
+.youtube-08-1 {
+  position: absolute;
+  margin: 0 !important;
+  top: 5px;
+  left: 95px;
+  width: 55.21px;
+  height: 50px;
+  flex-shrink: 0;
+  object-fit: cover;
+  z-index: 3;
+}
+.facebook-08-1 {
+  left: 368px;
+  width: 50px;
+  z-index: 4;
+}
+.done-div {
+  position: relative;
+  font-size: 16px;
+  font-family: Gelasio;
+  color: #fff;
+  text-align: left;
+  display: inline-block;
+}
+.frame-button3 {
+  cursor: pointer;
+  border: 0;
+  padding: 10px;
+  background-color: #db5a42;
+  border-radius: 40px;
+  width: 105px;
+  display: flex;
+  flex-direction: column;
+  box-sizing: border-box;
+  align-items: center;
+  justify-content: flex-end;
+  z-index: 5;
+}
+.vector-icon3 {
+  position: absolute;
+  margin: 0 !important;
+  height: 11.18%;
+  width: 4.24%;
+  top: 36.31%;
+  right: 6.43%;
+  bottom: 52.51%;
+  left: 89.33%;
+  max-width: 100%;
+  max-height: 100%;
+  z-index: 6;
+}
+.add-video-div,
+.frame-div1 {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  box-sizing: border-box;
+  align-items: center;
+  justify-content: flex-start;
+}
+.frame-div1 {
+  width: 506px;
+  height: 168px;
+  flex-shrink: 0;
+  padding: 24px 28px;
+}
+.add-video-div {
+  border-radius: 40px;
+  background-color: #fff;
+  width: 100%;
+  height: 185px;
+  padding: 10px 8px;
+  text-align: left;
+  font-size: 24px;
+  color: #0a0808;
+  font-family: Abel;
+}
