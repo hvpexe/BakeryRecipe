@@ -28,8 +28,10 @@ public class DBUtils {
             return conn;
         } catch (SQLException ex) {
             System.out.println("Connection error! " + ex.getMessage());
+            ex.printStackTrace();
         } catch (ClassNotFoundException ex) {
             System.out.println("Connection error! " + ex.getMessage());
+            ex.printStackTrace();
         }
         return null;
     }
