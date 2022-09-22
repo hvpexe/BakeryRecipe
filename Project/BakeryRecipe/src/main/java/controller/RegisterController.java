@@ -31,23 +31,23 @@ public class RegisterController extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
-      PrintWriter out = response.getWriter();
-      /*register?
+        PrintWriter out = response.getWriter();
+        /*register?
        email=binhnguyenthanh19242yahoo%40gmail.com
       &firstname=Nguy%26%237877%3Bn
       &lastname=B%ECnh
       &password=thanhbinh555
       &re-password=thanhbinh555*/
-      String url = "";
+        String url = "";
         String email = request.getParameter("email");
         String firstname = request.getParameter("firstname");
         String lastname = request.getParameter("lastname");
         String password = request.getParameter("password");
         String repassword = request.getParameter("re-password");
-        User user = new User(email,firstname,lastname,password);
-        
-        if(repassword.equals(password)&&UserDAO.register(user)){
-            
+        User user = new User(email, firstname, lastname, password);
+
+        if (repassword.equals(password) && UserDAO.register(user)) {
+
         }
     }
 

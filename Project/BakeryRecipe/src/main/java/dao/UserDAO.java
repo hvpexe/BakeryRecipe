@@ -3,6 +3,7 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
 package dao;
+
 import java.sql.ResultSet;
 import java.sql.PreparedStatement;
 import dto.User;
@@ -15,12 +16,14 @@ import utilities.DBUtils;
  * @author kichi
  */
 public class UserDAO {
+
     private static final String[] USER_COLUMN_NAME_LIST
             = {"ID", "Role", "Email", "Password", "Avatar", "FirstName",
                 "LastName", "Gender", "Phone", "Address", "DateRegister", "IsActive", "StoreID"};
     private static final Class[] USER_COLUMN_NAME_CLASS
             = {Integer.class, String.class, String.class, String.class, String.class, String.class,
                 String.class, Boolean.class, String.class, String.class, Timestamp.class, String.class, Integer.class};
+
     //ay da ko xem database code sai r
     public static boolean checkOldPassword(String ID, String password) {
         String sql = "SELECT ID\n"
@@ -117,7 +120,15 @@ public class UserDAO {
         }
         return null;
     }
-    private static final String INSERT_NEW_USER = ""; 
+    private static final String INSERT_NEW_USER
+            = "INSERT INTO [dbo].[User] "
+            + "([Role],[Email],[Password],[Avatar] "
+            + ",[FirstName],[LastName],[Gender] "
+            + ",[Phone],[Address],[DateRegister] "
+            + ",[IsActive],[StoreID]) "
+            + " VALUES"
+            + " (?,?,?,?,?,?,?,?,?,?,?,?)";
+
     public static boolean register(User user) {
         return false;
     }
