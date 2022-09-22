@@ -3,13 +3,10 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
 package dao;
-
 import java.sql.ResultSet;
-
-import dto.User;
 import java.sql.PreparedStatement;
+import dto.User;
 import java.sql.Connection;
-
 import java.sql.Timestamp;
 import utilities.DBUtils;
 
@@ -18,7 +15,6 @@ import utilities.DBUtils;
  * @author kichi
  */
 public class UserDAO {
-
     private static final String[] USER_COLUMN_NAME_LIST
             = {"ID", "Role", "Email", "Password", "Avatar", "FirstName",
                 "LastName", "Gender", "Phone", "Address", "DateRegister", "IsActive", "StoreID"};
@@ -46,21 +42,20 @@ public class UserDAO {
     }
     private static final String UPDATE_USER_PASSWORD = " UPDATE [User] SET Password = ? WHERE ID= ?";
 
-    public static boolean changePassword(String memberID, String password) {
+    public static boolean changePassword(String ID, String password) {
         String sql = UPDATE_USER_PASSWORD;
         try {
             Connection conn = DBUtils.getConnection();
             PreparedStatement ps = conn.prepareStatement(sql);
             //Set ps
             ps.setString(1, password);
-            ps.setString(2, memberID);
+            ps.setString(2, ID);
             //run ps
             ps.executeUpdate();
             return true;
         } catch (Exception e) {
             System.out.println("Change Password error:");
             e.printStackTrace();
-
         }
         return false;
     }
