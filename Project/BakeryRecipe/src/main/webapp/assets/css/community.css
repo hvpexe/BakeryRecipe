@@ -1,0 +1,267 @@
+body {
+  margin: 0;
+  line-height: normal;
+}
+.recommend-for-you {
+  margin: 0;
+  position: relative;
+  font-size: inherit;
+  font-weight: 700;
+  font-family: inherit;
+  display: inline-block;
+}
+.log-in-div {
+  position: absolute;
+  top: 9px;
+  left: 12px;
+  display: inline-block;
+}
+.btn-div {
+  position: relative;
+  border-radius: 20px;
+  background-color: #fff;
+  border: 1px solid #db5a42;
+  box-sizing: border-box;
+  width: 89px;
+  height: 37px;
+  flex-shrink: 0;
+  overflow: hidden;
+  font-size: 16px;
+  color: #db5a42;
+  font-family: Gelasio;
+}
+.titile-div {
+  align-self: stretch;
+  display: flex;
+  flex-direction: row;
+  padding: 15px 30px;
+  box-sizing: border-box;
+  align-items: flex-end;
+  justify-content: space-between;
+  flex-wrap: wrap;
+}
+.img-icon {
+  flex: 1;
+  align-self: stretch;
+  position: relative;
+  border-radius: 20px;
+  max-width: 100%;
+  max-height: 100%;
+  object-fit: cover;
+}
+.recipe-author-div,
+.recipe-name-div {
+  align-self: stretch;
+  position: relative;
+  display: inline-block;
+}
+.recipe-name-div {
+  text-transform: capitalize;
+}
+.recipe-author-div {
+  font-size: 11px;
+  color: rgba(0, 0, 0, 0.5);
+}
+.recipe-div {
+  border-radius: 20px;
+  width: 269px;
+  height: 269px;
+  flex-shrink: 0;
+  display: flex;
+  flex-direction: column;
+  padding: 10px;
+  box-sizing: border-box;
+  align-items: center;
+  justify-content: flex-start;
+  cursor: pointer;
+  box-shadow: inset 0 0 0 0#88888825;
+  transition: all 1s ease;
+}
+.recipe-div:hover {
+  box-shadow: inset 0 0 50px 100px #88888825;
+  transition: box-shadow 5s;
+}
+.recipe-div:active {
+  box-shadow: inset 0 0 50px 100px #88888850;
+  transition: 0.1s;
+}
+.items-div {
+  align-self: stretch;
+  display: flex;
+  flex-direction: row;
+  align-items: flex-start;
+  justify-content: space-around;
+  flex-wrap: wrap;
+  width: 100%;
+  font-size: 24px;
+  font-family: Gelasio;
+}
+.list-div,
+.section-div,
+.section-div1,
+.section-div2 {
+  border-radius: 20px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+.list-div {
+  background-color: #fff;
+  box-shadow: 0 4px 12px rgba(79, 79, 186, 0.06);
+  width: 100%;
+  padding: 10px;
+  box-sizing: border-box;
+  gap: 17px;
+  transition: 0.3s;
+}
+.list-div:hover {
+  box-shadow: 0 5px 10px 0#00000075;
+}
+.section-div,
+.section-div1,
+.section-div2 {
+  width: 80%;
+  z-index: 0;
+}
+.section-div1,
+.section-div2 {
+  z-index: 1;
+}
+.section-div2 {
+  z-index: 2;
+}
+.px-1-icon {
+  position: relative;
+  width: 159px;
+  height: 53px;
+  flex-shrink: 0;
+  object-fit: cover;
+}
+.home-div1 {
+  position: absolute;
+  top: 0;
+  left: 0;
+  display: inline-block;
+}
+.frame-div1 {
+  position: relative;
+  width: 44px;
+  height: 20px;
+  flex-shrink: 0;
+}
+.community-div {
+  color: #db5a42;
+}
+.community-div,
+.saved-div {
+  position: relative;
+  display: inline-block;
+}
+.rectangle-icon,
+.search-div1 {
+  position: absolute;
+  top: -0.25px;
+  left: -0.25px;
+  width: 277.5px;
+  height: 42.5px;
+}
+.search-div1 {
+  top: 10px;
+  left: 55px;
+  display: inline-block;
+  width: 104px;
+  height: 25px;
+}
+.iconsearch {
+  position: absolute;
+  top: 7px;
+  left: 12px;
+  width: 27px;
+  height: 27px;
+}
+.icon-bell,
+.search-div {
+  position: relative;
+  flex-shrink: 0;
+}
+.search-div {
+  width: 277px;
+  height: 42px;
+  color: rgba(0, 0, 0, 0.5);
+}
+.icon-bell {
+  width: 21px;
+  height: 28.78px;
+}
+.icon-keyboard-arrow-down {
+  position: absolute;
+  height: 40.68%;
+  width: 20.18%;
+  top: 28.13%;
+  right: 11.01%;
+  bottom: 31.19%;
+  left: 68.81%;
+  max-width: 100%;
+  max-height: 100%;
+}
+.bnh-div {
+  position: absolute;
+  top: 6px;
+  left: 14px;
+  display: inline-block;
+  mix-blend-mode: normal;
+}
+.frame-div2 {
+  position: relative;
+  border-radius: 20px;
+  background-color: #fff;
+  border: 0.2px solid #000;
+  box-sizing: border-box;
+  width: 109px;
+  height: 32px;
+  flex-shrink: 0;
+  overflow: hidden;
+}
+.communitydone-div,
+.header-div {
+  display: flex;
+  box-sizing: border-box;
+  align-items: center;
+  justify-content: flex-start;
+}
+.header-div {
+  margin: 0 !important;
+  position: absolute;
+  top: 3px;
+  left: calc(50% - 718.5px);
+  background-color: #fff;
+  box-shadow: 0 4px 12px rgba(79, 79, 186, 0.06);
+  flex-direction: row;
+  padding: 3px 77px 3px 4px;
+  gap: 79px;
+  z-index: 3;
+  font-size: 16px;
+  font-family: Gelasio;
+}
+.communitydone-div {
+  position: relative;
+  background-color: #f7fafc;
+  width: 100%;
+  flex-direction: column;
+  padding: 100px 0 50px;
+  gap: 45px;
+  text-align: left;
+  font-size: 32px;
+  color: #000;
+  font-family: Inter;
+}
+@media screen and (max-width: 768px) {
+  .recommend-for-you {
+    width: 100%;
+  }
+  .titile-div {
+    flex-wrap: wrap;
+    row-gap: 10px;
+  }
+}

@@ -46,7 +46,7 @@
 
             <div class="section-div flex-wrap flex-lg-nowrap">
 
-                <form class="register-form col-lg mx-auto d-lg-flex" action="home" id="register">
+                <form class="register-form col-lg mx-auto d-none d-lg-flex" action="home" id="register">
                     <div class="join-bakeryrecipe-div col-10">Join BakeryRecipe!</div>
                     <div class="joining-bakeryrecipe-is-quick col-10">
                         JOINING BAKERYRECIPE IS QUICK, EASY, AND FREE.

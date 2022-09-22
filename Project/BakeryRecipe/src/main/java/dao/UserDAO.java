@@ -4,52 +4,45 @@
  */
 package dao;
 
-<<<<<<< Updated upstream
-=======
 <<<<<<< HEAD
+<<<<<<< HEAD
+
+
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+=======
+=======
+>>>>>>> eb4802385483e28f7494b8183a7f193d607f7649
+import java.sql.ResultSet;
+
+import dto.User;
 import com.demo.utils.DBUtils;
-import java.sql.Connection;
 import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-=======
->>>>>>> Stashed changes
+<<<<<<< HEAD
+>>>>>>> eb4802385483e28f7494b8183a7f193d607f7649
 import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
+
 import java.sql.Timestamp;
-import model.User;
+<<<<<<< HEAD
+import dto.User;
 import utilities.DBUtils;
-<<<<<<< Updated upstream
+
 =======
->>>>>>> 8867fc6919734c17ec8a23ba68a9f48b149010a7
->>>>>>> Stashed changes
+>>>>>>> eb4802385483e28f7494b8183a7f193d607f7649
+=======
+import java.sql.Connection;
+
+import java.sql.Timestamp;
+>>>>>>> eb4802385483e28f7494b8183a7f193d607f7649
 
 /**
  *
  * @author kichi
  */
 public class UserDAO {
-<<<<<<< Updated upstream
-=======
 <<<<<<< HEAD
-    public static boolean changePassword(String ID, String password) {
-        String sql = "UPDATE [User]\n" +
-                     "SET Password = ?\n" +
-                     "WHERE ID = ?";
-        try {
-            Connection conn = DBUtils.getConnection();
-            PreparedStatement ps = conn.prepareStatement(sql);
-            ps.setString(1, ID);
-            ps.setString(2, password);
-            boolean check = ps.executeUpdate() > 0;
-            if(check){
-                return true;
-            }
-        } catch (Exception e) {
-            System.out.println("Error at changePassword: " + e.toString());
-        }
-        return false;
-    }
+<<<<<<< HEAD
     public static boolean checkOldPassword(String ID, String password) {
         String sql = "SELECT ID\n" +
                      "FROM [User]\n" +
@@ -65,35 +58,63 @@ public class UserDAO {
             }
         } catch (Exception e) {
             System.out.println("Error at checkOldPassword: " + e.toString());
+        }
+        return false;
+    }
 =======
->>>>>>> Stashed changes
+=======
+>>>>>>> eb4802385483e28f7494b8183a7f193d607f7649
 
+>>>>>>> eb4802385483e28f7494b8183a7f193d607f7649
     private static final String[] USER_COLUMN_NAME_LIST
             = {"ID", "Role", "Email", "Password", "Avatar", "FirstName",
                 "LastName", "Gender", "Phone", "Address", "DateRegister", "IsActive", "StoreID"};
     private static final Class[] USER_COLUMN_NAME_CLASS
             = {Integer.class, String.class, String.class, String.class, String.class, String.class,
                 String.class, Boolean.class, String.class, String.class, Timestamp.class, String.class, Integer.class};
+
+    public static boolean checkOldPassword(String ID, String password) {
+        String sql = "SELECT ID\n"
+                + "FROM [User]\n"
+                + "WHERE ID = ? AND Password = ?";
+        try {
+            Connection conn = DBUtils.getConnection();
+            PreparedStatement ps = conn.prepareStatement(sql);
+            ps.setString(1, ID);
+            ps.setString(2, password);
+            ResultSet rs = ps.executeQuery();
+            if (rs.next()) {
+                return true;
+            }
+        } catch (Exception e) {
+            System.out.println("Error at checkOldPassword: " + e.toString());
+        }
+        return false;
+    }
     private static final String UPDATE_USER_PASSWORD = " UPDATE [User] SET Password = ? WHERE ID= ?";
 
-    public static boolean changePassword(String memberID, String password) {
+    public static boolean changePassword(String ID, String password) {
         String sql = UPDATE_USER_PASSWORD;
         try {
             Connection conn = DBUtils.getConnection();
             PreparedStatement ps = conn.prepareStatement(sql);
             //Set ps
             ps.setString(1, password);
-            ps.setString(2, memberID);
+            ps.setString(2, ID);
             //run ps
             ps.executeUpdate();
             return true;
         } catch (Exception e) {
             System.out.println("Change Password error:");
             e.printStackTrace();
-<<<<<<< Updated upstream
+<<<<<<< HEAD
+<<<<<<< HEAD
 =======
->>>>>>> 8867fc6919734c17ec8a23ba68a9f48b149010a7
->>>>>>> Stashed changes
+
+>>>>>>> eb4802385483e28f7494b8183a7f193d607f7649
+=======
+
+>>>>>>> eb4802385483e28f7494b8183a7f193d607f7649
         }
         return false;
     }
@@ -102,9 +123,10 @@ public class UserDAO {
             + "WHERE Email = ? AND Password = ?";
 
     public static User login(String email, String password) {
-        String sql = UPDATE_USER_PASSWORD;
+        String sql = SELECT_LOGIN;
         try {
             Connection conn = DBUtils.getConnection();
+            System.out.println(conn);
             PreparedStatement ps = conn.prepareStatement(sql);
             //Set ps
             ps.setString(1, email);
@@ -126,6 +148,7 @@ public class UserDAO {
             + ",[Address],[DateRegister],[IsActive][StoreID]"
             + " FROM [BakeryRecipe].[dbo].[User]"
             + " WHERE [ID] = ?";
+
     public static User getUserByID(int id) {
 
         String sql = SELECT_USER_BY_ID;
@@ -139,7 +162,6 @@ public class UserDAO {
             String[] l = USER_COLUMN_NAME_LIST;
             Class[] c = USER_COLUMN_NAME_CLASS;
             User user = new User();
-            user.setID((String) rs.getObject(l[0],c[0]));
             return user;
         } catch (Exception e) {
             System.out.println("Login error:");
@@ -147,5 +169,7 @@ public class UserDAO {
         }
         return null;
     }
-    
+    public static void main(String[] args) {
+        getUserByID(1);
+    }
 }

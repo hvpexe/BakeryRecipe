@@ -1,0 +1,270 @@
+@import "web/bootstrap-4.3.1.min.css";
+body {
+    margin: 0;
+    line-height: normal;
+}
+body > * {
+    font-size: 16px;
+}
+.create-recipe-b {
+    position: absolute;
+    height: 100%;
+    width: 100%;
+    top: 0;
+    right: -11.52%;
+    bottom: 0;
+    left: 11.52%;
+    display: inline-block;
+}
+.text-h2 {
+    margin: 0;
+    position: absolute;
+    top: 4px;
+    left: 54px;
+    width: 197px;
+    height: 29px;
+    font-size: inherit;
+    font-family: inherit;
+}
+.button-icon6 {
+    position: absolute;
+    height: 87.88%;
+    width: 13.94%;
+    top: 6.06%;
+    right: 84.06%;
+    bottom: 6.06%;
+    left: 1.99%;
+    max-width: 100%;
+    max-height: 100%;
+}
+.button-icon6:hover{
+    box-shadow: 0 0 0 20px #00000025;
+}
+.create-recipe-div {
+    position: relative;
+    width: 251px;
+    height: 33px;
+    flex-shrink: 0;
+    overflow: hidden;
+}
+.save-b2 {
+    display: block;
+    font-family: Inter;
+    color: #fff;
+    font-size: 0.8em;
+}
+.save-button {
+    cursor: pointer;
+    border: 0;
+    padding: 0;
+    background-color: #db5a42;
+    border-radius: 20px;
+    width: 111px;
+    flex-shrink: 0;
+    overflow: hidden;
+}
+.create-recipe-main {
+    align-self: stretch;
+    display: flex;
+    flex-direction: row;
+    padding: 40px 65px;
+    box-sizing: border-box;
+    justify-content: space-between;
+    text-align: left;
+    font-size: 24px;
+    color: #000;
+    font-family: Inter;
+}
+.title-b2 {
+    position: relative;
+    display: inline-block;
+    width: 60px;
+}
+.title-div,
+.input {
+    align-self: stretch;
+    flex-shrink: 0;
+}
+.input {
+    border: 0;
+    background-color: #fff;
+    position: relative;
+    box-shadow: 0 4px 4px rgba(0, 0, 0, 0.25), 0 4px 4px rgba(0, 0, 0, 0.25);
+    min-height: 40px;
+    overflow: hidden;
+}
+input{
+    border-radius: 50px;
+}
+textarea, input{
+    border: 1px solid #77777725;
+}
+.title-div {
+    display: flex;
+    flex-direction: column;
+}
+.text-b {
+    position: relative;
+    display: inline-block;
+    font-family: Gelasio;
+    color: #fff;
+    text-align: left;
+    cursor: pointer;
+}
+.add-picture-input,
+.button {
+    display: flex;
+    box-sizing: border-box;
+}
+.button {
+    cursor: pointer;
+    border: 0;
+    padding: 6px 10px;
+    background-color: #db5a42;
+    border-radius: 40px;
+    flex-direction: row;
+    align-items: flex-start;
+    justify-content: flex-start;
+    z-index: 0;
+}
+.add-picture-input {
+
+}
+.vector-icon2 {
+    margin: 0 !important;
+    width: 35px;
+    aspect-ratio:45/40;
+}
+.add-video-and-pic {
+    height: 233px;
+    flex-shrink: 0;
+    display: flex;
+    flex-direction: column;
+    padding: 15px 0 0;
+    box-sizing: border-box;
+    align-items: flex-start;
+    justify-content: space-between;
+}
+.add-video-and-pic,
+.boxdes-textarea,
+.description-b {
+    align-self: stretch;
+    position: relative;
+}
+.description-b {
+    display: inline-block;
+}
+.boxdes-textarea {
+    border: 1px solid rgba(0, 0, 0, 0.25);
+    background-color: #fff;
+    box-shadow: 0 4px 4px rgba(0, 0, 0, 0.25);
+    box-sizing: border-box;
+    min-height: 80px;
+    flex-shrink: 0;
+    overflow: hidden;
+    text-align: left;
+}
+.description-div {
+    align-self: stretch;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: flex-start;
+    row-gap:7px;
+}
+.igre-screen-input {
+    border: 8px solid rgba(250, 248, 248, 0.5);
+    background-color: #faf8f8;
+    align-self: stretch;
+    position: relative;
+    box-shadow: 0 4px 4px rgba(0, 0, 0, 0.25);
+    box-sizing: border-box;
+    min-height: 40px;
+    flex-shrink: 0;
+    overflow: hidden;
+}
+.ingredient-div {
+    align-self: stretch;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: flex-start;
+    gap: 7px;
+}
+.intruc-box-input {
+    border: 8px solid rgba(250, 248, 248, 0.5);
+    background-color: #faf8f8;
+    box-shadow: 0 4px 4px rgba(0, 0, 0, 0.25);
+    box-sizing: border-box;
+}
+.intruc-box-input,
+.pre-box-input,
+.prepare-time-div1 {
+    align-self: stretch;
+    position: relative;
+}
+.prepare-time-div1 {
+    font-weight: 700;
+    display: inline-block;
+}
+.pre-box-input {
+    border: 4px solid rgba(250, 248, 248, 0.5);
+    background-color: rgba(250, 248, 248, 0.5);
+    box-shadow: 0 4px 4px rgba(0, 0, 0, 0.25);
+    box-sizing: border-box;
+    min-height: 40px;
+    flex-shrink: 0;
+    overflow: hidden;
+}
+.prepare-time-div,
+.section-div,
+.time-to-cook-div {
+    display: flex;
+    align-items: flex-start;
+    justify-content: flex-start;
+}
+.prepare-time-div {
+    flex: 1;
+    flex-direction: column;
+    row-gap: 13px;
+}
+.time-to-cook-div {
+
+}
+.section-div,
+.time-to-cook-div {
+    align-self: stretch;
+    flex-direction: row;
+    padding: 5px 0;
+    box-sizing: border-box;
+}
+.section-div {
+    flex: 1;
+    flex-direction: column;
+    padding: 8px 20px;
+    align-items: center;
+    justify-content: center;
+    gap: 22px;
+}
+.section-div > div {
+    align-self: center;
+}
+
+.cook2-main {
+    background-color: #f7fafc;
+    box-shadow: 0 0 0px 100px rgb(247 250 252);
+    box-sizing: border-box;
+    flex-shrink: 0;
+    text-align: left;
+    font-size: 1em;
+    color: #000;
+    font-family: Gelasio;
+}
+.add-recipedone-main,
+.cook2-main {
+    position: relative;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
