@@ -7,11 +7,11 @@ package dao;
 import java.sql.ResultSet;
 
 import dto.User;
-import com.demo.utils.DBUtils;
 import java.sql.PreparedStatement;
 import java.sql.Connection;
 
 import java.sql.Timestamp;
+import utilities.DBUtils;
 
 /**
  *
@@ -25,7 +25,7 @@ public class UserDAO {
     private static final Class[] USER_COLUMN_NAME_CLASS
             = {Integer.class, String.class, String.class, String.class, String.class, String.class,
                 String.class, Boolean.class, String.class, String.class, Timestamp.class, String.class, Integer.class};
-
+    //ay da ko xem database code sai r
     public static boolean checkOldPassword(String ID, String password) {
         String sql = "SELECT ID\n"
                 + "FROM [User]\n"
@@ -79,8 +79,11 @@ public class UserDAO {
             ps.setString(2, password);
             //run ps
             ResultSet rs = ps.executeQuery();
-            int id = rs.getInt("id");
-            return getUserByID(id);
+            if (rs.next()) {
+                int id = rs.getInt("id");
+                return getUserByID(id);
+            }
+            return null;
         } catch (Exception e) {
             System.out.println("Login error:");
             e.printStackTrace();
@@ -93,7 +96,7 @@ public class UserDAO {
             + ",[FirstName],[LastName],[Gender],[Phone]"
             + ",[Address],[DateRegister],[IsActive][StoreID]"
             + " FROM [BakeryRecipe].[dbo].[User]"
-            + " WHERE [ID] = ?";
+            + " WHERE [ID] = ? and IsActive = ?";
 
     public static User getUserByID(int id) {
 
@@ -103,11 +106,15 @@ public class UserDAO {
             PreparedStatement ps = conn.prepareStatement(sql);
             //Set ps
             ps.setInt(1, id);
+            ps.setInt(2, 1);
             //run ps
             ResultSet rs = ps.executeQuery();
             String[] l = USER_COLUMN_NAME_LIST;
-            Class[] c = USER_COLUMN_NAME_CLASS;
-            User user = new User();
+            User user = null;
+            if (rs.next()) {
+                user = new User(rs.getInt(l[0]), rs.getString(l[1]), rs.getString(l[2]), rs.getString(l[3]), rs.getString(l[4]), rs.getString(l[5]),
+                        rs.getString(l[6]), rs.getString(l[7]), rs.getString(l[8]), rs.getString(l[9]), rs.getDate(l[10]), rs.getInt(l[12]));
+            }
             return user;
         } catch (Exception e) {
             System.out.println("Login error:");
@@ -115,7 +122,13 @@ public class UserDAO {
         }
         return null;
     }
+    private static final String INSERT_NEW_USER = ""; 
+    public static boolean register(User user) {
+        return false;
+    }
+
     public static void main(String[] args) {
         getUserByID(1);
     }
+
 }

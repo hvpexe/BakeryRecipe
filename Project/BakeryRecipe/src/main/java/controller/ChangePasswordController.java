@@ -21,7 +21,8 @@ public class ChangePasswordController extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
-        String url = ERROR;
+    
+        String url = "login.jsp";
         try{
             String userID = request.getParameter("userID");
             String oldPassword = request.getParameter("oldPassword");
@@ -38,7 +39,7 @@ public class ChangePasswordController extends HttpServlet {
                 request.setAttribute("PASSWORD_ERROR", "Confirmation mismatched");
             } else if (UserDAO.changePassword(userID, newPassword)) {
                 request.setAttribute("PASSWORD_SUCCESS", "Change password successfully");
-                url = SUCCESS;
+                url = "home.jsp";
             }
         }catch (Exception e){
             System.out.println("Error at ProfileChangePasswordController: " + e.toString());

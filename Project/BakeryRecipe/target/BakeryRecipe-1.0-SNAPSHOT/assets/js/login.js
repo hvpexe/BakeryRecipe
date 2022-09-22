@@ -9,7 +9,6 @@ function changeForm() {
     $('.header-button:not(.active)').on('click',changeForm);
     $(this).unbind();
     form.addClass('d-none');
-    
     console.log('running');
     console.log('[class^='+this.getAttribute('data-type')+'-form]');
     console.log($('.section-div form'));

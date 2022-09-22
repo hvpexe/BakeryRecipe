@@ -4,6 +4,7 @@
  */
 package controller;
 
+import dao.UserDAO;
 import java.io.IOException;
 import java.io.PrintWriter;
 import javax.servlet.ServletException;
@@ -32,12 +33,10 @@ public class TestingController extends HttpServlet {
         response.setContentType("text/html;charset=UTF-8");
         try ( PrintWriter out = response.getWriter()) {
             /* TODO output your page here. You may use following sample code. */
-            out.println(DBUtils.getConnection());            
-            out.println(DBUtils.getConnection());
-            out.println(DBUtils.getConnection());
-            out.println(DBUtils.getConnection());
-            out.println(DBUtils.getConnection());
-            out.println(DBUtils.getConnection());
+            out.println(DBUtils.getConnection()+"<br>");            
+            out.println(UserDAO.getUserByID(1)+"<br>");            
+            request.setAttribute("user", UserDAO.getUserByID(1));
+            request.getRequestDispatcher("/").forward(request, response);
 
         }
     }

@@ -12,141 +12,161 @@ import java.util.Date;
  */
 public class User {
     public static final String IMG_PATH = "assets/images/mainavt/";
-    private int ID;
-    private String Role;
-    private String Email;
-    private String Password;
-    private String Avatar;
-    private String FirstName;
-    private String LastName;
-    private String Gender;
-    private String Phone;
-    private String Address;
-    private Date DateRegister;
-    private boolean IsActive;
-    private int StoreID;
+    private int id;
+    private String role;
+    private String email;
+    private String password;
+    private String avatar;
+    private String firstName;
+    private String lastName;
+    private String gender;
+    private String phone;
+    private String address;
+    private Date dateRegister;
+    private Boolean isActive=false;
+    private int storeID;
 
     public User() {
     }
+
+    public User(String email, String firstName, String lastName, String password) {
+        this.email = email;
+        this.password = password;
+        this.firstName = firstName;
+        this.lastName = lastName;
+    }
     
     public User(int ID, String Role, String Email, String Password, String Avatar, String FirstName, String LastName, String Gender, String Phone, String Address, Date DateRegister, boolean IsActive, int StoreID) {
-        this.ID = ID;
-        this.Role = Role;
-        this.Email = Email;
-        this.Password = Password;
-        this.Avatar = Avatar;
-        this.FirstName = FirstName;
-        this.LastName = LastName;
-        this.Gender = Gender;
-        this.Phone = Phone;
-        this.Address = Address;
-        this.DateRegister = DateRegister;
-        this.IsActive = IsActive;
-        this.StoreID = StoreID;
+        this.id = ID;
+        this.role = Role;
+        this.email = Email;
+        this.password = Password;
+        this.avatar = Avatar;
+        this.firstName = FirstName;
+        this.lastName = LastName;
+        this.gender = Gender;
+        this.phone = Phone;
+        this.address = Address;
+        this.dateRegister = DateRegister;
+        this.isActive = IsActive;
+        this.storeID = StoreID;
     }
 
+    public User(int ID, String Role, String Email, String Password, String Avatar
+            , String FirstName, String LastName, String Gender, String Phone
+            , String Address, Date DateRegister, int StoreID) {
+        this(ID, Role, Email, Password, Avatar, FirstName, LastName, Gender, Phone, Address, DateRegister, true, StoreID);
+    }
+
+    
+
     public int getID() {
-        return ID;
+        return id;
     }
 
     public void setID(int ID) {
-        this.ID = ID;
+        this.id = ID;
     }
 
     public String getRole() {
-        return Role;
+        return role;
     }
 
     public void setRole(String Role) {
-        this.Role = Role;
+        this.role = Role;
     }
 
     public String getEmail() {
-        return Email;
+        return email;
     }
 
     public void setEmail(String Email) {
-        this.Email = Email;
+        this.email = Email;
     }
 
     public String getPassword() {
-        return Password;
+        return password;
     }
 
     public void setPassword(String Password) {
-        this.Password = Password;
+        this.password = Password;
     }
 
     public String getAvatar() {
-        return IMG_PATH + Avatar;
+        return IMG_PATH + avatar;
     }
 
     public void setAvatar(String Avatar) {
-        this.Avatar = Avatar;
+        this.avatar = Avatar;
     }
 
     public String getFirstName() {
-        return FirstName;
+        return firstName;
     }
 
     public void setFirstName(String FirstName) {
-        this.FirstName = FirstName;
+        this.firstName = FirstName;
     }
 
     public String getLastName() {
-        return LastName;
+        return lastName;
     }
 
     public void setLastName(String LastName) {
-        this.LastName = LastName;
+        this.lastName = LastName;
     }
 
     public String getGender() {
-        return Gender;
+        return gender;
     }
 
     public void setGender(String Gender) {
-        this.Gender = Gender;
+        this.gender = Gender;
     }
 
     public String getPhone() {
-        return Phone;
+        return phone;
     }
 
     public void setPhone(String Phone) {
-        this.Phone = Phone;
+        this.phone = Phone;
     }
 
     public String getAddress() {
-        return Address;
+        return address;
     }
 
     public void setAddress(String Address) {
-        this.Address = Address;
+        this.address = Address;
     }
 
     public Date getDateRegister() {
-        return DateRegister;
+        return dateRegister;
     }
 
     public void setDateRegister(Date DateRegister) {
-        this.DateRegister = DateRegister;
+        this.dateRegister = DateRegister;
     }
 
     public boolean isIsActive() {
-        return IsActive;
+        return isActive;
     }
 
     public void setIsActive(boolean IsActive) {
-        this.IsActive = IsActive;
+        this.isActive = IsActive;
     }
 
     public int getStoreID() {
-        return StoreID;
+        return storeID;
     }
 
     public void setStoreID(int StoreID) {
-        this.StoreID = StoreID;
+        this.storeID = StoreID;
+    }
+
+    @Override
+    public String toString() {
+        return "User{" + "ID=" + id + ", Role=" + role + ", Email=" + email + ", Password=" + password + ", Avatar=" + avatar + ", FirstName=" + firstName + ", LastName=" + lastName + ", Gender=" + gender + ", Phone=" + phone + ", Address=" + address + ", DateRegister=" + dateRegister + ", IsActive=" + isActive + ", StoreID=" + storeID + '}';
     }
     
     
