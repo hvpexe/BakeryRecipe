@@ -23,7 +23,7 @@ public class User {
     private String phone;
     private String address;
     private Date dateRegister;
-    private Boolean isActive=false;
+    private boolean isActive=false;
     private int storeID;
 
     public User() {

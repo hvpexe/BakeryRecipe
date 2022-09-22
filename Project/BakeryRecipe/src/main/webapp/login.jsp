@@ -45,12 +45,12 @@
 
             <div class="section-div flex-wrap flex-lg-nowrap">
 
-                <form class="register-form col-lg mx-auto d-none d-lg-flex" action="register" id="register">
+                <form class="register-form col-lg mx-auto d-none d-lg-flex" action="register" id="register" method="POST">
                     <div class="join-bakeryrecipe-div col-10">Join BakeryRecipe!</div>
                     <div class="joining-bakeryrecipe-is-quick col-10">
                         JOINING BAKERYRECIPE IS QUICK, EASY, AND FREE.
                     </div>
-                    <input class="email-input col-10" type="text" placeholder="Email" required="" name="email">
+                    <input class="email-input col-10" type="email" placeholder="Email" required="" name="email">
                     <div class="name-div row col-10 p-0">
                         <input class="firstname-input col" type="text" placeholder="First name" required="" name="firstname"><input class="firstname-input col" type="text" placeholder="Last name" required="" name="lastname">
                     </div>
@@ -60,7 +60,7 @@
                         <b class="join-b">JOIN</b>
                     </button>
                 </form>
-                
+
                 <div class="line-div mx-auto d-none d-lg-block"></div>
                 <form class="login-form col-lg mx-auto d-lg-flex" action="login" method="post" id="login">
                     <div class="join-bakeryrecipe-div col-10">Already A Member? Sign-In</div>

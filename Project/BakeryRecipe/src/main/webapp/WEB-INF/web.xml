@@ -9,8 +9,8 @@
         <servlet-class>controller.LoginController</servlet-class>
     </servlet>
     <servlet>
-        <servlet-name>RegisterController</servlet-name>
-        <servlet-class>controller.RegisterController</servlet-class>
+        <servlet-name>RegisterAccountController</servlet-name>
+        <servlet-class>controller.baker.RegisterAccountController</servlet-class>
     </servlet>
     <servlet-mapping>
         <servlet-name>TestingController</servlet-name>
@@ -21,7 +21,7 @@
         <url-pattern>/login</url-pattern>
     </servlet-mapping>
     <servlet-mapping>
-        <servlet-name>RegisterController</servlet-name>
+        <servlet-name>RegisterAccountController</servlet-name>
         <url-pattern>/register</url-pattern>
     </servlet-mapping>
     <session-config>

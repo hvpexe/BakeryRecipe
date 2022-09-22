@@ -3,24 +3,29 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
 package dao;
+
 import java.sql.ResultSet;
 import java.sql.PreparedStatement;
 import dto.User;
 import java.sql.Connection;
+import java.sql.Date;
 import java.sql.Timestamp;
 import utilities.DBUtils;
+import utilities.Tools;
 
 /**
  *
  * @author kichi
  */
 public class UserDAO {
+
     private static final String[] USER_COLUMN_NAME_LIST
             = {"ID", "Role", "Email", "Password", "Avatar", "FirstName",
                 "LastName", "Gender", "Phone", "Address", "DateRegister", "IsActive", "StoreID"};
     private static final Class[] USER_COLUMN_NAME_CLASS
             = {Integer.class, String.class, String.class, String.class, String.class, String.class,
                 String.class, Boolean.class, String.class, String.class, Timestamp.class, String.class, Integer.class};
+
     //ay da ko xem database code sai r
     public static boolean checkOldPassword(String ID, String password) {
         String sql = "SELECT ID\n"
@@ -117,8 +122,46 @@ public class UserDAO {
         }
         return null;
     }
-    private static final String INSERT_NEW_USER = ""; 
-    public static boolean register(User user) {
+    
+    private static final String CHECK_EMAIL_EXIST = "SELECT ID FROM [User] WHERE Email = ?";
+    //ham nay dung de kiem tra email co bi trung ko, ap dung khi tao tk moi
+    public static boolean checkDuplicateEmail(String email) {
+        String sql = CHECK_EMAIL_EXIST;
+        try {
+            Connection conn = DBUtils.getConnection();
+            PreparedStatement ps = conn.prepareStatement(sql);
+            ps.setString(1, email);
+            ResultSet rs = ps.executeQuery();
+            if (rs.next()) {
+                return true;
+            }
+        } catch (Exception ex) {
+            System.out.println("checkDuplicateEmail error!" + ex.getMessage());
+        }
+        return false;
+    }
+
+    private static final String INSERT_NEW_USER = "INSERT INTO [User](Role, Email, Password, FirstName, LastName, DateRegister, IsActive) VALUES \n"
+            + "(?, ?, ?, ?, ?, ?, 1);";
+    //dang ki mot tk moi
+    public static boolean register(String role, String email, String password, String firstname, String lastname, Date dateRegister) {
+        String sql = INSERT_NEW_USER;
+        try {
+            Connection conn = DBUtils.getConnection();
+            PreparedStatement ps = conn.prepareStatement(sql);
+            ps.setString(1, role);
+            ps.setString(2, email);
+            ps.setString(3, password);
+            ps.setString(4, firstname);
+            ps.setString(5, lastname);
+            ps.setDate(6, dateRegister);
+            if (ps.executeUpdate() == 1) {
+                return true;
+            }
+        } catch (Exception e) {
+            System.out.println("Register error");
+            e.printStackTrace();
+        }
         return false;
     }
 
