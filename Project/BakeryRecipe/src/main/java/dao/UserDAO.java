@@ -3,69 +3,27 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
 package dao;
-
-<<<<<<< HEAD
-<<<<<<< HEAD
-
-
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
-=======
-=======
->>>>>>> eb4802385483e28f7494b8183a7f193d607f7649
 import java.sql.ResultSet;
-
-import dto.User;
-import com.demo.utils.DBUtils;
-import java.sql.PreparedStatement;
-<<<<<<< HEAD
->>>>>>> eb4802385483e28f7494b8183a7f193d607f7649
-import java.sql.Connection;
-
-import java.sql.Timestamp;
-<<<<<<< HEAD
 import dto.User;
 import utilities.DBUtils;
-
-=======
->>>>>>> eb4802385483e28f7494b8183a7f193d607f7649
-=======
+import java.sql.PreparedStatement;
 import java.sql.Connection;
-
 import java.sql.Timestamp;
->>>>>>> eb4802385483e28f7494b8183a7f193d607f7649
+import dto.User;
+import utilities.DBUtils;
+import java.sql.Connection;
+import java.sql.Timestamp;
+import java.sql.Connection;
+import java.sql.Timestamp;
 
 /**
  *
  * @author kichi
  */
 public class UserDAO {
-<<<<<<< HEAD
-<<<<<<< HEAD
-    public static boolean checkOldPassword(String ID, String password) {
-        String sql = "SELECT ID\n" +
-                     "FROM [User]\n" +
-                     "WHERE ID = ? AND Password = ?";
-        try {
-            Connection conn = DBUtils.getConnection();
-            PreparedStatement ps = conn.prepareStatement(sql);
-            ps.setString(1, ID);
-            ps.setString(2, password);
-            ResultSet rs = ps.executeQuery();
-            if(rs.next()){
-                return true;
-            }
-        } catch (Exception e) {
-            System.out.println("Error at checkOldPassword: " + e.toString());
-        }
-        return false;
-    }
-=======
-=======
->>>>>>> eb4802385483e28f7494b8183a7f193d607f7649
-
->>>>>>> eb4802385483e28f7494b8183a7f193d607f7649
     private static final String[] USER_COLUMN_NAME_LIST
             = {"ID", "Role", "Email", "Password", "Avatar", "FirstName",
                 "LastName", "Gender", "Phone", "Address", "DateRegister", "IsActive", "StoreID"};
@@ -107,14 +65,6 @@ public class UserDAO {
         } catch (Exception e) {
             System.out.println("Change Password error:");
             e.printStackTrace();
-<<<<<<< HEAD
-<<<<<<< HEAD
-=======
-
->>>>>>> eb4802385483e28f7494b8183a7f193d607f7649
-=======
-
->>>>>>> eb4802385483e28f7494b8183a7f193d607f7649
         }
         return false;
     }
