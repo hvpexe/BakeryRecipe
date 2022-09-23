@@ -22,7 +22,13 @@ import utilities.DBUtils;
  */
 @WebServlet(name = "LoginController", urlPatterns = {"/login"})
 public class LoginController extends HttpServlet {
-
+    private static final String ERROR = "login.jsp";
+    private static final String AD = "AD";
+    private static final String AD_PAGE = "adminPage.jsp";
+    private static final String US = "US";
+    private static final String USER_PAGE = "userPage.jsp";
+    private static final String SHOP = "SHOP";
+    private static final String SHOP_PAGE = "shopPage.jsp";
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
      * methods.
@@ -34,19 +40,37 @@ public class LoginController extends HttpServlet {
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        response.setContentType("text/html;charset=UTF-8");
-        PrintWriter out = response.getWriter();
-        String url = "";
-        HttpSession session = request.getSession();
-        String email = request.getParameter("email");
-        String password = request.getParameter("password");
-        User user = UserDAO.login(email, password);
-        if (user != null) {
-            session.setAttribute("user", user);
-            url = "addrecipe.jsp";
+        try (PrintWriter out = response.getWriter()) {
+            /* TODO output your page here. You may use following sample code. */
+            String url = ERROR;
+            try {
+                String email = request.getParameter("email");
+                String password = request.getParameter("password");
+                userDAO dao = new userDAO();
+                userDTO loginUser = dao.checkLogin(email, password);
+                if (loginUser != null) {
+                    HttpSession session = request.getSession();
+                    session.setAttribute("LOGIN_USER", loginUser);
+                    String roleID = loginUser.getRole();
+                    String isActive = loginUser.getIsActive();
+                    if (isActive.equals("0")) {
+                        request.setAttribute("loginError", "You have been banned");
+                    } else {
+                        if (AD.equals(roleID)) {
+                            url = AD_PAGE;
+                        } else if (US.equals(roleID)) {
+                            url = USER_PAGE;
+                        } else if (SHOP.equals(roleID)) {
+                            url = SHOP_PAGE;
+                        }
+                    }
+                }
+            } catch (Exception e) {
+                log("Error at LoginController" + e.toString());
+            } finally {
+                request.getRequestDispatcher(url).forward(request, response);
+            }
         }
-        out.print(url);
-        response.sendRedirect(url);
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
