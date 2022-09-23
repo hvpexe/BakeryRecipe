@@ -142,6 +142,7 @@ body {
 }
 form *:is( input , button ){
     border-radius:10px;
+    max-width: 500px;
 }
 form *:is( input , button ):hover, form *:is( input , button ):focus{
     box-shadow: 0 0 4px 2px rgb(0 0 0 / 25%);

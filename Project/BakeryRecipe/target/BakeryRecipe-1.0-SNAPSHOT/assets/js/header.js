@@ -14,7 +14,7 @@ $(window).resize(function () {
 function changeHeight() {
     $('header').css('height', 'calc( ' + $('.header-logo img').css('height') + ' + 5px');
     $("#test").html($('header').css('height'));
-    $('.line-div').css('height', Math.max(toValue($('.header-left').css('height')),toValue($('.header-right').css('height'))));
+    $('.line-div').css('height', Math.max($('.header-left').height(),$('.header-right').height()));
 }
 function toValue(pixel){
     return pixel-'px';

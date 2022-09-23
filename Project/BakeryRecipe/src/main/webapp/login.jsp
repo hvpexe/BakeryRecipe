@@ -80,7 +80,7 @@
                     <div id="g_id_onload" data-client_id="243057477675-ti2g5mjdpfrnq5vsgqgdtj3ph3j4ert6" data-context="signin" data-ux_mode="popup" data-login_uri="http://localhost:8080/BakeryRecipe/login.jsp" data-auto_select="true" data-itp_support="true">
                     </div>
                     <c:catch var="e">
-                        <div id="test1">
+                        <div id="test">
                             ${user.email}
                             ${user.password}
                         </div>
