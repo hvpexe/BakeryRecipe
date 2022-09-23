@@ -1,0 +1,247 @@
+body {
+  margin: 0;
+  line-height: normal;
+}
+.shopping-cart-b {
+  position: relative;
+  font-size: 35px;
+  display: flex;
+  font-family: Inter;
+  align-items: flex-end;
+  width: 1157px;
+  height: 68px;
+  flex-shrink: 0;
+}
+.unit-price-div {
+  width: 196px;
+  flex-shrink: 0;
+}
+.actions-div,
+.quantity-div,
+.total-price-div,
+.unit-price-div {
+  position: relative;
+  display: inline-block;
+}
+.actions-div,
+.total-price-div {
+  width: 228px;
+  flex-shrink: 0;
+}
+.actions-div {
+  width: 98px;
+}
+.taskbar-cart-div {
+  background-color: #fff;
+  width: 1157px;
+  display: flex;
+  flex-direction: row;
+  padding: 11px 17px;
+  box-sizing: border-box;
+  align-items: center;
+  justify-content: flex-start;
+  gap: 24px;
+}
+.image-8-icon {
+  position: absolute;
+  top: 12px;
+  left: 66px;
+  width: 110px;
+  height: 110px;
+  object-fit: cover;
+}
+.cottage-cheesemozzareal-200g,
+.div2,
+.div3,
+.div4,
+.div5 {
+  position: absolute;
+  font-family: Gelasio;
+  color: #000;
+  text-align: left;
+  display: inline-block;
+}
+.cottage-cheesemozzareal-200g {
+  top: 40px;
+  left: 189px;
+  font-size: 20px;
+  width: 234px;
+}
+.div2,
+.div3,
+.div4,
+.div5 {
+  top: 49px;
+  left: 458px;
+  font-size: 25px;
+}
+.div3,
+.div4,
+.div5 {
+  top: 51px;
+  left: 813px;
+}
+.div4,
+.div5 {
+  left: 661px;
+}
+.div5 {
+  top: 234px;
+}
+.image-13-icon {
+  position: absolute;
+  top: 173px;
+  left: 54px;
+  width: 135px;
+  height: 167px;
+  object-fit: cover;
+}
+.b-dao-nht-6-mn,
+.div6,
+.div7 {
+  position: absolute;
+  top: 241px;
+  left: 200px;
+  font-size: 20px;
+  font-family: Gelasio;
+  color: #000;
+  text-align: left;
+  display: inline-block;
+}
+.div6,
+.div7 {
+  top: 229px;
+  left: 458px;
+  font-size: 25px;
+}
+.div7 {
+  top: 231px;
+  left: 813px;
+}
+.icon-trash,
+.vector-icon2 {
+  position: absolute;
+  height: 8.7%;
+  width: 2.42%;
+  top: 63.59%;
+  right: 5.7%;
+  bottom: 27.72%;
+  left: 91.88%;
+  max-width: 100%;
+  max-height: 100%;
+}
+.icon-trash {
+  top: 13.86%;
+  bottom: 77.45%;
+}
+.rectangle-div2,
+.rectangle-div3 {
+  position: absolute;
+  top: 250px;
+  left: 22px;
+  background-color: #fff;
+  border: 1px solid rgba(0, 0, 0, 0.2);
+  box-sizing: border-box;
+  width: 22px;
+  height: 22px;
+}
+.rectangle-div3 {
+  top: 50px;
+}
+.frame-form {
+  position: relative;
+  background-color: #fff;
+  width: 1157px;
+  height: 368px;
+  flex-shrink: 0;
+  overflow: hidden;
+}
+.select-all-2 {
+  position: absolute;
+  top: 6px;
+  left: 50px;
+  display: inline-block;
+  width: 148px;
+}
+.rectangle-div4 {
+  position: absolute;
+  top: 11px;
+  left: 14px;
+  background-color: #fff;
+  border: 1px solid rgba(0, 0, 0, 0.2);
+  box-sizing: border-box;
+  width: 22px;
+  height: 22px;
+}
+.frame-div2 {
+  position: absolute;
+  top: 29px;
+  left: 10px;
+  width: 198px;
+  height: 44px;
+  overflow: hidden;
+}
+.check-out-b,
+.delete-div,
+.total-2-item {
+  position: absolute;
+  top: 35px;
+  left: 259px;
+  display: inline-block;
+}
+.check-out-b,
+.total-2-item {
+  left: 540px;
+}
+.check-out-b {
+  top: 14px;
+  left: 49px;
+  font-size: 30px;
+  font-family: Gelasio;
+  color: #fff;
+  text-align: left;
+}
+.frame-button3 {
+  cursor: pointer;
+  border: 0;
+  padding: 0;
+  background-color: #db5a42;
+  position: absolute;
+  top: 18px;
+  left: 883px;
+  width: 257px;
+  height: 65px;
+  overflow: hidden;
+}
+.div8 {
+  position: absolute;
+  top: 29px;
+  left: 723px;
+  font-size: 30px;
+  color: red;
+  display: inline-block;
+}
+.frame-div1 {
+  position: relative;
+  background-color: #fff;
+  width: 1157px;
+  height: 102px;
+  flex-shrink: 0;
+  overflow: hidden;
+}
+.shopping-cart-div {
+  position: relative;
+  background-color: #f7fafc;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  padding: 100px 133px 68px;
+  box-sizing: border-box;
+  align-items: flex-start;
+  justify-content: flex-start;
+  gap: 41px;
+  text-align: left;
+  font-size: 25px;
+  color: #000;
+  font-family: Gelasio;
+}
