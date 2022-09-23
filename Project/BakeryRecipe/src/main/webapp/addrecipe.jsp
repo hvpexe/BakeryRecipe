@@ -1,3 +1,4 @@
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html>
     <head>
@@ -6,7 +7,6 @@
         <title></title>
         <meta name="description" content="" />
 
-        <link rel="stylesheet" href="./assets/css/addrecipe.css" />
 
         <link
             rel="stylesheet"
@@ -32,8 +32,11 @@
             rel="stylesheet"
             href="https://fonts.googleapis.com/css2?family=Arima Madurai:wght@800&display=swap"
             />
+        <link rel="stylesheet" href="./assets/css/addrecipe.css" />
     </head>
     <body>
+        <jsp:include page="header.jsp"/>
+
         <main class="add-recipedone-main">
             <main class="cook2-main">
                 <main class="create-recipe-main col-md-6 col-12 align-self-center px-0">
@@ -87,10 +90,10 @@
                             <input class="pre-box-input col" type="number" placeholder="Minute :0">
                         </div>
                     </div>
-                </div>
+                    </div>
             </main>
         </main>
-        
+
         <script>
             var saveButton = document.getElementById("saveButton");
             if (saveButton) {
