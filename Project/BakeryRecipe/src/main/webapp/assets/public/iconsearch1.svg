@@ -1,8 +1,22 @@
-<svg width="27" height="28" viewBox="0 0 27 28" fill="none" xmlns="http://www.w3.org/2000/svg">
-<path fill-rule="evenodd" clip-rule="evenodd" d="M9.75 0.5C15.1348 0.5 19.5 4.86522 19.5 10.25C19.5 12.665 18.615 14.885 17.16 16.595L17.565 17H18.75L26.25 24.5L24 26.75L16.5 19.25V18.065L16.095 17.66C14.385 19.115 12.165 20 9.75 20C4.36522 20 0 15.6348 0 10.25C0 4.86522 4.36522 0.5 9.75 0.5V0.5ZM9.75 3.5C6 3.5 3 6.5 3 10.25C3 14 6 17 9.75 17C13.5 17 16.5 14 16.5 10.25C16.5 6.5 13.5 3.5 9.75 3.5Z" fill="#DB5A42"/>
-<mask id="mask0_60_2968" style="mask-type:alpha" maskUnits="userSpaceOnUse" x="0" y="0" width="27" height="27">
-<path fill-rule="evenodd" clip-rule="evenodd" d="M9.75 0.5C15.1348 0.5 19.5 4.86522 19.5 10.25C19.5 12.665 18.615 14.885 17.16 16.595L17.565 17H18.75L26.25 24.5L24 26.75L16.5 19.25V18.065L16.095 17.66C14.385 19.115 12.165 20 9.75 20C4.36522 20 0 15.6348 0 10.25C0 4.86522 4.36522 0.5 9.75 0.5V0.5ZM9.75 3.5C6 3.5 3 6.5 3 10.25C3 14 6 17 9.75 17C13.5 17 16.5 14 16.5 10.25C16.5 6.5 13.5 3.5 9.75 3.5Z" fill="white"/>
+<svg width="31" height="31" viewBox="0 0 31 31" fill="none" xmlns="http://www.w3.org/2000/svg">
+<g filter="url(#filter0_d_61_3137)">
+<path fill-rule="evenodd" clip-rule="evenodd" d="M11.75 2.5C17.1348 2.5 21.5 6.86522 21.5 12.25C21.5 14.665 20.615 16.885 19.16 18.595L19.565 19H20.75L28.25 26.5L26 28.75L18.5 21.25V20.065L18.095 19.66C16.385 21.115 14.165 22 11.75 22C6.36522 22 2 17.6348 2 12.25C2 6.86522 6.36522 2.5 11.75 2.5V2.5ZM11.75 5.5C8 5.5 5 8.5 5 12.25C5 16 8 19 11.75 19C15.5 19 18.5 16 18.5 12.25C18.5 8.5 15.5 5.5 11.75 5.5Z" fill="#DB5A42"/>
+<mask id="mask0_61_3137" style="mask-type:alpha" maskUnits="userSpaceOnUse" x="2" y="2" width="27" height="27">
+<path fill-rule="evenodd" clip-rule="evenodd" d="M11.75 2.5C17.1348 2.5 21.5 6.86522 21.5 12.25C21.5 14.665 20.615 16.885 19.16 18.595L19.565 19H20.75L28.25 26.5L26 28.75L18.5 21.25V20.065L18.095 19.66C16.385 21.115 14.165 22 11.75 22C6.36522 22 2 17.6348 2 12.25C2 6.86522 6.36522 2.5 11.75 2.5V2.5ZM11.75 5.5C8 5.5 5 8.5 5 12.25C5 16 8 19 11.75 19C15.5 19 18.5 16 18.5 12.25C18.5 8.5 15.5 5.5 11.75 5.5Z" fill="white"/>
 </mask>
-<g mask="url(#mask0_60_2968)">
+<g mask="url(#mask0_61_3137)">
 </g>
+</g>
+<defs>
+<filter id="filter0_d_61_3137" x="0" y="0.5" width="31" height="31" filterUnits="userSpaceOnUse" color-interpolation-filters="sRGB">
+<feFlood flood-opacity="0" result="BackgroundImageFix"/>
+<feColorMatrix in="SourceAlpha" type="matrix" values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 127 0" result="hardAlpha"/>
+<feMorphology radius="2" operator="dilate" in="SourceAlpha" result="effect1_dropShadow_61_3137"/>
+<feOffset/>
+<feComposite in2="hardAlpha" operator="out"/>
+<feColorMatrix type="matrix" values="0 0 0 0 1 0 0 0 0 1 0 0 0 0 1 0 0 0 0.01 0"/>
+<feBlend mode="normal" in2="BackgroundImageFix" result="effect1_dropShadow_61_3137"/>
+<feBlend mode="normal" in="SourceGraphic" in2="effect1_dropShadow_61_3137" result="shape"/>
+</filter>
+</defs>
 </svg>

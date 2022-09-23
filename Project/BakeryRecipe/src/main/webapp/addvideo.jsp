@@ -13,7 +13,7 @@
     <title></title>
     <meta name="description" content="" />
 
-    <link rel="stylesheet" href="./add-video.css" />
+    <link rel="stylesheet" href="assets/css/add-video.css" />
 
     <link
       rel="stylesheet"
