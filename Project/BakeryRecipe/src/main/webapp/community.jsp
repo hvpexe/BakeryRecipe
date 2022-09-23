@@ -13,7 +13,7 @@
     <title></title>
     <meta name="description" content="" />
 
-    <link rel="stylesheet" href="./community.css" />
+    <link rel="stylesheet" href="assets/css/community.css" />
 
     <link
       rel="stylesheet"
