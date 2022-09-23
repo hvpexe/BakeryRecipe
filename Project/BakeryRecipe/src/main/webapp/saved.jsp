@@ -13,7 +13,7 @@
     <title></title>
     <meta name="description" content="" />
 
-    <link rel="stylesheet" href="./saved.css" />
+    <link rel="stylesheet" href="assets/css/saved.css" />
 
     <link
       rel="stylesheet"

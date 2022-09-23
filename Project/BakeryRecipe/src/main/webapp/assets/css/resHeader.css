@@ -1,0 +1,89 @@
+body {
+  margin: 0;
+  line-height: normal;
+}
+.ellipse-icon,
+.px-2-icon {
+  position: relative;
+  flex-shrink: 0;
+  z-index: 0;
+}
+.px-2-icon {
+  width: 159px;
+  height: 53px;
+  object-fit: cover;
+}
+.ellipse-icon {
+  width: 37px;
+  height: 33px;
+}
+.frame-div1,
+.iconsearch {
+  margin: 0 !important;
+  position: absolute;
+  z-index: 1;
+}
+.iconsearch {
+  top: 5px;
+  left: 6px;
+  width: 25px;
+  height: 23px;
+  flex-shrink: 0;
+}
+.frame-div1 {
+  top: 11px;
+  left: 279px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-start;
+}
+.icon-menu {
+  height: 53.88%;
+  width: 54.05%;
+  top: 24.24%;
+  right: 18.92%;
+  bottom: 21.88%;
+  left: 27.03%;
+  max-width: 100%;
+  max-height: 100%;
+  z-index: 1;
+}
+.frame-div2,
+.icon-bell,
+.icon-menu {
+  position: absolute;
+  margin: 0 !important;
+}
+.frame-div2 {
+  top: 11px;
+  left: 371px;
+  display: flex;
+  flex-direction: row;
+  align-items: flex-start;
+  justify-content: flex-start;
+  z-index: 2;
+}
+.icon-bell {
+  height: 52.33%;
+  width: 4.91%;
+  top: 25.45%;
+  right: 17.29%;
+  bottom: 22.22%;
+  left: 77.8%;
+  max-width: 100%;
+  max-height: 100%;
+  z-index: 3;
+}
+.res-homepage-div {
+  position: relative;
+  background-color: #fff;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  padding: 1px 9px;
+  box-sizing: border-box;
+  align-items: flex-start;
+  justify-content: flex-start;
+  gap: 10px;
+}
