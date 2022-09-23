@@ -52,7 +52,7 @@ public class LoginController extends HttpServlet {
                     HttpSession session = request.getSession();
                     session.setAttribute("LOGIN_USER", loginUser);
                     String roleID = loginUser.getRole();
-                    String isActive = loginUser.getIsActive();
+                    Boolean isActive = loginUser.isIsActive();
                     if (isActive.equals("0")) {
                         request.setAttribute("loginError", "You have been banned");
                     } else {
