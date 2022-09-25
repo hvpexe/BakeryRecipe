@@ -58,9 +58,8 @@
 
     </head>
     <body>
+        <c:import url="header.jsp"/>
         <section class="logindone-section " id="Login">
-            <jsp:include page="header.jsp"/>
-
             <div class="section-div flex-wrap flex-lg-nowrap">
 
                 <form class="register-form col-lg mx-auto d-none d-lg-flex" action="register" id="register" method="POST">
