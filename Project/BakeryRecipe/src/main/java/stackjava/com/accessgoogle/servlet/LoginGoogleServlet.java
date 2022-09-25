@@ -26,7 +26,8 @@ public class LoginGoogleServlet extends HttpServlet {
       request.setAttribute("id", googlePojo.getId());
       request.setAttribute("name", googlePojo.getName());
       request.setAttribute("email", googlePojo.getEmail());
-      RequestDispatcher dis = request.getRequestDispatcher("index.jsp");
+        System.out.println("Login Success");
+      RequestDispatcher dis = request.getRequestDispatcher("home.jsp");
       dis.forward(request, response);
     }
   }

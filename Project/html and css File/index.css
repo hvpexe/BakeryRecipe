@@ -1,0 +1,714 @@
+body {
+  margin: 0;
+  line-height: normal;
+}
+.avatar-icon {
+  position: relative;
+  width: 45px;
+  height: 45px;
+  flex-shrink: 0;
+  object-fit: cover;
+}
+.add-your-post,
+.div {
+  position: relative;
+  font-size: 10px;
+  font-family: Inter;
+  color: #e3a587;
+  text-align: center;
+  display: inline-block;
+  z-index: 0;
+}
+.div {
+  position: absolute;
+  margin: 0 !important;
+  top: 3px;
+  left: 93px;
+  font-size: 20px;
+  color: #db5a42;
+  z-index: 1;
+}
+.btn-button,
+.posting-section-div {
+  border-radius: 20px;
+  display: flex;
+  flex-direction: row;
+  box-sizing: border-box;
+  align-items: center;
+}
+.btn-button {
+  cursor: pointer;
+  border: 1px solid #d7d5d5;
+  background-color: transparent;
+  position: relative;
+  width: 280px;
+  flex-shrink: 0;
+  justify-content: center;
+  gap: 20px;
+  padding: 10px 12px 10px 15px;
+}
+.btn-button:hover {
+  background-color: rgba(255, 210, 117, 0.7);
+  padding-top: 10px;
+  box-sizing: border-box;
+}
+.btn-button:active {
+  background-color: rgba(232, 174, 104, 0.7);
+}
+.posting-section-div {
+  align-self: stretch;
+  background-color: #fff;
+  box-shadow: 0 4px 12px rgba(79, 79, 186, 0.06);
+  padding: 16px 14px;
+  justify-content: flex-start;
+  gap: 26px;
+}
+.shape-icon {
+  position: relative;
+  width: 16px;
+  height: 16px;
+}
+.iconoptions-button {
+  cursor: pointer;
+  border: 0;
+  padding: 0;
+  background-color: transparent;
+  position: absolute;
+  top: 23px;
+  left: 344px;
+  width: 18px;
+  height: 18px;
+  transform: rotate(-90deg);
+  transform-origin: 0 0;
+}
+.h-a,
+.trnh-thng-bnh {
+  text-decoration: none;
+  position: relative;
+  display: inline-block;
+  width: 147px;
+  flex-shrink: 0;
+}
+.trnh-thng-bnh {
+  font-weight: 700;
+  color: inherit;
+  height: 11px;
+  cursor: pointer;
+}
+.trnh-thng-bnh:hover {
+  font-size: 11px;
+  text-decoration: underline;
+}
+.h-a {
+  font-size: 10px;
+  color: rgba(0, 0, 0, 0.5);
+  height: 12px;
+}
+.h-a:hover {
+  cursor: pointer;
+  text-decoration: underline;
+}
+.profile-name-div {
+  position: absolute;
+  top: 7px;
+  left: 54px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-start;
+}
+.avatar-icon1 {
+  position: absolute;
+  top: 2px;
+  left: 2px;
+  width: 45px;
+  height: 45px;
+  object-fit: cover;
+  cursor: pointer;
+}
+.user-info-div {
+  position: relative;
+  width: 370px;
+  height: 44px;
+  flex-shrink: 0;
+  overflow: hidden;
+}
+.detail-div,
+.image-icon {
+  position: absolute;
+  left: 2px;
+  width: 367px;
+}
+.image-icon {
+  top: 59px;
+  border-radius: 10px;
+  height: 218px;
+  object-fit: cover;
+}
+.detail-div {
+  top: 3px;
+  display: inline-block;
+}
+.user-post-div,
+.vector-icon {
+  position: relative;
+  flex-shrink: 0;
+}
+.user-post-div {
+  width: 369px;
+  height: 277px;
+  overflow: hidden;
+}
+.vector-icon {
+  width: 11.56px;
+  height: 23px;
+}
+.save-b {
+  position: relative;
+  display: inline-block;
+}
+.save {
+  text-decoration: none;
+  border-radius: 15px;
+  width: 100px;
+  height: 23px;
+  flex-shrink: 0;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  cursor: pointer;
+  transition: 0.2s;
+  color: inherit;
+}
+.save:hover {
+  background-color: rgba(0, 0, 0, 0.1);
+  display: flex;
+  padding-top: 0;
+  box-sizing: border-box;
+}
+.save:active {
+  background-color: rgba(0, 0, 0, 0.5);
+}
+.icon-eye {
+  position: relative;
+  width: 28.5px;
+  height: 20px;
+  flex-shrink: 0;
+}
+.view-a,
+.viewer-option-div {
+  flex-direction: row;
+  justify-content: center;
+}
+.view-a {
+  text-decoration: none;
+  border-radius: 15px;
+  width: 100px;
+  height: 23px;
+  flex-shrink: 0;
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  cursor: pointer;
+  transition: 0.2s;
+  color: inherit;
+}
+.view-a:hover {
+  background-color: rgba(0, 0, 0, 0.25);
+  display: flex;
+  padding-top: 0;
+  box-sizing: border-box;
+}
+.view-a:active {
+  background-color: rgba(0, 0, 0, 0.5);
+}
+.viewer-option-div {
+  width: 367px;
+  padding: 3px 0;
+  box-sizing: border-box;
+  gap: 50px;
+  font-size: 14px;
+  font-family: "Abhaya Libre";
+}
+.post-div,
+.view-a1,
+.viewer-option-div {
+  display: flex;
+  align-items: center;
+}
+.post-div {
+  align-self: stretch;
+  border-radius: 20px;
+  background-color: #fff;
+  box-shadow: 0 4px 4px rgba(0, 0, 0, 0.06);
+  flex-direction: column;
+  padding: 10px 13px;
+  box-sizing: border-box;
+  justify-content: flex-start;
+  gap: 10px;
+}
+.view-a1 {
+  text-decoration: none;
+  border-radius: 15px;
+  width: 100px;
+  height: 23px;
+  flex-shrink: 0;
+  flex-direction: row;
+  justify-content: center;
+  gap: 4px;
+  cursor: pointer;
+  transition: 0.2s;
+  color: inherit;
+}
+.post-section-div,
+.view-a1:hover {
+  display: flex;
+  box-sizing: border-box;
+}
+.view-a1:hover {
+  background-color: rgba(0, 0, 0, 0.25);
+  padding-top: 0;
+}
+.view-a1:active {
+  background-color: rgba(0, 0, 0, 0.5);
+}
+.post-section-div {
+  width: 407px;
+  height: 564px;
+  flex-shrink: 0;
+  flex-direction: column;
+  padding: 0 0 25px;
+  align-items: center;
+  justify-content: flex-start;
+  gap: 25px;
+}
+.rectangle-div {
+  border-radius: 12px;
+  background-color: #ff4e4e;
+}
+.group-icon,
+.rectangle-div,
+.rectangle-div1 {
+  position: absolute;
+  height: 100%;
+  width: 100%;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+}
+.group-icon {
+  max-width: 100%;
+  max-height: 100%;
+}
+.rectangle-div1 {
+  border-radius: 4px;
+  background-color: #1e1f20;
+  opacity: 0.2;
+  mix-blend-mode: normal;
+}
+.label-div {
+  position: absolute;
+  width: 54%;
+  top: calc(50% - 10px);
+  right: 32.3%;
+  left: 13.7%;
+  font-size: 14px;
+  line-height: 20px;
+  font-family: Abel;
+  color: #1e1f20;
+  text-align: left;
+  display: inline-block;
+}
+.iconarrow-right {
+  position: absolute;
+  top: calc(50% - 7px);
+  left: calc(50% - -12px);
+  width: 14px;
+  height: 14px;
+}
+.miscchip-icon-div {
+  position: absolute;
+  height: 100%;
+  width: 100%;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  overflow: hidden;
+}
+.chipchip-icon-div {
+  position: absolute;
+  top: 121px;
+  left: 21px;
+  width: 100px;
+  height: 30px;
+}
+.title-div,
+.try-premium-membersh {
+  position: absolute;
+  left: 20px;
+  font-family: Abel;
+  color: #fff;
+  text-align: left;
+  display: inline-block;
+}
+.try-premium-membersh {
+  top: 55px;
+  font-size: 14px;
+  line-height: 22px;
+  width: 265px;
+}
+.title-div {
+  top: 20px;
+  font-size: 22px;
+  line-height: 30px;
+}
+.banner-nav {
+  position: relative;
+  width: 317px;
+  height: 163.97px;
+  flex-shrink: 0;
+  overflow: hidden;
+}
+.label-div1 {
+  position: absolute;
+  width: 62.22%;
+  top: calc(50% - 10px);
+  right: 37.78%;
+  left: 0;
+  letter-spacing: 1px;
+  line-height: 20px;
+  text-transform: uppercase;
+  display: inline-block;
+}
+.iconcheckbox-empty {
+  position: absolute;
+  top: calc(50% - 7px);
+  left: calc(50% - -31px);
+  width: 14px;
+  height: 14px;
+}
+.see-more-div {
+  position: absolute;
+  top: 286px;
+  left: 0;
+  width: 90px;
+  height: 20px;
+  overflow: hidden;
+  font-size: 12px;
+  color: #8f92a1;
+}
+.button-icon {
+  position: absolute;
+  top: 6px;
+  right: 0;
+  width: 28px;
+  height: 28px;
+  display: none;
+}
+.subtitle-div {
+  top: calc(50% - 0px);
+  left: 0;
+  line-height: 20px;
+  display: inline-block;
+}
+.name-div,
+.subtitle-div,
+.username-div {
+  position: absolute;
+  width: 199px;
+}
+.username-div {
+  top: calc(50% - 20px);
+  left: 0;
+  font-size: 20px;
+  line-height: 20px;
+  display: inline-block;
+}
+.name-div {
+  top: calc(50% - 19.85px);
+  left: 48px;
+  height: 40px;
+  overflow: hidden;
+}
+.avatarimage-icon {
+  position: absolute;
+  top: 1px;
+  left: 0;
+  width: 38px;
+  height: 38px;
+  object-fit: cover;
+}
+.user02-div {
+  position: absolute;
+  height: 13.07%;
+  width: 100%;
+  top: 67.27%;
+  right: 0;
+  bottom: 19.65%;
+  left: 0;
+}
+.name-div1 {
+  position: absolute;
+  top: calc(50% - 19.91px);
+  left: 48px;
+  width: 199px;
+  height: 40px;
+  overflow: hidden;
+}
+.user02-div2 {
+  position: absolute;
+  height: 12.42%;
+  width: 100%;
+  top: 45.1%;
+  right: 0;
+  bottom: 42.48%;
+  left: 0;
+}
+.follow-div {
+  position: absolute;
+  top: 5px;
+  left: 14px;
+  font-size: 10px;
+  font-family: Gelasio;
+  color: #fff;
+  text-align: left;
+  display: inline-block;
+}
+.frame-button {
+  cursor: pointer;
+  border: 0;
+  padding: 0;
+  background-color: #db5a42;
+  position: absolute;
+  top: 134px;
+  left: 247px;
+  border-radius: 20px;
+  width: 59px;
+  height: 24px;
+  overflow: hidden;
+}
+.subtitle-a {
+  text-decoration: none;
+  position: absolute;
+  top: calc(50% - 0px);
+  left: 0;
+  line-height: 20px;
+  color: inherit;
+  display: inline-block;
+  width: 199px;
+}
+.name-div2,
+.username {
+  position: absolute;
+  width: 199px;
+  text-decoration: underline;
+}
+.username {
+  top: calc(50% - 20px);
+  left: 0;
+  font-size: 20px;
+  line-height: 20px;
+  color: inherit;
+  display: inline-block;
+}
+.name-div2 {
+  top: calc(50% - 19.91px);
+  left: 48px;
+  height: 40px;
+  overflow: hidden;
+}
+.user02-div4 {
+  position: absolute;
+  height: 12.42%;
+  width: 100%;
+  top: 22.88%;
+  right: 0;
+  bottom: 64.71%;
+  left: 0;
+}
+.frame-button1 {
+  cursor: pointer;
+  border: 0;
+  padding: 0;
+  background-color: #db5a42;
+  position: absolute;
+  top: 74px;
+  left: 247px;
+  border-radius: 20px;
+  width: 59px;
+  height: 24px;
+  overflow: hidden;
+}
+.title-b {
+  position: absolute;
+  top: 0;
+  left: 0;
+  font-size: 30px;
+  line-height: 30px;
+  display: inline-block;
+  font-family: "Abhaya Libre";
+}
+.frame-button2 {
+  cursor: pointer;
+  border: 0;
+  padding: 0;
+  background-color: #db5a42;
+  position: absolute;
+  top: 198px;
+  left: 247px;
+  border-radius: 20px;
+  width: 59px;
+  height: 24px;
+  overflow: hidden;
+}
+.who-to-follow {
+  position: relative;
+  width: 317px;
+  height: 288.37px;
+  flex-shrink: 0;
+  overflow: hidden;
+}
+.button-icon3 {
+  position: absolute;
+  top: 5px;
+  right: 0;
+  width: 28px;
+  height: 28px;
+}
+.username-div2 {
+  position: absolute;
+  top: calc(50% - 9.85px);
+  left: 48px;
+  line-height: 20px;
+  display: inline-block;
+  width: 199px;
+}
+.avatar-icon3,
+.avatarimage-div {
+  position: absolute;
+  left: 0;
+  width: 38px;
+  height: 38px;
+}
+.avatar-icon3 {
+  top: calc(50% - 19px);
+  border-radius: 12px;
+  object-fit: cover;
+}
+.avatarimage-div {
+  top: 0;
+}
+.user01-div,
+.user02-div6 {
+  position: absolute;
+  width: 100%;
+  right: 0;
+  bottom: 0;
+  left: 0;
+}
+.user01-div {
+  height: 100%;
+  top: 0;
+  overflow: hidden;
+}
+.user02-div6 {
+  height: 16.26%;
+  top: 83.74%;
+}
+.username-div3 {
+  position: absolute;
+  top: calc(50% - 9.91px);
+  left: 48px;
+  line-height: 20px;
+  display: inline-block;
+  width: 199px;
+}
+.avatarimage-div1 {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 38px;
+  height: 38px;
+  background-image: url(./public/avatarimage3@3x.png);
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: top;
+}
+.user02-div7 {
+  position: absolute;
+  height: 15.45%;
+  width: 100%;
+  top: 56.1%;
+  right: 0;
+  bottom: 28.46%;
+  left: 0;
+}
+.avatarimage-div2 {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 38px;
+  height: 38px;
+  background-image: url(./public/avatarimage4@3x.png);
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: top;
+}
+.user02-div8 {
+  position: absolute;
+  height: 15.45%;
+  width: 100%;
+  top: 28.47%;
+  right: 0;
+  bottom: 56.08%;
+  left: 0;
+}
+.who-to-follow1 {
+  position: relative;
+  width: 317px;
+  height: 231.83px;
+  flex-shrink: 0;
+  overflow: hidden;
+  font-size: 20px;
+}
+.frame-div,
+.home-div {
+  display: flex;
+  box-sizing: border-box;
+  justify-content: center;
+}
+.frame-div {
+  border-radius: 20px;
+  background-color: #fff;
+  box-shadow: 0 4px 4px rgba(0, 0, 0, 0.06);
+  height: 868px;
+  flex-direction: column;
+  padding: 75px 52px 46px;
+  align-items: center;
+  gap: 61px;
+  font-size: 14px;
+  font-family: Abel;
+}
+.home-div {
+  position: relative;
+  background-color: #f7fafc;
+  width: 100%;
+  height: 1000px;
+  flex-direction: row;
+  padding: 40px 0 50px;
+  align-items: flex-start;
+  gap: 75px;
+  text-align: left;
+  font-size: 11px;
+  color: #000;
+  font-family: Inter;
+}
+@media screen and (max-width: 768px) {
+  .frame-div {
+    display: none;
+  }
+}

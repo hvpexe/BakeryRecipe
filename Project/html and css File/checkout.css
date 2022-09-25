@@ -1,0 +1,339 @@
+body {
+  margin: 0;
+  line-height: normal;
+}
+.title-h1 {
+  margin: 0;
+  align-self: stretch;
+  position: relative;
+  font-size: 35px;
+  font-weight: 700;
+  font-family: Inter;
+  display: inline-block;
+}
+.icon5 {
+  position: relative;
+  width: 20.25px;
+  height: 26px;
+  flex-shrink: 0;
+}
+.text-h21 {
+  margin: 0;
+  position: relative;
+  font-size: inherit;
+  font-weight: 400;
+  font-family: inherit;
+  display: inline-block;
+}
+.title-div1 {
+  align-self: stretch;
+  display: flex;
+  flex-direction: row;
+  padding: 1px 0;
+  box-sizing: border-box;
+  align-items: center;
+  justify-content: flex-start;
+  gap: 10px;
+}
+.info-name-h3 {
+  margin: 0;
+  position: absolute;
+  top: -68px;
+  left: -29px;
+  font-size: inherit;
+  font-weight: 700;
+  font-family: inherit;
+  display: inline-block;
+}
+.ql61-p-3 {
+  margin-block-start: 0;
+  margin-block-end: 0;
+}
+.change,
+.info-address-span {
+  position: absolute;
+  top: -68px;
+  display: inline-block;
+}
+.info-address-span {
+  left: 430px;
+  width: 477px;
+  height: 25px;
+}
+.change {
+  text-decoration: underline;
+  left: 999px;
+  font-size: 19px;
+  color: #db5a42;
+}
+.address-div1 {
+  align-self: stretch;
+  position: relative;
+  height: 25px;
+  flex-shrink: 0;
+  font-size: 20px;
+  color: #000;
+}
+.delivery-address-div {
+  align-self: stretch;
+  background-color: #fff;
+  display: flex;
+  flex-direction: column;
+  padding: 12px 29px;
+  box-sizing: border-box;
+  align-items: center;
+  justify-content: flex-start;
+  gap: 22px;
+  color: #db5a42;
+}
+.span {
+  position: relative;
+  display: inline-block;
+}
+.actions-span,
+.total-price-span,
+.unit-price-span {
+  position: relative;
+  display: inline-block;
+  width: 196px;
+  flex-shrink: 0;
+}
+.actions-span,
+.total-price-span {
+  width: 228px;
+}
+.actions-span {
+  width: 98px;
+}
+.checkbox-input,
+.taskbar-cart-div {
+  background-color: #fff;
+  box-sizing: border-box;
+}
+.taskbar-cart-div {
+  display: flex;
+  flex-direction: row;
+  padding: 11px 17px;
+  align-items: center;
+  justify-content: flex-start;
+  gap: 24px;
+}
+.checkbox-input {
+  cursor: pointer;
+  position: absolute;
+  top: 44px;
+  left: 0;
+  border: 1px solid rgba(0, 0, 0, 0.2);
+  width: 22px;
+  height: 22px;
+}
+.item-img-icon {
+  position: absolute;
+  top: 0;
+  left: 98px;
+  width: 110px;
+  height: 110px;
+  object-fit: cover;
+}
+.cottage-cheesemozzareal-200g,
+.num-of-item,
+.price-span,
+.total-price-span1 {
+  position: absolute;
+  font-family: Gelasio;
+  color: #000;
+  text-align: left;
+  display: inline-block;
+}
+.cottage-cheesemozzareal-200g {
+  top: 30px;
+  left: 284px;
+  font-size: 20px;
+  width: 234px;
+}
+.num-of-item,
+.price-span,
+.total-price-span1 {
+  top: 39px;
+  left: 594px;
+  font-size: 25px;
+}
+.num-of-item,
+.total-price-span1 {
+  left: 773px;
+}
+.total-price-span1 {
+  left: 863px;
+}
+.btn-icon {
+  position: absolute;
+  height: 29.09%;
+  width: 2.62%;
+  top: 35.45%;
+  right: 0;
+  bottom: 35.45%;
+  left: 97.38%;
+  max-width: 100%;
+  max-height: 100%;
+}
+.item-div12 {
+  position: relative;
+  width: 1089px;
+  height: 110px;
+  flex-shrink: 0;
+}
+.item-list-form,
+.table-div {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: flex-start;
+}
+.item-list-form {
+  background-color: #fff;
+  padding: 12px 30px;
+  box-sizing: border-box;
+}
+.table-div {
+  align-self: stretch;
+  gap: 41px;
+}
+.span1 {
+  position: relative;
+  font-size: 30px;
+  color: red;
+  display: inline-block;
+}
+.msg-total-price-div {
+  position: absolute;
+  top: 24px;
+  left: 709px;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: flex-end;
+  gap: 33px;
+}
+.message-span {
+  position: absolute;
+  top: -23.5px;
+  left: -22px;
+  display: inline-block;
+}
+.frame-input4,
+.msg-box-div {
+  position: absolute;
+  height: 35px;
+}
+.frame-input4 {
+  border: 1px solid rgba(0, 0, 0, 0.25);
+  background-color: #fff;
+  top: -25px;
+  left: 107px;
+  box-sizing: border-box;
+  width: 360px;
+  overflow: hidden;
+  font-size: 14;
+  font-family: Gelasio;
+}
+.msg-box-div {
+  top: 25px;
+  left: 22px;
+  width: 489px;
+}
+.message-div {
+  align-self: stretch;
+  position: relative;
+  background-color: #fff;
+  border-top: 1px solid rgba(0, 0, 0, 0.2);
+  border-right: 0 solid rgba(0, 0, 0, 0.2);
+  border-bottom: 0 solid rgba(0, 0, 0, 0.2);
+  border-left: 0 solid rgba(0, 0, 0, 0.2);
+  box-sizing: border-box;
+  height: 85px;
+  flex-shrink: 0;
+  overflow: hidden;
+}
+.payment-div {
+  position: absolute;
+  top: -13px;
+  left: -16px;
+  font-size: 35px;
+  font-family: Gelasio;
+  color: #000;
+  text-align: left;
+  display: inline-block;
+}
+.frame-span {
+  align-self: stretch;
+  position: relative;
+  height: 44px;
+  flex-shrink: 0;
+}
+.merchandise-subtotal-495000 {
+  position: relative;
+  font-size: 20px;
+  font-family: Gelasio;
+  color: #000;
+  text-align: left;
+  display: inline-block;
+}
+.payment-form {
+  align-self: stretch;
+  background-color: #fff;
+  display: flex;
+  flex-direction: column;
+  padding: 13px 16px;
+  box-sizing: border-box;
+  align-items: flex-end;
+  justify-content: flex-start;
+  gap: 30px;
+}
+.place-order-b {
+  position: relative;
+  font-size: 30px;
+  display: inline-block;
+  font-family: Gelasio;
+  color: #fff;
+  text-align: left;
+}
+.btn-button1 {
+  cursor: pointer;
+  border: 0;
+  padding: 13px 37px;
+  background-color: #db5a42;
+  display: flex;
+  flex-direction: row;
+  box-sizing: border-box;
+  align-items: center;
+  justify-content: center;
+}
+.checkout-section,
+.place-order-form {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  box-sizing: border-box;
+}
+.place-order-form {
+  align-self: stretch;
+  border-top: 1px solid #000;
+  border-right: 0 solid #000;
+  border-bottom: 0 solid #000;
+  border-left: 0 solid #000;
+  padding: 18px 17px;
+  align-items: flex-end;
+  justify-content: center;
+}
+.checkout-section {
+  background-color: #f7fafc;
+  width: 100%;
+  padding: 59px 30px;
+  align-items: center;
+  justify-content: flex-start;
+  gap: 65px;
+  text-align: left;
+  font-size: 25px;
+  color: #000;
+  font-family: Gelasio;
+}
