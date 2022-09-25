@@ -108,8 +108,8 @@
                          data-shape="circle"
                          data-logo_alignment="left">
                     </div>
-                    <a href="https://accounts.google.com/o/oauth2/auth?scope=email&redirect_uri=http://localhost:8080/BakeryRecipe/login-google&response_type=code
-                       &client_id=243057477675-kt58mr9lav8eh6ti9bfrj8p782j7unkd.apps.googleusercontent.com&approval_prompt=force">Login With Google</a>  
+                    <a href="https://accounts.google.com/o/oauth2/auth?scope=email&redirect_uri=http://localhost:8080/BakeryRecipe/login-google&responsetype=code
+                       &client_id=<%=Constants.GOOGLE_CLIENT_ID%>&approval_prompt=force">Login With Google</a>  
                     <c:catch var="e">
                         <div id="root">
                             ${user.email}
