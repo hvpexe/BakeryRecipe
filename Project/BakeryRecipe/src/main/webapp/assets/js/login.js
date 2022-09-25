@@ -1,3 +1,5 @@
+/* global google, code_receiver_uri */
+
 $('.header-button:not(.active)').on('click',
         changeForm);
 

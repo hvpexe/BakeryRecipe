@@ -1,4 +1,5 @@
 
+<%@page import="stackjava.com.accessgoogle.common.Constants"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html>
@@ -37,7 +38,24 @@
         <!--<meta name="google-signin-client_id" content="243057477675-ti2g5mjdpfrnq5vsgqgdtj3ph3j4ert6">-->
         <!--<link href="assets/css/bootstrap-4.3.1.min.css" rel="stylesheet" type="text/css"/>-->
         <script src="assets/js/Jquery/jquery-core.js" ></script>
+        <script src="https://accounts.google.com/gsi/client" async defer></script>
+        <script>
+            window.onGoogleLibraryLoad = () => {
+                google.accounts.id.initialize({
+                    client_id: '243057477675-kt58mr9lav8eh6ti9bfrj8p782j7unkd.apps.googleusercontent.com',
+                    cancel_on_tap_outside: false,
+                    prompt_parent_id: "root"
+
+                });
+                google.accounts.id.prompt((notification) => {
+                    if (notification.isNotDisplayed()) {
+                        console.log(notification.getNotDisplayedReason());
+                    }
+                });
+            }
+        </script>
         <link rel="stylesheet" href="assets/css/login.css" />
+
     </head>
     <body>
         <section class="logindone-section " id="Login">
@@ -77,10 +95,23 @@
                                             </div>
                                         </div>-->
                     <!--<script src="https://accounts.google.com/gsi/client" async="" defer=""></script>-->
-                    <div id="g_id_onload" data-client_id="243057477675-ti2g5mjdpfrnq5vsgqgdtj3ph3j4ert6" data-context="signin" data-ux_mode="popup" data-login_uri="http://localhost:8080/BakeryRecipe/login.jsp" data-auto_select="true" data-itp_support="true">
+                    <div id="g_id_onload"
+                         data-client_id="<%=Constants.GOOGLE_CLIENT_ID %>"
+                         data-login_uri="<%=Constants.GOOGLE_REDIRECT_URI%>"
+                         data-auto_prompt="false">
                     </div>
+                    <div class="g_id_signin"
+                         data-type="signin"
+                         data-size="large"
+                         data-theme="outline"
+                         data-text="sign_in_with"
+                         data-shape="circle"
+                         data-logo_alignment="left">
+                    </div>
+                    <a href="https://accounts.google.com/o/oauth2/auth?scope=email&redirect_uri=http://localhost:8080/BakeryRecipe/login-google&responsetype=code
+                       &client_id=<%=Constants.GOOGLE_CLIENT_ID%>&approval_prompt=force">Login With Google</a>  
                     <c:catch var="e">
-                        <div id="test">
+                        <div id="root">
                             ${user.email}
                             ${user.password}
                         </div>
@@ -90,7 +121,29 @@
             </div>
 
         </section>
-        <script src="assets/js/login.js"></script>
+        <script type="module">
+            window.OnG
+            console.log(google);
+            const client = google.accounts.oauth2.initCodeClient({
+                client_id: '243057477675-kt58mr9lav8eh6ti9bfrj8p782j7unkd.apps.googleusercontent.com',
+                scope: 'https://localhost:8080/BakeryRecipe/',
+                ux_mode: 'popup',
+                callback: (response) => {
+                    const xhr = new XMLHttpRequest();
+                    xhr.open('POST', code_receiver_uri, true);
+                    xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
+                    // Set custom header for CRSF
+                    xhr.setRequestHeader('X-Requested-With', 'XmlHttpRequest');
+                    xhr.onload = function () {
+                        console.log('Auth code response: ' + xhr.responseText);
+                    };
+                    xhr.send('code=' + code);
+                },
+            });
+        </script>
+        <script src="assets/js/login.js" type="text/javascript">
+
+        </script>
     </body>
 </html>
 
