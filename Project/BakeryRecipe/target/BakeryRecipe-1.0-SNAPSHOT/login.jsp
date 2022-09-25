@@ -115,7 +115,9 @@
             </div>
 
         </section>
-        <script type="module">
+        <c:import url="footer.jsp"/>
+ 
+       <script type="module">
             window.OnG
             console.log(google);
             const client = google.accounts.oauth2.initCodeClient({
