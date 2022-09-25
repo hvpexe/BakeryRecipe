@@ -4,7 +4,8 @@
  */
 package dto;
 
-import net.sourceforge.jtds.jdbc.DateTime;
+import java.sql.Date;
+
 
 /**
  *
@@ -16,8 +17,8 @@ public class Recipe {
     private String description;
     private int like;
     private int dislike;
-    private DateTime datePost;
-    private DateTime lastDateEdit;
+    private Date datePost;
+    private Date lastDateEdit;
     private int prepTime;
     private int cookTime;
     private int saved;
@@ -27,7 +28,7 @@ public class Recipe {
     public Recipe() {
     }
 
-    public Recipe(int id, String name, String description, int like, int dislike, DateTime datePost, DateTime lastDateEdit, int prepTime, int cookTime, int saved, boolean isDeleted, int userID) {
+    public Recipe(int id, String name, String description, int like, int dislike, Date datePost, Date lastDateEdit, int prepTime, int cookTime, int saved, int userID) {
         this.id = id;
         this.name = name;
         this.description = description;
@@ -38,9 +39,10 @@ public class Recipe {
         this.prepTime = prepTime;
         this.cookTime = cookTime;
         this.saved = saved;
-        this.isDeleted = isDeleted;
         this.userID = userID;
     }
+
+    
 
     public int getId() {
         return id;
@@ -82,19 +84,19 @@ public class Recipe {
         this.dislike = dislike;
     }
 
-    public DateTime getDatePost() {
+    public Date getDatePost() {
         return datePost;
     }
 
-    public void setDatePost(DateTime datePost) {
+    public void setDatePost(Date datePost) {
         this.datePost = datePost;
     }
 
-    public DateTime getLastDateEdit() {
+    public Date getLastDateEdit() {
         return lastDateEdit;
     }
 
-    public void setLastDateEdit(DateTime lastDateEdit) {
+    public void setLastDateEdit(Date lastDateEdit) {
         this.lastDateEdit = lastDateEdit;
     }
 
