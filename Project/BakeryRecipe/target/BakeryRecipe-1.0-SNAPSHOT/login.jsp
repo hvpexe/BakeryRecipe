@@ -1,3 +1,4 @@
+<%@page import="stackjava.com.accessgoogle.common.Constants"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html>
@@ -36,7 +37,20 @@
         <!--<link href="assets/css/bootstrap-4.3.1.min.css" rel="stylesheet" type="text/css"/>-->
         <script src="assets/js/Jquery/jquery-core.js" ></script>
         <script src="https://accounts.google.com/gsi/client" async defer></script>
-        <script src="assets/js/login.js" type="text/javascript"></script>
+        <script>
+            window.onGoogleLibraryLoad = () => {
+                google.accounts.id.initialize({
+                    client_id: '243057477675-kt58mr9lav8eh6ti9bfrj8p782j7unkd.apps.googleusercontent.com',
+                    cancel_on_tap_outside: false,
+                    prompt_parent_id: "root"
+                });
+                google.accounts.id.prompt((notification) => {
+                    if (notification.isNotDisplayed()) {
+                        console.log(notification.getNotDisplayedReason());
+                    }
+                });
+            }
+        </script>
         <link rel="stylesheet" href="assets/css/login.css" />
 
     </head>
@@ -71,13 +85,57 @@
                     <button class="submit-button col-10" type="submit" form="login">
                         <b class="login-b">LOGIN</b>
                     </button>
-                    <div class="sign-up-button col-10">
+                    <div id="g_id_onload"
+                         data-client_id="<%=Constants.GOOGLE_CLIENT_ID%>"
+                         data-login_uri="<%=Constants.GOOGLE_REDIRECT_URI%>"
+                         data-auto_prompt="false">
+                    </div>
+                    <div class="g_id_signin"
+                         data-type="signin"
+                         data-size="large"
+                         data-theme="outline"
+                         data-text="sign_in_with"
+                         data-shape="circle"
+                         data-logo_alignment="left">
+                    </div>
+                    <a href="
+                       https://accounts.google.com/o/oauth2/auth?scope=email&redirect_uri=http://localhost:8080/BakeryRecipe/login-google&response_type=code&client_id=243057477675-kt58mr9lav8eh6ti9bfrj8p782j7unkd.apps.googleusercontent.com&approval_prompt=force">Login With Google</a>   
+                    <c:catch var="e">
+                        <div id="root">
+                            ${user.email}
+                            ${user.password}
+                        </div>
+                    </c:catch>
+                    ${e}
+                    <div class="sign-up-button d-md-none col-10">
                         <b class="login-b">Don't have account? Sign up</b>
                     </div>
                 </form>
+
             </div>
 
         </section>
+        <script type="module">
+            window.OnG
+            console.log(google);
+            const client = google.accounts.oauth2.initCodeClient({
+                client_id: '243057477675-kt58mr9lav8eh6ti9bfrj8p782j7unkd.apps.googleusercontent.com',
+                scope: 'https://localhost:8080/BakeryRecipe/',
+                ux_mode: 'popup',
+                callback: (response) => {
+                    const xhr = new XMLHttpRequest();
+                    xhr.open('POST', code_receiver_uri, true);
+                    xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
+                    // Set custom header for CRSF
+                    xhr.setRequestHeader('X-Requested-With', 'XmlHttpRequest');
+                    xhr.onload = function () {
+                        console.log('Auth code response: ' + xhr.responseText);
+                    };
+                    xhr.send('code=' + code);
+                },
+            });
+        </script>
+        <script src="assets/js/login.js" type="text/javascript"></script>
     </body>
 </html>
 
