@@ -1,9 +1,3 @@
-<%-- 
-    Document   : cookdetail
-    Created on : Sep 21, 2022, 10:28:18 AM
-    Author     : VO MINH MAN
---%>
-
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>

@@ -11,10 +11,11 @@
 .header-container {
     min-height: 60px;
     position: sticky;
+    top: 0;
+    z-index: 99;
     background-color: #fff;
     box-shadow: 0px 4px 12px rgba(79, 79, 186, 0.06);
     width: 100%;
-    z-index: 1;
     font-size: 16px;
     color: var(--main-title-color);
     flex-wrap: wrap;
@@ -22,9 +23,9 @@
 }
 
 /* header left */
-.header-logo {
-    
-    width: 100%;
+.header-logo img {
+
+    width: 120px;
     display: flex;
 }
 
@@ -54,7 +55,7 @@
 /* Header right */
 .searchbar {
     display: flex;
-    min-width: 100px;
+    /*max-width: 250px !important;*/
     border-radius: 100px;
     border: 1px solid #000;
     gap: 5px;
@@ -122,12 +123,15 @@
     .group-div {
         justify-content: space-around;
     }
+    .header-logo img {
+        width: 110px;
+    }
 }
 
 @media (max-width:767px) {
     .header-logo img {
         margin: auto;
-        width: 50% !important;
+        width: 25% !important;
     }
     .header-right {
         margin-bottom: 8px;

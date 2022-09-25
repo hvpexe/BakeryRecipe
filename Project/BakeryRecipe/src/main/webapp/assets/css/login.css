@@ -1,7 +1,5 @@
 @import "web/bootstrap-4.3.1.min.css";
-*{
-    font-family: Gelasio;
-}
+
 body {
     margin: 0;
     line-height: normal;
@@ -191,9 +189,4 @@ form *:is( input , button ):hover, form *:is( input , button ):focus{
     align-items: start;
     position: relative;
     box-shadow: 0 0 0 2px #e3a587;
-}
-@media (max-width:996px){
-    .section-div{
-        font-size: 12px;
-    }
 }

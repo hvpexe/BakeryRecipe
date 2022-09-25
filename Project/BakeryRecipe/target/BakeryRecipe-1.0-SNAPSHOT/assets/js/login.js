@@ -1,6 +1,4 @@
-/* global google, code_receiver_uri */
-
-$('.header-button:not(.active)').on('click',
+$('.sign-up-button').on('click',
         changeForm);
 
 function changeForm() {
