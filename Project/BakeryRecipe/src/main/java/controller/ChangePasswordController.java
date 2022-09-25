@@ -18,11 +18,13 @@ import javax.servlet.http.HttpServletResponse;
  * @author kichi
  */
 public class ChangePasswordController extends HttpServlet {
+    private static final String ERROR = "profilechangePass.jsp";
+    private static final String SUCCESS = "profilechangePass.jsp";
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
     
-        String url = "login.jsp";
+        String url = ERROR;
         try{
             String userID = request.getParameter("userID");
             String oldPassword = request.getParameter("oldPassword");
@@ -39,10 +41,10 @@ public class ChangePasswordController extends HttpServlet {
                 request.setAttribute("PASSWORD_ERROR", "Confirmation mismatched");
             } else if (UserDAO.changePassword(userID, newPassword)) {
                 request.setAttribute("PASSWORD_SUCCESS", "Change password successfully");
-                url = "home.jsp";
+                url = SUCCESS;
             }
         }catch (Exception e){
-            System.out.println("Error at ProfileChangePasswordController: " + e.toString());
+            System.out.println("Error at ChangePasswordController: " + e.toString());
         }finally{
             request.getRequestDispatcher(url).forward(request, response);
         }
