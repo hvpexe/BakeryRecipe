@@ -6,6 +6,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 import stackjava.com.accessgoogle.common.GooglePojo;
 import stackjava.com.accessgoogle.common.GoogleUtils;
 @WebServlet("/login-google")
@@ -17,19 +18,25 @@ public class LoginGoogleServlet extends HttpServlet {
   protected void doGet(HttpServletRequest request, HttpServletResponse response)
       throws ServletException, IOException {
     String code = request.getParameter("code");
+    String url = "login.jsp"; 
     if (code == null || code.isEmpty()) {
-      RequestDispatcher dis = request.getRequestDispatcher("login.jsp");
-      dis.forward(request, response);
+        url="login.jsp";
     } else {
+        System.out.println("Success");
       String accessToken = GoogleUtils.getToken(code);
       GooglePojo googlePojo = GoogleUtils.getUserInfo(accessToken);
-      request.setAttribute("id", googlePojo.getId());
-      request.setAttribute("name", googlePojo.getName());
-      request.setAttribute("email", googlePojo.getEmail());
+        HttpSession session = request.getSession();
+      session.setAttribute("id", googlePojo.getId());
+      session.setAttribute("name", googlePojo.getName());
+      session.setAttribute("email", googlePojo.getEmail());
+      session.setAttribute("gname", googlePojo.getGiven_name());
+      session.setAttribute("fname", googlePojo.getFamily_name());
+      session.setAttribute("image", googlePojo.getPicture());
+      session.setAttribute("google", googlePojo);
         System.out.println("Login Success");
-      RequestDispatcher dis = request.getRequestDispatcher("home.jsp");
-      dis.forward(request, response);
+      url= "homePage.jsp";
     }
+    response.sendRedirect(url);
   }
   protected void doPost(HttpServletRequest request, HttpServletResponse response)
       throws ServletException, IOException {

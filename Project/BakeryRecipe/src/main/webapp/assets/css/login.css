@@ -58,7 +58,9 @@ body {
 
 }
 .google img {
+    position: absolute;
     width: 50%;
+    inset:0;
     z-index: 1;
     margin: auto;
     border-radius: 50%;
@@ -68,11 +70,12 @@ body {
     content: '';
     position: absolute;
     inset:0;
-    transition: all 0.1s ;
+    transition: all 0.2s ease-in;
     border-radius: 50%;
     background: blue;
     opacity: 0.6;
-    translate: 0 100%;
+    scale:2;
+    translate: 0 200%;
 }
 .google:hover:before{
     background: blue;
@@ -102,6 +105,7 @@ body {
 }
 .submit-button{
     box-shadow: 0 4px 4px 0 rgba(0 0 0 / 0.25);
+    color:#fff;
 }
 .submit-button:hover {
     box-shadow: 0 0 4px 0 rgba(0 0 0 / 0.5);
@@ -138,6 +142,21 @@ body {
     text-align: center;
     font-family: san-serif;
 }
+.sign-up-button, .sign-in-button{
+    background: #fff;
+    border: 2px solid #db5a42;
+    border-radius: 10px;
+    color: #db5a42;
+    text-align: center;
+    padding: 0.5em 0;
+    transition: background 0.2s;
+}
+*:is(.sign-up-button , .sign-in-button):hover{
+    background: #db5a42;
+    box-shadow: 0 0 0 2px #c5513d;
+    color: #fff;
+    cursor: pointer;
+}
 form *:is( input , button ){
     border-radius:10px;
     max-width: 500px;
@@ -157,7 +176,7 @@ form *:is( input , button ):hover, form *:is( input , button ):focus{
     font-size: 1.5rem;
     display: inline-block;
     font-family: Gelasio;
-    color: #fff;
+    color: inherit;
     text-align: center;
 }
 
