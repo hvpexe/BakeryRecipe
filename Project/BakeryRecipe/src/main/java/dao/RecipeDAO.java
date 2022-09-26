@@ -22,6 +22,7 @@ public class RecipeDAO {
                                                     "FROM Recipe\n" +
                                                     "WHERE IsDeleted = 0";
     private static final String SELECT_MOST_RATED_SQL = SELECT_RECIPE_SQL.replace("12", "8") + " ORDER BY [Like] DESC ";
+    private static final String SELECT_MOST_RECENT_SQL = SELECT_RECIPE_SQL + " ORDER BY DatePost DESC";
     public static List<Recipe> getMostRatedRecipe(){
         try {
             Connection conn = DBUtils.getConnection();
@@ -38,6 +39,25 @@ public class RecipeDAO {
             return list;
         } catch (SQLException ex) {
             System.out.println("getMostRatedRecipe Query Error!" + ex.getMessage());
+        }
+        return null;
+    }
+    public static List<Recipe> getMostRecentRecipe(){
+        try {
+            Connection conn = DBUtils.getConnection();
+            PreparedStatement ps = conn.prepareStatement(SELECT_MOST_RECENT_SQL);
+            ResultSet rs = ps.executeQuery();
+            List<Recipe> list = new ArrayList<Recipe>();
+            while(rs.next()){
+                Recipe recipe = new Recipe(rs.getInt("ID"), rs.getString("Name"), rs.getString("Description"), 
+                                           rs.getInt("Like"), rs.getInt("Dislike"), rs.getDate("DatePost"), 
+                                           rs.getDate("LastDateEdit"), rs.getInt("PrepTime"), rs.getInt("CookTime"), 
+                                           rs.getInt("Saved"), rs.getInt("UserID"));
+                list.add(recipe);
+            }
+            return list;
+        } catch (SQLException ex) {
+            System.out.println("getMostRecentRecipe Query Error!" + ex.getMessage());
         }
         return null;
     }
