@@ -3,7 +3,7 @@
 <link href="assets/css/fontawesome-free-6.1.1-web/css/all.min.css" rel="stylesheet" type="text/css"/>
 <!--<link rel="stylesheet" href="assets/css/login.css" />-->
 <link rel="stylesheet" href="assets/css/web/bootstrap-4.3.1.min.css"/>
-<header class="header-container header">
+<header class="header-container header py-2 py-md-0">
     <div class="header-left col-sm-12 col-md-6 p-0">
         <a class="header-logo col-md-3 p-0" href="./home.html">
             <img class="mx-auto" src="assets/public/800250px1@2x.png" alt="">
