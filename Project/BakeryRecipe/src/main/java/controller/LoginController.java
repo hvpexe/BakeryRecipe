@@ -44,17 +44,24 @@ public class LoginController extends HttpServlet {
             HttpSession session = request.getSession();
             String email = request.getParameter("email");
             String password = request.getParameter("password");
+
             GooglePojo googlePojo = (GooglePojo) session.getAttribute("google");
+            System.out.println(googlePojo + " dsa");
             if (googlePojo != null) {
                 email = googlePojo.getEmail();
-                password = googlePojo.getId();
+                password = "";
                 if (!UserDAO.checkDuplicateEmail(email)) {
                     String firstname = email.split("@")[0];
                     String lastname = "";
                     String avatar = googlePojo.getPicture();
                     UserDAO.register(email, password, firstname, lastname, avatar);
                 }
+                session.removeAttribute("LOGIN_ERROR");
                 session.removeAttribute("google");
+            } else {
+                if (password.length() < 8) {
+                    request.setAttribute("LOGIN_ERROR", "Password must be at least 8 characters!");
+                }
             }
             User loginUser = UserDAO.login(email, password);
             if (loginUser != null) {

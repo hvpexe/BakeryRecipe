@@ -47,16 +47,16 @@ public class RegisterAccountController extends HttpServlet {
         Date dateRegister = new Date(System.currentTimeMillis());
         
         if (UserDAO.checkDuplicateEmail(email)) {
-            request.setAttribute("FAIL_REGISTER", "Email alreadly exist!");
+            request.setAttribute("REGISTER_ERROR", "Email alreadly exist!");
         } else if (password.length() < 8) {
-            request.setAttribute("FAIL_REGISTER", "Password must be at least 8 characters!");
+            request.setAttribute("REGISTER_ERROR", "Password must be at least 8 characters!");
         } else if (!rePassword.equals(password)) {
-            request.setAttribute("FAIL_REGISTER", "Password mismatched");
+            request.setAttribute("REGISTER_ERROR", "Password mismatched");
         } else {
-            UserDAO.register(role, email, password, firstname, lastname, dateRegister);
+            UserDAO.register(email, password, firstname, lastname);
             User user = UserDAO.login(email, password);
             HttpSession session = request.getSession();
-            session.setAttribute("LOGIN", user);
+            session.setAttribute("LOGIN_USER", user);
             response.sendRedirect("home.jsp");
             return;
         }

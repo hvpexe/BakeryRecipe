@@ -73,6 +73,7 @@
                     </div>
                     <input class="email-input col-10" type="password" placeholder="Password" required="" name="password">
                     <input class="email-input col-10" type="password" placeholder="Re-enter password" required="" name="re-password">
+                    <div>${REGISTER_ERROR}</div>
                     <button class="submit-button col-10" type="submit" form="register">
                         <b class="join-b">JOIN</b>
                     </button>
@@ -88,18 +89,11 @@
 
                     <input class="email-input1 col-10" type="text" placeholder="Email" required="" name="email">
                     <input class="password-input1 col-10" type="password" placeholder="Password" required="" name="password">
+                    <div>${LOGIN_ERROR}</div>
                     <div class="joining-bakeryrecipe-is-quick col-10">Forgot your password?</div>
                     <button class="submit-button col-10" type="submit" form="login">
                         <b class="login-b">LOGIN</b>
                     </button>
-
-                    <c:catch var="e">
-                        <div id="root">
-                            ${user.email}
-                            ${user.password}
-                        </div>
-                    </c:catch>
-                    ${e}
                     <div class="sign-up-button d-md-none col-10">
                         <b class="login-b">Don't have account? Sign up</b>
                     </div>

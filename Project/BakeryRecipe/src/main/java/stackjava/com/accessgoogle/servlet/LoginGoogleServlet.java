@@ -16,7 +16,7 @@ import stackjava.com.accessgoogle.common.GoogleUtils;
 public class LoginGoogleServlet extends HttpServlet {
 
     private static final String LOGIN_FAILED = "login.jsp";
-    private static final String LOGIN_SUCCESS = "login";
+    private static final String LOGIN_SUCCESS = "./login";
     private static final long serialVersionUID = 1L;
 
     public LoginGoogleServlet() {
@@ -36,7 +36,9 @@ public class LoginGoogleServlet extends HttpServlet {
             session.setAttribute("google", googlePojo);
             url = LOGIN_SUCCESS;
         }
+        System.out.println(url);
         response.sendRedirect(url);
+        return;
     }
 
     protected void doPost(HttpServletRequest request, HttpServletResponse response)

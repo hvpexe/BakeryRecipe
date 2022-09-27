@@ -20,6 +20,7 @@
             <input class="searchbar-input col p-0" type="text" placeholder="Search" name="searchbar">
         </div>
         <i class="header-notification fa-solid fa-bell"></i>
+        <c:set var="login" value="${LOGIN_USER}" scope="session"></c:set>
         <c:if test="${login == null}">
             <a href="login.jsp" class="header-button" data-type="register">
                 <div class="header-button-detail p-0">Sign up / Sign in</div>

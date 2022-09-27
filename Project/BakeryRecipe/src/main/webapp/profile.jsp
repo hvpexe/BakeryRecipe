@@ -1,5 +1,8 @@
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<c:if test="${login==null}" >
+    <jsp:forward page="login.jsp"/>
+</c:if>
 <!DOCTYPE html>
 <html>
     <head>
@@ -45,39 +48,28 @@
         <section class="profile-section">
             <div class="section-div8">
                 <div class="infomation-div1">
-                    <button class="edit-proile-button">
-                        <div class="log-in-div3">Edit Profile</div></button
-                    ><img class="avt-icon" alt="" src="public/avt@2x.png" /><button
+
+                    <img class="avt-icon" alt="" src="${sessionScope.login.avatar}" /><button
                         class="btn-button3"
                         >
                         <img class="shape-icon3" alt="" src="public/shape.svg" />
                     </button>
                     <div class="div38">
-                        <h3 class="trnh-thng-bnh8">Trịnh Thăng Bình</h3>
+                        <h3 class="trnh-thng-bnh8">${sessionScope.login.firstName}</h3>
                         <span class="following-999-follower">1 Following 999 Follower</span>
                     </div>
+                    <button class="edit-proile-button">
+                        <div class="log-in-div3">Edit Profile</div>
+                    </button>    
                 </div>
                 <button class="input-button" id="inputButton">
-                    <img class="text-icon" alt="" src="public/text.svg" />
+                    <img class="text-icon" alt="" src="assets/images/avt/text.svg" />
                     <div class="text-div">Add your post</div>
                 </button>
                 <div class="titile-div5"><b class="text-b2">Activity</b></div>
                 <div class="post-div2">
-                    <div class="div39">
-                        <div class="save-div">
-                            <img
-                                class="icon-bookmark"
-                                alt=""
-                                src="public/-icon-bookmark.svg"
-                                /><b class="save-b4">Save</b>
-                        </div>
-                        <div class="view-div">
-                            <img class="icon-eye2" alt="" src="public/-icon-eye2.svg" /><b
-                                class="view-b2"
-                                >View</b
-                            >
-                        </div>
-                    </div>
+
+                    <img class="avt-icon1" alt="" src="${sessionScope.login.avatar}" />
                     <img class="post-img-icon" alt="" src="public/img26@2x.png" />
                     <div class="post-text-div">
                         Added courgette and green beans, served with brown rice. Also added
@@ -85,14 +77,37 @@
                         Really good!! Will definitely have again.
                     </div>
                     <div class="text-div1">
-                        <p class="trnh-thng-bnh9"><b>Trịnh Thăng Bình</b></p>
+                        <p class="trnh-thng-bnh9"><b>${sessionScope.login.firstName}</b></p>
                         <p class="h-p"><span>1h</span></p>
                     </div>
                     <button class="icon-button">
-                        <img class="shape-icon3" alt="" src="public/shape4.svg" /></button
-                    ><img class="avt-icon1" alt="" src="public/avt1@2x.png" />
+                        <img class="shape-icon3" alt="" src="public/shape4.svg" /></button>
+                </div>
+                <div class="post-div">
+                    <div class="user-info-div">
+                        <button class="iconoptions-button">
+                            <img class="shape-icon" alt="" src="assets/public/shape.svg">
+                        </button>
+                        <div class="profile-name-div">
+                            <a class="trnh-thng-bnh" href="./profile.html">Trịnh Thăng Bình</a><a class="h-a" href="./cook-detaildone.html">1h</a>
+                        </div>
+                        <img class="avatar-icon1" alt="" src="assets/public/ellipse-9@2x.png" id="avatarIcon1">
+                    </div>
+                    <div class="user-post-div">
+                        <img class="image-icon" alt="" src="assets/public/image@2x.png">
+                        <div class="detail-div">
+                            Added courgette and green beans, served with brown rice. Also
+                            added a spoonful of rice vinegar to the sauce as suggested by
+                            others. Really good!! Will definitely have again.
+                        </div>
+                    </div>
+
+                    <div class="viewer-option-div">
+                        <a class="save" href="./cook-detaildone.html"><img class="vector-icon" alt="" src="assets/public/vector.svg"><b class="save-b">Save</b></a><a class="view-a" href="./cook-detaildone.html"><img class="icon-eye" alt="" src="assets/public/-icon-eye.svg"><b class="save-b">View</b></a>
+                    </div>
                 </div>
             </div>
+
         </section>
 
         <script>

@@ -161,25 +161,31 @@ public class UserDAO {
         }
         return false;
     }
-    private static final String UPDATE_USER_IMAGE = "UPDATE [User] SET [Avatar] = ? WHERE Email= ?";
 
-    /** user register with avatar
-     * 
+    /**
+     * user register with avatar
+     *
      * @param avatar the avatar of the user
      * @return true if login success
      */
     public static boolean register(String email, String password, String firstname, String lastname, String avatar) {
+        if (register(email, password, firstname, lastname)) {
+            updateAvatar(email, avatar);
+            return true;
+        }
+        return false;
+    }
+    private static final String UPDATE_USER_IMAGE = "UPDATE [User] SET [Avatar] = ? WHERE Email= ?";
+    public static boolean updateAvatar(String email, String avatar) {
         String sql = UPDATE_USER_IMAGE;
         try {
-            if (register(email, password, firstname, lastname)) {
-                PreparedStatement ps = conn.prepareStatement(sql);
-                ps.setString(1, avatar);//set avatar path
-                ps.setString(2, email);//where user have this email 
-                ps.executeUpdate();
-            }
+            PreparedStatement ps = conn.prepareStatement(sql);
+            ps.setString(1, avatar);//set avatar path
+            ps.setString(2, email);//where user have this email 
+            ps.executeUpdate();
             return true;
         } catch (Exception e) {
-            System.out.println("Register error");
+            System.out.println("Update Avatar error");
             e.printStackTrace();
         }
         return false;

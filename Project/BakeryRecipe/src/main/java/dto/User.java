@@ -11,6 +11,7 @@ import java.util.Date;
  * @author kichi
  */
 public class User {
+
     public static final String IMG_PATH = "assets/images/avt/";
     private int id;
     private String role;
@@ -23,7 +24,7 @@ public class User {
     private String phone;
     private String address;
     private Date dateRegister;
-    private boolean isActive=false;
+    private boolean isActive = false;
     private int storeID;
 
     public User() {
@@ -35,7 +36,7 @@ public class User {
         this.firstName = firstName;
         this.lastName = lastName;
     }
-    
+
     public User(int ID, String Role, String Email, String Password, String Avatar, String FirstName, String LastName, String Gender, String Phone, String Address, Date DateRegister, boolean IsActive, int StoreID) {
         this.id = ID;
         this.role = Role;
@@ -52,13 +53,11 @@ public class User {
         this.storeID = StoreID;
     }
 
-    public User(int ID, String Role, String Email, String Password, String Avatar
-            , String FirstName, String LastName, String Gender, String Phone
-            , String Address, Date DateRegister, int StoreID) {
+    public User(int ID, String Role, String Email, String Password, String Avatar,
+             String FirstName, String LastName, String Gender, String Phone,
+             String Address, Date DateRegister, int StoreID) {
         this(ID, Role, Email, Password, Avatar, FirstName, LastName, Gender, Phone, Address, DateRegister, true, StoreID);
     }
-
-    
 
     public int getID() {
         return id;
@@ -93,7 +92,8 @@ public class User {
     }
 
     public String getAvatar() {
-        return IMG_PATH + avatar;
+        return //IMG_PATH + 
+                avatar;
     }
 
     public void setAvatar(String Avatar) {
@@ -168,6 +168,5 @@ public class User {
     public String toString() {
         return "User{" + "ID=" + id + ", Role=" + role + ", Email=" + email + ", Password=" + password + ", Avatar=" + avatar + ", FirstName=" + firstName + ", LastName=" + lastName + ", Gender=" + gender + ", Phone=" + phone + ", Address=" + address + ", DateRegister=" + dateRegister + ", IsActive=" + isActive + ", StoreID=" + storeID + '}';
     }
-    
-    
+
 }

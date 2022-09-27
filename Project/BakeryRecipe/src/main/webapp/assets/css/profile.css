@@ -298,3 +298,197 @@ body {
   color: #000;
   font-family: Inter;
 }
+.posting-section-div {
+  align-self: stretch;
+  background-color: #fff;
+  box-shadow: 0 4px 12px rgba(79, 79, 186, 0.06);
+  padding: 16px 14px;
+  justify-content: flex-start;
+  gap: 26px;
+}
+.shape-icon {
+  position: relative;
+  width: 16px;
+  height: 16px;
+}
+.iconoptions-button {
+  cursor: pointer;
+  border: 0;
+  padding: 0;
+  background-color: transparent;
+  position: absolute;
+  top: 23px;
+  left: 344px;
+  width: 18px;
+  height: 18px;
+  transform: rotate(-90deg);
+  transform-origin: 0 0;
+}
+.h-a,
+.trnh-thng-bnh {
+  text-decoration: none;
+  position: relative;
+  display: inline-block;
+  width: 147px;
+  flex-shrink: 0;
+}
+.trnh-thng-bnh {
+  font-weight: 700;
+  color: inherit;
+  height: 11px;
+  cursor: pointer;
+}
+.trnh-thng-bnh:hover {
+  font-size: 11px;
+  text-decoration: underline;
+}
+.h-a {
+  font-size: 10px;
+  color: rgba(0, 0, 0, 0.5);
+  height: 12px;
+}
+.h-a:hover {
+  cursor: pointer;
+  text-decoration: underline;
+}
+.profile-name-div {
+  position: absolute;
+  top: 7px;
+  left: 54px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-start;
+}
+.avatar-icon1 {
+  position: absolute;
+  top: 2px;
+  left: 2px;
+  width: 45px;
+  height: 45px;
+  object-fit: cover;
+  cursor: pointer;
+}
+.user-info-div {
+  position: relative;
+  width: 370px;
+  height: 44px;
+  flex-shrink: 0;
+  overflow: hidden;
+}
+.detail-div,
+.image-icon {
+  position: absolute;
+  left: 2px;
+  width: 367px;
+}
+.image-icon {
+  top: 59px;
+  border-radius: 10px;
+  height: 218px;
+  object-fit: cover;
+}
+.detail-div {
+  top: 3px;
+  display: inline-block;
+}
+.user-post-div,
+.vector-icon {
+  position: relative;
+  flex-shrink: 0;
+}
+.user-post-div {
+  width: 369px;
+  height: 277px;
+  overflow: hidden;
+}
+.vector-icon {
+  width: 11.56px;
+  height: 23px;
+}
+.save-b {
+  position: relative;
+  display: inline-block;
+}
+.save {
+  text-decoration: none;
+  border-radius: 15px;
+  width: 100px;
+  height: 23px;
+  flex-shrink: 0;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  cursor: pointer;
+  transition: 0.2s;
+  color: inherit;
+}
+.save:hover {
+  background-color: rgba(0, 0, 0, 0.1);
+  display: flex;
+  padding-top: 0;
+  box-sizing: border-box;
+}
+.save:active {
+  background-color: rgba(0, 0, 0, 0.5);
+}
+.icon-eye {
+  position: relative;
+  width: 28.5px;
+  height: 20px;
+  flex-shrink: 0;
+}
+.view-a,
+.viewer-option-div {
+  flex-direction: row;
+  justify-content: center;
+}
+.view-a {
+  text-decoration: none;
+  border-radius: 15px;
+  width: 100px;
+  height: 23px;
+  flex-shrink: 0;
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  cursor: pointer;
+  transition: 0.2s;
+  color: inherit;
+}
+.view-a:hover {
+  background-color: rgba(0, 0, 0, 0.25);
+  display: flex;
+  padding-top: 0;
+  box-sizing: border-box;
+}
+.view-a:active {
+  background-color: rgba(0, 0, 0, 0.5);
+}
+.viewer-option-div {
+  width: 367px;
+  padding: 3px 0;
+  box-sizing: border-box;
+  gap: 50px;
+  font-size: 14px;
+  font-family: "Abhaya Libre";
+}
+.post-div,
+.view-a1,
+.viewer-option-div {
+  display: flex;
+  align-items: center;
+}
+.post-div {
+  align-self: stretch;
+  border-radius: 20px;
+  background-color: #fff;
+  box-shadow: 0 4px 4px rgba(0, 0, 0, 0.06);
+  flex-direction: column;
+  padding: 10px 13px;
+  box-sizing: border-box;
+  justify-content: flex-start;
+  gap: 10px;
+}
