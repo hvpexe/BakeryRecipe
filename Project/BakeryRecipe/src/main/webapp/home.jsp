@@ -46,16 +46,6 @@
                     </button>
                 </div>
                 <div class="post-div">
-                    <form action="mailto:binhnguyenthanh19242yahoo@gmail.com" method="post" enctype="text/plain">
-                        Student Name:<br><input type="text" name="sname"> <br>
-                        Student Subject:<br><input type="text" name="ssubject"><br>
-                        <p>${id}
-                        <p>p${name}
-                        <p>${email}
-                            <img src="${image}"/>
-                        <h6>${google}</h6>
-                        <input type="submit" value="Send">
-                    </form>
                     <div class="user-info-div">
                         <button class="iconoptions-button">
                             <img class="shape-icon" alt="" src="assets/public/shape.svg" />

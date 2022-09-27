@@ -7,14 +7,13 @@ package controller;
 import dao.UserDAO;
 import dto.User;
 import java.io.IOException;
-import java.io.PrintWriter;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
-import utilities.DBUtils;
+import stackjava.com.accessgoogle.common.GooglePojo;
 
 /**
  *
@@ -42,12 +41,24 @@ public class LoginController extends HttpServlet {
             throws ServletException, IOException {
         String url = ERROR;
         try {
+            HttpSession session = request.getSession();
             String email = request.getParameter("email");
             String password = request.getParameter("password");
+            GooglePojo googlePojo = (GooglePojo) session.getAttribute("google");
+            if (googlePojo != null) {
+                email = googlePojo.getEmail();
+                password = googlePojo.getId();
+                if (!UserDAO.checkDuplicateEmail(email)) {
+                    String firstname = email.split("@")[0];
+                    String lastname = "";
+                    String avatar = googlePojo.getPicture();
+                    UserDAO.register(email, password, firstname, lastname, avatar);
+                }
+                session.removeAttribute("google");
+            }
             User loginUser = UserDAO.login(email, password);
             if (loginUser != null) {
-                HttpSession session = request.getSession();
-                session.setAttribute("login", loginUser);
+                session.setAttribute("LOGIN_USER", loginUser);
                 String roleID = loginUser.getRole();
                 Boolean isActive = loginUser.isIsActive();
                 if (isActive == false) {

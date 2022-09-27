@@ -4,7 +4,7 @@
 <link rel="stylesheet" href="assets/css/web/bootstrap-4.3.1.min.css"/>
 <header class="header-container header py-2 py-md-0">
     <div class="header-left col-sm-12 col-md-6 p-0">
-        <a class="header-logo col-md-3 p-0" href="./home.html">
+        <a class="header-logo col-md-3 p-0" href="./home.jsp">
             <img class="mx-auto" src="assets/images/logo/logo2.png" alt="">
         </a>
         <nav class="header-links col-md col p-0 ">
