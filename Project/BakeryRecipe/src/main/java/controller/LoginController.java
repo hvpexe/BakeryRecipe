@@ -25,9 +25,9 @@ public class LoginController extends HttpServlet {
 
     private static final String ERROR = "login.jsp";
     private static final String AD = "admin";
-    private static final String AD_PAGE = "homePage.jsp";
+    private static final String AD_PAGE = "home.jsp";
     private static final String US = "baker";
-    private static final String USER_PAGE = "homePage.jsp";
+    private static final String USER_PAGE = "home.jsp";
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -47,11 +47,11 @@ public class LoginController extends HttpServlet {
             User loginUser = UserDAO.login(email, password);
             if (loginUser != null) {
                 HttpSession session = request.getSession();
-                session.setAttribute("LOGIN_USER", loginUser);
+                session.setAttribute("login", loginUser);
                 String roleID = loginUser.getRole();
                 Boolean isActive = loginUser.isIsActive();
                 if (isActive == false) {
-                    request.setAttribute("loginError", "You have been banned");
+                    request.setAttribute("LOGIN_ERROR", "You have been banned");
                 } else {
                     if (AD.equals(roleID)) {
                         url = AD_PAGE;

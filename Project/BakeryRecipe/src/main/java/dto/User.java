@@ -11,7 +11,7 @@ import java.util.Date;
  * @author kichi
  */
 public class User {
-    public static final String IMG_PATH = "assets/images/mainavt/";
+    public static final String IMG_PATH = "assets/images/avt/";
     private int id;
     private String role;
     private String email;
