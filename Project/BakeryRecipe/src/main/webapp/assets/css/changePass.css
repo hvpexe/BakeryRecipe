@@ -22,7 +22,8 @@ body {
 }
 .confirm-password-div,
 .current-password-div,
-.new-password-div {
+.new-password-div
+.save-button{
   position: absolute;
   top: 29px;
   left: 48px;
@@ -35,6 +36,8 @@ body {
 .new-password-div {
   top: 145px;
 }
+
+
 .frame-input,
 .frame-input1,
 .frame-input2 {

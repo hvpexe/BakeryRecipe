@@ -41,7 +41,6 @@
     />
   </head>
   <body>
-      <c:import url="header.jsp"/>
     <div class="changepass-div">
       <div class="section-div">
         <div class="titile-div"><b class="text-b">Change Password</b></div>
@@ -59,19 +58,15 @@
                     <label for="inputPasswordConfirm">Confirm Password</label>
                     
                 </div>
-                <input class="frame-input" type="password" /><input
-                class="frame-input1"
-                type="password"
-                defaultvalue="CurrentPass"
-                /><input
-                class="frame-input2"
-                type="text"
-                defaultvalue="ConfirmPass"
-                maxlength="{40}"
-                minlength="{8}"
-                /><button class="frame-button3" id="frameButton">
-                <b class="save-b2">Save</b>
-                </button>
+                <input class="frame-input" type="password" name="oldPassword" id="inputPasswordOld" required=""/>
+                <input class="frame-input1" type="password" name="newPassword" id="inputPasswordNew" required=""/>
+                <input class="frame-input2" type="password" name="confirmNewPassword" id="inputPasswordConfirm" required=""/>
+                <div>
+                    <button type="submit" class="frame-button3" id="frameButton">
+                        <b class="save-b2">Save</b>
+                    </button>
+                </div>
+                
             </form>
         </div>
       </div>
