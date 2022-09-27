@@ -10,8 +10,8 @@ import dto.User;
 import java.sql.Connection;
 import java.sql.Date;
 import java.sql.Timestamp;
-import utilities.DBUtils;
-import utilities.Tools;
+import utils.DBUtils;
+import utils.Tools;
 
 /**
  *
@@ -19,6 +19,7 @@ import utilities.Tools;
  */
 public class UserDAO {
 
+    private static Connection conn = DBUtils.getConnection();
     private static final String[] USER_COLUMN_NAME_LIST
             = {"ID", "Role", "Email", "Password", "Avatar", "FirstName",
                 "LastName", "Gender", "Phone", "Address", "DateRegister", "IsActive", "StoreID"};
@@ -32,7 +33,6 @@ public class UserDAO {
                 + "FROM [User]\n"
                 + "WHERE ID = ? AND Password = ?";
         try {
-            Connection conn = DBUtils.getConnection();
             PreparedStatement ps = conn.prepareStatement(sql);
             ps.setString(1, ID);
             ps.setString(2, password);
@@ -50,7 +50,6 @@ public class UserDAO {
     public static boolean changePassword(String ID, String password) {
         String sql = UPDATE_USER_PASSWORD;
         try {
-            Connection conn = DBUtils.getConnection();
             PreparedStatement ps = conn.prepareStatement(sql);
             //Set ps
             ps.setString(1, password);
@@ -71,7 +70,6 @@ public class UserDAO {
     public static User login(String email, String password) {
         String sql = SELECT_LOGIN;
         try {
-            Connection conn = DBUtils.getConnection();
             System.out.println(conn);
             PreparedStatement ps = conn.prepareStatement(sql);
             //Set ps
@@ -102,7 +100,6 @@ public class UserDAO {
 
         String sql = SELECT_USER_BY_ID;
         try {
-            Connection conn = DBUtils.getConnection();
             PreparedStatement ps = conn.prepareStatement(sql);
             //Set ps
             ps.setInt(1, id);
@@ -122,13 +119,13 @@ public class UserDAO {
         }
         return null;
     }
-    
+
     private static final String CHECK_EMAIL_EXIST = "SELECT ID FROM [User] WHERE Email = ?";
+
     //ham nay dung de kiem tra email co bi trung ko, ap dung khi tao tk moi
     public static boolean checkDuplicateEmail(String email) {
         String sql = CHECK_EMAIL_EXIST;
         try {
-            Connection conn = DBUtils.getConnection();
             PreparedStatement ps = conn.prepareStatement(sql);
             ps.setString(1, email);
             ResultSet rs = ps.executeQuery();
@@ -143,23 +140,52 @@ public class UserDAO {
 
     private static final String INSERT_NEW_USER = "INSERT INTO [User](Role, Email, Password, FirstName, LastName, DateRegister, IsActive) VALUES \n"
             + "(?, ?, ?, ?, ?, ?, 1);";
+
     //dang ki mot tk moi
-    public static boolean register(String role, String email, String password, String firstname, String lastname, Date dateRegister) {
+    public static boolean register(String email, String password, String firstname, String lastname) {
         String sql = INSERT_NEW_USER;
         try {
-            Connection conn = DBUtils.getConnection();
             PreparedStatement ps = conn.prepareStatement(sql);
-            ps.setString(1, role);
+            ps.setString(1, "baker");
             ps.setString(2, email);
             ps.setString(3, password);
             ps.setString(4, firstname);
             ps.setString(5, lastname);
-            ps.setDate(6, dateRegister);
+            ps.setDate(6, new Date(System.currentTimeMillis()));
             if (ps.executeUpdate() == 1) {
                 return true;
             }
         } catch (Exception e) {
             System.out.println("Register error");
+            e.printStackTrace();
+        }
+        return false;
+    }
+
+    /**
+     * user register with avatar
+     *
+     * @param avatar the avatar of the user
+     * @return true if login success
+     */
+    public static boolean register(String email, String password, String firstname, String lastname, String avatar) {
+        if (register(email, password, firstname, lastname)) {
+            updateAvatar(email, avatar);
+            return true;
+        }
+        return false;
+    }
+    private static final String UPDATE_USER_IMAGE = "UPDATE [User] SET [Avatar] = ? WHERE Email= ?";
+    public static boolean updateAvatar(String email, String avatar) {
+        String sql = UPDATE_USER_IMAGE;
+        try {
+            PreparedStatement ps = conn.prepareStatement(sql);
+            ps.setString(1, avatar);//set avatar path
+            ps.setString(2, email);//where user have this email 
+            ps.executeUpdate();
+            return true;
+        } catch (Exception e) {
+            System.out.println("Update Avatar error");
             e.printStackTrace();
         }
         return false;
