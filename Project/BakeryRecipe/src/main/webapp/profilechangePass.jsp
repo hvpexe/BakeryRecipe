@@ -41,26 +41,38 @@
     />
   </head>
   <body>
+      <c:import url="header.jsp"/>
     <div class="changepass-div">
       <div class="section-div">
         <div class="titile-div"><b class="text-b">Change Password</b></div>
         <div class="frame-div1">
-          <div class="current-password-div">Current Password</div>
-          <div class="confirm-password-div">Confirm Password</div>
-          <div class="new-password-div">New Password</div>
-          <input class="frame-input" type="text" /><input
-            class="frame-input1"
-            type="password"
-            defaultvalue="CurrentPass"
-          /><input
-            class="frame-input2"
-            type="text"
-            defaultvalue="ConfirmPass"
-            maxlength="{40}"
-            minlength="{8}"
-          /><button class="frame-button3" id="frameButton">
-            <b class="save-b2">Save</b>
-          </button>
+            <form action="ChangePasswordController" class="form" role="form" autocomplete="off">
+                <div class="current-password-div">
+                    <label for="inputPasswordOld">Current Password</label>
+                    
+                </div>
+                <div class="new-password-div">
+                    <label for="inputPasswordNew">New Password</label>
+                    
+                </div>
+                <div class="confirm-password-div">
+                    <label for="inputPasswordConfirm">Confirm Password</label>
+                    
+                </div>
+                <input class="frame-input" type="password" /><input
+                class="frame-input1"
+                type="password"
+                defaultvalue="CurrentPass"
+                /><input
+                class="frame-input2"
+                type="text"
+                defaultvalue="ConfirmPass"
+                maxlength="{40}"
+                minlength="{8}"
+                /><button class="frame-button3" id="frameButton">
+                <b class="save-b2">Save</b>
+                </button>
+            </form>
         </div>
       </div>
     </div>
