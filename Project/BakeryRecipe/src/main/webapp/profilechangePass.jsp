@@ -10,7 +10,7 @@
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="initial-scale=1, width=device-width" />
-    <title></title>
+    <title>Change Password</title>
     <meta name="description" content="" />
 
     <link rel="stylesheet" href="assets/css/changePass.css" />
