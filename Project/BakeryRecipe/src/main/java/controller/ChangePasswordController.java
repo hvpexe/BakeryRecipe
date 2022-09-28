@@ -19,7 +19,7 @@ import javax.servlet.http.HttpServletResponse;
  */
 public class ChangePasswordController extends HttpServlet {
     private static final String ERROR = "profilechangePass.jsp";
-    private static final String SUCCESS = "profilechangePass.jsp";
+    private static final String SUCCESS = "profile.jsp";
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
@@ -35,8 +35,6 @@ public class ChangePasswordController extends HttpServlet {
                 request.setAttribute("PASSWORD_ERROR", "Old password wrong!");
             } else if (newPassword.length() < 8 && newPassword.length() > 40) {
                 request.setAttribute("PASSWORD_ERROR", "password must be 8 to 40 characters !");
-            } else if (!newPassword.equals(confirmNewPassword)) {
-                request.setAttribute("PASSWORD_ERROR", "Confirmation mismatched");
             } else if (!newPassword.equals(confirmNewPassword)) {
                 request.setAttribute("PASSWORD_ERROR", "Confirmation mismatched");
             } else if (UserDAO.changePassword(userID, newPassword)) {
