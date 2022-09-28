@@ -37,20 +37,7 @@
         <!--<link href="assets/css/bootstrap-4.3.1.min.css" rel="stylesheet" type="text/css"/>-->
         <script src="assets/js/Jquery/jquery-core.js" ></script>
         <script src="https://accounts.google.com/gsi/client" async defer></script>
-        <script>
-            window.onGoogleLibraryLoad = () => {
-                google.accounts.id.initialize({
-                    client_id: '243057477675-kt58mr9lav8eh6ti9bfrj8p782j7unkd.apps.googleusercontent.com',
-                    cancel_on_tap_outside: false,
-                    prompt_parent_id: "root"
-                });
-                google.accounts.id.prompt((notification) => {
-                    if (notification.isNotDisplayed()) {
-                        console.log(notification.getNotDisplayedReason());
-                    }
-                });
-            }
-        </script>
+        <script src="assets/js/googleLogin.js"></script>
         <link rel="stylesheet" href="assets/css/login.css" />
 
     </head>
@@ -58,15 +45,11 @@
         <c:import url="header.jsp"/>
         <section class="logindone-section " id="Login">
             <div class="section-div flex-wrap flex-lg-nowrap">
-
                 <form class="register-form col-lg mx-auto d-none d-lg-flex" action="register" id="register" method="POST">
                     <div class="join-bakeryrecipe-div col-10">Join BakeryRecipe!</div>
                     <div class="joining-bakeryrecipe-is-quick col-10">
                         JOINING BAKERYRECIPE IS QUICK, EASY, AND FREE.
                     </div>
-                    <a class="google d-lg-none" href="https://accounts.google.com/o/oauth2/auth?scope=email&redirect_uri=http://localhost:8080/BakeryRecipe/login-google&response_type=code&client_id=243057477675-kt58mr9lav8eh6ti9bfrj8p782j7unkd.apps.googleusercontent.com&approval_prompt=force">
-                        <img src="assets/public/Google.png" alt=""/>
-                    </a>   
                     <input class="email-input col-10" type="email" placeholder="Email" required="" name="email">
                     <div class="name-div row col-10 p-0">
                         <input class="firstname-input col" type="text" placeholder="First name" required="" name="firstname"><input class="firstname-input col" type="text" placeholder="Last name" required="" name="lastname">
@@ -83,10 +66,20 @@
                 <form class="login-form col-lg mx-auto d-lg-flex" action="login" method="post" id="login">
                     <div class="join-bakeryrecipe-div col-10">Already A Member? Sign-In</div>
                     <div class="joining-bakeryrecipe-is-quick col-10">WELCOME BACK</div>
-                    <a class="google" href="https://accounts.google.com/o/oauth2/auth?scope=email&redirect_uri=http://localhost:8080/BakeryRecipe/login-google&response_type=code&client_id=243057477675-kt58mr9lav8eh6ti9bfrj8p782j7unkd.apps.googleusercontent.com&approval_prompt=force">
-                        <img src="assets/public/Google.png" alt=""/>
-                    </a>   
-
+                    <div class="d-none" id="g_id_onload"
+                         data-client_id="<%=Constants.GOOGLE_CLIENT_ID%>"
+                         data-login_uri="BakeryRecipe/home.jsp"
+                         data-callback="handleCredentialResponse"
+                         >
+                    </div>
+                    <div class="g_id_signin"
+                         data-type="icon"
+                         data-size="large"
+                         data-theme="filled_blue"
+                         data-text="sign_in_with"
+                         data-shape="circle"
+                         data-logo_alignment="left">
+                    </div>
                     <input class="email-input1 col-10" type="text" placeholder="Email" required="" name="email">
                     <input class="password-input1 col-10" type="password" placeholder="Password" required="" name="password">
                     <div>${LOGIN_ERROR}</div>
@@ -100,10 +93,10 @@
                 </form>
 
             </div>
-
+            <!--Google Login Dont Touch-->
+            <form class="d-none" id="googleLogin" action="login" method="get"></form>
         </section>
         <c:import url="footer.jsp"/>
-
         <script src="assets/js/login.js" type="text/javascript"></script>
     </body>
 </html>
