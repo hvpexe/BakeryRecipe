@@ -51,13 +51,7 @@ body {
   height: 40px;
   overflow: hidden;
 }
-.frame-input1,
-.frame-input2 {
-  top: 184px;
-}
-.frame-input2 {
-  top: 300px;
-}
+
 .save-b2 {
   position: absolute;
   top: 9px;
