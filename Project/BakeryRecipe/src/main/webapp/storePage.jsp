@@ -51,7 +51,7 @@
                 </div>
                 <div class="infomation-div">
                     <div class="mail-div">
-                        <img class="icon" alt="" src="public/icon.svg" /><span
+                        <img class="profile-icon" alt="" src="public/icon.svg" /><span
                             class="text-span"
                             >Gmail :</span
                         ><span class="text-nfo-span">nongtraisach@gmail.com</span>

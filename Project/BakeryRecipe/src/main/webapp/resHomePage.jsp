@@ -52,7 +52,7 @@
             <div class="div1">+</div>
           </button>
         </div>
-        <div class="post-div2">
+        <div class="user_post">
           <div class="user-info-div2">
             <button class="iconoptions-button2">
               <img class="shape-icon2" alt="" src="public/shape2.svg" />
@@ -91,7 +91,7 @@
             >
           </div>
         </div>
-        <div class="post-div2">
+        <div class="user_post">
           <div class="user-info-div2">
             <button class="iconoptions-button2">
               <img class="shape-icon2" alt="" src="public/shape2.svg" />

@@ -6,6 +6,7 @@
 
         <meta charset="utf-8" />
         <meta name="viewport" content="initial-scale=1, width=device-width" />
+        <meta name="description" content="" />
         <title>Welcome to Bakery Recipe</title>
         <link
             rel="stylesheet"
@@ -94,7 +95,7 @@
 
             </div>
             <!--Google Login Dont Touch-->
-            <form class="d-none" id="googleLogin" action="login" method="get"></form>
+            <form class="d-none" id="googleLogin" action="login" method="POST"></form>
         </section>
         <c:import url="footer.jsp"/>
         <script src="assets/js/login.js" type="text/javascript"></script>
