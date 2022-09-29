@@ -30,7 +30,7 @@
                     <li onclick="window.location = '${rating}'">
                         Liked recipe
                     </li>
-                    <li onclick="window.location = './profileChangePass.jsp'">
+                    <li onclick="window.location = './profilechangePass.jsp'">
                         Change password
                     </li>
                     <li onclick="window.location = 'logout'">

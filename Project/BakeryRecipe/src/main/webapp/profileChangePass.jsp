@@ -34,7 +34,7 @@
                 <li onclick="window.location = '${rating}'">
                     Liked recipe
                 </li>
-                <li onclick="window.location = './profileChangePassword.jsp'" class="function-select">
+                <li onclick="window.location = './profileChangePass.jsp'" class="function-select">
                     Change password
                 </li>
                 <li onclick="window.location = 'logout'" class="list-group-item list-group-item-action">
@@ -51,7 +51,7 @@
                 </div>
                 <div class="card card-outline-secondary">
                     <div class="card-body">
-                        <form action="ProfileChangePasswordController" class="form" role="form" autocomplete="off">
+                        <form action="ChangePasswordController" class="form" role="form" autocomplete="off">
                             <div class="form-group">
                                 <label for="inputPasswordOld">Current Password</label>
                                 <input type="password" name="oldPassword" class="form-control" id="inputPasswordOld"

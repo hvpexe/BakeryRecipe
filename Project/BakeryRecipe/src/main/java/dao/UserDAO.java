@@ -31,13 +31,13 @@ public class UserDAO {
                 String.class, Boolean.class, String.class, String.class, Timestamp.class, String.class, Integer.class};
 
     //ay da ko xem database code sai r
-    public static boolean checkOldPassword(String ID, String password) {
+    public static boolean checkOldPassword(String userID, String password) {
         String sql = "SELECT ID\n"
                 + "FROM [User]\n"
                 + "WHERE ID = ? AND Password = ?";
         try {
             PreparedStatement ps = conn.prepareStatement(sql);
-            ps.setString(1, ID);
+            ps.setString(1, userID);
             ps.setString(2, password);
             ResultSet rs = ps.executeQuery();
             if (rs.next()) {
@@ -50,13 +50,13 @@ public class UserDAO {
     }
     private static final String UPDATE_USER_PASSWORD = " UPDATE [User] SET Password = ? WHERE ID= ?";
 
-    public static boolean changePassword(String ID, String password) {
+    public static boolean changePassword(String userID, String password) {
         String sql = UPDATE_USER_PASSWORD;
         try {
             PreparedStatement ps = conn.prepareStatement(sql);
             //Set ps
             ps.setString(1, password);
-            ps.setString(2, ID);
+            ps.setString(2, userID);
             //run ps
             ps.executeUpdate();
             return true;
