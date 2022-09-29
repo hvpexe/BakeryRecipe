@@ -54,12 +54,12 @@
                         <form action="ProfileChangePasswordController" class="form" role="form" autocomplete="off">
                             <div class="form-group">
                                 <label for="inputPasswordOld">Current Password</label>
-                                <input type="password" name="passwordOld" class="form-control" id="inputPasswordOld"
+                                <input type="password" name="oldPassword" class="form-control" id="inputPasswordOld"
                                     required="">
                             </div>
                             <div class="form-group">
                                 <label for="inputPasswordNew">New Password</label>
-                                <input type="password" name="passwordNew" class="form-control" id="inputPasswordNew"
+                                <input type="password" name="newPassword" class="form-control" id="inputPasswordNew"
                                     required="">
                                 <span class="form-text small text-muted">
                                     password must be at least 8 characters.
@@ -67,7 +67,7 @@
                             </div>
                             <div class="form-group">
                                 <label for="inputPasswordNewVerify">Verify</label>
-                                <input type="password" name="passwordNewVerify" class="form-control"
+                                <input type="password" name="confirmNewPassword" class="form-control"
                                     id="inputPasswordNewVerify" required="">
                                 <span class="form-text small text-muted">
                                     To confirm, type the new password again.
