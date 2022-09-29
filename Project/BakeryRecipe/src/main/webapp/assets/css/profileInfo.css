@@ -1,0 +1,159 @@
+:root {
+    --main-theme-color: #DB5A42;
+    --main-theme-color-hover: #c22e14;
+    --side-theme-color: #FFFFFF;
+    --main-title-color: #000000;
+    --web-background-color: #F7FAFC;
+    --border-theme-color: #9c9c9c;
+}
+
+*{
+    font-family: Gelasio;
+}
+
+/* main */
+body {
+    background-color: var(--web-background-color) !important;
+}
+
+/* SECTION */
+.section {
+    display: flex;
+    flex-wrap: wrap;
+    margin: 25px auto 50px !important;
+    width: 100%;
+    background-color: white;
+    padding: 25px 1%;
+    border-radius: 20px;
+    box-shadow: 0 4px 4px rgb(0 0 0 / 6%);
+}
+
+@media (min-width:1400px) {
+    .container {
+        min-width: 1320px;
+    }
+}
+@media (min-width:1700px) {
+    .container {
+        min-width: 1600px;
+    }
+}
+
+/* dung chung */
+.profile-header {
+    background-color: var(--main-theme-color);
+    border-radius: 20px 20px 0 0;
+}
+
+.info-title {
+    color: var(--main-title-color);
+    padding: 8px 20px 10px;
+    font-size: 28px;
+    margin-bottom: 20px;
+}
+
+.profile-img {
+    text-align: center;
+    position: relative;
+}
+
+.profile-img img {
+    width: 100%;
+    aspect-ratio: 1;
+}
+
+.profile-name {
+    text-align: center;
+    font-weight: 500;
+    font-size: 22px;
+    padding: 20px;
+}
+
+#profile-function li {
+    padding: 8px 8px;
+    border: 2px solid var(--main-title-color);
+    border-radius: 20px;
+    margin: 6px 0;
+    color: var(--main-title-color);
+    cursor: pointer;
+    user-select: none; /*làm cho text không thể được select.*/
+    font-size: 24px;
+    font-weight: 500;
+    list-style: none;
+}
+
+.function-select {
+    background: var(--main-theme-color);
+    color: var(--main-title-color) !important;
+}
+#profile-function li:hover {
+    background: var(--main-theme-color);
+    color: var(--main-title-color);
+}
+
+/*your information */
+.infor-detail {
+    border: 1px solid var(--border-theme-color);
+    border-radius: 0 0 20px 20px;
+    padding: 20px;
+    line-height: 40px;
+    font-size: 24px;
+
+
+}
+
+.infor-detail>div {
+    padding-left: 20px;
+}
+
+.infor-detail:first-child {
+    padding-top: 30px;
+}
+
+#profile-information input[type=submit] {
+    background-color: var(--main-theme-color);
+    border: none;
+    color: var(--main-title-color);
+    font-size: 24px;
+    padding: 10px 20px;
+    border-radius: 20px;
+    margin: 25px auto;
+    display: block;
+}
+
+#profile-information input {
+    margin-bottom: 10px;
+}
+
+#profile-change-password .btn-main-theme {
+    background-color: var(--main-theme-color);
+    color: var(--main-title-color);
+}
+
+#profile-change-password .btn-main-theme:hover {
+    background-color: var(--main-theme-color-hover);
+}
+
+#profile-change-password .form-control {
+    border: 1px solid #ced4da !important;
+}
+
+.form {
+    width: 50%;
+}
+
+.pass-error {
+    color: red;
+    font-size: 24px;
+    margin-left: 30px;
+}
+
+.pass-success {
+    color: green;
+    font-size: 24px;
+    margin-left: 30px;
+}
+
+
+
+

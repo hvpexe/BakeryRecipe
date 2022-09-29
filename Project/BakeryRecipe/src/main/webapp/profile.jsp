@@ -46,7 +46,7 @@
     </head>
     <body>
         <c:import url="header.jsp"/>
-           
+
         <div class="section container-fluid col-10 mt-3 p-0 ">
             <div class="infomation py-3 col d-flex flex-wrap flex-md-nowrap justify-content-around align-items-start">
 
@@ -57,9 +57,11 @@
                         <span class="profile-text_follow-status">1 Following 999 Follower</span>
                     </div>
                 </div> 
-                <button class="edit-proile-button align-self-md-end">
-                    <div class="edit-btn">Edit Profile <i class="fa-solid fa-caret-down"></i></div>
-                </button>    
+                <a href="./profileInfo.jsp">
+                    <button class="edit-proile-button align-self-md-end">
+                        <div class="edit-btn">Edit Profile <i class="fa-solid fa-caret-down"></i></div>
+                    </button>    
+                </a>
 
             </div>
             <button class="profile-option_btn">
