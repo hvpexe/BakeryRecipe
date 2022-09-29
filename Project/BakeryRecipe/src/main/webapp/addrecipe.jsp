@@ -35,7 +35,7 @@
         <link rel="stylesheet" href="./assets/css/addrecipe.css" />
     </head>
     <body>
-        <jsp:include page="header.jsp"/>
+        <c:import url="header.jsp"/>
 
         <main class="add-recipedone-main">
             <main class="cook2-main">

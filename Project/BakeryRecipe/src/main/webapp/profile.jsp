@@ -40,14 +40,13 @@
             rel="stylesheet"
             href="https://fonts.googleapis.com/css2?family=Beau Rivage:wght@400&display=swap"
             />
-        <script src="assets/js/Jquery/jquery-core.js"></script>
-        <script src="assets/js/profile.js"></script>
+
         <link rel="stylesheet" href="assets/css/web/bootstrap-4.3.1.min.css"/>
         <link rel="stylesheet" href="assets/css/profile.css">
     </head>
     <body>
         <c:import url="header.jsp"/>
-
+           
         <div class="section container-fluid col-10 mt-3 p-0 ">
             <div class="infomation py-3 col d-flex flex-wrap flex-md-nowrap justify-content-around align-items-start">
 
@@ -109,6 +108,7 @@
                 </button>
             </div>
         </div>
-
+        <script src="assets/js/Jquery/jquery-core.js"></script>
+        <script src="assets/js/profile.js"></script>
     </body>
 </html>
