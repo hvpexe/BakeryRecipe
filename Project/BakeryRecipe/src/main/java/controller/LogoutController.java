@@ -17,7 +17,7 @@ import javax.servlet.http.HttpSession;
  *
  * @author VO MINH MAN
  */
-@WebServlet(name = "LogoutController", urlPatterns = {"/LogoutController"})
+@WebServlet(name = "LogoutController", urlPatterns = {"/logout"})
 public class LogoutController extends HttpServlet {
 
     private final static String ERROR = "login.jsp";
