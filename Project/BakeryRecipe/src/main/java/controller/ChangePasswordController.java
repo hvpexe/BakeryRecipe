@@ -17,6 +17,7 @@ import javax.servlet.http.HttpServletResponse;
  *
  * @author kichi
  */
+
 public class ChangePasswordController extends HttpServlet {
     private static final String ERROR = "profilechangePass.jsp";
     private static final String SUCCESS = "profile.jsp";
