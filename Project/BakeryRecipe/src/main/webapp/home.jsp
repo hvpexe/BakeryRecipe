@@ -6,7 +6,6 @@
         <meta charset="utf-8" />
         <meta name="viewport" content="initial-scale=1, width=device-width" />
         <title>HomePage</title>
-        <link rel="stylesheet" href="assets/css/homePage.css" />
         <link
             rel="stylesheet"
             href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700&display=swap"
@@ -31,6 +30,10 @@
             rel="stylesheet"
             href="https://fonts.googleapis.com/css2?family=Arima Madurai:wght@800&display=swap"
             />
+        
+        <link rel="stylesheet" href="assets/css/web/bootstrap-4.3.1.min.css" />
+                <link rel="stylesheet" href="assets/css/homePage.css" />
+
     </head>
     <body>
         <c:import url="header.jsp"/>
