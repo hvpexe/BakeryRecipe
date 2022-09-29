@@ -94,15 +94,7 @@
 
     <jsp:include page="footer.jsp" />
 
-    <script>
-        var frameButton = document.getElementById("frameButton");
-        if (frameButton)
-        {
-            frameButton.addEventListener("click", function (e) {
-                window.location.href = "./profile.html";
-            });
-        }
-    </script>
+    
 </body>
 
 </html>
