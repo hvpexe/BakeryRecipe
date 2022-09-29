@@ -47,67 +47,64 @@
     <body>
         <c:import url="header.jsp"/>
 
-        <div class="section container-fluid col-10 mt-3 p-0 ">
-            <div class="infomation py-3 col d-flex flex-wrap flex-md-nowrap justify-content-around align-items-start">
+        <div class="section-container">
+            <div class=" section-profile">
+                <div class="row profile-header">
+                    <img class="col-3 avt-icon"
+                         src=${sessionScope.login.avatar}
+                         alt="" />
+                    <div class="col-6">
+                        <h3 class="profile-name">${sessionScope.login.name}</h3>
+                        <span class="follow">1 Following</span>
+                        <span class="follow">999 Follower</span>
 
-                <div class="profile-text d-flex flex-column flex-md-row align-items-center col-12 col-md ">
-                    <img class="avt-icon" alt="profile picture" src="${sessionScope.login.avatar}" />
-                    <div class="d-flex flex-column align-self-lg-start align-self-md-start ml-lg-2 p-md-2"> 
-                        <span class="profile-text_name">${sessionScope.login.name}</span>
-                        <span class="profile-text_follow-status">1 Following 999 Follower</span>
                     </div>
-                </div> 
-                <a href="./profileInfo.jsp">
-                    <button class="edit-proile-button align-self-md-end">
-                        <div class="edit-btn">Edit Profile <i class="fa-solid fa-caret-down"></i></div>
-                    </button>    
-                </a>
+                    <a href="./profileInfo.jsp" class="btn edit-profile-button">Edit Profile</a>
+                </div>
+                <a href="#" class="btn input-button">Add your post</a>
+                <div class="profile-activity">
+                    <b>Activity</b>
+                </div>
+                <div class="profile-recipe">
+                    <div class="media recipe-header">
+                        <img class="recipe-ava"
+                             src=${sessionScope.login.avatar}
+                             alt="" />
+                        <div class="media-body ml-3">
+                            ${sessionScope.login.name}
+                            <div class="text-muted small">3 days ago</div>
+                        </div>
+                        <i class="fa-solid fa-ellipsis"></i>
+                    </div>
 
-            </div>
-            <button class="profile-option_btn">
-                <i class="fa-solid fa-ellipsis"></i>
-            </button>
+                    <div class="recipe-text">
+                        Added courgette and green beans, served with brown rice. Also added
+                        a spoonful of rice vinegar to the sauce as suggested by others.
+                        Really good!! Will definitely have again.
+                    </div>
 
-            <div class="title-div col"><b class="text">Activity</b></div>
-            <button class="input-button col-8 col-md-6" id="addrecipe">
-                <i class="fas fa-plus" style="color: var(--main-theme-color) "></i>
-                <div class="text-div">Add Your Recipe</div>
-            </button>
-            <div class="user_post col-11 col-md-9 p-3 d-flex flex-column">
-                <div class="post-div col-10 align-self-start p-0">
-                    <img class="post-avt " alt="" src="${sessionScope.login.avatar}" />
-                    <div class="d-flex flex-column">
-                        <p class="post-name col p-0 d-flex align-items-center justify-content-start"><b>${sessionScope.login.name}</b></p>
-                        <p class="post-time col p-0 d-flex align-items-center justify-content-start"><span>1h</span></p>
+                    <img class="recipe-img" alt=""
+                         src="https://cdn.cet.edu.vn/wp-content/uploads/2022/01/cach-lam-banh-ran-doremon-1.jpg" />
+
+                    <div class="recipe-react">
+                        <a href="javascript:void(0)" class="d-inline-block text-muted">
+                            <span class="align-middle">
+                                <strong>123</strong> Likes</span>
+                        </a>
+                        <a href="javascript:void(0)" class="d-inline-block text-muted ml-3">
+                            <span class="align-middle">
+                                <strong>12</strong> Comments</span>
+                        </a>
+                        <a href="#" class="d-inline-block text-muted ml-3">
+                            <i class="ion ion-md-share align-middle"></i>&nbsp;
+                            <span class="align-middle">Save</span>
+                        </a>
+                        <a href="#" class="d-inline-block text-muted ml-3">
+                            <i class="ion ion-md-share align-middle"></i>&nbsp;
+                            <span class="align-middle">View detail</span>
+                        </a>
                     </div>
                 </div>
-                <div class="post-description p-2">
-                    Added courgette and green beans, served with brown rice. Also added
-                    a spoonful of rice vinegar to the sauce as suggested by others.
-                    Really good!! Will definitely have again.
-                </div>
-                <img class="post-picture col" alt="a decorative picture" src="assets/images/image@2x.png"/>
-                <button class="post-option-btn ">
-                    <img class="profile-icon col" alt="" src="public/shape4.svg" />
-                </button>
-            </div>
-            <div class="user_post col-11 col-md-9 p-3 d-flex flex-column">
-                <div class="post-div col-10 align-self-start p-0">
-                    <img class="post-avt " alt="" src="${sessionScope.login.avatar}" />
-                    <div class="d-flex flex-column">
-                        <p class="post-name col p-0 d-flex align-items-center justify-content-start"><b>${sessionScope.login.name}</b></p>
-                        <p class="post-time col p-0 d-flex align-items-center justify-content-start"><span>1h</span></p>
-                    </div>
-                </div>
-                <div class="post-description p-2">
-                    Added courgette and green beans, served with brown rice. Also added
-                    a spoonful of rice vinegar to the sauce as suggested by others.
-                    Really good!! Will definitely have again.
-                </div>
-                <img class="post-picture col" alt="a decorative picture" src="assets/images/image@2x.png"/>
-                <button class="post-option-btn ">
-                    <img class="profile-icon col" alt="" src="public/shape4.svg" />
-                </button>
             </div>
         </div>
         <script src="assets/js/Jquery/jquery-core.js"></script>

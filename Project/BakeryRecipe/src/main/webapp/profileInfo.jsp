@@ -17,9 +17,9 @@
             <!-- SECTION LEFT -->
             <div class="col-md-12 col-lg-3 ">
                 <div class="profile-img ">
-                    <img class="border border-dark rounded-circle" src="https://khoinguonsangtao.vn/wp-content/uploads/2022/07/avatar-gau-cute.jpg" alt="User Avt">
+                    <img class="border border-dark rounded-circle" src="${sessionScope.login.avatar}" alt="User Avt">
                 </div>
-                <div class="profile-name">Trinh Thang Binh</div>
+                <div class="profile-name">${sessionScope.login.name}</div>
                 <ul id="profile-function" class="list-group">
                     <li onclick="window.location = './profileInformation.jsp'" class="function-select">
                         Change information
@@ -33,7 +33,7 @@
                     <li onclick="window.location = './profileChangePass.jsp'">
                         Change password
                     </li>
-                    <li onclick="window.location = 'logout'">
+                    <li onclick="window.location = 'LogoutController'">
                         Logout
                     </li>
                 </ul>
@@ -51,13 +51,13 @@
                             <div class="row">
                                 <div class="col-md-3">Firstname</div>
                                 <div class="col-md-9">
-                                    <input type="text" name="firstname" value="Trinh">
+                                    <input type="text" name="firstname" value="${sessionScope.login.firstName}">
                                 </div>
                             </div>
                             <div class="row">
                                 <div class="col-md-3">Lastname</div>
                                 <div class="col-md-9">
-                                    <input type="text" name="lastname" value="Thang Binh">
+                                    <input type="text" name="lastname" value="${sessionScope.login.lastName}">
                                 </div>
                             </div>
                             <div class="row">
@@ -92,6 +92,7 @@
         </div>
 
         <jsp:include page="footer.jsp"/>
+        <script src="assets/js/Jquery/jquery-core.js"></script>
     </body>
 </html>
 

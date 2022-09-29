@@ -40,7 +40,7 @@
         <div class="home-div">
             <div class="post-section-div">
                 <div class="posting-section-div">
-                    <img class="avatar-icon" alt="" src="assets/public/avatar@2x.png" /><button
+                    <img class="avatar-icon" alt="" src=${sessionScope.login.avatar} /><button
                         class="btn-button"
                         id="btnButton"
                         >

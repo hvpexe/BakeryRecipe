@@ -1,463 +1,117 @@
-html{
-    font-size: 16px;
+.section-container {
+    background-color: #f7fafc;
+    width: 100%;
+    padding-top: 60px;
+    font-size: 28px;
+    color: #000;
 }
-body {
-    margin: 0;
-    background: var(--web-background-color);
-    line-height: normal;
-}
-.edit-btn {
-    font-size: 16px;
-    font-family: Gelasio;
-    color: var(--main-theme-color);
-    text-align: center;
-    width: max-content;
-    display: inline-block;
-}
-.edit-proile-button {
-    cursor: pointer;
-    border: 1px solid var(--main-theme-color);
-    padding: 5px 10px;
-    background-color: #fff;
-    border-radius: 20px;
-    box-sizing: border-box;
+
+.section-profile {
+    max-width: 650px;
     display: flex;
-    justify-content: center;
     align-items: center;
+    margin: 0 auto;
+    border-radius: 20px 20px 0 0;
+    background-color: #fff;
+    box-shadow: 0 4px 12px rgba(79, 79, 186, 0.06);
+    flex-direction: column;
+    padding: 30px 0;
+    gap: 15px;
 }
+
+.profile-header {
+    justify-content: space-between;
+    width: 90%;
+}
+
 .avt-icon {
     box-sizing: border-box;
-    width: 120px;
-    aspect-ratio:1/1;
+    padding: 0 !important;
+    /* width: 120px; */
+    aspect-ratio: 1/1;
     border: 10px solid #EEE;
     border-radius: 50%;
 }
-.profile-icon {
-    position: relative;
-    width: 16px;
-    height: 16px;
-}
-.profile-option_btn {
-    cursor: pointer;
-    border: 0;
-    padding: 0;
-    background-color: transparent;
-    position: absolute;
-    top: 10px;
-    right: 2em;
-    width: 18px;
-    height: 18px;
-    transform-origin: 0 0;
-}
-.form {
-    width: 100%;
-    padding-left: 48px;
-    padding-right: 48px;
-    padding-top: 25px;
 
-}
-#profile-change-password .btn-main-theme {
-    background-color: var(--main-theme-color);
-    color: var(--main-title-color);
+.profile-name {
+    padding: 10px 0;
+    font-size: 24px;
+    font-weight: 600;
 }
 
-#profile-change-password .btn-main-theme:hover {
-    background-color: var(--main-theme-color-active);
-}
-.profile-text_follow-status,
-.profile-text_name {
-    position: relative;
-    display: inline-block;
-    width: 257px;
-}
-.profile-text_name {
-    margin: 0;
-    font-size: 1.5em;
-    font-weight: 500;
-    font-family: inherit;
-    width: auto;
-    padding-top: 0.75em;
-}
-.profile-text_follow-status {
-    font-size: 1.1em;
+.follow {
+    font-size: 16px;
     color: rgba(0, 0, 0, 0.5);
-    width: auto;
+    margin-right: 15px;
 }
-.profile-text {
-    /* gap: 25px 10px; */
+
+
+.edit-profile-button {
+    border: 1px solid #db5a42 !important;
+    color: #db5a42 !important;
+    border-radius: 20px !important;
+    height: 40px;
 }
-.infomation,
-.text-icon {
-    position: relative;
-    flex-shrink: 0;
-}
-.infomation {
-    box-shadow: 0 4px 4px rgba(0,0,0,0.25);
-    background-color: #fff;
-    font-family: Gelasio;
-    gap: 1em;
-    border-radius: 20px 20px 5px 5px;
-}
-.text-icon {
-    width: 21px;
-    height: 21px;
-}
-.text-div {
-    position: relative;
-    font-size: 14px;
-    font-family: Inter;
-    color: #e3a587;
-    text-align: center;
-    display: inline-block;
-}
+
 .input-button {
-    border: 1px solid #00000075;
-    background-color: #fff;
-    border-radius: 500px;
-    box-sizing: border-box;
+    margin-top: 20px;
+    padding: 10px !important;
+    border: 1px solid #d7d5d5 !important;
+    color: #db5a42 !important;
+    border-radius: 20px !important;
+    width: 352px;
     display: flex;
+    flex-direction: row;
     align-items: center;
     justify-content: center;
-    gap: 8px;
-    padding: 10px 15px;
 }
+
 .input-button:hover {
     background-color: rgba(255, 210, 117, 0.7);
-    padding-top: 10px;
-    box-sizing: border-box;
 }
-.input-button:active {
-    background-color: rgba(232, 174, 104, 0.7);
-}
-.text {
-    display: inline-block;
-}
-.icon-bookmark,
-.title-div {
+
+.profile-activity {
     position: relative;
-    background: var(--white);
-    flex-shrink: 0;
-}
-.title-div {
-    border-top: 0 solid #000;
-    border-right: 0 solid #000;
     border-bottom: 0.2px solid #000;
-    border-left: 0 solid #000;
-    box-sizing: border-box;
-    font-size: 1.5em;
+    width: 650px;
+    height: 45px;
+    font-size: 24px;
 }
-.icon-bookmark {
-    width: 11.56px;
-    height: 23px;
-}
-.save-b4 {
-    position: relative;
-    display: inline-block;
-}
-.save-div {
-    width: 100px;
-    height: 23px;
-    flex-shrink: 0;
-    display: flex;
-    flex-direction: row;
-    align-items: center;
-    justify-content: center;
-    gap: 6px;
-}
-.icon-eye2,
-.view-b2 {
-    position: relative;
-    flex-shrink: 0;
-}
-.icon-eye2 {
-    width: 28.5px;
-    height: 20px;
-}
-.view-b2 {
-    display: inline-block;
-    width: 48px;
-}
-.div39,
-.view-div {
-    display: flex;
-    flex-direction: row;
-    align-items: center;
-    justify-content: center;
-}
-.view-div {
-    width: 100px;
-    height: 23px;
-    flex-shrink: 0;
-    gap: 4px;
-}
-.div39 {
+
+.profile-activity b {
     position: absolute;
-    top: 529px;
-    left: -1px;
-    width: 586px;
-    height: 60px;
-    padding: 3px 0;
-    box-sizing: border-box;
-    gap: 179px;
-    font-size: 14px;
-    font-family: "Abhaya Libre";
+    top: 0px;
+    left: 47px;
 }
-.post-picture {
-    border-radius: 10px;
-    object-fit: cover;
+
+.profile-recipe {
+    border-radius: 20px;
+    box-shadow: 0 0 12px rgba(0, 0, 0, 0.06);
+    width: 600px;
+    padding: 20px 20px;
+    font-size: 16px;
 }
-.post-description {
-    display: inline-block;
+
+.recipe-header {
+    margin-bottom: 10px;
+
 }
-.post-name,.post-time {
-    margin: 0;
-    font-size: 0.85em;
-}
-.post-time {
-    color: rgba(0, 0, 0, 0.5);
-}
-.post-div {
-}
-.post-option-btn {
-    cursor: pointer;
-    border: 0;
-    padding: 0;
-    background-color: transparent;
-    position: absolute;
-    top: 42px;
-    left: 551px;
-    width: 18px;
-    height: 18px;
-    transform: rotate(-90deg);
-    transform-origin: 0 0;
-}
-.post-avt {
-    width: 48px;
-    aspect-ratio: 1/1;
-    border: 2px solid #00000075;
+
+.recipe-ava {
+
+    width: 50px;
+    height: 50px;
     border-radius: 50%;
 }
-.user_post {
-    /* flex: 1; */
-    position: relative;
-    border-radius: 20px;
-    background-color: #fff;
-    box-shadow: 0 0 12px rgba(0, 0, 0, 0.06);
-    font-size: 16px;
+
+.recipe-text {
+    /* text-align: justify; */
+    margin-bottom: 10px;
+
 }
-.profile-section,
-.section {
-    display: flex;
-    /*box-sizing: border-box;*/
-    align-items: center;
-}
-.section {
-    border-radius: 20px;
-    background-color: var(--web-background-color);
-    flex-direction: column;
-    justify-content: flex-start;
-    gap: 1.5em;
-}
-.profile-section {
-    position: relative;
-    background-color: #f7fafc;
-    width: 100%;
-    flex-direction: row;
-    padding: 20px 0 38px;
-    justify-content: center;
-    text-align: left;
-    font-size: 16px;
-    color: #000;
-    font-family: Inter;
-}
-.posting-section-div {
-    align-self: stretch;
-    background-color: #fff;
-    box-shadow: 0 4px 12px rgba(79, 79, 186, 0.06);
-    padding: 16px 14px;
-    justify-content: flex-start;
-    gap: 26px;
-}
-.shape-icon {
-    position: relative;
-    width: 16px;
-    height: 16px;
-}
-.iconoptions-button {
-    cursor: pointer;
-    border: 0;
-    padding: 0;
-    background-color: transparent;
-    position: absolute;
-    top: 23px;
-    left: 344px;
-    width: 18px;
-    height: 18px;
-    transform: rotate(-90deg);
-    transform-origin: 0 0;
-}
-.h-a,
-.trnh-thng-bnh {
-    text-decoration: none;
-    position: relative;
-    display: inline-block;
-    width: 147px;
-    flex-shrink: 0;
-}
-.trnh-thng-bnh {
-    font-weight: 700;
-    color: inherit;
-    height: 11px;
-    cursor: pointer;
-}
-.trnh-thng-bnh:hover {
-    font-size: 11px;
-    text-decoration: underline;
-}
-.h-a {
-    font-size: 10px;
-    color: rgba(0, 0, 0, 0.5);
-    height: 12px;
-}
-.h-a:hover {
-    cursor: pointer;
-    text-decoration: underline;
-}
-.profile-name-div {
-    position: absolute;
-    top: 7px;
-    left: 54px;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: flex-start;
-}
-.avatar-icon1 {
-    position: absolute;
-    top: 2px;
-    left: 2px;
-    width: 45px;
-    height: 45px;
-    object-fit: cover;
-    cursor: pointer;
-}
-.user-info-div {
-    position: relative;
-    width: 370px;
-    height: 44px;
-    flex-shrink: 0;
-    overflow: hidden;
-}
-.detail-div,
-.image-icon {
-    position: absolute;
-    left: 2px;
-    width: 367px;
-}
-.image-icon {
-    top: 59px;
+
+.recipe-img {
     border-radius: 10px;
-    height: 218px;
-    object-fit: cover;
-}
-.detail-div {
-    top: 3px;
-    display: inline-block;
-}
-.user-post-div,
-.vector-icon {
-    position: relative;
-    flex-shrink: 0;
-}
-.user-post-div {
-    width: 369px;
-    height: 277px;
-    overflow: hidden;
-}
-.vector-icon {
-    width: 11.56px;
-    height: 23px;
-}
-.save-b {
-    position: relative;
-    display: inline-block;
-}
-.save {
-    text-decoration: none;
-    border-radius: 15px;
-    width: 100px;
-    height: 23px;
-    flex-shrink: 0;
-    display: flex;
-    flex-direction: row;
-    align-items: center;
-    justify-content: center;
-    gap: 10px;
-    cursor: pointer;
-    transition: 0.2s;
-    color: inherit;
-}
-.save:hover {
-    background-color: rgba(0, 0, 0, 0.1);
-    display: flex;
-    padding-top: 0;
-    box-sizing: border-box;
-}
-.save:active {
-    background-color: rgba(0, 0, 0, 0.5);
-}
-.icon-eye {
-    position: relative;
-    width: 28.5px;
-    height: 20px;
-    flex-shrink: 0;
-}
-.view-a,
-.viewer-option-div {
-    flex-direction: row;
-    justify-content: center;
-}
-.view-a {
-    text-decoration: none;
-    border-radius: 15px;
-    width: 100px;
-    height: 23px;
-    flex-shrink: 0;
-    display: flex;
-    align-items: center;
-    gap: 4px;
-    cursor: pointer;
-    transition: 0.2s;
-    color: inherit;
-}
-.view-a:hover {
-    background-color: rgba(0, 0, 0, 0.25);
-    display: flex;
-    padding-top: 0;
-    box-sizing: border-box;
-}
-.view-a:active {
-    background-color: rgba(0, 0, 0, 0.5);
-}
-.viewer-option-div {
-    width: 367px;
-    padding: 3px 0;
-    box-sizing: border-box;
-    gap: 50px;
-    font-size: 14px;
-    font-family: "Abhaya Libre";
-}
-.post-div,
-.view-a1,
-.viewer-option-div {
-    display: flex;
-    align-items: center;
-}
-.post-div {
-    border-radius: 20px;
-    background-color: #fff;
-    padding: 10px 13px;
-    box-sizing: border-box;
-    justify-content: flex-start;
-    gap: 10px;
+    width: 100%;
+    margin-bottom: 15px;
 }
