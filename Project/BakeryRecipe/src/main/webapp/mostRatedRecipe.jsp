@@ -4,13 +4,15 @@
     Author     : kichi
 --%>
 
+<%@page import="dao.RecipeDAO"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html>
     <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="initial-scale=1, width=device-width" />
-    <title></title>
+    <title>Most Rated Recipe</title>
     <meta name="description" content="" />
 
     <link rel="stylesheet" href="assets/css/community.css" />
@@ -41,81 +43,32 @@
     />
     </head>
     <body>
-        
-        <div class="communitydone-div">
+    <c:import url="header.jsp"/>
+    
+    <c:set value="<%= RecipeDAO.getMostRatedRecipe()%>" var="RecipeList"/>
+    <div class="communitydone-div">
       <div class="section-div">
         <div class="list-div">
           <div class="titile-div">
             <h1 class="recommend-for-you">Recommend For You</h1>
-            <div class="btn-div"><div class="log-in-div">See more</div></div>
           </div>
           <div class="items-div">
-            <div class="recipe-div" value="postid">
-              <img class="img-icon" alt="" src="public/img@2x.png" />
-              <div class="recipe-name-div">Mooncake</div>
-              <div class="recipe-author-div">Trịnh Thăng Bình</div>
-            </div>
-            <div class="recipe-div" value="postid">
-              <img class="img-icon" alt="" src="public/img1@2x.png" />
-              <div class="recipe-name-div">Mooncake</div>
-              <div class="recipe-author-div">Trịnh Thăng Bình</div>
-            </div>
-            <div class="recipe-div" value="postid">
-              <img class="img-icon" alt="" src="public/img2@2x.png" />
-              <div class="recipe-name-div">Mooncake</div>
-              <div class="recipe-author-div">Trịnh Thăng Bình</div>
-            </div>
-            <div class="recipe-div" value="postid">
-              <img class="img-icon" alt="" src="public/img3@2x.png" />
-              <div class="recipe-name-div">Trung Thu Cake</div>
-              <div class="recipe-author-div">Trịnh Thăng Bình</div>
-            </div>
-            <div class="recipe-div" value="postid">
-              <img class="img-icon" alt="" src="public/img4@2x.png" />
-              <div class="recipe-name-div">Mooncake</div>
-              <div class="recipe-author-div">Trịnh Thăng Bình</div>
-            </div>
-            <div class="recipe-div" value="postid">
-              <img class="img-icon" alt="" src="public/img5@2x.png" />
-              <div class="recipe-name-div">Mooncake</div>
-              <div class="recipe-author-div">Trịnh Thăng Bình</div>
-            </div>
-            <div class="recipe-div" value="postid">
-              <img class="img-icon" alt="" src="public/img6@2x.png" />
-              <div class="recipe-name-div">Mooncake</div>
-              <div class="recipe-author-div">Trịnh Thăng Bình</div>
-            </div>
-            <div class="recipe-div" value="postid">
-              <img class="img-icon" alt="" src="public/img@2x.png" />
-              <div class="recipe-name-div">Mooncake</div>
-              <div class="recipe-author-div">Trịnh Thăng Bình</div>
-            </div>
+              <c:forEach items="${RecipeList}" var="cc" >
+                  <form action="recipe" class="col-md-4 col-lg-3  d-flex align-content-center">
+                      <div class="recipe-div" value="postid">
+                          <img class="img-icon" alt="" src="${cc.img}" />
+                          <div class="recipe-name-div">
+                              <a onclick="this.parentNode.submit()" >${cc.img}</a>
+                          </div>
+                          <div class="recipe-author-div">${cc.FirstName+LastName}</div>
+                      </div>
+                  </form>
+              </c:forEach>    
           </div>
-        </div>
-      </div>
-      <div class="header-div">
-        <img class="px-1-icon" alt="" src="public/-800--250-px-1@2x.png" />
-        <div class="frame-div1"><div class="home-div1">Home</div></div>
-        <div class="community-div">Community</div>
-        <div class="saved-div">Saved</div>
-        <div class="saved-div">Shopping</div>
-        <div class="search-div">
-          <img class="rectangle-icon" alt="" src="public/rectangle-19.svg" />
-          <div class="search-div1">Search</div>
-          <img class="iconsearch" alt="" src="public/iconsearch.svg" />
-        </div>
-        <img class="icon-bell" alt="" src="public/-icon-bell.svg" />
-        <div class="frame-div2">
-          <img
-            class="icon-keyboard-arrow-down"
-            alt=""
-            src="public/-icon-keyboard-arrow-down.svg"
-          />
-          <div class="bnh-div">Bình</div>
         </div>
       </div>
     </div>
-
+    <c:import url="footer.jsp"/>
     <script></script>
     </body>
 </html>
