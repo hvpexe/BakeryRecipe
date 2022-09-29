@@ -58,7 +58,7 @@
                       <div class="recipe-div" value="postid">
                           <img class="img-icon" alt="" src="${cc.img}" />
                           <div class="recipe-name-div">
-                              <a onclick="this.parentNode.submit()" >${cc.img}</a>
+                              <a onclick="this.parentNode.submit()" >${cc.name}</a>
                           </div>
                           <div class="recipe-author-div">${cc.FirstName+LastName}</div>
                       </div>
