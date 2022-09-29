@@ -18,6 +18,7 @@ public class User {
     private String email;
     private String password;
     private String avatar;
+    private String name;
     private String firstName;
     private String lastName;
     private String gender;
@@ -35,6 +36,7 @@ public class User {
         this.password = password;
         this.firstName = firstName;
         this.lastName = lastName;
+        this.name = firstName + " " + lastName;
     }
 
     public User(int ID, String Role, String Email, String Password, String Avatar, String FirstName, String LastName, String Gender, String Phone, String Address, Date DateRegister, boolean IsActive, int StoreID) {
@@ -51,11 +53,12 @@ public class User {
         this.dateRegister = DateRegister;
         this.isActive = IsActive;
         this.storeID = StoreID;
+        this.name = firstName + " " + lastName;
     }
 
     public User(int ID, String Role, String Email, String Password, String Avatar,
-             String FirstName, String LastName, String Gender, String Phone,
-             String Address, Date DateRegister, int StoreID) {
+            String FirstName, String LastName, String Gender, String Phone,
+            String Address, Date DateRegister, int StoreID) {
         this(ID, Role, Email, Password, Avatar, FirstName, LastName, Gender, Phone, Address, DateRegister, true, StoreID);
     }
 
@@ -94,6 +97,22 @@ public class User {
     public String getAvatar() {
         return //IMG_PATH + 
                 avatar;
+    }
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
     }
 
     public void setAvatar(String Avatar) {

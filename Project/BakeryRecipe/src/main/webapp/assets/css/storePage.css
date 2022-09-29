@@ -42,7 +42,7 @@ body {
   flex-shrink: 0;
   z-index: 1;
 }
-.icon {
+.profile-icon {
   position: relative;
   width: 22px;
   height: 22px;

@@ -24,10 +24,28 @@ public class Recipe {
     private int saved;
     private boolean isDeleted;
     private int userID;
+    
 
     public Recipe() {
     }
 
+    
+    
+     public Recipe(int id, String name, String description, int like, int dislike, Date datePost, Date lastDateEdit, int prepTime, int cookTime, int saved, boolean isDeleted, int userID) {
+        this.id = id;
+        this.name = name;
+        this.description = description;
+        this.like = like;
+        this.dislike = dislike;
+        this.datePost = datePost;
+        this.lastDateEdit = lastDateEdit;
+        this.prepTime = prepTime;
+        this.cookTime = cookTime;
+        this.saved = saved;
+        this.isDeleted = isDeleted;
+        this.userID = userID;
+    }
+     
     public Recipe(int id, String name, String description, int like, int dislike, Date datePost, Date lastDateEdit, int prepTime, int cookTime, int saved, int userID) {
         this.id = id;
         this.name = name;

@@ -2,48 +2,42 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/Servlet.java to edit this template
  */
-package controller;
+package controller.baker;
 
-import dao.UserDAO;
 import java.io.IOException;
 import java.io.PrintWriter;
 import javax.servlet.ServletException;
-import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 /**
  *
- * @author kichi
+ * @author VO MINH MAN
  */
-public class ChangePasswordController extends HttpServlet {
-    private static final String ERROR = "profilechangePass.jsp";
-    private static final String SUCCESS = "profile.jsp";
+public class Search extends HttpServlet {
+
+    
+    private static final String ERROR ="searchPage.jsp";
+    private static final String SEARCH_NAME  ="SearchName";
+    private static final String SEARCH_NAME_CONTROLLER ="SearchBakerController";
+    private static final String SEARCH_RECIPE ="SearchRecipe";
+    private static final String SEARCH_RECIPE_CONTROLLER ="SearchRecipeController";
+    
+   
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
-    
-        String url = ERROR;
-        try{
-            String userID = request.getParameter("userID");
-            String oldPassword = request.getParameter("oldPassword");
-            String newPassword = request.getParameter("newPassword");
-            String confirmNewPassword = request.getParameter("confirmNewPassword");
-            
-            if (!UserDAO.checkOldPassword(userID, oldPassword)) {
-                request.setAttribute("PASSWORD_ERROR", "Old password wrong!");
-            } else if (newPassword.length() < 8 && newPassword.length() > 40) {
-                request.setAttribute("PASSWORD_ERROR", "password must be 8 to 40 characters !");
-            } else if (!newPassword.equals(confirmNewPassword)) {
-                request.setAttribute("PASSWORD_ERROR", "Confirmation mismatched");
-            } else if (UserDAO.changePassword(userID, newPassword)) {
-                request.setAttribute("PASSWORD_SUCCESS", "Change password successfully");
-                url = SUCCESS;
-            }
-        }catch (Exception e){
-            System.out.println("Error at ChangePasswordController: " + e.toString());
-        }finally{
+       String url = ERROR;
+        try {
+            String action =request.getParameter("action");
+            if (action.equals(SEARCH_NAME)) {
+                url = SEARCH_NAME_CONTROLLER;
+            }else if(action.equals(SEARCH_RECIPE)){
+        url=SEARCH_RECIPE_CONTROLLER;
+        }
+        } catch (Exception e) {
+        } finally {
             request.getRequestDispatcher(url).forward(request, response);
         }
     }

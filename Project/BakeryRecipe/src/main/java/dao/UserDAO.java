@@ -9,7 +9,10 @@ import java.sql.PreparedStatement;
 import dto.User;
 import java.sql.Connection;
 import java.sql.Date;
+import java.sql.SQLException;
 import java.sql.Timestamp;
+import java.util.ArrayList;
+import java.util.List;
 import utils.DBUtils;
 import utils.Tools;
 
@@ -191,6 +194,61 @@ public class UserDAO {
         return false;
     }
 
+     private static final String SEARCH_CHEFNAME = "SELECT [ID],[Role],[Email],[Password],"
+            + "[Avatar],[FirstName],[LastName],[Gender],[Phone]"
+            + ",[Address],[DateRegister],[IsActive],[StoreID]\n"
+            + "FROM [dbo].[User]\n"
+            + "WHERE  [LastName] like ? or [FirstName] like ?";
+
+    public  List<User> searchName(String search) throws SQLException {
+        ArrayList<User> listName = new ArrayList<>();
+        Connection conn = null;
+        PreparedStatement ptm = null;
+        ResultSet rs = null;
+        try {
+            conn = DBUtils.getConnection();
+            if (conn != null) {
+                ptm = conn.prepareStatement(SEARCH_CHEFNAME);
+                ptm.setString(1,  "%"+search+"%" );
+                ptm.setString(2, "%"+search+"%");
+                rs = ptm.executeQuery();
+                while (rs.next()) {
+                    int ID = rs.getInt("ID");
+                    String role = rs.getString("Role");
+                    String email = rs.getString("Email");
+                    String avatar = rs.getString("Avatar");
+                    String password = rs.getString("Password");
+                    String FirstName = rs.getString("FirstName");
+                    String LastName = rs.getString("LastName");
+                    String Gender = rs.getString("Gender");
+                    String phone = rs.getString("Phone");
+                    String address = rs.getString("Address");
+                    Date DateRegister = rs.getDate("DateRegister");
+                    boolean isActive = rs.getBoolean("IsActive");
+                    int StoreId = rs.getInt("StoreID");
+                    User user = new User(ID, role, email, password, avatar, FirstName, LastName, Gender, phone, address, DateRegister, isActive, StoreId);
+                    listName.add(user);
+                }
+            }
+        } catch (Exception e) {
+            System.out.println("System have problem !!!");
+        } finally {
+            if (rs != null) {
+                rs.close();
+            }
+            if (ptm != null) {
+                ptm.close();
+            }
+            if (conn != null) {
+                conn.close();
+            }
+
+        }
+        return listName;
+    }
+    
+    
+    
     public static void main(String[] args) {
         getUserByID(1);
     }

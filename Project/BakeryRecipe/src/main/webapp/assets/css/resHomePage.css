@@ -232,14 +232,14 @@ body {
   font-size: 14px;
   font-family: "Abhaya Libre";
 }
-.post-div2,
+.user_post,
 .post-section-div1 {
   display: flex;
   flex-direction: column;
   box-sizing: border-box;
   justify-content: flex-start;
 }
-.post-div2 {
+.user_post {
   align-self: stretch;
   border-radius: 20px;
   background-color: #fff;

@@ -2,69 +2,43 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/Servlet.java to edit this template
  */
-package controller;
+package controller.baker;
 
-import dao.UserDAO;
-import dto.User;
+import dao.RecipeDAO;
+import dto.Recipe;
 import java.io.IOException;
+import java.util.List;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
-import stackjava.com.accessgoogle.common.GooglePojo;
 
 /**
  *
- * @author Admin
+ * @author VO MINH MAN
  */
-@WebServlet(name = "LoginController", urlPatterns = {"/login"})
-public class LoginController extends HttpServlet {
+//Page to handle the feature Search Recipe
+@WebServlet(name = "SearchRecipeController", urlPatterns = {"/SearchRecipeController"})
+public class SearchRecipeController extends HttpServlet {
 
-    private static final String ERROR = "login.jsp";
-    private static final String AD = "admin";
-    private static final String AD_PAGE = "home.jsp";
-    private static final String US = "baker";
-    private static final String USER_PAGE = "home.jsp";
+    private static final String SUCCESS = "login.jsp";
+    private static final String ERROR = "searchPage.jsp";
 
-    /**
-     * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
-     * methods.
-     *
-     * @param request servlet request
-     * @param response servlet response
-     * @throws ServletException if a servlet-specific error occurs
-     * @throws IOException if an I/O error occurs
-     */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
+        response.setContentType("text/html;charset=UTF-8");
         String url = ERROR;
         try {
-            HttpSession session = request.getSession();
-            String email = request.getParameter("email");
-            String password = request.getParameter("password");
-            String code = request.getParameter("code");
-            if ((code == null || code.isEmpty()) && password.length() < 8) {
-                request.setAttribute("LOGIN_ERROR", "Password must be at least 8 characters!");
-            }
-            User loginUser = UserDAO.login(email, password);
-            if (loginUser != null) {
-                session.setAttribute("LOGIN_USER", loginUser);
-                String roleID = loginUser.getRole();
-                Boolean isActive = loginUser.isIsActive();
-                if (isActive == false) {
-                    request.setAttribute("LOGIN_ERROR", "You have been banned");
-                } else {
-                    if (AD.equals(roleID)) {
-                        url = AD_PAGE;
-                    } else if (US.equals(roleID)) {
-                        url = USER_PAGE;
-                    }
-                }
+            String recipeName = request.getParameter("searchKey");
+            RecipeDAO recipe = new RecipeDAO();
+            List<Recipe> listRecipe = recipe.searchRecipe(recipeName);
+            if (!listRecipe.isEmpty()) {
+                request.setAttribute("LIST_USER", listRecipe);
+                url = SUCCESS;
             }
         } catch (Exception e) {
-            log("Error at LoginController" + e.toString());
+            log("Error at Search Controller" + e.toString());
         } finally {
             request.getRequestDispatcher(url).forward(request, response);
         }
