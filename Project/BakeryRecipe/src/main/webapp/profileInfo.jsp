@@ -33,7 +33,7 @@
                     <li onclick="window.location = './profileChangePass.jsp'">
                         Change password
                     </li>
-                    <li onclick="window.location = 'LogoutController'">
+                    <li onclick="window.location = '/BakeryRecipe/LogoutController'">
                         Logout
                     </li>
                 </ul>
