@@ -13,6 +13,7 @@ import java.util.Date;
 public class User {
 
     public static final String IMG_PATH = "assets/images/avt/";
+    public static final String DEFAULT_AVATAR = "assets/images/avt/Chef.png";
     private int id;
     private String role;
     private String email;
@@ -95,6 +96,7 @@ public class User {
     }
 
     public String getAvatar() {
+        if(avatar==null) return DEFAULT_AVATAR;
         return //IMG_PATH + 
                 avatar;
     }
