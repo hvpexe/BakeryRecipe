@@ -45,24 +45,22 @@
     <body>
     <c:import url="header.jsp"/>
     
-    <c:set value="<%= RecipeDAO.getMostRatedRecipe()%>" var="RecipeList"/>
+    
     <div class="communitydone-div">
       <div class="section-div">
         <div class="list-div">
           <div class="titile-div">
-            <h1 class="recommend-for-you">Recommend For You</h1>
+            <h1 class="recommend-for-you">Most Popular Recipes</h1>
           </div>
           <div class="items-div">
               <c:forEach items="${RecipeList}" var="cc" >
-                  <form action="recipe" class="col-md-4 col-lg-3  d-flex align-content-center">
+                  <div action="recipe" class="col-md-4 col-lg-3  d-flex align-content-center">
                       <div class="recipe-div" value="postid">
                           <img class="img-icon" alt="" src="${cc.img}" />
-                          <div class="recipe-name-div">
-                              <a onclick="this.parentNode.submit()" >${cc.name}</a>
-                          </div>
+                          <div class="recipe-name-div">${cc.name}</div>
                           <div class="recipe-author-div">${cc.username}</div>
                       </div>
-                  </form>
+                  </div>
               </c:forEach>    
           </div>
         </div>

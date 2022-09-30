@@ -13,39 +13,41 @@ import java.util.ArrayList;
  * @author kichi
  */
 public class Recipe {
-    private int id;
-    private String name;
-    private String description;
-    private int like;
-    private int dislike;
-    private Date datePost;
-    private Date lastDateEdit;
-    private int prepTime;
-    private int cookTime;
-    private int saved;
-    private boolean isDeleted;
-    private int userID;
+    private int ID;
+    private String Name;
+    private String Description;
+    private int Like;
+    private int Dislike;
+    private Date DatePost;
+    private Date LastDateEdit;
+    private int PrepTime;
+    private int CookTime;
+    private int Saved;
+    private boolean IsDeleted;
+    private int UserID;
     private ArrayList<String> img;
     private String username;
 
     public Recipe() {
     }
 
-    public Recipe(int id, String name, String description, int like, int dislike, Date datePost, Date lastDateEdit, int prepTime, int cookTime, int saved, int userID, ArrayList<String> img, String username) {
-        this.id = id;
-        this.name = name;
-        this.description = description;
-        this.like = like;
-        this.dislike = dislike;
-        this.datePost = datePost;
-        this.lastDateEdit = lastDateEdit;
-        this.prepTime = prepTime;
-        this.cookTime = cookTime;
-        this.saved = saved;
-        this.userID = userID;
+    public Recipe(int ID, String Name, String Description, int Like, int Dislike, Date DatePost, Date LastDateEdit, int PrepTime, int CookTime, int Saved, int UserID, ArrayList<String> img, String username) {
+        this.ID = ID;
+        this.Name = Name;
+        this.Description = Description;
+        this.Like = Like;
+        this.Dislike = Dislike;
+        this.DatePost = DatePost;
+        this.LastDateEdit = LastDateEdit;
+        this.PrepTime = PrepTime;
+        this.CookTime = CookTime;
+        this.Saved = Saved;
+        this.UserID = UserID;
         this.img = img;
         this.username = username;
     }
+
+    
 
     public ArrayList<String> getImg() {
         return img;
@@ -65,100 +67,107 @@ public class Recipe {
         this.username = username;
     }
 
-    public int getId() {
-        return id;
+    public int getID() {
+        return ID;
     }
 
-    public void setId(int id) {
-        this.id = id;
+    public void setID(int ID) {
+        this.ID = ID;
     }
 
     public String getName() {
-        return name;
+        return Name;
     }
 
-    public void setName(String name) {
-        this.name = name;
+    public void setName(String Name) {
+        this.Name = Name;
     }
 
     public String getDescription() {
-        return description;
+        return Description;
     }
 
-    public void setDescription(String description) {
-        this.description = description;
+    public void setDescription(String Description) {
+        this.Description = Description;
     }
 
     public int getLike() {
-        return like;
+        return Like;
     }
 
-    public void setLike(int like) {
-        this.like = like;
+    public void setLike(int Like) {
+        this.Like = Like;
     }
 
     public int getDislike() {
-        return dislike;
+        return Dislike;
     }
 
-    public void setDislike(int dislike) {
-        this.dislike = dislike;
+    public void setDislike(int Dislike) {
+        this.Dislike = Dislike;
     }
 
     public Date getDatePost() {
-        return datePost;
+        return DatePost;
     }
 
-    public void setDatePost(Date datePost) {
-        this.datePost = datePost;
+    public void setDatePost(Date DatePost) {
+        this.DatePost = DatePost;
     }
 
     public Date getLastDateEdit() {
-        return lastDateEdit;
+        return LastDateEdit;
     }
 
-    public void setLastDateEdit(Date lastDateEdit) {
-        this.lastDateEdit = lastDateEdit;
+    public void setLastDateEdit(Date LastDateEdit) {
+        this.LastDateEdit = LastDateEdit;
     }
 
     public int getPrepTime() {
-        return prepTime;
+        return PrepTime;
     }
 
-    public void setPrepTime(int prepTime) {
-        this.prepTime = prepTime;
+    public void setPrepTime(int PrepTime) {
+        this.PrepTime = PrepTime;
     }
 
     public int getCookTime() {
-        return cookTime;
+        return CookTime;
     }
 
-    public void setCookTime(int cookTime) {
-        this.cookTime = cookTime;
+    public void setCookTime(int CookTime) {
+        this.CookTime = CookTime;
     }
 
     public int getSaved() {
-        return saved;
+        return Saved;
     }
 
-    public void setSaved(int saved) {
-        this.saved = saved;
+    public void setSaved(int Saved) {
+        this.Saved = Saved;
     }
 
     public boolean isIsDeleted() {
-        return isDeleted;
+        return IsDeleted;
     }
 
-    public void setIsDeleted(boolean isDeleted) {
-        this.isDeleted = isDeleted;
+    public void setIsDeleted(boolean IsDeleted) {
+        this.IsDeleted = IsDeleted;
     }
 
     public int getUserID() {
-        return userID;
+        return UserID;
     }
 
-    public void setUserID(int userID) {
-        this.userID = userID;
+    public void setUserID(int UserID) {
+        this.UserID = UserID;
     }
+
+    @Override
+    public String toString() {
+        return "Recipe{" + "ID=" + ID + ", Name=" + Name + ", Description=" + Description + ", Like=" + Like + ", Dislike=" + Dislike + ", DatePost=" + DatePost + ", LastDateEdit=" + LastDateEdit + ", PrepTime=" + PrepTime + ", CookTime=" + CookTime + ", Saved=" + Saved + ", IsDeleted=" + IsDeleted + ", UserID=" + UserID + ", img=" + img + ", username=" + username + '}';
+    }
+
+    
     
 }

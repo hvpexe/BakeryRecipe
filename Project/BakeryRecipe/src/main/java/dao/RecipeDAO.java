@@ -20,13 +20,14 @@ import java.sql.SQLException;
  */
 public class RecipeDAO {
 
-    private static final String SELECT_RECIPE_SQL = "SELECT TOP 12 ID, Name, Description, [Like], Dislike, DatePost, LastDateEdit, PrepTime, CookTime, Saved, UserID, LastName + ' ' + FirstName AS username\n"
-            + "FROM Recipe\n"
-            + "WHERE IsDeleted = 0";
-    private static final String SELECT_MOST_RATED_SQL = SELECT_RECIPE_SQL.replace("12", "8") + " ORDER BY [Like] DESC ";
-    private static final String SELECT_MOST_RECENT_SQL = SELECT_RECIPE_SQL + " ORDER BY DatePost DESC";
+    private static final String SELECT_MOST_RATED_SQL = "SELECT Recipe.ID, Name, Description, [Like], Dislike, DatePost, LastDateEdit, PrepTime, CookTime, Saved, UserID, LastName + ' ' + FirstName AS username\n" +
+"            FROM Recipe, [User]\n" +
+"            WHERE IsDeleted = 0" +
+"            ORDER BY [Like] DESC";
+    
     private static final String SELECT_PICTURE_SQL = "SELECT img FROM Picture"; 
-    public static List<Recipe> getMostRatedRecipe() {
+    public List<Recipe> getMostRatedRecipe() {
+        List<Recipe> list = new ArrayList<>();
         try {
             Connection conn = DBUtils.getConnection();
             PreparedStatement ps1 = conn.prepareStatement(SELECT_PICTURE_SQL);
@@ -38,7 +39,7 @@ public class RecipeDAO {
             
             PreparedStatement ps = conn.prepareStatement(SELECT_MOST_RATED_SQL);
             ResultSet rs = ps.executeQuery();
-            List<Recipe> list = new ArrayList<>();
+            
             
             while (rs.next()) {
                 
@@ -52,10 +53,11 @@ public class RecipeDAO {
         } catch (SQLException ex) {
             System.out.println("getMostRatedRecipe Query Error!" + ex.getMessage());
         }
-        return null;
+        return list;
     }
+    
 
-    public static List<Recipe> getMostRecentRecipe() {
+    /*public List<Recipe> getMostRecentRecipe() {
         try {
             Connection conn = DBUtils.getConnection();
             PreparedStatement ps1 = conn.prepareStatement(SELECT_PICTURE_SQL);
@@ -80,7 +82,7 @@ public class RecipeDAO {
             System.out.println("getMostRecentRecipe Query Error!" + ex.getMessage());
         }
         return null;
-    }
+    }*/
 
     private static final String SEARCH_RECIPE = "SELECT [ID],[Name],[Description],[Like],[Dislike]"
             + ",[DatePost],[LastDateEdit],[PrepTime],[CookTime],"
@@ -109,6 +111,7 @@ public class RecipeDAO {
                 int CookTime = rs.getInt("CookTime");
                 int userID = rs.getInt("UserID");
                 boolean isDeleted = rs.getBoolean("IsDeleted");
+                ArrayList<String> img = null;
                 Recipe recipe = new Recipe(ID, name, description, like, dislike, DatePost, lastDateEdit, prepareTime, CookTime, userID, userID, img, name);
                 if (!isDeleted) {
                     listRecipe.add(recipe);
