@@ -5,6 +5,7 @@
 package dto;
 
 import java.sql.Date;
+import java.util.ArrayList;
 
 
 /**
@@ -24,14 +25,13 @@ public class Recipe {
     private int saved;
     private boolean isDeleted;
     private int userID;
-    
+    private ArrayList<String> img;
+    private String username;
 
     public Recipe() {
     }
 
-    
-    
-     public Recipe(int id, String name, String description, int like, int dislike, Date datePost, Date lastDateEdit, int prepTime, int cookTime, int saved, boolean isDeleted, int userID) {
+    public Recipe(int id, String name, String description, int like, int dislike, Date datePost, Date lastDateEdit, int prepTime, int cookTime, int saved, int userID, ArrayList<String> img, String username) {
         this.id = id;
         this.name = name;
         this.description = description;
@@ -42,25 +42,28 @@ public class Recipe {
         this.prepTime = prepTime;
         this.cookTime = cookTime;
         this.saved = saved;
-        this.isDeleted = isDeleted;
         this.userID = userID;
+        this.img = img;
+        this.username = username;
     }
-     
-    public Recipe(int id, String name, String description, int like, int dislike, Date datePost, Date lastDateEdit, int prepTime, int cookTime, int saved, int userID) {
-        this.id = id;
-        this.name = name;
-        this.description = description;
-        this.like = like;
-        this.dislike = dislike;
-        this.datePost = datePost;
-        this.lastDateEdit = lastDateEdit;
-        this.prepTime = prepTime;
-        this.cookTime = cookTime;
-        this.saved = saved;
-        this.userID = userID;
+
+    public ArrayList<String> getImg() {
+        return img;
+    }
+
+    public void setImg(ArrayList<String> img) {
+        this.img = img;
     }
 
     
+
+    public String getUsername() {
+        return username;
+    }
+
+    public void setUsername(String username) {
+        this.username = username;
+    }
 
     public int getId() {
         return id;
