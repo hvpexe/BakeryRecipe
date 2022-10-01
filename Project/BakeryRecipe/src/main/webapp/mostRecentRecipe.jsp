@@ -12,7 +12,7 @@
     <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="initial-scale=1, width=device-width" />
-    <title>Most Rated Recipe</title>
+    <title>Most Recent Recipe</title>
     <meta name="description" content="" />
 
     <link rel="stylesheet" href="assets/css/community.css" />
@@ -50,7 +50,7 @@
       <div class="section-div">
         <div class="list-div">
           <div class="titile-div">
-            <h1 class="recommend-for-you">Most Popular Recipes</h1>
+            <h1 class="recommend-for-you">Most Recent Recipes</h1>
           </div>
           <div class="items-div">
               

@@ -24,10 +24,13 @@ public class RecipeDAO {
 "            FROM Recipe, [User]\n" +
 "            WHERE IsDeleted = 0" +
 "            ORDER BY [Like] DESC";
-    
+    private static final String SELECT_MOST_RECENT_SQL = "SELECT Recipe.ID, Name, Description, [Like], Dislike, DatePost, LastDateEdit, PrepTime, CookTime, Saved, UserID, LastName + ' ' + FirstName AS username \n" +
+"            FROM Recipe, [User]\n" +
+"            WHERE IsDeleted = 0\n" +
+"            ORDER BY DatePost DESC";
     private static final String SELECT_PICTURE_SQL = "SELECT img FROM Picture"; 
-    public List<Recipe> getMostRatedRecipe() {
-        List<Recipe> list = new ArrayList<>();
+    public static List<Recipe> getMostRatedRecipe() {
+        
         try {
             Connection conn = DBUtils.getConnection();
             PreparedStatement ps1 = conn.prepareStatement(SELECT_PICTURE_SQL);
@@ -39,7 +42,7 @@ public class RecipeDAO {
             
             PreparedStatement ps = conn.prepareStatement(SELECT_MOST_RATED_SQL);
             ResultSet rs = ps.executeQuery();
-            
+            List<Recipe> list = new ArrayList<>();
             
             while (rs.next()) {
                 
@@ -53,11 +56,10 @@ public class RecipeDAO {
         } catch (SQLException ex) {
             System.out.println("getMostRatedRecipe Query Error!" + ex.getMessage());
         }
-        return list;
+        return null;
     }
-    
 
-    /*public List<Recipe> getMostRecentRecipe() {
+    public static List<Recipe> getMostRecentRecipe() {
         try {
             Connection conn = DBUtils.getConnection();
             PreparedStatement ps1 = conn.prepareStatement(SELECT_PICTURE_SQL);
@@ -82,7 +84,7 @@ public class RecipeDAO {
             System.out.println("getMostRecentRecipe Query Error!" + ex.getMessage());
         }
         return null;
-    }*/
+    }
 
     private static final String SEARCH_RECIPE = "SELECT [ID],[Name],[Description],[Like],[Dislike]"
             + ",[DatePost],[LastDateEdit],[PrepTime],[CookTime],"

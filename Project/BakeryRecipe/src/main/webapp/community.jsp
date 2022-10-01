@@ -90,7 +90,11 @@
             <div class="list-div">
                 <div class="titile-div">
                     <h1 class="recommend-for-you">Popular</h1>
-                    <div class="btn-div"><div class="log-in-div">See more</div></div>
+                    <div class="btn-div">
+                        <div class="log-in-div">
+                            <a class="header-link p-md-0 p-2 border-0 active" href="./MostRatedRecipe">See more</a>
+                        </div>     
+                    </div>
                 </div>
                 <div class="items-div">
                     <div class="recipe-div" value="postid">
@@ -140,7 +144,11 @@
             <div class="list-div">
                 <div class="titile-div">
                     <h1 class="recommend-for-you">Newest</h1>
-                    <div class="btn-div"><div class="log-in-div">See more</div></div>
+                    <div class="btn-div">
+                        <div class="log-in-div">
+                            <a class="header-link p-md-0 p-2 border-0 active" href="./MostRecentRecipe">See more</a>
+                        </div>     
+                    </div>
                 </div>
                 <div class="items-div">
                     <div class="recipe-div" value="postid">

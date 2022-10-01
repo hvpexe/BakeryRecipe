@@ -19,8 +19,8 @@ import javax.servlet.http.HttpServletResponse;
  *
  * @author kichi
  */
-@WebServlet(name = "MostRatedRecipeController", urlPatterns = {"/MostRatedRecipe"})
-public class MostRatedRecipeController extends HttpServlet {
+@WebServlet(name = "MostRecentRecipeController", urlPatterns = {"/MostRecentRecipe"})
+public class MostRecentRecipeController extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -34,10 +34,10 @@ public class MostRatedRecipeController extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
-        List<Recipe> list = RecipeDAO.getMostRatedRecipe();
+        List<Recipe> list = RecipeDAO.getMostRecentRecipe();
         System.out.println(list);
         request.setAttribute("RecipeList", list);
-        request.getRequestDispatcher("mostRatedRecipe.jsp").forward(request, response);
+        request.getRequestDispatcher("mostRecentRecipe.jsp").forward(request, response);
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
