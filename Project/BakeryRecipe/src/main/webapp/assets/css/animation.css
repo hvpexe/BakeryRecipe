@@ -1,0 +1,29 @@
+@keyframes appear {
+    0% {
+        display:none;
+        height:0;
+    }
+    0.1% {
+        display:none;
+        height:unset;
+    }
+
+    100% {
+        display: block;
+    }
+}
+
+@keyframes mymove {
+    0%   {
+        top: 0px;
+    }
+    25%  {
+        top: 200px;
+    }
+    75%  {
+        top: 50px;
+    }
+    100% {
+        top: 100px;
+    }
+}

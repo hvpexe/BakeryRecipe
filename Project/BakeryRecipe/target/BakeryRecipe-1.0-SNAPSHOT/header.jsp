@@ -1,3 +1,4 @@
+<script src="assets/js/Jquery/jquery-core.js" async defer></script>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <link rel="stylesheet" href="assets/css/header.css">
 <link href="assets/css/fontawesome-free-6.1.1-web/css/all.min.css" rel="stylesheet" type="text/css"/>
@@ -37,7 +38,7 @@
                         <img id="user_avatar" class=" d-inline m-auto rounded-circle position-absolute" src="${login.avatar}"/>
                     </div>
                 </a>
-                <div class="header-user_content position-absolute">
+                <div class="header-user_content  position-absolute">
                     <div class="list-group flex-column justify-content-start" href="#" >
                         <a class="list-group-item text-dark text-decoration-none nav-item" href="./profile.jsp"><div>Profile</div></a>
                         <a class="list-group-item text-dark text-decoration-none nav-item" href="#"><div>Setting</div></a>
@@ -48,3 +49,5 @@
         </c:if>
     </div>
 </header>
+
+<script src="assets/js/header.js"></script>
