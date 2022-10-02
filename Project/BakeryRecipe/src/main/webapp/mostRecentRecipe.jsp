@@ -62,8 +62,12 @@
                   </div>
               </c:forEach>  
           </div>
+          <c:forEach begin="1" end="${totalPage}" var="i">
+              <a href="MostRecentRecipe?index=${i}">${i}</a>
+          </c:forEach>
         </div>
       </div>
+       
     </div>
     <c:import url="footer.jsp"/>
     <script></script>

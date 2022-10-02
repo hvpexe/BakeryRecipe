@@ -34,9 +34,20 @@ public class MostRecentRecipeController extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
-        List<Recipe> list = RecipeDAO.getMostRecentRecipe();
-        System.out.println(list);
+        String indexPage = request.getParameter("index");
+        if(indexPage == null)
+            indexPage = "1";
+        int index = Integer.parseInt(indexPage);
+        
+        int totalRecipe = RecipeDAO.getAllRecipe();
+        int totalPage = totalRecipe/8;
+        if(totalRecipe % 8 != 0)
+            totalPage ++;
+        
+        List<Recipe> list = RecipeDAO.getMostRecentRecipe(index);
+        
         request.setAttribute("RecipeList", list);
+        request.setAttribute("totalPage", totalPage);
         request.getRequestDispatcher("mostRecentRecipe.jsp").forward(request, response);
     }
 

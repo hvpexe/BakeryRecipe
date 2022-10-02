@@ -102,41 +102,6 @@
                         <div class="recipe-name-div">Mooncake</div>
                         <div class="recipe-author-div">Trịnh Thăng Bình</div>
                     </div>
-                    <div class="recipe-div" value="postid">
-                        <img class="img-icon" alt="" src="public/img1@2x.png" />
-                        <div class="recipe-name-div">Mooncake</div>
-                        <div class="recipe-author-div">Trịnh Thăng Bình</div>
-                    </div>
-                    <div class="recipe-div" value="postid">
-                        <img class="img-icon" alt="" src="public/img2@2x.png" />
-                        <div class="recipe-name-div">Mooncake</div>
-                        <div class="recipe-author-div">Trịnh Thăng Bình</div>
-                    </div>
-                    <div class="recipe-div" value="postid">
-                        <img class="img-icon" alt="" src="public/img3@2x.png" />
-                        <div class="recipe-name-div">Trung Thu Cake</div>
-                        <div class="recipe-author-div">Trịnh Thăng Bình</div>
-                    </div>
-                    <div class="recipe-div" value="postid">
-                        <img class="img-icon" alt="" src="public/img4@2x.png" />
-                        <div class="recipe-name-div">Mooncake</div>
-                        <div class="recipe-author-div">Trịnh Thăng Bình</div>
-                    </div>
-                    <div class="recipe-div" value="postid">
-                        <img class="img-icon" alt="" src="public/img5@2x.png" />
-                        <div class="recipe-name-div">Mooncake</div>
-                        <div class="recipe-author-div">Trịnh Thăng Bình</div>
-                    </div>
-                    <div class="recipe-div" value="postid">
-                        <img class="img-icon" alt="" src="public/img6@2x.png" />
-                        <div class="recipe-name-div">Mooncake</div>
-                        <div class="recipe-author-div">Trịnh Thăng Bình</div>
-                    </div>
-                    <div class="recipe-div" value="postid">
-                        <img class="img-icon" alt="" src="public/img@2x.png" />
-                        <div class="recipe-name-div">Mooncake</div>
-                        <div class="recipe-author-div">Trịnh Thăng Bình</div>
-                    </div>
                 </div>
             </div>
         </div>

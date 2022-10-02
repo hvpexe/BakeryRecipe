@@ -20,16 +20,23 @@ import java.sql.SQLException;
  */
 public class RecipeDAO {
 
-    private static final String SELECT_MOST_RATED_SQL = "SELECT Recipe.ID, Name, Description, [Like], Dislike, DatePost, LastDateEdit, PrepTime, CookTime, Saved, UserID, LastName + ' ' + FirstName AS username\n" +
-"            FROM Recipe, [User]\n" +
-"            WHERE IsDeleted = 0" +
-"            ORDER BY [Like] DESC";
-    private static final String SELECT_MOST_RECENT_SQL = "SELECT Recipe.ID, Name, Description, [Like], Dislike, DatePost, LastDateEdit, PrepTime, CookTime, Saved, UserID, LastName + ' ' + FirstName AS username \n" +
-"            FROM Recipe, [User]\n" +
-"            WHERE IsDeleted = 0\n" +
-"            ORDER BY DatePost DESC";
+    
+    private static final String SELECT_MOST_RECENT_SQL = "SELECT Recipe.ID, Name, Description, [Like], Dislike, DatePost, LastDateEdit, PrepTime, CookTime, Saved, UserID, img, LastName + ' ' + FirstName AS username\n" +
+"                                                        FROM Recipe\n" +
+"                                                        JOIN Picture ON Recipe.ID = Picture.RecipeID\n" +
+"                                                        JOIN [User] ON Recipe.UserID = [User].ID\n" +
+"                                                        WHERE IsDeleted = 0\n" +
+"                                                        ORDER BY DatePost DESC\n" +
+"							 OFFSET ? ROWS FETCH NEXT 8 ROWS ONLY";
+    private static final String SELECT_MOST_RATED_SQL = "SELECT Recipe.ID, Name, Description, [Like], Dislike, DatePost, LastDateEdit, PrepTime, CookTime, Saved, UserID, img, LastName + ' ' + FirstName AS username\n" +
+"                                                        FROM Recipe\n" +
+"                                                        JOIN Picture ON Recipe.ID = Picture.RecipeID\n" +
+"                                                        JOIN [User] ON Recipe.UserID = [User].ID\n" +
+"                                                        WHERE IsDeleted = 0\n" +
+"                                                        ORDER BY [Like] DESC\n" +
+"							 OFFSET ? ROWS FETCH NEXT 8 ROWS ONLY";
     private static final String SELECT_PICTURE_SQL = "SELECT img FROM Picture"; 
-    public static List<Recipe> getMostRatedRecipe() {
+    public static List<Recipe> getMostRatedRecipe(int index) {
         
         try {
             Connection conn = DBUtils.getConnection();
@@ -41,9 +48,9 @@ public class RecipeDAO {
             }
             
             PreparedStatement ps = conn.prepareStatement(SELECT_MOST_RATED_SQL);
+            ps.setInt(1, (index-1)*8);
             ResultSet rs = ps.executeQuery();
             List<Recipe> list = new ArrayList<>();
-            
             while (rs.next()) {
                 
                 Recipe recipe = new Recipe(rs.getInt("ID"), rs.getString("Name"), rs.getString("Description"),
@@ -59,7 +66,7 @@ public class RecipeDAO {
         return null;
     }
 
-    public static List<Recipe> getMostRecentRecipe() {
+    public static List<Recipe> getMostRecentRecipe(int index) {
         try {
             Connection conn = DBUtils.getConnection();
             PreparedStatement ps1 = conn.prepareStatement(SELECT_PICTURE_SQL);
@@ -70,18 +77,20 @@ public class RecipeDAO {
             }
             
             PreparedStatement ps = conn.prepareStatement(SELECT_MOST_RECENT_SQL);
+            ps.setInt(1, (index-1)*8);
             ResultSet rs = ps.executeQuery();
-            List<Recipe> list = new ArrayList<Recipe>();
+            List<Recipe> list = new ArrayList<>();
             while (rs.next()) {
+                
                 Recipe recipe = new Recipe(rs.getInt("ID"), rs.getString("Name"), rs.getString("Description"),
-                        rs.getInt("Like"), rs.getInt("Dislike"), rs.getDate("DatePost"),
-                        rs.getDate("LastDateEdit"), rs.getInt("PrepTime"), rs.getInt("CookTime"),
-                        rs.getInt("Saved"), rs.getInt("UserID"), pic, rs.getString("username"));
+                                           rs.getInt("Like"), rs.getInt("Dislike"), rs.getDate("DatePost"), 
+                                           rs.getDate("LastDateEdit"), rs.getInt("PrepTime"), rs.getInt("CookTime"),
+                                           rs.getInt("Saved"), rs.getInt("UserID"), pic, rs.getString("username"));
                 list.add(recipe);
             }
             return list;
         } catch (SQLException ex) {
-            System.out.println("getMostRecentRecipe Query Error!" + ex.getMessage());
+            System.out.println("getMostRatedRecipe Query Error!" + ex.getMessage());
         }
         return null;
     }
@@ -136,6 +145,21 @@ public class RecipeDAO {
 
         }
         return listRecipe;
+    }
+    public static int getAllRecipe(){
+        String sql = "SELECT count(Recipe.ID)\n" +
+                     "FROM Recipe\n" +
+                     "WHERE IsDeleted = 0";
+        try {
+            Connection conn = DBUtils.getConnection();
+            PreparedStatement ps = conn.prepareStatement(sql);
+            ResultSet rs = ps.executeQuery();
+            while(rs.next()){
+                return rs.getInt(1);
+            }
+        } catch (SQLException ex) {
+        }
+        return 0;
     }
 
 }

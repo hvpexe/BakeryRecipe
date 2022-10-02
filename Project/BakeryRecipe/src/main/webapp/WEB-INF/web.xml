@@ -12,9 +12,25 @@
         <servlet-name>RegisterAccountController</servlet-name>
         <servlet-class>controller.baker.RegisterAccountController</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>MostRatedRecipeController</servlet-name>
+        <servlet-class>controller.recipe.MostRatedRecipeController</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>MostRecentRecipeController</servlet-name>
+        <servlet-class>controller.recipe.MostRecentRecipeController</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>TestingController</servlet-name>
         <url-pattern>/test</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>MostRatedRecipeController</servlet-name>
+        <url-pattern>/MostRatedRecipe</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>MostRecentRecipeController</servlet-name>
+        <url-pattern>/MostRecentRecipe</url-pattern>
     </servlet-mapping>
     <servlet-mapping>
         <servlet-name>LoginController</servlet-name>
