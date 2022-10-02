@@ -59,7 +59,7 @@ public class Test {
     }
     public static void main(String[] args) {
         
-        List<Recipe> list = RecipeDAO.getMostRatedRecipe(3);
+        List<Recipe> list = RecipeDAO.getTop8MostRatedRecipe();
         for(Recipe o : list){
             System.out.println(o);
         }

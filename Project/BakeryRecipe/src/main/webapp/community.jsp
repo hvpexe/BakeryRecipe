@@ -97,12 +97,15 @@
                     </div>
                 </div>
                 <div class="items-div">
-                    <div class="recipe-div" value="postid">
-                        <img class="img-icon" alt="" src="public/img@2x.png" />
-                        <div class="recipe-name-div">Mooncake</div>
-                        <div class="recipe-author-div">Trịnh Thăng Bình</div>
-                    </div>
-                </div>
+              
+              <c:forEach items="${Top8MostRecipe}" var="cc">
+                  <div class="recipe-div" value="postid">
+                      <img class="img-icon" alt="" src="${cc.img}" />
+                      <div class="recipe-name-div">${cc.name}</div>
+                      <div class="recipe-author-div">${cc.username}</div>
+                  </div>
+              </c:forEach>  
+          </div>
             </div>
         </div>
         <div class="section-div2">
