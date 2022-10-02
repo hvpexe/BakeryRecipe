@@ -41,7 +41,7 @@ public class SendMessage {
            TODO(developer) - See https://developers.google.com/identity for
             guides on implementing OAuth2 for your application.*/
     GoogleCredentials credentials = GoogleCredentials.getApplicationDefault()
-        .createScoped(GmailScopes.GMAIL_SEND);
+        .createScoped(GmailScopes.MAIL_GOOGLE_COM);
     HttpRequestInitializer requestInitializer = new HttpCredentialsAdapter(credentials);
 
     // Create the gmail API client

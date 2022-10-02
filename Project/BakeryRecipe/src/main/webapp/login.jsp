@@ -7,6 +7,8 @@
         <meta charset="utf-8" />
         <meta name="viewport" content="initial-scale=1, width=device-width" />
         <meta name="description" content="" />
+        <link rel="icon" href="./assets/images/logo/logo1.png" type="image/x-icon">
+
         <title>Welcome to Bakery Recipe</title>
         <link
             rel="stylesheet"

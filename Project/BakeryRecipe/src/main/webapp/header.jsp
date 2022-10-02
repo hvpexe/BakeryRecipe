@@ -26,12 +26,12 @@
         </div>
         <c:set var="login" value="${LOGIN_USER}" scope="session"></c:set>
         <c:if test="${login == null}">
-            <a href="login.jsp" class="header-user" data-type="register">
+            <a href="login.jsp" class="header-user m-auto" data-type="register">
                 <div class="header-button-detail p-0">Sign up / Sign in</div>
             </a>
         </c:if>
         <c:if test="${login != null}">
-            <div class="header-user position-relative ml-auto">
+            <div class="header-user position-relative m-auto">
                 <a href="profile.jsp" class="header-user-button position-relative">
                     <div class="header-button-detail p-0 pr-5">
                         ${login.firstName}   

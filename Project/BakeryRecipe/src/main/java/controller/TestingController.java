@@ -4,6 +4,7 @@
  */
 package controller;
 
+import com.google.api.services.gmail.model.Message;
 import java.io.IOException;
 import java.io.PrintWriter;
 import javax.mail.internet.MimeMessage;
@@ -12,6 +13,8 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import utilities.CreateEmail;
+import utilities.CreateMessage;
+import utilities.SendMessage;
 
 /**
  *
@@ -35,11 +38,19 @@ public class TestingController extends HttpServlet {
         try {
             out.println("Email Tesing");
             MimeMessage mm
-                    = CreateEmail.createEmail("binhnguyenthanh19242yahoo@gmail.com ", "binhntse160860@fpt.edu.vn", "Send Mail Test", "http://localhost:8080/BakeryRecipe/");
-//                createMessageWithEmail(mm);
-//                sendEmail("binhnguyenthanh19242yahoo@gmail.com ", "binhntse160860@fpt.edu.vn");
-            out.println("Email Send!" + mm);
+                    = CreateEmail.createEmail("binhntse160860@fpt.edu.vn","binhnguyenthanh19242yahoo@gmail.com ", "Send Mail Test", "http://localhost:8080/BakeryRecipe/");
+
+            out.println("<br>");
+            out.println(mm.getContent());
+            Message mess = CreateMessage.createMessageWithEmail(mm);
+            out.println("<br>");
+            out.println(mess);
+
+            SendMessage.sendEmail("binhntse160860@fpt.edu.vn","binhnguyenthanh19242yahoo@gmail.com " );
+            out.println("<br>Email Send!" + mm);
         } catch (Exception ex) {
+            System.out.println("==================================================================");
+            System.out.println(ex.getMessage());
             ex.printStackTrace();
 
         }
