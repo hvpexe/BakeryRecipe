@@ -97,15 +97,14 @@
                     </div>
                 </div>
                 <div class="items-div">
-              
-              <c:forEach items="${Top8MostRecipe}" var="cc">
-                  <div class="recipe-div" value="postid">
-                      <img class="img-icon" alt="" src="${cc.img}" />
-                      <div class="recipe-name-div">${cc.name}</div>
-                      <div class="recipe-author-div">${cc.username}</div>
-                  </div>
-              </c:forEach>  
-          </div>
+                    <c:forEach items="${listRated}" var="cc">
+                        <div class="recipe-div" value="postid">
+                           <img class="img-icon" alt="" src="${cc.img}" />
+                           <div class="recipe-name-div">${cc.name}</div>
+                           <div class="recipe-author-div">${cc.username}</div>
+                        </div>
+                    </c:forEach>  
+                </div>
             </div>
         </div>
         <div class="section-div2">
@@ -119,46 +118,13 @@
                     </div>
                 </div>
                 <div class="items-div">
-                    <div class="recipe-div" value="postid">
-                        <img class="img-icon" alt="" src="public/img@2x.png" />
-                        <div class="recipe-name-div">Mooncake</div>
-                        <div class="recipe-author-div">Trịnh Thăng Bình</div>
-                    </div>
-                    <div class="recipe-div" value="postid">
-                        <img class="img-icon" alt="" src="public/img1@2x.png" />
-                        <div class="recipe-name-div">Mooncake</div>
-                        <div class="recipe-author-div">Trịnh Thăng Bình</div>
-                    </div>
-                    <div class="recipe-div" value="postid">
-                        <img class="img-icon" alt="" src="public/img2@2x.png" />
-                        <div class="recipe-name-div">Mooncake</div>
-                        <div class="recipe-author-div">Trịnh Thăng Bình</div>
-                    </div>
-                    <div class="recipe-div" value="postid">
-                        <img class="img-icon" alt="" src="public/img3@2x.png" />
-                        <div class="recipe-name-div">Trung Thu Cake</div>
-                        <div class="recipe-author-div">Trịnh Thăng Bình</div>
-                    </div>
-                    <div class="recipe-div" value="postid">
-                        <img class="img-icon" alt="" src="public/img4@2x.png" />
-                        <div class="recipe-name-div">Mooncake</div>
-                        <div class="recipe-author-div">Trịnh Thăng Bình</div>
-                    </div>
-                    <div class="recipe-div" value="postid">
-                        <img class="img-icon" alt="" src="public/img5@2x.png" />
-                        <div class="recipe-name-div">Mooncake</div>
-                        <div class="recipe-author-div">Trịnh Thăng Bình</div>
-                    </div>
-                    <div class="recipe-div" value="postid">
-                        <img class="img-icon" alt="" src="public/img6@2x.png" />
-                        <div class="recipe-name-div">Mooncake</div>
-                        <div class="recipe-author-div">Trịnh Thăng Bình</div>
-                    </div>
-                    <div class="recipe-div" value="postid">
-                        <img class="img-icon" alt="" src="public/img@2x.png" />
-                        <div class="recipe-name-div">Mooncake</div>
-                        <div class="recipe-author-div">Trịnh Thăng Bình</div>
-                    </div>
+                    <c:forEach items="${listRecent}" var="cc">
+                         <div class="recipe-div" value="postid">
+                            <img class="img-icon" alt="" src="${cc.img}" />
+                            <div class="recipe-name-div">${cc.name}</div>
+                            <div class="recipe-author-div">${cc.username}</div>
+                         </div>
+                    </c:forEach>
                 </div>
             </div>
         </div>

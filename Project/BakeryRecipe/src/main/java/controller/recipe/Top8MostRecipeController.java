@@ -35,7 +35,9 @@ public class Top8MostRecipeController extends HttpServlet {
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
         List<Recipe> list = RecipeDAO.getTop8MostRatedRecipe();
+        List<Recipe> list2 = RecipeDAO.getTop8MostRecentRecipe();
         request.setAttribute("listRated", list);
+        request.setAttribute("listRecent", list2);
         request.getRequestDispatcher("community.jsp").forward(request, response);
     }
 
