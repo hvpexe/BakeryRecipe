@@ -1,3 +1,4 @@
+@import "animation.css";
 :root {
     --main-theme-color: #DB5A42;
     --main-theme-color-hover: #c22e14;
@@ -91,11 +92,13 @@
     margin-left: 16px;
     font-size: 24px;
 }
+
 .header-user {
     --transition-time: 0.1s;
     display: flex;
     padding: 8px;
     margin: auto 16px;
+    cursor: pointer;
     /* justify-content: center; */
     align-items: center;
     background: #fff;
@@ -103,20 +106,24 @@
     border-radius: 25px;
     transition: var(--transition-time);
     color: #c5513d;
+    transition-delay: var(--transition-time);
 }
-
+.header-user:hover {
+    background: #c5513d;
+    box-shadow: 0 0 0 2px var(--main-theme-color);
+    color: #fff;
+    transition-delay: 0s;
+}
 #user_avatar {
     right:5px;
     top:0;
     bottom:0;
     width: 35px;
+    box-sizing: border-box;
+    border: 1px #ccc groove;
 }
 
-.header-user:hover {
-    background: #c5513d;
-    box-shadow: 0 0 0 2px var(--main-theme-color);
-    color: #fff;
-}
+
 .header-user:has( .header-user-button ):hover{
     border-radius: 25px 25px 0 0 ;
 }
@@ -130,17 +137,20 @@
     background: #c5513d;
 }
 .header-user .header-user_content {
-    transition: all var(--transition-time), box-shadow 0s , border 0s;
+    transition: all var(--transition-time), box-shadow 0s , border 0s, top 0s;
     transform-origin: top center;
-    scale: 1 0;
-    top:100%;
-    left: 0px;
+    scale: 1 1;
+    top:-1000%;
+    width: 250px;
     right: 0px;
     border-radius: 0.25rem;
     box-shadow: 0 0 0 2px var(--main-theme-color);
+    transition-delay:0;
 }
 .header-user:hover .header-user_content {
     scale:1 1;
+    top:100%;
+    transition-delay: var(--transition-time);
 }
 .header-user .header-user_content> * {
     scale: 1 0;
@@ -153,6 +163,10 @@
 }
 .header-user .header-user_content .list-group-item{
     padding: 6px 10px;
+}
+.header-user .header-user_content .list-group-item:hover{
+    background: #ddd;
+    transition: calc(var(--transition-time) *  8);
 }
 
 @media (max-width:996px) {

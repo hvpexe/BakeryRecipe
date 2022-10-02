@@ -4,15 +4,14 @@
  */
 package controller;
 
-import dao.UserDAO;
-import dto.User;
 import java.io.IOException;
 import java.io.PrintWriter;
+import javax.mail.internet.MimeMessage;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import utils.DaoHelper;
+import utilities.CreateEmail;
 
 /**
  *
@@ -32,9 +31,16 @@ public class TestingController extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
-        try ( PrintWriter out = response.getWriter()) {
-            out.println(DaoHelper.execute("select password from User", new User()) + "<br>");
-            request.setAttribute("user", UserDAO.getUserByID(1));
+        PrintWriter out = response.getWriter();
+        try {
+            out.println("Email Tesing");
+            MimeMessage mm
+                    = CreateEmail.createEmail("binhnguyenthanh19242yahoo@gmail.com ", "binhntse160860@fpt.edu.vn", "Send Mail Test", "http://localhost:8080/BakeryRecipe/");
+//                createMessageWithEmail(mm);
+//                sendEmail("binhnguyenthanh19242yahoo@gmail.com ", "binhntse160860@fpt.edu.vn");
+            out.println("Email Send!" + mm);
+        } catch (Exception ex) {
+            ex.printStackTrace();
 
         }
     }
