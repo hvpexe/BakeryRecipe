@@ -9,7 +9,7 @@
         </a>
         <nav class="header-links justify-content-around col-md col p-0 ">
             <a class="header-link p-md-0 p-2 border-0 active" href="./home.jsp">Home</a>
-            <a class="header-link  p-md-0 p-2 border-0" href="./Top8MostRecipe">Community</a>
+            <a class="header-link  p-md-0 p-2 border-0" href="./community">Community</a>
             <a class="header-link  p-md-0 p-2 border-0" href="./saved.jsp">Saved</a>
             <a class="header-link  p-md-0 p-2 border-0" href="./shopping.jsp">Shopping</a>
         </nav>
