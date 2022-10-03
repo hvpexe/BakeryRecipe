@@ -17,7 +17,7 @@
             <div class="post-section">
                 <div class="posting-section">
                     <img class="avatar-icon"
-                         src="https://khoinguonsangtao.vn/wp-content/uploads/2022/07/avatar-gau-cute.jpg" alt="ava" />
+                         src="${login.avatar}" alt="ava" />
                     <button class="btn-button" id="btnButton">
                         <i class="fa-solid fa-plus"></i> Add your post
                     </button>
