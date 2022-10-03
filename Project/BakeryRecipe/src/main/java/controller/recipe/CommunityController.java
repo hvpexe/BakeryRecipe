@@ -19,8 +19,8 @@ import javax.servlet.http.HttpServletResponse;
  *
  * @author kichi
  */
-@WebServlet(name = "Top8MostRecipeController", urlPatterns = {"/Top8MostRecipe"})
-public class Top8MostRecipeController extends HttpServlet {
+@WebServlet(name = "CommunityController", urlPatterns = {"/community"})
+public class CommunityController extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>

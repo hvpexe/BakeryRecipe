@@ -4,12 +4,12 @@
 <link href="assets/css/fontawesome-free-6.1.1-web/css/all.min.css" rel="stylesheet" type="text/css"/>
 <header class="header-container header position-sticky py-2 py-md-0 ">
     <div class="header-left align-items-center col-sm-12 col-md-6 p-0">
-        <a class="header-logo col-md-3 p-0" href="./home.jsp">
+        <a class="header-logo navbar-brand col-md-3 p-0" href="./home.jsp">
             <img class="mx-auto" src="assets/images/logo/logo2.png" alt="">
         </a>
         <nav class="header-links justify-content-around col-md col p-0 ">
             <a class="header-link p-md-0 p-2 border-0 active" href="./home.jsp">Home</a>
-            <a class="header-link  p-md-0 p-2 border-0" href="./Top8MostRecipe">Community</a>
+            <a class="header-link  p-md-0 p-2 border-0" href="./community">Community</a>
             <a class="header-link  p-md-0 p-2 border-0" href="./saved.jsp">Saved</a>
             <a class="header-link  p-md-0 p-2 border-0" href="./shopping.jsp">Shopping</a>
         </nav>

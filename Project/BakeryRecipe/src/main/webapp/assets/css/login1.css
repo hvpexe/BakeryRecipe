@@ -1,0 +1,56 @@
+@import "web/bootstrap-4.3.1.min.css";
+html{
+    font-size: 16px;
+}
+*,body {
+    font-family: Gelasio;
+
+}
+.section {
+    background: gray;
+    position: relative;
+    padding:10% 0;
+
+}
+.section::before {
+    content:'';
+    position: absolute;
+    inset:0;
+    background-image: url(../images/logo/login-background.jpg);
+    background-repeat: no-repeat;
+    background-size: 100%;
+    background-position: center;
+    filter: contrast(150%) brightness(90%) blur(1%);
+}
+#login, #register{
+    background: white;
+    box-sizing: border-box;
+    border-radius: 5px;
+    background: #FFD4B0;
+    background: -webkit-linear-gradient(bottom left, #FFD4B0, #DB5B43);
+    background: -moz-linear-gradient(bottom left, #FFD4B0, #DB5B43);
+    background: linear-gradient(to top right, #FFD4B0, #DB5B43);
+    max-width: min(35vw , 600px);
+    border: 5px solid #fd7e14;
+}
+#login .login-form{
+    row-gap: 1em;
+    padding: 1em;
+    }
+#login .join-bakeryrecipe-div{
+    font-size: 150%;
+    text-align: center;
+}
+#login .join-bakeryrecipe-div:first-line{
+    font-weight: bold;
+}
+#login .input input {
+    border: 2px inset black ;
+    padding: 8px 10px;
+    position:relative;
+}
+#login .input::before{
+    content:attr(placeholder);
+    position: absolute;
+    
+}
