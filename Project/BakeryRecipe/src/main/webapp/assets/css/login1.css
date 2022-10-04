@@ -55,13 +55,12 @@ html{
     translate: 0 -50%;
     width: fit-content;
     height: auto;
-    color:
-    black;
+    color:inherit;
     transition: var(--transition-time) ease;
     pointer-events: none;
     background: inherit;
 }
-#login .input:focus-within, #login .input:has( input:not(:placeholder-shown)){
+#login .input:focus-within, #login .input:has( input:not(:placeholder-shown),input.invalid){
     color: var(--main-theme-color-hover);
 }
 #login .input:focus-within:before,#login .input:has( input:not(:placeholder-shown)):before{
@@ -88,11 +87,12 @@ html{
 #login .input input {
     color:#000;
     background: transparent;
+    cursor: text;
 }
 #login .input .status{
  pointer-events: none;
 }
-#login .input:focus-within input, #login .input:has( input:not(:placeholder-shown)) input{
+#login .input:focus-within input, #login .input:has( input:not(:placeholder-shown),input.invalid) input{
     box-shadow: 0 0 0 2px var(--main-theme-color-hover);
 }
 #login .input:has(input.valid){

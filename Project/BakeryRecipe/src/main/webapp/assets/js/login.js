@@ -17,30 +17,30 @@ function changeForm1() {
     $(document).focus();
 }
 
-document.querySelector('[name=email]').onblur = (e) => {
-    let call = undefined;
-    clearTimeout(call);
-    reg = new RegExp('^[a-zA-Z0-9]+(?:\.[a-zA-Z0-9]+)*@[a-zA-Z0-9]+(?:\.[a-zA-Z0-9]+)*$')
-    calls = [
-        isRequired(e),
-        checkValid(e, reg, "Invalid Email Format")
-    ];
-    try {
-        for (var i = 0; i < calls.length; i++) {
-            call = calls[i];
-            if(!call) break;
-        }
-        
-    } catch {
-
-    }
-
-}
-document.querySelector('[name=password]').onblur = (e) => {
-    isRequired(e);
-    reg = /^.{8,40}$/;
-    checkValid(e, reg, "Password must be between 8-40 character");
-}
+//document.querySelector('[name=email]').onblur = (e) => {
+//    let call = undefined;
+//    clearTimeout(call);
+//    reg = new RegExp('^[a-zA-Z0-9]+(?:\.[a-zA-Z0-9]+)*@[a-zA-Z0-9]+(?:\.[a-zA-Z0-9]+)*$')
+//    calls = [
+//        isRequired(e),
+//        checkValid(e, reg, "Invalid Email Format")
+//    ];
+//    try {
+//        for (var i = 0; i < calls.length; i++) {
+//            call = calls[i];
+//            if(!call) break;
+//        }
+//        
+//    } catch {
+//
+//    }
+//
+//}
+//document.querySelector('[name=password]').onblur = (e) => {
+//    isRequired(e);
+//    reg = /^.{8,40}$/;
+//    checkValid(e, reg, "Password must be between 8-40 character");
+//}
 function isRequired(e) {
     let input = $(e.target);
     if (input.val() === "") {

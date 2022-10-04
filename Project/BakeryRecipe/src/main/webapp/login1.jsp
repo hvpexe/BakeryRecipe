@@ -57,15 +57,14 @@
     <body>
         <c:import url="header.jsp"/>
         <section class="section container-fluid row px-0 m-0">
-            <aside class="col-7 d-none d-lg-flex">
-            </aside>
+
             <aside class="col-12 col-sm-9 col-lg-5 mx-auto px-3" id="login">
                 <form class="login-form  mx-1 rounded flex-column d-flex align-items-center" action="login" method="post">
                     <div class="join-bakeryrecipe-div col-10">WELCOME BACK<br> to <br>Bakery Recipe </div>
                     <div class="d-none" id="g_id_onload" data-client_id="243057477675-kt58mr9lav8eh6ti9bfrj8p782j7unkd.apps.googleusercontent.com" data-login_uri="BakeryRecipe/home.jsp" data-callback="handleCredentialResponse">
                     </div>
                     <div class="g_id_signin" data-type="icon" data-size="large" placeholder="Email" data-theme="filled_blue" data-text="sign_in_with" data-shape="circle" data-logo_alignment="left"><div class="S9gUrf-YoZ4jf" style="position: relative;"><div></div><iframe src="https://accounts.google.com/gsi/button?type=icon&amp;size=large&amp;theme=filled_blue&amp;text=sign_in_with&amp;shape=circle&amp;logo_alignment=left&amp;client_id=243057477675-kt58mr9lav8eh6ti9bfrj8p782j7unkd.apps.googleusercontent.com&amp;iframe_id=gsi_812950_790204&amp;as=MCsvGUZ%2Fo6jE5lvjeZjhzQ" id="gsi_812950_790204" title="Sign in with Google Button" style="display: block; position: relative; top: 0px; left: 0px; height: 44px; width: 64px; border: 0px; margin: -2px -12px;"></iframe></div></div>
-                    <div class="input col-10 p-0" placeholder="Email" regex="^[a-zA-Z0-9]+(?:\.[a-zA-Z0-9]+)*@[a-zA-Z0-9]+(?:\.[a-zA-Z0-9]+)*$">
+                    <div class="input col-10 p-0" placeholder="Email">
                         <input class="email-input1 col rounded" type="text" placeholder="   " form="login"
                                name="email"  >
                         <span class="status"></span> 
@@ -86,10 +85,24 @@
                     </div>
                 </form>
             </aside>
-
+            <aside class="col-7 d-none d-lg-flex">
+            </aside>
         </section>
         <!--Google Login Dont Touch-->
         <form class="d-none" id="googleLogin" action="login" method="POST"></form>
+        <script src="assets/js/validator.js"></script>
+        <script>
+            //expected
+            Validator({
+                form: '#login',
+                status: '.status',
+                rules: [
+                    Validator.isRequired('[name=email]'),
+                    Validator.isEmail('[name=email]'),
+                    Validator.isPassword('[name=password]')
+                ]
+            });
+        </script>
         <script src="assets/js/login.js" type="text/javascript"></script>
     </body>
 
