@@ -39,7 +39,7 @@
         <div class="section-div">
             <div class="list-div">
                 <div class="titile-div">
-                    <h1 class="recommend-for-you">Recommend For You</h1>
+                    <h1 class="recommend-for-you">Recommend For Yu</h1>
                     <div class="btn-div"><div class="log-in-div">See more</div></div>
                 </div>
                 <div class="items-div">

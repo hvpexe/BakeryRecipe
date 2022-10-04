@@ -49,21 +49,45 @@
                     <form action="EditInformationController" method="post" enctype="multipart/form-data">
                         <div class="infor-detail">
                             <div class="row">
-                                <div class="col-md-3">Firstname</div>
+                                <div class="col-md-3">Email</div>
+                                <div class="col-md-9">
+                                    <input type="text" name="email" value="${sessionScope.login.email}" readonly="">
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-3">Date Register</div>
+                                <div class="col-md-9">
+                                    <input type="date" name="dateregister" value="${sessionScope.login.dateRegister}" readonly="">
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-3">First Name</div>
                                 <div class="col-md-9">
                                     <input type="text" name="firstname" value="${sessionScope.login.firstName}">
                                 </div>
                             </div>
                             <div class="row">
-                                <div class="col-md-3">Lastname</div>
+                                <div class="col-md-3">Last Name</div>
                                 <div class="col-md-9">
                                     <input type="text" name="lastname" value="${sessionScope.login.lastName}">
                                 </div>
                             </div>
                             <div class="row">
+                                <div class="col-md-3">Role</div>
+                                <div class="col-md-9">
+                                    <input type="text" name="role" value="${sessionScope.login.role}" readonly="">
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-3">Phone Number</div>
+                                <div class="col-md-9">
+                                    <input type="text" name="phone" value="${sessionScope.login.phone}">
+                                </div>
+                            </div>    
+                            <div class="row">
                                 <div class="col-md-3">Birthday</div>
                                 <div class="col-md-9">
-                                    <input type="date" name="birthday" value="2022-8-1">
+                                    <input type="date" name="birthday" value="${sessionScope.login.birthday}">
                                 </div>
                             </div>
                             <div class="row">
@@ -77,13 +101,19 @@
                                 </div>
                             </div>
                             <div class="row">
+                                <div class="col-md-3">Address</div>
+                                <div class="col-md-9">
+                                    <input type="text" name="address" value="${sessionScope.login.address}">
+                                </div>
+                            </div>
+                            <div class="row">
                                 <div class="col-md-3">Avatar</div>
                                 <div class="col-md-9">
                                     <input type="file" name='avatar' value="">
                                 </div>
                             </div>
                         </div>
-                        <input type="hidden" name="memberID" value="">
+                        <input type="hidden" name="userID" value="${sessionScope.login.id}">
                         <input class="info-submit" type="submit" value="Submit">
 
                     </form>

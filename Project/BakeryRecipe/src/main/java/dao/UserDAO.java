@@ -247,7 +247,40 @@ public class UserDAO {
         return listName;
     }
     
-    
+    public static boolean EditInfo(User user){
+        String sql = "UPDATE [User]\n" +
+                     "SET FirstName = ?,\n" +
+                     "    LastName = ?,\n" +
+                     "	  Phone = ?,\n" +
+                     "	  Birthday = ?,\n" +
+                     "	  Gender = ?,\n" +
+                     "	  [Address] = ?,\n" +
+                     "	  Avatar = ?\n" +
+                     "WHERE ID = ?";
+        try {
+            Connection conn = DBUtils.getConnection();
+            PreparedStatement ps = conn.prepareStatement(sql);
+            int i = 1;
+            System.out.println(user.getAvatar());
+            ps.setString(i++, user.getAvatar());
+            ps.setString(i++, user.getFirstName());
+            ps.setString(i++, user.getLastName());
+            ps.setDate(i++, user.getBirthday());
+            ps.setString(i++, user.getGender());
+            ps.setString(i++, user.getPhone());
+            ps.setString(i++, user.getAddress());
+            ps.setInt(i++, user.getId());
+            ResultSet rs = ps.executeQuery();
+            
+            boolean check = ps.executeUpdate() > 0;
+            if (check) {
+                return true;
+            }
+        } catch (Exception e) {
+            System.out.println("Error at editInfo: " + e.toString());
+        }
+        return false;
+    }
     
     public static void main(String[] args) {
         getUserByID(1);

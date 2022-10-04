@@ -4,7 +4,7 @@
  */
 package dto;
 
-import java.util.Date;
+import java.sql.Date;
 
 /**
  *
@@ -28,6 +28,7 @@ public class User {
     private Date dateRegister;
     private boolean isActive = false;
     private int storeID;
+    private Date birthday;
 
     public User() {
     }
@@ -62,6 +63,34 @@ public class User {
             String Address, Date DateRegister, int StoreID) {
         this(ID, Role, Email, Password, Avatar, FirstName, LastName, Gender, Phone, Address, DateRegister, true, StoreID);
     }
+
+    public User(int ID, String Role, String Email, String Password, String Avatar, String FirstName, String LastName, String Gender, String Phone, String Address, Date DateRegister, boolean IsActive, int StoreID, Date Birthday) {
+        this.id = ID;
+        this.role = Role;
+        this.email = Email;
+        this.password = Password;
+        this.avatar = Avatar;
+        this.firstName = FirstName;
+        this.lastName = LastName;
+        this.gender = Gender;
+        this.phone = Phone;
+        this.address = Address;
+        this.dateRegister = DateRegister;
+        this.isActive = IsActive;
+        this.storeID = StoreID;
+        this.name = firstName + " " + lastName;
+        this.birthday = Birthday;
+    }
+    
+    public User(int ID, String Role, String Email, String Password, String Avatar,
+            String FirstName, String LastName, String Gender, String Phone,
+            String Address, Date DateRegister, int StoreID, Date Birthday) {
+        this(ID, Role, Email, Password, Avatar, FirstName, LastName, Gender, Phone, Address, DateRegister, true, StoreID, Birthday);
+    }
+
+  
+    
+    
 
     public int getID() {
         return id;
@@ -184,6 +213,15 @@ public class User {
     public void setStoreID(int StoreID) {
         this.storeID = StoreID;
     }
+
+    public Date getBirthday() {
+        return birthday;
+    }
+
+    public void setBirthday(Date birthday) {
+        this.birthday = birthday;
+    }
+    
 
     @Override
     public String toString() {
