@@ -13,6 +13,7 @@ import java.util.List;
 import utils.DBUtils;
 import java.sql.Date;
 import java.sql.SQLException;
+import org.checkerframework.checker.units.qual.A;
 
 /**
  *
@@ -109,7 +110,7 @@ public class RecipeDAO {
 
     private static final String SEARCH_RECIPE = "SELECT [ID],[Name],[Description],[Like],[Dislike]"
             + ",[DatePost],[LastDateEdit],[PrepTime],[CookTime],"
-            + "[Saved],[IsDeleted],[UserID]\n"
+            + "[Saved],[IsDeleted],[UserID],[Img]\n"
             + "FROM[dbo].[Recipe]\n"
             + "WHERE [Name] = ?";
 
@@ -134,8 +135,12 @@ public class RecipeDAO {
                 int CookTime = rs.getInt("CookTime");
                 int userID = rs.getInt("UserID");
                 boolean isDeleted = rs.getBoolean("IsDeleted");
-                ArrayList<String> img = null;
-                Recipe recipe = new Recipe(ID, name, description, like, dislike, DatePost, lastDateEdit, prepareTime, CookTime, userID, userID, img, name);
+                int save =Integer.parseInt(rs.getString("Saved"));
+                 String img1 =rs.getString("Img");
+                ArrayList<String> img = null ;
+                img = new ArrayList<>();
+                img.add(img1);
+                Recipe recipe = new Recipe(ID, name, description, like, dislike, DatePost, lastDateEdit, prepareTime, CookTime, save, userID, img, name);
                 if (!isDeleted) {
                     listRecipe.add(recipe);
 
