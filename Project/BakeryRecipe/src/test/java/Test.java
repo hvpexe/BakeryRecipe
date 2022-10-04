@@ -7,6 +7,8 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
+
+import org.junit.Assert;
 import utils.DBUtils;
 
 /*
@@ -57,7 +59,7 @@ public class Test {
         }
         return null;
     }
-    public static void main(String[] args) {
+    public  void main(String[] args) {
         
         List<Recipe> list = RecipeDAO.getTop8MostRatedRecipe();
         for(Recipe o : list){

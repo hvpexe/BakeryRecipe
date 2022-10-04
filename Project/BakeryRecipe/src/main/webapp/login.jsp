@@ -50,7 +50,7 @@
             <div class="section-div flex-wrap flex-lg-nowrap">
                 <form class="register-form col-lg mx-auto d-none d-lg-flex" action="register" id="register" method="POST">
                     <div class="join-bakeryrecipe-div col-10">Join BakeryRecipe!</div>
-                    <div class="joining-bakeryrecipe-is-quick col-10">
+                    <div class="forgot-pass col-10">
                         JOINING BAKERYRECIPE IS QUICK, EASY, AND FREE.
                     </div>
                     <input class="email-input col-10" type="email" placeholder="Email" required="" name="email">
@@ -68,7 +68,7 @@
                 <div class="line-div mx-auto d-none d-lg-block"></div>
                 <form class="login-form col-lg mx-auto d-lg-flex" action="login" method="post" id="login">
                     <div class="join-bakeryrecipe-div col-10">Already A Member? Sign-In</div>
-                    <div class="joining-bakeryrecipe-is-quick col-10">WELCOME BACK</div>
+                    <div class="forgot-pass col-10">WELCOME BACK</div>
                     <div class="d-none" id="g_id_onload"
                          data-client_id="<%=Constants.GOOGLE_CLIENT_ID%>"
                          data-login_uri="BakeryRecipe/home.jsp"
@@ -81,12 +81,12 @@
                          data-theme="filled_blue"
                          data-text="sign_in_with"
                          data-shape="circle"
-                         data-logo_alignment="left">
+                         data-logo_alignment="center">
                     </div>
                     <input class="email-input1 col-10" type="text" placeholder="Email" required="" name="email">
                     <input class="password-input1 col-10" type="password" placeholder="Password" required="" name="password">
                     <div>${LOGIN_ERROR}</div>
-                    <div class="joining-bakeryrecipe-is-quick col-10">Forgot your password?</div>
+                    <div class="forgot-pass col-10">Forgot your password?</div>
                     <button class="submit-button col-10" type="submit" form="login">
                         <b class="login-b">LOGIN</b>
                     </button>
