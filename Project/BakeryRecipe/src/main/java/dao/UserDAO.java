@@ -7,12 +7,16 @@ package dao;
 import java.sql.ResultSet;
 import java.sql.PreparedStatement;
 import dto.User;
+import java.io.File;
+import java.io.IOException;
 import java.sql.Connection;
 import java.sql.Date;
 import java.sql.SQLException;
 import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.List;
+import javax.servlet.ServletContext;
+import javax.servlet.http.Part;
 import utils.DBUtils;
 import utils.Tools;
 
@@ -25,7 +29,7 @@ public class UserDAO {
     private static Connection conn = DBUtils.getConnection();
     private static final String[] USER_COLUMN_NAME_LIST
             = {"ID", "Role", "Email", "Password", "Avatar", "FirstName",
-                "LastName", "Gender", "Phone", "Address", "DateRegister", "IsActive", "StoreID"};
+                "LastName", "Gender", "Phone", "Address", "DateRegister", "IsActive", "StoreID", "Birthday"};
     private static final Class[] USER_COLUMN_NAME_CLASS
             = {Integer.class, String.class, String.class, String.class, String.class, String.class,
                 String.class, Boolean.class, String.class, String.class, Timestamp.class, String.class, Integer.class};
@@ -95,7 +99,7 @@ public class UserDAO {
     private static final String SELECT_USER_BY_ID = "SELECT "
             + " [ID],[Role],[Email],[Password],[Avatar]"
             + ",[FirstName],[LastName],[Gender],[Phone]"
-            + ",[Address],[DateRegister],[IsActive][StoreID]"
+            + ",[Address],[DateRegister],[IsActive][StoreID], [Birthday]"
             + " FROM [BakeryRecipe].[dbo].[User]"
             + " WHERE [ID] = ? and IsActive = ?";
 
@@ -113,7 +117,7 @@ public class UserDAO {
             User user = null;
             if (rs.next()) {
                 user = new User(rs.getInt(l[0]), rs.getString(l[1]), rs.getString(l[2]), rs.getString(l[3]), rs.getString(l[4]), rs.getString(l[5]),
-                        rs.getString(l[6]), rs.getString(l[7]), rs.getString(l[8]), rs.getString(l[9]), rs.getDate(l[10]), rs.getInt(l[12]));
+                        rs.getString(l[6]), rs.getString(l[7]), rs.getString(l[8]), rs.getString(l[9]), rs.getDate(l[10]), rs.getInt(l[12]), rs.getDate(l[13]));
             }
             return user;
         } catch (Exception e) {
@@ -281,6 +285,32 @@ public class UserDAO {
             System.out.println("Error at editInfo: " + e.toString());
         }
         return false;
+    }
+    
+    public static String saveAvatar(String id, Part part, ServletContext sc) {
+
+        try {
+            String fileName = part.getSubmittedFileName();
+            if (fileName.isEmpty()) {
+                return null;
+            }
+            // refines the fileName in case it is an absolute path
+            fileName = new File(fileName).getName();
+            id += fileName.substring(fileName.indexOf('.'), fileName.length());
+            String absoluteFilepath = sc.getRealPath("/" + User.IMG_PATH);
+//            System.out.println(absoluteFilepath);
+            //D:\learning in FPT\Tools\UploadFile\build\web\images
+            String webFilepath = absoluteFilepath.replace("\\build", "");
+            Tools.getFolderUpload(absoluteFilepath);
+            Tools.getFolderUpload(webFilepath);
+//        D:\learning in FPT\Tools\UploadFile\web\assets\images
+            part.write(absoluteFilepath + id);
+            part.write(webFilepath + id);
+            return id;
+        } catch (IOException ex) {
+            System.out.println("Error Cant Save Avatar!" + ex.getMessage());
+        }
+        return null;
     }
     
     public static void main(String[] args) {

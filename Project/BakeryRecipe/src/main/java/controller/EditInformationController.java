@@ -28,15 +28,7 @@ public class EditInformationController extends HttpServlet {
     private static final String ERROR = "profileInfo.jsp";
     private static final String SUCCESS = "profileInfo.jsp";
 
-    /**
-     * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
-     * methods.
-     *
-     * @param request servlet request
-     * @param response servlet response
-     * @throws ServletException if a servlet-specific error occurs
-     * @throws IOException if an I/O error occurs
-     */
+    
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
@@ -53,12 +45,20 @@ public class EditInformationController extends HttpServlet {
             String lastname = Tools.toUTF8(request.getParameter("lastname"));
             Date birthday = Date.valueOf(request.getParameter("birthday"));
             String gender = request.getParameter("gender");
-            
+            Part part = request.getPart("avatar");
             user.setFirstName(firstname);
             user.setLastName(lastname);
             user.setBirthday(birthday);
             user.setGender(gender);
-            
+            String avatar = null;
+            if (!part.getSubmittedFileName().isEmpty()) {
+                int id = user.getID();
+                String userid = Integer.toString(id);
+                avatar = UserDAO.saveAvatar(userid, part, getServletContext());
+            }
+            if (avatar != null) {
+                user.setAvatar(avatar);
+            }
             if (UserDAO.EditInfo(user)) {
                 session.setAttribute("login", user);
                 url = SUCCESS;
