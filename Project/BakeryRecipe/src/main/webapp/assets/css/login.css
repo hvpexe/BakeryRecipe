@@ -6,7 +6,7 @@ body {
     background:  #e3a587;
 }
 .join-bakeryrecipe-div,
-.joining-bakeryrecipe-is-quick {
+.forgot-pass {
     position: relative;
     font-size: 2em;
     font-family: Gelasio;
@@ -17,7 +17,7 @@ body {
     color: #444;
     font-weight: bolder;
 }
-.joining-bakeryrecipe-is-quick {
+.forgot-pass {
     font-size: inherit;
     width: 523px;
     color: #555;

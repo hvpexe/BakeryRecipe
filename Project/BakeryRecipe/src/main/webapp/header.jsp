@@ -1,4 +1,3 @@
-<script src="assets/js/Jquery/jquery-core.js" async defer></script>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <link rel="stylesheet" href="assets/css/header.css">
 <link href="assets/css/fontawesome-free-6.1.1-web/css/all.min.css" rel="stylesheet" type="text/css"/>

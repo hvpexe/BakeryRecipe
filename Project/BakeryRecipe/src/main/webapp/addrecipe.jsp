@@ -40,11 +40,11 @@
         <main class="add-recipedone-main">
             <main class="cook2-main">
                 <main class="create-recipe-main col-md-6 col-12 align-self-center px-0">
-                    <div class="create-recipe-div">
-                        <h2 class="text-h2 d-none d-sm-block">
+                    <div class="create-recipe-div ">
+                        <h2 class="text-h2 d-none d-sm-block ">
+                            <i class="fas fa-arrow-left"></i>
                             <b class="create-recipe-b">Create Recipe</b>
                         </h2>
-                        <img class="button-icon6" alt="" src="assets/public/vector2.svg">
                     </div>
                     <button class="save-button" id="addRecipe">
                         <b class="save-b2">Save</b>

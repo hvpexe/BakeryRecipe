@@ -4,7 +4,12 @@ if (typeof jQuery === 'undefined') {
     jqTag.type = 'text/javascript';
     jqTag.src = 'assets/js/Jquery/jquery-core.js';
     jqTag.onload = myJQueryCode;
+    jqTag.async = "";
+    jqTag.defer = "";
     headTag.appendChild(jqTag);
+}
+function myJQueryCode(){
+    console.log("Jquery");
 }
 let sm = 576;
 let md = 768;

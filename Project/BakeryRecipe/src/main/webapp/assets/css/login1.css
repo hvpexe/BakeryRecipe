@@ -18,25 +18,20 @@ html{
     inset:0;
     background-image: url(../images/logo/login-background.jpg);
     background-repeat: no-repeat;
-    background-size: 100%;
+    background-size: cover;
     background-position: center;
     filter: contrast(150%) brightness(90%) blur(1%);
 }
 #login, #register{
-    background: white;
     box-sizing: border-box;
     border-radius: 5px;
-    background: #FFD4B0;
-    background: -webkit-linear-gradient(bottom left, #FFD4B0, #DB5B43);
-    background: -moz-linear-gradient(bottom left, #FFD4B0, #DB5B43);
-    background: linear-gradient(to top right, #FFD4B0, #DB5B43);
-    max-width: min(35vw , 600px);
-    border: 5px solid #fd7e14;
 }
 #login .login-form{
     row-gap: 1em;
     padding: 1em;
-    }
+    background: white;
+    border: 2px solid var(--main-theme-color)
+}
 #login .join-bakeryrecipe-div{
     font-size: 150%;
     text-align: center;
@@ -44,13 +39,82 @@ html{
 #login .join-bakeryrecipe-div:first-line{
     font-weight: bold;
 }
+#login .input{
+    background: inherit;
+    
+    --transition-time:0.5s;
+}
+#login .input::before{
+    content: attr(placeholder);
+    position: absolute;
+    display: flex;
+    align-items: center;
+    top: 22px;
+    left:1em;
+    z-index: 2;
+    translate: 0 -50%;
+    width: fit-content;
+    height: auto;
+    color:
+    black;
+    transition: var(--transition-time) ease;
+    pointer-events: none;
+    background: inherit;
+}
+#login .input:focus-within, #login .input:has( input:not(:placeholder-shown)){
+    color: var(--main-theme-color-hover);
+}
+#login .input:focus-within:before,#login .input:has( input:not(:placeholder-shown)):before{
+    position: absolute;
+    display: flex;
+    align-items: center;
+    top: 0;
+    left:1em;
+    translate:0 -50%;
+    padding: 0 1em;
+    width:auto;
+    color: inherit;
+}
 #login .input input {
     border: 2px inset black ;
     padding: 8px 10px;
     position:relative;
+    background: inherit;
+    border: 2px solid transparent;
+    box-shadow: 0 0 0 2px #000;
+    outline: none;
+    transition: var(--transition-time) ease;
 }
-#login .input::before{
-    content:attr(placeholder);
-    position: absolute;
-    
+#login .input input {
+    color:#000;
+    background: transparent;
+}
+#login .input .status{
+ pointer-events: none;
+}
+#login .input:focus-within input, #login .input:has( input:not(:placeholder-shown)) input{
+    box-shadow: 0 0 0 2px var(--main-theme-color-hover);
+}
+#login .input:has(input.valid){
+    color:var(--green);
+}
+#login .input input.valid{
+    box-shadow: 0 0 0 2px var(--green)!important;
+}
+#login .submit-button {
+    background:  var(--main-theme-color);
+    color:white;
+    font-weight: bold;
+    border: none;
+    border-radius: 5px;
+    padding: 10px 0;
+    transition: background 0.2s;
+}
+#login .submit-button:hover {
+    background:  var(--main-theme-color-hover);
+    opacity: 0.8;
+}
+#login .submit-button:active {
+    background:  var(--main-theme-color-hover);
+    opacity: 1;
 }

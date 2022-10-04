@@ -7,24 +7,29 @@ body > * {
     font-size: 16px;
 }
 .create-recipe-b {
-    position: absolute;
-    height: 100%;
-    width: 100%;
-    top: 0;
-    right: -11.52%;
-    bottom: 0;
-    left: 11.52%;
     display: inline-block;
+    translate:1.5em 0;
 }
 .text-h2 {
     margin: 0;
-    position: absolute;
-    top: 4px;
-    left: 54px;
-    width: 197px;
-    height: 29px;
     font-size: inherit;
     font-family: inherit;
+    position: relative;
+}
+.text-h2 i {
+    position: absolute;
+    width: 25px;
+    aspect-ratio :1/1;
+    border-radius: 50%;
+    text-align: center;
+}
+.text-h2 i:hover {
+    box-shadow: 0 -1px 0 5px #aaa;
+    background: #aaa;
+
+}
+.text-h2 i::before {
+
 }
 .button-icon6 {
     position: absolute;
@@ -42,13 +47,10 @@ body > * {
 }
 .create-recipe-div {
     position: relative;
-    width: 251px;
-    height: 33px;
-    flex-shrink: 0;
-    overflow: hidden;
+    display: flex;
+    align-items: center;
 }
 .save-b2 {
-    display: block;
     font-family: Inter;
     color: #fff;
     font-size: 0.8em;
@@ -59,9 +61,8 @@ body > * {
     padding: 0;
     background-color: #db5a42;
     border-radius: 20px;
-    width: 111px;
-    flex-shrink: 0;
-    overflow: hidden;
+    display: flex;
+    padding: 4px 1.2em;
 }
 .create-recipe-main {
     align-self: stretch;
