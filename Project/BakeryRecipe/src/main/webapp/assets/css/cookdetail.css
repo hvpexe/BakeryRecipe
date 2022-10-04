@@ -1,499 +1,540 @@
 body {
-  margin: 0;
-  line-height: normal;
+    margin: 0;
+    line-height: normal;
 }
 .ellipse-icon,
 .rectangle-icon {
-  position: relative;
-  flex-shrink: 0;
-  object-fit: cover;
+    position: relative;
+    flex-shrink: 0;
+    object-fit: cover;
+    border-radius: 22px;
 }
 .rectangle-icon {
-  width: 476px;
-  height: 331px;
-  transition: 1s;
+    width: 476px;
+    height: 331px;
+    transition: 1s;
 }
 .rectangle-icon:hover {
-  scale: 1.1;
+    scale: 1.1;
 }
 .ellipse-icon {
-  width: 45px;
-  height: 45px;
+    width: 45px;
+    height: 45px;
 }
 .chef-div {
-  position: relative;
-  display: inline-block;
+    position: relative;
+    display: inline-block;
 }
 .frame-div2 {
-  display: flex;
-  flex-direction: row;
-  align-items: center;
-  justify-content: center;
-  gap: 8px;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
 }
 .frame-icon {
-  position: relative;
-  border-radius: 20px;
-  width: 89px;
-  height: 37px;
-  flex-shrink: 0;
-  overflow: hidden;
+    position: relative;
+    border-radius: 20px;
+    width: 89px;
+    height: 37px;
+    flex-shrink: 0;
+    overflow: hidden;
 }
 .div2 {
-  flex-direction: row;
-  justify-content: center;
-  gap: 10px;
+    flex-direction: row;
+    justify-content: center;
+    gap: 10px;
 }
 .comments-12-div,
 .div1,
 .div2 {
-  display: flex;
-  align-items: center;
+    display: flex;
+    align-items: center;
 }
 .div1 {
-  flex-direction: row;
-  justify-content: center;
-  gap: 125px;
-  z-index: 0;
+    flex-direction: row;
+    justify-content: center;
+    gap: 125px;
+    z-index: 0;
 }
 .comments-12-div {
-  position: absolute;
-  height: 38.38%;
-  width: 72.83%;
-  top: 48.48%;
-  right: 2.34%;
-  bottom: 13.13%;
-  left: 24.82%;
-  font-size: 24px;
+    position: absolute;
+    height: 38.38%;
+    width: 72.83%;
+    top: 48.48%;
+    right: 2.34%;
+    bottom: 13.13%;
+    left: 24.82%;
+    font-size: 24px;
 }
 .shape-icon2 {
-  position: relative;
-  width: 25px;
-  height: 30px;
-  flex-shrink: 0;
+    position: relative;
+    width: 25px;
+    height: 30px;
+    flex-shrink: 0;
 }
 .frame-div4,
 .name-of-the-cook {
-  position: absolute;
-  left: 10px;
-  display: flex;
-  align-items: center;
+    position: absolute;
+    left: 10px;
+    display: flex;
+    align-items: center;
 }
 .frame-div4 {
-  top: 48px;
-  flex-direction: row;
-  justify-content: flex-start;
-  gap: 10px;
+    top: 48px;
+    flex-direction: row;
+    justify-content: flex-start;
+    gap: 10px;
 }
 .name-of-the-cook {
-  top: 0;
-  width: 427px;
+    top: 0;
+    width: 427px;
 }
 .frame-div3 {
-  align-self: stretch;
-  position: relative;
-  height: 99px;
-  flex-shrink: 0;
-  overflow: hidden;
-  display: flex;
-  flex-wrap: wrap;
-  z-index: 1;
+    align-self: stretch;
+    position: relative;
+    height: 99px;
+    flex-shrink: 0;
+    overflow: hidden;
+    display: flex;
+    flex-wrap: wrap;
+    z-index: 1;
 }
 .precooktime-icon {
-  position: absolute;
-  margin: 0 !important;
-  top: 297px;
-  left: 2px;
-  width: 429.08px;
-  height: 23.88px;
-  flex-shrink: 0;
-  z-index: 2;
+    position: absolute;
+    margin: 0 !important;
+    top: 297px;
+    left: 2px;
+    width: 429.08px;
+    height: 23.88px;
+    flex-shrink: 0;
+    z-index: 2;
 }
 .frame-div1,
 .profile-chef-div {
-  display: flex;
-  box-sizing: border-box;
-  align-items: flex-start;
+    display: flex;
+    box-sizing: border-box;
+    align-items: flex-start;
 }
 .frame-div1 {
-  align-self: stretch;
-  flex-direction: column;
-  padding: 6px 2px;
-  justify-content: flex-start;
-  position: relative;
-  gap: 21px;
+    /*align-self: stretch;*/
+    flex-direction: column;
+    padding: 6px 2px;
+    justify-content: flex-start;
+    position: relative;
+    gap: 39px;
 }
 .profile-chef-div {
-  width: 1020.08px;
-  flex-direction: row;
-  padding: 10px 26px;
-  justify-content: center;
-  gap: 50px;
-  z-index: 0;
+    /*width: 1020.08px;*/
+    flex-direction: row;
+    padding: 10px 26px;
+    justify-content: center;
+    gap: 50px;
+    z-index: 0;
 }
 .unsplashonxjrr3erwc-icon {
-  position: relative;
-  width: 60px;
-  height: 60px;
-  flex-shrink: 0;
-  object-fit: cover;
+    position: relative;
+    width: 60px;
+    height: 60px;
+    flex-shrink: 0;
+    object-fit: cover;
 }
-.frame-div5 {
-  width: 50%;
-  flex-shrink: 0;
-}
+
 .frame-div5,
-.frame-div6,
-.frame-div7,
 .ingredient-div {
-  display: flex;
-  flex-direction: row;
-  align-items: center;
-  justify-content: flex-start;
-  gap: 7px;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: flex-start;
+    gap: 7px;
+    font-size: 18px;
 }
-.frame-div7,
+/*.frame-div7,
 .ingredient-div {
-  padding: 1px 0;
-  box-sizing: border-box;
-  justify-content: center;
-  gap: 9px;
-}
+    padding: 1px 0;
+    box-sizing: border-box;
+    justify-content: center;
+    gap: 9px;
+}*/
 .ingredient-div {
-  width: 643px;
-  padding: 10px;
-  align-items: flex-start;
-  justify-content: space-between;
-  flex-wrap: wrap;
-  gap: 10px;
-  z-index: 1;
+    /*width: 512px;*/
+    display: grid;
+    padding: 5px;
+    align-items: flex-start;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 9px;
+    /*grid-gap: 10px;*/
+    z-index: 1;
+    grid-template-columns: auto auto auto;
+    margin-left: 1%
 }
 .image-20-icon,
 .suggestion-icon {
-  position: relative;
-  width: 121px;
-  height: 21.66px;
-  flex-shrink: 0;
+    position: relative;
+    width: 121px;
+    height: 21.66px;
+    flex-shrink: 0;
 }
 .image-20-icon {
-  width: 136px;
-  height: 133px;
-  object-fit: cover;
+    width: 136px;
+    height: 133px;
+    object-fit: cover;
 }
-.chicken-egg-05 {
-  position: relative;
-  width: 89.41px;
-  height: 32.45px;
-  flex-shrink: 0;
-}
+/*.chicken-egg-05 {
+    position: relative;
+    width: 89.41px;
+    height: 32.45px;
+    flex-shrink: 0;
+}*/
 .frame-div11 {
-  flex-direction: column;
-  padding: 5px;
-  align-items: center;
-  justify-content: center;
-  gap: 10px;
+    flex-direction: column;
+    padding: 5px;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
 }
 .frame-div10,
 .frame-div11,
 .suggestion-aside {
-  display: flex;
-  box-sizing: border-box;
+    display: flex;
+    box-sizing: border-box;
 }
 .frame-div10 {
-  border-radius: 20px;
-  border: 0.5px solid #000;
-  position: relative;
-  width: 100%;
-  flex-direction: row;
-  padding: 10px 11px;
-  align-items: flex-start;
-  justify-content: space-between;
-  flex-wrap: wrap;
+    border-radius: 20px;
+    border: 0.5px solid #000;
+    position: relative;
+    width: 100%;
+    flex-direction: row;
+    padding: 10px 11px;
+    align-items: flex-start;
+    justify-content: space-between;
+    flex-wrap: wrap;
 }
 .suggestion-aside {
-  margin: 0 !important;
-  position: absolute;
-  top: 436px;
-  left: calc(50% - -263px);
-  width: 388px;
-  flex-direction: column;
-  padding: 36px 0;
-  align-items: center;
-  justify-content: flex-start;
-  gap: 12px;
-  z-index: 2;
+    margin: 0 !important;
+    position: absolute;
+    top: 436px;
+    left: calc(50% - -263px);
+    width: 388px;
+    flex-direction: column;
+    padding: 36px 0;
+    align-items: center;
+    justify-content: flex-start;
+    gap: 12px;
+    z-index: 2;
 }
 .intructions-icon {
-  position: absolute;
-  margin: 0 !important;
-  top: 0;
-  left: 0;
-  width: 127.23px;
-  height: 16.83px;
-  flex-shrink: 0;
-  z-index: 0;
+    position: absolute;
+    margin: 0 !important;
+    top: 0;
+    left: 0;
+    width: 127.23px;
+    height: 16.83px;
+    flex-shrink: 0;
+    z-index: 0;
 }
 .in-a-large-bowl-mix-together {
-  position: relative;
-  color: #000;
-  display: inline-block;
-  width: 566px;
-  height: 67px;
-  flex-shrink: 0;
+    position: relative;
+    color: #000;
+    display: inline-block;
+    width: 566px;
+    height: 67px;
+    flex-shrink: 0;
 }
 .step1-intruc-div {
-  margin: 0 !important;
-  position: absolute;
-  top: 71px;
-  left: 15px;
-  width: 574px;
-  height: 98px;
-  flex-shrink: 0;
-  display: flex;
-  flex-direction: column;
-  align-items: flex-start;
-  justify-content: flex-start;
-  gap: 11px;
-  z-index: 1;
+    margin: 0 !important;
+    position: absolute;
+    top: 71px;
+    left: 15px;
+    width: 574px;
+    height: 98px;
+    flex-shrink: 0;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: flex-start;
+    gap: 11px;
+    z-index: 1;
 }
 .in-a-large-bowl-mix-together1 {
-  position: relative;
-  color: #000;
-  display: inline-block;
-  width: 566px;
-  height: 68px;
-  flex-shrink: 0;
+    position: relative;
+    color: #000;
+    display: inline-block;
+    width: 566px;
+    height: 68px;
+    flex-shrink: 0;
 }
 .instructions-div,
 .step2-intruc-div,
 .step3-intruc-div {
-  display: flex;
-  flex-direction: column;
-  align-items: flex-start;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
 }
 .step2-intruc-div {
-  margin: 0 !important;
-  position: absolute;
-  top: 185px;
-  left: 15px;
-  width: 574px;
-  height: 98px;
-  flex-shrink: 0;
-  justify-content: flex-start;
-  gap: 11px;
-  z-index: 2;
+    margin: 0 !important;
+    position: absolute;
+    top: 185px;
+    left: 15px;
+    width: 574px;
+    height: 98px;
+    flex-shrink: 0;
+    justify-content: flex-start;
+    gap: 11px;
+    z-index: 2;
 }
 .instructions-div,
 .step3-intruc-div {
-  z-index: 3;
+    z-index: 3;
 }
 .step3-intruc-div {
-  margin: 0 !important;
-  position: absolute;
-  top: 313px;
-  left: 15px;
-  width: 574px;
-  height: 98px;
-  flex-shrink: 0;
-  justify-content: flex-start;
-  gap: 11px;
+    margin: 0 !important;
+    position: absolute;
+    top: 313px;
+    left: 15px;
+    width: 574px;
+    height: 98px;
+    flex-shrink: 0;
+    justify-content: flex-start;
+    gap: 11px;
 }
 .instructions-div {
-  width: 643px;
-  height: 448px;
-  padding: 10px 10px 10px 0;
-  box-sizing: border-box;
-  justify-content: center;
-  gap: 10px;
-  font-size: 16px;
-  color: rgba(0, 0, 0, 0.5);
+    width: 643px;
+    height: 448px;
+    padding: 10px 10px 10px 0;
+    box-sizing: border-box;
+    justify-content: center;
+    gap: 10px;
+    font-size: 16px;
+    color: rgba(0, 0, 0, 0.5);
 }
 .comments-div,
 .instructions-div,
 .like-icon {
-  position: relative;
-  flex-shrink: 0;
+    position: relative;
+    flex-shrink: 0;
 }
 .comments-div {
-  display: inline-block;
-  width: 150.11px;
-  height: 35.19px;
+    display: inline-block;
+    width: 150.11px;
+    height: 35.19px;
 }
 .like-icon {
-  width: 25px;
-  height: 24px;
+    width: 25px;
+    height: 24px;
 }
 .liked-div {
-  display: flex;
-  flex-direction: row;
-  align-items: flex-start;
-  justify-content: flex-start;
-  gap: 6px;
+    display: flex;
+    flex-direction: row;
+    align-items: flex-start;
+    justify-content: flex-start;
+    gap: 6px;
 }
 .frame-div17,
 .like-manage-div {
-  display: flex;
-  box-sizing: border-box;
-  justify-content: flex-start;
+    display: flex;
+    box-sizing: border-box;
+    justify-content: flex-start;
 }
 .like-manage-div {
-  background-color: #fff;
-  width: 589px;
-  flex-direction: row;
-  padding: 15px 1px 15px 20px;
-  align-items: center;
-  gap: 50px;
+    background-color: #fff;
+    width: 589px;
+    flex-direction: row;
+    padding: 15px 1px 15px 20px;
+    align-items: center;
+    gap: 50px;
 }
 .frame-div17 {
-  width: 382px;
-  flex-direction: column;
-  padding: 0 1px;
-  align-items: flex-start;
-  font-size: 20px;
+    width: 382px;
+    flex-direction: column;
+    padding: 0 1px;
+    align-items: flex-start;
+    font-size: 20px;
 }
 .rectangle-icon1 {
-  position: relative;
-  border-radius: 30px;
-  width: 614px;
-  height: 126px;
-  flex-shrink: 0;
-  z-index: 0;
+    position: relative;
+    border-radius: 30px;
+    width: 614px;
+    height: 126px;
+    flex-shrink: 0;
+    z-index: 0;
 }
 .ellipse-icon1 {
-  position: relative;
-  width: 51.93px;
-  height: 46.3px;
-  flex-shrink: 0;
-  object-fit: cover;
+    position: relative;
+    width: 51.93px;
+    height: 46.3px;
+    flex-shrink: 0;
+    object-fit: cover;
 }
 .h-span {
-  color: rgba(0, 0, 0, 0.5);
+    color: rgba(0, 0, 0, 0.5);
 }
 .cmt-write-txt-span {
-  line-break: anywhere;
-  width: 100%;
+    line-break: anywhere;
+    width: 100%;
 }
 .cmt-write-div {
-  position: relative;
-  display: flex;
-  align-items: center;
-  width: 121.54px;
-  flex-shrink: 0;
+    position: relative;
+    display: flex;
+    align-items: center;
+    width: 121.54px;
+    flex-shrink: 0;
 }
 .ellipse-icon2,
 .like-1-icon {
-  position: relative;
-  width: 22.36px;
-  height: 19.63px;
-  flex-shrink: 0;
-  z-index: 0;
+    position: relative;
+    width: 22.36px;
+    height: 19.63px;
+    flex-shrink: 0;
+    z-index: 0;
 }
 .like-1-icon {
-  position: absolute;
-  margin: 0 !important;
-  top: 3px;
-  left: 3px;
-  width: 15.33px;
-  height: 13.46px;
-  object-fit: cover;
-  z-index: 1;
+    position: absolute;
+    margin: 0 !important;
+    top: 3px;
+    left: 3px;
+    width: 15.33px;
+    height: 13.46px;
+    object-fit: cover;
+    z-index: 1;
 }
 .dislike-icon1,
 .like-div {
-  position: relative;
-  flex-shrink: 0;
+    position: relative;
+    flex-shrink: 0;
 }
 .like-div {
-  width: 22.28px;
-  height: 19.63px;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: flex-start;
+    width: 22.28px;
+    height: 19.63px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-start;
 }
 .dislike-icon1 {
-  width: 21.92px;
-  height: 19px;
+    width: 21.92px;
+    height: 19px;
 }
 .detail-cmt-div,
 .rectangle-input {
-  position: absolute;
-  margin: 0 !important;
-  flex-shrink: 0;
+    position: absolute;
+    margin: 0 !important;
+    flex-shrink: 0;
 }
 .detail-cmt-div {
-  top: 36.81px;
-  left: 43px;
-  box-shadow: 0 4px 4px rgba(0, 0, 0, 0.25);
-  width: 100%;
-  height: 89px;
-  display: flex;
-  flex-direction: row;
-  align-items: flex-start;
-  justify-content: flex-start;
-  gap: 8px;
-  z-index: 1;
+    top: 36.81px;
+    left: 43px;
+    box-shadow: 0 4px 4px rgba(0, 0, 0, 0.25);
+    width: 100%;
+    height: 89px;
+    display: flex;
+    flex-direction: row;
+    align-items: flex-start;
+    justify-content: flex-start;
+    gap: 8px;
+    z-index: 1;
 }
 .rectangle-input {
-  border: 0.5px solid #000;
-  background-color: #eee9e9;
-  top: 63px;
-  left: 108px;
-  border-radius: 40px;
-  box-sizing: border-box;
-  width: 289px;
-  height: 23px;
-  opacity: 0.5;
-  z-index: 2;
+    border: 0.5px solid #000;
+    background-color: #eee9e9;
+    top: 63px;
+    left: 108px;
+    border-radius: 40px;
+    box-sizing: border-box;
+    width: 289px;
+    height: 23px;
+    opacity: 0.5;
+    z-index: 2;
 }
 .cre-cmt-div {
-  width: 673px;
-  height: 150px;
-  flex-shrink: 0;
-  padding: 0 26px;
-  align-items: center;
-  position: relative;
-  font-size: 13px;
+    width: 673px;
+    height: 150px;
+    flex-shrink: 0;
+    padding: 0 26px;
+    align-items: center;
+    position: relative;
+    font-size: 13px;
 }
 .cmt-main-div,
 .cook-detaildone-div,
 .cre-cmt-div,
 .main-page-div {
-  display: flex;
-  flex-direction: column;
-  box-sizing: border-box;
-  justify-content: flex-start;
+    display: flex;
+    flex-direction: column;
+    box-sizing: border-box;
+    justify-content: flex-start;
 }
 .cmt-main-div {
-  margin: 0 !important;
-  position: absolute;
-  top: 1214px;
-  left: 31px;
-  padding: 32px 15px;
-  align-items: flex-start;
-  z-index: 4;
+    margin: 0 !important;
+    position: absolute;
+    top: 1214px;
+    left: 31px;
+    padding: 32px 15px;
+    align-items: flex-start;
+    z-index: 4;
 }
 .cook-detaildone-div,
 .main-page-div {
-  position: relative;
-  height: 1597px;
+    position: relative;
+    height: 1597px;
 }
 .main-page-div {
-  align-self: stretch;
-  border-radius: 30px;
-  background-color: #fff;
-  box-shadow: 0 4px 12px rgba(79, 79, 186, 0.06);
-  flex-shrink: 0;
-  padding: 54px 16px;
-  align-items: flex-start;
-  gap: 16px;
+    align-self: stretch;
+    border-radius: 30px;
+    background-color: #fff;
+    box-shadow: 0 4px 12px rgba(79, 79, 186, 0.06);
+    flex-shrink: 0;
+    padding: 54px 16px;
+    align-items: flex-start;
+    gap: 16px;
 }
 .cook-detaildone-div {
-  width: 100%;
-  padding: 0 0 191px;
-  align-items: center;
-  text-align: left;
-  font-size: 30px;
-  color: #000;
-  font-family: Gelasio;
+    width: 100%;
+    padding: 0 0 191px;
+    align-items: center;
+    text-align: left;
+    font-size: 30px;
+    color: #000;
+    font-family: Gelasio;
+}
+.prep-class{
+    display: inline-block;
+    font-size: 12px;
+    margin-top: 12%;
+
+}
+.detail-prep{
+    display: inline-block;
+}
+.prep-time{
+    display: inline-block;
+    font-size: 25px;
+    padding :10px;
+}
+.time{
+    display: inline-block;
+    font-size:25px;
+    color : #C0C0C0;
+}
+
+.detail-store{
+    font-size: 12px;
+    text-align: center;
+}
+.intruc-title{
+
+
+}
+
+.follow-div, .save-div{
+    font-size: 14px;
+    margin: 8px 14px;
+}
+
+
+.surround-class{
+    border: 1px solid;
+    border-radius: 20px;
+    color: #DB5A42;
 }
