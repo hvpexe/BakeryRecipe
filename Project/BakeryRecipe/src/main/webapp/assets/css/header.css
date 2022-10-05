@@ -3,6 +3,22 @@
     --main-theme-color: #DB5A42;
     --main-theme-color-hover: #c22e14;
     --side-theme-color: #FFFFFF;
+    --yellow-theme: #FFD275;
+    --yellow-theme-25: #FFD27525;
+    --yellow-theme-50: #FFD27550;
+    --yellow-theme-75: #FFD27575;
+    --hard-yellow-theme: #E8AE68;
+    --hard-yellow-theme-25: #E8AE6825;
+    --hard-yellow-theme-50: #E8AE6850;
+    --hard-yellow-theme-75: #E8AE6875;
+    --brown-theme: #A57F60;
+    --brown-theme-25: #A57F6025;
+    --brown-theme-50: #A57F6050;
+    --brown-theme-75: #A57F6075;
+    --pink-theme:#E3A587;
+    --pink-theme-25:#E3A58725;
+    --pink-theme-50:#E3A58750;
+    --pink-theme-75:#E3A58775;
     --main-title-color: #000000;
     --web-background-color: #F7FAFC;
 }
@@ -96,10 +112,11 @@
     --transition-time: 0.1s;
     display: flex;
     padding: 6px;
-    margin: 0 ;
+    margin: 0;
     cursor: pointer;
     align-items: center;
     background: #fff;
+    padding: 10px 5px;
     box-shadow: 0 0 0 1px #c5513d;
     border-radius: 25px;
     transition: var(--transition-time);
@@ -118,6 +135,7 @@
     top:0;
     bottom:0;
     width: 35px;
+    aspect-ratio: 1;
     box-sizing: border-box;
     border: 1px #ccc groove;
 }

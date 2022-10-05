@@ -39,36 +39,61 @@
 
         <main class="add-recipedone-main">
             <main class="cook2-main">
-                <main class="create-recipe-main col-md-6 col-12 align-self-center px-0">
+                <main class="create-recipe-main col-md-10 col-12 align-self-center px-0">
                     <div class="create-recipe-div ">
-                        <h2 class="text-h2 d-none d-sm-block ">
+                        <h2 class="text-h2 ">
                             <i class="fas fa-arrow-left"></i>
-                            <b class="create-recipe-b">Create Recipe</b>
+                            <b class="create-recipe-b d-inline-block ">Create Recipe</b>
                         </h2>
                     </div>
-                    <button class="save-button" id="addRecipe">
+                    <button class="save-button" form="addRecipe">
                         <b class="save-b2">Save</b>
                     </button>
                 </main>
-                <form class="section-div col-12 col-md-6 align-content-center align-self-center"
+                <form class="section-div col-12 col-md-10 align-content-center align-self-center"
                       id="addRecipe">
                     <div class="title-div col-12">
                         <b class="title-b2">Title</b>
-                        <input name='name' class="input col-12"  type="text" placeholder="Cake's Name " required>
+                        <input name='name' class="input col-12"  type="text" placeholder="Recipe's Name ">
                     </div>
-                    <div class="add-video-and-pic col-12">
-                        <div class="d-flex col-12 justify-content-between">
-                            <button class="button" id="button">
-                                <span class="text-b" id="text1">Add video</span>
-                            </button>
-                            <img class="vector-icon2" alt="" src="assets/public/vector3.svg">
-                        </div>
-                        <input name='picture1'
-                               id="addfile" class="add-picture-input px-3 pt-2" type="file">
-                    </div>
-                    <div class="description-div col-12">
+                    <div class="description-div col">
                         <b class="description-b">Description</b>
                         <textarea class="boxdes-textarea  p-2" placeholder="Add description"></textarea>
+                        <div>
+
+                        </div>
+                        <div class="d-flex col p-0 justify-content-start" style="gap: 10px;">
+                            <button class="description-button" disabled="disabled" id="add-video-btn">
+                                Add Video <i class="fa-brands fa-youtube"></i>
+                            </button>
+                            <button class="description-button" disabled="disabled" id="add-img-btn">
+                                Add Image <i class="fa-regular fa-image"></i>
+                            </button>
+                        </div>
+                        <div class="display-image col p-0">
+                            <div class='image ' src="./"></div>
+                            <div class="display-image-options">
+                                <div class="fas fa-trash description-button" id='remove-image'></div>
+                                <div class="col-5 d-inline-flex"></div>
+                                <button class="description-button" disabled="disabled" id="to-cover-btn">
+                                    Set As Cover
+                                </button>
+                                <button class="description-button ml-2" disabled="disabled" id="change-img-btn">
+                                    Change Image
+                                </button>
+                            </div>
+                        </div>
+                        <div class="video-and-image p-0 col  list-group list-group-horizontal">
+                            <span class="col-2 list-group-item rounded add-img"></span>
+                            <span class="col-2 list-group-item rounded video" id='video' 
+                                  ></span>
+                            <span class="col-2 list-group-item rounded cover" id='pic2'></span>
+                            <span class="col-2 list-group-item rounded" id='pic3'></span>
+                            <span class="col-2 list-group-item rounded selected" id='pic4'
+                                  style="background-image: url(assets/images/image-29@2x.png);"></span>
+                        </div>
+
+
                     </div>
                     <div class="ingredient-div col-12">
                         <b class="description-b">Ingredients</b>
@@ -93,28 +118,18 @@
                     </div>
             </main>
         </main>
-
+        <<script src="assets/js/validator.js"></script>
         <script>
-            var saveButton = document.getElementById("saveButton");
-            if (saveButton) {
-                saveButton.addEventListener("click", function (e) {
-                    window.location.href = "./profile.html";
-                });
-            }
-
-            var text1 = document.getElementById("text1");
-            if (text1) {
-                text1.addEventListener("click", function (e) {
-                    window.open("./add-video.html");
-                });
-            }
-
-            var button = document.getElementById("button");
-            if (button) {
-                button.addEventListener("click", function (e) {
-                    window.location.href = "./add-video.html";
-                });
-            }
+            Validator({
+            form: '#formLogin',
+                    status: '.status',
+                    rules: [
+                            Validator.isRequired('[name=email]'),
+                            Validator.isEmail('[name=email]'),
+                            Validator.isRequired('[name=password]'),
+                            Validator.isPassword('[name=password]')
+                    ],
+                    );
         </script>
     </body>
 </html>

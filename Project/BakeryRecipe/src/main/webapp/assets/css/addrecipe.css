@@ -8,7 +8,7 @@ body > * {
 }
 .create-recipe-b {
     display: inline-block;
-    translate:1.5em 0;
+    translate: 0.5em 0;
 }
 .text-h2 {
     margin: 0;
@@ -17,33 +17,18 @@ body > * {
     position: relative;
 }
 .text-h2 i {
-    position: absolute;
     width: 25px;
     aspect-ratio :1/1;
     border-radius: 50%;
     text-align: center;
 }
 .text-h2 i:hover {
-    box-shadow: 0 -1px 0 5px #aaa;
-    background: #aaa;
+    box-shadow: 0 -1px 0 5px var(hard-yellow-75);
+    background: var(hard-yellow-75);
 
 }
 .text-h2 i::before {
 
-}
-.button-icon6 {
-    position: absolute;
-    height: 87.88%;
-    width: 13.94%;
-    top: 6.06%;
-    right: 84.06%;
-    bottom: 6.06%;
-    left: 1.99%;
-    max-width: 100%;
-    max-height: 100%;
-}
-.button-icon6:hover{
-    box-shadow: 0 0 0 20px #00000025;
 }
 .create-recipe-div {
     position: relative;
@@ -73,6 +58,7 @@ body > * {
     justify-content: space-between;
     text-align: left;
     font-size: 24px;
+    min-width: 450px;
     color: #000;
     font-family: Inter;
 }
@@ -90,63 +76,52 @@ body > * {
     border: 0;
     background-color: #fff;
     position: relative;
-    box-shadow: 0 4px 4px rgba(0, 0, 0, 0.25), 0 4px 4px rgba(0, 0, 0, 0.25);
+    box-shadow: 0 4px 4px rgb(0 0 0 / 25%);
     min-height: 40px;
     overflow: hidden;
 }
-input{
-    border-radius: 50px;
+input,textarea{
+    border-radius: 5px;
+    outline: 3px outset transparent;
+    transition: outline 0.3s;
+    background: white;
+    border:none;
 }
-textarea, input{
-    border: 1px solid #77777725;
+:is(input,textarea):focus{
+    outline: 3px outset var(hard-yellow-75);
+
 }
+
 .title-div {
     display: flex;
     flex-direction: column;
 }
-.text-b {
-    position: relative;
-    display: inline-block;
-    font-family: Gelasio;
-    color: #fff;
-    text-align: left;
-    cursor: pointer;
-}
-.add-picture-input,
-.button {
-    display: flex;
+
+.description-button {
+    display: inline-flex;
     box-sizing: border-box;
-}
-.button {
     cursor: pointer;
     border: 0;
     padding: 6px 10px;
-    background-color: #db5a42;
+    background-color: var(--side-theme-color);
     border-radius: 40px;
     flex-direction: row;
-    align-items: flex-start;
-    justify-content: flex-start;
+    align-items: center;
     z-index: 0;
+    background: #f1b0b7 linear-gradient(var(--hard-yellow-theme-50) 30%,transparent);
+    color:inherit;
+    gap:10px;
 }
-.add-picture-input {
-
+.description-button:hover {
+    outline:3px solid var(--yellow-theme-75)
 }
 .vector-icon2 {
     margin: 0 !important;
     width: 35px;
     aspect-ratio:45/40;
 }
-.add-video-and-pic {
-    height: 233px;
-    flex-shrink: 0;
-    display: flex;
-    flex-direction: column;
-    padding: 15px 0 0;
-    box-sizing: border-box;
-    align-items: flex-start;
-    justify-content: space-between;
-}
-.add-video-and-pic,
+
+
 .boxdes-textarea,
 .description-b {
     align-self: stretch;
@@ -156,7 +131,6 @@ textarea, input{
     display: inline-block;
 }
 .boxdes-textarea {
-    border: 1px solid rgba(0, 0, 0, 0.25);
     background-color: #fff;
     box-shadow: 0 4px 4px rgba(0, 0, 0, 0.25);
     box-sizing: border-box;
@@ -164,6 +138,121 @@ textarea, input{
     flex-shrink: 0;
     overflow: hidden;
     text-align: left;
+    aspect-ratio: 12/2;
+}
+.display-image{
+    border-radius: 10px;
+    position: relative;
+    box-shadow: 0 4px 4px #00000025;
+}
+.display-image .image{
+    background: var(--side-theme-color) url(../images/rectangle-20@2x.png) no-repeat ;
+    background-position: center center;
+    background-size: cover;
+    box-shadow: 0 0 0 2px inset var(--pink-theme);
+    aspect-ratio: 54/34;
+    border-radius: inherit;
+}
+.display-image .image.cover{
+    box-shadow: 0 0 0 2px inset var(--hard-yellow-theme);
+}
+.display-image .display-image-options {
+    position: absolute;
+    bottom:2%;
+    left:0;
+    right:0;
+}
+.display-image #remove-image{
+    align-items: center;
+    padding: 7px;
+    margin-left: 1em;
+    background: white;
+    border: 1px solid lightgray;
+    font-size: 1em;
+    border-radius: 50%;
+}
+.video-and-image {
+    gap: 10px;
+    aspect-ratio: 12/2;
+    overflow-x: clip;
+}
+.video-and-image span{
+    aspect-ratio:1;
+    font-family: 'Gelasio';
+    gap:2em;
+    border-width: 2px;
+    box-shadow: 0 0 0 0 inset #00000000;
+    border-color: var(--pink-theme);
+    transition: 0.3s;
+    position: relative;
+    background-size: cover;
+    background-repeat:  no-repeat;
+
+}
+.video-and-image span:hover{
+    box-shadow: 0 0 50px 0 inset var(--brown-theme-50);
+}
+.video-and-image span:has(div){
+    background:white;
+}
+
+.video-and-image span.video{
+    border: 3px solid var(--yellow-theme);
+}
+.video-and-image span.video::before{
+    content: '\f167';
+    position: absolute;
+    right: 0;
+    top:0;
+    color:red;
+    font-size: 1.5em;
+    border-radius: 0 0 0 10px;
+    background: var(--white);
+    padding: 3px 4px;
+    font-family: 'Font Awesome 6 Brands';
+}
+.video-and-image span.cover{
+    border: 3px solid var(--hard-yellow-theme);
+}
+.video-and-image span.cover::before{
+    position: absolute;
+    content:'Cover';
+    background: var(--hard-yellow-theme);
+    top:0;
+    left:0;
+    padding: 5px;
+    color: #111;
+    border-radius: 0 0 10px 0;
+    pointer-events: none;
+}
+.video-and-image span.selected::after{
+    position: absolute;
+    content: '';
+    inset:0;
+    pointer-events: none;
+    outline: 3px solid var(--info);
+}
+.video-and-image span.add-img{
+    box-sizing: border-box;
+    border: 5px solid var(--main-theme-color);
+    position: relative;
+    color:var(--main-theme-color);
+}
+.video-and-image span.add-img::before{
+    content:'\2b';
+    font-family: 'font awesome';
+    font-size: 5em;
+    position: absolute;
+    top:50%;
+    left:50%;
+    translate: -50% -50%;
+    margin:auto;
+    color: inherit;
+}
+.video-and-image .add-img:hover{
+    border: 5px solid var(--main-theme-color-hover);
+    color:var(--main-theme-color-hover);
+
 }
 .description-div {
     align-self: stretch;
@@ -246,6 +335,8 @@ textarea, input{
     align-items: center;
     justify-content: center;
     gap: 22px;
+    min-width: 450px;
+    max-width: 600px;
 }
 .section-div > div {
     align-self: center;
@@ -259,6 +350,7 @@ textarea, input{
     font-size: 1em;
     color: #000;
     font-family: Gelasio;
+    background: var(--yellow-theme-75);
 }
 .add-recipedone-main,
 .cook2-main {
