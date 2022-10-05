@@ -102,7 +102,11 @@ public class UserDAO {
             + ",[Address],[DateRegister],[IsActive][StoreID], [Birthday]"
             + " FROM [BakeryRecipe].[dbo].[User]"
             + " WHERE [ID] = ? and IsActive = ?";
-
+    /** Get User by ID
+     *  but this <b>method</b> only select the <b>User</b> that <b>not banned</b>
+     * @param id the <b>id</b> of the <b>User</b>
+     * @return the User Object with the same <b>id</b> as the inputted <b>id</b>
+     */
     public static User getUserByID(int id) {
 
         String sql = SELECT_USER_BY_ID;
