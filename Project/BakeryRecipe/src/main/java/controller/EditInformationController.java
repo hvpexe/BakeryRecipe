@@ -45,11 +45,15 @@ public class EditInformationController extends HttpServlet {
             String lastname = Tools.toUTF8(request.getParameter("lastname"));
             Date birthday = Date.valueOf(request.getParameter("birthday"));
             String gender = request.getParameter("gender");
+            String address = request.getParameter("address");
+            String phone = request.getParameter("phone");
             Part part = request.getPart("avatar");
             user.setFirstName(firstname);
             user.setLastName(lastname);
             user.setBirthday(birthday);
             user.setGender(gender);
+            user.setPhone(phone);
+            user.setAddress(address);
             String avatar = null;
             if (!part.getSubmittedFileName().isEmpty()) {
                 int id = user.getID();
@@ -59,6 +63,7 @@ public class EditInformationController extends HttpServlet {
             if (avatar != null) {
                 user.setAvatar(avatar);
             }
+            System.out.println("avatar:"+avatar);
             if (UserDAO.EditInfo(user)) {
                 session.setAttribute("login", user);
                 url = SUCCESS;

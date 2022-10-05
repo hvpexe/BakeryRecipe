@@ -314,7 +314,7 @@ public class UserDAO {
     }
     
     public static void main(String[] args) {
-        getUserByID(1);
+        getUserByID(3);
     }
 
 }
