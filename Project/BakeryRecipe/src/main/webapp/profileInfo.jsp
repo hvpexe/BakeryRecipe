@@ -46,7 +46,7 @@
                     <div class="profile-header">
                         <h1 class="info-title">Change information: </h1>
                     </div>
-                    <form action="EditInformationController" method="post" enctype="multipart/form-data">
+                    <form action="profileInfo" method="post" enctype="multipart/form-data">
                         <div class="infor-detail">
                             <div class="row">
                                 <div class="col-md-3">Email</div>
@@ -113,7 +113,7 @@
                                 </div>
                             </div>
                         </div>
-                        <input type="hidden" name="userID" value="${sessionScope.login.id}">
+                        <input type="hidden" name="userID" value="${sessionScope.login.ID}">
                         <input class="info-submit" type="submit" value="Submit">
 
                     </form>

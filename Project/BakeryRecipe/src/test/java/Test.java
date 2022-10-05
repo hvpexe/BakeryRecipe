@@ -1,6 +1,8 @@
 
 import dao.RecipeDAO;
+import dao.UserDAO;
 import dto.Recipe;
+import dto.User;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -59,11 +61,9 @@ public class Test {
         }
         return null;
     }
-    public  void main(String[] args) {
+    public static void main(String[] args) {
         
-        List<Recipe> list = RecipeDAO.getTop8MostRatedRecipe();
-        for(Recipe o : list){
-            System.out.println(o);
-        }
+        User user = UserDAO.getUserByID(3);
+        System.out.println(user);
     }
 }
