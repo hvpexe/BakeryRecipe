@@ -12,7 +12,6 @@
 .header-container {
     min-height: 60px;
     position: sticky;
-    /* margin-bottom: 10px; */
     top: 0;
     z-index: 99;
     background-color: #fff;
@@ -129,6 +128,7 @@
 }
 .header-user .header-user-button {
     color: inherit;
+    min-width: 200px;
     text-decoration: none;
 }
 .header-user.active,

@@ -49,7 +49,7 @@
         <section class="logindone-section " id="Login">
             <div class="section-div flex-wrap flex-lg-nowrap">
                 <form class="register-form col-lg mx-auto d-none d-lg-flex" action="register" id="register" method="POST">
-                    <div class="join-bakeryrecipe-div col-10">Join BakeryRecipe!</div>
+                    <div class="invitation-text col-10">Join BakeryRecipe!</div>
                     <div class="forgot-pass col-10">
                         JOINING BAKERYRECIPE IS QUICK, EASY, AND FREE.
                     </div>
@@ -66,8 +66,8 @@
                 </form>
 
                 <div class="line-div mx-auto d-none d-lg-block"></div>
-                <form class="login-form col-lg mx-auto d-lg-flex" action="login" method="post" id="login">
-                    <div class="join-bakeryrecipe-div col-10">Already A Member? Sign-In</div>
+                <form class="login-form col-lg mx-auto d-lg-flex" action="login" method="post" id="form-object">
+                    <div class="invitation-text col-10">Already A Member? Sign-In</div>
                     <div class="forgot-pass col-10">WELCOME BACK</div>
                     <div class="d-none" id="g_id_onload"
                          data-client_id="<%=Constants.GOOGLE_CLIENT_ID%>"

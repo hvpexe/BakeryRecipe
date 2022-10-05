@@ -3,14 +3,25 @@
 
 //Validator function
 function Validator(options) {
-
+    var selectorRules = {};
     //this function do the validating
     function validate(inputElem, rule) {
         // value: inputElem.value
         // test: rule.test
-        var errorMsg = rule.test(inputElem.value);
         var errorElem = inputElem.parentElement.querySelector(options.status);
+        var errorMsg;
 
+        //recieve all the rules of the selector
+        var rules = selectorRules[rule.selector];
+
+        // run every rule one by one of the selector
+        // if errorMsg have value (error) -> exit executing
+        for (var i = 0; i < rules.length; i++) {
+            errorMsg = rules[i](inputElem.value);
+            console.log(errorMsg);
+            if (errorMsg)
+                break;
+        }
         // if test = false run status will appear
         if (errorMsg) {
             errorElem.innerText = errorMsg;
@@ -21,51 +32,99 @@ function Validator(options) {
             inputElem.classList.add('valid');
             inputElem.classList.remove('invalid');
         }
-
+        return !errorMsg;
     }
+    var formElem = document.querySelector(options.form);
+    if (formElem) {
+        //submitting form
+        formElem.onsubmit = e => {
+            e.preventDefault();
 
-    var form = document.querySelector(options.form);
-    if (form) {
+            var isFormValid = true;
+
+            options.rules.forEach(rule => {
+                var inputElem = formElem.querySelector(rule.selector);
+                var isValid = validate(inputElem, rule);
+                if (!isValid) {
+                    isFormValid = false;
+                }
+            });
+            //js submit
+            if (isFormValid) {
+                console.log('submit success');
+                console.log(enableInputs);
+                if (typeof options.onSubmit === 'function')
+                {
+                    var senableInputs = formElem.querySelectorAll('[name]:not([disable])');
+                    var formValues = Array.from(enableInputs).reduce((values, input) => {
+                        return (values[input.name] = input.value) && values;
+                    }, {});
+                    formElem.submit();
+                    options.onSubmit(formValues);
+                }
+                //Html Submit
+                else {
+                    formElem.submit();
+                }
+            } else {
+                console.log('submit false');
+            }
+        }
+
         options.rules.forEach(rule => {
-            var inputElem = form.querySelector(rule.selector);
+            //save all the rules for every input not run yet
+            if (Array.isArray(selectorRules[rule.selector])) {
+                selectorRules[rule.selector].push(rule.test);
+            } else {
+                selectorRules[rule.selector] = [rule.test];
+            }
+            //running
+            var inputElem = formElem.querySelector(rule.selector);
             if (inputElem) {
                 inputElem.onblur = () => validate(inputElem, rule);
                 inputElem.oninput = () => {
-                    errorElem.innerText = '';
-                    inputElem.classList.add('valid');
+                    inputElem.classList.remove('valid');
                     inputElem.classList.remove('invalid');
                 }
             }
         });
     } else {
-        console.log(selector + " doesn't exist'");
+        console.log(options.form + " doesn't exist'");
     }
 }
 
 // rules editingqs  
-Validator.isRequired = function (selector) {
+Validator.isRequired = function (selector, msg) {
     return {
         selector: selector,
         test: function (value) {
-            return value.trim() ? undefined : 'Please input some text';
+            return value.trim() ? undefined : msg || 'Please input some text';
         }
     };
-}
-Validator.isEmail = function (selector) {
+};
+Validator.isEmail = function (selector, msg) {
     return {
         selector: selector,
         test: function (value) {
             var regex = /^[a-zA-Z0-9]+(?:\.[a-zA-Z0-9]+)*@[a-zA-Z0-9]+(?:\.[a-zA-Z0-9]+)*$/;
-            return regex.test(value) ? undefined : 'Wrong Email Format';
+            return regex.test(value) ? undefined : msg || 'Wrong Email Format';
         }
     };
-}
-Validator.isPassword = function (selector) {
+};
+Validator.isPassword = function (selector, msg) {
     return {
         selector: selector,
         test: function (value) {
             var regex = /^.{8,40}$/;
-            return regex.test(value) ? undefined : 'Password must be between 8 - 40 characters';
+            return regex.test(value) ? undefined : msg || 'Password must be between 8 - 40 characters';
         }
     };
-}
+};
+Validator.isSameValue = function (selector, getConfirmValue, msg) {
+    return {
+        selector: selector,
+        test: function (value) {
+            return value === getConfirmValue() ? undefined : msg || 'input field is wrong';
+        }
+    };
+};
