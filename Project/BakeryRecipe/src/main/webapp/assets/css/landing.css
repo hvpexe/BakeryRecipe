@@ -96,19 +96,19 @@ header.masthead .btn-main-color:hover {
 }
 
 .input-group-text {
-    border: 1px solid #C31952;  
+    border: 1px solid #C31952;
 }
 
 .form-control {
-    border: 1px solid #C31952;  
+    border: 1px solid #C31952;
 }
 
 .input-group-append button {
-    background-color: #C31952;  
+    background-color: #C31952;
     color: #FFFD92;
 }
 .input-group-append button:hover {
-    background-color: #eb175e;  
+    background-color: #eb175e;
     color: #FFFD92;
 }
 .page-section {
@@ -164,6 +164,7 @@ header.masthead .btn-main-color:hover {
     font-size: 20px;
     border-radius: 10px;
     padding: 8px 16px;
+    margin-bottom: 16px;
 
 }
 
@@ -177,6 +178,7 @@ header.masthead .btn-main-color:hover {
     font-size: 20px;
     border-radius: 10px;
     padding: 8px 16px;
+    margin-bottom: 16px;
 
 }
 /* RESPONSIVE CSS
