@@ -212,16 +212,15 @@ body {
     flex-wrap: wrap;
 }
 .suggestion-aside {
-    margin: 0 !important;
     position: absolute;
-    top: 436px;
-    left: calc(50% - -263px);
+    top: 622px;
+    left: calc(49% - -106px);
     width: 388px;
     flex-direction: column;
     padding: 36px 0;
     align-items: center;
     justify-content: flex-start;
-    gap: 12px;
+    gap: 8px;
     z-index: 2;
 }
 .intructions-icon {
@@ -480,10 +479,10 @@ body {
     height: 1597px;
 }
 .main-page-div {
-    align-self: stretch;
+    justify-content: center;
     border-radius: 30px;
     background-color: #fff;
-    box-shadow: 0 4px 12px rgba(79, 79, 186, 0.06);
+    box-shadow: 2px 4px 12px rgb(2 2 3 / 69%);
     flex-shrink: 0;
     padding: 54px 16px;
     align-items: flex-start;
