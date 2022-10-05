@@ -57,9 +57,8 @@
     <body>
         <c:import url="header.jsp"/>
         <section class="section container-fluid row px-0 m-0">
-
             <aside class="col-12  col-sm-9 col-lg-5 mx-auto px-3" id="form-object">
-                <form class="login-form d-none mx-1 rounded flex-column align-items-center" 
+                <form class="login-form mx-1 rounded flex-column align-items-center" 
                       id="formLogin" action="login" method="post">
                     <div class="invitation-text col-10">WELCOME BACK<br> to <br>Bakery Recipe </div>
                     <div class="d-none" id="g_id_onload" data-client_id="243057477675-kt58mr9lav8eh6ti9bfrj8p782j7unkd.apps.googleusercontent.com" data-login_uri="BakeryRecipe/home.jsp" data-callback="handleCredentialResponse">
@@ -80,15 +79,21 @@
                     <div class="forgot-pass col-10 text-center">Forgot your password?</div>
                     <div class="text-danger"></div>
                     <hr width="100%"/>
-                    <div class="sign-up-button text-center col-10 page-item">
-                        <b class="login-b border-0">Don't have account? Sign up</b>
-                    </div>
+                    <div class="change-form">Sign Up</div>
                 </form>
-                <form class="register-form  mx-1 rounded flex-column align-items-center " action="register" id="formRegister" method="POST">
+                <form class="register-form d-none mx-1 rounded flex-column align-items-center " action="register" id="formRegister" method="POST">
                     <div class="invitation-text col-10">
                         Join BakeryRecipe! 
                         <br>
                         JOINING BAKERYRECIPE IS QUICK, EASY, AND FREE.
+                    </div>
+                    <div class="g_id_signin"
+                         data-type="icon"
+                         data-size="large"
+                         data-theme="filled_blue"
+                         data-text="sign_in_with"
+                         data-shape="circle"
+                         data-logo_alignment="center">
                     </div>
                     <div class="input col-10 p-0" placeholder="Email">
                         <input class="email-input1 col rounded" type="text" placeholder="   " form="formRegister"
@@ -117,9 +122,12 @@
                     <button class="submit-button col-10" type="submit" form="formRegister">
                         <b class="join-b">JOIN</b>
                     </button>
+                    <hr width="100%">
+                    <div class="change-form">Sign In</div>
+
                 </form>
             </aside>
-            s            <aside class="col-7 d-none d-lg-flex">
+            <aside class="col-7 d-none d-lg-flex">
             </aside>
         </section>
         <!--Google Login Dont Touch-->

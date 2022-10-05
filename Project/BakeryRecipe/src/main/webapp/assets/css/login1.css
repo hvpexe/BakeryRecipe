@@ -128,3 +128,14 @@ body {
     background:  var(--main-theme-color-hover);
     opacity: 1;
 }
+#form-object .change-form{
+    text-align: center;
+    cursor:pointer;
+}
+#form-object .change-form:hover{
+    text-decoration: underline;
+}
+#form-object form{
+    position: relative;
+    transition: 1s;
+}
