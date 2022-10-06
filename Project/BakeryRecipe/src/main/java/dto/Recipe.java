@@ -28,6 +28,7 @@ public class Recipe {
     private boolean isDeleted;
     private int userID;
     private ArrayList<String> img; //field này dùng để lưu danh sách ảnh của recipe, dành cho trang detail
+    private ArrayList<String> video; //field này dùng để lưu danh sách video oecipe, dành cho trang detail
     private String cover; //field này dùng để lưu ảnh cover
     private String username; //dùng để lưu cả lastname + firstname của user
 
@@ -170,6 +171,14 @@ public class Recipe {
         this.username = username;
     }
 
+    public ArrayList<String> getVideo() {
+        return video;
+    }
+
+    public void setVideo(ArrayList<String> video) {
+        this.video = video;
+    }
+    
     @Override
     public String toString() {
         return "Recipe{" + "id=" + id + ", name=" + name + ", description=" + description + ", like=" + like + ", save=" + save + ", comment=" + comment + ", datePost=" + datePost + ", lastDateEdit=" + lastDateEdit + ", prepTime=" + prepTime + ", cookTime=" + cookTime + ", isDeleted=" + isDeleted + ", userID=" + userID + ", img=" + img + ", cover=" + cover + ", username=" + username + '}';
