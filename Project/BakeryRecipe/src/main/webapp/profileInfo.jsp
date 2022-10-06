@@ -17,7 +17,7 @@
             <!-- SECTION LEFT -->
             <div class="col-md-12 col-lg-3 ">
                 <div class="profile-img ">
-                    <img class="border border-dark rounded-circle" src="${sessionScope.login.avatar}" alt="User Avt">
+                    <img class="border border-dark col-3 col-lg-10 p-0 rounded-circle" src="${sessionScope.login.avatar}" alt="User Avt">
                 </div>
                 <div class="profile-name">${sessionScope.login.name}</div>
                 <ul id="profile-function" class="list-group">

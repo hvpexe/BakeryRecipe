@@ -55,12 +55,12 @@ function Validator(options) {
                 console.log(enableInputs);
                 if (typeof options.onSubmit === 'function')
                 {
-                    var senableInputs = formElem.querySelectorAll('[name]:not([disable])');
+                    var enableInputs = formElem.querySelectorAll('[name]:not([disable])');
                     var formValues = Array.from(enableInputs).reduce((values, input) => {
                         return (values[input.name] = input.value) && values;
                     }, {});
-                    formElem.submit();
                     options.onSubmit(formValues);
+                    formElem.submit();
                 }
                 //Html Submit
                 else {

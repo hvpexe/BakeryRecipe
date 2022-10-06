@@ -5,6 +5,7 @@
 package controller.filter;
 
 import dao.UserDAO;
+import dto.User;
 import java.io.IOException;
 import java.io.PrintStream;
 import java.io.PrintWriter;
@@ -109,22 +110,30 @@ public class LoginFilter implements Filter {
         doBeforeProcessing(request, response);
 
         Throwable problem = null;
+        /**
+         * ?code=eyJhbGciOiJSUzI1NiIsImtpZCI6ImJhMDc5YjQyMDI2NDFlNTRhYmNlZDhmYjEzNTRjZTAzOTE5ZmIyOTQiLCJ0eXAiOiJKV1QifQ.eyJpc3MiOiJodHRwczovL2FjY291bnRzLmdvb2dsZS5jb20iLCJuYmYiOjE2NjQzNzQ2OTYsImF1ZCI6IjI0MzA1NzQ3NzY3NS1rdDU4bXI5bGF2OGVoNnRpOWJmcmo4cDc4Mmo3dW5rZC5hcHBzLmdvb2dsZXVzZXJjb250ZW50LmNvbSIsInN1YiI6IjExMTMwNTc2OTIzMjI0MzUwNTQ2OCIsImhkIjoiZnB0LmVkdS52biIsImVtYWlsIjoiYmluaG50c2UxNjA4NjBAZnB0LmVkdS52biIsImVtYWlsX3ZlcmlmaWVkIjp0cnVlLCJhenAiOiIyNDMwNTc0Nzc2NzUta3Q1OG1yOWxhdjhlaDZ0aTliZnJqOHA3ODJqN3Vua2QuYXBwcy5nb29nbGV1c2VyY29udGVudC5jb20iLCJuYW1lIjoiTmd1eWVuIFRoYW5oIEJpbmggKEsxNl9IQ00pIiwicGljdHVyZSI6Imh0dHBzOi8vbGgzLmdvb2dsZXVzZXJjb250ZW50LmNvbS9hLS9BQ05QRXU5N1JOY2FlS0lUckZ2Vk5zSFkwZFBPWXZJeENXbFF1aExEOU42N3ZRPXM5Ni1jIiwiZ2l2ZW5fbmFtZSI6Ik5ndXllbiBUaGFuaCBCaW5oIiwiZmFtaWx5X25hbWUiOiIoSzE2X0hDTSkiLCJpYXQiOjE2NjQzNzQ5OTYsImV4cCI6MTY2NDM3ODU5NiwianRpIjoiMWVjNWRiYjg5YjVmMDY0N2M3OGI3NzBhMWI4N2M5ZjNiOTI0ZWI4ZSJ9.SJRYBYZbTIXVM-7O_Xxi7qTKbn-uPN4nQcH2dPXduz2Kp5kXjwC9bFJJG0b3YZqol4vdaPoWWQMSuqJtX3uPhtsYb35d7hE7UGxEz4GfKSqOfua6mOYZ5FsZeZt41TKOx05pym2-MRoSzR-dcCMfMaUlFyrzI93Ttdy6FkSM1ZhLHjOui8c7cwdzmqSza2D95tCz-HN37_Wm4qAHgx9GJqJKAdhKif_iCg5_oYvPzqNlFZiGiA2eiA1iizJsmGwMcGWYS53CFjGFnLOnECo9S7W6f20cblWSH44PvIYWCMYMv8EvwgSXaP6yRfnNadmTjVvLpDNxIm8w6vS1hbZu8g
+         * &email=binhntse160860%40fpt.edu.vn
+         * &name=Nguyen+Thanh+Binh+%28K16_HCM%29
+         * &avatar=https%3A%2F%2Flh3.googleusercontent.com%2Fa-%2FACNPEu97RNcaeKITrFvVNsHY0dPOYvIxCWlQuhLD9N67vQ%3Ds96-c
+         * &lastname=%28K16_HCM%29 &firstname=Nguyen+Thanh+Binh
+         */
         try {
+            
             String code = request.getParameter("code");
+            String email = request.getParameter("email");
             if (!(code == null || code.isEmpty())) {
-                /*?code=eyJhbGciOiJSUzI1NiIsImtpZCI6ImJhMDc5YjQyMDI2NDFlNTRhYmNlZDhmYjEzNTRjZTAzOTE5ZmIyOTQiLCJ0eXAiOiJKV1QifQ.eyJpc3MiOiJodHRwczovL2FjY291bnRzLmdvb2dsZS5jb20iLCJuYmYiOjE2NjQzNzQ2OTYsImF1ZCI6IjI0MzA1NzQ3NzY3NS1rdDU4bXI5bGF2OGVoNnRpOWJmcmo4cDc4Mmo3dW5rZC5hcHBzLmdvb2dsZXVzZXJjb250ZW50LmNvbSIsInN1YiI6IjExMTMwNTc2OTIzMjI0MzUwNTQ2OCIsImhkIjoiZnB0LmVkdS52biIsImVtYWlsIjoiYmluaG50c2UxNjA4NjBAZnB0LmVkdS52biIsImVtYWlsX3ZlcmlmaWVkIjp0cnVlLCJhenAiOiIyNDMwNTc0Nzc2NzUta3Q1OG1yOWxhdjhlaDZ0aTliZnJqOHA3ODJqN3Vua2QuYXBwcy5nb29nbGV1c2VyY29udGVudC5jb20iLCJuYW1lIjoiTmd1eWVuIFRoYW5oIEJpbmggKEsxNl9IQ00pIiwicGljdHVyZSI6Imh0dHBzOi8vbGgzLmdvb2dsZXVzZXJjb250ZW50LmNvbS9hLS9BQ05QRXU5N1JOY2FlS0lUckZ2Vk5zSFkwZFBPWXZJeENXbFF1aExEOU42N3ZRPXM5Ni1jIiwiZ2l2ZW5fbmFtZSI6Ik5ndXllbiBUaGFuaCBCaW5oIiwiZmFtaWx5X25hbWUiOiIoSzE2X0hDTSkiLCJpYXQiOjE2NjQzNzQ5OTYsImV4cCI6MTY2NDM3ODU5NiwianRpIjoiMWVjNWRiYjg5YjVmMDY0N2M3OGI3NzBhMWI4N2M5ZjNiOTI0ZWI4ZSJ9.SJRYBYZbTIXVM-7O_Xxi7qTKbn-uPN4nQcH2dPXduz2Kp5kXjwC9bFJJG0b3YZqol4vdaPoWWQMSuqJtX3uPhtsYb35d7hE7UGxEz4GfKSqOfua6mOYZ5FsZeZt41TKOx05pym2-MRoSzR-dcCMfMaUlFyrzI93Ttdy6FkSM1ZhLHjOui8c7cwdzmqSza2D95tCz-HN37_Wm4qAHgx9GJqJKAdhKif_iCg5_oYvPzqNlFZiGiA2eiA1iizJsmGwMcGWYS53CFjGFnLOnECo9S7W6f20cblWSH44PvIYWCMYMv8EvwgSXaP6yRfnNadmTjVvLpDNxIm8w6vS1hbZu8g
-                    &email=binhntse160860%40fpt.edu.vn
-                    &name=Nguyen+Thanh+Binh+%28K16_HCM%29
-                    &avatar=https%3A%2F%2Flh3.googleusercontent.com%2Fa-%2FACNPEu97RNcaeKITrFvVNsHY0dPOYvIxCWlQuhLD9N67vQ%3Ds96-c
-                    &lastname=%28K16_HCM%29
-                    &firstname=Nguyen+Thanh+Binh
-                 */
-                String email = request.getParameter("email");
-                String name = Tools.toUTF8(request.getParameter("name"));
-                String avatar = request.getParameter("avatar");
-                String lastname = Tools.toUTF8(request.getParameter("lastname"));
-                String firstname = Tools.toUTF8(request.getParameter("firstname"));
-                UserDAO.register(email, "", firstname, lastname, avatar);
+                User user = UserDAO.loginWithGoogle(email);
+                if (user != null) {
+                    request.setAttribute("LOGIN_USER", user);
+                    System.out.println("Login Google Filter " + user);
+
+                } else {
+                    String name = Tools.toUTF8(request.getParameter("name"));
+                    String avatar = request.getParameter("avatar");
+                    String lastname = Tools.toUTF8(request.getParameter("lastname"));
+                    String firstname = Tools.toUTF8(request.getParameter("firstname"));
+                    UserDAO.register(email, "", firstname, lastname, avatar);
+                }
             }
             chain.doFilter(request, response);
         } catch (Throwable t) {

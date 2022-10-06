@@ -139,3 +139,7 @@ body {
     position: relative;
     transition: 1s;
 }
+#credential_picker_container{
+    width: auto;
+    height: auto!important;
+}

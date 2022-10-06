@@ -71,8 +71,29 @@ public class UserDAO {
         return false;
     }
 
-    private static final String SELECT_LOGIN = " SELECT ID from [User]\n"
+    private static final String SELECT_LOGIN = " SELECT ID from [User]"
             + "WHERE Email = ? AND Password = ?";
+
+    public static User loginWithGoogle(String email) {
+        String sql = SELECT_LOGIN.replace(" AND Password = ?", "");
+        try {
+            System.out.println(conn);
+            PreparedStatement ps = conn.prepareStatement(sql);
+            //Set ps
+            ps.setString(1, email);
+            //run ps
+            ResultSet rs = ps.executeQuery();
+            if (rs.next()) {
+                int id = rs.getInt("id");
+                return getUserByID(id);
+            }
+            return null;
+        } catch (Exception e) {
+            System.out.println("loginWithGoogle error:");
+            e.printStackTrace();
+        }
+        return null;
+    }
 
     public static User login(String email, String password) {
         String sql = SELECT_LOGIN;
@@ -96,6 +117,38 @@ public class UserDAO {
         return null;
     }
 
+    private static final String SELECT_ALL_USER = "SELECT "
+            + " [ID],[Role],[Email],[Password],[Avatar]"
+            + ",[FirstName],[LastName],[Gender],[Phone]"
+            + ",[Address],[DateRegister],[IsActive][StoreID], [Birthday]"
+            + " FROM [BakeryRecipe].[dbo].[User]";
+
+    /**
+     * Get All User this <b>method</b> select all the <b>User</b>
+     *
+     * @param id the <b>id</b> of the <b>User</b>
+     * @return the User Object with the same <b>id</b> as the inputted <b>id</b>
+     */
+    public static List<User> getAllUser() {
+        String sql = SELECT_ALL_USER;
+        try {
+            PreparedStatement ps = conn.prepareStatement(sql);
+            ResultSet rs = ps.executeQuery();
+            String[] l = USER_COLUMN_NAME_LIST;
+            List<User> list = new ArrayList<>();
+            User user = null;
+            while (rs.next()) {
+                user = new User(rs.getInt(l[0]), rs.getString(l[1]), rs.getString(l[2]), rs.getString(l[3]), rs.getString(l[4]), rs.getString(l[5]),
+                        rs.getString(l[6]), rs.getString(l[7]), rs.getString(l[8]), rs.getString(l[9]), rs.getDate(l[10]), rs.getInt(l[12]), rs.getDate(l[13]));
+                list.add(user);
+            }
+            return list;
+        } catch (Exception e) {
+            System.out.println("Login error:");
+            e.printStackTrace();
+        }
+        return null;
+    }
     private static final String SELECT_USER_BY_ID = "SELECT "
             + " [ID],[Role],[Email],[Password],[Avatar]"
             + ",[FirstName],[LastName],[Gender],[Phone]"
@@ -111,7 +164,6 @@ public class UserDAO {
      * @return the User Object with the same <b>id</b> as the inputted <b>id</b>
      */
     public static User getUserByID(int id) {
-
         String sql = SELECT_USER_BY_ID;
         try {
             PreparedStatement ps = conn.prepareStatement(sql);
