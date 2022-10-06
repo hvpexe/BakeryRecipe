@@ -72,7 +72,7 @@ public class EditInformationController extends HttpServlet {
         } catch (Exception e) {
             System.out.println("Error at EditInformationController: " + e.toString());
         } finally{
-            response.sendRedirect(url);
+            request.getRequestDispatcher(url).forward(request, response);
         }
             
         

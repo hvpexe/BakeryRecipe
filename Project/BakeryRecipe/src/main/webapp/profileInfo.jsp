@@ -113,7 +113,7 @@
                                 </div>
                             </div>
                         </div>
-                        <input type="hidden" name="userID" value="${sessionScope.login.ID}">
+                        <input type="hidden" name="userID" value="${sessionScope.login.id}">
                         <input class="info-submit" type="submit" value="Submit">
 
                     </form>
