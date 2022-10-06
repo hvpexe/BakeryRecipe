@@ -26,6 +26,15 @@ public class Recipe {
     private boolean IsDeleted;
     private int UserID;
     private ArrayList<String> img;
+    private ArrayList<String> video;
+
+    public ArrayList<String> getVideo() {
+        return video;
+    }
+
+    public void setVideo(ArrayList<String> video) {
+        this.video = video;
+    }
     private String username;
 
     public Recipe() {
