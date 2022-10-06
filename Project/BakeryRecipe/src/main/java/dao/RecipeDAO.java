@@ -22,31 +22,35 @@ import java.sql.SQLException;
  */
 public class RecipeDAO {
 
-    private static final String SELECT_MOST_RATED_SQL = "SELECT Recipe.ID, Name, Description, [Like], Dislike, DatePost, LastDateEdit, PrepTime, CookTime, Saved, UserID, img, LastName + ' ' + FirstName AS username\n"
-            + "                                                        FROM Recipe\n"
-            + "                                                        JOIN Picture ON Recipe.ID = Picture.RecipeID\n"
-            + "                                                        JOIN [User] ON Recipe.UserID = [User].ID\n"
-            + "                                                        WHERE IsDeleted = 0\n"
-            + "                                                        ORDER BY [Like] DESC\n"
-            + "							 OFFSET ? ROWS FETCH NEXT 8 ROWS ONLY";
+    private static final String SELECT_MOST_RATED_SQL = "SELECT Recipe.ID, Name, Description, [Like], [Save], Comment, DatePost, LastDateEdit, Img, UserID, LastName + ' ' + FirstName AS Username\n" +
+"                                                        FROM Recipe\n" +
+"                                                        JOIN [User] ON Recipe.UserID = [User].ID\n" +
+"                                                        JOIN Picture ON Picture.RecipeID = Recipe.ID\n" +
+"                                                        WHERE IsDeleted = 0 AND IsCover = 1\n" +
+"                                                        ORDER BY [Like] DESC\n" +
+"			                                 OFFSET 0 ROWS FETCH NEXT 8 ROWS ONLY";
     private static final String SELECT_PICTURE_SQL = "SELECT img FROM Picture";
 
     public static List<Recipe> getMostRatedRecipe(int index) {
 
         try {
             Connection conn = DBUtils.getConnection();
-
             PreparedStatement ps = conn.prepareStatement(SELECT_MOST_RATED_SQL);
-            ps.setInt(1, (index - 1) * 8);
+
             ResultSet rs = ps.executeQuery();
             List<Recipe> list = new ArrayList<>();
             while (rs.next()) {
-
-//                Recipe recipe = new Recipe(rs.getInt("ID"), rs.getString("Name"), rs.getString("Description"),
-//                        rs.getInt("Like"), rs.getInt("Dislike"), rs.getDate("DatePost"),
-//                        rs.getDate("LastDateEdit"), rs.getInt("PrepTime"), rs.getInt("CookTime"),
-//                        rs.getInt("Saved"), rs.getInt("UserID"), pic, rs.getString("username"));
-                Recipe recipe = null;
+                Recipe recipe = new Recipe(rs.getInt("ID"),
+                        rs.getString("Name"),
+                        rs.getString("Description"),
+                        rs.getInt("Like"),
+                        rs.getInt("Save"),
+                        rs.getInt("Comment"),
+                        rs.getDate("DatePost"),
+                        rs.getDate("LastDateEdit"),
+                        rs.getString("Img"),
+                        rs.getInt("UserID"),
+                        rs.getString("Username"));
                 list.add(recipe);
             }
             return list;
@@ -56,40 +60,38 @@ public class RecipeDAO {
         return null;
     }
 
-    private static final String SELECT_MOST_RECENT_SQL = "SELECT Recipe.ID, Name, Description, [Like], Dislike, DatePost, LastDateEdit, PrepTime, CookTime, Saved, UserID, img, LastName + ' ' + FirstName AS username\n"
-            + "                                                        FROM Recipe\n"
-            + "                                                        JOIN Picture ON Recipe.ID = Picture.RecipeID\n"
-            + "                                                        JOIN [User] ON Recipe.UserID = [User].ID\n"
-            + "                                                        WHERE IsDeleted = 0\n"
-            + "                                                        ORDER BY DatePost DESC\n"
-            + "							 OFFSET ? ROWS FETCH NEXT 8 ROWS ONLY";
+    private static final String SELECT_MOST_RECENT_SQL = "SELECT Recipe.ID, Name, Description, [Like], [Save], Comment, DatePost, LastDateEdit, Img, UserID, LastName + ' ' + FirstName AS Username\n" +
+"                                                        FROM Recipe\n" +
+"                                                        JOIN [User] ON Recipe.UserID = [User].ID\n" +
+"                                                        JOIN Picture ON Picture.RecipeID = Recipe.ID\n" +
+"                                                        WHERE IsDeleted = 0 AND IsCover = 1\n" +
+"                                                        ORDER BY DatePost DESC\n" +
+"			                                 OFFSET 0 ROWS FETCH NEXT 8 ROWS ONLY";
 
     public static List<Recipe> getMostRecentRecipe(int index) {
         try {
             Connection conn = DBUtils.getConnection();
-            PreparedStatement ps1 = conn.prepareStatement(SELECT_PICTURE_SQL);
-            ResultSet rs1 = ps1.executeQuery();
-            ArrayList<String> pic = new ArrayList<>();
-            while (rs1.next()) {
-                pic.add(rs1.getString("img"));
-            }
-
             PreparedStatement ps = conn.prepareStatement(SELECT_MOST_RECENT_SQL);
-            ps.setInt(1, (index - 1) * 8);
+
             ResultSet rs = ps.executeQuery();
             List<Recipe> list = new ArrayList<>();
             while (rs.next()) {
-
-//                Recipe recipe = new Recipe(rs.getInt("ID"), rs.getString("Name"), rs.getString("Description"),
-//                        rs.getInt("Like"), rs.getInt("Dislike"), rs.getDate("DatePost"),
-//                        rs.getDate("LastDateEdit"), rs.getInt("PrepTime"), rs.getInt("CookTime"),
-//                        rs.getInt("Saved"), rs.getInt("UserID"), pic, rs.getString("username"));
-                Recipe recipe = null;
+                Recipe recipe = new Recipe(rs.getInt("ID"),
+                        rs.getString("Name"),
+                        rs.getString("Description"),
+                        rs.getInt("Like"),
+                        rs.getInt("Save"),
+                        rs.getInt("Comment"),
+                        rs.getDate("DatePost"),
+                        rs.getDate("LastDateEdit"),
+                        rs.getString("Img"),
+                        rs.getInt("UserID"),
+                        rs.getString("Username"));
                 list.add(recipe);
             }
             return list;
         } catch (SQLException ex) {
-            System.out.println("getMostRatedRecipe Query Error!" + ex.getMessage());
+            System.out.println("getMostRecentRecipe Query Error!" + ex.getMessage());
         }
         return null;
     }
