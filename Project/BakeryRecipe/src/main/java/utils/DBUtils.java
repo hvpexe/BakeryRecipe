@@ -15,25 +15,25 @@ import java.sql.SQLException;
 public class DBUtils {
 
     private static Connection conn;
-    private final static String serverName = "localhost";
-    private final static String dbName = "BakeryRecipe";
-    private final static String portNumber = "1433";
-    private final static String instance = "";//LEAVE THIS ONE EMPTY IF YOUR SQL IS A SINGLE INSTANCE
-    private final static String userID = "sa";
-    private final static String password = "12345";
+    private final static String SERVER_NAME = "localhost";
+    private final static String DB_NAME = "BakeryRecipe";
+    private final static String PORT = "1433";
+    private final static String INSTANCE = "";//LEAVE THIS ONE EMPTY IF YOUR SQL IS A SINGLE INSTANCE
+    private final static String USER_ID = "sa";
+    private final static String PASSWORD = "12345";
 
     public static Connection getConnection() {
         try {
-            if (conn != null) {
+            if (conn != null || !conn.isClosed()) {
                 return conn;
             }
-            String url = "jdbc:sqlserver://" + serverName + ":" + portNumber + "\\" + instance + ";databaseName=" + dbName;
-            if (instance == null || instance.trim().isEmpty()) {
-                url = "jdbc:sqlserver://" + serverName + ":" + portNumber + ";databaseName=" + dbName;
+            String url = "jdbc:sqlserver://" + SERVER_NAME + ":" + PORT + "\\" + INSTANCE + ";databaseName=" + DB_NAME;
+            if (INSTANCE == null || INSTANCE.trim().isEmpty()) {
+                url = "jdbc:sqlserver://" + SERVER_NAME + ":" + PORT + ";databaseName=" + DB_NAME;
             }
             url += ";encrypt=true;trustServerCertificate=true;CharacterSet=UTF-8";//important to add UTF-8 format
             Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver");
-            return (conn = DriverManager.getConnection(url, userID, password)) != null ? conn : null;
+            return (conn = DriverManager.getConnection(url, USER_ID, PASSWORD)) != null ? conn : null;
         } catch (SQLException ex) {
             System.out.println("Connection error! " + ex.getMessage());
             ex.printStackTrace();

@@ -9,8 +9,11 @@ package dto;
  * @author VO MINH MAN
  */
 public class Ingredient {
+
+    private static final String IMG_PATH = "assets/images/ingredients/";
+    private static final String DEFAULT_IMG = IMG_PATH + "default.png";
     private String name;
-    private String img ;
+    private String img;
 
     public Ingredient() {
     }
@@ -29,12 +32,16 @@ public class Ingredient {
     }
 
     public String getImg() {
-        return img;
+        return img != null ? IMG_PATH + img : DEFAULT_IMG;
     }
 
     public void setImg(String img) {
         this.img = img;
     }
-    
-    
+
+    @Override
+    public String toString() {
+        return "Ingredient{" + "name=" + name + ", img=" + img + '}';
+    }
+
 }
