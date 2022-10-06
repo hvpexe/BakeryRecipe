@@ -56,7 +56,7 @@
               
               <c:forEach items="${RecipeList}" var="cc">
                   <div class="recipe-div" value="postid">
-                      <img class="img-icon" alt="" src="${cc.img}" />
+                      <img class="img-icon" alt="" src="${cc.cover}" />
                       <div class="recipe-name-div">${cc.name}</div>
                       <div class="recipe-author-div">${cc.username}</div>
                   </div>
