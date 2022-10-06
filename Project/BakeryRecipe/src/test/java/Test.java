@@ -49,10 +49,11 @@ public class Test {
             List<Recipe> list = new ArrayList<>();
             while (rs.next()) {
                 
-                Recipe recipe = new Recipe(rs.getInt("ID"), rs.getString("Name"), rs.getString("Description"),
-                                           rs.getInt("Like"), rs.getInt("Dislike"), rs.getDate("DatePost"), 
-                                           rs.getDate("LastDateEdit"), rs.getInt("PrepTime"), rs.getInt("CookTime"),
-                                           rs.getInt("Saved"), rs.getInt("UserID"), pic, rs.getString("username"));
+//                Recipe recipe = new Recipe(rs.getInt("ID"), rs.getString("Name"), rs.getString("Description"),
+//                                           rs.getInt("Like"), rs.getInt("Dislike"), rs.getDate("DatePost"), 
+//                                           rs.getDate("LastDateEdit"), rs.getInt("PrepTime"), rs.getInt("CookTime"),
+//                                           rs.getInt("Saved"), rs.getInt("UserID"), pic, rs.getString("username"));
+                Recipe recipe = null;
                 list.add(recipe);
             }
             return list;

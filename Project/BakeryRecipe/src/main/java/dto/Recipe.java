@@ -7,47 +7,144 @@ package dto;
 import java.sql.Date;
 import java.util.ArrayList;
 
-
 /**
  *
  * @author kichi
  */
 public class Recipe {
-    private int ID;
-    private String Name;
-    private String Description;
-    private int Like;
-    private int Dislike;
-    private Date DatePost;
-    private Date LastDateEdit;
-    private int PrepTime;
-    private int CookTime;
-    private int Saved;
-    private boolean IsDeleted;
-    private int UserID;
-    private ArrayList<String> img;
-    private String username;
+
+    public static final String COVER_PATH = "assets/images/recipe/";
+
+    private int id;
+    private String name;
+    private String description;
+    private int like;
+    private int save;
+    private int comment;
+    private Date datePost;
+    private Date lastDateEdit;
+    private int prepTime;
+    private int cookTime;
+    private boolean isDeleted;
+    private int userID;
+    private ArrayList<String> img; //field này dùng để lưu danh sách ảnh của recipe, dành cho trang detail
+    private String cover; //field này dùng để lưu ảnh cover
+    private String username; //dùng để lưu cả lastname + firstname của user
 
     public Recipe() {
     }
 
-    public Recipe(int ID, String Name, String Description, int Like, int Dislike, Date DatePost, Date LastDateEdit, int PrepTime, int CookTime, int Saved, int UserID, ArrayList<String> img, String username) {
-        this.ID = ID;
-        this.Name = Name;
-        this.Description = Description;
-        this.Like = Like;
-        this.Dislike = Dislike;
-        this.DatePost = DatePost;
-        this.LastDateEdit = LastDateEdit;
-        this.PrepTime = PrepTime;
-        this.CookTime = CookTime;
-        this.Saved = Saved;
-        this.UserID = UserID;
-        this.img = img;
+    public Recipe(int id, String name, String description, int like, int save, int comment, Date datePost, Date lastDateEdit, String cover, int userID, String username) {
+        this.id = id;
+        this.name = name;
+        this.description = description;
+        this.like = like;
+        this.save = save;
+        this.comment = comment;
+        this.datePost = datePost;
+        this.lastDateEdit = lastDateEdit;
+        this.cover = cover;
+        this.userID = userID;
         this.username = username;
     }
 
     
+    
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public String getDescription() {
+        return description;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
+    }
+
+    public int getLike() {
+        return like;
+    }
+
+    public void setLike(int like) {
+        this.like = like;
+    }
+
+    public int getSave() {
+        return save;
+    }
+
+    public void setSave(int save) {
+        this.save = save;
+    }
+
+    public int getComment() {
+        return comment;
+    }
+
+    public void setComment(int comment) {
+        this.comment = comment;
+    }
+
+    public Date getDatePost() {
+        return datePost;
+    }
+
+    public void setDatePost(Date datePost) {
+        this.datePost = datePost;
+    }
+
+    public Date getLastDateEdit() {
+        return lastDateEdit;
+    }
+
+    public void setLastDateEdit(Date lastDateEdit) {
+        this.lastDateEdit = lastDateEdit;
+    }
+
+    public int getPrepTime() {
+        return prepTime;
+    }
+
+    public void setPrepTime(int prepTime) {
+        this.prepTime = prepTime;
+    }
+
+    public int getCookTime() {
+        return cookTime;
+    }
+
+    public void setCookTime(int cookTime) {
+        this.cookTime = cookTime;
+    }
+
+    public boolean isIsDeleted() {
+        return isDeleted;
+    }
+
+    public void setIsDeleted(boolean isDeleted) {
+        this.isDeleted = isDeleted;
+    }
+
+    public int getUserID() {
+        return userID;
+    }
+
+    public void setUserID(int userID) {
+        this.userID = userID;
+    }
 
     public ArrayList<String> getImg() {
         return img;
@@ -57,7 +154,13 @@ public class Recipe {
         this.img = img;
     }
 
-    
+    public String getCover() {
+        return COVER_PATH + cover;
+    }
+
+    public void setCover(String cover) {
+        this.cover = cover;
+    }
 
     public String getUsername() {
         return username;
@@ -67,107 +170,8 @@ public class Recipe {
         this.username = username;
     }
 
-    public int getID() {
-        return ID;
-    }
-
-    public void setID(int ID) {
-        this.ID = ID;
-    }
-
-    public String getName() {
-        return Name;
-    }
-
-    public void setName(String Name) {
-        this.Name = Name;
-    }
-
-    public String getDescription() {
-        return Description;
-    }
-
-    public void setDescription(String Description) {
-        this.Description = Description;
-    }
-
-    public int getLike() {
-        return Like;
-    }
-
-    public void setLike(int Like) {
-        this.Like = Like;
-    }
-
-    public int getDislike() {
-        return Dislike;
-    }
-
-    public void setDislike(int Dislike) {
-        this.Dislike = Dislike;
-    }
-
-    public Date getDatePost() {
-        return DatePost;
-    }
-
-    public void setDatePost(Date DatePost) {
-        this.DatePost = DatePost;
-    }
-
-    public Date getLastDateEdit() {
-        return LastDateEdit;
-    }
-
-    public void setLastDateEdit(Date LastDateEdit) {
-        this.LastDateEdit = LastDateEdit;
-    }
-
-    public int getPrepTime() {
-        return PrepTime;
-    }
-
-    public void setPrepTime(int PrepTime) {
-        this.PrepTime = PrepTime;
-    }
-
-    public int getCookTime() {
-        return CookTime;
-    }
-
-    public void setCookTime(int CookTime) {
-        this.CookTime = CookTime;
-    }
-
-    public int getSaved() {
-        return Saved;
-    }
-
-    public void setSaved(int Saved) {
-        this.Saved = Saved;
-    }
-
-    public boolean isIsDeleted() {
-        return IsDeleted;
-    }
-
-    public void setIsDeleted(boolean IsDeleted) {
-        this.IsDeleted = IsDeleted;
-    }
-
-    public int getUserID() {
-        return UserID;
-    }
-
-    public void setUserID(int UserID) {
-        this.UserID = UserID;
-    }
-
     @Override
     public String toString() {
-        return "Recipe{" + "ID=" + ID + ", Name=" + Name + ", Description=" + Description + ", Like=" + Like + ", Dislike=" + Dislike + ", DatePost=" + DatePost + ", LastDateEdit=" + LastDateEdit + ", PrepTime=" + PrepTime + ", CookTime=" + CookTime + ", Saved=" + Saved + ", IsDeleted=" + IsDeleted + ", UserID=" + UserID + ", img=" + img + ", username=" + username + '}';
+        return "Recipe{" + "id=" + id + ", name=" + name + ", description=" + description + ", like=" + like + ", save=" + save + ", comment=" + comment + ", datePost=" + datePost + ", lastDateEdit=" + lastDateEdit + ", prepTime=" + prepTime + ", cookTime=" + cookTime + ", isDeleted=" + isDeleted + ", userID=" + userID + ", img=" + img + ", cover=" + cover + ", username=" + username + '}';
     }
-
-    
-    
 }
