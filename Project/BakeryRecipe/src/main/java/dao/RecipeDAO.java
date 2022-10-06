@@ -15,6 +15,8 @@ import java.util.List;
 import utils.DBUtils;
 import java.sql.Date;
 import java.sql.SQLException;
+import java.text.SimpleDateFormat;
+import utils.Tools;
 
 /**
  *
@@ -46,8 +48,8 @@ public class RecipeDAO {
                         rs.getInt("Like"),
                         rs.getInt("Save"),
                         rs.getInt("Comment"),
-                        rs.getDate("DatePost"),
-                        rs.getDate("LastDateEdit"),
+                        rs.getTimestamp("DatePost"),
+                        rs.getTimestamp("LastDateEdit"),
                         rs.getString("Img"),
                         rs.getInt("UserID"),
                         rs.getString("Username"));
@@ -82,8 +84,8 @@ public class RecipeDAO {
                         rs.getInt("Like"),
                         rs.getInt("Save"),
                         rs.getInt("Comment"),
-                        rs.getDate("DatePost"),
-                        rs.getDate("LastDateEdit"),
+                        rs.getTimestamp("DatePost"),
+                        rs.getTimestamp("LastDateEdit"),
                         rs.getString("Img"),
                         rs.getInt("UserID"),
                         rs.getString("Username"));
@@ -176,6 +178,15 @@ public class RecipeDAO {
             + "WHERE IsDeleted = 0 AND IsCover = 1\n"
             + "ORDER BY [Like] DESC";
 
+    public static void main(String[] args) {
+        List<Recipe> list = RecipeDAO.getTop8MostRatedRecipe();
+        for (Recipe recipe : list) {
+            SimpleDateFormat dt = new SimpleDateFormat("mmHH dd/MM/yyyy");
+            System.out.println(dt.format(recipe.getDatePost()));
+            System.out.println(recipe.getDatePost());
+        }
+System.out.println("hee");
+    }
     public static List<Recipe> getTop8MostRatedRecipe() {
 
         try {
@@ -191,8 +202,8 @@ public class RecipeDAO {
                         rs.getInt("Like"),
                         rs.getInt("Save"),
                         rs.getInt("Comment"),
-                        rs.getDate("DatePost"),
-                        rs.getDate("LastDateEdit"),
+                        rs.getTimestamp("DatePost"),
+                        rs.getTimestamp("LastDateEdit"),
                         rs.getString("Img"),
                         rs.getInt("UserID"),
                         rs.getString("Username"));
@@ -227,8 +238,8 @@ public class RecipeDAO {
                         rs.getInt("Like"),
                         rs.getInt("Save"),
                         rs.getInt("Comment"),
-                        rs.getDate("DatePost"),
-                        rs.getDate("LastDateEdit"),
+                        rs.getTimestamp("DatePost"),
+                        rs.getTimestamp("LastDateEdit"),
                         rs.getString("Img"),
                         rs.getInt("UserID"),
                         rs.getString("Username"));

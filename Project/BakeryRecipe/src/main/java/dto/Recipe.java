@@ -4,8 +4,9 @@
  */
 package dto;
 
-import java.sql.Date;
+import java.sql.Timestamp;
 import java.util.ArrayList;
+import utils.Tools;
 
 /**
  *
@@ -21,8 +22,8 @@ public class Recipe {
     private int like;
     private int save;
     private int comment;
-    private Date datePost;
-    private Date lastDateEdit;
+    private Timestamp datePost; //timestamp mới thể hiện hết giờ phút giây, class Date ko làm đc
+    private Timestamp lastDateEdit;
     private int prepTime;
     private int cookTime;
     private boolean isDeleted;
@@ -35,7 +36,7 @@ public class Recipe {
     public Recipe() {
     }
 
-    public Recipe(int id, String name, String description, int like, int save, int comment, Date datePost, Date lastDateEdit, String cover, int userID, String username) {
+    public Recipe(int id, String name, String description, int like, int save, int comment, Timestamp datePost, Timestamp lastDateEdit, String cover, int userID, String username) {
         this.id = id;
         this.name = name;
         this.description = description;
@@ -99,19 +100,23 @@ public class Recipe {
         this.comment = comment;
     }
 
-    public Date getDatePost() {
+    public Timestamp getDatePost() {
         return datePost;
     }
+    
+    public String getDatePostFormat() {
+        return Tools.formatDate(datePost);
+    }
 
-    public void setDatePost(Date datePost) {
+    public void setDatePost(Timestamp datePost) {
         this.datePost = datePost;
     }
 
-    public Date getLastDateEdit() {
+    public Timestamp getLastDateEdit() {
         return lastDateEdit;
     }
 
-    public void setLastDateEdit(Date lastDateEdit) {
+    public void setLastDateEdit(Timestamp lastDateEdit) {
         this.lastDateEdit = lastDateEdit;
     }
 
