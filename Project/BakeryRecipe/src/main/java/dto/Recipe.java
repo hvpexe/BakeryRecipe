@@ -4,8 +4,9 @@
  */
 package dto;
 
-import java.sql.Date;
+import java.sql.Timestamp;
 import java.util.ArrayList;
+import utils.Tools;
 
 /**
  *
@@ -21,20 +22,21 @@ public class Recipe {
     private int like;
     private int save;
     private int comment;
-    private Date datePost;
-    private Date lastDateEdit;
+    private Timestamp datePost; //timestamp mới thể hiện hết giờ phút giây, class Date ko làm đc
+    private Timestamp lastDateEdit;
     private int prepTime;
     private int cookTime;
     private boolean isDeleted;
     private int userID;
     private ArrayList<String> img; //field này dùng để lưu danh sách ảnh của recipe, dành cho trang detail
+    private ArrayList<String> video; //field này dùng để lưu danh sách video oecipe, dành cho trang detail
     private String cover; //field này dùng để lưu ảnh cover
     private String username; //dùng để lưu cả lastname + firstname của user
 
     public Recipe() {
     }
 
-    public Recipe(int id, String name, String description, int like, int save, int comment, Date datePost, Date lastDateEdit, String cover, int userID, String username) {
+    public Recipe(int id, String name, String description, int like, int save, int comment, Timestamp datePost, Timestamp lastDateEdit, String cover, int userID, String username) {
         this.id = id;
         this.name = name;
         this.description = description;
@@ -98,19 +100,23 @@ public class Recipe {
         this.comment = comment;
     }
 
-    public Date getDatePost() {
+    public Timestamp getDatePost() {
         return datePost;
     }
+    
+    public String getDatePostFormat() {
+        return Tools.formatDate(datePost);
+    }
 
-    public void setDatePost(Date datePost) {
+    public void setDatePost(Timestamp datePost) {
         this.datePost = datePost;
     }
 
-    public Date getLastDateEdit() {
+    public Timestamp getLastDateEdit() {
         return lastDateEdit;
     }
 
-    public void setLastDateEdit(Date lastDateEdit) {
+    public void setLastDateEdit(Timestamp lastDateEdit) {
         this.lastDateEdit = lastDateEdit;
     }
 
@@ -170,6 +176,14 @@ public class Recipe {
         this.username = username;
     }
 
+    public ArrayList<String> getVideo() {
+        return video;
+    }
+
+    public void setVideo(ArrayList<String> video) {
+        this.video = video;
+    }
+    
     @Override
     public String toString() {
         return "Recipe{" + "id=" + id + ", name=" + name + ", description=" + description + ", like=" + like + ", save=" + save + ", comment=" + comment + ", datePost=" + datePost + ", lastDateEdit=" + lastDateEdit + ", prepTime=" + prepTime + ", cookTime=" + cookTime + ", isDeleted=" + isDeleted + ", userID=" + userID + ", img=" + img + ", cover=" + cover + ", username=" + username + '}';

@@ -10,27 +10,13 @@ import java.net.URLDecoder;
 import java.net.URLEncoder;
 import java.sql.Timestamp;
 import java.text.SimpleDateFormat;
-import java.util.Date;
+import java.sql.Date;
 
 /**
  *
  * @author Admin
  */
 public class Tools {
-
-    public static String newIDformat(String maxID) {
-        String s = maxID.split("\\d")[0];
-        String ss = maxID.replace(s, "");
-        System.out.println("---" + s + ss);
-        int newID = Integer.parseInt(ss);
-        newID++;
-        int seperator = ("" + maxID.substring(s.length())).length();
-        if ((newID + "").length() >= seperator) {
-            seperator = (newID + "").length();
-        }
-        String format = String.format(s + "%0" + seperator + "d", newID);
-        return format;
-    }
 
     public static String toUTF8(String firstname) {
         try {
@@ -51,15 +37,26 @@ public class Tools {
         return folderUpload;
     }
 
-    public static String getTodayDate() {
-        return new SimpleDateFormat("yyyy-MM-dd").format(new Date());
-    }
+//    public static String getTodayDate() {
+//        return new SimpleDateFormat("yyyy-MM-dd").format(new Date());
+//    }
     public static Timestamp getCurrentDateTime() {
         return new Timestamp(System.currentTimeMillis());
     }
+
     public static Timestamp dateToTimestamp(Date date) {
         return new Timestamp(date.getTime());
     }
+
+    public static Date timestampToDate(Timestamp time) {
+        return new Date(time.getTime());
+    }
+
+    public static String formatDate(Timestamp time) {
+        SimpleDateFormat dt = new SimpleDateFormat("mm:HH E dd-MM-yyyy");
+        return dt.format(time);
+    }
+
     public static void main(String[] args) {
         PrintWriter pw = new PrintWriter(System.out, true);
         pw.println(toUTF8("Nguá»?n"));

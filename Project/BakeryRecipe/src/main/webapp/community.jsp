@@ -31,107 +31,105 @@
             rel="stylesheet"
             href="https://fonts.googleapis.com/css2?family=Arima Madurai:wght@800&display=swap"
             />
+        <link rel="stylesheet" href="assets/css/web/bootstrap-4.3.1.min.css" />
+        <link rel="stylesheet" type="text/css" href="./assets/css/fontawesome-free-6.1.1-web/css/all.min.css">
+
     </head>
     <body>
-    <c:import url="header.jsp"/>
-
-    <div class="communitydone-div">
-        <div class="section-div">
-            <div class="list-div">
-                <div class="titile-div">
-                    <h1 class="recommend-for-you">Recommend For Yu</h1>
-                    <div class="btn-div"><div class="log-in-div">See more</div></div>
+        <c:import url="header.jsp"/>
+        <div class="community">
+            <div class="community-section mx-auto ">
+                <div class="title-container">
+                    <h1 class="title">Recommend For You</h1>
+                    <a href="#" class="btn seemore">See more</a>
                 </div>
-                <div class="items-div">
-                    <div class="recipe-div" value="postid">
-                        <img class="img-icon" alt="" src="public/img@2x.png" />
-                        <div class="recipe-name-div">Mooncake</div>
-                        <div class="recipe-author-div">Trịnh Thăng Bình</div>
-                    </div>
-                    <div class="recipe-div" value="postid">
-                        <img class="img-icon" alt="" src="public/img1@2x.png" />
-                        <div class="recipe-name-div">Mooncake</div>
-                        <div class="recipe-author-div">Trịnh Thăng Bình</div>
-                    </div>
-                    <div class="recipe-div" value="postid">
-                        <img class="img-icon" alt="" src="public/img2@2x.png" />
-                        <div class="recipe-name-div">Mooncake</div>
-                        <div class="recipe-author-div">Trịnh Thăng Bình</div>
-                    </div>
-                    <div class="recipe-div" value="postid">
-                        <img class="img-icon" alt="" src="public/img3@2x.png" />
-                        <div class="recipe-name-div">Trung Thu Cake</div>
-                        <div class="recipe-author-div">Trịnh Thăng Bình</div>
-                    </div>
-                    <div class="recipe-div" value="postid">
-                        <img class="img-icon" alt="" src="public/img4@2x.png" />
-                        <div class="recipe-name-div">Mooncake</div>
-                        <div class="recipe-author-div">Trịnh Thăng Bình</div>
-                    </div>
-                    <div class="recipe-div" value="postid">
-                        <img class="img-icon" alt="" src="public/img5@2x.png" />
-                        <div class="recipe-name-div">Mooncake</div>
-                        <div class="recipe-author-div">Trịnh Thăng Bình</div>
-                    </div>
-                    <div class="recipe-div" value="postid">
-                        <img class="img-icon" alt="" src="public/img6@2x.png" />
-                        <div class="recipe-name-div">Mooncake</div>
-                        <div class="recipe-author-div">Trịnh Thăng Bình</div>
-                    </div>
-                    <div class="recipe-div" value="postid">
-                        <img class="img-icon" alt="" src="public/img@2x.png" />
-                        <div class="recipe-name-div">Mooncake</div>
-                        <div class="recipe-author-div">Trịnh Thăng Bình</div>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <div class="section-div1">
-            <div class="list-div">
-                <div class="titile-div">
-                    <h1 class="recommend-for-you">Popular</h1>
-                    <div class="btn-div">
-                        <div class="log-in-div">
-                            <a class="header-link p-md-0 p-2 border-0 active" href="./MostRatedRecipe">See more</a>
-                        </div>     
-                    </div>
-                </div>
-                <div class="items-div">
+                <div class="recipe-list row ">
                     <c:forEach items="${listRated}" var="cc">
-                        <div class="recipe-div" value="postid">
-                           <img class="img-icon" alt="" src="${cc.cover}" />
-                           <div class="recipe-name-div">${cc.name}</div>
-                           <div class="recipe-author-div">${cc.username}</div>
+                        <div class="recipe col-6 col-md-4 col-lg-3">
+                            <div class="img-container">
+                                <img class="recipe-img" alt=""
+                                     src="${cc.cover}" />
+                                <div class="bookmark">
+                                    Save <i class="fa-regular fa-bookmark"></i>
+                                </div>
+                                <div class="react">
+                                    <div>${cc.like} likes</div>
+                                    <div>${cc.comment} comments</div>
+                                </div>
+                            </div>
+                            <div class="recipe-name">${cc.name}</div>
+                            <div class="recipe-author">
+                                <a href="#" class="text-truncate">${cc.username}</a> 
+                                <c:out value="${cc.getDatePostFormat()}"/></div>
                         </div>
-                    </c:forEach>  
-                </div>
-            </div>
-        </div>
-        <div class="section-div2">
-            <div class="list-div">
-                <div class="titile-div">
-                    <h1 class="recommend-for-you">Newest</h1>
-                    <div class="btn-div">
-                        <div class="log-in-div">
-                            <a class="header-link p-md-0 p-2 border-0 active" href="./MostRecentRecipe">See more</a>
-                        </div>     
-                    </div>
-                </div>
-                <div class="items-div">
-                    <c:forEach items="${listRecent}" var="cc">
-                         <div class="recipe-div" value="postid">
-                            <img class="img-icon" alt="" src="${cc.cover}" />
-                            <div class="recipe-name-div">${cc.name}</div>
-                            <div class="recipe-author-div">${cc.username}</div>
-                         </div>
                     </c:forEach>
                 </div>
             </div>
         </div>
-    </div>
-    
-    <c:import url="footer.jsp"/>
-    <script></script>
-</body>
+
+        <div class="community">
+            <div class="community-section mx-auto ">
+                <div class="title-container">
+                    <h1 class="title">Most Popular Recipes</h1>
+                    <a href="./MostRatedRecipe" class="btn seemore">See more</a>
+                </div>
+                <div class="recipe-list row ">
+                    <c:forEach items="${listRated}" var="cc">
+                        <div class="recipe col-6 col-md-4 col-lg-3">
+                            <div class="img-container">
+                                <img class="recipe-img" alt=""
+                                     src="${cc.cover}" />
+                                <div class="bookmark">
+                                    Save <i class="fa-regular fa-bookmark"></i>
+                                </div>
+                                <div class="react">
+                                    <div>${cc.like} likes</div>
+                                    <div>${cc.comment} comments</div>
+                                </div>
+                            </div>
+                            <div class="recipe-name">${cc.name}</div>
+                            <div class="recipe-author">
+                                <a href="#" class="text-truncate">${cc.username}</a> 
+                                <c:out value="${cc.getDatePostFormat()}"/></div>
+                        </div>
+                    </c:forEach>
+                </div>
+            </div>
+        </div>
+
+        <div class="community" id="newest">
+            <div class="community-section mx-auto ">
+                <div class="title-container">
+                    <h1 class="title">Most Recent Recipes</h1>
+                    <a href="./MostRecentRecipe" class="btn seemore">See more</a>
+                </div>
+                <div class="recipe-list row ">
+                    <c:forEach items="${listRecent}" var="cc">
+                        <div class="recipe col-6 col-md-4 col-lg-3">
+                            <div class="img-container">
+                                <img class="recipe-img" alt=""
+                                     src="${cc.cover}" />
+                                <div class="bookmark">
+                                    Save <i class="fa-regular fa-bookmark"></i>
+                                </div>
+                                <div class="react">
+                                    <div>${cc.like} likes</div>
+                                    <div>${cc.comment} comments</div>
+                                </div>
+                            </div>
+                            <div class="recipe-name">${cc.name}</div>
+                            <div class="recipe-author">
+                                <a href="#" class="text-truncate">${cc.username}</a> 
+                                <c:out value="${cc.getDatePostFormat()}"/></div>
+                                
+                        </div>
+                    </c:forEach>
+                </div>
+            </div>
+        </div>
+
+        <c:import url="footer.jsp"/>
+        <script></script>
+    </body>
 </html>
 

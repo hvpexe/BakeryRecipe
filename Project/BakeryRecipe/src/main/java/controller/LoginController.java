@@ -23,8 +23,8 @@ import stackjava.com.accessgoogle.common.GooglePojo;
 public class LoginController extends HttpServlet {
 
     private static final String ERROR = "login.jsp";
-    private static final String AD = "admin";
-    private static final String AD_PAGE = "home.jsp";
+    private static final String ADMIN = "admin";
+    private static final String ADMIN_PAGE = "home.jsp";
     private static final String US = "baker";
     private static final String USER_PAGE = "home.jsp";
 
@@ -40,15 +40,25 @@ public class LoginController extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         String url = ERROR;
+        User loginUser = null;
+        HttpSession session = request.getSession();
         try {
-            HttpSession session = request.getSession();
-            String email = request.getParameter("email");
-            String password = request.getParameter("password");
             String code = request.getParameter("code");
-            if ((code == null || code.isEmpty()) && password.length() < 8) {
-                request.setAttribute("LOGIN_ERROR", "Password must be at least 8 characters!");
+            if (code == null || code.isEmpty()) {
+                String email = request.getParameter("email");
+                String password = request.getParameter("password");
+                if (password.length() < 8) {
+                    request.setAttribute("LOGIN_ERROR", "Password must be at least 8 characters!");
+                }
+                loginUser = UserDAO.login(email, password);
+//                System.out.println("Login normal" + loginUser);
+            } else {
+                loginUser = (User) request.getAttribute("LOGIN_USER");
+//                System.out.println("Login Google" + loginUser);s
             }
-            User loginUser = UserDAO.login(email, password);
+        } catch (Exception e) {
+            log("Error at LoginController" + e.toString());
+        } finally {
             if (loginUser != null) {
                 session.setAttribute("LOGIN_USER", loginUser);
                 String roleID = loginUser.getRole();
@@ -56,16 +66,13 @@ public class LoginController extends HttpServlet {
                 if (isActive == false) {
                     request.setAttribute("LOGIN_ERROR", "You have been banned");
                 } else {
-                    if (AD.equals(roleID)) {
-                        url = AD_PAGE;
+                    if (ADMIN.equals(roleID)) {
+                        url = ADMIN_PAGE;
                     } else if (US.equals(roleID)) {
                         url = USER_PAGE;
                     }
                 }
             }
-        } catch (Exception e) {
-            log("Error at LoginController" + e.toString());
-        } finally {
             request.getRequestDispatcher(url).forward(request, response);
         }
     }

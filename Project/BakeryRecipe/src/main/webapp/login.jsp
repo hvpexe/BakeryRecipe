@@ -1,5 +1,12 @@
-<%@page import="stackjava.com.accessgoogle.common.Constants"%>
+<%-- 
+    Document   : login1
+    Created on : Oct 3, 2022, 8:36:01 AM
+    Author     : Admin
+--%>
+
+<%@page import="dao.UserDAO"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
     <head>
@@ -38,42 +45,48 @@
         <!--<script src="https://apis.google.com/js/platform.js" async defer></script>-->
         <!--<meta name="google-signin-client_id" content="243057477675-ti2g5mjdpfrnq5vsgqgdtj3ph3j4ert6">-->
         <!--<link href="assets/css/bootstrap-4.3.1.min.css" rel="stylesheet" type="text/css"/>-->
-        <script src="assets/js/Jquery/jquery-core.js" ></script>
+        <script src="assets/js/Jquery/jquery-core.js" 
+        crossorigin="anonymous"></script>
+        <!--<script
+                    src="https://code.jquery.com/jquery-3.6.1.min.js"
+                    integrity="sha256-o88AwQnZB+VDvE9tvIXrMQaPlFFSUTR+nldQm1LuPXQ="
+                crossorigin="anonymous"></script>-->
         <script src="https://accounts.google.com/gsi/client" async defer></script>
         <script src="assets/js/googleLogin.js"></script>
-        <link rel="stylesheet" href="assets/css/login.css" />
-
+        <link rel="stylesheet" href="assets/css/login1.css" />
     </head>
     <body>
         <c:import url="header.jsp"/>
-        <section class="logindone-section " id="Login">
-            <div class="section-div flex-wrap flex-lg-nowrap">
-                <form class="register-form col-lg mx-auto d-none d-lg-flex" action="register" id="register" method="POST">
-                    <div class="invitation-text col-10">Join BakeryRecipe!</div>
-                    <div class="forgot-pass col-10">
-                        JOINING BAKERYRECIPE IS QUICK, EASY, AND FREE.
+        <section class="section container-fluid row px-0 m-0">
+            <aside class="col-12  col-sm-9 col-lg-5 mx-auto px-3" id="form-object">
+                <form class="login-form mx-1 rounded flex-column align-items-center" 
+                      id="formLogin" action="login" method="post">
+                    <div class="invitation-text col-10">WELCOME BACK<br> to <br>Bakery Recipe </div>
+                    <div class="d-none" id="g_id_onload" data-client_id="243057477675-kt58mr9lav8eh6ti9bfrj8p782j7unkd.apps.googleusercontent.com" data-login_uri="BakeryRecipe/home.jsp" data-callback="handleCredentialResponse">
                     </div>
-                    <input class="email-input col-10" type="email" placeholder="Email" required="" name="email">
-                    <div class="name-div row col-10 p-0">
-                        <input class="firstname-input col" type="text" placeholder="First name" required="" name="firstname"><input class="firstname-input col" type="text" placeholder="Last name" required="" name="lastname">
+                    <div class="g_id_signin" data-type="icon" data-size="large" placeholder="Email" data-theme="filled_blue" data-text="sign_in_with" data-shape="circle" data-logo_alignment="left"><div class="S9gUrf-YoZ4jf" style="position: relative;"><div></div><iframe src="https://accounts.google.com/gsi/button?type=icon&amp;size=large&amp;theme=filled_blue&amp;text=sign_in_with&amp;shape=circle&amp;logo_alignment=left&amp;client_id=243057477675-kt58mr9lav8eh6ti9bfrj8p782j7unkd.apps.googleusercontent.com&amp;iframe_id=gsi_812950_790204&amp;as=MCsvGUZ%2Fo6jE5lvjeZjhzQ" id="gsi_812950_790204" title="Sign in with Google Button" style="display: block; position: relative; top: 0px; left: 0px; height: 44px; width: 64px; border: 0px; margin: -2px -12px;"></iframe></div></div>
+                    <div class="input col-10 p-0" placeholder="Email">
+                        <input class="email-input1 col rounded" type="text" placeholder="   " form="formLogin"
+                               name="email"  >
+                        <span class="status"></span> 
                     </div>
-                    <input class="email-input col-10" type="password" placeholder="Password" required="" name="password">
-                    <input class="email-input col-10" type="password" placeholder="Re-enter password" required="" name="re-password">
-                    <div>${REGISTER_ERROR}</div>
-                    <button class="submit-button col-10" type="submit" form="register">
-                        <b class="join-b">JOIN</b>
-                    </button>
-                </form>
+                    <div class="input col-10 p-0" placeholder="Password" regex="">
+                        <input class="password-input1 col rounded" type="password" placeholder="   "form="formLogin" 
+                               name="password" >
+                        <span class="status"></span> 
+                    </div>
+                    <input class="submit-button col-10" value="LOGIN" type="submit" form="formLogin">
 
-                <div class="line-div mx-auto d-none d-lg-block"></div>
-                <form class="login-form col-lg mx-auto d-lg-flex" action="login" method="post" id="form-object">
-                    <div class="invitation-text col-10">Already A Member? Sign-In</div>
-                    <div class="forgot-pass col-10">WELCOME BACK</div>
-                    <div class="d-none" id="g_id_onload"
-                         data-client_id="<%=Constants.GOOGLE_CLIENT_ID%>"
-                         data-login_uri="BakeryRecipe/home.jsp"
-                         data-callback="handleCredentialResponse"
-                         >
+                    <div class="forgot-pass col-10 text-center">Forgot your password?</div>
+                    <div class="text-danger"></div>
+                    <hr width="100%"/>
+                    <div class="change-form">Sign Up</div>
+                </form>
+                <form class="register-form d-none mx-1 rounded flex-column align-items-center " action="register" id="formRegister" method="POST">
+                    <div class="invitation-text col-10">
+                        Join BakeryRecipe! 
+                        <br>
+                        JOINING BAKERYRECIPE IS QUICK, EASY, AND FREE.
                     </div>
                     <div class="g_id_signin"
                          data-type="icon"
@@ -83,24 +96,85 @@
                          data-shape="circle"
                          data-logo_alignment="center">
                     </div>
-                    <input class="email-input1 col-10" type="text" placeholder="Email" required="" name="email">
-                    <input class="password-input1 col-10" type="password" placeholder="Password" required="" name="password">
-                    <div>${LOGIN_ERROR}</div>
-                    <div class="forgot-pass col-10">Forgot your password?</div>
-                    <button class="submit-button col-10" type="submit" form="login">
-                        <b class="login-b">LOGIN</b>
-                    </button>
-                    <div class="sign-up-button d-md-none col-10">
-                        <b class="login-b">Don't have account? Sign up</b>
+                    <div class="input col-10 p-0" placeholder="Email">
+                        <input class="email-input1 col rounded" type="text" placeholder="   " form="formRegister"
+                               name="email"  >
+                        <span class="status"></span> 
                     </div>
-                </form>
+                    <div class=" col-10 row justify-content-between bg-white p-0">
+                        <div class="input col p-0 mr-2" placeholder="First name">
+                            <input class="rounded col" type="text" placeholder="  " name="firstname">
+                            <span class="status"></span> 
+                        </div>
+                        <div class="input col p-0 ml-2" placeholder="Last name">
+                            <input class="rounded col" type="text" placeholder="  "  name="lastname">
+                            <span class="status"></span> 
+                        </div>
+                    </div>
+                    <div class="input col-10 p-0" placeholder="Password">
+                        <input class="col rounded" type="password" placeholder=" "  name="password">
+                        <span class="status"></span> 
+                    </div>
+                    <div class="input col-10 p-0" placeholder="Re-enter password">
+                        <input class="col rounded" type="password" placeholder=" "  name="re-password">
+                        <span class="status"></span> 
+                    </div>
+                    <div>${REGISTER_ERROR}</div>
+                    <button class="submit-button col-10" type="submit" form="formRegister">
+                        <b class="join-b">JOIN</b>
+                    </button>
+                    <hr width="100%">
+                    <div class="change-form">Sign In</div>
 
-            </div>
-            <!--Google Login Dont Touch-->
-            <form class="d-none" id="googleLogin" action="login" method="POST"></form>
+                </form>
+            </aside>
+            <aside class="col-7 d-none d-lg-flex bg-white">
+                <%= UserDAO.getAllUser()%>
+            </aside>
         </section>
-        <c:import url="footer.jsp"/>
+        <!--Google Login Dont Touch-->
+        <form class="d-none" id="googleLogin" action="login" method="POST"></form>
+        <script src="assets/js/validator.js"></script>
+        <script>
+            //expected
+            Validator({
+                form: '#formLogin',
+                status: '.status',
+                rules: [
+                    Validator.isRequired('[name=email]'),
+                    Validator.isEmail('[name=email]'),
+                    Validator.isRequired('[name=password]'),
+                    Validator.isPassword('[name=password]')
+                ],
+                onSubmit: (value) => {
+                    //Call api here
+                    console.log(value);
+                }
+            });
+            Validator({
+                form: '#formRegister',
+                status: '.status',
+                rules: [
+                    Validator.isRequired('[name=email]'),
+                    Validator.isEmail('[name=email]'),
+                    Validator.isRequired('[name=firstname]'),
+                    Validator.isRequired('[name=password]'),
+                    Validator.isPassword('[name=password]'),
+                    Validator.isRequired('[name=re-password]'),
+                    Validator.isSameValue('[name=re-password]',
+                            //this function return the value of re-password
+                                    function () {
+                                        return document.querySelector('#formRegister [name=password]').value;
+                                    }
+                            , "Passwords are not the same")
+                        ],
+                        onSubmit: (value) => {
+                            //Call api here
+                            console.log(value);
+                        }
+                    });
+        </script>
         <script src="assets/js/login.js" type="text/javascript"></script>
     </body>
-</html>
 
+</html>
