@@ -9,6 +9,7 @@ import java.io.IOException;
 import java.io.PrintWriter;
 import javax.mail.internet.MimeMessage;
 import javax.servlet.ServletException;
+import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -20,6 +21,8 @@ import utilities.SendMessage;
  *
  * @author Admin
  */
+@WebServlet(name = "TestingController", urlPatterns = {"/test"})
+
 public class TestingController extends HttpServlet {
 
     /**
