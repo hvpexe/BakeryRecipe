@@ -9,6 +9,10 @@
         <servlet-class>controller.LoginController</servlet-class>
     </servlet>
     <servlet>
+        <servlet-name>EditInformationController</servlet-name>
+        <servlet-class>controller.EditInformationController</servlet-class>
+    </servlet>
+    <servlet>
         <servlet-name>RegisterAccountController</servlet-name>
         <servlet-class>controller.baker.RegisterAccountController</servlet-class>
     </servlet>
@@ -27,6 +31,10 @@
     <servlet-mapping>
         <servlet-name>MostRatedRecipeController</servlet-name>
         <url-pattern>/MostRatedRecipe</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>EditInformationController</servlet-name>
+        <url-pattern>/ProfileInfo</url-pattern>
     </servlet-mapping>
     <servlet-mapping>
         <servlet-name>MostRecentRecipeController</servlet-name>

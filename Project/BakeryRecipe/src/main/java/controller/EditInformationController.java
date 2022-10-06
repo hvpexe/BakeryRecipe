@@ -23,10 +23,10 @@ import utils.Tools;
  *
  * @author kichi
  */
-@WebServlet(name = "EditInformationController", urlPatterns = {"/profileInfo"})
+@WebServlet("/UploadFileServlet")
 public class EditInformationController extends HttpServlet {
     private static final String ERROR = "profileInfo.jsp";
-    private static final String SUCCESS = "profileInfo.jsp";
+    private static final String SUCCESS = "profile.jsp";
 
     
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
