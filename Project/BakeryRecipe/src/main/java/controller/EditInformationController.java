@@ -23,7 +23,7 @@ import utils.Tools;
  *
  * @author kichi
  */
-@WebServlet("/UploadFileServlet")
+@WebServlet(name = "EditInformationController", urlPatterns = {"/UploadFileServlet"})
 public class EditInformationController extends HttpServlet {
     private static final String ERROR = "profileInfo.jsp";
     private static final String SUCCESS = "profile.jsp";

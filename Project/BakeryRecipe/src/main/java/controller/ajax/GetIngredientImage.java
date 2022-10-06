@@ -2,28 +2,23 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/Servlet.java to edit this template
  */
-package controller;
+package controller.ajax;
 
-import com.google.api.services.gmail.model.Message;
+import dao.IngredientDAO;
 import java.io.IOException;
 import java.io.PrintWriter;
-import javax.mail.internet.MimeMessage;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import utilities.CreateEmail;
-import utilities.CreateMessage;
-import utilities.SendMessage;
 
 /**
  *
  * @author Admin
  */
-@WebServlet(name = "TestingController", urlPatterns = {"/test"})
-
-public class TestingController extends HttpServlet {
+@WebServlet(name = "GetIngredientImage", urlPatterns = {"/ajax/GetIngredientImage"})
+public class GetIngredientImage extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -37,25 +32,11 @@ public class TestingController extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
-        PrintWriter out = response.getWriter();
-        try {
-            out.println("Email Tesing");
-            MimeMessage mm
-                    = CreateEmail.createEmail("binhntse160860@fpt.edu.vn","binhnguyenthanh19242yahoo@gmail.com ", "Send Mail Test", "http://localhost:8080/BakeryRecipe/");
-
-            out.println("<br>");
-            out.println(mm.getContent());
-            Message mess = CreateMessage.createMessageWithEmail(mm);
-            out.println("<br>");
-            out.println(mess);
-
-            SendMessage.sendEmail("binhntse160860@fpt.edu.vn","binhnguyenthanh19242yahoo@gmail.com " );
-            out.println("<br>Email Send!" + mm);
-        } catch (Exception ex) {
-            System.out.println("==================================================================");
-            System.out.println(ex.getMessage());
-            ex.printStackTrace();
-
+        try ( PrintWriter out = response.getWriter()) {
+            /* TODO output your page here. You may use following sample code. */
+            String name = request.getParameter("name");
+            System.out.println(name);
+            out.println(IngredientDAO.getIngredientByName(name));
         }
     }
 
