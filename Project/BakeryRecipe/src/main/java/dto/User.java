@@ -88,16 +88,12 @@ public class User {
         this(ID, Role, Email, Password, Avatar, FirstName, LastName, Gender, Phone, Address, DateRegister, true, StoreID, Birthday);
     }
 
-  
-    
-    
-
-    public int getID() {
+    public int getId() {
         return id;
     }
 
-    public void setID(int ID) {
-        this.id = ID;
+    public void setId(int id) {
+        this.id = id;
     }
 
     public String getRole() {
@@ -128,14 +124,6 @@ public class User {
         if(avatar==null) return DEFAULT_AVATAR;
         return //IMG_PATH + 
                 avatar;
-    }
-
-    public int getId() {
-        return id;
-    }
-
-    public void setId(int id) {
-        this.id = id;
     }
 
     public String getName() {

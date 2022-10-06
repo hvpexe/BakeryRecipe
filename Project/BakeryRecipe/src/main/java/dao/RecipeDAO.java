@@ -24,13 +24,13 @@ import utils.Tools;
  */
 public class RecipeDAO {
 
-    private static final String SELECT_MOST_RATED_SQL = "SELECT Recipe.ID, Name, Description, [Like], [Save], Comment, DatePost, LastDateEdit, Img, UserID, LastName + ' ' + FirstName AS Username\n" +
-"                                                        FROM Recipe\n" +
-"                                                        JOIN [User] ON Recipe.UserID = [User].ID\n" +
-"                                                        JOIN Picture ON Picture.RecipeID = Recipe.ID\n" +
-"                                                        WHERE IsDeleted = 0 AND IsCover = 1\n" +
-"                                                        ORDER BY [Like] DESC\n" +
-"			                                 OFFSET 0 ROWS FETCH NEXT 8 ROWS ONLY";
+    private static final String SELECT_MOST_RATED_SQL = "SELECT Recipe.ID, Name, Description, [Like], [Save], Comment, DatePost, LastDateEdit, Img, UserID, LastName + ' ' + FirstName AS Username\n"
+            + "                                                        FROM Recipe\n"
+            + "                                                        JOIN [User] ON Recipe.UserID = [User].ID\n"
+            + "                                                        JOIN Picture ON Picture.RecipeID = Recipe.ID\n"
+            + "                                                        WHERE IsDeleted = 0 AND IsCover = 1\n"
+            + "                                                        ORDER BY [Like] DESC\n"
+            + "			                                 OFFSET 0 ROWS FETCH NEXT 8 ROWS ONLY";
     private static final String SELECT_PICTURE_SQL = "SELECT img FROM Picture";
 
     public static List<Recipe> getMostRatedRecipe(int index) {
@@ -62,13 +62,13 @@ public class RecipeDAO {
         return null;
     }
 
-    private static final String SELECT_MOST_RECENT_SQL = "SELECT Recipe.ID, Name, Description, [Like], [Save], Comment, DatePost, LastDateEdit, Img, UserID, LastName + ' ' + FirstName AS Username\n" +
-"                                                        FROM Recipe\n" +
-"                                                        JOIN [User] ON Recipe.UserID = [User].ID\n" +
-"                                                        JOIN Picture ON Picture.RecipeID = Recipe.ID\n" +
-"                                                        WHERE IsDeleted = 0 AND IsCover = 1\n" +
-"                                                        ORDER BY DatePost DESC\n" +
-"			                                 OFFSET 0 ROWS FETCH NEXT 8 ROWS ONLY";
+    private static final String SELECT_MOST_RECENT_SQL = "SELECT Recipe.ID, Name, Description, [Like], [Save], Comment, DatePost, LastDateEdit, Img, UserID, LastName + ' ' + FirstName AS Username\n"
+            + "                                                        FROM Recipe\n"
+            + "                                                        JOIN [User] ON Recipe.UserID = [User].ID\n"
+            + "                                                        JOIN Picture ON Picture.RecipeID = Recipe.ID\n"
+            + "                                                        WHERE IsDeleted = 0 AND IsCover = 1\n"
+            + "                                                        ORDER BY DatePost DESC\n"
+            + "			                                 OFFSET 0 ROWS FETCH NEXT 8 ROWS ONLY";
 
     public static List<Recipe> getMostRecentRecipe(int index) {
         try {
@@ -178,15 +178,6 @@ public class RecipeDAO {
             + "WHERE IsDeleted = 0 AND IsCover = 1\n"
             + "ORDER BY [Like] DESC";
 
-    public static void main(String[] args) {
-        List<Recipe> list = RecipeDAO.getTop8MostRatedRecipe();
-        for (Recipe recipe : list) {
-            SimpleDateFormat dt = new SimpleDateFormat("mmHH dd/MM/yyyy");
-            System.out.println(dt.format(recipe.getDatePost()));
-            System.out.println(recipe.getDatePost());
-        }
-System.out.println("hee");
-    }
     public static List<Recipe> getTop8MostRatedRecipe() {
 
         try {
@@ -215,7 +206,7 @@ System.out.println("hee");
         }
         return null;
     }
-        
+
     private static final String TOP8_MOST_RECENT_SQL = "SELECT TOP 8 Recipe.ID, Name, Description, [Like], [Save], Comment, DatePost, LastDateEdit, Img, UserID, LastName + ' ' + FirstName AS Username\n"
             + "FROM Recipe\n"
             + "JOIN [User] ON Recipe.UserID = [User].ID\n"
@@ -224,7 +215,6 @@ System.out.println("hee");
             + "ORDER BY [DatePost] DESC";
 
     public static List<Recipe> getTop8MostRecentRecipe() {
-
         try {
             Connection conn = DBUtils.getConnection();
             PreparedStatement ps = conn.prepareStatement(TOP8_MOST_RECENT_SQL);
@@ -251,7 +241,6 @@ System.out.println("hee");
         }
         return null;
     }
-
 
     private static final String LIST_VIDEO = " SELECT [link]\n"
             + "FROM [dbo].[Video] video join [dbo].[Recipe] recipe\n"
@@ -370,5 +359,55 @@ System.out.println("hee");
             }
         }
         return liststep;
+    }
+
+    private static final String POST_HOME_RECIPE_SQL = "(SELECT U2.ID as UserID, U2.FirstName + ' ' + U2.LastName AS Username, U2.Avatar, R.ID, R.Name, R.Description, R.[Like], R.[Save], R.Comment, R.DatePost, P.Img AS Cover\n"
+            + "FROM [User] U\n"
+            + "JOIN Follow ON U.ID = Follow.UserID\n"
+            + "JOIN [User] U2 ON U2.ID = Follow.UserID2\n"
+            + "JOIN Recipe R ON R.UserID = Follow.UserID2\n"
+            + "JOIN Picture P ON P.RecipeID = R.ID\n"
+            + "WHERE U.ID = ? AND R.IsDeleted = 0 AND P.IsCover = 1)\n"
+            + "UNION\n"
+            + "(SELECT U.ID AS UserID, U.FirstName + ' ' + U.LastName AS Username, U.Avatar, R.ID, R.Name, R.Description, R.[Like], R.[Save], R.Comment, R.DatePost, P.Img AS Cover\n"
+            + "FROM Recipe R\n"
+            + "JOIN [User] U ON R.UserID = U.ID\n"
+            + "JOIN Picture P ON P.RecipeID = R.ID\n"
+            + "WHERE R.UserID = ? AND R.IsDeleted = 0 AND P.IsCover = 1)\n"
+            + "ORDER BY DatePost DESC";
+    public static ArrayList<Recipe> getPostHomeRecipes(int userID) {
+        try {
+            Connection conn = DBUtils.getConnection();
+            PreparedStatement ps = conn.prepareStatement(POST_HOME_RECIPE_SQL);
+            ps.setInt(1, userID);
+            ps.setInt(2, userID);
+            ResultSet rs = ps.executeQuery();
+            ArrayList<Recipe> list = new ArrayList<Recipe>();
+            while (rs.next()) {
+                Recipe recipe = new Recipe(rs.getInt("ID"), 
+                        rs.getString("Name"), 
+                        rs.getString("Description"), 
+                        rs.getInt("Like"), rs.getInt("Save"), 
+                        rs.getInt("Comment"), 
+                        rs.getTimestamp("DatePost"), 
+                        rs.getString("Cover"), 
+                        rs.getInt("UserID"), 
+                        rs.getString("Avatar"), 
+                        rs.getString("Username"));
+                list.add(recipe);
+            }
+            return list;
+        } catch (SQLException ex) {
+            System.out.println("getPostHomeRecipes Query Error!" + ex.getMessage());
+        } catch (Exception ex) {
+            System.out.println("Error: " + ex.getMessage());
+        }
+        return null;
+    }
+    public static void main(String[] args) {
+        ArrayList<Recipe> list = getPostHomeRecipes(3);
+        for (Recipe recipe : list) {
+            System.out.println(recipe);
+        }
     }
 }

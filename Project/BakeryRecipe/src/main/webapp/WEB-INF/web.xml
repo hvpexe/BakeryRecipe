@@ -24,6 +24,10 @@
         <servlet-name>MostRecentRecipeController</servlet-name>
         <servlet-class>controller.recipe.MostRecentRecipeController</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>HomeController</servlet-name>
+        <servlet-class>controller.baker.HomeController</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>TestingController</servlet-name>
         <url-pattern>/test</url-pattern>
@@ -47,6 +51,10 @@
     <servlet-mapping>
         <servlet-name>RegisterAccountController</servlet-name>
         <url-pattern>/register</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>HomeController</servlet-name>
+        <url-pattern>/home</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

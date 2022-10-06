@@ -24,9 +24,9 @@ public class LoginController extends HttpServlet {
 
     private static final String ERROR = "login.jsp";
     private static final String ADMIN = "admin";
-    private static final String ADMIN_PAGE = "home.jsp";
+    private static final String ADMIN_PAGE = "home";
     private static final String US = "baker";
-    private static final String USER_PAGE = "home.jsp";
+    private static final String USER_PAGE = "home";
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -71,6 +71,7 @@ public class LoginController extends HttpServlet {
                     } else if (US.equals(roleID)) {
                         url = USER_PAGE;
                     }
+                    response.sendRedirect(url);
                 }
             }
             request.getRequestDispatcher(url).forward(request, response);

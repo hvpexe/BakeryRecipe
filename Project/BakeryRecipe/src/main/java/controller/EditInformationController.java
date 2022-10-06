@@ -56,7 +56,7 @@ public class EditInformationController extends HttpServlet {
             user.setAddress(address);
             String avatar = null;
             if (!part.getSubmittedFileName().isEmpty()) {
-                int id = user.getID();
+                int id = user.getId();
                 String userid = Integer.toString(id);
                 avatar = UserDAO.saveAvatar(userid, part, getServletContext());
             }

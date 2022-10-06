@@ -22,46 +22,48 @@
                         <i class="fa-solid fa-plus"></i> Add your post
                     </button>
                 </div>
-                <div class="user-recipe">
-                    <div class="media recipe-header">
-                        <img class="recipe-ava"
-                             src="https://haycafe.vn/wp-content/uploads/2021/11/Anh-avatar-dep-chat-lam-hinh-dai-dien.jpg"
-                             alt="" />
-                        <div class="media-body ml-3">
-                            Trịnh Thăng Bình
-                            <div class="text-muted small">3 days ago</div>
+                <c:forEach items="${homeRecipe}" var="re">
+                    <div class="user-recipe">
+                        <div class="media recipe-header">
+                            <img class="recipe-ava"
+                                 src="${re.avatar}"
+                                 alt="avatar" />
+                            <div class="media-body ml-3">
+                                ${re.username}
+                                <div class="text-muted small"><c:out value="${re.getDatePostFormat()}"/></div>
+                            </div>
+                            <i class="fa-solid fa-ellipsis"></i>
                         </div>
-                        <i class="fa-solid fa-ellipsis"></i>
-                    </div>
 
-                    <div class="recipe-text">
-                        Added courgette and green beans, served with brown rice. Also added
-                        a spoonful of rice vinegar to the sauce as suggested by others.
-                        Really good!! Will definitely have again.
-                    </div>
+                        <div class="recipe-text">
+                            ${re.description}
+                        </div>
 
-                    <img class="recipe-img" alt=""
-                         src="https://cdn.cet.edu.vn/wp-content/uploads/2022/01/cach-lam-banh-ran-doremon-1.jpg" />
+                        <img class="recipe-img" alt=""
+                             src="${re.cover}" />
 
-                    <div class="recipe-react">
-                        <a href="javascript:void(0)" class="d-inline-block text-muted">
-                            <span class="align-middle">
-                                <strong>123</strong> Likes</span>
-                        </a>
-                        <a href="javascript:void(0)" class="d-inline-block text-muted ml-3">
-                            <span class="align-middle">
-                                <strong>12</strong> Comments</span>
-                        </a>
-                        <a href="#" class="d-inline-block text-muted ml-3">
-                            <i class="ion ion-md-share align-middle"></i>&nbsp;
-                            <span class="align-middle">Save</span>
-                        </a>
-                        <a href="./cookdetail.jsp" class="d-inline-block text-muted ml-3">
-                            <i class="ion ion-md-share align-middle"></i>&nbsp;
-                            <span class="align-middle">View detail</span>
-                        </a>
+                        <div class="recipe-react">
+                            <a href="javascript:void(0)" class="d-inline-block text-muted">
+                                <span class="align-middle">
+                                    <strong>${re.like}</strong> Likes</span>
+                            </a>
+                            <a href="javascript:void(0)" class="d-inline-block text-muted ml-3">
+                                <span class="align-middle">
+                                    <strong>${re.comment}</strong> Comments</span>
+                            </a>
+                            <a href="#" class="d-inline-block text-muted ml-3">
+                                <i class="ion ion-md-share align-middle"></i>&nbsp;
+                                <span class="align-middle">Save</span>
+                            </a>
+                            <a href="./cookdetail.jsp" class="d-inline-block text-muted ml-3">
+                                <i class="ion ion-md-share align-middle"></i>&nbsp;
+                                <span class="align-middle">View detail</span>
+                            </a>
+                        </div>
                     </div>
-                </div>
+                </c:forEach>
+
+
             </div>
             <div class="frame-div">
                 <div class="banner-div">

@@ -27,10 +27,11 @@ public class Recipe {
     private int prepTime;
     private int cookTime;
     private boolean isDeleted;
-    private int userID;
     private ArrayList<String> img; //field này dùng để lưu danh sách ảnh của recipe, dành cho trang detail
     private ArrayList<String> video; //field này dùng để lưu danh sách video oecipe, dành cho trang detail
     private String cover; //field này dùng để lưu ảnh cover
+    private int userID; //id người đăng recipe
+    private String avatar; //avatar của người đăng recipe
     private String username; //dùng để lưu cả lastname + firstname của user
 
     public Recipe() {
@@ -49,7 +50,25 @@ public class Recipe {
         this.userID = userID;
         this.username = username;
     }
+    
+    /**
+     * constructor này dành cho post recipe trên trang home
+     */
+    public Recipe(int id, String name, String description, int like, int save, int comment, Timestamp datePost, String cover, int userID, String avatar, String username) {
+        this.id = id;
+        this.name = name;
+        this.description = description;
+        this.like = like;
+        this.save = save;
+        this.comment = comment;
+        this.datePost = datePost;
+        this.cover = cover;
+        this.userID = userID;
+        this.avatar = avatar;
+        this.username = username;
+    }
 
+    
     
     
     public int getId() {
@@ -183,6 +202,15 @@ public class Recipe {
     public void setVideo(ArrayList<String> video) {
         this.video = video;
     }
+
+    public String getAvatar() {
+        return avatar;
+    }
+
+    public void setAvatar(String avatar) {
+        this.avatar = avatar;
+    }
+    
     
     @Override
     public String toString() {

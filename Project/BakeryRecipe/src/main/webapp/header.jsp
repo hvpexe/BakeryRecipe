@@ -7,7 +7,7 @@
             <img class="mx-auto" src="assets/images/logo/logo2.png" alt="">
         </a>
         <nav class="header-links justify-content-around col-md col p-0 ">
-            <a class="header-link p-0 border-0 active" href="./home.jsp">Home</a>
+            <a class="header-link p-0 border-0 active" href="./home">Home</a>
             <a class="header-link p-0 border-0" href="./community">Community</a>
             <a class="header-link p-0 border-0" href="./saved.jsp">Saved</a>
             <a class="header-link p-0 border-0" href="./shopping.jsp">Shopping</a>
