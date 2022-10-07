@@ -32,6 +32,10 @@
         <servlet-name>ProfileController</servlet-name>
         <servlet-class>controller.baker.ProfileController</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>FollowController</servlet-name>
+        <servlet-class>controller.baker.FollowController</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>TestingController</servlet-name>
         <url-pattern>/test</url-pattern>
@@ -63,6 +67,10 @@
     <servlet-mapping>
         <servlet-name>ProfileController</servlet-name>
         <url-pattern>/profile</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>FollowController</servlet-name>
+        <url-pattern>/FollowController</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

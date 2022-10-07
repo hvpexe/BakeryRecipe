@@ -391,6 +391,47 @@ public class UserDAO {
         }
         return user;
     }
+     
+       private static final String FOLLOW = "INSERT INTO [dbo].[Follow]([UserID],[UserID2]) VALUES(?,?)";
+
+    public boolean followUSer(int IDUser1, int IDUser2) {
+        boolean check = false;
+        Connection conn = null;
+        PreparedStatement ptm = null;
+        try {
+            conn = DBUtils.getConnection();
+            if (conn != null) {
+                ptm = conn.prepareStatement(FOLLOW);
+                ptm.setInt(1, IDUser1);
+                ptm.setInt(2, IDUser2);
+                check = ptm.executeUpdate() > 0 ? true : false;
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return check;
+
+    }
+
+    private static final String UN_FOLLOW = "delete [dbo].[Follow] where UserID =? and UserID2 = ?";
+
+    public boolean UNFollow(int userID1, int userID2) {
+        boolean check = false;
+        Connection conn = null;
+        PreparedStatement ptm = null;
+        try {
+            conn = DBUtils.getConnection();
+            if (conn != null) {
+                ptm = conn.prepareStatement(UN_FOLLOW);
+                ptm.setInt(1, userID1);
+                ptm.setInt(2, userID2);
+                check = ptm.executeUpdate() > 0 ? true : false;
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return check;
+    }
     
     public static void main(String[] args) {
         getUserByID(3);
