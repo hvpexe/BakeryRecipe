@@ -9,7 +9,9 @@ ingredentElem.onkeyup = e => {
         var elem = e.target;
         var container = elem.parentElement;
         //jQuery.get( url [, data ] [, success ] [, dataType ] ); 
-        var clone = newItem('#item', (item) => {
+        var count = elem.getAttribute('data-count') + 1;
+        var clone = newItem('#item', 'item' + count, (item) => {
+            item = '#' + item;
             $.ajax({
                 url: "ajax/GetIngredientImage",
                 type: "get", //send it through get method
@@ -18,23 +20,25 @@ ingredentElem.onkeyup = e => {
                 },
                 success: function (response) {
                     //Do Something
-                    $('#test').html(response);
+                    $(item).html(response);
+                    container.insertBefore(clone, elem);
+                    elem.value = '';
+                    elem.setAttribute('data-count',count);
                 },
                 error: function (xhr) {
                     //Do Something to handle error
-                    $('#test').html('error');
+                    $(item).html('error');
                 }
             });
         });
-        container.insertBefore(clone, elem);
-        elem.value = '';
-        clone.setAttribute("disabled", "disabled");
-        clone.setAttribute("id", "item1");
+        //finnally
+
         return;
     }
 }
-function newItem(item, test) {
-    var item = document.querySelector(item);
-    test(item);
-    return item.cloneNode(true);
+function newItem(item, newID, test) {
+    var item = document.querySelector(item).cloneNode();
+    item.setAttribute("id", newID);
+    test(item.id);
+    return item;
 }

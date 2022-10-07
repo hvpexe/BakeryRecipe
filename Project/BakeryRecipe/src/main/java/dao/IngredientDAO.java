@@ -47,7 +47,7 @@ public class IngredientDAO {
         return null;
     }
     private static final String SELECT_INGREDIENT_BY_NAME = SELECT_ALL_INGREDIENT
-            + "  Where [Name] = 'egg'";
+            + "  Where [Name] = ?";
 
     public static Ingredient getIngredientByName(String name) {
         String sql = SELECT_INGREDIENT_BY_NAME;
@@ -61,7 +61,7 @@ public class IngredientDAO {
             if (rs.next()) {
                 ingredient = new Ingredient(rs.getString(1), rs.getString(2));
             }
-            System.out.println(ingredient+"a");
+            System.out.println(ingredient + "a");
             return ingredient;
         } catch (Exception e) {
             System.out.println("getIngredientByID error:");

@@ -5,6 +5,7 @@
 package controller.ajax;
 
 import dao.IngredientDAO;
+import dto.Ingredient;
 import java.io.IOException;
 import java.io.PrintWriter;
 import javax.servlet.ServletException;
@@ -35,13 +36,19 @@ public class GetIngredientImage extends HttpServlet {
         try ( PrintWriter out = response.getWriter()) {
             /* TODO output your page here. You may use following sample code. */
             String name = request.getParameter("name");
-            System.out.println(name);
-            out.println(IngredientDAO.getIngredientByName(name));
+            Ingredient item = IngredientDAO.getIngredientByName(name);
+            if (item == null) {
+                item = new Ingredient();
+            }
+            out.println("<div class=\"col d-flex align-items-center p-0 pr-2\" id=\"item\">\n"
+                    + " <img src=\"" + item.getImg() + "\"> \n"
+                    + " <input class=\"col\" disabled value=\"" + name + "\"> \n"
+                    + " <div class=\"item-trashbin fas fa-trash ml-auto description-button\"></div>\n"
+                    + " </div>");
         }
     }
 
-    // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
-    /**
+    /** <editor-fold defaultstate="collapsed">
      * Handles the HTTP <code>GET</code> method.
      *
      * @param request servlet request
