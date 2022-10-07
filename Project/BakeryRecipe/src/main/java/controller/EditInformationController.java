@@ -23,7 +23,7 @@ import utils.Tools;
  *
  * @author kichi
  */
-@WebServlet(name = "EditInformationController", urlPatterns = {"/UploadFileServlet"})
+@WebServlet(name = "EditInformationController", urlPatterns = {"/ProfileInfo"})
 public class EditInformationController extends HttpServlet {
     private static final String ERROR = "profileInfo.jsp";
     private static final String SUCCESS = "profile.jsp";
@@ -38,7 +38,7 @@ public class EditInformationController extends HttpServlet {
             User user = null;
             User userLogin = (User) session.getAttribute("login");
             
-            String ID = request.getParameter("userID");
+            String ID = request.getParameter("userID"); 
             int userID = Integer.parseInt(ID);
             user = UserDAO.getUserByID(userID);
             String firstname = Tools.toUTF8(request.getParameter("firstname"));
@@ -47,15 +47,15 @@ public class EditInformationController extends HttpServlet {
             String gender = request.getParameter("gender");
             String address = request.getParameter("address");
             String phone = request.getParameter("phone");
-            Part part = request.getPart("avatar");
+ //           Part part = request.getPart("avatar");
             user.setFirstName(firstname);
             user.setLastName(lastname);
             user.setBirthday(birthday);
             user.setGender(gender);
             user.setPhone(phone);
             user.setAddress(address);
-            String avatar = null;
-            if (!part.getSubmittedFileName().isEmpty()) {
+ //           String avatar = null;
+           /*if (!part.getSubmittedFileName().isEmpty()) {
                 int id = user.getId();
                 String userid = Integer.toString(id);
                 avatar = UserDAO.saveAvatar(userid, part, getServletContext());
@@ -63,7 +63,7 @@ public class EditInformationController extends HttpServlet {
             if (avatar != null) {
                 user.setAvatar(avatar);
             }
-            System.out.println("avatar:"+avatar);
+            System.out.println("avatar:"+avatar);*/
             if (UserDAO.EditInfo(user)) {
                 session.setAttribute("login", user);
                 url = SUCCESS;

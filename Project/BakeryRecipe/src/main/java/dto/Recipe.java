@@ -37,6 +37,12 @@ public class Recipe {
     public Recipe() {
     }
 
+    public Recipe(String name,String  cover, String username) {
+        this.name = name;
+        this.cover = cover;
+        this.username = username;
+    }
+
     public Recipe(int id, String name, String description, int like, int save, int comment, Timestamp datePost, Timestamp lastDateEdit, String cover, int userID, String username) {
         this.id = id;
         this.name = name;

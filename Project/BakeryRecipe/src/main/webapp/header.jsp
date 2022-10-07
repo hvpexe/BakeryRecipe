@@ -15,14 +15,17 @@
     </div>
     <div class="header-right align-items-center flex-md-nowrap col-sm-12 col-md px-2 justify-content-md-center">
         <div class="col-sm d-flex align-items-center">
+             <form action="Search"> 
             <div class="searchbar px-3 px-md-0">
-                <i class="searchbar-icon fa-solid fa-magnifying-glass"></i>
-                <input class="searchbar-input col p-0" type="text" placeholder="Search" name="searchbar" size="40">
-            </div>
+                 <i class="searchbar-icon fa-solid fa-magnifying-glass"></i>
+                 <input class="searchbar-input col p-0" type="text" placeholder="Search" name="searchKey" value="" size="40">
+                 <input type="hidden" name="action" value="Recipe">
+                </div>
+                 </form> 
             <div class="p-0 d-flex align-items-center justify-content-center">
                 <i class="header-notification fa-solid fa-bell"></i>
             </div>
-            <c:set var="login" value="${LOGIN_USER}" scope="session"></c:set>
+            <c:set var="login" value="${login}" scope="session"></c:set>
             <c:if test="${login == null}">
                 <a href="login.jsp" class="header-user ml-auto" data-type="register">
                     Sign up / Sign in

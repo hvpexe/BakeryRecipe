@@ -46,48 +46,48 @@
                     <div class="profile-header">
                         <h1 class="info-title">Change information: </h1>
                     </div>
-                    <form action="UploadFileServlet" method="post" enctype="multipart/form-data">
+                    <form action="ProfileInfo" method="post">
                         <div class="infor-detail">
                             <div class="row">
                                 <div class="col-md-3">Email</div>
                                 <div class="col-md-9">
-                                    <input type="text" name="email" value="${sessionScope.loginUser.email}" readonly="">
+                                    <input type="text" name="email" value="${sessionScope.login.email}" readonly="">
                                 </div>
                             </div>
                             <div class="row">
                                 <div class="col-md-3">Date Register</div>
                                 <div class="col-md-9">
-                                    <input type="date" name="dateregister" value="${sessionScope.loginUser.dateRegister}" readonly="">
+                                    <input type="date" name="dateregister" value="${sessionScope.login.dateRegister}" readonly="">
                                 </div>
                             </div>
                             <div class="row">
                                 <div class="col-md-3">First Name</div>
                                 <div class="col-md-9">
-                                    <input type="text" name="firstname" value="${sessionScope.loginUser.firstName}">
+                                    <input type="text" name="firstname" value="${sessionScope.login.firstName}">
                                 </div>
                             </div>
                             <div class="row">
                                 <div class="col-md-3">Last Name</div>
                                 <div class="col-md-9">
-                                    <input type="text" name="lastname" value="${sessionScope.loginUser.lastName}">
+                                    <input type="text" name="lastname" value="${sessionScope.login.lastName}">
                                 </div>
                             </div>
                             <div class="row">
                                 <div class="col-md-3">Role</div>
                                 <div class="col-md-9">
-                                    <input type="text" name="role" value="${sessionScope.loginUser.role}" readonly="">
+                                    <input type="text" name="role" value="${sessionScope.login.role}" readonly="">
                                 </div>
                             </div>
                             <div class="row">
                                 <div class="col-md-3">Phone Number</div>
                                 <div class="col-md-9">
-                                    <input type="text" name="phone" value="${sessionScope.loginUser.phone}">
+                                    <input type="text" name="phone" value="${sessionScope.login.phone}">
                                 </div>
                             </div>    
                             <div class="row">
                                 <div class="col-md-3">Birthday</div>
                                 <div class="col-md-9">
-                                    <input type="date" name="birthday" value="${sessionScope.loginUser.birthday}">
+                                    <input type="date" name="birthday" value="${sessionScope.login.birthday}">
                                 </div>
                             </div>
                             <div class="row">
@@ -103,7 +103,7 @@
                             <div class="row">
                                 <div class="col-md-3">Address</div>
                                 <div class="col-md-9">
-                                    <input type="text" name="address" value="${sessionScope.loginUser.address}">
+                                    <input type="text" name="address" value="${sessionScope.login.address}">
                                 </div>
                             </div>
                             <div class="row">
@@ -113,7 +113,7 @@
                                 </div>
                             </div>
                         </div>
-                        <input type="hidden" name="userID" value="${sessionScope.loginUser.id}">
+                        <input type="hidden" name="userID" value="${sessionScope.login.id}">
                         <input class="info-submit" type="submit" value="Submit">
 
                     </form>

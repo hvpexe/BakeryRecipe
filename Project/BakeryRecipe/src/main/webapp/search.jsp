@@ -3,7 +3,7 @@
     Created on : Sep 21, 2022, 10:03:29 AM
     Author     : VO MINH MAN
 --%>
-
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
@@ -41,47 +41,60 @@
             />
     </head>
     <body>
-        <div class="saved-div">
+          <div class="saved-div">
             <div class="section-div">
-                <div class="frame-div1">
-                    <b class="saved-b">Search</b>
-                    <form class="frame-form">
-                        <img class="iconsearch" alt="" src=".\assets\css\fontawesome-free-6.1.1-web\svgs\solid\magnifying-glass.svg" /><input
-                            class="frame-input"
-                            type="text"
-                            placeholder="Search Recipes"
-                            name="search"
-                            />
-                    </form>
-                </div>
-                <div class="mid-div2">
-                    <div class="frame-dip2 in-div1">
-                        <div class="newest-div">Recipe</div>
+                <form action="Search" id="searchRec">
+                    <div class="frame-div1">
+                        <b class="saved-b">Search</b>
+                        <div class="frame-form">
+                            <img class="iconsearch" alt="" src=".\assets\css\fontawesome-free-6.1.1-web\svgs\solid\magnifying-glass.svg" />
+                            <input
+                                class="frame-input"
+                                type="text"
+                                placeholder="Search Recipes"
+                                name="searchKey"
+                                />
+                        </div>
                     </div>
-                    <div class="frame-dip2 in-div">
-                        <div class="newest-div">Baker</div>
+                    <div class="mid-div2">
+                        <select name="action">
+                            <option value="Recipe">
+                            <div class="frame-dip2 in-div1">
+                                <div class="newest-div">Recipe</div>
+                            </div>
+                            </option> 
+                            <option value="Baker">
+                            <div class="frame-dip2 in-div" >
+                                <div class="newest-div">Baker</div>
+                            </div>
+                            </option>
+                        </select>
                     </div>
-                </div>
+<!--                    <input type="submit" >-->
+                </form>
                 <div class="saved-item-div">
-                    <div class="div1">
-                        <img
-                            class="img-icon"
-                            alt=""
-                            src=".\assets\images\image@2x.png"
-                            id="imgImage"
-                            /><a class="mooncake"
-                            ><p class="mooncake-p"><span>Mooncake</span></p></a
-                        ><a class="trnh-thng-bnh2">Trịnh Thăng Bình </a>
-                    </div>
-                    <div class="div2">
-                        <img class="img-icon1" alt="" src=".\assets\images\image@2x.png" /><a
-                            class="mooncake"
-                            ><p class="mooncake-p"><span>Mooncake</span></p></a
-                        ><a class="trnh-thng-bnh2">Trịnh Thăng Bình </a>
-                    </div>
-
+                    <c:forEach items="${requestScope.LIST_BAKER}" var="n">
+                        <div class="div1">
+                            <img
+                                class="img-icon"
+                                alt=""
+                                src="${n.avatar}"
+                                id="imgImage"
+                                /><a class="mooncake"
+                                ><p class="mooncake-p"><span>${n.name}</span></p></a
+                            ><div class="follow-button"><div>Follow</div></div>
+                        </div>
+                    </c:forEach>
+                     <c:forEach items="${requestScope.LIST_RECIPE}" var="n">
+                        <div class="div2">
+                            <img class="img-icon1" alt="" src="${n.cover}" /><a
+                                class="mooncake"
+                                ><p class="mooncake-p"><span>${n.name}</span></p></a
+                            ><a class="trnh-thng-bnh2">${n.username}</a>
+                        </div>
+                    </c:forEach>
                 </div>
-       
+
             </div>
 
             <script>

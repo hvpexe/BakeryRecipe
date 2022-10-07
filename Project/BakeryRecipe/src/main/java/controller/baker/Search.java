@@ -4,8 +4,13 @@
  */
 package controller.baker;
 
+import dao.RecipeDAO;
+import dao.UserDAO;
+import dto.Recipe;
+import dto.User;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.List;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -16,30 +21,42 @@ import javax.servlet.http.HttpServletResponse;
  *
  * @author VO MINH MAN
  */
-@WebServlet(name = "Search", urlPatterns = {"/search"})
+@WebServlet(name = "Search", urlPatterns = {"/Search"})
 
 public class Search extends HttpServlet {
 
-    
-    private static final String ERROR ="searchPage.jsp";
-    private static final String SEARCH_NAME  ="SearchName";
-    private static final String SEARCH_NAME_CONTROLLER ="SearchBakerController";
-    private static final String SEARCH_RECIPE ="SearchRecipe";
-    private static final String SEARCH_RECIPE_CONTROLLER ="SearchRecipeController";
-    
-   
+    private static final String ERROR = "search.jsp";
+    private static final String SEARCH_NAME = "Baker";
+    private static final String SUCCESS = "search.jsp";
+    private static final String SEARCH_RECIPE = "Recipe";
+
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
-       String url = ERROR;
+        String url = ERROR;
         try {
-            String action =request.getParameter("action");
-            if (action.equals(SEARCH_NAME)) {
-                url = SEARCH_NAME_CONTROLLER;
-            }else if(action.equals(SEARCH_RECIPE)){
-        url=SEARCH_RECIPE_CONTROLLER;
-        }
+            String action = request.getParameter("action");
+            String searchK = request.getParameter("searchKey");
+            if (SEARCH_RECIPE.equals(action)) {
+                RecipeDAO recipe = new RecipeDAO();
+                List<Recipe> listRecipe = recipe.searchRecipe(searchK);
+                System.out.println(listRecipe);
+                if (!listRecipe.isEmpty()) {
+                    request.setAttribute("LIST_RECIPE", listRecipe);
+                    url = SUCCESS;
+                }
+
+            } else if (SEARCH_NAME.equals(action)) {
+                UserDAO user = new UserDAO();
+                List<User> listUser = user.searchName(searchK);
+                if (!listUser.isEmpty()) {
+                    request.setAttribute("LIST_BAKER", listUser);
+                    url = SUCCESS;
+                }
+            }
         } catch (Exception e) {
+
+            e.printStackTrace();
         } finally {
             request.getRequestDispatcher(url).forward(request, response);
         }
