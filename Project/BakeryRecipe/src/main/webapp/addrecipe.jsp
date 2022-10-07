@@ -99,7 +99,7 @@
                         <div id="test"></div>
                         <b class="label">Ingredients</b>
                         <div class="col d-flex align-items-center p-0 pr-2" id="item">
-                            <img src="assets/images/image-261@2x.png"> 
+                            <img src="assets/images/image-261@2x.png" > 
                             <input class="col" disabled value="black grapes"> 
                             <div class="item-trashbin fas fa-trash ml-auto description-button"></div>
                         </div>
@@ -107,7 +107,20 @@
                     </div>
                     <div class="add-recipe-input col-12">
                         <b class="label">Instructions</b>
-                        <input name='instruction' id="instruction"  class="instruction-box-input" type="text" placeholder="Add one instruction">
+                        <div class="col align-items-center p-0 pr-2" id="inst">
+                            <h4>
+                                Step 0
+                                <input type="hidden" value="0">
+                            </h4>
+                            <div class="inst-img fas fa-camera d-flex align-items-center justify-content-center" 
+                                 onclick="this.querySelector('input').click();">
+                                <img>
+                                <input class="d-none" type="file" accept="image/*" onchange="changeImg(this.previousElementSibling, window.URL.createObjectURL(this.files[0]))">
+                            </div>
+                        </div>
+
+                    </div>
+                    <input name='instruction' id="instruction"  class="instruction-box-input" type="text" placeholder="Add one instruction">
                     </div>
                     <div class="time-to-cook-div col">
                         <div class="add-recipe-input col">

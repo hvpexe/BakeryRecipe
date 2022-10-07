@@ -19,7 +19,7 @@
             <div class="searchbar px-3 px-md-0">
                  <i class="searchbar-icon fa-solid fa-magnifying-glass"></i>
                  <input class="searchbar-input col p-0" type="text" placeholder="Search" name="searchKey" value="" size="40">
-                 <input type="hidden" name="action" value="Baker">
+                 <input type="hidden" name="action" value="Recipe">
                 </div>
                  </form> 
             <div class="p-0 d-flex align-items-center justify-content-center">
