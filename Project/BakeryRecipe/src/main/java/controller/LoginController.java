@@ -60,7 +60,7 @@ public class LoginController extends HttpServlet {
             log("Error at LoginController" + e.toString());
         } finally {
             if (loginUser != null) {
-                session.setAttribute("LOGIN_USER", loginUser);
+                session.setAttribute("login", loginUser);
                 String roleID = loginUser.getRole();
                 Boolean isActive = loginUser.isIsActive();
                 if (isActive == false) {
