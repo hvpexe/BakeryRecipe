@@ -312,15 +312,15 @@ public class UserDAO {
             Connection conn = DBUtils.getConnection();
             PreparedStatement ps = conn.prepareStatement(sql);
             int i = 1;
-            System.out.println(user.getAvatar());
-            ps.setString(i++, user.getAvatar());
+            //System.out.println(user.getAvatar());
+            //ps.setString(i++, user.getAvatar());
             ps.setString(i++, user.getFirstName());
             ps.setString(i++, user.getLastName());
             ps.setDate(i++, user.getBirthday());
             ps.setString(i++, user.getGender());
             ps.setString(i++, user.getPhone());
             ps.setString(i++, user.getAddress());
-            ps.setInt(i++, user.getId());
+            //ps.setInt(i++, user.getId());
             ResultSet rs = ps.executeQuery();
             
             boolean check = ps.executeUpdate() > 0;
@@ -333,7 +333,7 @@ public class UserDAO {
         return false;
     }
     
-    public static String saveAvatar(String id, Part part, ServletContext sc) {
+   /* public static String saveAvatar(String id, Part part, ServletContext sc) {
 
         try {
             String fileName = part.getSubmittedFileName();
@@ -357,7 +357,7 @@ public class UserDAO {
             System.out.println("Error Cant Save Avatar!" + ex.getMessage());
         }
         return null;
-    }
+    }*/
     
       private static final String LIST_USER = "select[Email], [LastName],[FirstName] ,[Avatar]\n"
             + "from [dbo].[User] join [dbo].[Recipe]\n"

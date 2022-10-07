@@ -25,7 +25,7 @@
             <div class="p-0 d-flex align-items-center justify-content-center">
                 <i class="header-notification fa-solid fa-bell"></i>
             </div>
-            <c:set var="login" value="${LOGIN_USER}" scope="session"></c:set>
+            <c:set var="login" value="${login}" scope="session"></c:set>
             <c:if test="${login == null}">
                 <a href="login.jsp" class="header-user ml-auto" data-type="register">
                     Sign up / Sign in

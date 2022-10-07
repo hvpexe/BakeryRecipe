@@ -28,7 +28,7 @@ public class HomeController extends HttpServlet {
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
         HttpSession session = request.getSession();
-        User user = (User) session.getAttribute("LOGIN_USER");
+        User user = (User) session.getAttribute("login");
         ArrayList<Recipe> list = RecipeDAO.getPostHomeRecipes(user.getId());
         request.setAttribute("homeRecipe", list);
         request.getRequestDispatcher("home.jsp").forward(request, response);
