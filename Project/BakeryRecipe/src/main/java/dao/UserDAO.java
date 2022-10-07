@@ -254,13 +254,13 @@ public class UserDAO {
         return false;
     }
 
-     private static final String SEARCH_CHEFNAME = "SELECT [ID],[Role],[Email],[Password],"
+    private static final String SEARCH_CHEFNAME = "SELECT [ID],[Role],[Email],[Password],"
             + "[Avatar],[FirstName],[LastName],[Gender],[Phone]"
             + ",[Address],[DateRegister],[IsActive],[StoreID]\n"
             + "FROM [dbo].[User]\n"
             + "WHERE  [LastName] like ? or [FirstName] like ?";
 
-    public  List<User> searchName(String search) throws SQLException {
+    public List<User> searchName(String search) throws SQLException {
         ArrayList<User> listName = new ArrayList<>();
         Connection conn = null;
         PreparedStatement ptm = null;
@@ -269,11 +269,11 @@ public class UserDAO {
             conn = DBUtils.getConnection();
             if (conn != null) {
                 ptm = conn.prepareStatement(SEARCH_CHEFNAME);
-                ptm.setString(1,  "%"+search+"%" );
-                ptm.setString(2, "%"+search+"%");
+                ptm.setString(1, "%" + search + "%");
+                ptm.setString(2, "%" + search + "%");
                 rs = ptm.executeQuery();
                 while (rs.next()) {
-                   
+
                     int ID = rs.getInt("ID");
                     String role = rs.getString("Role");
                     String email = rs.getString("Email");
@@ -292,19 +292,9 @@ public class UserDAO {
                 }
             }
         } catch (Exception e) {
-            System.out.println("System have problem !!!");
-        } finally {
-            if (rs != null) {
-                rs.close();
-            }
-            if (ptm != null) {
-                ptm.close();
-            }
-            if (conn != null) {
-                conn.close();
-            }
-
-        }
+            System.out.println("System have problem !!!"+e.toString());
+                    
+        } 
         return listName;
     }
     

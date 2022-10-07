@@ -98,13 +98,16 @@ public class RecipeDAO {
         return null;
     }
 
-    private static final String SEARCH_RECIPE = "SELECT [ID],[Name],[Description],[Like],[Dislike]"
-            + ",[DatePost],[LastDateEdit],[PrepTime],[CookTime],"
-            + "[Saved],[IsDeleted],[UserID],[Img]\n"
-            + "FROM[dbo].[Recipe]\n"
-            + "WHERE [Name] = ?";
+   private static final String SEARCH_RECIPE = "SELECT recipe.[Name],[Description],[Like],recipe.ID\n"
+            + "            ,[DatePost],[LastDateEdit],[PrepTime],[CookTime]\n"
+            + "            [Save],[IsDeleted],[UserID],[Img],baker.FirstName +' '+baker.LastName as fullName\n"
+            + "            FROM[dbo].[Recipe] recipe join [dbo].[Picture] pic\n"
+            + "			on recipe.ID =pic.RecipeID\n"
+            + "			join [dbo].[User]  baker\n"
+            + "			on  baker.ID =recipe.UserID\n"
+            + "            WHERE recipe.Name like ? and pic.IsCover ='True'";
 
-    public static List<Recipe> searchRecipe(String name) throws SQLException {
+    public  List<Recipe> searchRecipe(String name) throws SQLException {
         ArrayList<Recipe> listRecipe = new ArrayList<>();
         Connection conn = null;
         PreparedStatement ptm = null;
@@ -112,46 +115,20 @@ public class RecipeDAO {
         try {
             conn = DBUtils.getConnection();
             ptm = conn.prepareStatement(SEARCH_RECIPE);
-            ptm.setString(1, name);
+            ptm.setString(1, "%" + name + "%");
             rs = ptm.executeQuery();
             while (rs.next()) {
-                int ID = rs.getInt("ID");
-                String description = rs.getString("Description");
-                int like = rs.getInt("Like");
-                int dislike = rs.getInt("DisLike");
-                Date DatePost = rs.getDate("DatePost");
-                Date lastDateEdit = rs.getDate("LastDateEdit");
-                int prepareTime = rs.getInt("PrepTime");
-                int CookTime = rs.getInt("CookTime");
-                int userID = rs.getInt("UserID");
-                boolean isDeleted = rs.getBoolean("IsDeleted");
-                int save = Integer.parseInt(rs.getString("Saved"));
-                String img1 = rs.getString("Img");
-                ArrayList<String> img = null;
-                img = new ArrayList<>();
-                img.add(img1);
-//                Recipe recipe = new Recipe(ID, name, description, like, dislike, DatePost, lastDateEdit, prepareTime, CookTime, save, userID, img, name);
-                Recipe recipe = null;
-                if (!isDeleted) {
-                    listRecipe.add(recipe);
-
-                }
+                String fullName = rs.getString("fullName");
+                String img = rs.getString("Img");
+                Recipe recipe;
+                recipe = new Recipe(name, img, fullName);
+                listRecipe.add(recipe);
             }
 
         } catch (Exception e) {
             System.out.println("System had a problem ???");
-        } finally {
-            if (rs != null) {
-                rs.close();
-            }
-            if (ptm != null) {
-                ptm.close();
-            }
-            if (conn != null) {
-                conn.close();
-            }
-
-        }
+        e.printStackTrace();
+        } 
         return listRecipe;
     }
 

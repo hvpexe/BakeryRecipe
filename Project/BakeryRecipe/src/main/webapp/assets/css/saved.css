@@ -38,7 +38,7 @@ body {
 }
 .frame-div1,
 .frame-icon {
-  position: absolute;
+ 
   overflow: hidden;
 }
 .frame-icon {
@@ -134,33 +134,21 @@ body {
   z-index: 5;
 }
 .newest-div {
-  position: absolute;
   top: 9px;
   left: 7px;
   display: inline-block;
   width: 58px;
   height: 25px;
+  padding :10%;
 }
-.icon-keyboard-arrow-down {
-  position: absolute;
-  height: 34.26%;
-  width: 22%;
-  top: 31.58%;
-  right: 10%;
-  bottom: 34.16%;
-  left: 68%;
-  max-width: 100%;
-  max-height: 100%;
-}
+
 .frame-div2,
 .saved-item-div {
-  position: absolute;
+
   box-sizing: border-box;
 }
-.frame-div2 {
-  margin: 0 !important;
-  top: 0;
-  left: 68px;
+.frame-dip2 {
+  display: inline-block;
   border-radius: 20px;
   border: 1px solid #000;
   width: 100px;
@@ -171,6 +159,7 @@ body {
   text-align: center;
   font-size: 16px;
   color: rgba(0, 0, 0, 0.5);
+ 
 }
 .saved-item-div {
   top: 181px;
@@ -256,59 +245,13 @@ body {
   height: 42px;
   color: rgba(0, 0, 0, 0.5);
 }
-.icon-bell {
-  width: 21px;
-  height: 28.78px;
-}
-.icon-keyboard-arrow-down1 {
-  position: absolute;
-  height: 40.68%;
-  width: 20.18%;
-  top: 28.13%;
-  right: 11.01%;
-  bottom: 31.19%;
-  left: 68.81%;
-  max-width: 100%;
-  max-height: 100%;
-}
-.bnh-div {
-  position: absolute;
-  top: 6px;
-  left: 14px;
-  display: inline-block;
-  mix-blend-mode: normal;
-}
-.frame-div4 {
-  position: relative;
-  border-radius: 20px;
-  background-color: #fff;
-  border: 0.2px solid #000;
-  box-sizing: border-box;
-  width: 109px;
-  height: 32px;
-  flex-shrink: 0;
-  overflow: hidden;
-}
+
 .header-div,
 .saved-div {
   display: flex;
   box-sizing: border-box;
   align-items: center;
   justify-content: flex-start;
-}
-.header-div {
-  margin: 0 !important;
-  position: absolute;
-  top: 0;
-  left: 0;
-  background-color: #fff;
-  box-shadow: 0 4px 12px rgba(79, 79, 186, 0.06);
-  flex-direction: row;
-  padding: 3px 77px 3px 4px;
-  gap: 79px;
-  z-index: 1;
-  font-size: 16px;
-  font-family: Gelasio;
 }
 .saved-div {
   position: relative;
@@ -321,4 +264,11 @@ body {
   font-size: 32px;
   color: #000;
   font-family: Inter;
+}
+.mid-div2{
+    display: inline-block;
+    margin-left: 8%;
+}
+.frame-dip2 .in-div{
+    padding-left: 20px
 }
