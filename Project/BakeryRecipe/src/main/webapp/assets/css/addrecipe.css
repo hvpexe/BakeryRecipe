@@ -355,7 +355,7 @@ input,textarea{
 }
 div[id^=item]
 {
-    background: var(--yellow-theme);
+    border:2px solid var(--yellow-theme);
     border-radius: 10px;
 }
 div[id^=item] img {
@@ -383,7 +383,6 @@ div[id^=item] .item-trashbin:hover {
 
 }
 div[id^=inst]{
-
 }
 div[id^=inst] .inst-img{
     width: 3.5em;
@@ -391,10 +390,11 @@ div[id^=inst] .inst-img{
     border-bottom-left-radius: 10px;
     background: var(--white);
     aspect-ratio:1/1;
-    
+    position: relative;
+
 }
 div[id^=inst] .inst-img img{
     position: absolute;
-    inset:0;
-    
+    left:0 right:0 top:0;
+    width:100%;
 }

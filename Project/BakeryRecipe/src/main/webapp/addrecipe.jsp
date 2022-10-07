@@ -108,11 +108,11 @@
                     <div class="add-recipe-input col-12">
                         <b class="label">Instructions</b>
                         <div class="col align-items-center p-0 pr-2" id="inst">
-                            <h4>
+                            <h4 class="col">
                                 Step 0
                                 <input type="hidden" value="0">
                             </h4>
-                            <div class="inst-img fas fa-camera d-flex align-items-center justify-content-center" 
+                            <div class="inst-img fas fa-camera d-inline-flex align-items-center justify-content-center" 
                                  onclick="this.querySelector('input').click();">
                                 <img>
                                 <input class="d-none" type="file" accept="image/*" onchange="changeImg(this.previousElementSibling, window.URL.createObjectURL(this.files[0]))">
