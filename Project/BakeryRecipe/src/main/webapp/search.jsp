@@ -3,7 +3,7 @@
     Created on : Sep 21, 2022, 10:03:29 AM
     Author     : VO MINH MAN
 --%>
-
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
@@ -82,15 +82,15 @@
                                 id="imgImage"
                                 /><a class="mooncake"
                                 ><p class="mooncake-p"><span>${n.name}</span></p></a
-                            ><a class="trnh-thng-bnh2">Trịnh Thăng Bình </a>
+                            ><div class="follow-button"><div>Follow</div></div>
                         </div>
                     </c:forEach>
-                    <c:forEach items="${requestScope.LIST_RECIPE}" var="n">
+                     <c:forEach items="${requestScope.LIST_RECIPE}" var="n">
                         <div class="div2">
                             <img class="img-icon1" alt="" src="${n.img}" /><a
                                 class="mooncake"
-                                ><p class="mooncake-p"><span>Mooncake</span></p></a
-                            ><a class="trnh-thng-bnh2">Trịnh Thăng Bình </a>
+                                ><p class="mooncake-p"><span>${n.name}</span></p></a
+                            ><a class="trnh-thng-bnh2">${n.username}</a>
                         </div>
                     </c:forEach>
                 </div>
