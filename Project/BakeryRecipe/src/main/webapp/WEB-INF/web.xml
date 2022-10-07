@@ -1,5 +1,61 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <web-app version="3.1" xmlns="http://xmlns.jcp.org/xml/ns/javaee" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee http://xmlns.jcp.org/xml/ns/javaee/web-app_3_1.xsd">
+    <servlet>
+        <servlet-name>TestingController</servlet-name>
+        <servlet-class>controller.TestingController</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>LoginController</servlet-name>
+        <servlet-class>controller.LoginController</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>EditInformationController</servlet-name>
+        <servlet-class>controller.EditInformationController</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>RegisterAccountController</servlet-name>
+        <servlet-class>controller.baker.RegisterAccountController</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>MostRatedRecipeController</servlet-name>
+        <servlet-class>controller.recipe.MostRatedRecipeController</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>MostRecentRecipeController</servlet-name>
+        <servlet-class>controller.recipe.MostRecentRecipeController</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>HomeController</servlet-name>
+        <servlet-class>controller.baker.HomeController</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>TestingController</servlet-name>
+        <url-pattern>/test</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>MostRatedRecipeController</servlet-name>
+        <url-pattern>/MostRatedRecipe</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>EditInformationController</servlet-name>
+        <url-pattern>/ProfileInfo</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>MostRecentRecipeController</servlet-name>
+        <url-pattern>/MostRecentRecipe</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>LoginController</servlet-name>
+        <url-pattern>/login</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>RegisterAccountController</servlet-name>
+        <url-pattern>/register</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>HomeController</servlet-name>
+        <url-pattern>/home</url-pattern>
+    </servlet-mapping>
     <session-config>
         <session-timeout>
             30
