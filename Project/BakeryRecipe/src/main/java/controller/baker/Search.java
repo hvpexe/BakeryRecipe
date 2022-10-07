@@ -21,7 +21,7 @@ import javax.servlet.http.HttpServletResponse;
  *
  * @author VO MINH MAN
  */
-@WebServlet(name = "Search", urlPatterns = {"/search"})
+@WebServlet(name = "Search", urlPatterns = {"/Search"})
 
 public class Search extends HttpServlet {
 
