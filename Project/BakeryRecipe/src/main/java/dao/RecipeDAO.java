@@ -98,7 +98,7 @@ public class RecipeDAO {
         return null;
     }
 
-   private static final String SEARCH_RECIPE = "SELECT recipe.[Name],[Description],[Like],recipe.ID\n"
+    private static final String SEARCH_RECIPE = "SELECT recipe.[Name],[Description],[Like],recipe.ID\n"
             + "            ,[DatePost],[LastDateEdit],[PrepTime],[CookTime]\n"
             + "            [Save],[IsDeleted],[UserID],[Img],baker.FirstName +' '+baker.LastName as fullName\n"
             + "            FROM[dbo].[Recipe] recipe join [dbo].[Picture] pic\n"
@@ -107,7 +107,7 @@ public class RecipeDAO {
             + "			on  baker.ID =recipe.UserID\n"
             + "            WHERE recipe.Name like ? and pic.IsCover ='True'";
 
-    public  List<Recipe> searchRecipe(String name) throws SQLException {
+    public List<Recipe> searchRecipe(String name) throws SQLException {
         ArrayList<Recipe> listRecipe = new ArrayList<>();
         Connection conn = null;
         PreparedStatement ptm = null;
@@ -127,8 +127,8 @@ public class RecipeDAO {
 
         } catch (Exception e) {
             System.out.println("System had a problem ???");
-        e.printStackTrace();
-        } 
+            e.printStackTrace();
+        }
         return listRecipe;
     }
 
@@ -352,6 +352,7 @@ public class RecipeDAO {
             + "JOIN Picture P ON P.RecipeID = R.ID\n"
             + "WHERE R.UserID = ? AND R.IsDeleted = 0 AND P.IsCover = 1)\n"
             + "ORDER BY DatePost DESC";
+
     public static ArrayList<Recipe> getPostHomeRecipes(int userID) {
         try {
             Connection conn = DBUtils.getConnection();
@@ -361,15 +362,15 @@ public class RecipeDAO {
             ResultSet rs = ps.executeQuery();
             ArrayList<Recipe> list = new ArrayList<Recipe>();
             while (rs.next()) {
-                Recipe recipe = new Recipe(rs.getInt("ID"), 
-                        rs.getString("Name"), 
-                        rs.getString("Description"), 
-                        rs.getInt("Like"), rs.getInt("Save"), 
-                        rs.getInt("Comment"), 
-                        rs.getTimestamp("DatePost"), 
-                        rs.getString("Cover"), 
-                        rs.getInt("UserID"), 
-                        rs.getString("Avatar"), 
+                Recipe recipe = new Recipe(rs.getInt("ID"),
+                        rs.getString("Name"),
+                        rs.getString("Description"),
+                        rs.getInt("Like"), rs.getInt("Save"),
+                        rs.getInt("Comment"),
+                        rs.getTimestamp("DatePost"),
+                        rs.getString("Cover"),
+                        rs.getInt("UserID"),
+                        rs.getString("Avatar"),
                         rs.getString("Username"));
                 list.add(recipe);
             }
@@ -381,6 +382,43 @@ public class RecipeDAO {
         }
         return null;
     }
+
+    private static final String POST_PROFILE_RECIPE_SQL = "SELECT U.ID AS UserID, U.FirstName + ' ' + U.LastName AS Username, U.Avatar, R.ID, R.Name, R.Description, R.[Like], R.[Save], R.Comment, R.DatePost, P.Img AS Cover\n"
+            + "FROM Recipe R\n"
+            + "JOIN [User] U ON R.UserID = U.ID\n"
+            + "JOIN Picture P ON P.RecipeID = R.ID\n"
+            + "WHERE R.UserID = ? AND R.IsDeleted = 0 AND P.IsCover = 1\n"
+            + "ORDER BY DatePost DESC";
+
+    public static ArrayList<Recipe> getPostProfileRecipes(int userID) {
+        try {
+            Connection conn = DBUtils.getConnection();
+            PreparedStatement ps = conn.prepareStatement(POST_PROFILE_RECIPE_SQL);
+            ps.setInt(1, userID);
+            ResultSet rs = ps.executeQuery();
+            ArrayList<Recipe> list = new ArrayList<Recipe>();
+            while (rs.next()) {
+                Recipe recipe = new Recipe(rs.getInt("ID"),
+                        rs.getString("Name"),
+                        rs.getString("Description"),
+                        rs.getInt("Like"), rs.getInt("Save"),
+                        rs.getInt("Comment"),
+                        rs.getTimestamp("DatePost"),
+                        rs.getString("Cover"),
+                        rs.getInt("UserID"),
+                        rs.getString("Avatar"),
+                        rs.getString("Username"));
+                list.add(recipe);
+            }
+            return list;
+        } catch (SQLException ex) {
+            System.out.println("getPostProfileRecipes Query Error!" + ex.getMessage());
+        } catch (Exception ex) {
+            System.out.println("Error: " + ex.getMessage());
+        }
+        return null;
+    }
+
     public static void main(String[] args) {
         ArrayList<Recipe> list = getPostHomeRecipes(3);
         for (Recipe recipe : list) {

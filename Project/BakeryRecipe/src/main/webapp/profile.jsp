@@ -65,46 +65,46 @@
                 <div class="profile-activity">
                     <b>Activity</b>
                 </div>
-                <div class="profile-recipe">
-                    <div class="media recipe-header">
-                        <img class="recipe-ava"
-                             src=${sessionScope.login.avatar}
-                             alt="" />
-                        <div class="media-body ml-3">
-                            ${sessionScope.login.name}
-                            <div class="text-muted small">3 days ago</div>
+                <c:forEach items="${profileRecipe}" var="re">
+                    <div class="profile-recipe">
+                        <div class="media recipe-header">
+                            <img class="recipe-ava"
+                                 src="${re.avatar}"
+                                 alt="" />
+                            <div class="media-body ml-3">
+                                ${re.username}
+                                <div class="text-muted small"><c:out value="${re.getDatePostFormat()}"/></div>
+                            </div>
+                            <i class="fa-solid fa-ellipsis"></i>
                         </div>
-                        <i class="fa-solid fa-ellipsis"></i>
-                    </div>
 
-                    <div class="recipe-text">
-                        Added courgette and green beans, served with brown rice. Also added
-                        a spoonful of rice vinegar to the sauce as suggested by others.
-                        Really good!! Will definitely have again.
-                    </div>
+                        <div class="recipe-text">
+                            ${re.description}
+                        </div>
 
-                    <img class="recipe-img" alt=""
-                         src="https://cdn.cet.edu.vn/wp-content/uploads/2022/01/cach-lam-banh-ran-doremon-1.jpg" />
+                        <img class="recipe-img" alt=""
+                             src="${re.cover}" />
 
-                    <div class="recipe-react">
-                        <a href="javascript:void(0)" class="d-inline-block text-muted">
-                            <span class="align-middle">
-                                <strong>123</strong> Likes</span>
-                        </a>
-                        <a href="javascript:void(0)" class="d-inline-block text-muted ml-3">
-                            <span class="align-middle">
-                                <strong>12</strong> Comments</span>
-                        </a>
-                        <a href="#" class="d-inline-block text-muted ml-3">
-                            <i class="ion ion-md-share align-middle"></i>&nbsp;
-                            <span class="align-middle">Save</span>
-                        </a>
-                        <a href="#" class="d-inline-block text-muted ml-3">
-                            <i class="ion ion-md-share align-middle"></i>&nbsp;
-                            <span class="align-middle">View detail</span>
-                        </a>
+                        <div class="recipe-react">
+                            <a href="javascript:void(0)" class="d-inline-block text-muted">
+                                <span class="align-middle">
+                                    <strong>${re.like}</strong> Likes</span>
+                            </a>
+                            <a href="javascript:void(0)" class="d-inline-block text-muted ml-3">
+                                <span class="align-middle">
+                                    <strong>${re.comment}</strong> Comments</span>
+                            </a>
+                            <a href="#" class="d-inline-block text-muted ml-3">
+                                <i class="ion ion-md-share align-middle"></i>&nbsp;
+                                <span class="align-middle">Save</span>
+                            </a>
+                            <a href="#" class="d-inline-block text-muted ml-3">
+                                <i class="ion ion-md-share align-middle"></i>&nbsp;
+                                <span class="align-middle">View detail</span>
+                            </a>
+                        </div>
                     </div>
-                </div>
+                </c:forEach>
             </div>
         </div>
         <script src="assets/js/Jquery/jquery-core.js"></script>

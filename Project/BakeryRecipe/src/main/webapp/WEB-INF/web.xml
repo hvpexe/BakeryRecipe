@@ -28,6 +28,10 @@
         <servlet-name>HomeController</servlet-name>
         <servlet-class>controller.baker.HomeController</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>ProfileController</servlet-name>
+        <servlet-class>controller.baker.ProfileController</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>TestingController</servlet-name>
         <url-pattern>/test</url-pattern>
@@ -55,6 +59,10 @@
     <servlet-mapping>
         <servlet-name>HomeController</servlet-name>
         <url-pattern>/home</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>ProfileController</servlet-name>
+        <url-pattern>/profile</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>
