@@ -46,7 +46,7 @@
                     <div class="profile-header">
                         <h1 class="info-title">Change information: </h1>
                     </div>
-                    <form action="ProfileInfo" method="post" enctype="multipart/form-data">
+                    <form action="UploadFileServlet" method="post" enctype="multipart/form-data">
                         <div class="infor-detail">
                             <div class="row">
                                 <div class="col-md-3">Email</div>
