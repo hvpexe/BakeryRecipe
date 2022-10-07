@@ -35,20 +35,19 @@ public class GetIngredientImage extends HttpServlet {
         response.setContentType("text/html;charset=UTF-8");
         try ( PrintWriter out = response.getWriter()) {
             /* TODO output your page here. You may use following sample code. */
-            String name = request.getParameter("name");
+            String name = request.getParameter("name").trim();
             Ingredient item = IngredientDAO.getIngredientByName(name);
             if (item == null) {
                 item = new Ingredient();
             }
-            out.println("<div class=\"col d-flex align-items-center p-0 pr-2\" id=\"item\">\n"
-                    + " <img src=\"" + item.getImg() + "\"> \n"
-                    + " <input class=\"col\" disabled value=\"" + name + "\"> \n"
-                    + " <div class=\"item-trashbin fas fa-trash ml-auto description-button\"></div>\n"
-                    + " </div>");
+            out.println("<img src=\"" + item.getImg() + "\" alt=\"" + name + "\"> \n"
+                    + "  <input class=\"col\" disabled value=\"" + name + "\"> \n"
+                    + "  <div class=\"item-trashbin fas fa-trash ml-auto description-button\"></div>");
         }
     }
+//<editor-fold defaultstate="collapsed">
 
-    /** <editor-fold defaultstate="collapsed">
+    /**
      * Handles the HTTP <code>GET</code> method.
      *
      * @param request servlet request

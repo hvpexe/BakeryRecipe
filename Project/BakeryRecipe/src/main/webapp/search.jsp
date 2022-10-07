@@ -87,7 +87,7 @@
                     </c:forEach>
                      <c:forEach items="${requestScope.LIST_RECIPE}" var="n">
                         <div class="div2">
-                            <img class="img-icon1" alt="" src="${n.img}" /><a
+                            <img class="img-icon1" alt="" src="${n.cover}" /><a
                                 class="mooncake"
                                 ><p class="mooncake-p"><span>${n.name}</span></p></a
                             ><a class="trnh-thng-bnh2">${n.username}</a>

@@ -305,24 +305,18 @@ public class UserDAO {
                      "	  Phone = ?,\n" +
                      "	  Birthday = ?,\n" +
                      "	  Gender = ?,\n" +
-                     "	  [Address] = ?,\n" +
-                     "	  Avatar = ?\n" +
+                     "	  [Address] = ?\n" +
                      "WHERE ID = ?";
         try {
             Connection conn = DBUtils.getConnection();
             PreparedStatement ps = conn.prepareStatement(sql);
-            int i = 1;
-            //System.out.println(user.getAvatar());
-            //ps.setString(i++, user.getAvatar());
-            ps.setString(i++, user.getFirstName());
-            ps.setString(i++, user.getLastName());
-            ps.setDate(i++, user.getBirthday());
-            ps.setString(i++, user.getGender());
-            ps.setString(i++, user.getPhone());
-            ps.setString(i++, user.getAddress());
-            //ps.setInt(i++, user.getId());
-            ResultSet rs = ps.executeQuery();
-            
+            ps.setString(1, user.getFirstName());
+            ps.setString(2, user.getLastName());
+            ps.setString(3, user.getPhone());
+            ps.setDate(4, user.getBirthday());
+            ps.setString(5, user.getGender());
+            ps.setString(6, user.getAddress());
+            ps.setInt(7, user.getId()); 
             boolean check = ps.executeUpdate() > 0;
             if (check) {
                 return true;

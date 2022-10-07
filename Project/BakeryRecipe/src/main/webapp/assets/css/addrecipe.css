@@ -363,6 +363,7 @@ div[id^=item] img {
     border-top-left-radius: inherit;
     border-bottom-left-radius: inherit;
     background: var(--white);
+    aspect-ratio:1/1;
 }
 div[id^=item] input {
     background: none;
@@ -378,6 +379,22 @@ div[id^=item] .item-trashbin {
     align-items: center;
 }
 div[id^=item] .item-trashbin:hover {
-        outline-color: var(--brown-theme-75);
+    outline-color: var(--brown-theme-75);
 
+}
+div[id^=inst]{
+
+}
+div[id^=inst] .inst-img{
+    width: 3.5em;
+    border-top-left-radius: 10px;
+    border-bottom-left-radius: 10px;
+    background: var(--white);
+    aspect-ratio:1/1;
+    
+}
+div[id^=inst] .inst-img img{
+    position: absolute;
+    inset:0;
+    
 }
