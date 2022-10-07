@@ -103,7 +103,7 @@
                             <input class="col" disabled value="black grapes"> 
                             <div class="item-trashbin fas fa-trash ml-auto description-button"></div>
                         </div>
-                        <input name='ingredient' id="ingredient"  class="instruction-box-input" type="text" placeholder="Add one ingredient">
+                        <input name='ingredient' id="ingredient" data-count="0" class="instruction-box-input" type="text" placeholder="Add one ingredient">
                     </div>
                     <div class="add-recipe-input col-12">
                         <b class="label">Instructions</b>

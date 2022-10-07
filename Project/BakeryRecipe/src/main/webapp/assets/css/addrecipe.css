@@ -362,6 +362,7 @@ div[id^=item] img {
     width: 3.5em;
     border-top-left-radius: inherit;
     border-bottom-left-radius: inherit;
+    background: var(--white);
 }
 div[id^=item] input {
     background: none;

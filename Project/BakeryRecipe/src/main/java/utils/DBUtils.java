@@ -24,7 +24,7 @@ public class DBUtils {
 
     public static Connection getConnection() {
         try {
-            if (conn != null || !conn.isClosed()) {
+            if (conn != null) {
                 return conn;
             }
             String url = "jdbc:sqlserver://" + SERVER_NAME + ":" + PORT + "\\" + INSTANCE + ";databaseName=" + DB_NAME;
