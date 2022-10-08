@@ -71,11 +71,9 @@ public class UserDAO {
         return false;
     }
 
-    private static final String SELECT_LOGIN = " SELECT ID from [User]"
-            + "WHERE Email = ? AND Password = ?";
 
     public static User loginWithGoogle(String email) {
-        String sql = SELECT_LOGIN.replace(" AND Password = ?", "");
+        String sql = SELECT_USER_BY_EMAIL;
         try {
             System.out.println(conn);
             PreparedStatement ps = conn.prepareStatement(sql);
@@ -94,7 +92,9 @@ public class UserDAO {
         }
         return null;
     }
-
+    private static final String SELECT_LOGIN = " SELECT ID from [User]"
+            + "WHERE Email = ? AND Password = ?";
+    //ham nay tim user su dung email va password
     public static User login(String email, String password) {
         String sql = SELECT_LOGIN;
         try {
@@ -183,11 +183,11 @@ public class UserDAO {
         return null;
     }
 
-    private static final String CHECK_EMAIL_EXIST = "SELECT ID FROM [User] WHERE Email = ?";
+    private static final String SELECT_USER_BY_EMAIL = "SELECT ID FROM [User] WHERE Email = ?";
 
     //ham nay dung de kiem tra email co bi trung ko, ap dung khi tao tk moi
     public static boolean checkDuplicateEmail(String email) {
-        String sql = CHECK_EMAIL_EXIST;
+        String sql = SELECT_USER_BY_EMAIL;
         try {
             PreparedStatement ps = conn.prepareStatement(sql);
             ps.setString(1, email);

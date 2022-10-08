@@ -18,7 +18,6 @@ function Validator(options) {
         // if errorMsg have value (error) -> exit executing
         for (var i = 0; i < rules.length; i++) {
             errorMsg = rules[i](inputElem.value);
-            console.log(errorMsg);
             if (errorMsg)
                 break;
         }
@@ -36,6 +35,7 @@ function Validator(options) {
     }
     var formElem = document.querySelector(options.form);
     if (formElem) {
+
         //submitting form
         formElem.onsubmit = e => {
             e.preventDefault();
@@ -88,6 +88,13 @@ function Validator(options) {
                 }
             }
         });
+        //onload
+        if (typeof options.onLoad === 'function') {
+            options.rules.forEach(rule => {
+                var inputElem = formElem.querySelector(rule.selector);
+                validate(inputElem, rule);
+            });
+        }
     } else {
         console.log(options.form + " doesn't exist'");
     }

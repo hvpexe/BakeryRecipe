@@ -2,28 +2,22 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/Servlet.java to edit this template
  */
-package controller;
+package controller.ajax;
 
-import com.google.api.services.gmail.model.Message;
 import java.io.IOException;
 import java.io.PrintWriter;
-import javax.mail.internet.MimeMessage;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import utilities.CreateEmail;
-import utilities.CreateMessage;
-import utilities.SendMessage;
 
 /**
  *
  * @author Admin
  */
-@WebServlet(name = "TestingController", urlPatterns = {"/test"})
-
-public class TestingController extends HttpServlet {
+@WebServlet(name = "GetInstructionTemplate", urlPatterns = {"/ajax/GetInstructionTemplate"})
+public class GetInstructionTemplate extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -37,25 +31,26 @@ public class TestingController extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
-        PrintWriter out = response.getWriter();
-        try {
-            out.println("Email Tesing");
-            MimeMessage mm
-                    = CreateEmail.createEmail("binhntse160860@fpt.edu.vn","binhnguyenthanh19242yahoo@gmail.com ", "Send Mail Test", "http://localhost:8080/BakeryRecipe/");
-
-            out.println("<br>");
-            out.println(mm.getContent());
-            Message mess = CreateMessage.createMessageWithEmail(mm);
-            out.println("<br>");
-            out.println(mess);
-
-            SendMessage.sendEmail("binhntse160860@fpt.edu.vn","binhnguyenthanh19242yahoo@gmail.com " );
-            out.println("<br>Email Send!" + mm);
-        } catch (Exception ex) {
-            System.out.println("==================================================================");
-            System.out.println(ex.getMessage());
-            ex.printStackTrace();
-
+        try ( PrintWriter out = response.getWriter()) {
+            /* TODO output your page here. You may use following sample code. */
+            out.println("<div class=\"col align-items-center p-0 \" id=\"inst\">\n" +
+"                                <h5 class=\"text-secondary col-12 p-0\">\n" +
+"                                    Step 0\n" +
+"                                    <input name=\"step\" type=\"hidden\" value=\"0\">\n" +
+"                                </h5>\n" +
+"                                <div class=\"col hover-highlight p-0 pr-2 d-flex align-items-center border border-secondary rounded\"\n" +
+"                                     onclick='showDetail([instructionView()])' >\n" +
+"                                    <div class=\"inst-img d-inline-flex align-items-center justify-content-center\" \n" +
+"                                         onclick=\"this.querySelector('input').click();\"\n" +
+"                                         >\n" +
+"                                        <img>\n" +
+"                                        <input name='inst-image'  id='inst-image' class=\"d-none\" type=\"file\" \n" +
+"                                               accept=\"image/*\" onchange=\"changeImg(this.parentElement, window.URL.createObjectURL(this.files[0]))\">\n" +
+"                                    </div>\n" +
+"                                    <input class=\"instruction-box-input col \" value=\"hello\" name='inst-description' disabled  id=\"inst-description\"  type=\"text\">\n" +
+"                                    <div class=\"item-trashbin fas fa-trash ml-auto description-button\"></div>\n" +
+"                                </div>\n" +
+"                            </div>");
         }
     }
 

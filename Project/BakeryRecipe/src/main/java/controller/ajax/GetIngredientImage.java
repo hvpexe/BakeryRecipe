@@ -36,13 +36,18 @@ public class GetIngredientImage extends HttpServlet {
         try ( PrintWriter out = response.getWriter()) {
             /* TODO output your page here. You may use following sample code. */
             String name = request.getParameter("name").trim();
+            String amount = request.getParameter("amount").trim();
             Ingredient item = IngredientDAO.getIngredientByName(name);
             if (item == null) {
                 item = new Ingredient();
             }
-            out.println("<img src=\"" + item.getImg() + "\" alt=\"" + name + "\"> \n"
-                    + "  <input class=\"col\" disabled value=\"" + name + "\"> \n"
-                    + "  <div class=\"item-trashbin fas fa-trash ml-auto description-button\"></div>");
+            out.println("<div class=\"col p-0 hover-highlight align-items-center p-0 pr-2 border border-secondary\" id=\"item\">\n"
+                    + "                                <img src=\""+item.getImg()+"\" alt=' ' > \n"
+                    + "                                <input name=\"ingre-name\" class=\"col\" disabled value=\""+name+"\">\n"
+                    + "                                <span>Amount:</span> \n"
+                    + "                                <input name=\"ingre-amount\" class=\"col bg-white ml-2 mr-4\" placeholder=\"1 egg\" value=\""+amount+"\"> \n"
+                    + "                                <div class=\"item-trashbin fas fa-trash ml-auto description-button\"></div>\n"
+                    + "                            </div>");
         }
     }
 //<editor-fold defaultstate="collapsed">

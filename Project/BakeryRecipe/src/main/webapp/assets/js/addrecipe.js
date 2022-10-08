@@ -1,58 +1,67 @@
 let formElem = document.getElementById('add-recipe');
-let ingredentElem = document.getElementById('ingredient');
+
+let instructionElem = document.getElementById('instruction');
 formElem.onsubmit = e => {
     e.preventDefault();
 }
-ingredentElem.onkeyup = e => {
+function checkKeyEnter(e) {
+    return e.key === "Enter";
+}
+function getParam(elem) {
+    let result = [];
+    for (var i = 0; i < elem.length; i++) {
+        var item = elem[i];
+        result.push({
+            name: item.name,
+            value: item.value || '1 ',
+        });
+        item.value = '';
+    }
+    return result;
+}
+function changeImg(elem, value, check) {
+    console.log(value);
+    if (elem.tagName != 'img') {
 
-    if (e.key === 'Enter') {
-        var elem = e.target;
-        var container = elem.parentElement;
-        //jQuery.get( url [, data ] [, success ] [, dataType ] ); 
-        var count = parseInt(elem.dataset.count) + 1;
-        // i want the newItem function to insert in the id and the new ID so that 
-        // i can insert new searched element 
-        var clone = newItem('#item', 'item' + count);
+        elem.style.backgroundImage = 'url(' + value + ')';
+        return;
+    } else
+        elem.src = value;
+
+}
+
+function ItemCopy(option) {
+    var inputElement = $(option.selector);
+    function runAjax(url, param, run) {
         $.ajax({
-            url: "ajax/GetIngredientImage",
-            type: "get", //send it through get method
-            data: {
-                name: elem.value
+            url: url, data: param,
+            success: function (data) {
+                console.log(option.container);
+                option.run(data, option.container);
             },
-            success: function (response) {
-                //Do Something
-                var id = clone.id;
-
-                $(clone.item).html(response);
-                container.insertBefore(clone.item, elem);
-                //img tag
-                $(clone.item).children()[0].onerror = () => {
-                    this.src = "assets/images/ingredients/default.png";
-                }
-                //trashbin tag
-                $(clone.item).children()[2].onclick = (e) => {
-                    e.target.parentElement.remove();
-                }
-                elem.value = '';
-                elem.setAttribute('data-count', count);
-            },
-            error: function (xhr) {
-                //Do Something to handle error
-                $('#test').html('error');
+            error: function () {
+                console.log('error');
             }
         });
-        return;
     }
+    if (option.copy) {
+        inputElement.keyup(e => {
+            if (checkKeyEnter(e)) {
+                var clone = $(option.copy).clone(true);
+                option.run(clone, option.container);
+            }
+        });
+
+    } else
+    if (option.url) {
+        inputElement.keyup(e => {
+            if (checkKeyEnter(e)) {
+                runAjax(option.url, getParam(inputElement), option.run);
+            }
+        });
+    } else {
+        console.log('error: nothing to copy');
+    }
+
 }
-function newItem(item, newID, test) {
-    var item = document.querySelector(item).cloneNode();
-    item.setAttribute("id", newID);
-    return {
-        id: '#' + newID,
-        item: item
-    };
-}
-function changeImg(elem, value) {
-    console.log(value);
-    elem.src = value;
-} 
+;

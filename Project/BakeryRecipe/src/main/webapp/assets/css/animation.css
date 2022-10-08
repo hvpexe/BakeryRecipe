@@ -27,3 +27,16 @@
         top: 100px;
     }
 }
+[class^=hover] {
+    transition:0.3s;
+}
+.hover-highlight:hover {
+    box-shadow: 0 4px 4px 0 #00000025;
+    translate:0 -2px;
+}
+.hover-button-1:hover{
+    box-shadow: 0 0 400px inset #00000025;
+}
+.hover-button-1:active{
+    box-shadow: 0 0 400px inset #00000050;
+}

@@ -277,7 +277,6 @@ input,textarea{
     gap: 7px;
 }
 .instruction-box-input {
-    border: 8px solid rgba(250, 248, 248, 0.5);
     background-color: #faf8f8;
     box-shadow: 0 4px 4px rgba(0, 0, 0, 0.25);
     box-sizing: border-box;
@@ -353,9 +352,12 @@ input,textarea{
     flex-direction: column;
     align-items: center;
 }
+div#item{
+    /*display: none;*/
+}
 div[id^=item]
 {
-    border:2px solid var(--yellow-theme);
+    display: flex;
     border-radius: 10px;
 }
 div[id^=item] img {
@@ -372,7 +374,7 @@ div[id^=item] input {
     color:#000;
     font-weight: bold;
 }
-div[id^=item] .item-trashbin {
+:is(div[id^=item],div[id^=inst]) .item-trashbin {
     aspect-ratio:1/1;
     background: var(--pink-theme);
     display: flex;
@@ -383,18 +385,56 @@ div[id^=item] .item-trashbin:hover {
 
 }
 div[id^=inst]{
+    display: flex;
+    flex-wrap: wrap;
 }
 div[id^=inst] .inst-img{
     width: 3.5em;
-    border-top-left-radius: 10px;
-    border-bottom-left-radius: 10px;
+    border-radius: inherit;
     background: var(--white);
     aspect-ratio:1/1;
     position: relative;
-
+    background-image: url( '../images/avt/avatar2@2x.png' );
+    background-position: center;
+    background-size: cover;
 }
-div[id^=inst] .inst-img img{
+div[id^=inst] .inst-img img[src]{
     position: absolute;
-    left:0 right:0 top:0;
+    left:0;
+    right:0;
+    top:0;
+
     width:100%;
+}
+div[id^=inst] [id^=inst-desc] {
+    background: none;
+    border: none;
+    text-transform: capitalize;
+    color:#000;
+    font-weight: bold;
+    box-shadow: none;
+}
+textarea[id^=inst]{
+    height:2.5em;
+    margin: 0;
+    margin-right: 2.5em;
+    border: 0;
+    display: flex;
+    align-items: center;
+}
+#inst-input  {
+    position: relative;
+}
+#inst-input .accept-input {
+    position: absolute;
+    right: 15px;
+    width: auto;
+    aspect-ratio: 1/1;
+    top: 0;
+    bottom: calc(100% - 39px);
+    margin: auto;
+    background: var(--info);
+}
+div[id$=container]{
+    
 }

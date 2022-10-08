@@ -6,7 +6,7 @@
 
 <%@page import="dao.UserDAO"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<%@page contentType="text/html" pageEncoding="UTF-8"%>
+<%@ page language="java" pageEncoding="utf8" contentType="text/html;charset=UTF-8" %>
 <!DOCTYPE html>
 <html>
     <head>
@@ -59,30 +59,31 @@
         <c:import url="header.jsp"/>
         <section class="section container-fluid row px-0 m-0">
             <aside class="col-12  col-sm-9 col-lg-5 mx-auto px-3" id="form-object">
-                <form class="login-form mx-1 rounded flex-column align-items-center" 
+                <form class="login-form mx-1 ${REGISTER_ERROR!=null?'d-none':''} rounded flex-column align-items-center" 
                       id="formLogin" action="login" method="post">
                     <div class="invitation-text col-10">WELCOME BACK<br> to <br>Bakery Recipe </div>
                     <div class="d-none" id="g_id_onload" data-client_id="243057477675-kt58mr9lav8eh6ti9bfrj8p782j7unkd.apps.googleusercontent.com" data-login_uri="BakeryRecipe/home.jsp" data-callback="handleCredentialResponse">
                     </div>
                     <div class="g_id_signin" data-type="icon" data-size="large" placeholder="Email" data-theme="filled_blue" data-text="sign_in_with" data-shape="circle" data-logo_alignment="left"><div class="S9gUrf-YoZ4jf" style="position: relative;"><div></div><iframe src="https://accounts.google.com/gsi/button?type=icon&amp;size=large&amp;theme=filled_blue&amp;text=sign_in_with&amp;shape=circle&amp;logo_alignment=left&amp;client_id=243057477675-kt58mr9lav8eh6ti9bfrj8p782j7unkd.apps.googleusercontent.com&amp;iframe_id=gsi_812950_790204&amp;as=MCsvGUZ%2Fo6jE5lvjeZjhzQ" id="gsi_812950_790204" title="Sign in with Google Button" style="display: block; position: relative; top: 0px; left: 0px; height: 44px; width: 64px; border: 0px; margin: -2px -12px;"></iframe></div></div>
                     <div class="input col-10 p-0" placeholder="Email">
-                        <input class="email-input1 col rounded" type="text" placeholder="   " form="formLogin"
+                        <input class="email-input1 col rounded" type="text" value="${param.email}" placeholder="   " form="formLogin"
                                name="email"  >
                         <span class="status"></span> 
                     </div>
                     <div class="input col-10 p-0" placeholder="Password" regex="">
-                        <input class="password-input1 col rounded" type="password" placeholder="   "form="formLogin" 
+                        <input class="password-input1 col rounded" type="password" value="${param.password}" placeholder="   "form="formLogin" 
                                name="password" >
                         <span class="status"></span> 
                     </div>
-                    <input class="submit-button col-10" value="LOGIN" type="submit" form="formLogin">
+                    <div class="text-danger">${LOGIN_ERROR}</div>
 
+                    <input class="submit-button col-10" value="LOGIN" type="submit" form="formLogin">
                     <div class="forgot-pass col-10 text-center">Forgot your password?</div>
                     <div class="text-danger"></div>
                     <hr width="100%"/>
                     <div class="change-form">Sign Up</div>
                 </form>
-                <form class="register-form d-none mx-1 rounded flex-column align-items-center " action="register" id="formRegister" method="POST">
+                <form class="register-form ${REGISTER_ERROR!=null?'':'d-none'}  mx-1 rounded flex-column align-items-center " action="register" id="formRegister" method="POST">
                     <div class="invitation-text col-10">
                         Join BakeryRecipe! 
                         <br>
@@ -97,29 +98,29 @@
                          data-logo_alignment="center">
                     </div>
                     <div class="input col-10 p-0" placeholder="Email">
-                        <input class="email-input1 col rounded" type="text" placeholder="   " form="formRegister"
+                        <input class="email-input1 col rounded" type="text" value="${param.email}" placeholder="   " form="formRegister"
                                name="email"  >
                         <span class="status"></span> 
                     </div>
                     <div class=" col-10 row justify-content-between bg-white p-0">
                         <div class="input col p-0 mr-2" placeholder="First name">
-                            <input class="rounded col" type="text" placeholder="  " name="firstname">
+                            <input class="rounded col" type="text" placeholder="  " value="${firstname}" name="firstname">
                             <span class="status"></span> 
                         </div>
                         <div class="input col p-0 ml-2" placeholder="Last name">
-                            <input class="rounded col" type="text" placeholder="  "  name="lastname">
+                            <input class="rounded col" type="text" placeholder="  " value="${lastname}" name="lastname">
                             <span class="status"></span> 
                         </div>
                     </div>
                     <div class="input col-10 p-0" placeholder="Password">
-                        <input class="col rounded" type="password" placeholder=" "  name="password">
+                        <input class="col rounded" type="password" placeholder=" " value="${param['password']}" " name="password">
                         <span class="status"></span> 
                     </div>
                     <div class="input col-10 p-0" placeholder="Re-enter password">
-                        <input class="col rounded" type="password" placeholder=" "  name="re-password">
+                        <input class="col rounded" type="password" placeholder=" " value="${param['re-password']}" " name="re-password">
                         <span class="status"></span> 
                     </div>
-                    <div>${REGISTER_ERROR}</div>
+                    <div class="text-danger">${REGISTER_ERROR}</div>
                     <button class="submit-button col-10" type="submit" form="formRegister">
                         <b class="join-b">JOIN</b>
                     </button>
@@ -138,43 +139,54 @@
         <form class="d-none" id="googleLogin" action="login" method="POST"></form>
         <script src="assets/js/validator.js"></script>
         <script>
-            //expected
+            //login validator
             Validator({
-                form: '#formLogin',
-                status: '.status',
-                rules: [
-                    Validator.isRequired('[name=email]'),
-                    Validator.isEmail('[name=email]'),
-                    Validator.isRequired('[name=password]'),
-                    Validator.isPassword('[name=password]')
-                ],
-                onSubmit: (value) => {
-                    //Call api here
-                    console.log(value);
-                }
+            form: '#formLogin',
+                    status: '.status',
+                    rules: [
+                            Validator.isRequired('[name=email]'),
+                            Validator.isEmail('[name=email]'),
+                            Validator.isRequired('[name=password]'),
+                            Validator.isPassword('[name=password]')
+                    ],
+                    onSubmit: (value) => {
+            //Call api here
+            console.log(value);
+            },
+            <c:if test="${LOGIN_ERROR!=null}">
+            onLoad: () => {
+            console.log('${LOGIN_ERROR}');
+            }
+            </c:if>
             });
+            //register validator
             Validator({
-                form: '#formRegister',
-                status: '.status',
-                rules: [
-                    Validator.isRequired('[name=email]'),
-                    Validator.isEmail('[name=email]'),
-                    Validator.isRequired('[name=firstname]'),
-                    Validator.isRequired('[name=password]'),
-                    Validator.isPassword('[name=password]'),
-                    Validator.isRequired('[name=re-password]'),
-                    Validator.isSameValue('[name=re-password]',
-                            //this function return the value of re-password
-                                    function () {
-                                        return document.querySelector('#formRegister [name=password]').value;
+            form: '#formRegister',
+                    status: '.status',
+                    rules: [
+                            Validator.isRequired('[name=email]'),
+                            Validator.isEmail('[name=email]'),
+                            Validator.isRequired('[name=firstname]'),
+                            Validator.isRequired('[name=password]'),
+                            Validator.isPassword('[name=password]'),
+                            Validator.isRequired('[name=re-password]'),
+                            Validator.isSameValue('[name=re-password]',
+                                    //this function return the value of re-password
+                                            function () {
+                                            return document.querySelector('#formRegister [name=password]').value;
+                                            }
+                                    , "Passwords are not the same")
+                                    ],
+                                            onSubmit: (value) => {
+                                    //Call api here
+                                    console.log(value);
+                                    },
+            <c:if test="${REGISTER_ERROR!=null}">
+                                    onLoad: () => {
+                                    console.log('${REGISTER_ERROR}');
                                     }
-                            , "Passwords are not the same")
-                        ],
-                        onSubmit: (value) => {
-                            //Call api here
-                            console.log(value);
-                        }
-                    });
+            </c:if>
+                                    });
         </script>
         <script src="assets/js/login.js" type="text/javascript"></script>
     </body>

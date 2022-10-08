@@ -13,6 +13,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
+import jdk.nashorn.internal.ir.ContinueNode;
 import stackjava.com.accessgoogle.common.GooglePojo;
 
 /**
@@ -47,11 +48,17 @@ public class LoginController extends HttpServlet {
             if (code == null || code.isEmpty()) {
                 String email = request.getParameter("email");
                 String password = request.getParameter("password");
-                if (password.length() < 8) {
+                if (!UserDAO.checkDuplicateEmail(email)) {
+                    request.setAttribute("LOGIN_ERROR", "Email Not Found!");
+                } else if (password.length() < 8) {
                     request.setAttribute("LOGIN_ERROR", "Password must be at least 8 characters!");
-                }
-                loginUser = UserDAO.login(email, password);
+                } else {
+                    loginUser = UserDAO.login(email, password);
 //                System.out.println("Login normal" + loginUser);
+                    if (loginUser == null) {
+                        request.setAttribute("LOGIN_ERROR", "Login Failed! Wrong email of Password");
+                    }
+                }
             } else {
                 loginUser = (User) request.getAttribute("LOGIN_USER");
 //                System.out.println("Login Google" + loginUser);s
@@ -59,7 +66,7 @@ public class LoginController extends HttpServlet {
         } catch (Exception e) {
             log("Error at LoginController" + e.toString());
         } finally {
-            if (loginUser != null) {
+            if (loginUser != null && request.getAttribute("LOGIN_ERROR") == null) {
                 session.setAttribute("login", loginUser);
                 String roleID = loginUser.getRole();
                 Boolean isActive = loginUser.isIsActive();

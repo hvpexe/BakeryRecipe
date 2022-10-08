@@ -2,28 +2,28 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/Servlet.java to edit this template
  */
-package controller.baker;
+package controller;
 
-import dao.UserDAO;
-import dto.User;
+import com.google.api.services.gmail.model.Message;
 import java.io.IOException;
 import java.io.PrintWriter;
-import java.sql.Date;
+import javax.mail.internet.MimeMessage;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
-import javax.servlet.http.Part;
-import utils.Tools;
+import utilities.CreateEmail;
+import utilities.CreateMessage;
+import utilities.SendMessage;
 
 /**
  *
- * @author PhuHV
+ * @author Admin
  */
-@WebServlet(name = "RegisterAccountController", urlPatterns = {"/register"})
-public class RegisterAccountController extends HttpServlet {
+@WebServlet(name = "DebugController", urlPatterns = {"/debug"})
+
+public class DebugController extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -36,35 +36,27 @@ public class RegisterAccountController extends HttpServlet {
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        String role = "user";
-        String email = request.getParameter("email");
-        String firstname = request.getParameter("firstname");
-        String lastname = request.getParameter("lastname");
-        firstname = Tools.toUTF8(firstname);
-        lastname = Tools.toUTF8(lastname);
-        String password = request.getParameter("password");
-        String rePassword = request.getParameter("re-password");
-        Date dateRegister = new Date(System.currentTimeMillis());
-        
-        if (UserDAO.checkDuplicateEmail(email)) {
-            request.setAttribute("REGISTER_ERROR", "Email alreadly exist!");
-        } else if (password.length() < 8) {
-            request.setAttribute("REGISTER_ERROR", "Password must be at least 8 characters!");
-        } else if (!rePassword.equals(password)) {
-            request.setAttribute("REGISTER_ERROR", "Password mismatched");
-        } else {
-            UserDAO.register(email, password, firstname, lastname);
-            User user = UserDAO.login(email, password);
-            HttpSession session = request.getSession();
-            session.setAttribute("LOGIN_USER", user);
-            response.sendRedirect("home.jsp");
-            return;
+        response.setContentType("text/html;charset=UTF-8");
+        PrintWriter out = response.getWriter();
+        try {
+            out.println("Email Tesing");
+            MimeMessage mm
+                    = CreateEmail.createEmail("binhntse160860@fpt.edu.vn","binhnguyenthanh19242yahoo@gmail.com ", "Send Mail Test", "http://localhost:8080/BakeryRecipe/");
+
+            out.println("<br>");
+            out.println(mm.getContent());
+            Message mess = CreateMessage.createMessageWithEmail(mm);
+            out.println("<br>");
+            out.println(mess);
+
+            SendMessage.sendEmail("binhntse160860@fpt.edu.vn","binhnguyenthanh19242yahoo@gmail.com " );
+            out.println("<br>Email Send!" + mm);
+        } catch (Exception ex) {
+            System.out.println("==================================================================");
+            System.out.println(ex.getMessage());
+            ex.printStackTrace();
+
         }
-        if(request.getAttribute("REGISTER_ERROR")!=null){
-            request.setAttribute("firstname", firstname);
-            request.setAttribute("lastname", lastname);
-        }
-        request.getRequestDispatcher("login.jsp").forward(request, response);
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
