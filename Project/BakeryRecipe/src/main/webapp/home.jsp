@@ -26,7 +26,7 @@
                     <div class="user-recipe">
                         <div class="media recipe-header">
                             <img class="recipe-ava"
-                                 src="${re.avatar}"
+                                 src="<c:out value="${re.getAvatar()}"/>"
                                  alt="avatar" />
                             <div class="media-body ml-3">
                                 ${re.username}

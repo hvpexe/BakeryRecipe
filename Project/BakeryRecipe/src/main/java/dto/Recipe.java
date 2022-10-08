@@ -4,6 +4,8 @@
  */
 package dto;
 
+import static dto.User.DEFAULT_AVATAR;
+import static dto.User.IMG_PATH;
 import java.sql.Timestamp;
 import java.util.ArrayList;
 import utils.Tools;
@@ -208,9 +210,10 @@ public class Recipe {
     public void setVideo(ArrayList<String> video) {
         this.video = video;
     }
-
+    
     public String getAvatar() {
-        return avatar;
+        if(avatar==null) return DEFAULT_AVATAR;
+        return IMG_PATH + avatar;
     }
 
     public void setAvatar(String avatar) {

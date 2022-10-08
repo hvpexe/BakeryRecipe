@@ -69,7 +69,7 @@
                     <div class="profile-recipe">
                         <div class="media recipe-header">
                             <img class="recipe-ava"
-                                 src="${re.avatar}"
+                                 src="<c:out value="${re.getAvatar()}"/>"
                                  alt="" />
                             <div class="media-body ml-3">
                                 ${re.username}

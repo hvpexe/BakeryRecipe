@@ -120,12 +120,6 @@ public class User {
         this.password = Password;
     }
 
-    public String getAvatar() {
-        if(avatar==null) return DEFAULT_AVATAR;
-        return //IMG_PATH + 
-                avatar;
-    }
-
     public String getName() {
         return name;
     }
@@ -136,6 +130,11 @@ public class User {
 
     public void setAvatar(String Avatar) {
         this.avatar = Avatar;
+    }
+
+    public String getAvatar() {
+        if(avatar==null) return DEFAULT_AVATAR;
+        return IMG_PATH + avatar;
     }
 
     public String getFirstName() {
