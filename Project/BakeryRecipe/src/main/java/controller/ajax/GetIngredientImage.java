@@ -42,11 +42,11 @@ public class GetIngredientImage extends HttpServlet {
                 item = new Ingredient();
             }
             out.println("<div class=\"col p-0 hover-highlight align-items-center p-0 pr-2 border border-secondary\" id=\"item\">\n"
-                    + "                                <img src=\""+item.getImg()+"\" alt=' ' > \n"
-                    + "                                <input name=\"ingre-name\" class=\"col\" disabled value=\""+name+"\">\n"
+                    + "                                <img src=\"" + item.getImg() + "\" alt=' ' > \n"
+                    + "                                <input name=\"ingre-name\" class=\"col\" disabled value=\"" + name + "\">\n"
                     + "                                <span>Amount:</span> \n"
-                    + "                                <input name=\"ingre-amount\" class=\"col bg-white ml-2 mr-4\" placeholder=\"1 egg\" value=\""+amount+"\"> \n"
-                    + "                                <div class=\"item-trashbin fas fa-trash ml-auto description-button\"></div>\n"
+                    + "                                <input name=\"ingre-amount\" class=\"col bg-white ml-2 mr-4\" placeholder=\"1 egg\" value=\"" + amount + "\"> \n"
+                    + "                                <div class=\"item-trashbin fas fa-trash ml-auto description-button\" onclick=\"this.parentElement.remove()\"></div>\n"
                     + "                            </div>");
         }
     }

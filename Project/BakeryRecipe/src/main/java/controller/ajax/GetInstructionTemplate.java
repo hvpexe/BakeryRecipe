@@ -33,24 +33,27 @@ public class GetInstructionTemplate extends HttpServlet {
         response.setContentType("text/html;charset=UTF-8");
         try ( PrintWriter out = response.getWriter()) {
             /* TODO output your page here. You may use following sample code. */
-            out.println("<div class=\"col align-items-center p-0 \" id=\"inst\">\n" +
-"                                <h5 class=\"text-secondary col-12 p-0\">\n" +
-"                                    Step 0\n" +
-"                                    <input name=\"step\" type=\"hidden\" value=\"0\">\n" +
-"                                </h5>\n" +
-"                                <div class=\"col hover-highlight p-0 pr-2 d-flex align-items-center border border-secondary rounded\"\n" +
-"                                     onclick='showDetail([instructionView()])' >\n" +
-"                                    <div class=\"inst-img d-inline-flex align-items-center justify-content-center\" \n" +
-"                                         onclick=\"this.querySelector('input').click();\"\n" +
-"                                         >\n" +
-"                                        <img>\n" +
-"                                        <input name='inst-image'  id='inst-image' class=\"d-none\" type=\"file\" \n" +
-"                                               accept=\"image/*\" onchange=\"changeImg(this.parentElement, window.URL.createObjectURL(this.files[0]))\">\n" +
-"                                    </div>\n" +
-"                                    <input class=\"instruction-box-input col \" value=\"hello\" name='inst-description' disabled  id=\"inst-description\"  type=\"text\">\n" +
-"                                    <div class=\"item-trashbin fas fa-trash ml-auto description-button\"></div>\n" +
-"                                </div>\n" +
-"                            </div>");
+            //?detail=hello&count=1
+            String detail = request.getParameter("detail");
+            String count = request.getParameter("count");
+
+            out.println("<div class=\"col align-items-center p-0 \" id=\"inst" + count + "\">\n"
+                    + "                                <h5 class=\"text-secondary col-12 p-0\">\n"
+                    + "                                    Step " + count + "\n"
+                    + "                                    <input name=\"step\" type=\"hidden\" value=\"0\">\n"
+                    + "                                </h5>\n"
+                    + "                                <div class=\"col hover-highlight  p-0 pr-2 d-flex align-items-center border border-secondary rounded\"\n"
+                    + "                                     onclick='showDetail(this)' >\n"
+                    + "                                    <div class=\"inst-img d-inline-flex fas fa-camera position-relative align-items-center justify-content-center\" \n"
+                    + "                                         onclick=\"this.querySelector('input').click();\"\n"
+                    + "                                         >\n"
+                    + "                                        <input name='inst-image' id='inst-image" + count + "' class=\"d-none\" readonly type=\"file\" \n"
+                    + "                                               accept=\"image/*\" onchange=\"changeIngrImg(this.parentElement, window.URL.createObjectURL(this.files[0]),event)\">\n"
+                    + "                                    </div>\n"
+                    + "                                    <input class=\"instruction-box-input col \" value=\"" + detail + "\" readonly name='inst-description' id=\"inst-description" + count + "\"  type=\"text\">\n"
+                    + "                                    <div class=\"item-trashbin fas fa-trash ml-auto description-button\" onclick=\"this.parentElement.parentElement.remove()\"></div>\n"
+                    + "                                </div>\n"
+                    + "                            </div>");
         }
     }
 

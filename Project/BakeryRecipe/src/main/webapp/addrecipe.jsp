@@ -103,7 +103,7 @@
                                 <img src="assets/images/image-261@2x.png" alt=' ' > 
                                 <input name="ingre-name" class="col" disabled value="black grapes">
                                 <span>Amount:</span> 
-                                <input name="ingre-amount" class="col bg-white ml-2 mr-4" placeholder="1 oz" value=""> 
+                                <input name="ingre-amount" class="col-2 bg-white ml-2 mr-4" placeholder="1 oz" value=""> 
                                 <div class="item-trashbin fas fa-trash ml-auto description-button"></div>
                             </div>
                         </div>
@@ -111,37 +111,34 @@
                             <input class="instruction-box-input col-7 " name='name' id="name" type="text" placeholder="Add one ingredient">
                             <span class="col d-flex align-items-center pr-0">Amount:</span>
                             <input class="instruction-box-input col-3 ml-1" name='amount' id="amount"  type="text" placeholder="1 Oz">
+                            <input type="hidden" name="count" value="1">
                         </div>
                     </div>
                     <div class="add-recipe-input col-12">
                         <div id="tes"></div>
                         <b class="label">Instructions</b>
-                        <div class="col d-block p-0 " id="inst-container">
-                            <div class="col align-items-center p-0 " id="inst">
+                        <div class="col d-block p-0 " id="inst-container" >
+                            <div class="col align-items-center p-0 " id="inst1">
                                 <h5 class="text-secondary col-12 p-0">
                                     Step 0
                                     <input name="step" type="hidden" value="0">
                                 </h5>
-                                <div class="col hover-highlight p-0 pr-2 d-flex align-items-center border border-secondary rounded"
-                                     onclick='showDetail(this)' >
-                                    <div class="inst-img d-inline-flex align-items-center justify-content-center" 
-                                         onclick="this.querySelector('input').click();"
-                                         >
-                                        <input name='inst-image'  id='inst-image' class="d-none" readonly type="file" 
-                                               accept="image/*" onchange="changeImg(this.parentElement, window.URL.createObjectURL(this.files[0]))">
+                                <div class="col hover-highlight  p-0 pr-2 d-flex align-items-center border border-secondary rounded" onclick="showDetail(this);">
+                                    <div class="inst-img d-inline-flex fas fa-camera position-relative align-items-center justify-content-center" onclick="this.querySelector('input').click();">
+                                        <input name="inst-image" id="inst-image1" class="d-none" readonly="" type="file" accept="image/*" onchange="changeIngrImg(this.parentElement, window.URL.createObjectURL(this.files[0]), event)">
                                     </div>
-                                    <input class="instruction-box-input col " value="detail" readonly name='inst-description' id="inst-description"  type="text">
-                                    <div class="item-trashbin fas fa-trash ml-auto description-button"></div>
+                                    <input class="instruction-box-input col " value="dasd
+                                           " readonly="" name="inst-description" id="inst-description1" type="text">
+                                    <div class="item-trashbin fas fa-trash ml-auto description-button" onclick="this.parentElement.parentElement.remove()"></div>
                                 </div>
                             </div>
                         </div>
 
                     </div>
                     <div class="col" id="instruction">
-                        <textarea class="instruction-box-input col pr-3" name='detail' type="text"
-                                  placeholder="Paste one or multiple steps (e.g. Finely chop the garlic)"></textarea>
+                        <textarea class="instruction-box-input col-11 pt-2 pr-3" name="detail" type="text" placeholder="Paste one or multiple steps (e.g. Finely chop the garlic)"></textarea>
                         <input type="hidden" name="count" value="1">
-                        <div class="accept-input fas fa-check d-flex align-items-center justify-content-center hover-button-1" ></div>
+                        <div class="accept-input fas fa-check d-flex align-items-center justify-content-center col-1 hover-button-1"></div>
                     </div>
                     <div class="time-to-cook-div col">
                         <div class="add-recipe-input col">
@@ -155,25 +152,48 @@
                     </div>
             </main>
         </main>
+        <!--Detail Showing item detail-->
+        <div class="d-none" id="detail" viewing="">
+            <div class="gray-box"></div>
+            <div class="exit-btn"></div>
+            <div class="container col col-md-6 p-3 rounded">
+                <h4 class="step">Step <span>0</span></h4>
+                <div class="col-10 mx-auto my-2">
+                    <img class="col mx-auto" src="assets/images/rectangle-20@2x.png" alt="Image not found" id="detail-image" >
+                </div>
+                <h5>Instruction</h5>
+                <textarea class="rounded col border" value=""></textarea> 
+                <div class="mt-auto d-flex justify-content-end">
+                    <div class="cancel-btn hover-button-1 hover-highlight font-weight-bold">Cancel</div>
+                    <div class="save-btn hover-button-1 hover-highlight font-weight-bold">Save</div>
+                </div>
+            </div>
+        </div>
         <script src="assets/js/addrecipe.js"></script>
         <script src="assets/js/validator.js"></script>
         <script>
-                                                   ItemCopy({
-                                                       selector: '#ingredient [name]',
-                                                       run: (result, container) => {
-                                                           $(container).append(result);
-                                                       },
-                                                       container: '#ingredient-container',
-                                                       url: 'ajax/GetIngredientImage',
-                                                   });
-                                                   ItemCopy({
-                                                       selector: '#instruction [name]',
-                                                       run: (result, container) => {
-                                                           $(container).append(result);
-                                                       },
-                                                       url: 'ajax/GetInstructionTemplate',
-                                                       container: '#inst-container',
-                                                   });
+                                        ItemCopy({
+                                            selector: '#ingredient [name]',
+                                            run: (result, container) => {
+                                                $(container).append(result);
+                                            },
+                                            count: '#ingredient [name=count]',
+                                            container: '#ingredient-container',
+                                            url: 'ajax/GetIngredientImage',
+                                        });
+                                        ItemCopy({
+                                            selector: '#instruction [name]',
+                                            run: (result, container, step) => {
+                                                if (step) {
+                                                    var count = document.querySelector(step);
+                                                    count.setAttribute('value', parseInt(count.value) + 1);
+                                                }
+                                                $(container).append(result);
+                                            },
+                                            count: '#instruction [name=count]',
+                                            url: 'ajax/GetInstructionTemplate',
+                                            container: '#inst-container',
+                                        });
         </script>
     </body>
 </html>
