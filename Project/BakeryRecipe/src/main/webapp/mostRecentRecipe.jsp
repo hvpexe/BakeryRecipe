@@ -71,7 +71,7 @@
                     </c:forEach>
                 </div>
                 <c:forEach begin="1" end="${totalPage}" var="i">
-                    <a href="MostRecentRecipe?index=${i}">${i}</a>
+                    <a href="MostRecentRecipe?index=${i}" class="paging">${i}</a>
                 </c:forEach> 
             </div>
         </div>

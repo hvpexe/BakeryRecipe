@@ -176,6 +176,6 @@ body {
   }
   .paging.active:hover{
       background-color: #FFC85C;
-      color: 
+      color: var(--main-theme-color);
   }
 }
