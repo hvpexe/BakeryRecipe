@@ -14,6 +14,13 @@ public class Ingredient {
     private static final String DEFAULT_IMG = IMG_PATH + "default.png";
     private String name;
     private String img;
+    private String amount;
+
+    public Ingredient(String name, String img, String amount) {
+        this.name = name;
+        this.img = img;
+        this.amount = amount;
+    }
 
     public Ingredient() {
     }

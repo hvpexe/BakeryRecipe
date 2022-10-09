@@ -4,6 +4,9 @@ import dto.Ingredient;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
 import utils.DBUtils;
 
 /**
@@ -68,5 +71,37 @@ public class IngredientDAO {
             e.printStackTrace();
         }
         return null;
+    }
+    
+    private static final String LIST_INGREDIENT ="select ingre.[Name],ingre.[Img],ingreRe.Amount\n" +
+"            from [dbo].[Ingredient] ingre join [dbo].[IngredientRecipe] ingreRe\n" +
+"            on ingre.ID =ingreRe.IngredientID\n" +
+"            join [dbo].[Recipe] re on ingreRe.RecipeID =re.ID\n" +
+"            where re.ID = ? ";
+
+    public List<Ingredient> listIngredient(int recipeID) throws SQLException {
+        List<Ingredient> listIgre = new ArrayList<>();
+        Connection conn = null;
+        PreparedStatement ptm = null;
+        ResultSet rs = null;
+        try {
+            conn = DBUtils.getConnection();
+            ptm = conn.prepareStatement(LIST_INGREDIENT);
+            ptm.setInt(1, recipeID);
+//            ptm.setString(2, des);
+            rs = ptm.executeQuery();
+            while (rs.next()) {
+                String name = rs.getString("Name");
+                String img = rs.getString("Img");
+                String amount = rs.getString("Amount");
+                Ingredient sc;
+                sc = new Ingredient(name, img, amount);
+                listIgre.add(sc);
+            }
+        } catch (Exception e) {
+            System.out.println("System have error !!!");
+        } 
+        return listIgre;
+
     }
 }

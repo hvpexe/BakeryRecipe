@@ -219,41 +219,31 @@ public class RecipeDAO {
         return null;
     }
 
-    private static final String LIST_VIDEO = " SELECT [link]\n"
-            + "FROM [dbo].[Video] video join [dbo].[Recipe] recipe\n"
-            + "on video.RecipeID = recipe.ID\n"
-            + "where recipe.ID = ?";
+       private static final String LIST_PICTURE = "  SELECT pic.img,recipe.Video\n"
+            + " FROM  [dbo].[Recipe] recipe\n"
+            + "join [dbo].[Picture] pic\n"
+            + "on pic.RecipeID=recipe.ID\n"
+            + "   where recipe.ID = ?";
 
-    public ArrayList<String> listVideo(int recipeID) throws SQLException {
-        ArrayList<String> listVideo = new ArrayList<>();
+    public static ArrayList<String> listPicture(int recipeID) throws SQLException {
+        ArrayList<String> listPicture = new ArrayList<>();
         Recipe recipe = new Recipe();
         Connection conn = null;
         PreparedStatement ptm = null;
         ResultSet rs = null;
         try {
             conn = DBUtils.getConnection();
-            ptm = conn.prepareStatement(LIST_VIDEO);
+            ptm = conn.prepareStatement(LIST_PICTURE);
             ptm.setInt(1, recipeID);
             rs = ptm.executeQuery();
             while (rs.next()) {
-                String video = rs.getString("link");
-                listVideo.add(video);
-                recipe.setVideo(listVideo);
+                String picture = rs.getString("img");
+                listPicture.add(picture);
             }
         } catch (Exception e) {
             System.out.println("System have error !!!");
-        } finally {
-            if (rs != null) {
-                rs.close();
-            }
-            if (ptm != null) {
-                ptm.close();
-            }
-            if (conn != null) {
-                conn.close();
-            }
         }
-        return recipe.getVideo();
+        return listPicture;
 
     }
 
@@ -297,7 +287,7 @@ public class RecipeDAO {
 
     }
 
-    private static final String LIST_STEP = "SELECT [InsStep],[Detail],[Img]\n"
+  private static final String LIST_STEP = "SELECT [InsStep],[Detail],[Img]\n"
             + "FROM [dbo].[Instruction] instruc join [dbo].[Recipe] recipe \n"
             + "ON instruc.RecipeID = recipe.ID\n"
             + "WHERE recipe.ID = ?";
@@ -324,16 +314,6 @@ public class RecipeDAO {
         } catch (Exception e) {
             System.out.println("System have error !!!" + e);
 
-        } finally {
-            if (rs != null) {
-                rs.close();
-            }
-            if (ptm != null) {
-                ptm.close();
-            }
-            if (conn != null) {
-                conn.close();
-            }
         }
         return liststep;
     }
@@ -419,6 +399,62 @@ public class RecipeDAO {
         return null;
     }
 
+     private static final String COOK_DETAIL = "SELECT [Name],[Like],[Save],[Comment],[PrepTime],[CookTime],[Description],[DatePost]\n"
+            + "FROM [dbo].[Recipe] recipe join [dbo].[User] baker\n"
+            + "on recipe.UserID =baker.ID\n"
+            + "WHERE baker.ID = ? and recipe.ID =?";
+
+    public Recipe recipeDetail(int userID,int recipeID) {
+        Recipe recipe = null;
+        Connection conn = null;
+        PreparedStatement ptm = null;
+        ResultSet rs = null;
+        try {
+            conn = DBUtils.getConnection();
+            ptm = conn.prepareStatement(COOK_DETAIL);
+            ptm.setInt(1, userID);
+            ptm.setInt(2, recipeID);
+            rs = ptm.executeQuery();
+            while (rs.next()) {
+                String name = rs.getString("Name");
+                String description = rs.getString("Description");
+                int like = rs.getInt("Like");
+                int save = rs.getInt("Save");
+                int prepTime = rs.getInt("PrepTime");
+                int cookTime = rs.getInt("CookTime");
+                int comment = rs.getInt("Comment");
+                recipe = new Recipe(name, description, like, save, comment, prepTime, cookTime);
+            }
+        } catch (Exception e) {
+            System.out.println("System have error !!!" + e);
+        }
+        return recipe;
+    }
+    
+    
+     private static final String VIDEO_DETAIL = "SELECT [Video]\n"
+            + "FROM [dbo].[Recipe] recipe join [dbo].[User] baker\n"
+            + "ON recipe.[UserID]= baker.[ID]\n"
+            + "WHERE baker.[ID] = ?";
+
+    public String recipeVideo(int userID) {
+        Connection conn = null;
+        PreparedStatement ptm = null;
+        ResultSet rs = null;
+        String theVideo = null;
+        try {
+            conn =DBUtils.getConnection();
+            ptm = conn.prepareStatement(VIDEO_DETAIL);
+            ptm.setInt(1, userID);
+            rs = ptm.executeQuery();
+            while (rs.next()) {
+                String video = rs.getString("Video");
+                theVideo = video;
+            }
+        } catch (Exception e) {
+        }
+        return theVideo;
+    }
     public static void main(String[] args) {
         ArrayList<Recipe> list = getPostHomeRecipes(3);
         for (Recipe recipe : list) {

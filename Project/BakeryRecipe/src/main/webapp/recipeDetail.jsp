@@ -29,14 +29,16 @@
                         <!-- Additional required wrapper -->
                         <div class="swiper-wrapper">
                             <!-- Slides -->
-                            <div class="swiper-slide"><img src="./assets/images/recipe/21.jpg" alt=""></div>
+                              <c:forEach items="${LIST_PIC}" var="cc">
+                                    <div class="swiper-slide"><img src="./assets/images/recipe/${cc}" alt=""></div>
+                                    </c:forEach>
                             <div class="swiper-slide"><img src="./assets/images/recipe/22.jpg" alt=""></div>
                             <div class="swiper-slide"><img src="./assets/images/recipe/The-Best-Keto-Low-Carb-Blueberry-Muffins.jpg" alt=""></div>
                             <div class="swiper-slide"><img src="./assets/images/recipe/31200x6764-1@2x.png" alt=""></div>
                             <div class="swiper-slide"><img src="./assets/images/recipe/474b9866d66f07462cc5236d2f8d1e69.jpg" alt=""></div>
                             <div class="swiper-slide"><img src="./assets/images/recipe/71.jpg" alt=""></div>
                             <div class="swiper-slide">
-                                <iframe src="https://www.youtube.com/embed/_-_uSvStZEE" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+                                <iframe src="https://www.youtube.com/embed/${VIDEO_DETAIL}" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
                             </div>
                             ...
                         </div>
@@ -51,8 +53,8 @@
                 <div class="col-md-8">
                     <div class="first-div">
                         <span class="info-user">
-                            <img src="https://khoinguonsangtao.vn/wp-content/uploads/2022/07/avatar-gau-cute.jpg">
-                            <span>Trinh thanh binh</span>
+                            <img src="${USER_DETAIL.getAvatar()}">
+                            <span>${USER_DETAIL.getName()}</span>
                             <a href="#" class="btn btn-style1"><i class="fa-solid fa-user-plus"></i> Follow</a>
                             <a href="#" class="btn btn-style2"><i class="fa-solid fa-user-plus"></i> Followed</a>
                         </span>
@@ -61,15 +63,16 @@
                         </span>
                     </div>
                     <div class="recipe-name">
-                        White Chocolate Lemon Cupcakes White Chocolate Lemon Cupcakes
+                        <!--White Chocolate Lemon Cupcakes White Chocolate Lemon Cupcakes-->
+                         ${RECIPE_DETAIL.name}
                     </div>
                     <div class="date-post">
                         2 day ago
                     </div>
                     <div class="recipe-react">
-                        <span>Like: 123</span>
-                        <span>Comment: 123</span>
-                        <span>Saved: 123</span>
+                        <span>Like:${RECIPE_DETAIL.getLike()}</span>
+                        <span>Comment: ${RECIPE_DETAIL.getComment()}</span>
+                        <span>Saved:  ${RECIPE_DETAIL.getSave()}</span>
                     </div>
                     <div class="react-action">
                         <a href="#" class="btn btn-style1"><i class="fa-regular fa-heart"></i> Like</a>
@@ -79,9 +82,10 @@
                         <a href="#" class="btn btn-style2"><i class="fa-solid fa-bookmark"></i> Saved</a>
                     </div>
                     <div class="detail">
-                        These lemon cupcakes have an ultra soft and moist texture and are served with a fragrant white
+<!--                        These lemon cupcakes have an ultra soft and moist texture and are served with a fragrant white
                         chocolate whipped cream and strawberries. This recipe is for you if you enjoy a decadent dessert
-                        that is not too sweet.
+                        that is not too sweet.-->
+                    ${RECIPE_DETAIL.getDescription()}
                     </div>
                     <div class="time">
                         <i class="fa-regular fa-clock"></i> Prep: 15min &nbsp; &nbsp; &nbsp; Cook: 20min
@@ -97,42 +101,15 @@
                             INGREDIENTS
                         </div>
                         <div class="body row">
-                            <div class="ingredient col-md-6">
-                                <img src="https://khoinguonsangtao.vn/wp-content/uploads/2022/07/avatar-gau-cute.jpg">
-                                <span>
-                                    190 gam baking powder
-
-                                </span>
-                            </div>
-                            <div class="ingredient col-md-6">
-                                <img src="https://khoinguonsangtao.vn/wp-content/uploads/2022/07/avatar-gau-cute.jpg">
-                                <span>190 gam baking powder
-                                </span>
-                            </div>
-                            <div class="ingredient col-md-6">
-                                <img src="https://khoinguonsangtao.vn/wp-content/uploads/2022/07/avatar-gau-cute.jpg">
-                                <span>
-                                    190 gam baking powder
-
-                                </span>
-                            </div>
-                            <div class="ingredient col-md-6">
-                                <img src="https://khoinguonsangtao.vn/wp-content/uploads/2022/07/avatar-gau-cute.jpg">
-                                <span>190 gam baking powder
-                                </span>
-                            </div>
-                            <div class="ingredient col-md-6">
-                                <img src="https://khoinguonsangtao.vn/wp-content/uploads/2022/07/avatar-gau-cute.jpg">
-                                <span>
-                                    190 gam baking powder
-
-                                </span>
-                            </div>
-                            <div class="ingredient col-md-6">
-                                <img src="https://khoinguonsangtao.vn/wp-content/uploads/2022/07/avatar-gau-cute.jpg">
-                                <span>190 gam baking powder
-                                </span>
-                            </div>
+                          <c:forEach items="${requestScope.LIST_INGREDIENT}" var="di">
+                                    <div class="ingredient col-md-6">
+                                        <img src="${di.getImg()}">
+                                        <span>
+                                            <!--190 gam baking powder-->
+                                            ${di.getAmount()} ${di.getName()}
+                                        </span>
+                                    </div>
+                                </c:forEach>
                         </div>
                     </div>
 
@@ -141,16 +118,19 @@
                             INSTRUCTIONS
                         </div>
                         <div class="body">
-                            <div class="instruction">
-                                <div class="step">step 1:</div>
-                                <p>
-                                    Prepare an electric mixer and set it aside. Create a double
-                                    boiler by choosing a medium and small pot, so you can stack the
-                                    small one into the medium pot. Add water to the medium pot to
-                                    the height the covers the bottom of the small pot. Bring water
-                                    to a simmer. Add white chocolate, butter, lemon juice, and milk to the small pot.
-                                </p>
-                            </div>
+                         <c:forEach items="${LIST_STEP}" var="ep">
+                                    <div class="instruction">
+                                        <div class="step">step :${ep.getInsstep()}</div>
+                                        <p>
+                                            <!--                                    Prepare an electric mixer and set it aside. Create a double
+                                                                                boiler by choosing a medium and small pot, so you can stack the
+                                                                                small one into the medium pot. Add water to the medium pot to
+                                                                                the height the covers the bottom of the small pot. Bring water
+                                                                                to a simmer. Add white chocolate, butter, lemon juice, and milk to the small pot.-->
+                                            ${ep.getDetail()}
+                                        </p>
+                                    </div>
+                                </c:forEach>
                             <div class="instruction">
                                 <div class="step">step 1:</div>
                                 <p>

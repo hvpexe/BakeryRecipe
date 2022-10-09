@@ -58,6 +58,16 @@ public class Recipe {
         this.userID = userID;
         this.username = username;
     }
+
+    public Recipe(String name, String description, int like, int save, int comment, int prepTime, int cookTime) {
+        this.name = name;
+        this.description = description;
+        this.like = like;
+        this.save = save;
+        this.comment = comment;
+        this.prepTime = prepTime;
+        this.cookTime = cookTime;
+    }
     
     /**
      * constructor này dành cho post recipe trên trang home

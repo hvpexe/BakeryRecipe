@@ -38,10 +38,10 @@
                         <div class="recipe-text">
                             ${re.description}
                         </div>
-
-                        <img class="recipe-img" alt=""
-                             src="${re.cover}" />
-
+                        <a href=".\RecipeDetailController?ID=${re.getUserID()}&recipeID=${re.getId()}">
+                            <img  class="recipe-img" alt=""
+                                  src="${re.cover}" />
+                        </a>
                         <div class="recipe-react">
                             <a href="javascript:void(0)" class="d-inline-block text-muted">
                                 <span class="align-middle">
