@@ -38,7 +38,7 @@ public class RecipeDAO {
         try {
             Connection conn = DBUtils.getConnection();
             PreparedStatement ps = conn.prepareStatement(SELECT_MOST_RATED_SQL);
-
+            ps.setInt(1, (index - 1) * 8);
             ResultSet rs = ps.executeQuery();
             List<Recipe> list = new ArrayList<>();
             while (rs.next()) {
@@ -74,7 +74,7 @@ public class RecipeDAO {
         try {
             Connection conn = DBUtils.getConnection();
             PreparedStatement ps = conn.prepareStatement(SELECT_MOST_RECENT_SQL);
-
+            ps.setInt(1, (index - 1) * 8);
             ResultSet rs = ps.executeQuery();
             List<Recipe> list = new ArrayList<>();
             while (rs.next()) {
