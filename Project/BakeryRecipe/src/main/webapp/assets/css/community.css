@@ -149,7 +149,12 @@ body {
   .seemore {
     font-size: 10px !important;
   }
-
+  .seemore:hover{
+    background-color: #c5513d;
+    box-shadow: 0 0 0 2px var(--main-theme-color);
+    color: var(--side-theme-color);
+    transition-delay: 0s;
+  }
   .title-container {
     padding: 15px 20px;
   }
@@ -160,5 +165,17 @@ body {
 
   .react {
     font-size: 9px;
+  }
+  .paging{
+      text-align: center;
+      background-color: transparent;
+      color: var(--main-theme-color);
+      font-size: 12px;
+      cursor: pointer;
+      position: relative;
+  }
+  .paging.active:hover{
+      background-color: #FFC85C;
+      color: 
   }
 }

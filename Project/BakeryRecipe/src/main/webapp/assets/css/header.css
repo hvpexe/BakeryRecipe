@@ -163,7 +163,7 @@
     right: 0px;
     border-radius: 0.25rem;
     box-shadow: 0 0 0 2px var(--main-theme-color);
-    transition-delay:0;
+    transition-delay:0s;
 }
 .header-user:hover .header-user_content {
     scale:1 1;
