@@ -21,15 +21,15 @@ html {
 }
 
 header.masthead {
-    padding-top: 10.5rem;
-    padding-bottom: 6rem;
+    padding-top: 16rem !important;
+    padding-bottom: 13.5rem !important;
     text-align: center;
     color: #fff;
     background-image: linear-gradient(rgba(0, 0, 0, 0.3), rgba(0, 0, 0, 0.4)), url("https://images.alphacoders.com/114/1141188.jpg");
     background-repeat: no-repeat;
-    background-attachment: scroll;
+    background-attachment: fixed;
     background-position: center center;
-    background-size: cover;
+    background-size: cover;;
 }
 
 header.masthead .masthead-subheading {
@@ -53,7 +53,7 @@ header.masthead .btn-main-color {
     padding: 10px 15px;
     border-radius: 10px;
     background-color: var(--main-theme-color);
-    box-shadow: 0px 10px 10px 0px rgba(0, 0, 0, 0.4);
+    box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.06);
 }
 
 header.masthead .btn-main-color:hover {
@@ -83,8 +83,8 @@ header.masthead .btn-main-color:hover {
 }
 
 #search {
-    background-color: #FFFD92;
-    color: #C31952;
+    background-color: #edb79c;
+    color: #34495e;
 }
 
 .input-group {
@@ -96,20 +96,20 @@ header.masthead .btn-main-color:hover {
 }
 
 .input-group-text {
-    border: 1px solid #C31952;
+    border: 1px solid #34495e;  
 }
 
 .form-control {
-    border: 1px solid #C31952;
+    border: 1px solid #34495e;  
 }
 
 .input-group-append button {
-    background-color: #C31952;
-    color: #FFFD92;
+    background-color: #34495e;  
+    color: #edb79c;
 }
 .input-group-append button:hover {
-    background-color: #eb175e;
-    color: #FFFD92;
+    background-color: #34495e;  
+    color: #edb79c;
 }
 .page-section {
     padding: 6rem 0;
@@ -153,6 +153,20 @@ header.masthead .btn-main-color:hover {
 .lead {
     font-size: 25px;
 }
+
+#start {
+    background-color: #FFFD92;
+    color: #C31952;
+}
+
+#start .btn {
+    background-color: #C31952;
+    color: #FFFD92;
+    font-size: 20px;
+    border-radius: 10px;
+    padding: 8px 16px;
+}
+
 #save {
     background-color: #DAFFF6;
     color: #006B6C;
@@ -164,7 +178,6 @@ header.masthead .btn-main-color:hover {
     font-size: 20px;
     border-radius: 10px;
     padding: 8px 16px;
-    margin-bottom: 16px;
 
 }
 
@@ -178,7 +191,6 @@ header.masthead .btn-main-color:hover {
     font-size: 20px;
     border-radius: 10px;
     padding: 8px 16px;
-    margin-bottom: 16px;
 
 }
 /* RESPONSIVE CSS

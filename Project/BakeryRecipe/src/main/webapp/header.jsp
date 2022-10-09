@@ -3,7 +3,7 @@
 <link href="assets/css/fontawesome-free-6.1.1-web/css/all.min.css" rel="stylesheet" type="text/css"/>
 <header class="header-container header py-2 py-md-0 ">
     <div class="header-left align-items-center col-sm-12 col-md-6 p-0">
-        <a class="header-logo navbar-brand col-md-3 p-0" href="./home.jsp">
+        <a class="header-logo navbar-brand col-md-3 p-0" href="./home">
             <img class="mx-auto" src="assets/images/logo/logo2.png" alt="">
         </a>
         <nav class="header-links justify-content-around col-md col p-0 ">

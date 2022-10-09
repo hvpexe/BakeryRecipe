@@ -30,7 +30,7 @@ public class RecipeDAO {
             + "                                                        JOIN Picture ON Picture.RecipeID = Recipe.ID\n"
             + "                                                        WHERE IsDeleted = 0 AND IsCover = 1\n"
             + "                                                        ORDER BY [Like] DESC\n"
-            + "			                                       OFFSET ? ROWS FETCH NEXT 8 ROWS ONLY";
+            + "			                                 OFFSET ? ROWS FETCH NEXT 8 ROWS ONLY";
     private static final String SELECT_PICTURE_SQL = "SELECT img FROM Picture";
 
     public static List<Recipe> getMostRatedRecipe(int index) {
@@ -68,7 +68,7 @@ public class RecipeDAO {
             + "                                                        JOIN Picture ON Picture.RecipeID = Recipe.ID\n"
             + "                                                        WHERE IsDeleted = 0 AND IsCover = 1\n"
             + "                                                        ORDER BY DatePost DESC\n"
-            + "			                                       OFFSET ? ROWS FETCH NEXT 8 ROWS ONLY";
+            + "			                                 OFFSET ? ROWS FETCH NEXT 8 ROWS ONLY";
 
     public static List<Recipe> getMostRecentRecipe(int index) {
         try {
