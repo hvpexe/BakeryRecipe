@@ -12,7 +12,6 @@
 body {
   background-color: var(--web-background-color) !important;
   font-family: 'Roboto', sans-serif;
-  scroll-behavior: smooth;
 }
 
 .community {

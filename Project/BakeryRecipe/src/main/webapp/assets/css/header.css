@@ -22,8 +22,10 @@
     --main-title-color: #000000;
     --web-background-color: #F7FAFC;
 }
-*{
-    font-family: Gelasio;
+/* main */
+body {
+  background-color: var(--web-background-color) !important;
+  font-family: 'Roboto', sans-serif;
 }
 .header-container {
     min-height: 60px;
@@ -34,6 +36,7 @@
     box-shadow: 0px 4px 12px rgba(79, 79, 186, 0.06);
     width: 100%;
     font-size: 16px;
+    font-family: Gelasio !important;
     color: var(--main-title-color);
     flex-wrap: wrap;
     display: flex;
@@ -67,7 +70,7 @@
 
 .header-link:not(.active):hover {
     color: var(--main-theme-color-hover);
-    font-weight: 500;
+    /*font-weight: 500;*/
 }
 
 /* Header right */
@@ -146,7 +149,7 @@
 }
 .header-user .header-user-button {
     color: inherit;
-    min-width: 200px;
+    /* min-width: 200px; */
     text-decoration: none;
 }
 .header-user.active,
@@ -159,7 +162,7 @@
     transform-origin: top center;
     scale: 1 1;
     top:-1000%;
-    width: 250px;
+    /* width: 100px; */
     right: 0px;
     border-radius: 0.25rem;
     box-shadow: 0 0 0 2px var(--main-theme-color);
@@ -213,3 +216,4 @@
         /* margin-bottom: 8px; */
     }
 }
+
