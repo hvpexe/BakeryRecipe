@@ -38,6 +38,10 @@
         <servlet-name>MostRatedRecipeController</servlet-name>
         <servlet-class>controller.recipe.MostRatedRecipeController</servlet-class>
     </servlet>
+     <servlet>
+        <servlet-name>ShowSavedRecipeListController</servlet-name>
+        <servlet-class>controller.recipe.ShowSavedRecipeListController</servlet-class>
+    </servlet>
     <servlet>
         <servlet-name>MostRecentRecipeController</servlet-name>
         <servlet-class>controller.recipe.MostRecentRecipeController</servlet-class>
@@ -61,6 +65,10 @@
     <servlet-mapping>
         <servlet-name>MostRatedRecipeController</servlet-name>
         <url-pattern>/MostRatedRecipe</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>ShowSavedRecipeListController</servlet-name>
+        <url-pattern>/savedrecipe</url-pattern>
     </servlet-mapping>
     <servlet-mapping>
         <servlet-name>EditInformationController</servlet-name>

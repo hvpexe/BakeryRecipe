@@ -6,6 +6,7 @@ package controller.recipe;
 
 import dao.RecipeDAO;
 import dto.Recipe;
+import dto.User;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.List;
@@ -14,6 +15,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 /**
  *
@@ -34,18 +36,21 @@ public class ShowSavedRecipeListController extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
+        HttpSession session = request.getSession();
+        User user = (User) session.getAttribute("login");
+        
         String indexPage = request.getParameter("index");
-        String id = request.getParameter("userID");
+        
         if(indexPage == null)
             indexPage = "1";
         int index = Integer.parseInt(indexPage);
-        int userID = Integer.parseInt(id);
+        
         int totalRecipe = RecipeDAO.getAllRecipe();
         int totalPage = totalRecipe/8;
         if(totalRecipe % 8 != 0)
             totalPage ++;
         
-        List<Recipe> list = RecipeDAO.showSavedRecipe(userID, index);
+        List<Recipe> list = RecipeDAO.showSavedRecipe(user.getId(), index);
         
         request.setAttribute("RecipeList", list);
         request.setAttribute("totalPage", totalPage);
