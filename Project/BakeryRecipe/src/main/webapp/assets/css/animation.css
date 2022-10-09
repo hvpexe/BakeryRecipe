@@ -29,6 +29,10 @@
 }
 [class^=hover] {
     transition:0.3s;
+    cursor: pointer;
+}
+[class~=-btn],[class~=-button] {
+    cursor: pointer;
 }
 .hover-highlight:hover {
     box-shadow: 0 4px 4px 0 #00000025;
