@@ -10,6 +10,7 @@
 /* main */
 body {
   background-color: var(--web-background-color) !important;
+  font-family: 'Roboto', sans-serif;
 }
 
 .home-container {

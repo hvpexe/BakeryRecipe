@@ -1,5 +1,6 @@
+package com.bakeryRecipe.test;
 
-import dao.RecipeDAO;
+
 import dao.UserDAO;
 import dto.Recipe;
 import dto.User;
@@ -9,8 +10,8 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
+import org.junit.Test;
 
-import org.junit.Assert;
 import utils.DBUtils;
 
 /*
@@ -22,7 +23,7 @@ import utils.DBUtils;
  *
  * @author kichi
  */
-public class Test {
+public class LoginPageTesting {
     private static final String SELECT_MOST_RATED_SQL = "SELECT Recipe.ID, Name, Description, [Like], Dislike, DatePost, LastDateEdit, PrepTime, CookTime, Saved, UserID, img, LastName + ' ' + FirstName AS username\n" +
                                                         "FROM Recipe, [User], Picture\n" +
                                                         "WHERE IsDeleted = 0\n" +

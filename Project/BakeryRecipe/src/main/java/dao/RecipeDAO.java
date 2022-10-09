@@ -218,6 +218,44 @@ public class RecipeDAO {
         }
         return null;
     }
+    
+    private static final String SAVED_RECIPES_LIST_SQL = "SELECT Recipe.ID, Recipe.[Name], Recipe.[Description], Recipe.[Like], Recipe.[Save], Recipe.Comment, Recipe.DatePost, Recipe.LastDateEdit, Picture.Img, Recipe.UserID, LastName + ' ' + FirstName AS Username\n" +
+                                                         "FROM [User]\n" +
+                                                         "JOIN [Save] ON [Save].UserID = [User].ID\n" +
+                                                         "JOIN [Recipe] ON [Save].RecipeID = [Recipe].ID\n" +
+                                                         "JOIN [Picture] ON [Recipe].ID = [Picture].RecipeID\n" +
+                                                         "WHERE IsDeleted = 0 AND IsCover = 1 AND [User].ID = ?\n" +
+                                                         "ORDER BY Recipe.[Like] DESC\n" +
+                                                         "OFFSET ? ROWS FETCH NEXT 8 ROWS ONLY";
+    
+    public static List<Recipe> showSavedRecipe(int userID, int index) {
+        try {
+            Connection conn = DBUtils.getConnection();
+            PreparedStatement ps = conn.prepareStatement(SAVED_RECIPES_LIST_SQL);
+            ps.setInt(1, userID);
+            ps.setInt(2, (index - 1) * 8);
+            ResultSet rs = ps.executeQuery();
+            List<Recipe> list = new ArrayList<>();
+            while (rs.next()) {
+                Recipe recipe = new Recipe(rs.getInt("ID"),
+                        rs.getString("Name"),
+                        rs.getString("Description"),
+                        rs.getInt("Like"),
+                        rs.getInt("Save"),
+                        rs.getInt("Comment"),
+                        rs.getTimestamp("DatePost"),
+                        rs.getTimestamp("LastDateEdit"),
+                        rs.getString("Img"),
+                        rs.getInt("UserID"),
+                        rs.getString("Username"));
+                list.add(recipe);
+            }
+            return list;
+        } catch (SQLException ex) {
+            System.out.println("getMostRatedRecipe Query Error!" + ex.getMessage());
+        }
+        return null;
+    }
 
        private static final String LIST_PICTURE = "  SELECT pic.img,recipe.Video\n"
             + " FROM  [dbo].[Recipe] recipe\n"
@@ -456,9 +494,10 @@ public class RecipeDAO {
         return theVideo;
     }
     public static void main(String[] args) {
-        ArrayList<Recipe> list = getPostHomeRecipes(3);
+        List<Recipe> list = showSavedRecipe(3, 1);
         for (Recipe recipe : list) {
             System.out.println(recipe);
         }
     }
+    
 }

@@ -1,5 +1,6 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <link rel="stylesheet" href="assets/css/header.css">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Gelasio:wght@400;500;700&display=swap"/>
 <link href="assets/css/fontawesome-free-6.1.1-web/css/all.min.css" rel="stylesheet" type="text/css"/>
 <header class="header-container header py-2 py-md-0 ">
     <div class="header-left align-items-center col-sm-12 col-md-6 p-0">
@@ -9,19 +10,19 @@
         <nav class="header-links justify-content-around col-md col p-0 ">
             <a class="header-link p-0 border-0 active" href="./home">Home</a>
             <a class="header-link p-0 border-0" href="./community">Community</a>
-            <a class="header-link p-0 border-0" href="./saved.jsp">Saved</a>
+            <a class="header-link p-0 border-0" href="./savedrecipe">Saved</a>
             <a class="header-link p-0 border-0" href="./shopping.jsp">Shopping</a>
         </nav>
     </div>
     <div class="header-right align-items-center flex-md-nowrap col-sm-12 col-md px-2 justify-content-md-center">
         <div class="col-sm d-flex align-items-center">
-             <form action="Search"> 
-            <div class="searchbar px-3 px-md-0">
-                 <i class="searchbar-icon fa-solid fa-magnifying-glass"></i>
-                 <input class="searchbar-input col p-0" type="text" placeholder="Search" name="searchKey" value="" size="40">
-                 <input type="hidden" name="action" value="Recipe">
+            <form action="Search"> 
+                <div class="searchbar px-3 px-md-0">
+                    <i class="searchbar-icon fa-solid fa-magnifying-glass"></i>
+                    <input class="searchbar-input col p-0" type="text" placeholder="Search" name="searchKey" value="" size="40">
+                    <input type="hidden" name="action" value="Recipe">
                 </div>
-                 </form> 
+            </form> 
             <div class="p-0 d-flex align-items-center justify-content-center">
                 <i class="header-notification fa-solid fa-bell"></i>
             </div>

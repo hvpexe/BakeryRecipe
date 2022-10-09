@@ -73,12 +73,14 @@ public class LoginController extends HttpServlet {
                 if (isActive == false) {
                     request.setAttribute("LOGIN_ERROR", "You have been banned");
                 } else {
-                    if (ADMIN.equals(roleID)) {
+                    if (ADMIN.equalsIgnoreCase(roleID)) {
                         url = ADMIN_PAGE;
-                    } else if (US.equals(roleID)) {
+                    } else if (US.equalsIgnoreCase(roleID)) {
                         url = USER_PAGE;
                     }
+                    System.out.println(url);
                     response.sendRedirect(url);
+                    return;
                 }
             }
             request.getRequestDispatcher(url).forward(request, response);

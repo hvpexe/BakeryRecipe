@@ -107,7 +107,7 @@
                                 <div class="item-trashbin fas fa-trash ml-auto description-button"></div>
                             </div>
                         </div>
-                        <div class="d-flex p-0 col align-items-center" id="ingredient" data-count="0" >
+                        <div class="d-flex p-0 col align-items-center" id="ingredient"  >
                             <input class="instruction-box-input col-7 " name='name' id="name" type="text" placeholder="Add one ingredient">
                             <span class="col d-flex align-items-center pr-0">Amount:</span>
                             <input class="instruction-box-input col-3 ml-1" name='amount' id="amount"  type="text" placeholder="1 Oz">
@@ -115,23 +115,24 @@
                         </div>
                     </div>
                     <div class="add-recipe-input col-12">
-                        <div id="tes"></div>
                         <b class="label">Instructions</b>
                         <div class="col d-block p-0 " id="inst-container" >
-                            <div class="col align-items-center p-0 " id="inst1">
+                            <div class="col align-items-center p-0 " id="inst">
                                 <h5 class="text-secondary col-12 p-0">
-                                    Step 0
-                                    <input name="step" type="hidden" value="0">
+                                    Step <span>0</span>
+                                    <input name="step" disabled onchange="this.previousElementSibling.innerText = this.value" type="hidden" value="0">
                                 </h5>
-                                <div class="col hover-highlight  p-0 pr-2 d-flex align-items-center border border-secondary rounded" onclick="showDetail(this);">
-                                    <div class="inst-img d-inline-flex fas fa-camera position-relative align-items-center justify-content-center" onclick="this.querySelector('input').click();">
-                                        <input name="inst-image" id="inst-image1" class="d-none" readonly="" type="file" accept="image/*" onchange="changeIngrImg(this.parentElement, window.URL.createObjectURL(this.files[0]), event)">
+                                <div class="col hover-highlight  p-0 pr-2 d-flex align-items-center border border-secondary rounded" onclick="showDetail(this.parentElement);">
+                                    <div class="inst-img d-inline-flex fas fa-camera position-relative align-items-center justify-content-center" src="assets/images/image-29@2x.png" onclick="this.querySelector('input').click();">
+                                        <input name="inst-image" disabled id="inst-image" class="d-none" readonly="" type="file" accept="image/*" 
+                                               onchange="changeIngrImg(this.parentElement, window.URL.createObjectURL(this.files[0]), event)">
                                     </div>
-                                    <input class="instruction-box-input col " value="dasd
-                                           " readonly="" name="inst-description" id="inst-description1" type="text">
+                                    <input class="instruction-box-input col " disabled value=""
+                                           readonly="" name="inst-description" id="inst-description" type="text">
                                     <div class="item-trashbin fas fa-trash ml-auto description-button" onclick="this.parentElement.parentElement.remove()"></div>
                                 </div>
                             </div>
+                            
                         </div>
 
                     </div>
@@ -153,47 +154,57 @@
             </main>
         </main>
         <!--Detail Showing item detail-->
-        <div class="d-none" id="detail" viewing="">
+        <div class="d-none" id="detail" viewing="#inst">
             <div class="gray-box"></div>
             <div class="exit-btn"></div>
             <div class="container col col-md-6 p-3 rounded">
-                <h4 class="step">Step <span>0</span></h4>
-                <div class="col-10 mx-auto my-2">
-                    <img class="col mx-auto" src="assets/images/rectangle-20@2x.png" alt="Image not found" id="detail-image" >
+                <h4 class="step">Step <span>0</span>
+                    <input type="hidden" name="step" onclick="this.previousElementSibling.innerText = this.value" value="0">
+                </h4>
+                <div class="col-10 mx-auto my-2 d-flex flex-column align-items-center">
+                    <img class="col p-0 rounded mx-auto" src="assets/images/rectangle-20@2x.png" alt="Image not found" id="detail-image" >
+                    <input type="file" class="d-none" onchange="changeIngrImg(this.previousElementSibling, window.URL.createObjectURL(files[0]), event);"> 
+                    <div class="change-img-btn mx-auto hover-button-1 col-6 font-weight-bold rounded m-2"
+                         onclick="this.previousElementSibling.click()">Change Image</div>
                 </div>
                 <h5>Instruction</h5>
-                <textarea class="rounded col border" value=""></textarea> 
+                <textarea class="rounded col border py-3" value="" style="min-height:7rem"></textarea> 
                 <div class="mt-auto d-flex justify-content-end">
-                    <div class="cancel-btn hover-button-1 hover-highlight font-weight-bold">Cancel</div>
-                    <div class="save-btn hover-button-1 hover-highlight font-weight-bold">Save</div>
+                    <div class="cancel-btn hover-button-1 col-auto font-weight-bold rounded m-2">Cancel</div>
+                    <div class="save-btn hover-button-1 col-auto font-weight-bold rounded m-2">Save</div>
                 </div>
             </div>
         </div>
         <script src="assets/js/addrecipe.js"></script>
         <script src="assets/js/validator.js"></script>
         <script>
-                                        ItemCopy({
-                                            selector: '#ingredient [name]',
-                                            run: (result, container) => {
-                                                $(container).append(result);
-                                            },
-                                            count: '#ingredient [name=count]',
-                                            container: '#ingredient-container',
-                                            url: 'ajax/GetIngredientImage',
-                                        });
-                                        ItemCopy({
-                                            selector: '#instruction [name]',
-                                            run: (result, container, step) => {
-                                                if (step) {
-                                                    var count = document.querySelector(step);
-                                                    count.setAttribute('value', parseInt(count.value) + 1);
-                                                }
-                                                $(container).append(result);
-                                            },
-                                            count: '#instruction [name=count]',
-                                            url: 'ajax/GetInstructionTemplate',
-                                            container: '#inst-container',
-                                        });
+//                             showDetail(document.querySelector('#inst1'));
+                             ItemCopy({
+                                 selector: '#ingredient [name]',
+                                 run: (result, container) => {
+                                     $(container).append(result);
+                                 },
+                                 count: '#ingredient [name=count]',
+                                 container: '#ingredient-container',
+                                 url: 'ajax/GetIngredientImage',
+                             });
+                             ItemCopy({
+                                 selector: '#instruction [name]',
+                                 run: (result, container, step) => {
+                                     if (step) {
+                                         var count = document.querySelector(step);
+                                         count.setAttribute('value', parseInt(count.value) + 1);
+                                     }
+                                     $(container).append(result);
+                                     $('#inst-container h5, #inst-container .inst-img, #inst-container .inst-img *\n\
+                                                ,#inst-container .item-trashbin, #inst-container .item-trashbin *').click(function (e) {
+                                         e.stopPropagation();
+                                     });
+                                 },
+                                 count: '#instruction [name=count]',
+                                 url: 'ajax/GetInstructionTemplate',
+                                 container: '#inst-container',
+                             });
         </script>
     </body>
 </html>
