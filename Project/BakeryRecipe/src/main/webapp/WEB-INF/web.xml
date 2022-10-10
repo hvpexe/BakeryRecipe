@@ -38,7 +38,7 @@
         <servlet-name>MostRatedRecipeController</servlet-name>
         <servlet-class>controller.recipe.MostRatedRecipeController</servlet-class>
     </servlet>
-     <servlet>
+    <servlet>
         <servlet-name>ShowSavedRecipeListController</servlet-name>
         <servlet-class>controller.recipe.ShowSavedRecipeListController</servlet-class>
     </servlet>
@@ -57,6 +57,10 @@
     <servlet>
         <servlet-name>FollowController</servlet-name>
         <servlet-class>controller.baker.FollowController</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>AddRecipeController</servlet-name>
+        <servlet-class>controller.recipe.AddRecipeController</servlet-class>
     </servlet>
     <servlet-mapping>
         <servlet-name>DebugController</servlet-name>
@@ -97,6 +101,10 @@
     <servlet-mapping>
         <servlet-name>FollowController</servlet-name>
         <url-pattern>/FollowController</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>AddRecipeController</servlet-name>
+        <url-pattern>/AddRecipe</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

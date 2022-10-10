@@ -122,12 +122,7 @@
                                     <div class="instruction">
                                         <div class="step">step : ${ep.getInsstep()}</div>
                                         <p>
-                                            <!--                                    Prepare an electric mixer and set it aside. Create a double
-                                                                                boiler by choosing a medium and small pot, so you can stack the
-                                                                                small one into the medium pot. Add water to the medium pot to
-                                                                                the height the covers the bottom of the small pot. Bring water
-                                                                                to a simmer. Add white chocolate, butter, lemon juice, and milk to the small pot.-->
-                                            ${ep.getDetail()}
+                                             ${ep.getDetail()}
                                         </p>
                                     </div>
                                 </c:forEach>

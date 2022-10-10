@@ -2,14 +2,11 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/Servlet.java to edit this template
  */
-package controller.ajax;
+package controller.recipe;
 
-import dao.IngredientDAO;
-import dto.Ingredient;
 import java.io.IOException;
 import java.io.PrintWriter;
 import javax.servlet.ServletException;
-import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -18,8 +15,7 @@ import javax.servlet.http.HttpServletResponse;
  *
  * @author Admin
  */
-@WebServlet(name = "GetIngredientImage", urlPatterns = {"/ajax/GetIngredientImage"})
-public class GetIngredientImage extends HttpServlet {
+public class AddRecipeController extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -35,25 +31,19 @@ public class GetIngredientImage extends HttpServlet {
         response.setContentType("text/html;charset=UTF-8");
         try ( PrintWriter out = response.getWriter()) {
             /* TODO output your page here. You may use following sample code. */
-            String name = request.getParameter("iname").trim();
-            String amount = request.getParameter("iamount").trim();
-            Ingredient item = IngredientDAO.getIngredientByName(name);
-            String count = request.getParameter("count");
-
-            if (item == null) {
-                item = new Ingredient();
-            }
-            out.println("<div class=\"col p-0 hover-highlight align-items-center p-0 pr-2 border border-secondary\" id=\"item"+count+"\">\n"
-                    + "                                <img src=\""+item.getImg()+"\" alt=' ' > \n"
-                    + "                                <input name=\"ingre-name\" class=\"col\"  value=\""+name+"\">\n"
-                    + "                                <span>Amount:</span> \n"
-                    + "                                <input name=\"ingre-amount\" class=\"col-2 bg-white ml-2 mr-4\" placeholder=\"1 \" value=\""+amount+"\"> \n"
-                    + "                                <div class=\"item-trashbin fas fa-trash ml-auto description-button\"></div>\n"
-                    + "                            </div>");
+            out.println("<!DOCTYPE html>");
+            out.println("<html>");
+            out.println("<head>");
+            out.println("<title>Servlet AddRecipeController</title>");            
+            out.println("</head>");
+            out.println("<body>");
+            out.println("<h1>Servlet AddRecipeController at " + request.getContextPath() + "</h1>");
+            out.println("</body>");
+            out.println("</html>");
         }
     }
-//<editor-fold defaultstate="collapsed">
 
+    // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
     /**
      * Handles the HTTP <code>GET</code> method.
      *
