@@ -272,3 +272,75 @@ body {
 .frame-dip2 .in-div{
     padding-left: 20px
 }
+
+
+.img-container {
+  position: relative;
+  font-size: 14px;
+}
+
+.recipe-img {
+  border-radius: 10px;
+  max-width: 100%;
+  aspect-ratio: 1;
+  object-fit: cover;
+}
+
+.recipe-img:hover {
+  border-radius: 10px;
+  cursor: pointer;
+  opacity: 0.8;
+}
+
+.bookmark {
+  cursor: pointer;
+  border-radius: 10px 0 10px 0;
+  padding: 5px 8px;
+  position: absolute;
+  background-color: var(--main-theme-color);
+  opacity: 0.9;
+  color: var(--side-theme-color);
+  top: 0;
+  left: 0;
+}
+
+.react {
+  width: 100%;
+  position: absolute;
+  color: #fff;
+  border-radius: 0 0 10px 10px;
+  padding: 2px 0;
+  background-color: rgba(0, 0, 0, 0.3);
+  display: flex;
+  justify-content: space-around;
+  /* top: 30px; */
+  bottom: 0px;
+}
+
+.recipe-name {
+  font-family: 'Trebuchet MS', sans-serif;
+  font-weight: 500;
+  padding-top: 5px;
+  font-size: 16px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  /* number of lines to show */
+  line-clamp: 2;
+  -webkit-box-orient: vertical;
+
+}
+
+.recipe-author {
+  font-size: 14px;
+  color: rgba(0, 0, 0, 0.7) !important;
+}
+
+.recipe-author a {
+  color: inherit;
+  display: block;
+}
+.recipe-author a:hover {
+  color: inherit;
+}

@@ -100,7 +100,7 @@ public class RecipeDAO {
 
     private static final String SEARCH_RECIPE = "SELECT recipe.[Name],[Description],[Like],recipe.ID\n"
             + "            ,[DatePost],[LastDateEdit],[PrepTime],[CookTime]\n"
-            + "            [Save],[IsDeleted],[UserID],[Img],baker.FirstName +' '+baker.LastName as fullName\n"
+            + "            [Save],[IsDeleted],[UserID],Comment,[Img],baker.FirstName +' '+baker.LastName as fullName\n"
             + "            FROM[dbo].[Recipe] recipe join [dbo].[Picture] pic\n"
             + "			on recipe.ID =pic.RecipeID\n"
             + "			join [dbo].[User]  baker\n"
@@ -119,9 +119,14 @@ public class RecipeDAO {
             rs = ptm.executeQuery();
             while (rs.next()) {
                 String fullName = rs.getString("fullName");
-                String img = rs.getString("Img");
+//                String img = rs.getString("Img");
+                int comment =rs.getInt("Comment");
+                int like =rs.getInt("Like");
+                int save = rs.getInt("Save");
+                String cakeName = rs.getString("Name");
+                String cover = rs.getString("Img");
                 Recipe recipe;
-                recipe = new Recipe(name, img, fullName);
+                recipe = new Recipe(cakeName, like, comment, cover, fullName);
                 listRecipe.add(recipe);
             }
 

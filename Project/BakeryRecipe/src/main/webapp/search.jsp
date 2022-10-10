@@ -13,7 +13,7 @@
         <title></title>
         <meta name="description" content="" />
 
-        <link rel="stylesheet" href="assets/css/search.css" />
+        <link rel="stylesheet" href="assets/css/search1.css" />
 
         <link
             rel="stylesheet"
@@ -39,8 +39,10 @@
             rel="stylesheet"
             href="https://fonts.googleapis.com/css2?family=Arima Madurai:wght@800&display=swap"
             />
+        <link rel="stylesheet" href="assets/css/web/bootstrap-4.3.1.min.css" />
     </head>
     <body>
+        <c:import url="header.jsp"/>
           <div class="saved-div">
             <div class="section-div">
                 <form action="Search" id="searchRec">
@@ -85,12 +87,23 @@
                             ><div class="follow-button"><div>Follow</div></div>
                         </div>
                     </c:forEach>
-                     <c:forEach items="${requestScope.LIST_RECIPE}" var="n">
-                        <div class="div2">
-                            <img class="img-icon1" alt="" src="${n.cover}" /><a
-                                class="mooncake"
-                                ><p class="mooncake-p"><span>${n.name}</span></p></a
-                            ><a class="trnh-thng-bnh2">${n.username}</a>
+                    <c:forEach items="${requestScope.LIST_RECIPE}" var="cc">
+                        <div class="recipe col-6 col-md-4 col-lg-3">
+                            <div class="img-container">
+                                <img class="recipe-img" alt=""
+                                     src="${cc.cover}" />
+                                <div class="bookmark">
+                                    Save <i class="fa-regular fa-bookmark"></i>
+                                </div>
+                                <div class="react">
+                                    <div>${cc.like} likes</div>
+                                    <div>${cc.comment} comments</div>
+                                </div>
+                            </div>
+                            <div class="recipe-name">${cc.name}</div>
+                            <div class="recipe-author">
+                                <a href="#" class="text-truncate">${cc.username}</a> 
+                                
                         </div>
                     </c:forEach>
                 </div>

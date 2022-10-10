@@ -38,7 +38,7 @@
                         <div class="recipe-text">
                             ${re.description}
                         </div>
-                        <a href=".\RecipeDetailController?ID=${re.getUserID()}&recipeID=${re.getId()}">
+                        <a href=".\RecipeDetail?ID=${re.getUserID()}&recipeID=${re.getId()}">
                             <img  class="recipe-img" alt=""
                                   src="${re.cover}" />
                         </a>
