@@ -352,7 +352,7 @@ public class UserDAO {
         return null;
     }*/
     
- private static final String LIST_USER = "select[Email], [LastName],[FirstName] ,[Avatar]\n"
+ private static final String LIST_USER = "select[Email], [LastName],[FirstName] ,[Avatar] ,[dbo].[User].ID \n"
             + "           from [dbo].[User] \n"
             + "         where [dbo].[User].ID =?";
 
@@ -369,11 +369,12 @@ public class UserDAO {
                 ptm.setInt(1, userID);
                 rs = ptm.executeQuery();
                 while (rs.next()) {
+                    
                     String lastName = rs.getString("LastName");
                     String firstName = rs.getString("FirstName");
                     String Avatar = rs.getString("Avatar");
                      String fullName = lastName +" "+firstName;
-                    user = new User(Avatar, fullName);
+                    user = new User(userID, Avatar, fullName);
                 
                 }
             }
