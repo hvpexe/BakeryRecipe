@@ -30,6 +30,7 @@
             rel="stylesheet"
             href="https://fonts.googleapis.com/css2?family=Arima Madurai:wght@800&display=swap"
             />
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@8/swiper-bundle.min.css">
         <link rel="stylesheet" href="./assets/css/animation.css" />
         <link rel="stylesheet" href="./assets/css/addrecipe.css" />
         <script src="assets/js/Jquery/jquery-core.js"></script>
@@ -42,7 +43,7 @@
             <main class="cook2-main">
                 <main class="create-recipe-main col-md-10 col-12 align-self-center px-0">
                     <div class="create-recipe-div ">
-                        <h2 class="text-h2 ">
+                        <h2 class="text-h2 "onclick="history.back ()">
                             <i class="fas fa-arrow-left"></i>
                             <b class="create-recipe-b d-inline-block ">Create Recipe</b>
                         </h2>
@@ -51,8 +52,8 @@
                         <b class="save-b2">Save</b>
                     </button>
                 </main>
-                <form class="section-div col-12 col-md-10 align-content-center align-self-center"
-                      id="add-recipe">
+                <form action="AddRecipe" class="section-div col-12 col-md-10 align-content-center align-self-center"
+                      id="add-recipe" method="get" >
                     <div class="title-div col-12">
                         <b class="label">Title</b>
 
@@ -61,9 +62,8 @@
                     <div class="add-recipe-input col">
                         <b class="label">Description</b>
                         <textarea name="recipe-description" class="boxdes-textarea  p-2" placeholder="Add description"></textarea>
-                        <div>
-
-                        </div>
+                    </div>    <!--                Video And Image Picture                            -->
+                    <div class="add-recipe-input col" style="gap: 10px;">
                         <div class="d-flex col p-0 justify-content-start" style="gap: 10px;">
                             <button class="description-button" disabled="disabled" id="add-video-btn">
                                 Add Video <i class="fa-brands fa-youtube"></i>
@@ -85,13 +85,25 @@
                                 </button>
                             </div>
                         </div>
-                        <div class="video-and-image p-0 col list-group list-group-horizontal" id="img-content">
-                            <span class="col-2 list-group-item rounded add-img"></span>
-                            <span class="col-2 list-group-item rounded video" id='video'></span>
-                            <span class="col-2 list-group-item rounded cover" id='pic2'></span>
-                            <span class="col-2 list-group-item rounded" id='pic3'></span>
-                            <span class="col-2 list-group-item rounded selected" id='pic4'
-                                  style="background-image: url(assets/images/image-29@2x.png);"></span>
+                        <!--                                                            <span class="col-2 list-group-item rounded add-img"></span>
+                                                            <span class="col-2 list-group-item rounded video" id='video'></span>
+                                                            <span class="col-2 list-group-item rounded cover" id='pic2'></span>
+                                                            <span class="col-2 list-group-item rounded" id='pic3'></span>
+                                                            <span class="col-2 list-group-item rounded selected" id='pic4'
+                                                                  style="background-image: url(assets/images/image-29@2x.png);"></span>-->
+                        <div class="video-and-image swiper  col-12 p-0">
+                            <div class="swiper-wrapper col p-0" id="img-content">
+                                <span class="col-2 p-0 swiper-slide list-group-item rounded add-img"></span>
+                                <span class="col-2 p-0 swiper-slide rounded video" id='video'></span>
+                                <span class="col-2 p-0 swiper-slide rounded cover" id='pic2'></span>
+                                <span class="col-2 p-0 swiper-slide rounded" id='pic3'></span>
+                                <span class="col-2 p-0 swiper-slide rounded" id='pic3'></span>
+                                <span class="col-2 p-0 swiper-slide rounded" id='pic3'></span>
+                                <span class="col-2 p-0 swiper-slide rounded" id='pic3'></span>
+                                <span class="col-2 p-0 swiper-slide rounded selected" id='pic4'
+                                      style="background-image: url(assets/images/image-29@2x.png);"></span>
+
+                            </div>
                         </div>
 
 
@@ -104,17 +116,18 @@
                                 <img src="assets/images/image-261@2x.png" alt=' ' > 
                                 <input name="ingre-name" class="col" disabled value="black grapes">
                                 <span>Amount:</span> 
-                                <input name="ingre-amount" class="col-2 bg-white ml-2 mr-4" placeholder="1 oz" value=""> 
+                                <input name="ingre-amount" disabled class="col-2 bg-white ml-2 mr-4" placeholder="1 oz" value=""> 
                                 <div class="item-trashbin fas fa-trash ml-auto description-button"></div>
                             </div>
                         </div>
                         <div class="d-flex p-0 col align-items-center" id="ingredient"  >
-                            <input class="instruction-box-input col-7 " id="name" type="text" placeholder="Add one ingredient">
+                            <input class="instruction-box-input col-7 " name="iname" id="name" type="text" placeholder="Add one ingredient">
                             <span class="col d-flex align-items-center pr-0">Amount:</span>
-                            <input class="instruction-box-input col-3 ml-1" id="amount"  type="text" placeholder="1 Oz">
+                            <input class="instruction-box-input col-3 ml-1" name="iamount" id="amount"  type="text" placeholder="1 Oz">
                             <input type="hidden" name="count" value="1">
                         </div>
-                    </div>
+                    </div>                    
+                    <!--                INSTRUCTION                            -->
                     <div class="add-recipe-input col-12">
                         <b class="label">Instructions</b>
                         <div class="col d-block p-0 " id="inst-container" >
@@ -138,20 +151,26 @@
 
                     </div>
                     <div class="col" id="instruction">
-                        <textarea class="instruction-box-input col-11 pt-2 pr-3" name="detail" type="text" placeholder="Paste one or multiple steps (e.g. Finely chop the garlic)"></textarea>
+                        <textarea class="instruction-box-input col-11 pt-2 pr-3" name="idetail" type="text" placeholder="Paste one or multiple steps (e.g. Finely chop the garlic)"></textarea>
                         <input type="hidden" name="count" value="1">
                         <div class="accept-input fas fa-check d-flex align-items-center justify-content-center col-1 hover-button-1"></div>
                     </div>
+                    <!-- Prepare Time and Cook Time-->
                     <div class="time-to-cook-div col">
                         <div class="add-recipe-input col">
-                            <div class="label col p-0">Prepare Time</div>
-                            <input class="pre-box-input col" type="number"  placeholder="Minute : 0">
+                            <label class="label col p-0">Prepare Time</label>
+                            <input class="pre-box-input col" type="number" name="prepare-time" placeholder="0">
                         </div>
                         <div class="add-recipe-input col">
-                            <div class="label col p-0">Cook Time</div>
-                            <input class="pre-box-input col" type="number" placeholder="Minute :0">
+                            <label class="label col p-0">Cook Time</label>
+                            <input class="pre-box-input col" type="number" name="cook-time" placeholder="0">
                         </div>
                     </div>
+                    <button class="save-button ml-auto" >
+                        <b class="save-b2">Add recipe</b>
+                    </button>
+                </form>
+
             </main>
         </main>
         <!--Detail Showing item detail-->
@@ -176,8 +195,9 @@
                 </div>
             </div>
         </div>
-        <script src="assets/js/addrecipe.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/swiper@8/swiper-bundle.min.js"></script>
         <script src="assets/js/validator.js"></script>
+        <script src="assets/js/addrecipe.js"></script>
         <script>
 //                             showDetail(document.querySelector('#inst1'));
                              ItemCopy({

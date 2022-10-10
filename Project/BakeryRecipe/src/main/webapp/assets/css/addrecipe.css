@@ -144,7 +144,8 @@ input,textarea{
     box-shadow: 0 4px 4px #00000025;
 }
 .display-image .image{
-    background: var(--side-theme-color) url(../images/rectangle-20@2x.png) no-repeat ;
+    background: var(--side-theme-color) no-repeat ;
+
     background-position: center center;
     background-size: cover;
     box-shadow: 0 0 0 2px inset var(--pink-theme);
@@ -169,10 +170,15 @@ input,textarea{
     font-size: 1em;
     border-radius: 50%;
 }
-.video-and-image {
+.video-and-image  {
+    position: relative;
+    width: 100%;
+    height: 50px;
+    aspect-ratio:12/2;
+}
+.video-and-image  {
     gap: 10px;
-    aspect-ratio: 12/2;
-    overflow-x: clip;
+    display: flex;
 }
 .video-and-image span{
     aspect-ratio:1;
@@ -185,7 +191,9 @@ input,textarea{
     position: relative;
     background-size: cover;
     background-repeat:  no-repeat;
-
+}
+.video-and-image is(span, span::before, span::after){
+    transition: 0.3s;
 }
 .video-and-image span:hover{
     box-shadow: 0 0 50px 0 inset var(--brown-theme-50);
@@ -223,12 +231,18 @@ input,textarea{
     border-radius: 0 0 10px 0;
     pointer-events: none;
 }
+.video-and-image span.selected::before{
+    content:'';
+    position: absolute;
+    inset:0;
+    box-shadow: 0 -10px 10px 0 inset var(--success);
+}
 .video-and-image span.selected::after{
     position: absolute;
     content: '';
     inset:0;
     pointer-events: none;
-    outline: 3px solid var(--info);
+    border: 3px solid var(--success);
 }
 .video-and-image span.add-img{
     box-sizing: border-box;
@@ -253,11 +267,8 @@ input,textarea{
 
 }
 .add-recipe-input {
-    align-self: stretch;
     display: flex;
     flex-direction: column;
-    align-items: flex-start;
-    justify-content: flex-start;
     row-gap:7px;
 }
 .ingredient-box-input {
@@ -293,6 +304,7 @@ input,textarea{
     font-weight: 700;
     display: inline-block;
 }
+
 .pre-box-input {
     border: 4px solid rgba(250, 248, 248, 0.5);
     box-shadow: 0 4px 4px rgba(0, 0, 0, 0.25);
@@ -300,7 +312,17 @@ input,textarea{
     min-height: 40px;
     flex-shrink: 0;
     overflow: hidden;
+    padding-left: 76px;
+    position:relative;
 }
+.add-recipe-input:has(.pre-box-input):before {
+    content: 'Minute :';
+    position:absolute;
+    z-index: 1;
+    left: 30px;
+    bottom: 10px;
+}
+
 .add-recipe-input,
 .section-div,
 .time-to-cook-div {
@@ -345,7 +367,7 @@ input,textarea{
     font-size: 1em;
     color: #000;
     font-family: Gelasio;
-    background: var(--yellow-theme-75);
+    background: var(--yellow-theme-50);
 }
 .add-recipedone-main,
 .cook2-main {

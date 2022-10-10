@@ -34,7 +34,7 @@ public class GetInstructionTemplate extends HttpServlet {
         try ( PrintWriter out = response.getWriter()) {
             /* TODO output your page here. You may use following sample code. */
             //?detail=hello&count=1
-            String detail = request.getParameter("detail");
+            String detail = request.getParameter("idetail").trim();
             String count = request.getParameter("count");
 
             out.println("<div class=\"col align-items-center p-0 \" id=\"inst"+count+"\">\n"

@@ -14,9 +14,6 @@
         <meta name="viewport" content="initial-scale=1, width=device-width" />
         <title>Most Recent Recipe</title>
         <meta name="description" content="" />
-
-        <link rel="stylesheet" href="assets/css/community1.css" />
-
         <link
             rel="stylesheet"
             href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700&display=swap"
@@ -41,6 +38,9 @@
             rel="stylesheet"
             href="https://fonts.googleapis.com/css2?family=Arima Madurai:wght@800&display=swap"
             />
+        <link rel="stylesheet" href="assets/css/web/bootstrap-4.3.1.min.css" />
+        <link rel="stylesheet" href="assets/css/community1.css" />
+
     </head>
     <body>
         <c:import url="header.jsp"/>

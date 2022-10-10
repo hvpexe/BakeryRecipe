@@ -2,6 +2,45 @@ let formElem = document.getElementById('add-recipe');
 let instructionElem = document.getElementById('instruction');
 formElem.onsubmit = e => {
 }
+//add video and picture
+var swiper = new Swiper(".swiper", {
+    slidesPerView: 4,
+//    centeredSlides: true,
+    spaceBetween: 30,
+    freeMode: true,
+});
+
+var appendNumber = 4;
+var prependNumber = 1;
+
+document.querySelector("#add-img-btn")
+        .addEventListener("click", function (e) {
+            e.preventDefault();
+            swiper.appendSlide(
+                    '<div class="swiper-slide">Slide ' + ++appendNumber + "</div>"
+                    );
+        });
+function addVideo() {
+
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+// item copy
 function ItemCopy(option) {
     var inputElement = $(option.selector);
     function runAjax(url, param, run) {
@@ -21,6 +60,7 @@ function ItemCopy(option) {
     if (option.url) {
         inputElement.keyup(e => {
             var check = true;
+            console.log(inputElement);
             if (checkKeyEnter(e)) {
                 for (var i = 0; i < inputElement.length; i++) {
                     if (inputElement[i].value === '')
@@ -102,7 +142,8 @@ function changeIngrImg(elem, value, e) {
 }
 //removeElem
 function updateContainer(container) {
-    if(typeof container === 'string' ) container= document.querySelector(container);
+    if (typeof container === 'string')
+        container = document.querySelector(container);
     console.log(container);
     let instList = container.querySelectorAll('#' + container.id + ' > [id^=inst]');
     console.log(instList);
