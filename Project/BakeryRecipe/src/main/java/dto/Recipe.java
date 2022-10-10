@@ -67,15 +67,20 @@ public class Recipe {
         this.username = username;
     }
 
-    public Recipe(String name, String description, int like, int save, int comment, int prepTime, int cookTime) {
+  
+
+    public Recipe(String name, String description, int like, int save, int comment, Timestamp datePost, Timestamp lastDateEdit, int prepTime, int cookTime) {
         this.name = name;
         this.description = description;
         this.like = like;
         this.save = save;
         this.comment = comment;
+        this.datePost = datePost;
+        this.lastDateEdit = lastDateEdit;
         this.prepTime = prepTime;
         this.cookTime = cookTime;
     }
+    
     
     /**
      * constructor này dành cho post recipe trên trang home

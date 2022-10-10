@@ -47,30 +47,36 @@
                         </div>
                     </div>
                     <div class="col-md-8">
-                            <div class="first-div">
-                                <span class="info-user">
-                                    <img src="${USER_DETAIL.getAvatar()}">
-                                    <span>${USER_DETAIL.getName()}</span>
+                        <div class="first-div">
+                            <span class="info-user">
+                                <img src="${USER_DETAIL.getAvatar()}">
+                                <span>${USER_DETAIL.getName()}</span>
+                                <c:if test="${sessionScope.login.name != USER_DETAIL.name}">
                                     <a href="#" class="btn btn-style1"><i class="fa-solid fa-user-plus"></i> Follow</a>
                                     <a href="#" class="btn btn-style2"><i class="fa-solid fa-user-plus"></i> Followed</a>
-                                </span>
+                                </c:if>
+
+                            </span>
+                            <c:if test="${sessionScope.login.name == USER_DETAIL.name}">
                                 <span class="text-nowrap">
                                     <a href="#" class="btn btn-style2"><i class="fa-regular fa-pen-to-square"></i> Edit</a>
                                 </span>
-                            </div>
+                            </c:if>
+                        </div>
+                        <div class="recipe-name">
+                            <!--White Chocolate Lemon Cupcakes White Chocolate Lemon Cupcakes-->
+                            ${RECIPE_DETAIL.name}
+                        </div>
+                        <div class="date-post">
+                           <c:out value="${RECIPE_DETAIL.getDatePostFormat()}"/>
+                        </div>
+                        <div class="recipe-react">
+                            <span>Like: ${RECIPE_DETAIL.getLike()}</span>
+                            <span>Comment: ${RECIPE_DETAIL.getComment()}</span>
+                            <span>Saved: ${RECIPE_DETAIL.getSave()}</span>
+                        </div>
 
-                            <div class="recipe-name">
-                                <!--White Chocolate Lemon Cupcakes White Chocolate Lemon Cupcakes-->
-                                ${RECIPE_DETAIL.name}
-                            </div>
-                            <div class="date-post">
-                                2 day ago
-                            </div>
-                            <div class="recipe-react">
-                                <span>Like: ${RECIPE_DETAIL.getLike()}</span>
-                                <span>Comment: ${RECIPE_DETAIL.getComment()}</span>
-                                <span>Saved: ${RECIPE_DETAIL.getSave()}</span>
-                            </div>
+                        <c:if test="${sessionScope.login.id != USER_DETAIL.getId()}">
                             <div class="react-action">
                                 <a href="#" class="btn btn-style1"><i class="fa-regular fa-heart"></i> Like</a>
                                 <a href="#" class="btn btn-style2"><i class="fa-solid fa-heart"></i> Liked</a>
@@ -78,15 +84,16 @@
                                 <a href="#" class="btn btn-style1"><i class="fa-regular fa-bookmark"></i> Save</a>
                                 <a href="#" class="btn btn-style2"><i class="fa-solid fa-bookmark"></i> Saved</a>
                             </div>
-                            <div class="detail">
-                                <!--                        These lemon cupcakes have an ultra soft and moist texture and are served with a fragrant white
-                                                        chocolate whipped cream and strawberries. This recipe is for you if you enjoy a decadent dessert
-                                                        that is not too sweet.-->
-                                ${RECIPE_DETAIL.getDescription()}
-                            </div>
-                            <div class="time">
-                                <i class="fa-regular fa-clock"></i> Prep: ${RECIPE_DETAIL.getPrepTime()}min &nbsp; &nbsp; &nbsp; Cook: ${RECIPE_DETAIL.getCookTime()}min
-                            </div>
+                        </c:if>
+                        <div class="detail">
+                            <!--                        These lemon cupcakes have an ultra soft and moist texture and are served with a fragrant white
+                                                    chocolate whipped cream and strawberries. This recipe is for you if you enjoy a decadent dessert
+                                                    that is not too sweet.-->
+                            ${RECIPE_DETAIL.getDescription()}
+                        </div>
+                        <div class="time">
+                            <i class="fa-regular fa-clock"></i> Prep: ${RECIPE_DETAIL.getPrepTime()}min &nbsp; &nbsp; &nbsp; Cook: ${RECIPE_DETAIL.getCookTime()}min
+                        </div>
                     </div>
 
                 </div>
@@ -131,7 +138,7 @@
                                         </p>
                                     </div>
                                 </c:forEach>
-                                
+
                             </div>
                         </div>
                         <div class="comment-container">

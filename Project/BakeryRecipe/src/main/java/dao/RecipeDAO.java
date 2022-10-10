@@ -463,8 +463,8 @@ public class RecipeDAO {
         return null;
     }
 
-     private static final String COOK_DETAIL = "SELECT [Name],[Like],[Save],[Comment],[PrepTime],[CookTime],[Description],[DatePost]\n"
-            + "FROM [dbo].[Recipe] recipe join [dbo].[User] baker\n"
+     private static final String COOK_DETAIL = "SELECT [Name],[Like],[Save],[Comment],[PrepTime],[CookTime],[Description],[DatePost],DatePost, LastDateEdit \n"
+            + "FROM [dbo].[Recipe]recipe join [dbo].[User] baker\n"
             + "on recipe.UserID =baker.ID\n"
             + "WHERE baker.ID = ? and recipe.ID =?";
 
@@ -487,7 +487,7 @@ public class RecipeDAO {
                 int prepTime = rs.getInt("PrepTime");
                 int cookTime = rs.getInt("CookTime");
                 int comment = rs.getInt("Comment");
-                recipe = new Recipe(name, description, like, save, comment, prepTime, cookTime);
+                recipe = new Recipe(name, description, like, save, comment, rs.getTimestamp("DatePost"), rs.getTimestamp("LastDateEdit"), prepTime, cookTime);
             }
         } catch (Exception e) {
             System.out.println("System have error !!!" + e);
