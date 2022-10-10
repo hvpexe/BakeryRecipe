@@ -51,13 +51,13 @@
                             <span class="info-user">
                                 <img src="${USER_DETAIL.getAvatar()}">
                                 <span>${USER_DETAIL.getName()}</span>
-                                <c:if test="${sessionScope.login.name != USER_DETAIL.name}">
-                                    <a href="#" class="btn btn-style1"><i class="fa-solid fa-user-plus"></i> Follow</a>
+                                <c:if test="${sessionScope.login.id != USER_DETAIL.id}">
+                                    <a href="./FollowController?follower=${sessionScope.login.id}&followed=${USER_DETAIL.id}&action=FOLLOW" class="btn btn-style1"><i class="fa-solid fa-user-plus"></i> Follow</a>
                                     <a href="#" class="btn btn-style2"><i class="fa-solid fa-user-plus"></i> Followed</a>
                                 </c:if>
 
                             </span>
-                            <c:if test="${sessionScope.login.name == USER_DETAIL.name}">
+                            <c:if test="${sessionScope.login.id == USER_DETAIL.id}">
                                 <span class="text-nowrap">
                                     <a href="#" class="btn btn-style2"><i class="fa-regular fa-pen-to-square"></i> Edit</a>
                                 </span>
