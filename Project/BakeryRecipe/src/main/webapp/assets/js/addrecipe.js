@@ -1,7 +1,6 @@
 let formElem = document.getElementById('add-recipe');
 let instructionElem = document.getElementById('instruction');
 formElem.onsubmit = e => {
-    e.preventDefault();
 }
 function ItemCopy(option) {
     var inputElement = $(option.selector);
@@ -101,16 +100,51 @@ function changeIngrImg(elem, value, e) {
         elem.parentElement.classList.remove('fas', 'fa-camera')
     }
 }
+//removeElem
+function updateContainer(container) {
+    if(typeof container === 'string' ) container= document.querySelector(container);
+    console.log(container);
+    let instList = container.querySelectorAll('#' + container.id + ' > [id^=inst]');
+    console.log(instList);
+    for (var i = 0; i < instList.length; i++) {
+        var step = instList[i].querySelector('[name=step]');
+        step.setAttribute('value', i);
+        step.click();
+    }
+}
+function removeElem(elem) {
+    let container = elem.parentElement;
+    let instContainer = container.parentElement;
+    container.remove();
+    updateContainer(instContainer);
+}
+//#detail save button
 $('.save-btn').on('click', e => {
     var detail = document.querySelector("#detail");
     var elem = document.getElementById(detail.getAttribute('viewing'));
     elem.querySelector('[name=inst-description]').value = detail.querySelector('textarea').value;
-    elem.querySelector('[name=inst-image]').value = detail.querySelector('img').src;
+    let elemFile = elem.querySelector('[name=inst-image]');
+    let detailFile = detail.querySelector('input[type=file]');
+
+    if (detailFile.files[0]) {
+        elemFile.files[0] = detailFile.files[0];
+        console.log(elemFile.files[0]);
+        console.log(detailFile.files[0]);
+        let clone = detailFile.cloneNode(true);
+        //<input name="inst-image" id="inst-image1" class="d-none" readonly="" type="file" accept="image/*" onchange="changeIngrImg(this.parentElement, window.URL.createObjectURL(this.files[0]), event)">
+        clone.setAttribute('name', elemFile.name);
+        clone.setAttribute('onchange', elemFile.getAttribute('onchange'));
+        clone.setAttribute('accept', elemFile.accept);
+        console.log(clone.value);
+        elemFile.parentElement.insertBefore(clone, elemFile);
+        changeIngrImg(clone.parentElement, window.URL.createObjectURL(clone.files[0]))
+        elemFile.remove();
+    }
+
 
     console.log(detail);
     console.log(elem);
     document.querySelector("#detail").classList.add('d-none');
-
 });
 // stop img that have a camera calling ShowDetail first
 $('#inst-container h5, #inst-container .inst-img, #inst-container .inst-img *\n\
