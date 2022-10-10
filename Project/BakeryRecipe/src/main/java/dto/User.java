@@ -33,10 +33,13 @@ public class User {
     public User() {
     }
 
-    public User(String avatar, String name) {
+    public User(int id, String avatar, String name) {
+        this.id = id;
         this.avatar = avatar;
         this.name = name;
     }
+
+  
 
     public User(String email, String firstName, String lastName, String password) {
         this.email = email;
