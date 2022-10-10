@@ -16,6 +16,14 @@ public class Ingredient {
     private String img;
     private String amount;
 
+    public String getAmount() {
+        return amount;
+    }
+
+    public void setAmount(String amount) {
+        this.amount = amount;
+    }
+
     public Ingredient(String name, String img, String amount) {
         this.name = name;
         this.img = img;
