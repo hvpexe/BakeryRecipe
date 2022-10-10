@@ -10,7 +10,7 @@
 
 /* main */
 body {
-    background-color: var(--web-background-color) !important;
+    background-color: var(--web-background-color) ;
     font-family: 'Roboto', sans-serif;
     scroll-behavior: smooth;
 }
@@ -24,7 +24,8 @@ body {
     border-radius: 20px;
 }
 
-.head-info {}
+.head-info {
+}
 
 /* .info-img img {
     height: 300px;
@@ -34,7 +35,7 @@ body {
 } */
 
 .info-img {
-    padding: 0 !important;
+    padding: 0 ;
 }
 
 .first-div {
@@ -57,23 +58,23 @@ body {
 }
 
 .btn-style1 {
-    padding: 0.25rem 0.7rem !important;
-    background-color: var(--main-theme-color) !important;
-    color: var(--side-theme-color) !important;
-    border-radius: 20px !important;
+    padding: 0.25rem 0.7rem ;
+    background-color: var(--main-theme-color) ;
+    color: var(--side-theme-color) ;
+    border-radius: 20px ;
+    text-align: center;
 }
+
 
 .btn-style1:hover {
-    background-color: var(--main-theme-color-hover) !important;
-    color: var(--side-theme-color) !important;
-    border-radius: 20px !important;
+    background-color: var(--main-theme-color-hover);
+    color: var(--side-theme-color) ;
+    border-radius: 20px ;
 }
-
-.btn-style2 {
-    padding: 0.25rem 0.7rem !important;
-    border: 1px solid var(--main-theme-color) !important;
-    color: var(--main-theme-color) !important;
-    border-radius: 20px !important;
+.btn-style1.button-Follower {
+    background-color: var(--white);
+    border: 2px solid var(--main-theme-color);
+    color: black;
 }
 
 .recipe-name {
@@ -166,16 +167,16 @@ body {
 }
 
 .seemore {
-    border-radius: 20px !important;
-    border: 1px solid var(--main-theme-color) !important;
-    color: var(--main-theme-color) !important;
+    border-radius: 20px ;
+    border: 1px solid var(--main-theme-color) ;
+    color: var(--main-theme-color) ;
     font-family: Gelasio;
 }
 
 
 .recipe-list {
     width: 100%;
-    margin-left: 0 !important;
+    margin-left: 0 ;
     margin-top: 5px;
     transition: 0.3s;
 }
@@ -246,7 +247,7 @@ body {
 
 .recipe-author {
     font-size: 14px;
-    color: rgba(0, 0, 0, 0.7) !important;
+    color: rgba(0, 0, 0, 0.7) ;
 }
 
 .recipe-author a {

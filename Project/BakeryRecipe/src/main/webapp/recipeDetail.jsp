@@ -9,13 +9,16 @@
         <meta name="viewport" content="initial-scale=1, width=device-width" />
         <title>recipeDetail</title>
 
-        <link rel="stylesheet" href="assets/css/recipeDetail.css" />
         <link href="assets/css/fontawesome-free-6.1.1-web/css/all.min.css" rel="stylesheet" type="text/css" />
         <link rel="stylesheet" href="assets/css/web/bootstrap-4.3.1.min.css" />
+
         <link rel="preconnect" href="https://fonts.googleapis.com">
         <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
         <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap" rel="stylesheet">
         <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@8/swiper-bundle.min.css" />
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+        <link rel="stylesheet" href="assets/css/recipeDetail.css?version=1" />
+
     </head>
 
     <body>
@@ -52,10 +55,14 @@
                                 <img src="${USER_DETAIL.getAvatar()}">
                                 <span>${USER_DETAIL.getName()}</span>
                                 <c:if test="${sessionScope.login.id != USER_DETAIL.id}">
-                                    <a href="./FollowController?follower=${sessionScope.login.id}&followed=${USER_DETAIL.id}&action=FOLLOW" class="btn btn-style1"><i class="fa-solid fa-user-plus"></i> Follow</a>
-                                    <a href="#" class="btn btn-style2"><i class="fa-solid fa-user-plus"></i> Followed</a>
-                                </c:if>
+                                    <div class="btn btn-style1" onclick="followButton(this,'Follow','UnFollow')" >
+                                        <i class="fa-solid fa-user-plus"></i>
+                                        <span class="txt-follow">Follow</span>
+                                    </div>
 
+                                </c:if>
+                                        <!--followButton(this,'Saved','Not Saved')-->
+                                        <!--followButton(this,'Like','UnLike')-->
                             </span>
                             <c:if test="${sessionScope.login.id == USER_DETAIL.id}">
                                 <span class="text-nowrap">
@@ -68,7 +75,7 @@
                             ${RECIPE_DETAIL.name}
                         </div>
                         <div class="date-post">
-                           <c:out value="${RECIPE_DETAIL.getDatePostFormat()}"/>
+                            <c:out value="${RECIPE_DETAIL.getDatePostFormat()}"/>
                         </div>
                         <div class="recipe-react">
                             <span>Like: ${RECIPE_DETAIL.getLike()}</span>
@@ -78,11 +85,9 @@
 
                         <c:if test="${sessionScope.login.id != USER_DETAIL.getId()}">
                             <div class="react-action">
-                                <a href="#" class="btn btn-style1"><i class="fa-regular fa-heart"></i> Like</a>
-                                <a href="#" class="btn btn-style2"><i class="fa-solid fa-heart"></i> Liked</a>
+                                <a href="#" class="btn btn-style1" onclick="followButton(this,'Like','UnLike')"><i class="fa-regular fa-heart"></i> Like</a>
                                 &nbsp;
-                                <a href="#" class="btn btn-style1"><i class="fa-regular fa-bookmark"></i> Save</a>
-                                <a href="#" class="btn btn-style2"><i class="fa-solid fa-bookmark"></i> Saved</a>
+                                <a href="#" class="btn btn-style1" onclick="followButton(this,'Saved','Not Saved')"><i class="fa-regular fa-bookmark"></i> Save</a>
                             </div>
                         </c:if>
                         <div class="detail">
@@ -129,7 +134,7 @@
                                     <div class="instruction">
                                         <div class="step">step : ${ep.getInsstep()}</div>
                                         <p>
-                                             ${ep.getDetail()}
+                                            ${ep.getDetail()}
                                         </p>
                                     </div>
                                 </c:forEach>
@@ -331,18 +336,53 @@
         <script src="https://cdn.jsdelivr.net/npm/swiper@8/swiper-bundle.min.js"></script>
 
         <script>
-            const swiper = new Swiper('.swiper', {
-                pagination: {
-                    el: '.swiper-pagination',
-                    clickable: true
-                },
+                                        const swiper = new Swiper('.swiper', {
+                                            pagination: {
+                                                el: '.swiper-pagination',
+                                                clickable: true
+                                            },
 
-                navigation: {
-                    nextEl: '.swiper-button-next',
-                    prevEl: '.swiper-button-prev',
-                },
+                                            navigation: {
+                                                nextEl: '.swiper-button-next',
+                                                prevEl: '.swiper-button-prev',
+                                            },
 
-            });
+                                        });
+        </script>
+        <script>
+            function  followButton(item,val1,val2) {
+//                event.target.style.backgroundColor = 'white';
+//                event.target.classList.toggle("button-Follower");
+//
+//                console.log(event.target.classList);
+
+                $.ajax({
+                    url: "ajax/UpdateUserFollowAjax",
+                    type: "get", //send it through get method
+                    data: {
+                        follower: "${USER_DETAIL.id}",
+                        action: "Follow",
+                        followed: "${sessionScope.login.id}"
+                    },
+                    success: function () {
+                        console.log(item);
+                        item.classList.toggle("button-Follower");
+
+                        let txtFollow = item.querySelector("span");
+                        if (txtFollow.innerText !== val2)
+                            txtFollow.innerText = val2;
+                        else
+                            txtFollow.innerText = val1;
+
+                        //Do Something
+                    },
+                    error: function () {
+                        //Do Something to handle error
+                        console.log("thanh cong roi kia");
+                    }
+                });
+            }
+
         </script>
     </body>
 

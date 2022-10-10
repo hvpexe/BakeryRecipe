@@ -1,5 +1,4 @@
-<link rel="stylesheet" href="assets/css/web/bootstrap-4.3.1.min.css" />
-<link href="assets/css/fontawesome-free-6.1.1-web/css/all.min.css" rel="stylesheet" type="text/css" />
+
 <style>
    /*css ? ?ây, code ko có bao nhiêu*/
     footer {

@@ -487,7 +487,7 @@ public class RecipeDAO {
                 int prepTime = rs.getInt("PrepTime");
                 int cookTime = rs.getInt("CookTime");
                 int comment = rs.getInt("Comment");
-                recipe = new Recipe(name, description, like, save, comment, rs.getTimestamp("DatePost"), rs.getTimestamp("LastDateEdit"), prepTime, cookTime);
+                recipe = new Recipe(recipeID,name, description, like, save, comment, rs.getTimestamp("DatePost"), rs.getTimestamp("LastDateEdit"), prepTime, cookTime);
             }
         } catch (Exception e) {
             System.out.println("System have error !!!" + e);

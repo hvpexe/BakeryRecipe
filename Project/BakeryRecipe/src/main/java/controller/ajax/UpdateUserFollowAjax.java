@@ -2,12 +2,13 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/Servlet.java to edit this template
  */
-package controller.baker;
+package controller.ajax;
 
 import dao.UserDAO;
 import java.io.IOException;
 import java.io.PrintWriter;
 import javax.servlet.ServletException;
+import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -16,39 +17,35 @@ import javax.servlet.http.HttpServletResponse;
  *
  * @author VO MINH MAN
  */
-public class FollowController extends HttpServlet {
-private static final String ERROR = "recipeDetail.jsp";
-    private static final String SUCCESS = "RecipeDetailController";
-    private static final String FOLLOW = "Follow";
+@WebServlet(name = "UpdateUserFollowAjax", urlPatterns = {"/ajax/UpdateUserFollowAjax"})
+public class UpdateUserFollowAjax extends HttpServlet {
+ private static final String FOLLOW = "Follow";
     private static final String UN_FOLLOW = "unFollow";
-
-    
+    /**
+     * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
+     * methods.
+     *
+     * @param request servlet request
+     * @param response servlet response
+     * @throws ServletException if a servlet-specific error occurs
+     * @throws IOException if an I/O error occurs
+     */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
-        String url = ERROR;
-        try {
-
-            //Ý tưởng follow xử lý trong tb.Follow nếu người userID follow với action là Follow thì sẽ add vào trong Follow
-            //Ý tưởng unFollow xử lý trong tb.Follow nếu người userID unfollow với action là unFollow thì sẽ delete vào trong unFollow
-            UserDAO sc = new UserDAO();
+        try ( PrintWriter out = response.getWriter()) {
+           UserDAO sc = new UserDAO();
             String action = request.getParameter("action");
             int recipeID = Integer.parseInt(request.getParameter("recipeID"));
             int ID = Integer.parseInt(request.getParameter("follower"));
             int userFollowed = Integer.parseInt(request.getParameter("followed"));
             if (action.equals(FOLLOW)) {
-                url = SUCCESS;
+               
                 sc.followUSer(ID, userFollowed);
             } else if (action.equals(UN_FOLLOW)) {
-                url = SUCCESS;
+               
                 sc.UNFollow(ID, userFollowed);
             }
-
-        } catch (Exception e) {
-            System.out.println("Follow Controller have a problem");
-            e.printStackTrace();
-        } finally {
-            request.getRequestDispatcher(url).forward(request, response);
         }
     }
 

@@ -69,7 +69,8 @@ public class Recipe {
 
   
 
-    public Recipe(String name, String description, int like, int save, int comment, Timestamp datePost, Timestamp lastDateEdit, int prepTime, int cookTime) {
+    public Recipe(int id,String name, String description, int like, int save, int comment, Timestamp datePost, Timestamp lastDateEdit, int prepTime, int cookTime) {
+        this.id = id;
         this.name = name;
         this.description = description;
         this.like = like;
