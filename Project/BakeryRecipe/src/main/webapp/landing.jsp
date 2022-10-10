@@ -51,7 +51,7 @@
                         <h2 class="featurette-heading">Open your refrigerator. <span class="text-muted">Tell us what you have</span>
                         </h2>
                         <p class="lead">Which ingredient you have? Enter all here, we will bring to you some recommend!</p>
-                        <a class="btn" href="#">Start</a>
+                        <a class="btn" href="searchByIngredient.jsp">Start</a>
                     </div>
                     <div class="col-md-5 order-md-1">
                         <img class="featurette-image img-fluid mx-auto" data-src="holder.js/500x500/auto" alt="500x500"
