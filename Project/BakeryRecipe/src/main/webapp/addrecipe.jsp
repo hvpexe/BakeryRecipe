@@ -43,7 +43,7 @@
             <main class="cook2-main">
                 <main class="create-recipe-main col-md-10 col-12 align-self-center px-0">
                     <div class="create-recipe-div ">
-                        <h2 class="text-h2 ">
+                        <h2 class="text-h2 "onclick="history.back ()">
                             <i class="fas fa-arrow-left"></i>
                             <b class="create-recipe-b d-inline-block ">Create Recipe</b>
                         </h2>

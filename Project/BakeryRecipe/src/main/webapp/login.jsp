@@ -143,6 +143,8 @@
     <script src="assets/js/validator.js"></script>
     <script>
         //login validator
+        document.querySelector('form').classList.add('class');
+        document.querySelector('form').classList.remove('class');
         Validator({
         form: '#formLogin',
                 status: '.status',

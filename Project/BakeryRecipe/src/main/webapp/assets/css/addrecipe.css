@@ -192,6 +192,9 @@ input,textarea{
     background-size: cover;
     background-repeat:  no-repeat;
 }
+.video-and-image is(span, span::before, span::after){
+    transition: 0.3s;
+}
 .video-and-image span:hover{
     box-shadow: 0 0 50px 0 inset var(--brown-theme-50);
 }
@@ -228,12 +231,11 @@ input,textarea{
     border-radius: 0 0 10px 0;
     pointer-events: none;
 }
-.video-and-image span.selected::befove{
+.video-and-image span.selected::before{
     content:'';
     position: absolute;
-    left:0;top:0;
-        font-family: 'Font Awesome 6 Brands';
-
+    inset:0;
+    box-shadow: 0 -10px 10px 0 inset var(--success);
 }
 .video-and-image span.selected::after{
     position: absolute;
@@ -365,7 +367,7 @@ input,textarea{
     font-size: 1em;
     color: #000;
     font-family: Gelasio;
-    /*background: var(--yellow-theme-75);*/
+    background: var(--yellow-theme-50);
 }
 .add-recipedone-main,
 .cook2-main {
