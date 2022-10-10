@@ -47,7 +47,7 @@
                             <b class="create-recipe-b d-inline-block ">Create Recipe</b>
                         </h2>
                     </div>
-                    <button class="save-button" form="addRecipe">
+                    <button class="save-button" >
                         <b class="save-b2">Save</b>
                     </button>
                 </main>
@@ -56,11 +56,11 @@
                     <div class="title-div col-12">
                         <b class="label">Title</b>
 
-                        <input name='name' class="input col-12"  type="text" placeholder="Recipe's Name ">
+                        <input name='recipe-name' class="input col-12"  type="text" placeholder="Recipe's Name ">
                     </div>
                     <div class="add-recipe-input col">
                         <b class="label">Description</b>
-                        <textarea class="boxdes-textarea  p-2" placeholder="Add description"></textarea>
+                        <textarea name="recipe-description" class="boxdes-textarea  p-2" placeholder="Add description"></textarea>
                         <div>
 
                         </div>
@@ -96,6 +96,7 @@
 
 
                     </div>
+                    <!--                INGREDIENTS                            -->
                     <div class="add-recipe-input col-12">
                         <b class="label">Ingredients</b>
                         <div class="col p-0" id="ingredient-container">
@@ -108,9 +109,9 @@
                             </div>
                         </div>
                         <div class="d-flex p-0 col align-items-center" id="ingredient"  >
-                            <input class="instruction-box-input col-7 " name='name' id="name" type="text" placeholder="Add one ingredient">
+                            <input class="instruction-box-input col-7 " id="name" type="text" placeholder="Add one ingredient">
                             <span class="col d-flex align-items-center pr-0">Amount:</span>
-                            <input class="instruction-box-input col-3 ml-1" name='amount' id="amount"  type="text" placeholder="1 Oz">
+                            <input class="instruction-box-input col-3 ml-1" id="amount"  type="text" placeholder="1 Oz">
                             <input type="hidden" name="count" value="1">
                         </div>
                     </div>
@@ -129,10 +130,10 @@
                                     </div>
                                     <input class="instruction-box-input col " disabled value=""
                                            readonly="" name="inst-description" id="inst-description" type="text">
-                                    <div class="item-trashbin fas fa-trash ml-auto description-button" onclick="this.parentElement.parentElement.remove()"></div>
+                                    <div class="item-trashbin fas fa-trash ml-auto description-button" onclick="removeElem(this.parentElement)"></div>
                                 </div>
                             </div>
-                            
+
                         </div>
 
                     </div>
@@ -196,6 +197,7 @@
                                          count.setAttribute('value', parseInt(count.value) + 1);
                                      }
                                      $(container).append(result);
+                                     updateContainer(container);
                                      $('#inst-container h5, #inst-container .inst-img, #inst-container .inst-img *\n\
                                                 ,#inst-container .item-trashbin, #inst-container .item-trashbin *').click(function (e) {
                                          e.stopPropagation();

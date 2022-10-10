@@ -356,7 +356,7 @@ input,textarea{
     align-items: center;
 }
 div#item{
-    /*display: none;*/
+    display: none;
 }
 div[id^=item]
 {

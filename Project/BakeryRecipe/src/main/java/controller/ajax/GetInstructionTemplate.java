@@ -40,7 +40,7 @@ public class GetInstructionTemplate extends HttpServlet {
             out.println("<div class=\"col align-items-center p-0 \" id=\"inst"+count+"\">\n"
                     + "                                <h5 class=\"text-secondary col-12 p-0\">\n"
                     + "                                    Step <span>"+count+"</span>\n"
-                    + "                                    <input name=\"step\"  onchange=\"this.previousElementSibling.innerText = this.value\" type=\"hidden\" value=\""+count+"\">\n"
+                    + "                                    <input name=\"step\" onclick=\"this.previousElementSibling.innerText = this.value\" type=\"hidden\" value=\""+count+"\">\n"
                     + "                                </h5>\n"
                     + "                                <div class=\"col hover-highlight  p-0 pr-2 d-flex align-items-center border border-secondary rounded\" onclick=\"showDetail(this.parentElement);\">\n"
                     + "                                    <div class=\"inst-img d-inline-flex fas fa-camera position-relative align-items-center justify-content-center\" src=\"\" onclick=\"this.querySelector('input').click();\">\n"
@@ -49,7 +49,7 @@ public class GetInstructionTemplate extends HttpServlet {
                     + "                                    </div>\n"
                     + "                                    <input class=\"instruction-box-input col \"  value=\""+detail+"\"\n"
                     + "                                           readonly=\"\" name=\"inst-description\" id=\"inst-description"+count+"\" type=\"text\">\n"
-                    + "                                    <div class=\"item-trashbin fas fa-trash ml-auto description-button\" onclick=\"this.parentElement.parentElement.remove()\"></div>\n"
+                    + "                                    <div class=\"item-trashbin fas fa-trash ml-auto description-button\" onclick=\"removeElem(this.parentElement)\"></div>\n"
                     + "                                </div>\n"
                     + "                            </div>");
         }
