@@ -130,9 +130,9 @@
                 </form>
             </aside>
             <aside class="col-7 d-none d-lg-flex bg-white">
-                <c:forEach var="u" items="<%=UserDAO.getAllUser()%>" varStatus="i">
-                    <br>${i.index} E: ${u.email} P: ${u.password}
-                </c:forEach>
+                <%--<c:forEach var="u" items="<%=UserDAO.getAllUser()%>" varStatus="i">--%>
+                <%--   <br>${i.index} E: ${u.email} P: ${u.password}--%>
+                <%--</c:forEach>--%>
             </aside>
         </section>
         <!--Google Login Dont Touch-->

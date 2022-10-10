@@ -1,4 +1,6 @@
 @import "web/bootstrap-4.3.1.min.css";
+html, body {
+}
 body {
     margin: 0;
     line-height: normal;
@@ -440,6 +442,8 @@ div[id$=container]{
 
 }
 #detail {
+    font-family: 'Gelasio';
+
 }
 #detail .gray-box{
     position: fixed;
@@ -454,12 +458,28 @@ div[id$=container]{
     inset:0;
     z-index:1;
     background: #fff;
-    /*overflow-y: scroll;*/
+    overflow-y: scroll;
     min-height: 300px;
+    font-family: 'Gelasio';
 }
-#detail .container::webkit-scrollbar{
+#detail .container :is(.cancel-btn , .save-btn, .change-img-btn){
+    background: white;
+    outline: 2px solid var(--dark);
+    padding: 7px 10px;
+    text-align: center;
+    cursor: pointer;
+}
+#detail .container .change-img-btn{
+    font-size: 0.85em;
+}
+#detail .container .save-btn{
+    background: var(--success);
+    color:#fff;
+    outline: 2px solid var(--dark);
 
-
+}
+body:has( #detail:not(.d-none)) {
+    overflow:hidden;
 }
 @media (min-width: 768px){
     #detail .container{

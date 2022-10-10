@@ -273,7 +273,6 @@ public class UserDAO {
                 ptm.setString(2, "%" + search + "%");
                 rs = ptm.executeQuery();
                 while (rs.next()) {
-
                     int ID = rs.getInt("ID");
                     String role = rs.getString("Role");
                     String email = rs.getString("Email");
@@ -353,44 +352,37 @@ public class UserDAO {
         return null;
     }*/
     
-      private static final String LIST_USER = "select[Email], [LastName],[FirstName] ,[Avatar]\n"
-            + "from [dbo].[User] join [dbo].[Recipe]\n"
-            + "on [dbo].[User].ID =[dbo].[Recipe].[UserID]\n"
-            + "where [dbo].[Recipe].[ID]= ?";
-     public  User listUser(int recipeID) throws SQLException {
-        User user = null;
+ private static final String LIST_USER = "select[Email], [LastName],[FirstName] ,[Avatar]\n"
+            + "           from [dbo].[User] \n"
+            + "         where [dbo].[User].ID =?";
+
+    public static User userDetail(int userID) {
+         User user = null;
         Connection conn = null;
         PreparedStatement ptm = null;
         ResultSet rs = null;
         try {
+          
             conn = DBUtils.getConnection();
             if (conn != null) {
                 ptm = conn.prepareStatement(LIST_USER);
-                ptm.setInt(1, recipeID);
+                ptm.setInt(1, userID);
                 rs = ptm.executeQuery();
                 while (rs.next()) {
                     String lastName = rs.getString("LastName");
-                    String email = rs.getString("Email");
                     String firstName = rs.getString("FirstName");
                     String Avatar = rs.getString("Avatar");
-                    user = new User(email, Avatar, firstName, lastName);
+                     String fullName = lastName +" "+firstName;
+                    user = new User(Avatar, fullName);
+                
                 }
             }
         } catch (Exception e) {
             System.out.println("System have a problem");
-        } finally {
-            if (rs != null) {
-                rs.close();
-            }
-            if (ptm != null) {
-                ptm.close();
-            }
-            if (conn != null) {
-                conn.close();
-            }
         }
         return user;
     }
+
      
        private static final String FOLLOW = "INSERT INTO [dbo].[Follow]([UserID],[UserID2]) VALUES(?,?)";
 
