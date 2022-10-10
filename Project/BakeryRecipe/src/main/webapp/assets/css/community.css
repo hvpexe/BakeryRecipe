@@ -166,15 +166,23 @@ body {
     font-size: 9px;
   }
   .paging{
+      display: inline-block;
       text-align: center;
-      background-color: transparent;
-      color: var(--main-theme-color);
-      font-size: 12px;
-      cursor: pointer;
-      position: relative;
   }
-  .paging.active:hover{
-      background-color: #FFC85C;
-      color: var(--main-theme-color);
+  .paging a{
+      color: black;
+      float: left;
+      padding: 8px 16px;
+      text-decoration: none;
+      border-radius: 5px;
+      transition: background-color .3s;
+  }
+  .paging a.active {
+      background-color: #4CAF50;
+      color: white;
+  }
+  .paging a:hover:not(.active) {background-color: #ddd;}
+  .paging a.active {
+      border-radius: 5px;
   }
 }
