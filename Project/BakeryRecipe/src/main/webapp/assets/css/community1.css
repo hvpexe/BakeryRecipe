@@ -185,3 +185,6 @@ body {
       border-radius: 5px;
   }
 }
+.paging.col.my-4 {
+    text-align: center;
+}
