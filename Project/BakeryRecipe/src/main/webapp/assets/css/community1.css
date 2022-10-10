@@ -147,6 +147,20 @@ body {
         width: 95%;
     }
 
+
+  .a.btn.seemore {
+    font-size: 10px !important;
+  }
+  .a.btn.seemore:hover{
+    background-color: var(--main-theme-color);
+    box-shadow: 0 0 0 2px var(--main-theme-color);
+    color: white;
+    transition-delay: 0s;
+  }
+  .title-container {
+    padding: 15px 20px;
+  }
+
     .seemore {
         font-size: 10px !important;
     }
@@ -159,6 +173,7 @@ body {
     .title-container {
         padding: 15px 20px;
     }
+
 
     .title {
         font-size: 20px;
