@@ -187,4 +187,25 @@ body {
 }
 .paging.col.my-4 {
     text-align: center;
+    display: inline-block;
+}
+.paging.col.my-4 a{
+    color: var(--main-theme-color);
+    padding: 8px 16px;
+    text-decoration: none;
+    border-radius: 5px;
+    transition: background-color .3s;
+    font-size: 20px;
+    font-family: Times New Roman !important;
+    background-color: white;
+}
+.paging.col.my-4 a.active{
+    background-color: var(--main-theme-color);
+    color: white;
+    border-radius: 5px;
+    font-weight: bold;
+    
+}
+.paging.col.my-4 a:hover:not(.active){
+    background-color: #ddd;
 }
