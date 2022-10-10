@@ -15,7 +15,7 @@
         <title>Most Recent Recipe</title>
         <meta name="description" content="" />
 
-        <link rel="stylesheet" href="assets/css/community.css" />
+        <link rel="stylesheet" href="assets/css/community1.css" />
 
         <link
             rel="stylesheet"

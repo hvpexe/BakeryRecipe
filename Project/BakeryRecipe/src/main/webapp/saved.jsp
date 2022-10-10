@@ -16,7 +16,7 @@
 
     <link rel="stylesheet" href="assets/css/web/bootstrap-4.3.1.min.css" />
     <link rel="stylesheet" type="text/css" href="./assets/css/fontawesome-free-6.1.1-web/css/all.min.css">
-    <link rel="stylesheet" href="assets/css/community.css" />
+    <link rel="stylesheet" href="assets/css/community1.css" />
     <link
       rel="stylesheet"
       href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700&display=swap"

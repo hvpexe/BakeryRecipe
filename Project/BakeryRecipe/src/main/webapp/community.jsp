@@ -6,7 +6,7 @@
         <meta charset="utf-8" />
         <meta name="viewport" content="initial-scale=1, width=device-width" />
         <title>Community</title>
-        <link rel="stylesheet" href="assets/css/community.css" />
+        <link rel="stylesheet" href="assets/css/community1.css" />
         <link
             rel="stylesheet"
             href="https://fonts.googleapis.com/css2?family=Gelasio:wght@400;500;700&display=swap"
