@@ -36,7 +36,7 @@ public class Search extends HttpServlet {
         String url = ERROR;
         try {
             String action = request.getParameter("action");
-            String searchK = request.getParameter("searchKey");
+            String searchK = request.getParameter("searchKey").toLowerCase();
             if (SEARCH_RECIPE.equals(action)) {
                 RecipeDAO recipe = new RecipeDAO();
                 List<Recipe> listRecipe = recipe.searchRecipe(searchK);

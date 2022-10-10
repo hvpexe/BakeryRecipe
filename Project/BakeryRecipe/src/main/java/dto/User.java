@@ -43,7 +43,7 @@ public class User {
         this.password = password;
         this.firstName = firstName;
         this.lastName = lastName;
-        this.name = firstName + " " + lastName;
+        this.name = lastName + " " + firstName;
     }
 
     public User(int ID, String Role, String Email, String Password, String Avatar, String FirstName, String LastName, String Gender, String Phone, String Address, Date DateRegister, boolean IsActive, int StoreID) {
@@ -60,7 +60,7 @@ public class User {
         this.dateRegister = DateRegister;
         this.isActive = IsActive;
         this.storeID = StoreID;
-        this.name = firstName + " " + lastName;
+        this.name = lastName + " " + firstName;
     }
 
     public User(int ID, String Role, String Email, String Password, String Avatar,
@@ -83,10 +83,10 @@ public class User {
         this.dateRegister = DateRegister;
         this.isActive = IsActive;
         this.storeID = StoreID;
-        this.name = firstName + " " + lastName;
+        this.name = lastName + " " + firstName;
         this.birthday = Birthday;
     }
-    
+
     public User(int ID, String Role, String Email, String Password, String Avatar,
             String FirstName, String LastName, String Gender, String Phone,
             String Address, Date DateRegister, int StoreID, Date Birthday) {
@@ -138,7 +138,9 @@ public class User {
     }
 
     public String getAvatar() {
-        if(avatar==null) return DEFAULT_AVATAR;
+        if (avatar == null) {
+            return DEFAULT_AVATAR;
+        }
         return IMG_PATH + avatar;
     }
 
@@ -213,7 +215,6 @@ public class User {
     public void setBirthday(Date birthday) {
         this.birthday = birthday;
     }
-    
 
     @Override
     public String toString() {

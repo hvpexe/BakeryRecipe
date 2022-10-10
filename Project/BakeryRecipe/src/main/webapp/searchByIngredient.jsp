@@ -60,7 +60,15 @@
                                 </div>
                                 <div class="ingre-container">
                                     <span class="ingre-active">Water</span>
-                                    <span class="ingre-inactive">Water</span>
+                                    <span class="ingre-active">Water</span>
+                                    <span class="ingre-active">Water</span>
+                                    <span class="ingre-active">Water</span>
+                                    <span class="ingre-active">Water</span>
+                                    <span class="ingre-active">Water</span>
+                                    <span class="ingre-active">Water</span>
+                                    <span class="ingre-active">Water</span>
+                                    <span class="ingre-active">Water</span>
+                                    <!--<span class="ingre-inactive">Water</span>-->
                                 </div>
                             </div>
                         </div>
