@@ -21,8 +21,6 @@ html {
 }
 
 header.masthead {
-    padding-top: 16rem !important;
-    padding-bottom: 13.5rem !important;
     text-align: center;
     color: #fff;
     background-image: linear-gradient(rgba(0, 0, 0, 0.3), rgba(0, 0, 0, 0.4)), url("https://images.alphacoders.com/114/1141188.jpg");
@@ -63,7 +61,8 @@ header.masthead .btn-main-color:hover {
 
 @media (min-width: 768px) {
     header.masthead {
-        padding-top: 17rem;
+        height: 100vh;
+        padding-top: 18rem;
         padding-bottom: 12.5rem;
     }
 

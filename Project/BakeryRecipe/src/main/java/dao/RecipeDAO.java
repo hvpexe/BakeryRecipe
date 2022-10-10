@@ -138,9 +138,11 @@ public class RecipeDAO {
     }
 
     public static int getAllRecipe() {
-        String sql = "SELECT count(Recipe.ID)\n"
-                + "FROM Recipe\n"
-                + "WHERE IsDeleted = 0";
+        String sql = "SELECT count(Recipe.ID)\n" +
+"                     FROM Recipe\n" +
+"		      JOIN [User] ON Recipe.UserID = [User].ID\n" +
+"		      JOIN Picture ON Picture.RecipeID = Recipe.ID\n" +
+"                     WHERE IsDeleted = 0 AND IsCover = 1";
         try {
             Connection conn = DBUtils.getConnection();
             PreparedStatement ps = conn.prepareStatement(sql);
@@ -261,6 +263,25 @@ public class RecipeDAO {
         }
         return null;
     }
+    public static int getAllSavedRecipe(int id) {
+        String sql = "SELECT count(Recipe.ID)\n" +
+"                     FROM [User]\n" +
+"		      JOIN [Save] ON [Save].UserID = [User].ID\n" +
+"		      JOIN [Recipe] ON [Save].RecipeID = [Recipe].ID\n" +
+"		      JOIN [Picture] ON [Recipe].ID = [Picture].RecipeID\n" +
+"                     WHERE IsDeleted = 0 AND IsCover = 1 AND [User].ID = ?";
+        try {
+            Connection conn = DBUtils.getConnection();
+            PreparedStatement ps = conn.prepareStatement(sql);
+            ps.setInt(1, id);
+            ResultSet rs = ps.executeQuery();
+            while (rs.next()) {
+                return rs.getInt(1);
+            }
+        } catch (SQLException ex) {
+        }
+        return 0;
+    }  
 
        private static final String LIST_PICTURE = "  SELECT pic.img,recipe.Video\n"
             + " FROM  [dbo].[Recipe] recipe\n"

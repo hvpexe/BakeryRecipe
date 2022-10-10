@@ -19,6 +19,7 @@ body {
 }
 .section::before {
     content:'';
+    opacity: 0.7;
     position: absolute;
     inset:0;
     background-image: url(../images/logo/login-background.jpg);
@@ -36,7 +37,9 @@ body {
     row-gap: 1em;
     padding: 1em;
     background: white;
-    border: 2px solid var(--main-theme-color)
+    border-radius: 15px !important;
+    box-shadow: 0 4px 12px rgba(79, 79, 186, 0.06);
+    /*border: 2px solid var(--main-theme-color)*/
 }
 #form-object .invitation-text{
     font-size: 110%;

@@ -8,10 +8,10 @@
             <img class="mx-auto" src="assets/images/logo/logo2.png" alt="">
         </a>
         <nav class="header-links justify-content-around col-md col p-0 ">
-            <a class="header-link p-0 border-0 active" href="./home">Home</a>
-            <a class="header-link p-0 border-0" href="./community">Community</a>
-            <a class="header-link p-0 border-0" href="./savedrecipe">Saved</a>
-            <a class="header-link p-0 border-0" href="./shopping.jsp">Shopping</a>
+            <a id="home" class="header-link p-0 border-0" href="./home">Home</a>
+            <a id="community" class="header-link p-0 border-0" href="./community">Community</a>
+            <a id="saved" class="header-link p-0 border-0" href="./savedrecipe">Saved</a>
+            <a id="shopping" class="header-link p-0 border-0" href="./shopping.jsp">Shopping</a>
         </nav>
     </div>
     <div class="header-right align-items-center flex-md-nowrap col-sm-12 col-md px-2 justify-content-md-center">
@@ -36,7 +36,7 @@
                 <div class="header-user position-relative ml-auto">
                     <a href="profile.jsp" class="header-user-button position-relative">
                         <div class="header-button-detail p-0 pr-5">
-                            ${login.firstName}   
+                            ${login.name}   
                             <img id="user_avatar" class=" d-inline m-auto rounded-circle position-absolute" src="${login.avatar}"/>
                         </div>
                     </a>

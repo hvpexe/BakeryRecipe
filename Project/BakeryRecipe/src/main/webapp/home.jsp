@@ -73,7 +73,7 @@
                     <div class="try-premium-membersh">
                         Make a cake with ingredient you haved
                     </div>
-                    <a href="#" class="btn btn-start">
+                    <a href="searchByIngredient.jsp" class="btn btn-start">
                         <span>Start Now <i class="fa-sharp fa-solid fa-right-to-bracket"></i></span>
                     </a>
                 </div>

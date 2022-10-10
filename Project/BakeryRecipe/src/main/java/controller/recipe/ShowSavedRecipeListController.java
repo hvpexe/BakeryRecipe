@@ -38,14 +38,14 @@ public class ShowSavedRecipeListController extends HttpServlet {
         response.setContentType("text/html;charset=UTF-8");
         HttpSession session = request.getSession();
         User user = (User) session.getAttribute("login");
-        
+
         String indexPage = request.getParameter("index");
         
         if(indexPage == null)
             indexPage = "1";
         int index = Integer.parseInt(indexPage);
         
-        int totalRecipe = RecipeDAO.getAllRecipe();
+        int totalRecipe = RecipeDAO.getAllSavedRecipe(user.getId());
         int totalPage = totalRecipe/8;
         if(totalRecipe % 8 != 0)
             totalPage ++;

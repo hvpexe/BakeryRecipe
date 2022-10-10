@@ -16,7 +16,7 @@
         <meta name="description" content="" />
 
         <link rel="stylesheet" href="assets/css/community1.css" />
-
+        <link rel="stylesheet" href="assets/css/web/bootstrap-4.3.1.min.css" />
         <link
             rel="stylesheet"
             href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700&display=swap"

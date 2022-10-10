@@ -58,7 +58,7 @@
     <body>
         <c:import url="header.jsp"/>
         <section class="section container-fluid row px-0 m-0">
-            <aside class="col-12  col-sm-9 col-lg-5 mx-auto px-3" id="form-object">
+            <aside class="col-12 col-sm-9 col-lg-4 mx-auto px-3" id="form-object">
                 <form class="login-form mx-1 ${REGISTER_ERROR!=null?'d-none':''} rounded flex-column align-items-center" 
                       id="formLogin" action="login" method="post">
                     <div class="invitation-text col-10">WELCOME BACK<br> to <br>Bakery Recipe </div>
@@ -129,66 +129,69 @@
 
                 </form>
             </aside>
-            <aside class="col-7 d-none d-lg-flex bg-white">
-                <%--<c:forEach var="u" items="<%=UserDAO.getAllUser()%>" varStatus="i">--%>
-                <%--   <br>${i.index} E: ${u.email} P: ${u.password}--%>
-                <%--</c:forEach>--%>
-            </aside>
-        </section>
-        <!--Google Login Dont Touch-->
-        <form class="d-none" id="googleLogin" action="login" method="POST"></form>
-        <script src="assets/js/validator.js"></script>
-        <script>
-            //login validator
-            Validator({
-            form: '#formLogin',
-                    status: '.status',
-                    rules: [
-                            Validator.isRequired('[name=email]'),
-                            Validator.isEmail('[name=email]'),
-                            Validator.isRequired('[name=password]'),
-                            Validator.isPassword('[name=password]')
-                    ],
-                    onSubmit: (value) => {
-            //Call api here
-            console.log(value);
-            },
-            <c:if test="${LOGIN_ERROR!=null}">
-            onLoad: () => {
-            console.log('${LOGIN_ERROR}');
-            }
-            </c:if>
-            });
-            //register validator
-            Validator({
-            form: '#formRegister',
-                    status: '.status',
-                    rules: [
-                            Validator.isRequired('[name=email]'),
-                            Validator.isEmail('[name=email]'),
-                            Validator.isRequired('[name=firstname]'),
-                            Validator.isRequired('[name=password]'),
-                            Validator.isPassword('[name=password]'),
-                            Validator.isRequired('[name=re-password]'),
-                            Validator.isSameValue('[name=re-password]',
-                                    //this function return the value of re-password
-                                            function () {
-                                            return document.querySelector('#formRegister [name=password]').value;
-                                            }
-                                    , "Passwords are not the same")
-                                    ],
-                                            onSubmit: (value) => {
-                                    //Call api here
-                                    console.log(value);
-                                    },
-            <c:if test="${REGISTER_ERROR!=null}">
-                                    onLoad: () => {
-                                    console.log('${REGISTER_ERROR}');
-                                    }
-            </c:if>
-                                    });
-        </script>
-        <script src="assets/js/login.js" type="text/javascript"></script>
-    </body>
+            <!--<aside class="col-7 d-none d-lg-flex bg-white">-->
+            <%--<c:forEach var="u" items="<%=UserDAO.getAllUser()%>" varStatus="i">--%>
+            <%--   <br>${i.index} E: ${u.email} P: ${u.password}--%>
+            <%--</c:forEach>--%>
+        </aside>
+    </section>
+
+    <c:import url="footer.jsp"/>
+
+    <!--Google Login Dont Touch-->
+    <form class="d-none" id="googleLogin" action="login" method="POST"></form>
+    <script src="assets/js/validator.js"></script>
+    <script>
+        //login validator
+        Validator({
+        form: '#formLogin',
+                status: '.status',
+                rules: [
+                        Validator.isRequired('[name=email]'),
+                        Validator.isEmail('[name=email]'),
+                        Validator.isRequired('[name=password]'),
+                        Validator.isPassword('[name=password]')
+                ],
+                onSubmit: (value) => {
+        //Call api here
+        console.log(value);
+        },
+        <c:if test="${LOGIN_ERROR!=null}">
+        onLoad: () => {
+        console.log('${LOGIN_ERROR}');
+        }
+        </c:if>
+        });
+        //register validator
+        Validator({
+        form: '#formRegister',
+                status: '.status',
+                rules: [
+                        Validator.isRequired('[name=email]'),
+                        Validator.isEmail('[name=email]'),
+                        Validator.isRequired('[name=firstname]'),
+                        Validator.isRequired('[name=password]'),
+                        Validator.isPassword('[name=password]'),
+                        Validator.isRequired('[name=re-password]'),
+                        Validator.isSameValue('[name=re-password]',
+                                //this function return the value of re-password
+                                        function () {
+                                        return document.querySelector('#formRegister [name=password]').value;
+                                        }
+                                , "Passwords are not the same")
+                                ],
+                                        onSubmit: (value) => {
+                                //Call api here
+                                console.log(value);
+                                },
+        <c:if test="${REGISTER_ERROR!=null}">
+                                onLoad: () => {
+                                console.log('${REGISTER_ERROR}');
+                                }
+        </c:if>
+                                });
+    </script>
+    <script src="assets/js/login.js" type="text/javascript"></script>
+</body>
 
 </html>

@@ -72,12 +72,12 @@ public class IngredientDAO {
         }
         return null;
     }
-    
-    private static final String LIST_INGREDIENT ="select ingre.[Name],ingre.[Img],ingreRe.Amount\n" +
-"            from [dbo].[Ingredient] ingre join [dbo].[IngredientRecipe] ingreRe\n" +
-"            on ingre.ID =ingreRe.IngredientID\n" +
-"            join [dbo].[Recipe] re on ingreRe.RecipeID =re.ID\n" +
-"            where re.ID = ? ";
+
+    private static final String LIST_INGREDIENT = "select ingre.[Name],ingre.[Img],ingreRe.Amount\n"
+            + "            from [dbo].[Ingredient] ingre join [dbo].[IngredientRecipe] ingreRe\n"
+            + "            on ingre.ID =ingreRe.IngredientID\n"
+            + "            join [dbo].[Recipe] re on ingreRe.RecipeID =re.ID\n"
+            + "            where re.ID = ? ";
 
     public List<Ingredient> listIngredient(int recipeID) throws SQLException {
         List<Ingredient> listIgre = new ArrayList<>();
@@ -100,8 +100,37 @@ public class IngredientDAO {
             }
         } catch (Exception e) {
             System.out.println("System have error !!!");
-        } 
+        }
         return listIgre;
 
+    }
+
+    private static final String ALL_INGREDIENT = "SELECT Name\n"
+            + "FROM Ingredient";
+
+    public static List<String> getAllIngredients() {
+        List<String> list = new ArrayList<String>();
+        Connection conn = null;
+        PreparedStatement ptm = null;
+        ResultSet rs = null;
+        try {
+            conn = DBUtils.getConnection();
+            ptm = conn.prepareStatement(ALL_INGREDIENT);
+            rs = ptm.executeQuery();
+            int i = 0;
+            while (rs.next()) {
+                String name = rs.getString("Name");
+                list.add(name);
+            }
+        } catch (Exception e) {
+            System.out.println("getAllIngredients have error !!!");
+        }
+        return list;
+    }
+    public static void main(String[] args) {
+        List<String> list = getAllIngredients();
+        for (String a : list) {
+            System.out.println(a);
+        }
     }
 }
