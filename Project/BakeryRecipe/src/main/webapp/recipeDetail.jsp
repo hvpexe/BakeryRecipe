@@ -33,13 +33,8 @@
                                 <c:forEach items="${LIST_PIC}" var="cc">
                                     <div class="swiper-slide"><img src="./assets/images/recipe/${cc}" alt=""></div>
                                     </c:forEach>
-                                <div class="swiper-slide"><img src="./assets/images/recipe/22.jpg" alt=""></div>
-                                <div class="swiper-slide"><img src="./assets/images/recipe/The-Best-Keto-Low-Carb-Blueberry-Muffins.jpg" alt=""></div>
-                                <div class="swiper-slide"><img src="./assets/images/recipe/31200x6764-1@2x.png" alt=""></div>
-                                <div class="swiper-slide"><img src="./assets/images/recipe/474b9866d66f07462cc5236d2f8d1e69.jpg" alt=""></div>
-                                <div class="swiper-slide"><img src="./assets/images/recipe/71.jpg" alt=""></div>
                                 <div class="swiper-slide">
-                                    <iframe src="https://www.youtube.com/embed/_-_uSvStZEE" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+                                    <iframe src="https://www.youtube.com/embed/${VIDEO_DETAIL}" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
                                 </div>
                                 ...
                             </div>
@@ -115,35 +110,6 @@
                                         </span>
                                     </div>
                                 </c:forEach>
-                                <div class="ingredient col-md-6">
-                                    <img src="https://khoinguonsangtao.vn/wp-content/uploads/2022/07/avatar-gau-cute.jpg">
-                                    <span>190 gam baking powder
-                                    </span>
-                                </div>
-                                <div class="ingredient col-md-6">
-                                    <img src="https://khoinguonsangtao.vn/wp-content/uploads/2022/07/avatar-gau-cute.jpg">
-                                    <span>
-                                        190 gam baking powder
-
-                                    </span>
-                                </div>
-                                <div class="ingredient col-md-6">
-                                    <img src="https://khoinguonsangtao.vn/wp-content/uploads/2022/07/avatar-gau-cute.jpg">
-                                    <span>190 gam baking powder
-                                    </span>
-                                </div>
-                                <div class="ingredient col-md-6">
-                                    <img src="https://khoinguonsangtao.vn/wp-content/uploads/2022/07/avatar-gau-cute.jpg">
-                                    <span>
-                                        190 gam baking powder
-
-                                    </span>
-                                </div>
-                                <div class="ingredient col-md-6">
-                                    <img src="https://khoinguonsangtao.vn/wp-content/uploads/2022/07/avatar-gau-cute.jpg">
-                                    <span>190 gam baking powder
-                                    </span>
-                                </div>
                             </div>
                         </div>
 
@@ -165,16 +131,7 @@
                                         </p>
                                     </div>
                                 </c:forEach>
-                                <div class="instruction">
-                                    <div class="step">step 1:</div>
-                                    <p>
-                                        Prepare an electric mixer and set it aside. Create a double
-                                        boiler by choosing a medium and small pot, so you can stack the
-                                        small one into the medium pot. Add water to the medium pot to
-                                        the height the covers the bottom of the small pot. Bring water
-                                        to a simmer. Add white chocolate, butter, lemon juice, and milk to the small pot.
-                                    </p>
-                                </div>
+                                
                             </div>
                         </div>
                         <div class="comment-container">

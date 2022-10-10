@@ -74,6 +74,7 @@
                     </div>
 <!--                    <input type="submit" >-->
                 </form>
+         
                 <div class="saved-item-div">
                     <c:forEach items="${requestScope.LIST_BAKER}" var="n">
                         <div class="div1">
@@ -105,10 +106,11 @@
                                 <a href="#" class="text-truncate">${cc.username}</a> 
                                 
                         </div>
+                                </div>
                     </c:forEach>
+                
                 </div>
-
-            </div>
+            
 
             <script>
                 var imgImage = document.getElementById("imgImage");
