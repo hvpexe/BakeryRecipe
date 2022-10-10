@@ -94,9 +94,9 @@
                                 <div class="col-md-3">Gender</div>
                                 <div class="col-md-9">
                                     <select name="gender">
-                                        <option value="Male">Male</option>
-                                        <option value="Female">Female</option>
-                                        <option value="Other">Other</option>
+                                        <option value="Male" ${sessionScope.login.gender == 'Male'? 'selected': ''}>Male</option>
+                                        <option value="Female" ${sessionScope.login.gender == 'Female'? 'selected': ''}>Female</option>
+                                        <option value="Other" ${sessionScope.login.gender == 'Other'? 'selected': ''}>Other</option>
                                     </select>
                                 </div>
                             </div>
