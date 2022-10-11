@@ -71,7 +71,6 @@ public class UserDAO {
         return false;
     }
 
-
     public static User loginWithGoogle(String email) {
         String sql = SELECT_USER_BY_EMAIL;
         try {
@@ -94,6 +93,7 @@ public class UserDAO {
     }
     private static final String SELECT_LOGIN = " SELECT ID from [User]"
             + "WHERE Email = ? AND Password = ?";
+
     //ham nay tim user su dung email va password
     public static User login(String email, String password) {
         String sql = SELECT_LOGIN;
@@ -155,8 +155,11 @@ public class UserDAO {
             + ",[Address],[DateRegister],[IsActive][StoreID], [Birthday]"
             + " FROM [BakeryRecipe].[dbo].[User]"
             + " WHERE [ID] = ? and IsActive = ?";
-    /** Get User by ID
-     *  but this <b>method</b> only select the <b>User</b> that <b>not banned</b>
+
+    /**
+     * Get User by ID but this <b>method</b> only select the <b>User</b> that
+     * <b>not banned</b>
+     *
      * @param id the <b>id</b> of the <b>User</b>
      * @return the User Object with the same <b>id</b> as the inputted <b>id</b>
      */
@@ -239,6 +242,7 @@ public class UserDAO {
         return false;
     }
     private static final String UPDATE_USER_IMAGE = "UPDATE [User] SET [Avatar] = ? WHERE Email= ?";
+
     public static boolean updateAvatar(String email, String avatar) {
         String sql = UPDATE_USER_IMAGE;
         try {
@@ -291,21 +295,21 @@ public class UserDAO {
                 }
             }
         } catch (Exception e) {
-            System.out.println("System have problem !!!"+e.toString());
-                    
-        } 
+            System.out.println("System have problem !!!" + e.toString());
+
+        }
         return listName;
     }
-    
-    public static boolean EditInfo(User user){
-        String sql = "UPDATE [User]\n" +
-                     "SET FirstName = ?,\n" +
-                     "    LastName = ?,\n" +
-                     "	  Phone = ?,\n" +
-                     "	  Birthday = ?,\n" +
-                     "	  Gender = ?,\n" +
-                     "	  [Address] = ?\n" +
-                     "WHERE ID = ?";
+
+    public static boolean EditInfo(User user) {
+        String sql = "UPDATE [User]\n"
+                + "SET FirstName = ?,\n"
+                + "    LastName = ?,\n"
+                + "	  Phone = ?,\n"
+                + "	  Birthday = ?,\n"
+                + "	  Gender = ?,\n"
+                + "	  [Address] = ?\n"
+                + "WHERE ID = ?";
         try {
             Connection conn = DBUtils.getConnection();
             PreparedStatement ps = conn.prepareStatement(sql);
@@ -315,7 +319,7 @@ public class UserDAO {
             ps.setDate(4, user.getBirthday());
             ps.setString(5, user.getGender());
             ps.setString(6, user.getAddress());
-            ps.setInt(7, user.getId()); 
+            ps.setInt(7, user.getId());
             boolean check = ps.executeUpdate() > 0;
             if (check) {
                 return true;
@@ -325,8 +329,8 @@ public class UserDAO {
         }
         return false;
     }
-    
-   /* public static String saveAvatar(String id, Part part, ServletContext sc) {
+
+    /* public static String saveAvatar(String id, Part part, ServletContext sc) {
 
         try {
             String fileName = part.getSubmittedFileName();
@@ -351,31 +355,31 @@ public class UserDAO {
         }
         return null;
     }*/
-    
- private static final String LIST_USER = "select[Email], [LastName],[FirstName] ,[Avatar] ,[dbo].[User].ID \n"
-            + "           from [dbo].[User] \n"
-            + "         where [dbo].[User].ID =?";
+    private static final String LIST_USER = "select[Email], [LastName],[FirstName] ,[Avatar] ,userRep.ID\n"
+            + "                      from [dbo].[User] userRep join [dbo].[Recipe] recipe\n"
+            + "					  on userRep.ID=recipe.UserID\n"
+            + "               where recipe.ID =?";
 
-    public static User userDetail(int userID) {
-         User user = null;
+    public static User userDetail(int recipeID) {
+        User user = null;
         Connection conn = null;
         PreparedStatement ptm = null;
         ResultSet rs = null;
         try {
-          
+
             conn = DBUtils.getConnection();
             if (conn != null) {
                 ptm = conn.prepareStatement(LIST_USER);
-                ptm.setInt(1, userID);
+                ptm.setInt(1, recipeID);
                 rs = ptm.executeQuery();
                 while (rs.next()) {
-                    
+                    int userID = rs.getInt("ID");
                     String lastName = rs.getString("LastName");
                     String firstName = rs.getString("FirstName");
                     String Avatar = rs.getString("Avatar");
-                     String fullName = lastName +" "+firstName;
+                    String fullName = lastName + " " + firstName;
                     user = new User(userID, Avatar, fullName);
-                
+
                 }
             }
         } catch (Exception e) {
@@ -384,8 +388,7 @@ public class UserDAO {
         return user;
     }
 
-     
-       private static final String FOLLOW = "INSERT INTO [dbo].[Follow]([UserID],[UserID2]) VALUES(?,?)";
+    private static final String FOLLOW = "INSERT INTO [dbo].[Follow]([UserID],[UserID2]) VALUES(?,?)";
 
     public boolean followUSer(int IDUser1, int IDUser2) {
         boolean check = false;
@@ -425,9 +428,12 @@ public class UserDAO {
         }
         return check;
     }
-    
+
     public static void main(String[] args) {
-        getUserByID(3);
+        UserDAO sc= new UserDAO();
+        sc.UNFollow(3, 4);
+        sc.followUSer(3, 5);
+        System.out.println(sc.UNFollow(3, 4));
     }
 
 }

@@ -466,9 +466,9 @@ public class RecipeDAO {
      private static final String COOK_DETAIL = "SELECT [Name],[Like],[Save],[Comment],[PrepTime],[CookTime],[Description],[DatePost],DatePost, LastDateEdit \n"
             + "FROM [dbo].[Recipe]recipe join [dbo].[User] baker\n"
             + "on recipe.UserID =baker.ID\n"
-            + "WHERE baker.ID = ? and recipe.ID =?";
+            + "WHERE  recipe.ID =?";
 
-    public Recipe recipeDetail(int userID,int recipeID) {
+    public Recipe recipeDetail(int recipeID) {
         Recipe recipe = null;
         Connection conn = null;
         PreparedStatement ptm = null;
@@ -476,8 +476,8 @@ public class RecipeDAO {
         try {
             conn = DBUtils.getConnection();
             ptm = conn.prepareStatement(COOK_DETAIL);
-            ptm.setInt(1, userID);
-            ptm.setInt(2, recipeID);
+            ptm.setInt(1, recipeID);
+//            ptm.setInt(2, recipeID);
             rs = ptm.executeQuery();
             while (rs.next()) {
                 String name = rs.getString("Name");
@@ -499,7 +499,7 @@ public class RecipeDAO {
      private static final String VIDEO_DETAIL = "SELECT [Video]\n"
             + "FROM [dbo].[Recipe] recipe join [dbo].[User] baker\n"
             + "ON recipe.[UserID]= baker.[ID]\n"
-            + "WHERE baker.[ID] = ?";
+            + "WHERE recipe.[ID] = ?";
 
     public String recipeVideo(int userID) {
         Connection conn = null;

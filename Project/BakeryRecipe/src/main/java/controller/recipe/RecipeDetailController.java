@@ -38,7 +38,7 @@ public class RecipeDetailController extends HttpServlet {
         String url = ERROR;
         try {
              
-            int userID = Integer.parseInt(request.getParameter("ID"));
+//            int userID = Integer.parseInt(request.getParameter("ID"));
             int recipeID = Integer.parseInt(request.getParameter("recipeID"));
             RecipeDAO recipe = new RecipeDAO();
             List<String> picRecp;
@@ -47,7 +47,7 @@ public class RecipeDetailController extends HttpServlet {
 
             
             User user;
-            user = UserDAO.userDetail(userID);
+            user = UserDAO.userDetail(recipeID);
             request.setAttribute("USER_DETAIL", user);
 
             IngredientDAO dao = new IngredientDAO();
@@ -61,10 +61,10 @@ public class RecipeDetailController extends HttpServlet {
             request.setAttribute("LIST_STEP", liststep);
 
             Recipe recipedl;
-            recipedl = recipe.recipeDetail(userID, recipeID);
+            recipedl = recipe.recipeDetail( recipeID);
             request.setAttribute("RECIPE_DETAIL", recipedl);
 
-            String videoDetail = recipe.recipeVideo(userID);
+            String videoDetail = recipe.recipeVideo(recipeID);
             request.setAttribute("VIDEO_DETAIL", videoDetail);
             url = SUCCESS;
         } catch (Exception e) {

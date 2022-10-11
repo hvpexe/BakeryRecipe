@@ -19,8 +19,7 @@ import javax.servlet.http.HttpServletResponse;
  */
 @WebServlet(name = "UpdateUserFollowAjax", urlPatterns = {"/ajax/UpdateUserFollowAjax"})
 public class UpdateUserFollowAjax extends HttpServlet {
- private static final String FOLLOW = "Follow";
-    private static final String UN_FOLLOW = "unFollow";
+
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
      * methods.
@@ -34,18 +33,14 @@ public class UpdateUserFollowAjax extends HttpServlet {
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
         try ( PrintWriter out = response.getWriter()) {
-           UserDAO sc = new UserDAO();
-            String action = request.getParameter("action");
-            int recipeID = Integer.parseInt(request.getParameter("recipeID"));
-            int ID = Integer.parseInt(request.getParameter("follower"));
-            int userFollowed = Integer.parseInt(request.getParameter("followed"));
-            if (action.equals(FOLLOW)) {
-               
-                sc.followUSer(ID, userFollowed);
-            } else if (action.equals(UN_FOLLOW)) {
-               
+            UserDAO sc = new UserDAO();
+            int ID = Integer.parseInt(request.getParameter("followed"));
+            int userFollowed = Integer.parseInt(request.getParameter("follower"));
+            boolean check = sc.followUSer(ID, userFollowed);
+            if (!check) {
                 sc.UNFollow(ID, userFollowed);
             }
+
         }
     }
 

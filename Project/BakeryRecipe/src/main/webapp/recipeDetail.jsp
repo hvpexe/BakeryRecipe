@@ -17,6 +17,7 @@
         <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap" rel="stylesheet">
         <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@8/swiper-bundle.min.css" />
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+        <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
         <link rel="stylesheet" href="assets/css/recipeDetail.css?version=1" />
 
     </head>
@@ -55,14 +56,14 @@
                                 <img src="${USER_DETAIL.getAvatar()}">
                                 <span>${USER_DETAIL.getName()}</span>
                                 <c:if test="${sessionScope.login.id != USER_DETAIL.id}">
-                                    <div class="btn btn-style1" onclick="followButton(this,'Follow','UnFollow')" >
+                                    <div class="btn btn-style1" onclick="followButton(this, 'Follow', 'UnFollow', this.action)" >
                                         <i class="fa-solid fa-user-plus"></i>
-                                        <span class="txt-follow">Follow</span>
+                                        <span  class="txt-follow" this="">Follow</span>
                                     </div>
 
                                 </c:if>
-                                        <!--followButton(this,'Saved','Not Saved')-->
-                                        <!--followButton(this,'Like','UnLike')-->
+                                <!--followButton(this,'Saved','Not Saved')-->
+                                <!--followButton(this,'Like','UnLike')-->
                             </span>
                             <c:if test="${sessionScope.login.id == USER_DETAIL.id}">
                                 <span class="text-nowrap">
@@ -85,9 +86,9 @@
 
                         <c:if test="${sessionScope.login.id != USER_DETAIL.getId()}">
                             <div class="react-action">
-                                <a href="#" class="btn btn-style1" onclick="followButton(this,'Like','UnLike')"><i class="fa-regular fa-heart"></i> Like</a>
+                                <a href="#" class="btn btn-style1" onclick="followButton(this, 'Like', 'UnLike')"><i class="fa-regular fa-heart"></i> Like</a>
                                 &nbsp;
-                                <a href="#" class="btn btn-style1" onclick="followButton(this,'Saved','Not Saved')"><i class="fa-regular fa-bookmark"></i> Save</a>
+                                <a href="#" class="btn btn-style1" onclick="followButton(this, 'Saved', 'Not Saved')"><i class="fa-regular fa-bookmark"></i> Save</a>
                             </div>
                         </c:if>
                         <div class="detail">
@@ -208,7 +209,7 @@
                         <div class="recipe col-6 col-md-3">
                             <div class="img-container">
                                 <img class="recipe-img" alt=""
-                                     src="https://thermomixvietnam.vn/wp-content/themes/yootheme/cache/tiramisu-truyen-thong-9cdd0569.jpeg" />
+                                     src="https://thermomidxvietnam.vn/wp-content/themes/yootheme/cache/tiramisu-truyen-thong-9cdd0569.jpeg" />
                                 <div class="bookmark">
                                     Save <i class="fa-regular fa-bookmark"></i>
                                 </div>
@@ -336,32 +337,33 @@
         <script src="https://cdn.jsdelivr.net/npm/swiper@8/swiper-bundle.min.js"></script>
 
         <script>
-                                        const swiper = new Swiper('.swiper', {
-                                            pagination: {
-                                                el: '.swiper-pagination',
-                                                clickable: true
-                                            },
+                                    const swiper = new Swiper('.swiper', {
+                                        pagination: {
+                                            el: '.swiper-pagination',
+                                            clickable: true
+                                        },
 
-                                            navigation: {
-                                                nextEl: '.swiper-button-next',
-                                                prevEl: '.swiper-button-prev',
-                                            },
+                                        navigation: {
+                                            nextEl: '.swiper-button-next',
+                                            prevEl: '.swiper-button-prev',
+                                        },
 
-                                        });
+                                    });
         </script>
         <script>
-            function  followButton(item,val1,val2) {
-//                event.target.style.backgroundColor = 'white';
+            function  followButton(item, val1, val2,action) {
+//                eventac.target.style.backgroundColor = 'white';
 //                event.target.classList.toggle("button-Follower");
-//
+///
 //                console.log(event.target.classList);
 
+var action =val1;
                 $.ajax({
                     url: "ajax/UpdateUserFollowAjax",
                     type: "get", //send it through get method
                     data: {
                         follower: "${USER_DETAIL.id}",
-                        action: "Follow",
+                        action: action,
                         followed: "${sessionScope.login.id}"
                     },
                     success: function () {
@@ -373,6 +375,10 @@
                             txtFollow.innerText = val2;
                         else
                             txtFollow.innerText = val1;
+// console.log(action);
+                        
+//    action = unFollow;
+                        console.log(action);
 
                         //Do Something
                     },
