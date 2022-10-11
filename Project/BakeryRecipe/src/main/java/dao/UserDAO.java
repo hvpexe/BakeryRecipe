@@ -428,11 +428,74 @@ public class UserDAO {
         }
         return check;
     }
+
     public static void main(String[] args) {
         UserDAO sc= new UserDAO();
         sc.UNFollow(3, 4);
         sc.followUSer(3, 5);
         System.out.println(sc.UNFollow(3, 4));
-    }
+    }    
+    
+    private static final String SAVE = "INSERT INTO [Save] (RecipeID, UserID) VALUES (?, ?)";
+    
+    public boolean SaveRecipe(int recipeID, int userID) {
+        boolean check = false;
+        Connection conn = null;
+        PreparedStatement ptm = null;
+        try {
+            conn = DBUtils.getConnection();
+            if (conn != null) {
+                ptm = conn.prepareStatement(SAVE);
+                ptm.setInt(1, recipeID);
+                ptm.setInt(2, userID);
+                check = ptm.executeUpdate() > 0 ? true : false;
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return check;
 
+    }
+    
+    private static final String UN_SAVED = "DELETE [Save] WHERE [Save].RecipeID = ? AND [Save].UserID = ?";
+    
+    public boolean Unsave(int recipeID, int userID) {
+        boolean check = false;
+        Connection conn = null;
+        PreparedStatement ptm = null;
+        try {
+            conn = DBUtils.getConnection();
+            if (conn != null) {
+                ptm = conn.prepareStatement(UN_SAVED);
+                ptm.setInt(1, recipeID);
+                ptm.setInt(2, userID);
+                check = ptm.executeUpdate() > 0 ? true : false;
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return check;
+    }
+    
+    private static final String CHECK_SAVE_RECIPE = "SELECT *\n" +
+                                             "FROM [Save]\n" +
+                                             "WHERE UserID = ? AND RecipeID = ?";
+    
+    public static boolean checkSaveRecipe(int userID, int recipeID){
+        boolean check = false;
+        try {
+            Connection conn = DBUtils.getConnection();
+            PreparedStatement ps = conn.prepareStatement(CHECK_SAVE_RECIPE);
+            ps.setInt(1, userID);
+            ps.setInt(2, recipeID);
+            ResultSet rs = ps.executeQuery();
+            if(rs.next())
+                return true;
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return check;
+    }
+    
+    
 }

@@ -61,7 +61,7 @@
                                      src="${cc.cover}" />
                                 <input type="hidden" name="recipeID" value="${cc.id}">
                                 <div class="bookmark">
-                                        <a href="./saverecipe:action=ahihi&name="man"">Save <i class="fa-regular fa-bookmark"></i></a>
+                                        <a href="./saverecipe:action=action&name=save">Save <i class="fa-regular fa-bookmark"></i></a>
                                 </div>
                                 <div class="react">
                                     <div>${cc.like} likes</div>

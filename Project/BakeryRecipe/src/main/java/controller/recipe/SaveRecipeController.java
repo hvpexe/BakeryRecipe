@@ -21,7 +21,8 @@ import javax.servlet.http.HttpSession;
  */
 @WebServlet(name = "SaveRecipeController", urlPatterns = {"/saverecipe"})
 public class SaveRecipeController extends HttpServlet {
-
+    
+    
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
      * methods.
@@ -37,11 +38,21 @@ public class SaveRecipeController extends HttpServlet {
         try {
             HttpSession session = request.getSession();
             User user = (User) session.getAttribute("login"); 
-            
+            UserDAO us = new UserDAO();
             int recipeid = Integer.parseInt(request.getParameter("recipeID"));
-            String action = request.getParameter("action");
+            boolean checkSave = UserDAO.checkSaveRecipe(user.getId(), recipeid);
+            if(checkSave == false){
+                us.SaveRecipe(recipeid, user.getId());
+            }
+            else{
+                us.Unsave(recipeid, user.getId());
+            }
             
         } catch (Exception e) {
+            System.out.println("Save Controller have a problem");
+            e.printStackTrace();
+        }finally{
+            request.getRequestDispatcher(url).forward(request, response);
         }
     }
 
