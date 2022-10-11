@@ -65,6 +65,14 @@
                                         <!--followButton(this,'Like','UnLike')-->
                             </span>
                             <c:if test="${sessionScope.login.id == USER_DETAIL.id}">
+                            <div class="first-div">
+                                <span class="info-user">
+                                    <img src="${USER_DETAIL.getAvatar()}">
+                                    <span>${USER_DETAIL.getName()}</span>
+                                    
+                                    <a href="#" class="btn btn-style1"><i class="fa-solid fa-user-plus"></i> Follow</a>
+                                    <a href="#" class="btn btn-style2"><i class="fa-solid fa-user-plus"></i> Followed</a>
+                                </span>
                                 <span class="text-nowrap">
                                     <a href="#" class="btn btn-style2"><i class="fa-regular fa-pen-to-square"></i> Edit</a>
                                 </span>

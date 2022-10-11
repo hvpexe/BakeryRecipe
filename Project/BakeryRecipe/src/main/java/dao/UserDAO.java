@@ -352,7 +352,7 @@ public class UserDAO {
         return null;
     }*/
     
- private static final String LIST_USER = "select[Email], [LastName],[FirstName] ,[Avatar] ,[dbo].[User].ID \n"
+ private static final String LIST_USER = "select[Email], [LastName],[FirstName] ,[Avatar] \n"
             + "           from [dbo].[User] \n"
             + "         where [dbo].[User].ID =?";
 
@@ -385,7 +385,7 @@ public class UserDAO {
     }
 
      
-       private static final String FOLLOW = "INSERT INTO [dbo].[Follow]([UserID],[UserID2]) VALUES(?,?)";
+    private static final String FOLLOW = "INSERT INTO [dbo].[Follow]([UserID],[UserID2]) VALUES(?,?)";
 
     public boolean followUSer(int IDUser1, int IDUser2) {
         boolean check = false;
@@ -425,6 +425,49 @@ public class UserDAO {
         }
         return check;
     }
+    
+    private static final String SAVE = "INSERT INTO [Save] (RecipeID, UserID) VALUES (?, ?)";
+    
+    public static boolean SaveRecipe(int recipeID, int userID) {
+        boolean check = false;
+        Connection conn = null;
+        PreparedStatement ptm = null;
+        try {
+            conn = DBUtils.getConnection();
+            if (conn != null) {
+                ptm = conn.prepareStatement(SAVE);
+                ptm.setInt(1, recipeID);
+                ptm.setInt(2, userID);
+                check = ptm.executeUpdate() > 0 ? true : false;
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return check;
+
+    }
+    
+    private static final String UN_SAVED = "DELETE [Save] WHERE [Save].RecipeID = ? AND [Save].UserID = ?";
+    
+    public static boolean Unsave(int recipeID, int userID) {
+        boolean check = false;
+        Connection conn = null;
+        PreparedStatement ptm = null;
+        try {
+            conn = DBUtils.getConnection();
+            if (conn != null) {
+                ptm = conn.prepareStatement(UN_SAVED);
+                ptm.setInt(1, recipeID);
+                ptm.setInt(2, userID);
+                check = ptm.executeUpdate() > 0 ? true : false;
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return check;
+    }
+    
+    
     
     public static void main(String[] args) {
         getUserByID(3);
