@@ -214,6 +214,7 @@
                         <h1 class="title">Related recipes</h1>
                     </div>
                     <div class="recipe-list row ">
+                        <c:forEach items="${RELATED_TOPIC}" var="to">
                         <div class="recipe col-6 col-md-3">
                             <div class="img-container">
                                 <img class="recipe-img" alt=""
@@ -226,9 +227,10 @@
                                     <div>12 comments</div>
                                 </div>
                             </div>
-                            <div class="related-recipe-name">Mooncake</div>
+                            <div class="related-recipe-name">${to}</div>
                             <div class="recipe-author"><a href="#">Trịnh Thăng Bình</a> 2 day ago</div>
                         </div>
+                        </c:forEach>
                         <div class="recipe col-6 col-md-3">
                             <div class="img-container">
                                 <img class="recipe-img" alt=""

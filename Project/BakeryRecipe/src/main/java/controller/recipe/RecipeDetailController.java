@@ -66,6 +66,9 @@ public class RecipeDetailController extends HttpServlet {
 
             String videoDetail = recipe.recipeVideo(recipeID);
             request.setAttribute("VIDEO_DETAIL", videoDetail);
+            
+            List<String> relateRecipe =recipe.listRelate(recipeID);
+            request.setAttribute("RELATED_TOPIC", relateRecipe);
             url = SUCCESS;
         } catch (Exception e) {
             e.printStackTrace();
