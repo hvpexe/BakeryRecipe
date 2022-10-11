@@ -186,7 +186,8 @@ input,textarea{
     gap:2em;
     border-width: 2px;
     box-shadow: 0 0 0 0 inset #00000000;
-    border-color: var(--pink-theme);
+    background: var(--white);
+    border:2px solid var(--pink-theme);
     transition: 0.3s;
     position: relative;
     background-size: cover;
@@ -230,6 +231,9 @@ input,textarea{
     color: #111;
     border-radius: 0 0 10px 0;
     pointer-events: none;
+}
+.video-and-image span.selected{
+    border:none;
 }
 .video-and-image span.selected::before{
     content:'';
@@ -502,6 +506,9 @@ div[id$=container]{
 }
 body:has( #detail:not(.d-none)) {
     overflow:hidden;
+}
+.g_id_signin img {
+    width: 100%;
 }
 @media (min-width: 768px){
     #detail .container{

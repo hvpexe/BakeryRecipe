@@ -170,6 +170,7 @@ body {
 }
 .header-user:hover .header-user_content {
     scale:1 1;
+    left:0;right:0;
     top:100%;
     transition-delay: var(--transition-time);
 }
