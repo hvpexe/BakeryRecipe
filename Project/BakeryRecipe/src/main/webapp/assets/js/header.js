@@ -1,13 +1,4 @@
-if (typeof jQuery === 'undefined') {
-    var headTag = document.getElementsByTagName("head")[0];
-    var jqTag = document.createElement('script');
-    jqTag.type = 'text/javascript';
-    jqTag.src = 'assets/js/Jquery/jquery-core.js';
-    jqTag.onload = myJQueryCode;
-    jqTag.async = "";
-    jqTag.defer = "";
-    headTag.appendChild(jqTag);
-}
+
 function myJQueryCode(){
     console.log("Jquery");
 }
@@ -22,6 +13,8 @@ var id;
 //});
 //$('.header').mouseover(function () {
 //    test(event);
+//    
+//    
 //});
 //function test() {
 //    $("#test").html($('.header-user_content').attr('class'));

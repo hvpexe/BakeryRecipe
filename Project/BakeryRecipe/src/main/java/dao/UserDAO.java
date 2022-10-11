@@ -428,7 +428,6 @@ public class UserDAO {
         }
         return check;
     }
-
     public static void main(String[] args) {
         UserDAO sc= new UserDAO();
         sc.UNFollow(3, 4);
