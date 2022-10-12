@@ -4,6 +4,7 @@
  */
 package dao;
 
+import dto.Comment;
 import dto.Ingredient;
 import dto.Intruction;
 import dto.Recipe;
@@ -546,9 +547,10 @@ public class RecipeDAO {
         return listRecipe;
 
     }
-    private static final String CMT_RECIPE = "";
+    private static final String CMT_RECIPE = "INSERT INTO [dbo].[Comment]([Comment],[Rate],[DateComment],[IsDeleted],[UserID],[RecipeID])\n"
+            + "VALUES (?,?,?,?,?,?)";
 
-    public static boolean commentRecipe(int commentID, String comment, int UserID, int RecipeID) {
+    public static boolean commentRecipe(String comment, int UserID, int RecipeID) {
         Connection cnn = null;
         PreparedStatement ptm = null;
         ResultSet rs = null;
@@ -557,27 +559,54 @@ public class RecipeDAO {
         try {
             cnn = DBUtils.getConnection();
             ptm = cnn.prepareStatement(CMT_RECIPE);
-            ptm.setInt(1, commentID);
-            ptm.setString(2, comment);
-            ptm.setBoolean(3, true);
-            ptm.setDate(4, date);
-            ptm.setDate(5, date);
-            ptm.setBoolean(6, false);
-            ptm.setInt(7, UserID);
-            ptm.setInt(8, RecipeID);
+            ptm.setString(1, comment);
+            ptm.setBoolean(2, true);
+            ptm.setDate(3, date);
+            ptm.setBoolean(4, false);
+            ptm.setInt(5, UserID);
+            ptm.setInt(6, RecipeID);
             check = ptm.executeUpdate() > 0 ? true : false;
         } catch (Exception e) {
             e.printStackTrace();
         }
-
         return check;
+    }
+
+    private static final String LIST_COMMENT = "select cmt.ID,cmt.Comment,baker.Avatar\n"
+            + "from [dbo].[Comment] cmt join [dbo].[User] baker\n"
+            + "on cmt.UserID = baker.ID\n"
+            + "where cmt.RecipeID = ?";
+
+    public static List<Comment> commentList(int recipeID) {
+        List<Comment> cmtList = new ArrayList<>();
+        Connection cnn = null;
+        PreparedStatement ptm = null;
+        ResultSet rs = null;
+        try {
+            cnn = DBUtils.getConnection();
+            ptm = cnn.prepareStatement(LIST_COMMENT);
+            ptm.setInt(1, recipeID);
+            rs = ptm.executeQuery();
+            while (rs.next()) {
+                int commentID = rs.getInt("ID");
+                String avatar = rs.getString("Avatar");
+                String comment = rs.getString("Comment");
+                Comment cmt = new Comment(commentID, comment, avatar);
+                cmtList.add(cmt);
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return cmtList;
     }
 
     public static void main(String[] args) throws SQLException {
         RecipeDAO sc = new RecipeDAO();
-        System.out.println(sc.listRelate(2));
+//        System.out.println(sc.listRelate(2));
 //        List<Recipe> list = showSavedRecipe(3, 1);
 
+//        sc.commentRecipe("ngon vl ", 4, 4);
+sc.commentList(4);
     }
 
 }

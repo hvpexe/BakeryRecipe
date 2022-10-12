@@ -75,6 +75,10 @@
         <servlet-name>CommnetRecipeAjax</servlet-name>
         <servlet-class>controller.ajax.CommnetRecipeAjax</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>CommentController</servlet-name>
+        <servlet-class>controller.recipe.CommentController</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>DebugController</servlet-name>
         <url-pattern>/debug</url-pattern>
@@ -122,6 +126,10 @@
     <servlet-mapping>
         <servlet-name>CommnetRecipeAjax</servlet-name>
         <url-pattern>/CommnetRecipeAjax</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>CommentController</servlet-name>
+        <url-pattern>/CommentController</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

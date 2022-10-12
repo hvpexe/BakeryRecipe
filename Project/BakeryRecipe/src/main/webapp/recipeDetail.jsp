@@ -65,7 +65,7 @@
                                     <a href="#" class="btn btn-style2"><i class="fa-regular fa-pen-to-square"></i> Edit</a>
                                 </span>
                             </c:if>
-                          
+
                         </div>
 
                         <div class="recipe-name">
@@ -81,7 +81,7 @@
                             <span>Saved: ${RECIPE_DETAIL.getSave()}</span>
                         </div>
 
-                       <c:if test="${sessionScope.login.id != USER_DETAIL.getId()}">
+                        <c:if test="${sessionScope.login.id != USER_DETAIL.getId()}">
                             <div class="react-action">
                                 <a href="#" class="btn btn-style1" onclick="followButton(this, 'Like', 'UnLike')"><i class="fa-regular fa-heart"></i> Like</a>
                                 &nbsp;
@@ -153,13 +153,15 @@
                                             <form action="CommentController">
                                                 <div class="form-outline">
                                                     <input class="form-control" id="textAreaExample" rows="4" type="textarea" name="txtCmt">
-                                                    <!--<textarea class="form-control" id="textAreaExample" rows="4"></textarea>-->
+                                                    <input type="hidden" name="bakerID" value="${sessionScope.login.id}">
+                                                    <input type="hidden" name="recipeID" value="${RECIPE_DETAIL.id}"
+                                                           <!--<textarea class="form-control" id="textAreaExample" rows="4"></textarea>-->
                                                     <label class="form-label" for="textAreaExample">What is your view?</label>
                                                 </div>
                                                 <div>
-                                                    <button type="button" class="btn btn-style1 float-right">
-                                                        Send <i class="fas fa-long-arrow-alt-right ms-1"></i>
-                                                    </button>
+                                                    <!--                                                    <button type="button" class="btn btn-style1 float-right">
+                                                                                                            Send <i class="fas fa-long-arrow-alt-right ms-1"></i>
+                                                                                                        </button>-->
                                                 </div>
                                             </form>
                                         </div>
@@ -190,6 +192,28 @@
                                         </div>
                                     </div>
                                 </div>
+                                                           <!--test list_cmt-->
+                               
+                                    <c:forEach items="${COMMENT_LIST}" var="cmt">
+                                         <div class="d-flex flex-start mb-4">
+                                    <img class="rounded-circle mr-2"
+                                         src="${cmt.avatar}" alt="avatar"
+                                         width="60" height="60" />
+                                    <div class="card w-100">
+                                        <div class="card-body p-4">
+                                            <div class="">
+                                                <h5>Johny Cash</h5>
+                                                <p class="small">3 hours ago</p>
+                                                <p>
+                                                  ${cmt.comment}
+                                                    
+                                                </p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                                  </div>
+                                    </c:forEach>
+                                
                             </div>
                         </div>
 

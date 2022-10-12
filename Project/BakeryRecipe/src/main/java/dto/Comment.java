@@ -20,6 +20,21 @@ public class Comment {
     private boolean isDeleted;
     private int userID;
     private int recipeID;
+    private String avatar;
+
+    public String getAvatar() {
+        return avatar;
+    }
+
+    public void setAvatar(String avatar) {
+        this.avatar = avatar;
+    }
+
+    public Comment(int commentID, String comment, String avatar) {
+        this.commentID = commentID;
+        this.comment = comment;
+        this.avatar = avatar;
+    }
 
     public int getCommentID() {
         return commentID;

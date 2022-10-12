@@ -4,85 +4,42 @@
  */
 package controller.recipe;
 
-import dao.IngredientDAO;
 import dao.RecipeDAO;
-import dao.UserDAO;
-import dto.Comment;
-import dto.Ingredient;
-import dto.Intruction;
-import dto.Recipe;
-import dto.User;
 import java.io.IOException;
 import java.io.PrintWriter;
-import java.util.ArrayList;
-import java.util.List;
 import javax.servlet.ServletException;
-import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
 
 /**
  *
  * @author VO MINH MAN
  */
-@WebServlet(name = "RecipeDetailController", urlPatterns = {"/RecipeDetail"})
-public class RecipeDetailController extends HttpServlet {
+public class CommentController extends HttpServlet {
 
-    private static final String SUCCESS = "recipeDetail.jsp";
-    private static final String ERROR = "recipeDetail.jsp";
-
+    private static final String ERROR = "header.jsp";
+    private static final String SUCCESS = "search.jsp";
+    
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
         String url = ERROR;
-        try {
-             
-//            int userID = Integer.parseInt(request.getParameter("ID"));
+        
+        try ( PrintWriter out = response.getWriter()) {
+            int bakerID = Integer.parseInt(request.getParameter("bakerID"));
+            String comment = request.getParameter("txtCmt");
             int recipeID = Integer.parseInt(request.getParameter("recipeID"));
-            RecipeDAO recipe = new RecipeDAO();
-            List<String> picRecp;
-            picRecp = recipe.listPicture(recipeID);
-            request.setAttribute("LIST_PIC", picRecp);
-
-            
-            User user;
-            user = UserDAO.userDetail(recipeID);
-            request.setAttribute("USER_DETAIL", user);
-
-            IngredientDAO dao = new IngredientDAO();
-
-            List<Ingredient> listIngre;
-            listIngre = dao.listIngredient(recipeID);
-            request.setAttribute("LIST_INGREDIENT", listIngre);
-
-            List<Intruction> liststep;
-            liststep = recipe.listStep(recipeID);
-            request.setAttribute("LIST_STEP", liststep);
-
-            Recipe recipedl;
-            recipedl = recipe.recipeDetail( recipeID);
-            request.setAttribute("RECIPE_DETAIL", recipedl);
-
-            String videoDetail = recipe.recipeVideo(recipeID);
-            request.setAttribute("VIDEO_DETAIL", videoDetail);
-            
-            List<String> relateRecipe =recipe.listRelate(recipeID);
-            request.setAttribute("RELATED_TOPIC", relateRecipe);
-            
-            
-//            recipe.commentList(recipeID);
-            List<Comment> cmt = recipe.commentList(recipeID);
-            request.setAttribute("COMMENT_LIST", cmt);
-            
-            url = SUCCESS;
-            
+            RecipeDAO recipeD = new RecipeDAO();
+            if (recipeD.commentRecipe(comment, bakerID, recipeID)) {
+                url = SUCCESS;
+            }
         } catch (Exception e) {
             e.printStackTrace();
         } finally {
             request.getRequestDispatcher(url).forward(request, response);
         }
+        
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
