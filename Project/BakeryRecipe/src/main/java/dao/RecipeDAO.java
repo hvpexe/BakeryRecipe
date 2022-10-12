@@ -546,29 +546,33 @@ public class RecipeDAO {
         return listRecipe;
 
     }
+    private static final String CMT_RECIPE = "";
 
     public static boolean commentRecipe(int commentID, String comment, int UserID, int RecipeID) {
         Connection cnn = null;
-        PrepareStatement ptm = null;
+        PreparedStatement ptm = null;
         ResultSet rs = null;
-        Date date = new Date(System.cunrrentTimeMillis())
-         boolean check = False;
+        Date date = new Date(System.currentTimeMillis());
+        boolean check = false;
         try {
-                cnn = DBUtils.getConnnection();
-                ptm = cnn.prepareStatement(SQL);
-                ptm.setInt(1, commentID);
-                ptm.setString(2, comment);
-                ptm.setRate(3, "True");
-                ptm.setDate(4, date);
-                ptm.setDate(5, date);
-                ptm.setBoolean(six, "False");
-                ptm.setInt(7, UserID);
-                ptm.setInt(8, RecipeID); }catch(Exception e){
-                e.printStackTrace();
-                }
-        
-    return true;
+            cnn = DBUtils.getConnection();
+            ptm = cnn.prepareStatement(CMT_RECIPE);
+            ptm.setInt(1, commentID);
+            ptm.setString(2, comment);
+            ptm.setBoolean(3, true);
+            ptm.setDate(4, date);
+            ptm.setDate(5, date);
+            ptm.setBoolean(6, false);
+            ptm.setInt(7, UserID);
+            ptm.setInt(8, RecipeID);
+            check = ptm.executeUpdate() > 0 ? true : false;
+        } catch (Exception e) {
+            e.printStackTrace();
         }
+
+        return check;
+    }
+
     public static void main(String[] args) throws SQLException {
         RecipeDAO sc = new RecipeDAO();
         System.out.println(sc.listRelate(2));
