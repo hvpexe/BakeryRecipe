@@ -526,7 +526,7 @@ public class RecipeDAO {
         String thirdElements;
         RecipeDAO dao = new RecipeDAO();
         List<Ingredient> ingre = dao.listIngredient(recipeID);
-        
+
         try {
             cnn = DBUtils.getConnection();
             for (int i = 1; i < ingre.size(); i++) {
@@ -547,6 +547,28 @@ public class RecipeDAO {
 
     }
 
+    public static boolean commentRecipe(int commentID, String comment, int UserID, int RecipeID) {
+        Connection cnn = null;
+        PrepareStatement ptm = null;
+        ResultSet rs = null;
+        Date date = new Date(System.cunrrentTimeMillis())
+         boolean check = False;
+        try {
+                cnn = DBUtils.getConnnection();
+                ptm = cnn.prepareStatement(SQL);
+                ptm.setInt(1, commentID);
+                ptm.setString(2, comment);
+                ptm.setRate(3, "True");
+                ptm.setDate(4, date);
+                ptm.setDate(5, date);
+                ptm.setBoolean(six, "False");
+                ptm.setInt(7, UserID);
+                ptm.setInt(8, RecipeID); }catch(Exception e){
+                e.printStackTrace();
+                }
+        
+    return true;
+        }
     public static void main(String[] args) throws SQLException {
         RecipeDAO sc = new RecipeDAO();
         System.out.println(sc.listRelate(2));
