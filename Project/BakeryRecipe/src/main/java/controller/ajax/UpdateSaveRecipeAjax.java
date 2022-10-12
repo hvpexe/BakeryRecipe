@@ -2,10 +2,9 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/Servlet.java to edit this template
  */
-package controller.recipe;
+package controller.ajax;
 
 import dao.UserDAO;
-import dto.User;
 import java.io.IOException;
 import java.io.PrintWriter;
 import javax.servlet.ServletException;
@@ -13,16 +12,14 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
 
 /**
  *
  * @author kichi
  */
-@WebServlet(name = "SaveRecipeController", urlPatterns = {"/saverecipe"})
-public class SaveRecipeController extends HttpServlet {
-    
-    
+@WebServlet(name = "UpdateSaveRecipeAjax", urlPatterns = {"/ajax/updatesaverecipe"})
+public class UpdateSaveRecipeAjax extends HttpServlet {
+
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
      * methods.
@@ -35,24 +32,14 @@ public class SaveRecipeController extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
-        try {
-            HttpSession session = request.getSession();
-            User user = (User) session.getAttribute("login"); 
-            UserDAO us = new UserDAO();
-            int recipeid = Integer.parseInt(request.getParameter("recipeID"));
-            boolean checkSave = UserDAO.checkSaveRecipe(user.getId(), recipeid);
-            if(checkSave == false){
-                us.SaveRecipe(recipeid, user.getId());
+        try ( PrintWriter out = response.getWriter()) {
+            UserDAO sr = new UserDAO();
+            int userID = Integer.parseInt(request.getParameter("user"));
+            int recipeID = Integer.parseInt(request.getParameter("recipe"));
+            boolean check = sr.SaveRecipe(recipeID, userID);
+            if (!check) {
+                sr.Unsave(recipeID, userID);
             }
-            else{
-                us.Unsave(recipeid, user.getId());
-            }
-            
-        } catch (Exception e) {
-            System.out.println("Save Controller have a problem");
-            e.printStackTrace();
-        }finally{
-            request.getRequestDispatcher(url).forward(request, response);
         }
     }
 

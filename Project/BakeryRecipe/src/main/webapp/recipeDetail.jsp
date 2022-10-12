@@ -96,7 +96,10 @@
                             <div class="react-action">
                                 <a href="#" class="btn btn-style1" onclick="followButton(this, 'Like', 'UnLike')"><i class="fa-regular fa-heart"></i> Like</a>
                                 &nbsp;
-                                <a href="#" class="btn btn-style1" onclick="followButton(this, 'Saved', 'Not Saved')"><i class="fa-regular fa-bookmark"></i> Save</a>
+                                <div class="btn btn-style1" onclick="saveButton(this, 'Saved', 'UnSaved', this.action)">
+                                    <i class="fa-regular fa-bookmark"></i>
+                                    <span  class="txt-follow" this="">Save</span>
+                                </div>
                             </div>
                         </c:if>
                         <div class="detail">
@@ -385,6 +388,46 @@ var action =val1;
                             txtFollow.innerText = val2;
                         else
                             txtFollow.innerText = val1;
+// console.log(action);
+                        
+//    action = unFollow;
+                        console.log(action);
+
+                        //Do Something
+                    },
+                    error: function () {
+                        //Do Something to handle error
+                        console.log("thanh cong roi kia");
+                    }
+                });
+            }
+
+        </script>
+        <script>
+            function  saveButton(item, val1, val2,action) {
+//                eventac.target.style.backgroundColor = 'white';
+//                event.target.classList.toggle("button-Follower");
+///
+//                console.log(event.target.classList);
+
+var action =val1;
+                $.ajax({
+                    url: "/ajax/updatesaverecipe",
+                    type: "get", //send it through get method
+                    data: {
+                        recipe: "${RECIPE_DETAIL.getid()}",
+                        action: action,
+                        user: "${sessionScope.login.id}"
+                    },
+                    success: function () {
+                        console.log(item);
+                        item.classList.toggle("button-Follow");
+
+                        let txtSave = item.querySelector("span");
+                        if (txtSave.innerText !== val2)
+                            txtSave.innerText = val2;
+                        else
+                            txtSave.innerText = val1;
 // console.log(action);
                         
 //    action = unFollow;
