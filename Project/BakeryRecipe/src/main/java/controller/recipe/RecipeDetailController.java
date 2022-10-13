@@ -38,10 +38,10 @@ public class RecipeDetailController extends HttpServlet {
         response.setContentType("text/html;charset=UTF-8");
         String url = ERROR;
         try {
-            int loginID = Integer.parseInt(request.getParameter("loginID"));
+//            int loginID = Integer.parseInt(request.getParameter("loginID"));
             HttpSession session = request.getSession();
             User userLogin = (User) session.getAttribute("login");
-//            int userID = Integer.parseInt(request.getParameter("ID"));
+           Recipe  ID = (Recipe) session.getAttribute("homeRecipe");
             int recipeID = Integer.parseInt(request.getParameter("recipeID"));
             RecipeDAO recipe = new RecipeDAO();
             List<String> picRecp;
@@ -82,7 +82,7 @@ public class RecipeDetailController extends HttpServlet {
             boolean checksave = UserDAO.checkSaveRecipe(userLogin.getId(), recipeID);
             request.setAttribute("checksave", checksave);
             
-            boolean checkfollow = UserDAO.checkFollowUser(userLogin.getId(), loginID);
+            boolean checkfollow = UserDAO.checkFollowUser(userLogin.getId(), ID.getUserID());
             request.setAttribute("CHECK_FOLLOW", checkfollow);
             
             boolean checklike = UserDAO.checkLikeRecipe(userLogin.getId(), recipeID);
