@@ -73,14 +73,16 @@
                             </div>
                         </div>
                         <div class="display-image d-none col p-0" id="display-img">
-                            <div class='image'  src="./"></div>
-                            <div class="display-image-options">
+                            <div class='image'  src="./">
+                            </div>
+                            <iframe class="video"></iframe>
+                            <div class="display-image-options mb-3">
                                 <div class="fas fa-trash description-button" id='remove-image'></div>
                                 <div class="col-5 d-inline-flex"></div>
-                                <button class="description-button" disabled="disabled" id="to-cover-btn">
+                                <button class="description-button" form="dissabled" id="to-cover-btn">
                                     Set As Cover
                                 </button>
-                                <button class="description-button ml-2" disabled="disabled" id="change-img-btn">
+                                <button class="description-button ml-2" form="dissabled" id="change-img-btn">
                                     Change Image
                                 </button>
                             </div>
@@ -89,9 +91,8 @@
                         <div class="video-and-image swiper d-none col-12 p-0">
                             <div class="swiper-wrapper col p-0" id="img-content">
                                 <span class="col-2 p-0 swiper-slide hover-button-2 list-group-item rounded add-img"></span>
-                                <span class="col-2 d-none p-0 swiper-slide hover-button-2 list-group-item rounded video">
-                                    <input type="hidden" class="video-name">
-                                    <input type="hidden" class="video-url">
+                                <span class="col-2 d-none p-0 swiper-slide hover-button-2 list-group-item rounded video" onclick="selectContent(this.parentElement, this)">
+                                    <input type="hidden" name="video-url">
                                 </span>
 
                             </div>
@@ -157,7 +158,7 @@
                             <input class="pre-box-input col" type="number" name="cook-time" placeholder="0">
                         </div>
                     </div>
-                    <button class="save-button ml-auto" >
+                    <button class="save-button ml-auto" onclick="document.querySelector('form').submit()">
                         <b class="save-b2">Add recipe</b>
                     </button>
                 </form>
@@ -172,11 +173,6 @@
                 <div class="col-12 row justify-content-center align-content-center m-auto">
                     <div class="video h4 font-weight-bold">Add Video</div>
                     <i class="fas fa-youtube col-12 text-center pt-4 text-danger h3" style="font-family: 'Font Awesome 5 Brands' "></i>                
-                    <div class="col-12 p-0 my-4 d-flex justify-content-between align-items-center flex-wrap">
-                        <span class="h6 col-2 p-0 ">Name: </span>
-                        <input class="col-10  p-2" placeholder="(optional)" name="vname">
-                        <span class="status"></span>
-                    </div>
                     <div class="col-12 p-0 my-4 d-flex justify-content-between align-items-center flex-wrap">
                         <span class="h6 col-2 p-0 ">URL: </span>
                         <input class="col-10 p-2" placeholder="Input Your Youtube URL" name="vurl">

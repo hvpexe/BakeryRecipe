@@ -19,8 +19,7 @@ var prependNumber = 1;
 document.querySelector("#add-video-btn").onclick = () => addVideo('#img-content');
 document.querySelector("#add-img-btn").onclick = () => addImage('#img-content');
 document.querySelector("#img-content .add-img").onclick = () => addImage('#img-content');
-
-
+//document.querySelector('#remove-image').onclick = e => removeImage(e.target.getAttritube(''));
 //
 async function addVideo(container) {
     var container = document.querySelector(container);
@@ -33,8 +32,7 @@ async function addVideo(container) {
         selector: '#img-box',
         container: container.parentElement,
         video: video,
-        name: inputs[0],
-        url: inputs[1],
+        url: inputs[0],
         btn: videoBtn,
     });
 }
@@ -45,52 +43,69 @@ async function showBox(option) {
     var inputs = box.querySelectorAll('input');
     var isYoutubeRegex = /^((?:https?:)?\/\/)?((?:www|m)\.)?((?:youtube\.com|youtu.be))(\/(?:[\w\-]+\?v=|embed\/|v\/)?)([\w\-]+)?(\S+)?$/s;
     var check = false;
-    inputs[0].value = option.name.value;
-    inputs[1].value = option.url.value;
-    inputs[1].oninput = e => {
+    inputs[0].value = option.url.value;
+    inputs[0].oninput = e => {
         var status = e.target.parentElement.querySelector('.status');
         var url = e.target.value;
         status.innerText = "";
-        inputs[1].classList.remove('border-danger');
-        inputs[1].classList.remove('border-success');
+        inputs[0].classList.remove('border-danger');
+        inputs[0].classList.remove('border-success');
         check = isYoutubeRegex.test(url);
         if (check) {
-            inputs[1].classList.add('border-success');
+            inputs[0].classList.add('border-success');
         }
     }
-    inputs[1].onblur = e => {
+    inputs[0].onblur = e => {
         var status = e.target.parentElement.querySelector('.status');
         var url = e.target.value;
-        console.log(e.target.value +" ggggggg");
+        console.log(e.target.value + " ggggggg");
         check = isYoutubeRegex.test(url);
         if (!check) {
-            inputs[1].classList.add('border-danger');
-            inputs[1].classList.remove('border-success');
+            inputs[0].classList.add('border-danger');
+            inputs[0].classList.remove('border-success');
             status.innerText = "Please input Youtube URL";
             console.log("false");
             console.log(check);
-            box.querySelector('.save-btn').onclick = () => {};
-        } 
+            box.querySelector('.save-btn').onclick = () => {
+            };
+        }
         if (check) {
             status.innerText = "";
-            inputs[1].classList.remove('border-danger');
-            inputs[1].classList.add('border-success');
+            inputs[0].classList.remove('border-danger');
+            inputs[0].classList.add('border-success');
             console.log("true");
         }
         if (check) {
             // if check == true add a video 
             box.querySelector('.save-btn').onclick = () => {
-                option.name.value = inputs[0].value;
-                option.url.value = inputs[1].value;
-                option.container.classList.remove('d-none');
-                option.btn.innerHTML = option.btn.innerHTML.replace('Add', "Update");
-                option.video.classList.remove('d-none');
+                showVideo(option, inputs);
                 box.classList.add('d-none');
             };
-        } 
+        }
         ;
     }
 
+}
+function getLinkEmbed(value) {
+    var embedUrl = value.match(/[\w\-]{11,}/)[0];
+    return 'https://www.youtube.com/embed/' + embedUrl;
+}
+function getLinkImg(value) {
+    var imgUrl = value.match(/[\w\-]{11,}/)[0];
+    return 'https://img.youtube.com/vi/' + imgUrl + '/0.jpg';
+}
+function showVideo(option, inputs) {
+    var imgUrl = getLinkImg(inputs[0].value);
+    option.url.value = inputs[0].value;
+    option.container.classList.remove('d-none');
+    option.btn.innerHTML = option.btn.innerHTML.replace('Add', "Update");
+    option.video.classList.remove('d-none');
+    option.video.style.backgroundImage = 'url(' + imgUrl + ')';
+}
+function hideVideo(option) {
+    option.url.value = '';
+    option.btn.innerHTML = option.btn.innerHTML.replace('Update', "Add");
+    option.video.classList.add('d-none');
 }
 // add image 
 function addImage(container) {
@@ -100,30 +115,71 @@ function addImage(container) {
     inputPicture.setAttribute('type', 'file');
     inputPicture.setAttribute('name', 'video-image');
     inputPicture.setAttribute('class', 'd-none');
-//    inputPicture.setAttribute('onclick', 'changeImg(this)');
+    //    inputPicture.setAttribute('onclick', 'changeImg(this)');
     span.classList = "col-2 p-0 swiper-slide hover-button-2 list-group-item rounded ";
     span.appendChild(inputPicture);
     inputPicture.click();
     container.parentElement.classList.remove("d-none");
     span.onclick = e => {
-        console.log(e.target.parentElement);
-        container.querySelector('.selected')?.classList.remove('selected');
-        e.target.classList.add('selected');
-        selectImg(container, e.target, e);
+        selectContent(container, e.target);
     };
     inputPicture.onchange = e => {
-        changeIngrImg(e.target.parentElement, URL.createObjectURL(e.target.files[0]), e);
+        changeImg(e.target.parentElement, URL.createObjectURL(e.target.files[0]), e);
         swiper.appendSlide(span);
-        container.querySelector('.selected')?.classList.remove('selected');
-        span.classList.add('selected');
-        e.target.onchange = () => changeIngrImg(e.target.parentElement, URL.createObjectURL(e.target.files[0]), e);
+
     };
 }
-
-function selectImg(container, elem, e) {
+//elem the .selected picture
+function selectContent(container, elem) {
+    container.querySelector('.selected')?.classList.remove('selected');
+    elem.classList.add('selected');
+    var display = document.querySelector('#display-img');
+    var displayImage = display.querySelector('.image');
+    var displayVideo = display.querySelector('.video');
+    display.classList.remove('d-none');
+    var img;
+    var toCoverBtn = document.querySelector('#to-cover-btn');
+    var changeImgBtn = document.querySelector('#change-img-btn');
+    if (!elem.classList.contains('video')) {
+        img = elem.getAttribute('src');
+        displayImage.style.backgroundImage = 'url(' + img + ')';
+        displayImage.setAttribute('src', img);
+        toCoverBtn.classList.remove('d-none');
+        changeImgBtn.classList.remove('d-none');
+        displayImage.classList.remove('d-none');
+        displayVideo.classList.add('d-none');
+        toCoverBtn.onclick = () => {
+            setCover(elem);
+        }
+        changeImgBtn.onclick = () => {
+            changeDisplayImage(elem, displayImage);
+        };
+    } else {
+        toCoverBtn.classList.add('d-none');
+        changeImgBtn.classList.add('d-none');
+        displayImage.classList.add('d-none');
+        displayVideo.classList.remove('d-none');
+        displayVideo.setAttribute('src', getLinkEmbed(elem.querySelector('input').value));
+        displayVideo.contentDocument.location.reload(true);
+        displayVideo.src += '';
+        console.log(elem.querySelector('input').value);
+    }
+}
+function setCover(elem) {
+    elem.parentElement.querySelector('.cover')?.classList.remove('cover');
+    elem.classList.add('cover');
+}
+async function changeDisplayImage(elem, image) {
+    var inputPicture = elem.querySelector('input');
+    inputPicture.click();
+    inputPicture.onchange = e => {
+        changeImg(inputPicture.parentElement, URL.createObjectURL(inputPicture.files[0]), e);
+        elem.click();
+        image.style.backgroundSize = '';
+    };
+    elem.click();
 
 }
-
 
 
 
@@ -145,7 +201,7 @@ function ItemCopy(option) {
         $.ajax({
             url: url, data: param,
             success: function (data) {
-//                console.log(option.container);                
+                //                console.log(option.container);                
                 option.run(data, option.container, option.count);
             },
             error: function () {
@@ -153,7 +209,6 @@ function ItemCopy(option) {
             }
         });
     }
-
     if (option.url) {
         inputElement.keyup(e => {
             var check = true;
@@ -166,7 +221,6 @@ function ItemCopy(option) {
             } else {
                 check = false;
             }
-
             if (check)
                 runAjax(option.url, getParam(inputElement), option.run);
         });
@@ -219,21 +273,24 @@ function showDetail(elem) {
     if (imgValue) {
         detail.querySelector('img').parentElement.classList.remove('fas', 'fa-camera');
         detail.querySelector('img').classList.remove('d-none');
-        detail.querySelector('img').src = elem.querySelector('input[type=file]').parentElement.src;
+        detail.querySelector('img').src = elem.querySelector('input[type=file]').parentElement.getAttribute('src');
     } else {
         detail.querySelector('img').parentElement.classList.add('fas', 'fa-camera');
         detail.querySelector('img').classList.add('d-none');
     }
 }
-function changeIngrImg(elem, value, e) {
+//elem the elem you want to edit
+//value the src 
+//e maybe use
+async function changeImg(elem, value, e) {
     if (elem.tagName !== 'IMG') {
         elem.style.backgroundImage = 'url(' + value + ')';
         elem.classList.remove('fas', 'fa-camera');
-        elem.src = value;
+        elem.setAttribute('src', value);
     } else {
-        elem.src = value;
+        elem.parentElement.classList.remove('fas', 'fa-camera');
         elem.classList.remove("d-none");
-        elem.parentElement.classList.remove('fas', 'fa-camera')
+        elem.setAttribute('src', value);
     }
 }
 //removeElem
@@ -273,10 +330,9 @@ $('#detail .save-btn').on('click', e => {
         clone.setAttribute('accept', elemFile.accept);
         console.log(clone.value);
         elemFile.parentElement.insertBefore(clone, elemFile);
-        changeIngrImg(clone.parentElement, window.URL.createObjectURL(clone.files[0]))
+        changeImg(clone.parentElement, window.URL.createObjectURL(clone.files[0]))
         elemFile.remove();
     }
-
 
     console.log(detail);
     console.log(elem);
@@ -284,7 +340,7 @@ $('#detail .save-btn').on('click', e => {
 });
 // stop img that have a camera calling ShowDetail first
 $('#inst-container h5, #inst-container .inst-img, #inst-container .inst-img *\n\
-                                                ,#inst-container .item-trashbin, #inst-container .item-trashbin *').click(function (e) {
+    ,#inst-container .item-trashbin, #inst-container .item-trashbin *').click(function (e) {
     e.stopPropagation();
 });
 // #img-box exit btn
@@ -294,4 +350,5 @@ $('#img-box :is(.gray-box, .exit-btn, .cancel-btn)').click(e => {
 // #detail exit btn
 $('#detail :is(.gray-box, .exit-btn, .cancel-btn, .save-btn)').click(e => {
     document.querySelector("#detail").classList.add('d-none');
-});
+}
+);

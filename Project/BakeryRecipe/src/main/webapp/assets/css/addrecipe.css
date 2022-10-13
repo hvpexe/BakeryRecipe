@@ -143,9 +143,9 @@ input,textarea{
     position: relative;
     box-shadow: 0 4px 4px #00000025;
 }
-.display-image .image{
+.display-image :is(.image,.video){
     background: var(--side-theme-color) no-repeat ;
-
+    width: 100%;
     background-position: center center;
     background-size: cover;
     box-shadow: 0 0 0 2px inset var(--pink-theme);
@@ -222,6 +222,7 @@ input,textarea{
 .video-and-image span.cover::before{
     position: absolute;
     content:'Cover';
+    transform-origin: top left;
     background: var(--hard-yellow-theme);
     top:0;
     left:0;
@@ -233,18 +234,20 @@ input,textarea{
 .video-and-image span.selected{
     border:none;
 }
-.video-and-image span.selected::before{
-    content:'';
-    position: absolute;
-    inset:0;
-    box-shadow: 0 -10px 10px 0 inset var(--success);
-}
 .video-and-image span.selected::after{
     position: absolute;
     content: '';
     inset:0;
     pointer-events: none;
     border: 3px solid var(--success);
+    box-shadow: 0 -10px 10px 0 inset var(--success);
+
+}
+.video-and-image span.video.selected::before{
+    background: var(--success);
+}
+.video-and-image span.cover.selected::before{
+    background: var(--success);
 }
 .video-and-image span.add-img{
     box-sizing: border-box;
