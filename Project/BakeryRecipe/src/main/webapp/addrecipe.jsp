@@ -43,7 +43,7 @@
             <main class="cook2-main">
                 <main class="create-recipe-main col-md-10 col-12 align-self-center px-0">
                     <div class="create-recipe-div ">
-                        <h2 class="text-h2 "onclick="history.back ()">
+                        <h2 class="text-h2 "onclick="history.back()">
                             <i class="fas fa-arrow-left"></i>
                             <b class="create-recipe-b d-inline-block ">Create Recipe</b>
                         </h2>
@@ -65,14 +65,14 @@
                     </div>    <!--                Video And Image Picture                            -->
                     <div class="add-recipe-input col" style="gap: 10px;">
                         <div class="d-flex col p-0 justify-content-start" style="gap: 10px;">
-                            <button class="description-button" disabled="disabled" id="add-video-btn">
+                            <div class="description-button"  id="add-video-btn">
                                 Add Video <i class="fa-brands fa-youtube"></i>
-                            </button>
-                            <button class="description-button" disabled="disabled" id="add-img-btn">
+                            </div>
+                            <div class="description-button"  id="add-img-btn">
                                 Add Image <i class="fa-regular fa-image"></i>
-                            </button>
+                            </div>
                         </div>
-                        <div class="display-image col p-0">
+                        <div class="display-image d-none col p-0" id="display-img">
                             <div class='image'  src="./"></div>
                             <div class="display-image-options">
                                 <div class="fas fa-trash description-button" id='remove-image'></div>
@@ -85,23 +85,14 @@
                                 </button>
                             </div>
                         </div>
-                        <!--                                                            <span class="col-2 list-group-item rounded add-img"></span>
-                                                            <span class="col-2 list-group-item rounded video" id='video'></span>
-                                                            <span class="col-2 list-group-item rounded cover" id='pic2'></span>
-                                                            <span class="col-2 list-group-item rounded" id='pic3'></span>
-                                                            <span class="col-2 list-group-item rounded selected" id='pic4'
-                                                                  style="background-image: url(assets/images/image-29@2x.png);"></span>-->
-                        <div class="video-and-image swiper  col-12 p-0">
+
+                        <div class="video-and-image swiper d-none col-12 p-0">
                             <div class="swiper-wrapper col p-0" id="img-content">
-                                <span class="col-2 p-0 swiper-slide list-group-item rounded add-img"></span>
-                                <span class="col-2 p-0 swiper-slide rounded video" id='video'></span>
-                                <span class="col-2 p-0 swiper-slide rounded cover" id='pic2'></span>
-                                <span class="col-2 p-0 swiper-slide rounded" id='pic3'></span>
-                                <span class="col-2 p-0 swiper-slide rounded" id='pic3'></span>
-                                <span class="col-2 p-0 swiper-slide rounded" id='pic3'></span>
-                                <span class="col-2 p-0 swiper-slide rounded" id='pic3'></span>
-                                <span class="col-2 p-0 swiper-slide rounded selected" id='pic4'
-                                      style="background-image: url(assets/images/image-29@2x.png);"></span>
+                                <span class="col-2 p-0 swiper-slide hover-button-2 list-group-item rounded add-img"></span>
+                                <span class="col-2 d-none p-0 swiper-slide hover-button-2 list-group-item rounded video">
+                                    <input type="hidden" class="video-name">
+                                    <input type="hidden" class="video-url">
+                                </span>
 
                             </div>
                         </div>
@@ -173,6 +164,31 @@
 
             </main>
         </main>
+        <!--Detail Showing Video and image config-->
+        <div class="d-none" id="img-box" viewing="#img1">
+            <div class="gray-box"></div>
+            <div class="exit-btn "></div>
+            <div class="container col col-md-5 p-3 rounded p-0">
+                <div class="col-12 row justify-content-center align-content-center m-auto">
+                    <div class="video h4 font-weight-bold">Add Video</div>
+                    <i class="fas fa-youtube col-12 text-center pt-4 text-danger h3" style="font-family: 'Font Awesome 5 Brands' "></i>                
+                    <div class="col-12 p-0 my-4 d-flex justify-content-between align-items-center flex-wrap">
+                        <span class="h6 col-2 p-0 ">Name: </span>
+                        <input class="col-10  p-2" placeholder="(optional)" name="vname">
+                        <span class="status"></span>
+                    </div>
+                    <div class="col-12 p-0 my-4 d-flex justify-content-between align-items-center flex-wrap">
+                        <span class="h6 col-2 p-0 ">URL: </span>
+                        <input class="col-10 p-2" placeholder="Input Your Youtube URL" name="vurl">
+                        <div class="status w-100"></div>
+                    </div>
+                    <div class="col-12 d-flex justify-content-end">
+                        <div class="cancel-btn hover-button-1 col-auto font-weight-bold rounded m-2">Cancel</div>
+                        <div class="save-btn hover-button-1 col-auto font-weight-bold rounded m-2">Save</div><!-- comment -->
+                    </div>
+                </div>
+            </div>
+        </div>
         <!--Detail Showing item detail-->
         <div class="d-none" id="detail" viewing="#inst">
             <div class="gray-box"></div>
@@ -199,7 +215,7 @@
         <script src="assets/js/validator.js"></script>
         <script src="assets/js/addrecipe.js"></script>
         <script>
-//                             showDetail(document.querySelector('#inst1'));
+
                              ItemCopy({
                                  selector: '#ingredient [name]',
                                  run: (result, container) => {
