@@ -234,125 +234,19 @@
                             <div class="recipe col-6 col-md-3">
                                 <div class="img-container">
                                     <img class="recipe-img" alt=""
-                                         src="https://thermomidxvietnam.vn/wp-content/themes/yootheme/cache/tiramisu-truyen-thong-9cdd0569.jpeg" />
+                                         src="${to.cover}" />
                                     <div class="bookmark">
                                         Save <i class="fa-regular fa-bookmark"></i>
                                     </div>
                                     <div class="react">
-                                        <div>12 likes</div>
-                                        <div>12 comments</div>
+                                        <div>${to.like} likes</div>
+                                        <div>${to.comment} comments</div>
                                     </div>
                                 </div>
-                                <div class="related-recipe-name">${to}</div>
-                                <div class="recipe-author"><a href="#">Trịnh Thăng Bình</a> 2 day ago</div>
+                                <div class="related-recipe-name">${to.name}</div>
+                                <div class="recipe-author"><a href="#">${to.username}</a> 2 day ago</div>
                             </div>
                         </c:forEach>
-                        <div class="recipe col-6 col-md-3">
-                            <div class="img-container">
-                                <img class="recipe-img" alt=""
-                                     src="https://thermomixvietnam.vn/wp-content/themes/yootheme/cache/tiramisu-truyen-thong-9cdd0569.jpeg" />
-                                <div class="bookmark">
-                                    Save <i class="fa-regular fa-bookmark"></i>
-                                </div>
-                                <div class="react">
-                                    <div>12 likes</div>
-                                    <div>12 comments</div>
-                                </div>
-                            </div>
-                            <div class="related-recipe-name">Mooncake</div>
-                            <div class="recipe-author"><a href="#">Trịnh Thăng Bình</a> 2 day ago</div>
-                        </div>
-                        <div class="recipe col-6 col-md-3">
-                            <div class="img-container">
-                                <img class="recipe-img" alt=""
-                                     src="https://thermomixvietnam.vn/wp-content/themes/yootheme/cache/tiramisu-truyen-thong-9cdd0569.jpeg" />
-                                <div class="bookmark">
-                                    Save <i class="fa-regular fa-bookmark"></i>
-                                </div>
-                                <div class="react">
-                                    <div>12 likes</div>
-                                    <div>12 comments</div>
-                                </div>
-                            </div>
-                            <div class="related-recipe-name">Mooncake</div>
-                            <div class="recipe-author"><a href="#">Trịnh Thăng Bình</a> 2 day ago</div>
-                        </div>
-                        <div class="recipe col-6 col-md-3">
-                            <div class="img-container">
-                                <img class="recipe-img" alt=""
-                                     src="https://thermomixvietnam.vn/wp-content/themes/yootheme/cache/tiramisu-truyen-thong-9cdd0569.jpeg" />
-                                <div class="bookmark">
-                                    Save <i class="fa-regular fa-bookmark"></i>
-                                </div>
-                                <div class="react">
-                                    <div>12 likes</div>
-                                    <div>12 comments</div>
-                                </div>
-                            </div>
-                            <div class="related-recipe-name">Mooncake</div>
-                            <div class="recipe-author"><a href="#">Trịnh Thăng Bình</a> 2 day ago</div>
-                        </div>
-                        <div class="recipe col-6 col-md-3">
-                            <div class="img-container">
-                                <img class="recipe-img" alt=""
-                                     src="https://thermomixvietnam.vn/wp-content/themes/yootheme/cache/tiramisu-truyen-thong-9cdd0569.jpeg" />
-                                <div class="bookmark">
-                                    Save <i class="fa-regular fa-bookmark"></i>
-                                </div>
-                                <div class="react">
-                                    <div>12 likes</div>
-                                    <div>12 comments</div>
-                                </div>
-                            </div>
-                            <div class="related-recipe-name">Mooncake</div>
-                            <div class="recipe-author"><a href="#">Trịnh Thăng Bình</a> 2 day ago</div>
-                        </div>
-                        <div class="recipe col-6 col-md-3">
-                            <div class="img-container">
-                                <img class="recipe-img" alt=""
-                                     src="https://thermomixvietnam.vn/wp-content/themes/yootheme/cache/tiramisu-truyen-thong-9cdd0569.jpeg" />
-                                <div class="bookmark">
-                                    Save <i class="fa-regular fa-bookmark"></i>
-                                </div>
-                                <div class="react">
-                                    <div>12 likes</div>
-                                    <div>12 comments</div>
-                                </div>
-                            </div>
-                            <div class="related-recipe-name">Mooncake</div>
-                            <div class="recipe-author"><a href="#">Trịnh Thăng Bình</a> 2 day ago</div>
-                        </div>
-                        <div class="recipe col-6 col-md-3">
-                            <div class="img-container">
-                                <img class="recipe-img" alt=""
-                                     src="https://thermomixvietnam.vn/wp-content/themes/yootheme/cache/tiramisu-truyen-thong-9cdd0569.jpeg" />
-                                <div class="bookmark">
-                                    Save <i class="fa-regular fa-bookmark"></i>
-                                </div>
-                                <div class="react">
-                                    <div>12 likes</div>
-                                    <div>12 comments</div>
-                                </div>
-                            </div>
-                            <div class="related-recipe-name">Mooncake</div>
-                            <div class="recipe-author"><a href="#">Trịnh Thăng Bình</a> 2 day ago</div>
-                        </div>
-                        <div class="recipe col-6 col-md-3">
-                            <div class="img-container">
-                                <img class="recipe-img" alt=""
-                                     src="https://thermomixvietnam.vn/wp-content/themes/yootheme/cache/tiramisu-truyen-thong-9cdd0569.jpeg" />
-                                <div class="bookmark">
-                                    Save <i class="fa-regular fa-bookmark"></i>
-                                </div>
-                                <div class="react">
-                                    <div>12 likes</div>
-                                    <div>12 comments</div>
-                                </div>
-                            </div>
-                            <div class="related-recipe-name">Mooncake</div>
-                            <div class="recipe-author"><a href="#">Trịnh Thăng Bình</a> 2 day ago</div>
-                        </div>
-
                     </div>
                 </div>
             </div>

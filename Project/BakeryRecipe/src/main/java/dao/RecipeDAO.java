@@ -17,6 +17,9 @@ import utils.DBUtils;
 import java.sql.Date;
 import java.sql.SQLException;
 import java.text.SimpleDateFormat;
+import java.util.Collection;
+import java.util.Collections;
+import java.util.HashMap;
 import utils.Tools;
 
 /**
@@ -108,7 +111,7 @@ public class RecipeDAO {
             + "			on  baker.ID =recipe.UserID\n"
             + "            WHERE recipe.Name like ? and pic.IsCover ='True'";
 
-    public List<Recipe> searchRecipe(String name) throws SQLException {
+    public static List<Recipe> searchRecipe(String name) throws SQLException {
         ArrayList<Recipe> listRecipe = new ArrayList<>();
         Connection conn = null;
         PreparedStatement ptm = null;
@@ -511,15 +514,23 @@ public class RecipeDAO {
         return theVideo;
     }
 
-    private static final String RELATED_TOPIC = "SELECT DISTINCT recipe.Name\n"
+    private static final String RELATED_INGREDIENTS = "SELECT DISTINCT recipe.Name\n"
             + "FROM [dbo].[Recipe] recipe join [dbo].[IngredientRecipe] igreRecipe\n"
             + "on recipe.[ID] =igreRecipe.[RecipeID]\n"
             + "join [dbo].[Ingredient] igre\n"
             + "on igreRecipe.IngredientID = igre.ID\n"
             + "WHERE igre.Name = ?";
 
-    public List<String> listRelate(int recipeID) throws SQLException {
-        List<String> listRecipe = new ArrayList<>();
+    private static final String RLATED_BAKER = "SELECT   recipe.Name\n"
+            + "FROM [dbo].[Recipe]recipe \n"
+            + "WHERE  recipe.UserID = ?";
+
+    private static final String All_NAME = "SELECT   recipe.Name\n"
+            + "FROM [dbo].[Recipe]recipe ";
+
+    public List<Recipe> listRelate(int recipeID) throws SQLException {
+        List<Recipe> listRecipe = new ArrayList<>();
+        HashMap<Integer, String> relateListRecipe = new HashMap<>();
         Connection cnn = null;
         PreparedStatement ptm = null;
         ResultSet rs = null;
@@ -527,26 +538,76 @@ public class RecipeDAO {
         String thirdElements;
         RecipeDAO dao = new RecipeDAO();
         List<Ingredient> ingre = dao.listIngredient(recipeID);
-
+        cnn = DBUtils.getConnection();
+        int checkNum = 0;
+//        nameBaker = RecipeDAO.
         try {
-            cnn = DBUtils.getConnection();
-            for (int i = 1; i < ingre.size(); i++) {
-                secondElements += " OR igre.Name =" + "\'" + ingre.get(i).getName() + "\'";
+            if (!ingre.isEmpty()) {
+                for (int i = 1; i < ingre.size(); i++) {
+                    secondElements += " OR igre.Name =" + "\'" + ingre.get(i).getName() + "\'";
+                }
+                thirdElements = RELATED_INGREDIENTS + secondElements;
+                ptm = cnn.prepareStatement(thirdElements);
+                ptm.setString(1, ingre.get(0).getName());
+                ptm.executeQuery();
             }
-            thirdElements = RELATED_TOPIC + secondElements;
-            ptm = cnn.prepareStatement(thirdElements);
-            ptm.setString(1, ingre.get(0).getName());
+            ptm = cnn.prepareStatement(RLATED_BAKER);
+            ptm.setInt(1, recipeID);
+            ptm.executeQuery();
+            ptm = cnn.prepareStatement(All_NAME);
             rs = ptm.executeQuery();
             while (rs.next()) {
-                String nameRecipe = rs.getString("Name");
-                listRecipe.add(nameRecipe);
+                if (checkNum < 8) {
+                    relateListRecipe.put(checkNum, rs.getString("Name"));
+                    String nameRecipe = rs.getString("Name");
+//                    Recipe recipeS = RecipeDAO.
+                    Recipe recipeD = RecipeDAO.searchRecipebyName(nameRecipe);
+                    listRecipe.add(recipeD);
+                    checkNum++;
+                }
             }
         } catch (Exception e) {
-
+            e.printStackTrace();
         }
         return listRecipe;
 
     }
+
+    private static final String SEARCH_EXACTLY = "SELECT recipe.[Name],[Description],[Like],recipe.ID\n"
+            + "                   ,[DatePost],[LastDateEdit],[PrepTime],[CookTime]\n"
+            + "                        [Save],[IsDeleted],[UserID],Comment,[Img],baker.FirstName +' '+baker.LastName as fullName\n"
+            + "                        FROM[dbo].[Recipe] recipe join [dbo].[Picture] pic\n"
+            + "            			on recipe.ID =pic.RecipeID\n"
+            + "            			join [dbo].[User]  baker\n"
+            + "            			on  baker.ID =recipe.UserID\n"
+            + "                        WHERE recipe.Name =? and pic.IsCover ='True'";
+
+    public static Recipe searchRecipebyName(String recipeName) {
+        Connection cnn = null;
+        PreparedStatement ptm = null;
+        ResultSet rs = null;
+        Recipe recipe = null;
+        try {
+            cnn = DBUtils.getConnection();
+            ptm = cnn.prepareStatement(SEARCH_EXACTLY);
+            ptm.setString(1, recipeName);
+            rs = ptm.executeQuery();
+            while (rs.next()) {
+                String fullName = rs.getString("fullName");
+//                String img = rs.getString("Img");
+                int comment = rs.getInt("Comment");
+                int like = rs.getInt("Like");
+                int save = rs.getInt("Save");
+                String cakeName = rs.getString("Name");
+                String cover = rs.getString("Img");
+                recipe = new Recipe(cakeName, like, comment, cover, fullName);
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return recipe;
+    }
+
     private static final String CMT_RECIPE = "INSERT INTO [dbo].[Comment]([Comment],[Rate],[DateComment],[IsDeleted],[UserID],[RecipeID])\n"
             + "VALUES (?,?,?,?,?,?)";
 
@@ -606,7 +667,7 @@ public class RecipeDAO {
 //        List<Recipe> list = showSavedRecipe(3, 1);
 
 //        sc.commentRecipe("ngon vl ", 4, 4);
-sc.commentList(4);
+//        sc.listRelate(4);
     }
 
 }
