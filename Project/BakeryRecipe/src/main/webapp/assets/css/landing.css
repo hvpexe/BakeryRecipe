@@ -62,7 +62,7 @@ header.masthead .btn-main-color:hover {
 @media (min-width: 768px) {
     header.masthead {
         height: 100vh;
-        padding-top: 18rem;
+        padding-top: 16rem;
         padding-bottom: 12.5rem;
     }
 

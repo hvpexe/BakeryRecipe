@@ -39,7 +39,7 @@ public class Recipe {
     public Recipe() {
     }
 
-    public Recipe(String name,String  cover, String username) {
+    public Recipe(String name, String cover, String username) {
         this.name = name;
         this.cover = cover;
         this.username = username;
@@ -67,9 +67,7 @@ public class Recipe {
         this.username = username;
     }
 
-  
-
-    public Recipe(int id,String name, String description, int like, int save, int comment, Timestamp datePost, Timestamp lastDateEdit, int prepTime, int cookTime) {
+    public Recipe(int id, String name, String description, int like, int save, int comment, Timestamp datePost, Timestamp lastDateEdit, int prepTime, int cookTime) {
         this.id = id;
         this.name = name;
         this.description = description;
@@ -81,8 +79,7 @@ public class Recipe {
         this.prepTime = prepTime;
         this.cookTime = cookTime;
     }
-    
-    
+
     /**
      * constructor này dành cho post recipe trên trang home
      */
@@ -100,9 +97,6 @@ public class Recipe {
         this.username = username;
     }
 
-    
-    
-    
     public int getId() {
         return id;
     }
@@ -154,7 +148,7 @@ public class Recipe {
     public Timestamp getDatePost() {
         return datePost;
     }
-    
+
     public String getDatePostFormat() {
         return Tools.formatDate(datePost);
     }
@@ -234,17 +228,18 @@ public class Recipe {
     public void setVideo(ArrayList<String> video) {
         this.video = video;
     }
-    
+
     public String getAvatar() {
-        if(avatar==null) return DEFAULT_AVATAR;
+        if (avatar == null) {
+            return DEFAULT_AVATAR;
+        }
         return IMG_PATH + avatar;
     }
 
     public void setAvatar(String avatar) {
         this.avatar = avatar;
     }
-    
-    
+
     @Override
     public String toString() {
         return "Recipe{" + "id=" + id + ", name=" + name + ", description=" + description + ", like=" + like + ", save=" + save + ", comment=" + comment + ", datePost=" + datePost + ", lastDateEdit=" + lastDateEdit + ", prepTime=" + prepTime + ", cookTime=" + cookTime + ", isDeleted=" + isDeleted + ", userID=" + userID + ", img=" + img + ", cover=" + cover + ", username=" + username + '}';

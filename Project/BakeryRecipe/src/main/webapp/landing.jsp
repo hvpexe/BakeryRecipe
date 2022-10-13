@@ -27,20 +27,21 @@
                     <h3 class="section-subheading text-muted">Which ingredient you have in your house? Enter all here, we
                         will bring to you some recommend!</h3>
                 </div>
-                <div class="input-group">
-                    <span class="input-group-prepend">
-                        <div class="input-group-text border-right-0">
-                            <i class="fa fa-search"></i>
-                        </div>
-                    </span>
-                    <input class="form-control py-2 border-left-0" type="search" value="..."
-                           id="example-search-input" />
-                    <span class="input-group-append">
-                        <button class="btn btn-outline-secondary border-left-0 border" type="button">
-                            Search
-                        </button>
-                    </span>
-                </div>
+                <form action="Search" method="GET">
+                    <div class="input-group">
+                        <span class="input-group-prepend">
+                            <div class="input-group-text border-right-0">
+                                <i class="fa fa-search"></i>
+                            </div>
+                        </span>
+                        <input class="form-control py-2 border-left-0" type="search" name="searchKey" id="example-search-input" />
+                        <span class="input-group-append">
+                            <button class="btn btn-outline-secondary border-left-0 border" type="submit" name="action" value="Recipe">
+                                Search
+                            </button>
+                        </span>
+                    </div>
+                </form>
             </div>
         </section>
 

@@ -8,6 +8,7 @@ import dto.Comment;
 import dto.Ingredient;
 import dto.Intruction;
 import dto.Recipe;
+import dto.RecipeSearch;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -103,13 +104,13 @@ public class RecipeDAO {
     }
 
     private static final String SEARCH_RECIPE = "SELECT recipe.[Name],[Description],[Like],recipe.ID\n"
-            + "            ,[DatePost],[LastDateEdit],[PrepTime],[CookTime]\n"
-            + "            [Save],[IsDeleted],[UserID],Comment,[Img],baker.FirstName +' '+baker.LastName as fullName\n"
-            + "            FROM[dbo].[Recipe] recipe join [dbo].[Picture] pic\n"
-            + "			on recipe.ID =pic.RecipeID\n"
-            + "			join [dbo].[User]  baker\n"
-            + "			on  baker.ID =recipe.UserID\n"
-            + "            WHERE recipe.Name like ? and pic.IsCover ='True'";
+            + "[DatePost],[LastDateEdit],[PrepTime],[CookTime]\n"
+            + "[Save],[IsDeleted],[UserID],Comment,[Img],baker.FirstName +' '+baker.LastName as fullName\n"
+            + "FROM[dbo].[Recipe] recipe join [dbo].[Picture] pic\n"
+            + "on recipe.ID =pic.RecipeID\n"
+            + "join [dbo].[User]  baker\n"
+            + "on  baker.ID =recipe.UserID\n"
+            + "WHERE FREETEXT (recipe.Name , ?) and pic.IsCover =1";
 
     public static List<Recipe> searchRecipe(String name) throws SQLException {
         ArrayList<Recipe> listRecipe = new ArrayList<>();
@@ -119,7 +120,7 @@ public class RecipeDAO {
         try {
             conn = DBUtils.getConnection();
             ptm = conn.prepareStatement(SEARCH_RECIPE);
-            ptm.setString(1, "%" + name + "%");
+            ptm.setString(1, name);
             rs = ptm.executeQuery();
             while (rs.next()) {
                 String fullName = rs.getString("fullName");
@@ -554,7 +555,7 @@ public class RecipeDAO {
                 ptm.setString(1, ingre.get(0).getName());
                 ptm.executeQuery();
             }
-            
+
             ptm = cnn.prepareStatement(All_NAME);
             rs = ptm.executeQuery();
             while (rs.next()) {
@@ -635,10 +636,10 @@ public class RecipeDAO {
         return check;
     }
 
-    private static final String LIST_COMMENT = "select baker.FirstName +' ' + baker.LastName as fullName ,cmt.ID,cmt.Comment,baker.Avatar\n" +
-"            from [dbo].[Comment] cmt join [dbo].[User] baker\n" +
-"            on cmt.UserID = baker.ID\n" +
-"            where cmt.RecipeID = ?";
+    private static final String LIST_COMMENT = "select baker.FirstName +' ' + baker.LastName as fullName ,cmt.ID,cmt.Comment,baker.Avatar\n"
+            + "            from [dbo].[Comment] cmt join [dbo].[User] baker\n"
+            + "            on cmt.UserID = baker.ID\n"
+            + "            where cmt.RecipeID = ?";
 
     public static List<Comment> commentList(int recipeID) {
         List<Comment> cmtList = new ArrayList<>();
@@ -664,14 +665,49 @@ public class RecipeDAO {
         return cmtList;
     }
 
-    public static void main(String[] args) throws SQLException {
-        RecipeDAO sc = new RecipeDAO();
-//        System.out.println(sc.listRelate(2));
-//        List<Recipe> list = showSavedRecipe(3, 1);
+    public static ArrayList<RecipeSearch> getRecipes() {
+        String sql1 = "SELECT P.Img, R.ID, R.Name, R.Description, R.[Like], R.Comment, R.DatePost, U.ID AS UserID, U.LastName + ' ' + U.FirstName AS Username \n"
+                + "FROM Recipe R\n"
+                + "INNER JOIN Picture P ON P.RecipeID = R.ID\n"
+                + "INNER JOIN [User] U ON R.UserID = U.ID\n"
+                + "WHERE P.IsCover = 1";
+        String sql2 = "SELECT I.Name\n"
+                + "FROM IngredientRecipe IR\n"
+                + "INNER JOIN Ingredient I ON I.ID = IR.IngredientID\n"
+                + "WHERE IR.RecipeID = ?";
+        ArrayList<RecipeSearch> list = new ArrayList<RecipeSearch>();
 
-//        sc.commentRecipe("ngon vl ", 4, 4);
-//        sc.listRelate(4);
-        sc.commentList(4);
+        try {
+            Connection conn = DBUtils.getConnection();
+            PreparedStatement ps = conn.prepareStatement(sql1);
+            ResultSet rs = ps.executeQuery();
+            while (rs.next()) {
+                int id = rs.getInt("ID");
+                ArrayList<String> ingres = new ArrayList<String>();
+                PreparedStatement ps2 = conn.prepareStatement(sql2);
+                ps2.setInt(1, id);
+                ResultSet rs2 = ps2.executeQuery();
+                while (rs2.next()) {
+                    ingres.add(rs2.getString("Name"));
+                }
+                list.add(new RecipeSearch(rs.getInt("ID"),
+                        rs.getString("Name"),
+                        rs.getString("Description"),
+                        rs.getInt("Like"),
+                        rs.getInt("Comment"),
+                        rs.getTimestamp("DatePost"),
+                        ingres, rs.getString("Img"),
+                        rs.getInt("UserID"),
+                        rs.getString("Username")));
+            }
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+        }
+        return list;
+    }
+
+    public static void main(String[] args) {
+        System.out.println(getRecipes());
     }
 
 }
