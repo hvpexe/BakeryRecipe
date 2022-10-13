@@ -97,6 +97,12 @@ body {
     top: 0;
     left: 0;
 }
+.bookmark.check{
+    background-color: var(--main-theme-color-hover);
+    border: 1px inset var(--main-theme-color);
+    color: var(--white);
+    opacity: 0.9;
+}
 
 .react {
     width: 100%;
@@ -148,18 +154,18 @@ body {
     }
 
 
-  .a.btn.seemore {
-    font-size: 10px !important;
-  }
-  .a.btn.seemore:hover{
-    background-color: var(--main-theme-color);
-    box-shadow: 0 0 0 2px var(--main-theme-color);
-    color: white;
-    transition-delay: 0s;
-  }
-  .title-container {
-    padding: 15px 20px;
-  }
+    .a.btn.seemore {
+        font-size: 10px !important;
+    }
+    .a.btn.seemore:hover{
+        background-color: var(--main-theme-color);
+        box-shadow: 0 0 0 2px var(--main-theme-color);
+        color: white;
+        transition-delay: 0s;
+    }
+    .title-container {
+        padding: 15px 20px;
+    }
 
     .seemore {
         font-size: 10px !important;

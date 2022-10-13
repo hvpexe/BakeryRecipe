@@ -29,9 +29,9 @@
                             <div class="img-container">
                                 <a href=".\RecipeDetail?recipeID=${cc.id}">
                                     <img class="recipe-img" alt=""
-                                     src="${cc.cover}" />
+                                         src="${cc.cover}" />
                                 </a>
-                                <div class="bookmark">
+                                <div class="bookmark " recipeID="${cc.id}" onclick="changeSave(this)">
                                     Save <i class="fa-regular fa-bookmark"></i>
                                 </div>
                                 <div class="react">
@@ -61,9 +61,9 @@
                             <div class="img-container">
                                 <a href=".\RecipeDetail?recipeID=${cc.id}">
                                     <img class="recipe-img" alt=""
-                                     src="${cc.cover}" />
+                                         src="${cc.cover}" />
                                 </a>
-                                <div class="bookmark">
+                                <div class="bookmark"  recipeID="${cc.id}"  onclick="changeSave(this)">
                                     Save <i class="fa-regular fa-bookmark"></i>
                                 </div>
                                 <div class="react">
@@ -93,14 +93,14 @@
                             <div class="img-container">
                                 <a href=".\RecipeDetail?recipeID=${cc.id}">
                                     <img class="recipe-img" alt=""
-                                     src="${cc.cover}" />
+                                         src="${cc.cover}" />
                                 </a>
-                                <div class="bookmark">
+                                <div class="bookmark" recipeID="${cc.id}"  onclick="changeSave(this)">
                                     Save <i class="fa-regular fa-bookmark"></i>
                                 </div>
                                 <div class="react">
                                     <div>${cc.like} likes</div>
-                                    <div>${cc.comment} comments</div>
+                                    <div>${cc.comment}  comments</div>
                                 </div>
                             </div>
                             <div class="recipe-name">${cc.name}</div>
@@ -115,7 +115,26 @@
         </div>
 
         <c:import url="footer.jsp"/>
+        <script src="assets/js/Jquery/jquery-core.js" ></script>
         <script>
+                                    function changeSave(elem) {
+                                        console.log(${login.id});
+                                        console.log(elem.getAttribute('recipeid'));
+                                        $.ajax({
+                                            url: "ajax/updatesaverecipe",
+                                            data: {
+                                                user: ${login.id},
+                                                recipe: elem.getAttribute('recipeid')
+                                            },
+                                            success: function (data) {
+                                                elem.classList.toggle('check');
+                                                if (elem.classList.contains('check')) {
+                                                        elem.innerHTML = elem.innerHTML.replace('Save','UnSave');
+                                                }else
+                                                        elem.innerHTML = elem.innerHTML.replace('UnSave','Save');
+                                            }
+                                        });
+                                    }
         </script>
     </body>
 </html>
