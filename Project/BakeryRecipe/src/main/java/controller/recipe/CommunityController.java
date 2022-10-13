@@ -6,6 +6,7 @@ package controller.recipe;
 
 import dao.RecipeDAO;
 import dto.Recipe;
+import dto.User;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.text.SimpleDateFormat;
@@ -15,6 +16,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 /**
  *
@@ -35,6 +37,9 @@ public class CommunityController extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
+        HttpSession session = request.getSession();
+        User userLogin = (User) session.getAttribute("login");
+        
         List<Recipe> list = RecipeDAO.getTop8MostRatedRecipe();
         List<Recipe> list2 = RecipeDAO.getTop8MostRecentRecipe();
         request.setAttribute("listRated", list);

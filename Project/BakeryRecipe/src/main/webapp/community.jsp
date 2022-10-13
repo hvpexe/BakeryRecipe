@@ -27,8 +27,10 @@
                     <c:forEach items="${listRated}" var="cc">
                         <div class="recipe col-6 col-md-4 col-lg-3">
                             <div class="img-container">
-                                <img class="recipe-img" alt=""
+                                <a href=".\RecipeDetail?recipeID=${cc.id}">
+                                    <img class="recipe-img" alt=""
                                      src="${cc.cover}" />
+                                </a>
                                 <div class="bookmark">
                                     Save <i class="fa-regular fa-bookmark"></i>
                                 </div>
@@ -57,11 +59,12 @@
                     <c:forEach items="${listRated}" var="cc">
                         <div class="recipe col-6 col-md-4 col-lg-3">
                             <div class="img-container">
-                                <img class="recipe-img" alt=""
+                                <a href=".\RecipeDetail?recipeID=${cc.id}">
+                                    <img class="recipe-img" alt=""
                                      src="${cc.cover}" />
-                                <input type="hidden" name="recipeID" value="${cc.id}">
+                                </a>
                                 <div class="bookmark">
-                                        <a href="./saverecipe:action=action&name=save">Save <i class="fa-regular fa-bookmark"></i></a>
+                                    Save <i class="fa-regular fa-bookmark"></i>
                                 </div>
                                 <div class="react">
                                     <div>${cc.like} likes</div>
@@ -88,8 +91,10 @@
                     <c:forEach items="${listRecent}" var="cc">
                         <div class="recipe col-6 col-md-4 col-lg-3">
                             <div class="img-container">
-                                <img class="recipe-img" alt=""
+                                <a href=".\RecipeDetail?recipeID=${cc.id}">
+                                    <img class="recipe-img" alt=""
                                      src="${cc.cover}" />
+                                </a>
                                 <div class="bookmark">
                                     Save <i class="fa-regular fa-bookmark"></i>
                                 </div>
@@ -102,7 +107,7 @@
                             <div class="recipe-author">
                                 <a href="#" class="text-truncate">${cc.username}</a> 
                                 <c:out value="${cc.getDatePostFormat()}"/></div>
-                                
+
                         </div>
                     </c:forEach>
                 </div>
@@ -110,7 +115,8 @@
         </div>
 
         <c:import url="footer.jsp"/>
-        <script></script>
+        <script>
+        </script>
     </body>
 </html>
 
