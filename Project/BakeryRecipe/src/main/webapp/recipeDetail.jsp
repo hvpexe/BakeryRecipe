@@ -63,7 +63,7 @@
                                         </div>
                                     </c:when>
                                     <c:otherwise>
-                                        <div class="btn btn-style1" onclick="likeButton(this, 'UnFollow', 'Follow', this.action)" >
+                                        <div class="btn btn-style1 button-Follower" onclick="likeButton(this, 'UnFollow', 'Follow', this.action)" >
                                             <i class="fa-regular fa-heart"></i>
                                             <span  class="txt-follow" this="">UnFollow</span>
                                         </div>
@@ -105,7 +105,7 @@
                                         </div>
                                     </c:when>
                                     <c:otherwise>
-                                        <div class="btn btn-style1" onclick="likeButton(this, 'UnLike', 'Like', this.action)" >
+                                        <div class="btn btn-style1 button-Follower" onclick="likeButton(this, 'UnLike', 'Like', this.action)" >
                                             <i class="fa-regular fa-heart"></i>
                                             <span  class="txt-follow" this="">UnLike</span>
                                         </div>
@@ -120,7 +120,7 @@
                                         </div>
                                     </c:when>
                                     <c:otherwise>
-                                        <div class="btn btn-style1" onclick="saveButton(this, 'UnSave', 'Save', this.action)" >
+                                        <div class="btn btn-style1 button-Follower" onclick="saveButton(this, 'UnSave', 'Save', this.action)" >
                                             <i class="fa-regular fa-bookmark"></i>
                                             <span  class="txt-follow" this="">UnSave</span>
                                         </div>

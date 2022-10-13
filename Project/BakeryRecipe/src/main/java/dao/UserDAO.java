@@ -575,7 +575,7 @@ public class UserDAO {
     }
 
     public static void main(String[] args) {
-        boolean check = UserDAO.checkLikeRecipe(4, 4);
+        boolean check = UserDAO.checkFollowUser(3, 7);
         System.out.println(check);
     }
 
