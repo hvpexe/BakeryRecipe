@@ -74,7 +74,7 @@ body {
 .btn-style1.button-Follower {
     background-color: var(--white);
     border: 2px solid var(--main-theme-color);
-    color: black;
+    color: #DB5A42;
 }
 
 .recipe-name {

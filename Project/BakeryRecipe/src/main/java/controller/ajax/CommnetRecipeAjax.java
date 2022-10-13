@@ -4,9 +4,11 @@
  */
 package controller.ajax;
 
+import dao.RecipeDAO;
 import java.io.IOException;
 import java.io.PrintWriter;
 import javax.servlet.ServletException;
+import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -15,13 +17,19 @@ import javax.servlet.http.HttpServletResponse;
  *
  * @author VO MINH MAN
  */
+@WebServlet(name = "CommnetRecipeAjax", urlPatterns = {"/ajax/CommnetRecipeAjax"})
 public class CommnetRecipeAjax extends HttpServlet {
-
 
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
         try ( PrintWriter out = response.getWriter()) {
+            int bakerID = Integer.parseInt(request.getParameter("bakerID"));
+            String comment = request.getParameter("txtCmt");
+            int recipeID = Integer.parseInt(request.getParameter("recipeID"));
+            RecipeDAO recipeD = new RecipeDAO();
+            recipeD.commentRecipe(comment, bakerID, recipeID);
+               
             
         }
     }

@@ -390,7 +390,7 @@ public class UserDAO {
 
     private static final String FOLLOW = "INSERT INTO [dbo].[Follow]([UserID],[UserID2]) VALUES(?,?)";
 
-    public boolean followUSer(int IDUser1, int IDUser2) {
+    public static boolean followUSer(int IDUser1, int IDUser2) {
         boolean check = false;
         Connection conn = null;
         PreparedStatement ptm = null;
@@ -431,7 +431,7 @@ public class UserDAO {
 
     private static final String SAVE = "INSERT INTO [Save] (RecipeID, UserID) VALUES (?, ?)";
 
-    public boolean SaveRecipe(int recipeID, int userID) {
+    public static boolean SaveRecipe(int recipeID, int userID) {
         boolean check = false;
         Connection conn = null;
         PreparedStatement ptm = null;

@@ -50,12 +50,27 @@
                             <img src="${USER_DETAIL.getAvatar()}">
                             <span>${USER_DETAIL.getName()}</span>
                             <c:if test="${sessionScope.login.id != USER_DETAIL.id}">
-                                <div class="btn btn-style1" onclick="followButton(this, 'Follow', 'UnFollow', this.action)" >
-                                    <i class="fa-solid fa-user-plus"></i>
-                                    <span  class="txt-follow" this="">Follow</span>
-                                </div>
-
+                                <!--                                <div class="btn btn-style1" onclick="followButton(this, 'Follow', 'UnFollow', this.action)" >
+                                                                    <i class="fa-solid fa-user-plus"></i>
+                                                                    <span  class="txt-follow" this="">Follow</span>
+                                                                </div>-->
+                                <!--cach cua anh tú mượn mấy hôm trả-->
+                                <c:choose>
+                                    <c:when test="${CHECK_FOLLOW == 'false'}">
+                                        <div class="btn btn-style1" onclick="likeButton(this, 'Follow', 'UnFollow', this.action)" >
+                                            <i class="fa-regular fa-heart"></i>
+                                            <span  class="txt-follow" this="">Follow</span>
+                                        </div>
+                                    </c:when>
+                                    <c:otherwise>
+                                        <div class="btn btn-style1" onclick="likeButton(this, 'UnFollow', 'Follow', this.action)" >
+                                            <i class="fa-regular fa-heart"></i>
+                                            <span  class="txt-follow" this="">UnFollow</span>
+                                        </div>
+                                    </c:otherwise>
+                                </c:choose>
                             </c:if>
+
                             <!--followButton(this,'Saved','Not Saved')-->
                             <!--followButton(this,'Like','UnLike')-->
                         </span>
@@ -65,7 +80,6 @@
                                     <a href="#" class="btn btn-style2"><i class="fa-regular fa-pen-to-square"></i> Edit</a>
                                 </span>
                             </c:if>
-
                         </div>
 
                         <div class="recipe-name">
@@ -181,7 +195,7 @@
                                                     <input type="hidden" name="bakerID" value="${sessionScope.login.id}">
                                                     <input type="hidden" name="recipeID" value="${RECIPE_DETAIL.id}"
                                                            <!--<textarea class="form-control" id="textAreaExample" rows="4"></textarea>-->
-                                                    <label class="form-label" for="textAreaExample">What is your view?</label>
+                                                    <!--<label class="form-label" for="textAreaExample">What is your view?</label>-->
                                                 </div>
                                                 <div>
                                                     <!--                                                    <button type="button" class="btn btn-style1 float-right">
@@ -189,6 +203,7 @@
                                                                                                         </button>-->
                                                 </div>
                                             </form>
+                                            <button  onclick="commentFunction()"> Load Comment</button>
                                         </div>
                                     </div>
                                 </div>
@@ -222,12 +237,12 @@
                                 <c:forEach items="${COMMENT_LIST}" var="cmt">
                                     <div class="d-flex flex-start mb-4">
                                         <img class="rounded-circle mr-2"
-                                             src="${cmt.avatar}" alt="avatar"
+                                             src="./assets/images/avt/${cmt.avatar}" alt="avatar"
                                              width="60" height="60" />
                                         <div class="card w-100">
                                             <div class="card-body p-4">
                                                 <div class="">
-                                                    <h5>Johny Cash</h5>
+                                                    <h5>${cmt.chefName}</h5>
                                                     <p class="small">3 hours ago</p>
                                                     <p>
                                                         ${cmt.comment}
@@ -241,8 +256,6 @@
 
                             </div>
                         </div>
-
-
                     </div>
                     <div class="col-md-4" style="background-color: #e3a587;">
                         <!-- Phần này để nội dung gợi ý shop - làm sau -->
@@ -400,6 +413,23 @@
                     }
                 });
             }
+        </script>
+        <script>
+            $.ajax({
+                url: "/ajax/CommnetRecipeAjax",
+                type: "get", //send it through get method
+                data: {
+                    txtCmt: 4,
+                    bakerID: ${sessionScope.login.id},
+                    RecipeID: ${RECIPE_DETAIL.id}
+                },
+                success: function (response) {
+                    //Do Something
+                },
+                error: function (xhr) {
+                    //Do Something to handle error
+                }
+            });
         </script>
         <c:import url="footer.jsp"/>
     </body>

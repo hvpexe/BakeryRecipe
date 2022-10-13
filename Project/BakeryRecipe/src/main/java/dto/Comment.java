@@ -21,7 +21,15 @@ public class Comment {
     private int userID;
     private int recipeID;
     private String avatar;
+private String chefName;
 
+    public String getChefName() {
+        return chefName;
+    }
+
+    public void setChefName(String chefName) {
+        this.chefName = chefName;
+    }
     public String getAvatar() {
         return avatar;
     }
@@ -34,6 +42,13 @@ public class Comment {
         this.commentID = commentID;
         this.comment = comment;
         this.avatar = avatar;
+    }
+
+    public Comment(int commentID, String comment, String avatar, String chefName) {
+        this.commentID = commentID;
+        this.comment = comment;
+        this.avatar = avatar;
+        this.chefName = chefName;
     }
 
     public int getCommentID() {

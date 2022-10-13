@@ -542,6 +542,9 @@ public class RecipeDAO {
         int checkNum = 0;
 //        nameBaker = RecipeDAO.
         try {
+            ptm = cnn.prepareStatement(RLATED_BAKER);
+            ptm.setInt(1, recipeID);
+            ptm.executeQuery();
             if (!ingre.isEmpty()) {
                 for (int i = 1; i < ingre.size(); i++) {
                     secondElements += " OR igre.Name =" + "\'" + ingre.get(i).getName() + "\'";
@@ -551,9 +554,7 @@ public class RecipeDAO {
                 ptm.setString(1, ingre.get(0).getName());
                 ptm.executeQuery();
             }
-            ptm = cnn.prepareStatement(RLATED_BAKER);
-            ptm.setInt(1, recipeID);
-            ptm.executeQuery();
+            
             ptm = cnn.prepareStatement(All_NAME);
             rs = ptm.executeQuery();
             while (rs.next()) {
@@ -561,7 +562,8 @@ public class RecipeDAO {
                     relateListRecipe.put(checkNum, rs.getString("Name"));
                     String nameRecipe = rs.getString("Name");
 //                    Recipe recipeS = RecipeDAO.
-                    Recipe recipeD = RecipeDAO.searchRecipebyName(nameRecipe);
+//                    Recipe recipeD = RecipeDAO.searchRecipebyName(nameRecipe);
+                    Recipe recipeD = RecipeDAO.searchRecipebyName(relateListRecipe.get(checkNum));
                     listRecipe.add(recipeD);
                     checkNum++;
                 }
@@ -633,10 +635,10 @@ public class RecipeDAO {
         return check;
     }
 
-    private static final String LIST_COMMENT = "select cmt.ID,cmt.Comment,baker.Avatar\n"
-            + "from [dbo].[Comment] cmt join [dbo].[User] baker\n"
-            + "on cmt.UserID = baker.ID\n"
-            + "where cmt.RecipeID = ?";
+    private static final String LIST_COMMENT = "select baker.FirstName +' ' + baker.LastName as fullName ,cmt.ID,cmt.Comment,baker.Avatar\n" +
+"            from [dbo].[Comment] cmt join [dbo].[User] baker\n" +
+"            on cmt.UserID = baker.ID\n" +
+"            where cmt.RecipeID = ?";
 
     public static List<Comment> commentList(int recipeID) {
         List<Comment> cmtList = new ArrayList<>();
@@ -652,7 +654,8 @@ public class RecipeDAO {
                 int commentID = rs.getInt("ID");
                 String avatar = rs.getString("Avatar");
                 String comment = rs.getString("Comment");
-                Comment cmt = new Comment(commentID, comment, avatar);
+                String name = rs.getString("fullName");
+                Comment cmt = new Comment(commentID, comment, avatar, name);
                 cmtList.add(cmt);
             }
         } catch (Exception e) {

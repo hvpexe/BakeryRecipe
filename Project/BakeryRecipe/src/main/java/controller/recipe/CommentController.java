@@ -18,8 +18,8 @@ import javax.servlet.http.HttpServletResponse;
  */
 public class CommentController extends HttpServlet {
 
-    private static final String ERROR = "header.jsp";
-    private static final String SUCCESS = "search.jsp";
+    private static final String ERROR = "/ajax/CommnetRecipeAjax";
+    private static final String SUCCESS = "/ajax/CommnetRecipeAjax";
     
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
