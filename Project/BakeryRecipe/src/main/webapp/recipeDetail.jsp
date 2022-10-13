@@ -83,10 +83,35 @@
 
                         <c:if test="${sessionScope.login.id != USER_DETAIL.getId()}">
                             <div class="react-action">
-                                <a href="#" class="btn btn-style1" onclick="followButton(this, 'Like', 'UnLike')"><i class="fa-regular fa-heart"></i> Like</a>
+                                <c:choose>
+                                    <c:when test="${checklike == 'false'}">
+                                        <div class="btn btn-style1" onclick="likeButton(this, 'Like', 'UnLike', this.action)" >
+                                            <i class="fa-regular fa-heart"></i>
+                                            <span  class="txt-follow" this="">Like</span>
+                                        </div>
+                                    </c:when>
+                                    <c:otherwise>
+                                        <div class="btn btn-style1" onclick="likeButton(this, 'UnLike', 'Like', this.action)" >
+                                            <i class="fa-regular fa-heart"></i>
+                                            <span  class="txt-follow" this="">UnLike</span>
+                                        </div>
+                                    </c:otherwise>
+                                </c:choose>
                                 &nbsp;
-                                <a href="#" class="btn btn-style1" onclick="followButton(this, 'Save', 'UnSave')"><i class="fa-regular fa-heart"></i> Save</a>
-
+                                <c:choose>
+                                    <c:when test="${checksave == 'false'}">
+                                        <div class="btn btn-style1" onclick="saveButton(this, 'Save', 'UnSave', this.action)" >
+                                            <i class="fa-solid fa-user-plus"></i>
+                                            <span  class="txt-follow" this="">Save</span>
+                                        </div>
+                                    </c:when>
+                                    <c:otherwise>
+                                        <div class="btn btn-style1" onclick="saveButton(this, 'UnSave', 'Save', this.action)" >
+                                            <i class="fa-solid fa-user-plus"></i>
+                                            <span  class="txt-follow" this="">UnSave</span>
+                                        </div>
+                                    </c:otherwise>
+                                </c:choose>
                             </div>
                         </c:if>
                         <div class="detail">
@@ -192,28 +217,28 @@
                                         </div>
                                     </div>
                                 </div>
-                                                           <!--test list_cmt-->
-                               
-                                    <c:forEach items="${COMMENT_LIST}" var="cmt">
-                                         <div class="d-flex flex-start mb-4">
-                                    <img class="rounded-circle mr-2"
-                                         src="${cmt.avatar}" alt="avatar"
-                                         width="60" height="60" />
-                                    <div class="card w-100">
-                                        <div class="card-body p-4">
-                                            <div class="">
-                                                <h5>Johny Cash</h5>
-                                                <p class="small">3 hours ago</p>
-                                                <p>
-                                                  ${cmt.comment}
-                                                    
-                                                </p>
+                                <!--test list_cmt-->
+
+                                <c:forEach items="${COMMENT_LIST}" var="cmt">
+                                    <div class="d-flex flex-start mb-4">
+                                        <img class="rounded-circle mr-2"
+                                             src="${cmt.avatar}" alt="avatar"
+                                             width="60" height="60" />
+                                        <div class="card w-100">
+                                            <div class="card-body p-4">
+                                                <div class="">
+                                                    <h5>Johny Cash</h5>
+                                                    <p class="small">3 hours ago</p>
+                                                    <p>
+                                                        ${cmt.comment}
+
+                                                    </p>
+                                                </div>
                                             </div>
                                         </div>
                                     </div>
-                                                  </div>
-                                    </c:forEach>
-                                
+                                </c:forEach>
+
                             </div>
                         </div>
 
@@ -301,6 +326,80 @@
                 });
             }
 
+        </script>
+        <script>
+            function  saveButton(item, val1, val2, action) {
+                //                eventac.target.style.backgroundColor = 'white';
+                //                event.target.classList.toggle("button-Follower");
+                ///
+                //                console.log(event.target.classList);
+
+                var action = val1;
+                $.ajax({
+                    url: "ajax/updatesaverecipe",
+                    type: "get", //send it through get method
+                    data: {
+                        recipe: "${RECIPE_DETAIL.id}",
+                        action: action,
+                        user: "${sessionScope.login.id}"
+                    },
+                    success: function () {
+                        console.log(item);
+                        item.classList.toggle("button-Follower");
+                        let txtFollow = item.querySelector("span");
+                        if (txtFollow.innerText !== val2)
+                            txtFollow.innerText = val2;
+                        else
+                            txtFollow.innerText = val1;
+                        // console.log(action);
+
+                        //    action = unFollow;
+                        console.log(action);
+                        //Do Something
+                    },
+                    error: function () {
+                        //Do Something to handle error
+                        console.log("thanh cong roi kia");
+                    }
+                });
+            }
+        </script>
+        <script>
+            function  likeButton(item, val1, val2, action) {
+                //                eventac.target.style.backgroundColor = 'white';
+                //                event.target.classList.toggle("button-Follower");
+                ///
+                //                console.log(event.target.classList);
+
+                var action = val1;
+                $.ajax({
+                    url: "ajax/likerecipe",
+                    type: "get", //send it through get method
+                    data: {
+                        recipe: "${RECIPE_DETAIL.id}",
+                        action: action,
+                        user: "${sessionScope.login.id}"
+                    },
+                    success: function () {
+                        console.log(item);
+                        item.classList.toggle("button-Follower");
+                        let txtFollow = item.querySelector("span");
+                        if (txtFollow.innerText !== val2)
+                            txtFollow.innerText = val2;
+                        else
+                            txtFollow.innerText = val1;
+                        // console.log(action);
+
+                        //    action = unFollow;
+                        console.log(action);
+                        //Do Something
+                    },
+                    error: function () {
+                        //Do Something to handle error
+                        console.log("thanh cong roi kia");
+                    }
+                });
+            }
         </script>
         <c:import url="footer.jsp"/>
     </body>

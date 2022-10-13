@@ -38,7 +38,8 @@ public class RecipeDetailController extends HttpServlet {
         response.setContentType("text/html;charset=UTF-8");
         String url = ERROR;
         try {
-             
+            HttpSession session = request.getSession();
+            User userLogin = (User) session.getAttribute("login");
 //            int userID = Integer.parseInt(request.getParameter("ID"));
             int recipeID = Integer.parseInt(request.getParameter("recipeID"));
             RecipeDAO recipe = new RecipeDAO();
@@ -46,7 +47,6 @@ public class RecipeDetailController extends HttpServlet {
             picRecp = recipe.listPicture(recipeID);
             request.setAttribute("LIST_PIC", picRecp);
 
-            
             User user;
             user = UserDAO.userDetail(recipeID);
             request.setAttribute("USER_DETAIL", user);
@@ -62,22 +62,31 @@ public class RecipeDetailController extends HttpServlet {
             request.setAttribute("LIST_STEP", liststep);
 
             Recipe recipedl;
-            recipedl = recipe.recipeDetail( recipeID);
+            recipedl = recipe.recipeDetail(recipeID);
             request.setAttribute("RECIPE_DETAIL", recipedl);
 
             String videoDetail = recipe.recipeVideo(recipeID);
             request.setAttribute("VIDEO_DETAIL", videoDetail);
-            
-            List<Recipe> relateRecipe =recipe.listRelate(recipeID);
+
+            List<Recipe> relateRecipe = recipe.listRelate(recipeID);
             request.setAttribute("RELATED_TOPIC", relateRecipe);
-            
-            
+
 //            recipe.commentList(recipeID);
             List<Comment> cmt = recipe.commentList(recipeID);
             request.setAttribute("COMMENT_LIST", cmt);
+
+//          check save
+            boolean checksave = UserDAO.checkSaveRecipe(userLogin.getId(), recipeID);
+            request.setAttribute("checksave", checksave);
+            
+            boolean checkfollow = UserDAO.checkSaveRecipe(userLogin.getId(), recipeID);
+            request.setAttribute("checkfollow", checkfollow);
+            
+            boolean checklike = UserDAO.checkLikeRecipe(userLogin.getId(), recipeID);
+            request.setAttribute("checklike", checklike);
             
             url = SUCCESS;
-            
+
         } catch (Exception e) {
             e.printStackTrace();
         } finally {

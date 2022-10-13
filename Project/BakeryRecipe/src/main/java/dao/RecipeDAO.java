@@ -231,13 +231,13 @@ public class RecipeDAO {
     }
 
     private static final String SAVED_RECIPES_LIST_SQL = "SELECT Recipe.ID, Recipe.[Name], Recipe.[Description], Recipe.[Like], Recipe.[Save], Recipe.Comment, Recipe.DatePost, Recipe.LastDateEdit, Picture.Img, Recipe.UserID, LastName + ' ' + FirstName AS Username\n"
-            + "FROM [User]\n"
-            + "JOIN [Save] ON [Save].UserID = [User].ID\n"
-            + "JOIN [Recipe] ON [Save].RecipeID = [Recipe].ID\n"
-            + "JOIN [Picture] ON [Recipe].ID = [Picture].RecipeID\n"
-            + "WHERE IsDeleted = 0 AND IsCover = 1 AND [User].ID = ?\n"
-            + "ORDER BY Recipe.[Like] DESC\n"
-            + "OFFSET ? ROWS FETCH NEXT 8 ROWS ONLY";
+            + "            FROM [Save]\n"
+            + "            JOIN [Recipe] ON [Save].RecipeID = [Recipe].ID\n"
+            + "		   JOIN [User] ON [User].ID = [Recipe].UserID\n"
+            + "            JOIN [Picture] ON [Recipe].ID = [Picture].RecipeID\n"
+            + "            WHERE IsDeleted = 0 AND IsCover = 1 AND [Save].UserID = ?\n"
+            + "            ORDER BY Recipe.[Like] DESC\n"
+            + "		   OFFSET ? ROWS FETCH NEXT 8 ROWS ONLY";
 
     public static List<Recipe> showSavedRecipe(int userID, int index) {
         try {
@@ -668,6 +668,7 @@ public class RecipeDAO {
 
 //        sc.commentRecipe("ngon vl ", 4, 4);
 //        sc.listRelate(4);
+        sc.commentList(4);
     }
 
 }
