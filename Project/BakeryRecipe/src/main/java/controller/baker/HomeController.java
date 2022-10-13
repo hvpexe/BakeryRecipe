@@ -30,7 +30,6 @@ public class HomeController extends HttpServlet {
         HttpSession session = request.getSession();
         User user = (User) session.getAttribute("login");
         ArrayList<Recipe> list = RecipeDAO.getPostHomeRecipes(user.getId());
-        
         request.setAttribute("homeRecipe", list);
         request.getRequestDispatcher("home.jsp").forward(request, response);
     }

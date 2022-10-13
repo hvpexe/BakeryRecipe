@@ -41,9 +41,11 @@ public class RecipeDetailController extends HttpServlet {
 //            int loginID = Integer.parseInt(request.getParameter("loginID"));
             HttpSession session = request.getSession();
             User userLogin = (User) session.getAttribute("login");
-           Recipe ID = (Recipe) session.getAttribute("homeRecipe");
+//           Recipe ID = (Recipe) session.getAttribute("RECIPE_DETAIL");
+         
             int recipeID = Integer.parseInt(request.getParameter("recipeID"));
             RecipeDAO recipe = new RecipeDAO();
+             int ID = (int) recipe.recipeDetail(recipeID).getUserID();
             List<String> picRecp;
             picRecp = recipe.listPicture(recipeID);
             request.setAttribute("LIST_PIC", picRecp);
@@ -85,7 +87,7 @@ public class RecipeDetailController extends HttpServlet {
             boolean checklike = UserDAO.checkLikeRecipe(userLogin.getId(), recipeID);
             request.setAttribute("checklike", checklike);
             
-            boolean checkfollow = UserDAO.checkFollowUser(userLogin.getId(), ID.getUserID());
+            boolean checkfollow = UserDAO.checkFollowUser(userLogin.getId(), ID);
             request.setAttribute("CHECK_FOLLOW", checkfollow);
             
             
