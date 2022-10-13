@@ -115,13 +115,13 @@
                                 <c:choose>
                                     <c:when test="${checksave == 'false'}">
                                         <div class="btn btn-style1" onclick="saveButton(this, 'Save', 'UnSave', this.action)" >
-                                            <i class="fa-solid fa-user-plus"></i>
+                                            <i class="fa-regular fa-bookmark"></i>
                                             <span  class="txt-follow" this="">Save</span>
                                         </div>
                                     </c:when>
                                     <c:otherwise>
                                         <div class="btn btn-style1" onclick="saveButton(this, 'UnSave', 'Save', this.action)" >
-                                            <i class="fa-solid fa-user-plus"></i>
+                                            <i class="fa-regular fa-bookmark"></i>
                                             <span  class="txt-follow" this="">UnSave</span>
                                         </div>
                                     </c:otherwise>

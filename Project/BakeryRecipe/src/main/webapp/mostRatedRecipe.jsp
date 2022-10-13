@@ -54,8 +54,10 @@
                     <c:forEach items="${RecipeList}" var="cc">
                         <div class="recipe col-6 col-md-4 col-lg-3">
                             <div class="img-container">
-                                <img class="recipe-img" alt=""
+                                <a href=".\RecipeDetail?recipeID=${cc.id}">
+                                    <img class="recipe-img" alt=""
                                      src="${cc.cover}" />
+                                </a>
                                 <div class="bookmark">
                                     Save <i class="fa-regular fa-bookmark"></i>
                                 </div>
