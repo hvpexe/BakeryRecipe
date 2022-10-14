@@ -19,7 +19,7 @@
                     <img class="avatar-icon"
                          src="${login.avatar}" alt="ava" />
                     <button class="btn-button" id="btnButton">
-                        <i class="fa-solid fa-plus"></i> Add your post
+                        <i class="fa-solid fa-plus"></i> Add your recipe
                     </button>
                 </div>
                 <c:forEach items="${homeRecipe}" var="re">

@@ -25,54 +25,50 @@
                 </div>
 
                 <div class="search-container">
-                    <form action="search" onkeydown="return event.key != 'Enter'">
+                    <form action="searchByIngredient" onkeydown="return event.key != 'Enter'">
                         <label for="tagsList">Ingredients you have:</label>
                         <!-- Create an empty list to hold the tags -->
                         <ul id="tagsList"></ul>
                         <!-- Create a text field for the tags input -->
                         <input type="text" name="txt" class="form-control rounded" id="tagsInput" spellcheck="false"
                                placeholder="Type an ingredient and Hit ENTER" />
-                        <button class="btn" type="button" id="search">Search</button>
+                        <button class="btn" type="submit" id="search">Search</button>
                     </form>
                 </div>
 
                 <div class="recipe-list">
-                    <div class="recipe row">
-                        <div class="col-md-3">
-                            <div class="img-container">
-                                <img class="recipe-img" alt=""
-                                     src="https://thermomixvietnam.vn/wp-content/themes/yootheme/cache/tiramisu-truyen-thong-9cdd0569.jpeg" />
-                                <div class="bookmark">
-                                    Save <i class="fa-regular fa-bookmark"></i>
+                    <c:forEach items="${searchByIngre}" var="re">
+                        <div class="recipe row">
+                            <div class="col-md-3">
+                                <div class="img-container">
+                                    <img class="recipe-img" alt=""
+                                         src="${re.cover}" />
+                                    <div class="bookmark">
+                                        Save <i class="fa-regular fa-bookmark"></i>
+                                    </div>
+                                    <div class="react">
+                                        <div>${re.like} likes</div>
+                                        <div>${re.comment} comments</div>
+                                    </div>
                                 </div>
-                                <div class="react">
-                                    <div>12 likes</div>
-                                    <div>12 comments</div>
+                            </div>
+                            <div class="col-md-9">
+                                <div class="recipe-detail"> 
+                                    <div class="recipe-name">${re.name}</div>
+                                    <div class="recipe-author">
+                                        <a href="#" class="text-truncate">${re.username} </a>
+                                        <c:out value="${re.getDatePostFormat()}"/>
+                                    </div>
+                                    <div class="ingre-container">
+                                        <c:forEach items="${re.ingre}" var="ingre">
+                                            <span class="ingre-active">${ingre}</span>
+                                        </c:forEach>
+                                        <!--<span class="ingre-inactive">Water</span>-->
+                                    </div>
                                 </div>
                             </div>
                         </div>
-                        <div class="col-md-9">
-                            <div class="recipe-detail"> 
-                                <div class="recipe-name">Mooncake</div>
-                                <div class="recipe-author">
-                                    <a href="#" class="text-truncate">Trịnh Thăng Bình </a>
-                                    2 day ago
-                                </div>
-                                <div class="ingre-container">
-                                    <span class="ingre-active">Water</span>
-                                    <span class="ingre-active">Water</span>
-                                    <span class="ingre-active">Water</span>
-                                    <span class="ingre-active">Water</span>
-                                    <span class="ingre-active">Water</span>
-                                    <span class="ingre-active">Water</span>
-                                    <span class="ingre-active">Water</span>
-                                    <span class="ingre-active">Water</span>
-                                    <span class="ingre-active">Water</span>
-                                    <!--<span class="ingre-inactive">Water</span>-->
-                                </div>
-                            </div>
-                        </div>
-                    </div>
+                    </c:forEach>
 
                 </div>
             </div>

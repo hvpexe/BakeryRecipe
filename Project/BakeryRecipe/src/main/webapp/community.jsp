@@ -42,7 +42,8 @@
                             <div class="recipe-name">${cc.name}</div>
                             <div class="recipe-author">
                                 <a href="#" class="text-truncate">${cc.username}</a> 
-                                <c:out value="${cc.getDatePostFormat()}"/></div>
+                                <c:out value="${cc.getDatePostFormat()}"/>
+                            </div>
                         </div>
                     </c:forEach>
                 </div>
