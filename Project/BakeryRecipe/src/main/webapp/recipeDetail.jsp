@@ -57,13 +57,13 @@
                                 <!--cach cua anh tú mượn mấy hôm trả-->
                                 <c:choose>
                                     <c:when test="${CHECK_FOLLOW == 'false'}">
-                                        <div class="btn btn-style1" onclick="likeButton(this, 'Follow', 'UnFollow', this.action)" >
+                                        <div class="btn btn-style1" onclick="followButton(this, 'Follow', 'UnFollow', this.action)" >
                                             <i class="fa-regular fa-heart"></i>
                                             <span  class="txt-follow" this="">Follow</span>
                                         </div>
                                     </c:when>
                                     <c:otherwise>
-                                        <div class="btn btn-style1 button-Follower" onclick="likeButton(this, 'UnFollow', 'Follow', this.action)" >
+                                        <div class="btn btn-style1 button-Follower" onclick="followButton(this, 'UnFollow', 'Follow', this.action)" >
                                             <i class="fa-regular fa-heart"></i>
                                             <span  class="txt-follow" this="">UnFollow</span>
                                         </div>

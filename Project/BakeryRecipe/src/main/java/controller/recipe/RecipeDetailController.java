@@ -42,10 +42,11 @@ public class RecipeDetailController extends HttpServlet {
             HttpSession session = request.getSession();
             User userLogin = (User) session.getAttribute("login");
 //           Recipe ID = (Recipe) session.getAttribute("RECIPE_DETAIL");
-         
             int recipeID = Integer.parseInt(request.getParameter("recipeID"));
             RecipeDAO recipe = new RecipeDAO();
-             int ID = (int) recipe.recipeDetail(recipeID).getUserID();
+User sc ;
+            sc =   UserDAO.userDetail(recipeID);
+            int ID = sc.getId();
             List<String> picRecp;
             picRecp = recipe.listPicture(recipeID);
             request.setAttribute("LIST_PIC", picRecp);
