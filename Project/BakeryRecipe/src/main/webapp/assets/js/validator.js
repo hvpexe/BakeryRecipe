@@ -109,6 +109,14 @@ Validator.isRequired = function (selector, msg) {
         }
     };
 };
+Validator.isExist = function (selector, msg) {
+    return {
+        selector: selector,
+        test: function (value) {
+            return document.querySelector(selector) ? undefined : msg || 'Please Add this Field';
+        }
+    };
+};
 Validator.isEmail = function (selector, msg) {
     return {
         selector: selector,

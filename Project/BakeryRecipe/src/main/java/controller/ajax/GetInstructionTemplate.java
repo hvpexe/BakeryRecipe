@@ -33,7 +33,7 @@ public class GetInstructionTemplate extends HttpServlet {
         response.setContentType("text/html;charset=UTF-8");
         try ( PrintWriter out = response.getWriter()) {
             /* TODO output your page here. You may use following sample code. */
-            //?detail=hello&count=1
+            //?Idetail=hasdas%0A&Count=1
             String detail = request.getParameter("idetail").trim();
             String count = request.getParameter("count");
 
@@ -45,10 +45,10 @@ public class GetInstructionTemplate extends HttpServlet {
                     + "                                <div class=\"col hover-highlight  p-0 pr-2 d-flex align-items-center border border-secondary rounded\" onclick=\"showDetail(this.parentElement);\">\n"
                     + "                                    <div class=\"inst-img d-inline-flex fas fa-camera position-relative align-items-center justify-content-center\" src=\"\" onclick=\"this.querySelector('input').click();\">\n"
                     + "                                        <input name=\"inst-image\"  id=\"inst-image"+count+"\" class=\"d-none\" readonly=\"\" type=\"file\" accept=\"image/*\" \n"
-                    + "                                               onchange=\"changeIngrImg(this.parentElement, window.URL.createObjectURL(this.files[0]), event)\">\n"
+                    + "                                               onchange=\"changeImg(this.parentElement, window.URL.createObjectURL(this.files[0]), event)\">\n"
                     + "                                    </div>\n"
-                    + "                                    <input class=\"instruction-box-input col \"  value=\""+detail+"\"\n"
-                    + "                                           readonly=\"\" name=\"inst-description\" id=\"inst-description"+count+"\" type=\"text\">\n"
+                    + "                                    <textarea class=\"instruction-box-input col \"  value=\""+detail+"\"\n"
+                    + "                                           readonly=\"\" name=\"inst-description\" id=\"inst-description"+count+"\" type=\"text\">"+detail+"</textarea>\n"
                     + "                                    <div class=\"item-trashbin fas fa-trash ml-auto description-button\" onclick=\"removeElem(this.parentElement)\"></div>\n"
                     + "                                </div>\n"
                     + "                            </div>");

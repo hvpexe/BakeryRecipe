@@ -3,6 +3,14 @@
 let formElem = document.getElementById('add-recipe');
 let instructionElem = document.getElementById('instruction');
 formElem.onsubmit = e => {
+    e.preventDefault();
+}
+function submitForm(selector) {
+
+    var formElem = document.querySelector(selector);
+    var input = formElem.elements;
+    console.log(input);
+    
 }
 //add video and picture
 var swiper = new Swiper(".swiper", {
@@ -168,6 +176,14 @@ function selectContent(container, elem) {
 function setCover(elem) {
     elem.parentElement.querySelector('.cover')?.classList.remove('cover');
     elem.classList.add('cover');
+    var vImage = elem.parentElement.querySelectorAll('span:has(input[name=video-image])');
+    var cover;
+    for (var i = 0; i < vImage.length; i++) {
+        if (vImage[i] === elem){
+            cover = i;
+        }
+    }
+    document.querySelector('[name=cover]').value = cover || 0;
 }
 async function changeDisplayImage(elem, image) {
     var inputPicture = elem.querySelector('input');
@@ -202,7 +218,7 @@ function ItemCopy(option) {
             url: url, data: param,
             success: function (data) {
                 //                console.log(option.container);                
-                option.run(data, option.container, option.count);
+                run(data, option.container, option.count);
             },
             error: function () {
                 console.log('error');
@@ -212,12 +228,9 @@ function ItemCopy(option) {
     if (option.url) {
         inputElement.keyup(e => {
             var check = true;
-            console.log(inputElement);
             if (checkKeyEnter(e)) {
-                for (var i = 0; i < inputElement.length; i++) {
-                    if (inputElement[i].value === '')
-                        check = false;
-                }
+                if (inputElement[0].value === '')
+                    check = false;
             } else {
                 check = false;
             }
@@ -253,7 +266,7 @@ function getParam(elem) {
         var item = elem[i];
         result.push({
             name: item.name,
-            value: item.value || null,
+            value: item.value.replace(/^\w/, c => c.toUpperCase()) || '1',
         });
         if (item.type !== 'hidden')
             item.value = null;
@@ -293,7 +306,6 @@ async function changeImg(elem, value, e) {
         elem.setAttribute('src', value);
     }
 }
-//removeElem
 function updateContainer(container) {
     if (typeof container === 'string')
         container = document.querySelector(container);
@@ -306,6 +318,7 @@ function updateContainer(container) {
         step.click();
     }
 }
+//removeElem
 function removeElem(elem) {
     let container = elem.parentElement;
     let instContainer = container.parentElement;
@@ -316,13 +329,10 @@ function removeElem(elem) {
 $('#detail .save-btn').on('click', e => {
     var detail = document.querySelector("#detail");
     var elem = document.getElementById(detail.getAttribute('viewing'));
-    elem.querySelector('[name=inst-description]').value = detail.querySelector('textarea').value;
+    elem.querySelector('[name=inst-description]').value = detail.querySelector('textarea').value.replace(/^\w/, c => c.toUpperCase());
     let elemFile = elem.querySelector('[name=inst-image]');
     let detailFile = detail.querySelector('input[type=file]');
     if (detailFile.files[0]) {
-        elemFile.files[0] = detailFile.files[0];
-        console.log(elemFile.files[0]);
-        console.log(detailFile.files[0]);
         let clone = detailFile.cloneNode(true);
         //<input name="inst-image" id="inst-image1" class="d-none" readonly="" type="file" accept="image/*" onchange="changeIngrImg(this.parentElement, window.URL.createObjectURL(this.files[0]), event)">
         clone.setAttribute('name', elemFile.name);

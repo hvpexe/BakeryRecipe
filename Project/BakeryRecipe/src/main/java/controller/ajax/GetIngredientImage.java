@@ -18,7 +18,10 @@ import javax.servlet.http.HttpServletResponse;
  *
  * @author Admin
  */
-@WebServlet(name = "GetIngredientImage", urlPatterns = {"/ajax/GetIngredientImage"})
+@WebServlet(name = "GetIngredientImage", urlPatterns =
+{
+    "/ajax/GetIngredientImage"
+})
 public class GetIngredientImage extends HttpServlet {
 
     /**
@@ -33,21 +36,23 @@ public class GetIngredientImage extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
-        try ( PrintWriter out = response.getWriter()) {
+        try ( PrintWriter out = response.getWriter())
+        {
             /* TODO output your page here. You may use following sample code. */
             String name = request.getParameter("iname").trim();
             String amount = request.getParameter("iamount").trim();
             Ingredient item = IngredientDAO.getIngredientByName(name);
             String count = request.getParameter("count");
 
-            if (item == null) {
-                item = new Ingredient();
+            if (item == null)
+            {
+                item = new Ingredient(name, null, amount);
             }
-            out.println("<div class=\"col p-0 hover-highlight align-items-center p-0 pr-2 border border-secondary\" id=\"item"+count+"\">\n"
-                    + "                                <img src=\""+item.getImg()+"\" alt=' ' > \n"
-                    + "                                <input name=\"ingre-name\" class=\"col\"  value=\""+name+"\">\n"
+            out.println("<div class=\"col p-0  align-items-center p-0 pr-2 border border-secondary\" id=\"item" + count + "\">\n"
+                    + "                                <img src=\"" + item.getImg() + "\" alt=' ' > \n"
+                    + "                                <input name=\"ingre-name\" readonly class=\"col text-capitalize\"  value=\"" + item.getName() + "\">\n"
                     + "                                <span>Amount:</span> \n"
-                    + "                                <input name=\"ingre-amount\" class=\"col-2 bg-white ml-2 mr-4\" placeholder=\"1 \" value=\""+amount+"\"> \n"
+                    + "                                <input name=\"ingre-amount\" class=\"col-2 bg-white ml-2 mr-4\" placeholder=\"1 \" value=\"" + amount + "\"> \n"
                     + "                                <div class=\"item-trashbin fas fa-trash ml-auto description-button\"></div>\n"
                     + "                            </div>");
         }

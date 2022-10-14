@@ -27,6 +27,16 @@
         top: 100px;
     }
 }
+.valid, .invalid{
+    transition: 0.3s;
+    border: 3px solid transparent;
+}
+.valid {
+    border-color: var(--success);
+}
+.invalid {
+    border-color: var(--danger);
+}
 [class^=hover] {
     transition:0.3s;
     cursor: pointer;
@@ -45,9 +55,9 @@
     box-shadow: 0 0 400px inset #00000050;
 }
 .hover-button-2:hover{
-        box-shadow: 0 -10px 10px 0 inset var(--brown-theme-50);
+    box-shadow: 0 -10px 10px 0 inset var(--brown-theme-50);
 }
 .hover-button-2:active{
-            box-shadow: 0 -15px 15px 0 inset var(--brown-theme-50);
+    box-shadow: 0 -15px 15px 0 inset var(--brown-theme-50);
 
 }

@@ -4,7 +4,7 @@
     <head>
         <meta charset="utf-8" />
         <meta name="viewport" content="initial-scale=1, width=device-width" />
-        <title></title>
+        <title>Let's Create A Recipe</title>
         <meta name="description" content="" />
         <link
             rel="stylesheet"
@@ -53,15 +53,14 @@
                     </button>
                 </main>
                 <form action="AddRecipe" class="section-div col-12 col-md-10 align-content-center align-self-center"
-                      id="add-recipe" method="get" >
+                      id="add-recipe" enctype="multipart/form-data" method="get" >
                     <div class="title-div col-12">
                         <b class="label">Title</b>
-
                         <input name='recipe-name' class="input col-12"  type="text" placeholder="Recipe's Name ">
                     </div>
                     <div class="add-recipe-input col">
                         <b class="label">Description</b>
-                        <textarea name="recipe-description" class="boxdes-textarea  p-2" placeholder="Add description"></textarea>
+                        <textarea name="recipe-description" class="boxdes-textarea  py-3 col-12" placeholder="Add description"></textarea>
                     </div>    <!--                Video And Image Picture                            -->
                     <div class="add-recipe-input col" style="gap: 10px;">
                         <div class="d-flex col p-0 justify-content-start" style="gap: 10px;">
@@ -79,12 +78,13 @@
                             <div class="display-image-options mb-3">
                                 <div class="fas fa-trash description-button" id='remove-image'></div>
                                 <div class="col-5 d-inline-flex"></div>
-                                <button class="description-button" form="dissabled" id="to-cover-btn">
+                                <div class="description-button" form="dissabled" id="to-cover-btn">
                                     Set As Cover
-                                </button>
-                                <button class="description-button ml-2" form="dissabled" id="change-img-btn">
+                                </div>
+                                <input type="hidden" name="cover" value="">
+                                <div class="description-button ml-2" form="dissabled" id="change-img-btn">
                                     Change Image
-                                </button>
+                                </div>
                             </div>
                         </div>
 
@@ -108,14 +108,14 @@
                                 <img src="assets/images/image-261@2x.png" alt=' ' > 
                                 <input name="ingre-name" class="col" disabled value="black grapes">
                                 <span>Amount:</span> 
-                                <input name="ingre-amount" disabled class="col-2 bg-white ml-2 mr-4" placeholder="1 oz" value=""> 
+                                <input name="ingre-amount" disabled class="col-2 bg-white ml-2 mr-4" placeholder="1 piece" value=""> 
                                 <div class="item-trashbin fas fa-trash ml-auto description-button"></div>
                             </div>
                         </div>
                         <div class="d-flex p-0 col align-items-center" id="ingredient"  >
-                            <input class="instruction-box-input col-7 " name="iname" id="name" type="text" placeholder="Add one ingredient">
+                            <input class="instruction-box-input col-7 " form="disabled" name="iname" id="name" type="text" placeholder="Add one ingredient">
                             <span class="col d-flex align-items-center pr-0">Amount:</span>
-                            <input class="instruction-box-input col-3 ml-1" name="iamount" id="amount"  type="text" placeholder="1 Oz">
+                            <input class="instruction-box-input col-3 ml-1" form="disabled"  name="iamount" id="amount"  type="text" placeholder="1 Piece">
                             <input type="hidden" name="count" value="1">
                         </div>
                     </div>                    
@@ -131,7 +131,7 @@
                                 <div class="col hover-highlight  p-0 pr-2 d-flex align-items-center border border-secondary rounded" onclick="showDetail(this.parentElement);">
                                     <div class="inst-img d-inline-flex fas fa-camera position-relative align-items-center justify-content-center" src="assets/images/image-29@2x.png" onclick="this.querySelector('input').click();">
                                         <input name="inst-image" disabled id="inst-image" class="d-none" readonly="" type="file" accept="image/*" 
-                                               onchange="changeIngrImg(this.parentElement, window.URL.createObjectURL(this.files[0]), event)">
+                                               onchange="changeImg(this.parentElement, window.URL.createObjectURL(this.files[0]), event)">
                                     </div>
                                     <input class="instruction-box-input col " disabled value=""
                                            readonly="" name="inst-description" id="inst-description" type="text">
@@ -143,7 +143,7 @@
 
                     </div>
                     <div class="col" id="instruction">
-                        <textarea class="instruction-box-input col-11 pt-2 pr-3" name="idetail" type="text" placeholder="Paste one or multiple steps (e.g. Finely chop the garlic)"></textarea>
+                        <textarea class="instruction-box-input col-11  py-3 pr-3" form="disabled" name="idetail" type="text" placeholder="Paste one or multiple steps (e.g. Finely chop the garlic)"></textarea>
                         <input type="hidden" name="count" value="1">
                         <div class="accept-input fas fa-check d-flex align-items-center justify-content-center col-1 hover-button-1"></div>
                     </div>
@@ -158,9 +158,9 @@
                             <input class="pre-box-input col" type="number" name="cook-time" placeholder="0">
                         </div>
                     </div>
-                    <button class="save-button ml-auto" onclick="document.querySelector('form').submit()">
+                    <div class="save-button ml-auto" onclick="submitForm('form#add-recipe')">
                         <b class="save-b2">Add recipe</b>
-                    </button>
+                    </div>
                 </form>
 
             </main>
@@ -174,7 +174,7 @@
                     <div class="video h4 font-weight-bold">Add Video</div>
                     <i class="fas fa-youtube col-12 text-center pt-4 text-danger h3" style="font-family: 'Font Awesome 5 Brands' "></i>                
                     <div class="col-12 p-0 my-4 d-flex justify-content-between align-items-center flex-wrap">
-                        <span class="h6 col-2 p-0 ">URL: </span>
+                        <span class="h6 col-2 p-0 m-0">URL: </span>
                         <input class="col-10 p-2" placeholder="Input Your Youtube URL" name="vurl">
                         <div class="status w-100"></div>
                     </div>
@@ -195,12 +195,12 @@
                 </h4>
                 <div class="col-10 mx-auto my-2 d-flex flex-column align-items-center">
                     <img class="col p-0 rounded mx-auto" src="assets/images/rectangle-20@2x.png" alt="Image not found" id="detail-image" >
-                    <input type="file" class="d-none" onchange="changeIngrImg(this.previousElementSibling, window.URL.createObjectURL(files[0]), event);"> 
+                    <input type="file" class="d-none" onchange="changeImg(this.previousElementSibling, window.URL.createObjectURL(files[0]), event);"> 
                     <div class="change-img-btn mx-auto hover-button-1 col-6 font-weight-bold rounded m-2"
                          onclick="this.previousElementSibling.click()">Change Image</div>
                 </div>
                 <h5>Instruction</h5>
-                <textarea class="rounded col border py-3" value="" style="min-height:7rem"></textarea> 
+                <textarea class="rounded col border py-3 "  value="" style="min-height:7rem"></textarea> 
                 <div class="mt-auto d-flex justify-content-end">
                     <div class="cancel-btn hover-button-1 col-auto font-weight-bold rounded m-2">Cancel</div>
                     <div class="save-btn hover-button-1 col-auto font-weight-bold rounded m-2">Save</div>
@@ -211,10 +211,24 @@
         <script src="assets/js/validator.js"></script>
         <script src="assets/js/addrecipe.js"></script>
         <script>
-
+//                             Validator({
+//                                 form: '#add-recipe',
+//                                 status: '.status',
+//                                 rules: [
+//                                     Validator.isRequired('[name=recipe-name]'),
+//                                         ],
+//                                         onSubmit: (value) => {
+//                                             //Call api here
+//                                             console.log(value);
+//                                         },
+//                                     });
                              ItemCopy({
                                  selector: '#ingredient [name]',
-                                 run: (result, container) => {
+                                 run: (result, container,step) => {
+                                     if (step) {
+                                         var count = document.querySelector(step);
+                                         count.setAttribute('value', parseInt(count.value) + 1);
+                                     }
                                      $(container).append(result);
                                  },
                                  count: '#ingredient [name=count]',
@@ -228,6 +242,7 @@
                                          var count = document.querySelector(step);
                                          count.setAttribute('value', parseInt(count.value) + 1);
                                      }
+                                     console.log(result);
                                      $(container).append(result);
                                      updateContainer(container);
                                      $('#inst-container h5, #inst-container .inst-img, #inst-container .inst-img *\n\
