@@ -97,21 +97,7 @@ public class Recipe {
         this.username = username;
     }
 
-    public Recipe(int recipeID, String name, String description, int like, int save, int comment, Timestamp timestamp, Timestamp timestamp0, int prepTime, int cookTime) {
-         this.id = id;
-        this.name = name;
-        this.description = description;
-        this.like = like;
-        this.save = save;
-        this.comment = comment;
-        this.datePost = datePost;
-        this.cover = cover;
-        this.userID = userID;
-        this.avatar = avatar;
-        this.username = username;
-        
-       
-    }
+
 
     
     
