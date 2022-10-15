@@ -290,20 +290,20 @@
             </div>
 
         </div>
-                                
+
         <!--PhuHV: nua dem fix bug cai nay, tien sư thang nao xoa script lam carousel ko chay -->                                             
         <script src="https://cdn.jsdelivr.net/npm/swiper@8/swiper-bundle.min.js"></script>
         <script>
-            const swiper = new Swiper('.swiper', {
-                pagination: {
-                    el: '.swiper-pagination',
-                    clickable: true
-                },
-                navigation: {
-                    nextEl: '.swiper-button-next',
-                    prevEl: '.swiper-button-prev',
-                },
-            });
+                                                const swiper = new Swiper('.swiper', {
+                                                    pagination: {
+                                                        el: '.swiper-pagination',
+                                                        clickable: true
+                                                    },
+                                                    navigation: {
+                                                        nextEl: '.swiper-button-next',
+                                                        prevEl: '.swiper-button-prev',
+                                                    },
+                                                });
         </script>
         <script>
             function  followButton(item, val1, val2, action) {
