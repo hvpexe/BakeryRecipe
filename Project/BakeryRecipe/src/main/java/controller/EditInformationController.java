@@ -11,6 +11,7 @@ import java.io.PrintWriter;
 import java.sql.Date;
 import java.time.LocalDate;
 import javax.servlet.ServletException;
+import javax.servlet.annotation.MultipartConfig;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -24,11 +25,14 @@ import utils.Tools;
  * @author kichi
  */
 @WebServlet(name = "EditInformationController", urlPatterns = {"/ProfileInfo"})
+@MultipartConfig(fileSizeThreshold = 1024 * 1024 * 2, // 2MB
+        maxFileSize = 1024 * 1024 * 50, // 50MB
+        maxRequestSize = 1024 * 1024 * 50) // 50MB
 public class EditInformationController extends HttpServlet {
+
     private static final String ERROR = "profileInfo.jsp";
     private static final String SUCCESS = "profileInfo.jsp";
 
-    
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
@@ -37,8 +41,8 @@ public class EditInformationController extends HttpServlet {
             HttpSession session = request.getSession();
             User user = null;
             User userLogin = (User) session.getAttribute("login");
-            
-            String ID = request.getParameter("userID"); 
+
+            String ID = request.getParameter("userID");
             int userID = Integer.parseInt(ID);
             user = UserDAO.getUserByID(userID);
             String firstname = Tools.toUTF8(request.getParameter("firstname"));
@@ -47,15 +51,15 @@ public class EditInformationController extends HttpServlet {
             String gender = request.getParameter("gender");
             String address = request.getParameter("address");
             String phone = request.getParameter("phone");
- //           Part part = request.getPart("avatar");
+            Part part = request.getPart("avatar");
             user.setFirstName(firstname);
             user.setLastName(lastname);
             user.setBirthday(birthday);
             user.setGender(gender);
             user.setPhone(phone);
             user.setAddress(address);
- //           String avatar = null;
-           /*if (!part.getSubmittedFileName().isEmpty()) {
+            String avatar = null;
+            if (!part.getSubmittedFileName().isEmpty()) {
                 int id = user.getId();
                 String userid = Integer.toString(id);
                 avatar = UserDAO.saveAvatar(userid, part, getServletContext());
@@ -63,19 +67,18 @@ public class EditInformationController extends HttpServlet {
             if (avatar != null) {
                 user.setAvatar(avatar);
             }
-            System.out.println("avatar:"+avatar);*/
+            System.out.println("avatar:" + avatar);
             if (UserDAO.EditInfo(user)) {
                 session.setAttribute("login", user);
                 url = SUCCESS;
             }
-            
+
         } catch (Exception e) {
             System.out.println("Error at EditInformationController: " + e.toString());
-        } finally{
+        } finally {
             response.sendRedirect(url);
         }
-            
-        
+
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">

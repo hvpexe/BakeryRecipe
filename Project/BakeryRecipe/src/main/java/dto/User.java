@@ -146,6 +146,10 @@ public class User {
         }
         return IMG_PATH + avatar;
     }
+    
+    public String getAvatarToDB(){
+        return avatar;
+    }
 
     public String getFirstName() {
         return firstName;
