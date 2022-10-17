@@ -109,7 +109,7 @@
                             <div class="row">
                                 <div class="col-md-3">Avatar</div>
                                 <div class="col-md-9">
-                                    <input type="file" name='avatar' value="">
+                                    <input type="file" name='avatar' value="${sessionScope.login.avatar}">
                                 </div>
                             </div>
                         </div>

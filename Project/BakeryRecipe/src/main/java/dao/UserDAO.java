@@ -349,7 +349,7 @@ public class UserDAO {
 //            System.out.println(absoluteFilepath);
 //absoluteFilepath = D:\learning in FPT\Ky_5\SWP391\BakeryRecipe\Project\BakeryRecipe\target\BakeryRecipe-1.0-SNAPSHOT\assets\images\avt
 //webFilepath = D:\learning in FPT\Ky_5\SWP391\BakeryRecipe\Project\BakeryRecipe\src\main\webapp\assets\images\avt
-            String webFilepath = absoluteFilepath.replace("\\build", "");
+            String webFilepath = absoluteFilepath.replace("\\target\\BakeryRecipe-1.0-SNAPSHOT\\", "\\src\\main\\webapp\\");
             Tools.getFolderUpload(absoluteFilepath);
             Tools.getFolderUpload(webFilepath);
 //        D:\learning in FPT\Tools\UploadFile\web\assets\images
