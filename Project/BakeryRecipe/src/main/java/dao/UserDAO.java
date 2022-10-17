@@ -335,16 +335,16 @@ public class UserDAO {
         return false;
     }
 
-    public static String saveAvatar(String id, Part part, ServletContext sc) {
+    public static String saveAvatar(String filename, Part file, ServletContext sc) {
 
         try {
-            String fileName = part.getSubmittedFileName();
+            String fileName = file.getSubmittedFileName();
             if (fileName.isEmpty()) {
                 return null;
             }
             // refines the fileName in case it is an absolute path
             fileName = new File(fileName).getName();
-            id += fileName.substring(fileName.indexOf('.'), fileName.length());
+            filename += fileName.substring(fileName.indexOf('.'), fileName.length());
             String absoluteFilepath = sc.getRealPath("/" + User.IMG_PATH);
 //            System.out.println(absoluteFilepath);
 //absoluteFilepath = D:\learning in FPT\Ky_5\SWP391\BakeryRecipe\Project\BakeryRecipe\target\BakeryRecipe-1.0-SNAPSHOT\assets\images\avt
@@ -353,9 +353,9 @@ public class UserDAO {
             Tools.getFolderUpload(absoluteFilepath);
             Tools.getFolderUpload(webFilepath);
 //        D:\learning in FPT\Tools\UploadFile\web\assets\images
-            part.write(absoluteFilepath + id);
-            part.write(webFilepath + id);
-            return id;
+            file.write(absoluteFilepath + filename);
+            file.write(webFilepath + filename);
+            return filename;
         } catch (IOException ex) {
             System.out.println("Error Cant Save Avatar!" + ex.getMessage());
         }
