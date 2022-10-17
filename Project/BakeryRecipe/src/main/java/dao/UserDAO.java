@@ -305,21 +305,24 @@ public class UserDAO {
         String sql = "UPDATE [User]\n"
                 + "SET FirstName = ?,\n"
                 + "    LastName = ?,\n"
-                + "	  Phone = ?,\n"
-                + "	  Birthday = ?,\n"
-                + "	  Gender = ?,\n"
-                + "	  [Address] = ?\n"
+                + "    Phone = ?,\n"
+                + "    Birthday = ?,\n"
+                + "    Gender = ?,\n"
+                + "    [Address] = ?,\n"
+                + "	Avatar = ?\n"
                 + "WHERE ID = ?";
         try {
             Connection conn = DBUtils.getConnection();
             PreparedStatement ps = conn.prepareStatement(sql);
+            System.out.println(user.getAvatar());
             ps.setString(1, user.getFirstName());
             ps.setString(2, user.getLastName());
             ps.setString(3, user.getPhone());
             ps.setDate(4, user.getBirthday());
             ps.setString(5, user.getGender());
             ps.setString(6, user.getAddress());
-            ps.setInt(7, user.getId());
+            ps.setString(7, user.getAvatarToDB());
+            ps.setInt(8, user.getId());
             boolean check = ps.executeUpdate() > 0;
             if (check) {
                 return true;
@@ -330,7 +333,7 @@ public class UserDAO {
         return false;
     }
 
-    /* public static String saveAvatar(String id, Part part, ServletContext sc) {
+    public static String saveAvatar(String id, Part part, ServletContext sc) {
 
         try {
             String fileName = part.getSubmittedFileName();
@@ -354,7 +357,7 @@ public class UserDAO {
             System.out.println("Error Cant Save Avatar!" + ex.getMessage());
         }
         return null;
-    }*/
+    }
     private static final String LIST_USER = "select[Email], [LastName],[FirstName] ,[Avatar] ,userRep.ID\n"
             + "                      from [dbo].[User] userRep join [dbo].[Recipe] recipe\n"
             + "					  on userRep.ID=recipe.UserID\n"
