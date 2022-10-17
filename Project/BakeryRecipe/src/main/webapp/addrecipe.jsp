@@ -53,7 +53,7 @@
                     </button>
                 </main>
                 <form action="AddRecipe" class="section-div col-12 col-md-10 align-content-center align-self-center"
-                      id="add-recipe" enctype="multipart/form-data" method="get" >
+                      id="add-recipe" enctype="multipart/mixed" method="get" >
                     <div class="title-div col-12">
                         <b class="label">Title</b>
                         <input name='recipe-name' class="input col-12"  type="text" placeholder="Recipe's Name ">

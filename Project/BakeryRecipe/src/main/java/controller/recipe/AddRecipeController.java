@@ -39,23 +39,20 @@ public class AddRecipeController extends HttpServlet {
         {
             /* TODO output your page here. You may use following sample code. */
  /*http://localhost:8080/BakeryRecipe/AddRecipe
-            ?recipe-name=Baker+bake
-            recipe-description=aaaaaaaaaaa
-            cover=1
-            video-url=https%3A%2F%2Fwww.youtube.com%2Fwatch%3Fv%3DZOvyn72x6kQ%26ab_channel%3DAperture
-            video-image=56757438_868951923446849_7427423009536737280_n.jpg
-            video-image=50808996_588337204972341_8710699352852529152_n.jpg
-            ingre-name=egg
-            ingre-amount=1
-            ingre-name=banana
-            ingre-amount=123
-            count=3
-            step=1
+            ?recipe-name=Baker+bake&
+            recipe-description=aaaaaaaaaaa&
+            cover=1&
+            video-url=https%3A%2F%2Fwww.youtube.com%2Fwatch%3Fv%3DZOvyn72x6kQ%26ab_channel%3DAperture&
+            video-image=56757438_868951923446849_7427423009536737280_n.jpg&
+            ingre-name=egg&
+            ingre-amount=1&
+            ingre-name=banana&
+            ingre-amount=123&
+            count=3&
+            step=1&
             inst-image=56757438_868951923446849_7427423009536737280_n.jpg
             inst-description=Hello
             step=2
-            inst-image=156a0d2872579f1ffcaa5d2127239bfd.jpg
-            inst-description=Home%0D%0ACommunity%0D%0ASaved%0D%0AShopping%0D%0ASearch%0D%0ASign+up+%2F+Sign+in%0D%0A+Create+Recipe%0D%0A%0D%0ASave%0D%0ATitle%0D%0ABaker+bake%0D%0ADescription%0D%0Aaaaaaaaaaaa%0D%0AUpdate+Video%0D%0AAdd+Image%0D%0A++Set+As+Cover+Change+Image%0D%0AIngredients%0D%0A+%0D%0AEgg%0D%0AAmount%3A%0D%0A1%0D%0A+%0D%0ABanana%0D%0AAmount%3A%0D%0A123%0D%0AAdd+one+ingredient%0D%0AAmount%3A%0D%0A1+Piece%0D%0AInstructions%0D%0AStep+1%0D%0AHello%0D%0APaste+one+or+multiple+steps+%28e.g.+Finely+chop+the+garlic%29%0D%0APrepare+Time%0D%0A0%0D%0ACook+Time%0D%0A0%0D%0AAdd+recipe
             count=3
             prepare-time=180
             cook-time=180*/
@@ -70,7 +67,7 @@ public class AddRecipeController extends HttpServlet {
             int cover = Integer.parseInt(request.getParameter("cover"));
             int prepareTime = Integer.parseInt(request.getParameter("prepare-time"));
             int cookTime = Integer.parseInt(request.getParameter("cook-time"));
-            Part path = request.getPart("video-image");
+            Part path = request.getPart("inst-image");
             out.print("<br>" + recipeName);
             out.print("<br>" + recipeDescription);
             out.print("<br>" + videoUrl);
