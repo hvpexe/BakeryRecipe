@@ -21,7 +21,7 @@
                 </div>
                 <div class="profile-name">${sessionScope.login.name}</div>
                 <ul id="profile-function" class="list-group">
-                    <li onclick="window.location = './profileInformation.jsp'" class="function-select">
+                    <li onclick="window.location = window.location" class="function-select">
                         Change information
                     </li>
                     <li onclick="window.location = '${download}'">
@@ -30,10 +30,10 @@
                     <li onclick="window.location = '${rating}'">
                         Liked recipe
                     </li>
-                    <li onclick="window.location = './profileChangePass.jsp'">
+                    <li onclick="ajaxLoad('./profileChangePass.jsp')">
                         Change password
                     </li>
-                    <li onclick="window.location = '/BakeryRecipe/LogoutController'">
+                    <li onclick="window.location ='/BakeryRecipe/LogoutController'">
                         Logout
                     </li>
                 </ul>
@@ -123,6 +123,7 @@
 
         <jsp:include page="footer.jsp"/>
         <script src="assets/js/Jquery/jquery-core.js"></script>
+        <script src="assets/js/profileInfo.js"></script>
     </body>
 </html>
 

@@ -5,12 +5,15 @@
 package utils;
 
 import java.io.File;
+import java.io.IOException;
 import java.io.PrintWriter;
 import java.net.URLDecoder;
 import java.net.URLEncoder;
 import java.sql.Timestamp;
 import java.text.SimpleDateFormat;
 import java.sql.Date;
+import javax.servlet.ServletContext;
+import javax.servlet.http.Part;
 
 /**
  *
@@ -56,6 +59,40 @@ public class Tools {
         SimpleDateFormat dt = new SimpleDateFormat("mm:HH E dd-MM-yyyy");
         return dt.format(time);
     }
+
+    /**
+     * do exactly what the function said
+     */
+    public static Boolean isNullOrEmpty(String string) {
+        return string == null || string.trim().isEmpty();
+    }
+
+    public static String saveFile(String filename, Part file, ServletContext sc, String filePath) {
+        try {
+            String fileName = file.getSubmittedFileName();
+            if (fileName.isEmpty()) {
+                return null;
+            }
+            // refines the fileName in case it is an absolute path
+            fileName = new File(fileName).getName();
+            filename += fileName.substring(fileName.indexOf('.'), fileName.length());
+            String absoluteFilepath = sc.getRealPath("/" + filePath);
+            //D:\learning in FPT\Tools\UploadFile\build\web\images
+            String webFilepath = absoluteFilepath.replace("\\build", "");
+//            Tools.getFolderUpload(absoluteFilepath);
+//            Tools.getFolderUpload(webFilepath);
+//            System.out.println(id + "\n-" + absoluteFilepath + id + "\n-" + webFilepath + id);
+//        C:\Users\Admin\Documents\Github2\prj301-se1609-05\BOOKZ\Bookz\build\web\assets\images\bookCover\
+            file.write(absoluteFilepath + filename);
+            file.write(webFilepath + filename);
+            System.out.println("path: " + filePath + filename);
+            return filePath + filename;
+        } catch (IOException ex) {
+            System.out.println("Error Cant Save to " + filePath + filename + "! " + ex.getMessage());
+        }
+        return null;
+    }
+    
 
     public static void main(String[] args) {
         PrintWriter pw = new PrintWriter(System.out, true);

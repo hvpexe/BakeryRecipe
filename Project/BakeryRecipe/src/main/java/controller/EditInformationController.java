@@ -18,6 +18,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import javax.servlet.http.Part;
+import javax.tools.Tool;
 import utils.Tools;
 
 /**
@@ -47,7 +48,11 @@ public class EditInformationController extends HttpServlet {
             user = UserDAO.getUserByID(userID);
             String firstname = Tools.toUTF8(request.getParameter("firstname"));
             String lastname = Tools.toUTF8(request.getParameter("lastname"));
-            Date birthday = Date.valueOf(request.getParameter("birthday"));
+            String birthdayString = request.getParameter("birthday");
+            Date birthday = null;
+            if (!Tools.isNullOrEmpty(birthdayString)) {
+                birthday = Date.valueOf(birthdayString);
+            }
             String gender = request.getParameter("gender");
             String address = request.getParameter("address");
             String phone = request.getParameter("phone");
@@ -75,6 +80,7 @@ public class EditInformationController extends HttpServlet {
 
         } catch (Exception e) {
             System.out.println("Error at EditInformationController: " + e.toString());
+            e.printStackTrace();
         } finally {
             response.sendRedirect(url);
         }

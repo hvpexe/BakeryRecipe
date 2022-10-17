@@ -39,8 +39,6 @@ public class User {
         this.name = name;
     }
 
-  
-
     public User(String email, String firstName, String lastName, String password) {
         this.email = email;
         this.password = password;
@@ -146,8 +144,8 @@ public class User {
         }
         return IMG_PATH + avatar;
     }
-    
-    public String getAvatarToDB(){
+
+    public String getAvatarToDB() {
         return avatar;
     }
 
@@ -220,7 +218,7 @@ public class User {
     }
 
     public void setBirthday(Date birthday) {
-        this.birthday = birthday;
+        this.birthday = birthday != null ? birthday : this.birthday;
     }
 
     @Override

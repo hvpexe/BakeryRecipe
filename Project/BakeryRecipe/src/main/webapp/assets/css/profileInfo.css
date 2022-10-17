@@ -61,6 +61,8 @@ body {
     width: 100%;
     aspect-ratio: 1;
     object-fit: cover;
+    outline: 5px solid var(--main-theme-color);
+    outline-style: double;
 }
 
 .profile-name {

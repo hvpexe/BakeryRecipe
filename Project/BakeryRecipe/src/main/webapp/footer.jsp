@@ -1,10 +1,4 @@
-
-<style>
-   /*css ? ?ây, code ko có bao nhiêu*/
-    footer {
-        background-color: #DB5A42;
-    }
-</style>
+    <link rel="stylesheet" type="text/css" href="./assets/css/footer.css">
 <footer class="page-footer font-small text-light">
     <div class="footer-copyright text-center py-3 ">&copy; 2022 Copyright:
         <a class="text-dark" href="#"> BakeryRecipe </a>

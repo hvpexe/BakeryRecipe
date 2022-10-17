@@ -1,5 +1,5 @@
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
-<!DOCTYPE html>
+<!--<!DOCTYPE html>
 <html>
 
 <head>
@@ -8,22 +8,20 @@
     <title>Change Password</title>
     <link rel="stylesheet" type="text/css" href="./assets/css/web/bootstrap-4.3.1.min.css">
     <link rel="stylesheet" type="text/css" href="./assets/css/fontawesome-free-6.1.1-web/css/all.min.css">
-    <link rel="stylesheet" type="text/css" href="./assets/css/header.css">
-    <link rel="stylesheet" type="text/css" href="./assets/css/footer.css">
     <link rel="stylesheet" href="./assets/css/profileInfo.css">
 
 </head>
 
 <body>
-    <jsp:include page="header.jsp" />
+    <%--<jsp:include page="header.jsp" />--%>
     <div class="section container row">
-        <!-- SECTION LEFT -->
+         SECTION LEFT 
         <div class="col-md-12 col-lg-3 ">
             <div class="profile-img ">
                 <img class="border border-dark rounded-circle"
                     src="https://khoinguonsangtao.vn/wp-content/uploads/2022/07/avatar-gau-cute.jpg" alt="User Avt">
             </div>
-            <div class="profile-name">Trinh Thang Binh</div>
+            <div class="profile-name">${sessionScope.login.name}</div>
             <ul id="profile-function" class="list-group">
                 <li onclick="window.location = './profileInformation.jsp'">
                     Change information
@@ -43,9 +41,9 @@
             </ul>
 
         </div>
-        <!-- SECTION RIGHT -->
-        <div class="col-md-12 col-lg-9">
-            <div id="profile-change-password">
+         SECTION RIGHT 
+        <div class="col-md-12 col-lg-9">-->
+            <!--<div id="profile-change-password">-->
                 <div class="profile-header">
                     <h1 class="info-title">Change password: </h1>
                 </div>
@@ -74,7 +72,7 @@
                                 </span>
                             </div>
                             <div class="form-group">
-                                <input type="hidden" name="userID" value="${sessionScope.LOGIN_USER.id}">
+                                <input type="hidden" name="userID" value="${sessionScope.login.id}">
                                 <button type="submit" class="btn btn-main-theme" id="frameButton">
                                     <b class="save-b2">Save</b>
                                 </button>
@@ -87,14 +85,14 @@
                         </form>
                     </div>
                 </div>
-            </div>
-        </div>
+            <!--</div>-->
+<!--        </div>
     </div>
     </div>
 
-    <jsp:include page="footer.jsp" />
+    <%--<jsp:include page="footer.jsp" />--%>
 
     
 </body>
 
-</html>
+</html>-->

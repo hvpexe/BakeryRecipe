@@ -12,6 +12,8 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import static utils.HashingEncrypter.MD5;
+import static utils.HashingEncrypter.getHexaDigest;
 
 /**
  *
@@ -19,32 +21,36 @@ import javax.servlet.http.HttpServletResponse;
  */
 @WebServlet(name = "ChangePasswordController", urlPatterns = {"/ChangePasswordController"})
 public class ChangePasswordController extends HttpServlet {
+
     private static final String ERROR = "profileChangePass.jsp";
     private static final String SUCCESS = "profile.jsp";
+
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
-    
+
         String url = ERROR;
-        try{
+        try {
             String userID = request.getParameter("userID");
             String oldPassword = request.getParameter("oldPassword");
             String newPassword = request.getParameter("newPassword");
             String confirmNewPassword = request.getParameter("confirmNewPassword");
-            
-            if (!UserDAO.checkOldPassword(userID, oldPassword)) {
+            String encryptedOldPassword = getHexaDigest(MD5, oldPassword);
+            String encryptedNewPassword = getHexaDigest(MD5, newPassword);
+            if (!UserDAO.checkOldPassword(userID, encryptedOldPassword)) {
                 request.setAttribute("PASSWORD_ERROR", "Old password wrong!");
             } else if (newPassword.length() < 8 && newPassword.length() > 40) {
-                request.setAttribute("PASSWORD_ERROR", "password must be 8 to 40 characters !");
+                request.setAttribute("PASSWORD_ERROR", "Password must be 8 to 40 characters!");
             } else if (!newPassword.equals(confirmNewPassword)) {
                 request.setAttribute("PASSWORD_ERROR", "Confirmation mismatched");
-            } else if (UserDAO.changePassword(userID, newPassword)) {
+            } else if (UserDAO.changePassword(userID, encryptedNewPassword)) {
                 request.setAttribute("PASSWORD_SUCCESS", "Change password successfully");
                 url = SUCCESS;
             }
-        }catch (Exception e){
+        } catch (Exception e) {
             System.out.println("Error at ChangePasswordController: " + e.toString());
-        }finally{
+            e.printStackTrace();
+        } finally {
             request.getRequestDispatcher(url).forward(request, response);
         }
     }
