@@ -14,6 +14,11 @@ import java.text.SimpleDateFormat;
 import java.sql.Date;
 import javax.servlet.ServletContext;
 import javax.servlet.http.Part;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.OutputStream;
+import java.net.URL;
 
 /**
  *
@@ -92,10 +97,28 @@ public class Tools {
         }
         return null;
     }
-    
+
+    public static String saveImagefromURL(String imageUrl, String fileName, ServletContext sc, String imagePath) throws IOException {
+        URL url = new URL(imageUrl);
+        InputStream is = url.openStream();//get inputstream
+        String realPath = sc.getRealPath(imagePath);
+        String savedPath = realPath + fileName;
+        //new type of file writer
+        OutputStream os = new FileOutputStream(savedPath);
+        byte[] b = new byte[2048];
+        int length;
+        //write the file 
+        //it's not long this is what the saveFile function do to
+        while ((length = is.read(b)) != -1) {
+            os.write(b, 0, length);
+        }
+
+        is.close();
+        os.close();
+        return fileName;
+    }
 
     public static void main(String[] args) {
         PrintWriter pw = new PrintWriter(System.out, true);
-        pw.println(toUTF8("Nguá»?n"));
     }
 }

@@ -5,7 +5,6 @@
 package controller.filter;
 
 import dao.UserDAO;
-import dto.User;
 import java.io.IOException;
 import java.io.PrintStream;
 import java.io.PrintWriter;
@@ -13,19 +12,20 @@ import java.io.StringWriter;
 import javax.servlet.Filter;
 import javax.servlet.FilterChain;
 import javax.servlet.FilterConfig;
-import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
 import javax.servlet.ServletRequest;
 import javax.servlet.ServletResponse;
 import javax.servlet.annotation.WebFilter;
-import utils.Tools;
+import javax.servlet.http.HttpServletRequestWrapper;
+import static utils.HashingEncrypter.getHexaDigest;
+import static utils.HashingEncrypter.MD5;
 
 /**
  *
  * @author Admin
  */
-@WebFilter(filterName = "LoginFilter", urlPatterns = {"/login"})
-public class LoginFilter implements Filter {
+@WebFilter( servletNames = {"LoginController","RegisterAccountController"})
+public class PasswordHashingFilter implements Filter {
 
     private static final boolean debug = true;
 
@@ -34,13 +34,13 @@ public class LoginFilter implements Filter {
     // configured. 
     private FilterConfig filterConfig = null;
 
-    public LoginFilter() {
+    public PasswordHashingFilter() {
     }
 
     private void doBeforeProcessing(ServletRequest request, ServletResponse response)
             throws IOException, ServletException {
         if (debug) {
-            log("LoginFilter:DoBeforeProcessing");
+            log("PasswordHashingFilter:DoBeforeProcessing");
         }
 
         // Write code here to process the request and/or response before
@@ -68,7 +68,7 @@ public class LoginFilter implements Filter {
     private void doAfterProcessing(ServletRequest request, ServletResponse response)
             throws IOException, ServletException {
         if (debug) {
-            log("LoginFilter:DoAfterProcessing");
+            log("PasswordHashingFilter:DoAfterProcessing");
         }
 
         // Write code here to process the request and/or response after
@@ -104,53 +104,29 @@ public class LoginFilter implements Filter {
             throws IOException, ServletException {
 
         if (debug) {
-            log("LoginFilter:doFilter()");
+            log("PasswordHashingFilter:doFilter()");
         }
 
         doBeforeProcessing(request, response);
-
         Throwable problem = null;
-        /**
-         * ?code=eyJhbGciOiJSUzI1NiIsImtpZCI6ImJhMDc5YjQyMDI2NDFlNTRhYmNlZDhmYjEzNTRjZTAzOTE5ZmIyOTQiLCJ0eXAiOiJKV1QifQ.eyJpc3MiOiJodHRwczovL2FjY291bnRzLmdvb2dsZS5jb20iLCJuYmYiOjE2NjQzNzQ2OTYsImF1ZCI6IjI0MzA1NzQ3NzY3NS1rdDU4bXI5bGF2OGVoNnRpOWJmcmo4cDc4Mmo3dW5rZC5hcHBzLmdvb2dsZXVzZXJjb250ZW50LmNvbSIsInN1YiI6IjExMTMwNTc2OTIzMjI0MzUwNTQ2OCIsImhkIjoiZnB0LmVkdS52biIsImVtYWlsIjoiYmluaG50c2UxNjA4NjBAZnB0LmVkdS52biIsImVtYWlsX3ZlcmlmaWVkIjp0cnVlLCJhenAiOiIyNDMwNTc0Nzc2NzUta3Q1OG1yOWxhdjhlaDZ0aTliZnJqOHA3ODJqN3Vua2QuYXBwcy5nb29nbGV1c2VyY29udGVudC5jb20iLCJuYW1lIjoiTmd1eWVuIFRoYW5oIEJpbmggKEsxNl9IQ00pIiwicGljdHVyZSI6Imh0dHBzOi8vbGgzLmdvb2dsZXVzZXJjb250ZW50LmNvbS9hLS9BQ05QRXU5N1JOY2FlS0lUckZ2Vk5zSFkwZFBPWXZJeENXbFF1aExEOU42N3ZRPXM5Ni1jIiwiZ2l2ZW5fbmFtZSI6Ik5ndXllbiBUaGFuaCBCaW5oIiwiZmFtaWx5X25hbWUiOiIoSzE2X0hDTSkiLCJpYXQiOjE2NjQzNzQ5OTYsImV4cCI6MTY2NDM3ODU5NiwianRpIjoiMWVjNWRiYjg5YjVmMDY0N2M3OGI3NzBhMWI4N2M5ZjNiOTI0ZWI4ZSJ9.SJRYBYZbTIXVM-7O_Xxi7qTKbn-uPN4nQcH2dPXduz2Kp5kXjwC9bFJJG0b3YZqol4vdaPoWWQMSuqJtX3uPhtsYb35d7hE7UGxEz4GfKSqOfua6mOYZ5FsZeZt41TKOx05pym2-MRoSzR-dcCMfMaUlFyrzI93Ttdy6FkSM1ZhLHjOui8c7cwdzmqSza2D95tCz-HN37_Wm4qAHgx9GJqJKAdhKif_iCg5_oYvPzqNlFZiGiA2eiA1iizJsmGwMcGWYS53CFjGFnLOnECo9S7W6f20cblWSH44PvIYWCMYMv8EvwgSXaP6yRfnNadmTjVvLpDNxIm8w6vS1hbZu8g
-         * &email=binhntse160860%40fpt.edu.vn
-         * &name=Nguyen+Thanh+Binh+%28K16_HCM%29
-         * &avatar=https%3A%2F%2Flh3.googleusercontent.com%2Fa-%2FACNPEu97RNcaeKITrFvVNsHY0dPOYvIxCWlQuhLD9N67vQ%3Ds96-c
-         * &lastname=%28K16_HCM%29 &firstname=Nguyen+Thanh+Binh
-         */
         try {
-
-            String code = request.getParameter("code");
-            String password = request.getParameter("password");
             String email = request.getParameter("email");
-
-            if (!(code == null || code.isEmpty())) {
-                User user = UserDAO.loginWithGoogle(email);
-                if (user != null) {
-                    request.setAttribute("LOGIN_USER", user);
-                    System.out.println("Login Google Filter " + user);
-                } else {
-                    String name = Tools.toUTF8(request.getParameter("name"));
-                    //https://lh3.googleusercontent.com/a/ALm5wu3BF_1x0wgvw8qXh7lPLDECVbl06uF5JZK36Mq3Hw=s96-c
-                    //the avatar is complicated
-                    ServletContext sc = request.getServletContext();
-                    String avatar = request.getParameter("avatar");
-                    String avatarPath = Tools.saveImagefromURL(avatar, email.substring(0, email.indexOf("@")) + ".png", sc,User.IMG_PATH);
-                    String lastname = Tools.toUTF8(request.getParameter("lastname"));
-                    String firstname = Tools.toUTF8(request.getParameter("firstname"));
-                    UserDAO.register(email, "", firstname, lastname, avatarPath);
-                    user = UserDAO.loginWithGoogle(email);
-                    request.setAttribute("LOGIN_USER", user);
-                }
-            } else {
-                if (!UserDAO.checkDuplicateEmail(email)) {
-                    request.setAttribute("LOGIN_ERROR", "Email Not Found!");
-                } else if (password != null && password.length() < 8) {
-                    request.setAttribute("LOGIN_ERROR", "Password must be at least 8 characters!");
-                }
+            String password = request.getParameter("password");
+            String rePassword = request.getParameter("re-password");
+             if (password.length() < 8) {
+                request.setAttribute("REGISTER_ERROR", "Password must be at least 8 characters!");
+            } else if (rePassword != null && !rePassword.equals(password)) {
+                request.setAttribute("REGISTER_ERROR", "Password mismatched");
             }
-
+            //if password exist do hashing so this will help with google login
+            if (!(password == null || password.isEmpty())) {
+                //Hash the password
+                password = getHexaDigest(MD5, password);
+                //set attribute
+                request.setAttribute("password", password);
+            }
             chain.doFilter(request, response);
-        } catch (Throwable t) {
+        } catch (IOException | ServletException t) {
             // If an exception is thrown somewhere down the filter chain,
             // we still want to execute our after processing, and then
             // rethrow the problem after that.
@@ -202,7 +178,7 @@ public class LoginFilter implements Filter {
         this.filterConfig = filterConfig;
         if (filterConfig != null) {
             if (debug) {
-                log("LoginFilter:Initializing filter");
+                log("PasswordHashingFilter:Initializing filter");
             }
         }
     }
@@ -213,9 +189,9 @@ public class LoginFilter implements Filter {
     @Override
     public String toString() {
         if (filterConfig == null) {
-            return ("LoginFilter()");
+            return ("PasswordHashingFilter()");
         }
-        StringBuffer sb = new StringBuffer("LoginFilter(");
+        StringBuffer sb = new StringBuffer("PasswordHashingFilter(");
         sb.append(filterConfig);
         sb.append(")");
         return (sb.toString());

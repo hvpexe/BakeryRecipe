@@ -12,20 +12,29 @@
         <filter-name>SaveFilter</filter-name>
         <filter-class>controller.filter.SaveFilter</filter-class>
     </filter>
+    <filter>
+        <filter-name>PasswordHashingFilter</filter-name>
+        <filter-class>controller.filter.PasswordHashingFilter</filter-class>
+    </filter>
     <filter-mapping>
-        <filter-name>SaveFilter</filter-name>
-        <url-pattern>/savedrecipe</url-pattern>
-        <url-pattern>/saved.jsp</url-pattern>
+        <filter-name>PasswordHashingFilter</filter-name>
+        <servlet-name>RegisterAccountController</servlet-name>
+    </filter-mapping>
+    <filter-mapping>
+        <filter-name>PasswordHashingFilter</filter-name>
+        <servlet-name>LoginController</servlet-name>
     </filter-mapping>
     <filter-mapping>
         <filter-name>ProfileFilter</filter-name>
         <url-pattern>/profile.jsp</url-pattern>
-        <url-pattern>/profile</url-pattern>
+    </filter-mapping>
+    <filter-mapping>
+        <filter-name>SaveFilter</filter-name>
+        <url-pattern>/savedrecipe</url-pattern>
     </filter-mapping>
     <filter-mapping>
         <filter-name>HomeFilter</filter-name>
         <url-pattern>/home.jsp</url-pattern>
-        <url-pattern>/home</url-pattern>
     </filter-mapping>
     <servlet>
         <servlet-name>DebugController</servlet-name>

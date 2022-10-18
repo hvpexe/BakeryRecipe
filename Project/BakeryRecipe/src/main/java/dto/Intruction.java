@@ -11,6 +11,7 @@ package dto;
 public class Intruction {
    
     private int insstep;
+    
     private String detail;
     private String img;
 
