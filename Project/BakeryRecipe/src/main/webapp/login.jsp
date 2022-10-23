@@ -53,7 +53,7 @@
                 crossorigin="anonymous"></script>-->
         <script src="https://accounts.google.com/gsi/client" async defer></script>
         <script src="assets/js/googleLogin.js"></script>
-        <link rel="stylesheet" href="assets/css/login1.css" />
+        <link rel="stylesheet" href="assets/css/login1.css?v=3" />
     </head>
     <body>
         <c:import url="header.jsp"/>
@@ -67,12 +67,12 @@
                     <div class="g_id_signin" data-type="icon" data-size="large" placeholder="Email" data-theme="filled_blue" data-text="sign_in_with" data-shape="circle" data-logo_alignment="left"><div class="S9gUrf-YoZ4jf" style="position: relative;"><div></div><iframe src="https://accounts.google.com/gsi/button?type=icon&amp;size=large&amp;theme=filled_blue&amp;text=sign_in_with&amp;shape=circle&amp;logo_alignment=left&amp;client_id=243057477675-kt58mr9lav8eh6ti9bfrj8p782j7unkd.apps.googleusercontent.com&amp;iframe_id=gsi_812950_790204&amp;as=MCsvGUZ%2Fo6jE5lvjeZjhzQ" id="gsi_812950_790204" title="Sign in with Google Button" style="display: block; position: relative; top: 0px; left: 0px; height: 44px; width: 64px; border: 0px; margin: -2px -12px;"></iframe></div></div>
                     <div class="input col-10 p-0" placeholder="Email">
                         <input class="email-input1 col rounded" type="text" value="${param.email}" placeholder="   " form="formLogin"
-                               name="email"  >
+                               name="email" value=""  >
                         <span class="status"></span> 
                     </div>
                     <div class="input col-10 p-0" placeholder="Password" regex="">
                         <input class="password-input1 col rounded" type="password" value="${param.password}" placeholder="   "form="formLogin" 
-                               name="password" >
+                               name="password" value="" >
                         <span class="status"></span> 
                     </div>
                     <div class="text-danger">${LOGIN_ERROR}</div>
@@ -99,25 +99,25 @@
                     </div>
                     <div class="input col-10 p-0" placeholder="Email">
                         <input class="email-input1 col rounded" type="text" value="${param.email}" placeholder="   " form="formRegister"
-                               name="email"  >
+                               name="email" value="" >
                         <span class="status"></span> 
                     </div>
                     <div class=" col-10 row justify-content-between bg-white p-0">
                         <div class="input col p-0 mr-2" placeholder="First name">
-                            <input class="rounded col" type="text" placeholder="  " value="${firstname}" name="firstname">
+                            <input class="rounded col" value="" type="text" placeholder="  " value="${firstname}" name="firstname">
                             <span class="status"></span> 
                         </div>
                         <div class="input col p-0 ml-2" placeholder="Last name">
-                            <input class="rounded col" type="text" placeholder="  " value="${lastname}" name="lastname">
+                            <input class="rounded col" value="" type="text" placeholder="  " value="${lastname}" name="lastname">
                             <span class="status"></span> 
                         </div>
                     </div>
                     <div class="input col-10 p-0" placeholder="Password">
-                        <input class="col rounded" type="password" placeholder=" " value="${param['password']}" " name="password">
+                        <input class="col rounded" value="" type="password" placeholder=" " value="${param['password']}" " name="password">
                         <span class="status"></span> 
                     </div>
                     <div class="input col-10 p-0" placeholder="Re-enter password">
-                        <input class="col rounded" type="password" placeholder=" " value="${param['re-password']}" " name="re-password">
+                        <input class="col rounded" value="" type="password" placeholder=" " value="${param['re-password']}" " name="re-password">
                         <span class="status"></span> 
                     </div>
                     <div class="text-danger">${REGISTER_ERROR}</div>
@@ -143,6 +143,7 @@
     <script src="assets/js/validator.js"></script>
     <script>
         //login validator
+        $('form').css('scale','0 0').css('scale','1 1');
         document.querySelector('form').classList.remove('d-none');
         Validator({
         form: '#formLogin',

@@ -4,15 +4,25 @@
  */
 package controller.recipe;
 
+import dao.RecipeDAO;
+import dto.Recipe;
+import dto.User;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.ArrayList;
 import java.util.Collection;
+import java.util.LinkedList;
+import java.util.List;
+import java.util.logging.Logger;
+import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.MultipartConfig;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 import javax.servlet.http.Part;
+import utils.Tools;
 
 /**
  *
@@ -27,18 +37,89 @@ public class AddRecipeController extends HttpServlet {
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
      * methods.
      *
-     * @param request servlet request
+     * @param request  servlet request
      * @param response servlet response
+     *
      * @throws ServletException if a servlet-specific error occurs
-     * @throws IOException if an I/O error occurs
+     * @throws IOException      if an I/O error occurs
      */
-    protected void processRequest(HttpServletRequest request, HttpServletResponse response)
+    private static final String ERROR = "addrecipe.jsp";
+    private static final String ERROR_MISSING_USER = "profile.jsp";
+    private static final String SUCCESS = "addrecipe.jsp";
+
+    protected void processRequest (HttpServletRequest request,
+            HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
-        try ( PrintWriter out = response.getWriter())
-        {
+
+        PrintWriter out = response.getWriter();
+        HttpSession session = request.getSession();
+        ServletContext sc = request.getServletContext();
+        String url = ERROR;
+        try {
             /* TODO output your page here. You may use following sample code. */
- /*http://localhost:8080/BakeryRecipe/AddRecipe
+
+            System.out.println("running addrecipe");
+            User user = (User) session.getAttribute("login");
+            if (user == null) {
+                url = ERROR_MISSING_USER;
+                throw new NullPointerException("User not Exist");
+            }
+            int userId = user.getId();
+
+            String recipeName = Tools.toUTF8(request.getParameter("recipe-name"));
+            String recipeDescription = Tools.toUTF8(request.getParameter("recipe-description"));
+            String videoUrl = request.getParameter("video-url");
+            List<Part> pictureList = new ArrayList<Part>();//get all video-image
+            // get video code if string exist
+            if (!Tools.isNullOrEmpty(videoUrl)) {
+                int index = videoUrl.indexOf("?v=");
+                out.print("<br>" + videoUrl);
+                videoUrl = videoUrl.substring(index + 3, index + 14);
+                out.print("<br>" + videoUrl);
+            }
+            String[] ingreName = Tools.toUTF8(request.getParameterValues("ingre-name"));//get all name
+            String[] ingreAmount = Tools.toUTF8(request.getParameterValues("ingre-amount"));//get all amount
+            List<Part> instImgList = new LinkedList<Part>();//get all instuction images
+            String[] instDescription = Tools.toUTF8(request.getParameterValues("inst-description"));//get all instuction descrition
+            int prepareTime = Integer.parseInt(request.getParameter("prepare-time"));
+            int cookTime = Integer.parseInt(request.getParameter("cook-time"));
+            Collection<Part> parts = request.getParts();
+            int vIndex = 0;
+            int iIndex = 0;
+            int cover = Integer.parseInt(request.getParameter("cover"));//video image cover
+
+            for (Part p : parts) {
+                if (p.getName().contains("video-image")) {
+                    try {
+                        out.print("<hr>" + p.getName());
+                        out.print("<br>" + p.getSubmittedFileName().isEmpty());
+                        out.print("<br>" + p.getSubmittedFileName());
+                        out.print("<br>" + p.getContentType());
+                        out.print("<br>" + (vIndex == cover));
+                        pictureList.add(p);
+                    } catch (Exception e) {
+
+                    }
+                    vIndex++;
+                }
+                if (p.getName().contains("inst-image")) {
+                    try {
+                        out.print("<hr>" + p.getName());
+                        out.print("<br>" + p.getSubmittedFileName().isEmpty());
+                        out.print("<br>" + p.getSubmittedFileName());
+                        out.print("<br>" + p.getContentType());
+                        out.print("<br>" + instDescription[iIndex]);
+                        instImgList.add(p);
+                    } catch (Exception e) {
+
+                    }
+                    iIndex++;
+                }
+            }
+            out.print("<hr>" + pictureList);
+            out.print("<hr>" + instImgList);
+            /*http://localhost:8080/BakeryRecipe/AddRecipe
             ?recipe-name=Baker+bake&
             recipe-description=aaaaaaaaaaa&
             cover=1&
@@ -56,44 +137,19 @@ public class AddRecipeController extends HttpServlet {
             count=3
             prepare-time=180
             cook-time=180*/
-            String recipeName = request.getParameter("recipe-name");
-            String recipeDescription = request.getParameter("recipe-description");
-            String videoUrl = request.getParameter("video-url");
-            String[] videoImage = request.getParameterValues("video-image");
-            String[] ingreName = request.getParameterValues("ingre-name");
-            String[] ingreAmount = request.getParameterValues("ingre-amount");
-            String[] instImage = request.getParameterValues("inst-image");
-            String[] instDescription = request.getParameterValues("inst-description");
-            int cover = Integer.parseInt(request.getParameter("cover"));
-            int prepareTime = Integer.parseInt(request.getParameter("prepare-time"));
-            int cookTime = Integer.parseInt(request.getParameter("cook-time"));
-            Part path = request.getPart("inst-image");
-            out.print("<br>" + recipeName);
-            out.print("<br>" + recipeDescription);
-            out.print("<br>" + videoUrl);
-            for (String string : videoImage)
-            {
-                out.print("<br>" + string);
+            boolean recipeAdded
+                    = RecipeDAO.addRecipe(recipeName, recipeDescription, videoUrl, pictureList, ingreName,
+                            ingreAmount, instImgList, instDescription, prepareTime, cookTime, userId, cover, sc);
+            if (recipeAdded) {
+                url = SUCCESS;
+                out.print("Recipe ADDED");
             }
-            for (String string : ingreName)
-            {
-                out.print("<br>" + string);
-            }
-            for (String string : ingreAmount)
-            {
-                out.print("<br>" + string);
-            }
-            for (String string : instImage)
-            {
-                out.print("<br>" + string);
-            }
-            for (String string : instDescription)
-            {
-                out.print("<br>" + string);
-            }
-            out.print("<br>" + videoImage[cover]);
-            out.print("<br>" + prepareTime);
-            out.print("<br>" + cookTime);
+
+        } catch (Exception e) {
+            e.printStackTrace(out);
+            e.printStackTrace();
+        } finally {
+            response.sendRedirect(url);
         }
 //        request.getRequestDispatcher("addrecipe.jsp").forward(request, response);
     }
@@ -102,13 +158,15 @@ public class AddRecipeController extends HttpServlet {
     /**
      * Handles the HTTP <code>GET</code> method.
      *
-     * @param request servlet request
+     * @param request  servlet request
      * @param response servlet response
+     *
      * @throws ServletException if a servlet-specific error occurs
-     * @throws IOException if an I/O error occurs
+     * @throws IOException      if an I/O error occurs
      */
     @Override
-    protected void doGet(HttpServletRequest request, HttpServletResponse response)
+    protected void doGet (HttpServletRequest request,
+            HttpServletResponse response)
             throws ServletException, IOException {
         processRequest(request, response);
     }
@@ -116,13 +174,15 @@ public class AddRecipeController extends HttpServlet {
     /**
      * Handles the HTTP <code>POST</code> method.
      *
-     * @param request servlet request
+     * @param request  servlet request
      * @param response servlet response
+     *
      * @throws ServletException if a servlet-specific error occurs
-     * @throws IOException if an I/O error occurs
+     * @throws IOException      if an I/O error occurs
      */
     @Override
-    protected void doPost(HttpServletRequest request, HttpServletResponse response)
+    protected void doPost (HttpServletRequest request,
+            HttpServletResponse response)
             throws ServletException, IOException {
         processRequest(request, response);
     }
@@ -133,7 +193,7 @@ public class AddRecipeController extends HttpServlet {
      * @return a String containing servlet description
      */
     @Override
-    public String getServletInfo() {
+    public String getServletInfo () {
         return "Short description";
     }// </editor-fold>
 

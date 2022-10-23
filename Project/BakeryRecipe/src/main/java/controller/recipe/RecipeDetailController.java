@@ -9,7 +9,7 @@ import dao.RecipeDAO;
 import dao.UserDAO;
 import dto.Comment;
 import dto.Ingredient;
-import dto.Intruction;
+import dto.Instruction;
 import dto.Recipe;
 import dto.User;
 import java.io.IOException;
@@ -61,7 +61,7 @@ User sc ;
             listIngre = dao.listIngredient(recipeID);
             request.setAttribute("LIST_INGREDIENT", listIngre);
 
-            List<Intruction> liststep;
+            List<Instruction> liststep;
             liststep = recipe.listStep(recipeID);
             request.setAttribute("LIST_STEP", liststep);
 

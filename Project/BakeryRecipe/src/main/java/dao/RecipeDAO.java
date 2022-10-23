@@ -6,7 +6,7 @@ package dao;
 
 import dto.Comment;
 import dto.Ingredient;
-import dto.Intruction;
+import dto.Instruction;
 import dto.Recipe;
 import dto.RecipeSearch;
 import java.sql.Connection;
@@ -17,10 +17,14 @@ import java.util.List;
 import utils.DBUtils;
 import java.sql.Date;
 import java.sql.SQLException;
+import java.sql.Timestamp;
 import java.text.SimpleDateFormat;
 import java.util.Collection;
 import java.util.Collections;
 import java.util.HashMap;
+import javax.servlet.ServletContext;
+import javax.servlet.http.Part;
+import org.checkerframework.common.returnsreceiver.qual.This;
 import utils.Tools;
 
 /**
@@ -38,7 +42,7 @@ public class RecipeDAO {
             + "			                                 OFFSET ? ROWS FETCH NEXT 8 ROWS ONLY";
     private static final String SELECT_PICTURE_SQL = "SELECT img FROM Picture";
 
-    public static List<Recipe> getMostRatedRecipe(int index) {
+    public static List<Recipe> getMostRatedRecipe (int index) {
 
         try {
             Connection conn = DBUtils.getConnection();
@@ -62,7 +66,8 @@ public class RecipeDAO {
             }
             return list;
         } catch (SQLException ex) {
-            System.out.println("getMostRatedRecipe Query Error!" + ex.getMessage());
+            System.out.println("getMostRatedRecipe Query Error!" + ex.
+                    getMessage());
         }
         return null;
     }
@@ -75,7 +80,7 @@ public class RecipeDAO {
             + "                                                        ORDER BY DatePost DESC\n"
             + "			                                 OFFSET ? ROWS FETCH NEXT 8 ROWS ONLY";
 
-    public static List<Recipe> getMostRecentRecipe(int index) {
+    public static List<Recipe> getMostRecentRecipe (int index) {
         try {
             Connection conn = DBUtils.getConnection();
             PreparedStatement ps = conn.prepareStatement(SELECT_MOST_RECENT_SQL);
@@ -98,7 +103,8 @@ public class RecipeDAO {
             }
             return list;
         } catch (SQLException ex) {
-            System.out.println("getMostRecentRecipe Query Error!" + ex.getMessage());
+            System.out.println("getMostRecentRecipe Query Error!" + ex.
+                    getMessage());
         }
         return null;
     }
@@ -112,14 +118,14 @@ public class RecipeDAO {
             + "on  baker.ID =recipe.UserID\n"
             + "WHERE FREETEXT (recipe.Name , ?) and pic.IsCover =1";
 
-    public static List<Recipe> searchRecipe(String name) throws SQLException {
+    public static List<Recipe> searchRecipe (String name) throws SQLException {
         ArrayList<Recipe> listRecipe = new ArrayList<>();
         Connection conn = null;
         PreparedStatement ptm = null;
         ResultSet rs = null;
         try {
             conn = DBUtils.getConnection();
-            ptm = conn.prepareStatement(SEARCH_RECIPE);
+            ptm = conn.prepareStatement(INSERT_RECIPE);
             ptm.setString(1, name);
             rs = ptm.executeQuery();
             while (rs.next()) {
@@ -142,7 +148,7 @@ public class RecipeDAO {
         return listRecipe;
     }
 
-    public static int getAllRecipe() {
+    public static int getAllRecipe () {
         String sql = "SELECT count(Recipe.ID)\n"
                 + "                     FROM Recipe\n"
                 + "		      JOIN [User] ON Recipe.UserID = [User].ID\n"
@@ -152,14 +158,72 @@ public class RecipeDAO {
             Connection conn = DBUtils.getConnection();
             PreparedStatement ps = conn.prepareStatement(sql);
             ResultSet rs = ps.executeQuery();
-            while (rs.next()) {
+            while (rs.next())
                 return rs.getInt(1);
-            }
         } catch (SQLException ex) {
         }
         return 0;
     }
+    private static final String INSERT_RECIPE = "INSERT INTO [dbo].[Recipe]\n"
+            + "           ([Name],[Description],[Like],[Save],[Comment]\n"
+            + "           ,[Video],[DatePost],[LastDateEdit],[PrepTime],[CookTime]\n"
+            + "           ,[IsDeleted],[UserID])\n"
+            + "           OUTPUT INSERTED.ID"
+            + "    VALUES (?           ,?           ,?           ,?           ,?\n"
+            + "           ,?           ,?           ,?           ,?           ,?\n"
+            + "           ,?           ,?)";
 
+    public static boolean addRecipe (String recipeName, String recipeDescription,
+            String videoUrl, List<Part> pictureList, String[] ingreName,
+            String[] ingreAmount, List<Part> instImgList,
+            String[] instDescription, int prepareTime, int cookTime, int userId ,int cover,ServletContext sc) throws SQLException {
+        Connection conn = DBUtils.getConnection();
+        PreparedStatement ps = null;
+        ResultSet rs = null;
+        String sql = INSERT_RECIPE;
+        System.out.println("addrecipe = ");
+        String[] returnId = {"ID"};
+
+        try {
+            conn.setAutoCommit(false);
+            ps = conn.prepareStatement(sql, returnId);
+            //set value
+            ps.setString(1, recipeName);
+            ps.setString(2, recipeDescription);
+            ps.setInt(3, 0);
+            ps.setInt(4, 0);
+            ps.setInt(5, 0);
+            ps.setString(6, videoUrl);
+            ps.setTimestamp(7, new Timestamp(System.currentTimeMillis()));
+            ps.setTimestamp(8, null);
+            ps.setInt(9, prepareTime);
+            ps.setInt(10, cookTime);
+            ps.setBoolean(11, false);
+            ps.setInt(12, userId);
+            rs = ps.executeQuery();
+            int recipeId = -1;
+            if (rs.next()) {
+                recipeId = rs.getInt("ID");
+                PictureDAO.addPicturesRecipe(pictureList,cover,recipeId,conn,sc);
+                IngredientDAO.addIngredientsRecipe(ingreName,ingreAmount,recipeId,conn,sc);
+                IntructionDAO.addInstructionsRecipe(instImgList,instDescription,recipeId,conn,sc);
+            }
+            conn.commit();
+            conn.setAutoCommit(true);
+            return true;
+        } catch (Exception e) {
+            System.out.println("Add Recipe ERROR:" + e.getMessage());
+            e.printStackTrace();
+        } finally {
+            if (conn != null)
+                conn.setAutoCommit(true);
+            if (ps != null)
+                ps.close();
+            if (rs != null)
+                rs.close();
+        }
+        return false;
+    }
     private static final String TOP8_MOST_RATED_SQL = "SELECT TOP 8 Recipe.ID, Name, Description, [Like], [Save], Comment, DatePost, LastDateEdit, Img, UserID, LastName + ' ' + FirstName AS Username\n"
             + "FROM Recipe\n"
             + "JOIN [User] ON Recipe.UserID = [User].ID\n"
@@ -167,7 +231,7 @@ public class RecipeDAO {
             + "WHERE IsDeleted = 0 AND IsCover = 1\n"
             + "ORDER BY [Like] DESC";
 
-    public static List<Recipe> getTop8MostRatedRecipe() {
+    public static List<Recipe> getTop8MostRatedRecipe () {
 
         try {
             Connection conn = DBUtils.getConnection();
@@ -191,7 +255,8 @@ public class RecipeDAO {
             }
             return list;
         } catch (SQLException ex) {
-            System.out.println("getMostRatedRecipe Query Error!" + ex.getMessage());
+            System.out.println("getMostRatedRecipe Query Error!" + ex.
+                    getMessage());
         }
         return null;
     }
@@ -203,7 +268,7 @@ public class RecipeDAO {
             + "WHERE IsDeleted = 0 AND IsCover = 1\n"
             + "ORDER BY [DatePost] DESC";
 
-    public static List<Recipe> getTop8MostRecentRecipe() {
+    public static List<Recipe> getTop8MostRecentRecipe () {
         try {
             Connection conn = DBUtils.getConnection();
             PreparedStatement ps = conn.prepareStatement(TOP8_MOST_RECENT_SQL);
@@ -226,7 +291,8 @@ public class RecipeDAO {
             }
             return list;
         } catch (SQLException ex) {
-            System.out.println("getTop8MostRecentRecipe Query Error!" + ex.getMessage());
+            System.out.println("getTop8MostRecentRecipe Query Error!" + ex.
+                    getMessage());
         }
         return null;
     }
@@ -240,7 +306,7 @@ public class RecipeDAO {
             + "            ORDER BY Recipe.[Like] DESC\n"
             + "		   OFFSET ? ROWS FETCH NEXT 8 ROWS ONLY";
 
-    public static List<Recipe> showSavedRecipe(int userID, int index) {
+    public static List<Recipe> showSavedRecipe (int userID, int index) {
         try {
             Connection conn = DBUtils.getConnection();
             PreparedStatement ps = conn.prepareStatement(SAVED_RECIPES_LIST_SQL);
@@ -264,12 +330,13 @@ public class RecipeDAO {
             }
             return list;
         } catch (SQLException ex) {
-            System.out.println("getMostRatedRecipe Query Error!" + ex.getMessage());
+            System.out.println("getMostRatedRecipe Query Error!" + ex.
+                    getMessage());
         }
         return null;
     }
 
-    public static int getAllSavedRecipe(int id) {
+    public static int getAllSavedRecipe (int id) {
         String sql = "SELECT count(Recipe.ID)\n"
                 + "                     FROM [User]\n"
                 + "		      JOIN [Save] ON [Save].UserID = [User].ID\n"
@@ -281,9 +348,8 @@ public class RecipeDAO {
             PreparedStatement ps = conn.prepareStatement(sql);
             ps.setInt(1, id);
             ResultSet rs = ps.executeQuery();
-            while (rs.next()) {
+            while (rs.next())
                 return rs.getInt(1);
-            }
         } catch (SQLException ex) {
         }
         return 0;
@@ -295,7 +361,7 @@ public class RecipeDAO {
             + "on pic.RecipeID=recipe.ID\n"
             + "   where recipe.ID = ?";
 
-    public static ArrayList<String> listPicture(int recipeID) throws SQLException {
+    public static ArrayList<String> listPicture (int recipeID) throws SQLException {
         ArrayList<String> listPicture = new ArrayList<>();
         Recipe recipe = new Recipe();
         Connection conn = null;
@@ -323,7 +389,7 @@ public class RecipeDAO {
             + "join [dbo].[Recipe] re on ingreRe.RecipeID =re.ID\n"
             + "where re.ID = ?";
 
-    public List<Ingredient> listIngredient(int recipeID) throws SQLException {
+    public List<Ingredient> listIngredient (int recipeID) throws SQLException {
         List<Ingredient> listIgre = new ArrayList<>();
         Connection conn = null;
         PreparedStatement ptm = null;
@@ -352,8 +418,8 @@ public class RecipeDAO {
             + "ON instruc.RecipeID = recipe.ID\n"
             + "WHERE recipe.ID = ?";
 
-    public List<Intruction> listStep(int recipeID) throws SQLException {
-        List<Intruction> liststep = new ArrayList<>();
+    public List<Instruction> listStep (int recipeID) throws SQLException {
+        List<Instruction> liststep = new ArrayList<>();
         Connection conn = null;
         PreparedStatement ptm = null;
         ResultSet rs = null;
@@ -366,8 +432,8 @@ public class RecipeDAO {
                 int step = rs.getInt("InsStep");
                 String detailStep = rs.getString("Detail");
                 String imgStep = rs.getString("Img");
-                Intruction intruc;
-                intruc = new Intruction(step, detailStep, imgStep);
+                Instruction intruc;
+                intruc = new Instruction(step, detailStep, imgStep);
                 liststep.add(intruc);
             }
 
@@ -393,7 +459,7 @@ public class RecipeDAO {
             + "WHERE R.UserID = ? AND R.IsDeleted = 0 AND P.IsCover = 1)\n"
             + "ORDER BY DatePost DESC";
 
-    public static ArrayList<Recipe> getPostHomeRecipes(int userID) {
+    public static ArrayList<Recipe> getPostHomeRecipes (int userID) {
         try {
             Connection conn = DBUtils.getConnection();
             PreparedStatement ps = conn.prepareStatement(POST_HOME_RECIPE_SQL);
@@ -416,7 +482,8 @@ public class RecipeDAO {
             }
             return list;
         } catch (SQLException ex) {
-            System.out.println("getPostHomeRecipes Query Error!" + ex.getMessage());
+            System.out.println("getPostHomeRecipes Query Error!" + ex.
+                    getMessage());
         } catch (Exception ex) {
             System.out.println("Error: " + ex.getMessage());
         }
@@ -430,10 +497,11 @@ public class RecipeDAO {
             + "WHERE R.UserID = ? AND R.IsDeleted = 0 AND P.IsCover = 1\n"
             + "ORDER BY DatePost DESC";
 
-    public static ArrayList<Recipe> getPostProfileRecipes(int userID) {
+    public static ArrayList<Recipe> getPostProfileRecipes (int userID) {
         try {
             Connection conn = DBUtils.getConnection();
-            PreparedStatement ps = conn.prepareStatement(POST_PROFILE_RECIPE_SQL);
+            PreparedStatement ps = conn.
+                    prepareStatement(POST_PROFILE_RECIPE_SQL);
             ps.setInt(1, userID);
             ResultSet rs = ps.executeQuery();
             ArrayList<Recipe> list = new ArrayList<Recipe>();
@@ -452,7 +520,8 @@ public class RecipeDAO {
             }
             return list;
         } catch (SQLException ex) {
-            System.out.println("getPostProfileRecipes Query Error!" + ex.getMessage());
+            System.out.println("getPostProfileRecipes Query Error!" + ex.
+                    getMessage());
         } catch (Exception ex) {
             System.out.println("Error: " + ex.getMessage());
         }
@@ -464,7 +533,7 @@ public class RecipeDAO {
             + "on recipe.UserID =baker.ID\n"
             + "WHERE  recipe.ID =?";
 
-    public Recipe recipeDetail(int recipeID) {
+    public Recipe recipeDetail (int recipeID) {
         Recipe recipe = null;
         Connection conn = null;
         PreparedStatement ptm = null;
@@ -483,8 +552,10 @@ public class RecipeDAO {
                 int prepTime = rs.getInt("PrepTime");
                 int cookTime = rs.getInt("CookTime");
                 int comment = rs.getInt("Comment");
-                
-                recipe = new Recipe(recipeID, name, description, like, save, comment, rs.getTimestamp("DatePost"), rs.getTimestamp("LastDateEdit"), prepTime, cookTime);
+
+                recipe = new Recipe(recipeID, name, description, like, save, comment, rs.
+                        getTimestamp("DatePost"), rs.
+                        getTimestamp("LastDateEdit"), prepTime, cookTime);
             }
         } catch (Exception e) {
             System.out.println("System have error !!!" + e);
@@ -497,7 +568,7 @@ public class RecipeDAO {
             + "ON recipe.[UserID]= baker.[ID]\n"
             + "WHERE recipe.[ID] = ?";
 
-    public String recipeVideo(int userID) {
+    public String recipeVideo (int userID) {
         Connection conn = null;
         PreparedStatement ptm = null;
         ResultSet rs = null;
@@ -530,7 +601,7 @@ public class RecipeDAO {
     private static final String All_NAME = "SELECT   recipe.Name\n"
             + "FROM [dbo].[Recipe]recipe ";
 
-    public List<Recipe> listRelate(int recipeID) throws SQLException {
+    public List<Recipe> listRelate (int recipeID) throws SQLException {
         List<Recipe> listRecipe = new ArrayList<>();
         HashMap<Integer, String> relateListRecipe = new HashMap<>();
         Connection cnn = null;
@@ -548,9 +619,9 @@ public class RecipeDAO {
             ptm.setInt(1, recipeID);
             ptm.executeQuery();
             if (!ingre.isEmpty()) {
-                for (int i = 1; i < ingre.size(); i++) {
-                    secondElements += " OR igre.Name =" + "\'" + ingre.get(i).getName() + "\'";
-                }
+                for (int i = 1; i < ingre.size(); i++)
+                    secondElements += " OR igre.Name =" + "\'" + ingre.get(i).
+                            getName() + "\'";
                 thirdElements = RELATED_INGREDIENTS + secondElements;
                 ptm = cnn.prepareStatement(thirdElements);
                 ptm.setString(1, ingre.get(0).getName());
@@ -559,17 +630,17 @@ public class RecipeDAO {
 
             ptm = cnn.prepareStatement(All_NAME);
             rs = ptm.executeQuery();
-            while (rs.next()) {
+            while (rs.next())
                 if (checkNum < 8) {
                     relateListRecipe.put(checkNum, rs.getString("Name"));
                     String nameRecipe = rs.getString("Name");
 //                    Recipe recipeS = RecipeDAO.
 //                    Recipe recipeD = RecipeDAO.searchRecipebyName(nameRecipe);
-                    Recipe recipeD = RecipeDAO.searchRecipebyName(relateListRecipe.get(checkNum));
+                    Recipe recipeD = RecipeDAO.
+                            searchRecipebyName(relateListRecipe.get(checkNum));
                     listRecipe.add(recipeD);
                     checkNum++;
                 }
-            }
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -586,7 +657,7 @@ public class RecipeDAO {
             + "            			on  baker.ID =recipe.UserID\n"
             + "                        WHERE recipe.Name =? and pic.IsCover ='True'";
 
-    public static Recipe searchRecipebyName(String recipeName) {
+    public static Recipe searchRecipebyName (String recipeName) {
         Connection cnn = null;
         PreparedStatement ptm = null;
         ResultSet rs = null;
@@ -615,7 +686,8 @@ public class RecipeDAO {
     private static final String CMT_RECIPE = "INSERT INTO [dbo].[Comment]([Comment],[Rate],[DateComment],[IsDeleted],[UserID],[RecipeID])\n"
             + "VALUES (?,?,?,?,?,?)";
 
-    public static boolean commentRecipe(String comment, int UserID, int RecipeID) {
+    public static boolean commentRecipe (String comment, int UserID,
+            int RecipeID) {
         Connection cnn = null;
         PreparedStatement ptm = null;
         ResultSet rs = null;
@@ -642,7 +714,7 @@ public class RecipeDAO {
             + "            on cmt.UserID = baker.ID\n"
             + "            where cmt.RecipeID = ?";
 
-    public static List<Comment> commentList(int recipeID) {
+    public static List<Comment> commentList (int recipeID) {
         List<Comment> cmtList = new ArrayList<>();
         Connection cnn = null;
         PreparedStatement ptm = null;
@@ -666,7 +738,7 @@ public class RecipeDAO {
         return cmtList;
     }
 
-    public static ArrayList<RecipeSearch> getRecipes() {
+    public static ArrayList<RecipeSearch> getRecipes () {
         String sql1 = "SELECT P.Img, R.ID, R.Name, R.Description, R.[Like], R.Comment, R.DatePost, U.ID AS UserID, U.LastName + ' ' + U.FirstName AS Username \n"
                 + "FROM Recipe R\n"
                 + "INNER JOIN Picture P ON P.RecipeID = R.ID\n"
@@ -688,9 +760,8 @@ public class RecipeDAO {
                 PreparedStatement ps2 = conn.prepareStatement(sql2);
                 ps2.setInt(1, id);
                 ResultSet rs2 = ps2.executeQuery();
-                while (rs2.next()) {
+                while (rs2.next())
                     ingres.add(rs2.getString("Name"));
-                }
                 list.add(new RecipeSearch(rs.getInt("ID"),
                         rs.getString("Name"),
                         rs.getString("Description"),
@@ -707,7 +778,7 @@ public class RecipeDAO {
         return list;
     }
 
-    public static void main(String[] args) {
+    public static void main (String[] args) {
         System.out.println(getRecipes());
     }
 

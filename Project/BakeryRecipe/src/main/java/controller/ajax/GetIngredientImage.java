@@ -54,7 +54,7 @@ public class GetIngredientImage extends HttpServlet {
                     + "                                <input name=\"ingre-name\" readonly class=\"col text-capitalize\"  value=\"" + item.getName() + "\">\n"
                     + "                                <span>Amount:</span> \n"
                     + "                                <input name=\"ingre-amount\" class=\"col-2 bg-white ml-2 mr-4\" placeholder=\"1 \" value=\"" + amount + "\"> \n"
-                    + "                                <div class=\"item-trashbin fas fa-trash ml-auto description-button\"></div>\n"
+                    + "                                <div class=\"item-trashbin fas fa-trash ml-auto description-button\" onclick=\"this.parentElement.remove()\"></div>\n"
                     + "                            </div>");
         }
     }

@@ -1,3 +1,4 @@
+<%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html>
@@ -48,12 +49,12 @@
                             <b class="create-recipe-b d-inline-block ">Create Recipe</b>
                         </h2>
                     </div>
-                    <button class="save-button" >
+                    <button class="save-button d-none" id="submit" form="add-recipe" >
                         <b class="save-b2">Save</b>
                     </button>
                 </main>
-                <form action="AddRecipe" class="section-div col-12 col-md-10 align-content-center align-self-center"
-                      id="add-recipe" enctype="multipart/mixed" method="get" >
+                <form action="AddRecipe"  class="section-div col-12 col-md-10 align-content-center align-self-center"
+                      id="add-recipe" enctype="multipart/form-data" method="post" >
                     <div class="title-div col-12">
                         <b class="label">Title</b>
                         <input name='recipe-name' class="input col-12"  type="text" placeholder="Recipe's Name ">
@@ -81,7 +82,7 @@
                                 <div class="description-button" form="dissabled" id="to-cover-btn">
                                     Set As Cover
                                 </div>
-                                <input type="hidden" name="cover" value="">
+                                <input type="hidden" name="cover" value="0">
                                 <div class="description-button ml-2" form="dissabled" id="change-img-btn">
                                     Change Image
                                 </div>
@@ -142,6 +143,8 @@
                         </div>
 
                     </div>
+                            <div id="test"></div>
+
                     <div class="col" id="instruction">
                         <textarea class="instruction-box-input col-11  py-3 pr-3" form="disabled" name="idetail" type="text" placeholder="Paste one or multiple steps (e.g. Finely chop the garlic)"></textarea>
                         <input type="hidden" name="count" value="1">
@@ -211,6 +214,7 @@
         <script src="assets/js/validator.js"></script>
         <script src="assets/js/addrecipe.js"></script>
         <script>
+            
 //                             Validator({
 //                                 form: '#add-recipe',
 //                                 status: '.status',

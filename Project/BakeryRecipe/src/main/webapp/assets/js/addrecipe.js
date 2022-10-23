@@ -3,14 +3,23 @@
 let formElem = document.getElementById('add-recipe');
 let instructionElem = document.getElementById('instruction');
 formElem.onsubmit = e => {
-    e.preventDefault();
-}
-function submitForm(selector) {
 
-    var formElem = document.querySelector(selector);
-    var input = formElem.elements;
-    console.log(input);
-    
+    if (e.key == 'Enter')
+        e.preventDefault();
+}
+async function submitForm(selector) {
+    const form = document.getElementById('add-recipe');
+    var inputs = form.querySelectorAll('[name][count]:not([disabled])');
+    var smbtn = document.getElementById('submit');
+    const output = document.getElementById('test');
+    var cover = document.querySelector('[name=cover]');
+    if (!cover.value)
+        cover.value = 0;
+    for (var i = 0; i < inputs.length; i++) {
+        inputs[i].setAttribute('name', inputs[i].getAttribute('name') + inputs[i].getAttribute('count'));
+    }
+    console.log(output);
+    smbtn.click();
 }
 //add video and picture
 var swiper = new Swiper(".swiper", {
@@ -23,12 +32,11 @@ var appendNumber = 4;
 var prependNumber = 1;
 
 // video and image
-
 document.querySelector("#add-video-btn").onclick = () => addVideo('#img-content');
 document.querySelector("#add-img-btn").onclick = () => addImage('#img-content');
 document.querySelector("#img-content .add-img").onclick = () => addImage('#img-content');
-//document.querySelector('#remove-image').onclick = e => removeImage(e.target.getAttritube(''));
-//
+document.querySelector('#remove-image').onclick = () => removeImage('.video-and-image .selected');
+//this 
 async function addVideo(container) {
     var container = document.querySelector(container);
     var videoBtn = document.querySelector("#add-video-btn");
@@ -44,6 +52,7 @@ async function addVideo(container) {
         btn: videoBtn,
     });
 }
+
 // this will change the value of the video class
 async function showBox(option) {
     var box = document.querySelector(option.selector);
@@ -111,9 +120,12 @@ function showVideo(option, inputs) {
     option.video.style.backgroundImage = 'url(' + imgUrl + ')';
 }
 function hideVideo(option) {
+    option.input.value = '';
     option.url.value = '';
+    option.url.classList.remove('border-success');
     option.btn.innerHTML = option.btn.innerHTML.replace('Update', "Add");
     option.video.classList.add('d-none');
+    option.video.classList.remove('selected');
 }
 // add image 
 function addImage(container) {
@@ -123,6 +135,7 @@ function addImage(container) {
     inputPicture.setAttribute('type', 'file');
     inputPicture.setAttribute('name', 'video-image');
     inputPicture.setAttribute('class', 'd-none');
+    inputPicture.setAttribute('count', '0');
     //    inputPicture.setAttribute('onclick', 'changeImg(this)');
     span.classList = "col-2 p-0 swiper-slide hover-button-2 list-group-item rounded ";
     span.appendChild(inputPicture);
@@ -132,12 +145,38 @@ function addImage(container) {
         selectContent(container, e.target);
     };
     inputPicture.onchange = e => {
-        changeImg(e.target.parentElement, URL.createObjectURL(e.target.files[0]), e);
+        changeImg(e.target.parentElement, getObjURL(e.target.files[0]), e);
         swiper.appendSlide(span);
-
+        updateCount(container);
     };
 }
+function removeImage(selector) {
+    var elem = document.querySelector(selector);
+    var display = document.querySelector('#display-img');
+    console.log(elem);
+    if (elem.classList.contains("cover")) {
+        document.querySelector('[name=cover]').setAttribute('value', 0);
+    }
+    if (elem.classList.contains("video")) {
+        hideVideo({
+            input: document.querySelector('#img-content input'),
+            url: document.querySelector("[name=vurl]"),
+            video: elem,
+            btn: document.querySelector("#add-video-btn")
+        });
+    } else {
+        elem.remove();
+    }
+    display.classList.add('d-none');
+}
+function updateCount(container) {
+    var inputs = container.querySelectorAll('input[count]');
+    for (var i = 0; i < inputs.length; i++) {
+        inputs[i].setAttribute('count', i);
+    }
+}
 //elem the .selected picture
+//this method will run when user select an image
 function selectContent(container, elem) {
     container.querySelector('.selected')?.classList.remove('selected');
     elem.classList.add('selected');
@@ -176,27 +215,27 @@ function selectContent(container, elem) {
 function setCover(elem) {
     elem.parentElement.querySelector('.cover')?.classList.remove('cover');
     elem.classList.add('cover');
-    var vImage = elem.parentElement.querySelectorAll('span:has(input[name=video-image])');
     var cover;
-    for (var i = 0; i < vImage.length; i++) {
-        if (vImage[i] === elem){
-            cover = i;
-        }
-    }
-    document.querySelector('[name=cover]').value = cover || 0;
+    cover = elem.querySelector('input').getAttribute('count');
+    console.log(elem);
+    document.querySelector('[name=cover]').setAttribute('value', cover);
 }
+
 async function changeDisplayImage(elem, image) {
     var inputPicture = elem.querySelector('input');
     inputPicture.click();
     inputPicture.onchange = e => {
-        changeImg(inputPicture.parentElement, URL.createObjectURL(inputPicture.files[0]), e);
+        changeImg(inputPicture.parentElement, getObjURL(inputPicture.files[0]), e);
         elem.click();
         image.style.backgroundSize = '';
     };
     elem.click();
 
 }
-
+function getObjURL(file) {
+    url = URL.revokeObjectURL(file);
+    return url || URL.createObjectURL(file);
+}
 
 
 
@@ -330,17 +369,17 @@ $('#detail .save-btn').on('click', e => {
     var detail = document.querySelector("#detail");
     var elem = document.getElementById(detail.getAttribute('viewing'));
     elem.querySelector('[name=inst-description]').value = detail.querySelector('textarea').value.replace(/^\w/, c => c.toUpperCase());
-    let elemFile = elem.querySelector('[name=inst-image]');
+    let elemFile = elem.querySelector('[name*=inst-image]');
     let detailFile = detail.querySelector('input[type=file]');
     if (detailFile.files[0]) {
         let clone = detailFile.cloneNode(true);
-        //<input name="inst-image" id="inst-image1" class="d-none" readonly="" type="file" accept="image/*" onchange="changeIngrImg(this.parentElement, window.URL.createObjectURL(this.files[0]), event)">
+        //<input name="inst-image1" id="inst-image1" class="d-none" readonly="" type="file" accept="image/*" onchange="changeIngrImg(this.parentElement, window.URL.createObjectURL(this.files[0]), event)">
         clone.setAttribute('name', elemFile.name);
         clone.setAttribute('onchange', elemFile.getAttribute('onchange'));
         clone.setAttribute('accept', elemFile.accept);
         console.log(clone.value);
         elemFile.parentElement.insertBefore(clone, elemFile);
-        changeImg(clone.parentElement, window.URL.createObjectURL(clone.files[0]))
+        changeImg(clone.parentElement, getObjURL(clone.files[0]))
         elemFile.remove();
     }
 

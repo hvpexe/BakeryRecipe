@@ -45,27 +45,26 @@ public class LoginController extends HttpServlet {
         HttpSession session = request.getSession();
         try {
             String code = request.getParameter("code");
+            //check if user is not login with google
             if (code == null || code.isEmpty()) {
                 String email = request.getParameter("email");
-                String password = request.getParameter("password");
-                if (!UserDAO.checkDuplicateEmail(email)) {
-                    request.setAttribute("LOGIN_ERROR", "Email Not Found!");
-                } else if (password.length() < 8) {
-                    request.setAttribute("LOGIN_ERROR", "Password must be at least 8 characters!");
-                } else {
-                    loginUser = UserDAO.login(email, password);
+                String password = (String) request.getAttribute("password");
+
+                //set user password to ""
+                loginUser = UserDAO.login(email, password);
 //                System.out.println("Login normal" + loginUser);
-                    if (loginUser == null) {
-                        request.setAttribute("LOGIN_ERROR", "Login Failed! Wrong email of Password");
-                    }
+                if (loginUser == null) {
+                    request.setAttribute("LOGIN_ERROR", "Login Failed! Wrong email or Password");
                 }
             } else {
+                //login with google
                 loginUser = (User) request.getAttribute("LOGIN_USER");
-//                System.out.println("Login Google" + loginUser);s
+//                System.out.println("Login Google" + loginUser);
             }
         } catch (Exception e) {
             log("Error at LoginController" + e.toString());
         } finally {
+            //this validation is only for people login with password
             if (loginUser != null && request.getAttribute("LOGIN_ERROR") == null) {
                 session.setAttribute("login", loginUser);
                 String roleID = loginUser.getRole();
@@ -99,7 +98,7 @@ public class LoginController extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        processRequest(request, response);
+        request.getRequestDispatcher(ERROR).forward(request, response);
     }
 
     /**
