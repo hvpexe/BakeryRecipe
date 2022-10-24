@@ -41,12 +41,12 @@ public class UserDAO {
                 + "WHERE ID = ? AND Password = ?";
         try {
             PreparedStatement ps = conn.prepareStatement(sql);
-            System.out.println(userID+" "+password);
+            System.out.println(userID + " " + password);
             ps.setString(1, userID);
             ps.setString(2, password);
             ResultSet rs = ps.executeQuery();
             if (rs.next()) {
-            System.out.println(password);
+                System.out.println(password);
                 return true;
             }
         } catch (Exception e) {
@@ -580,9 +580,47 @@ public class UserDAO {
         return check;
     }
 
+    private static final String SHOW_USER_LIST = "SELECT \n"
+            + "[ID],[Role],[Email],[Password],[Avatar],\n"
+            + "[LastName] + ' ' + [FirstName] AS [Username],[Gender],[Phone],\n"
+            + "[Address],[DateRegister],[IsActive],[StoreID], [Birthday]\n"
+            + "FROM [BakeryRecipe].[dbo].[User]";
+
+    public static List<User> showUserList() {
+        try {
+            Connection conn = DBUtils.getConnection();
+            PreparedStatement ps = conn.prepareStatement(SHOW_USER_LIST);
+            ResultSet rs = ps.executeQuery();
+            List<User> list = new ArrayList<>();
+            while (rs.next()) {
+                User user = new User(rs.getInt("ID"), 
+                        rs.getString("Role"), 
+                        rs.getString("Email"), 
+                        rs.getString("Password"), 
+                        rs.getString("Avatar"), 
+                        rs.getString("Username"), 
+                        rs.getString("Gender"), 
+                        rs.getString("Phone"), 
+                        rs.getString("Address"), 
+                        rs.getDate("DateRegister"), 
+                        rs.getBoolean("IsActive"), 
+                        rs.getInt("StoreID"), 
+                        rs.getDate("Birthday"));
+                list.add(user);
+            }
+            return list;
+        } catch (SQLException ex) {
+            System.out.println("UserList Query Error!" + ex.
+                    getMessage());
+        }
+        return null;
+    }
+
     public static void main(String[] args) {
-        boolean check = UserDAO.checkFollowUser(3, 7);
-        System.out.println(check);
+        List<User> user = UserDAO.showUserList();
+        for (User o : user) {
+            System.out.println(o);
+        }
     }
 
 }

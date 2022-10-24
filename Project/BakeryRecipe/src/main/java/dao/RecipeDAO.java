@@ -779,7 +779,10 @@ public class RecipeDAO {
     }
 
     public static void main (String[] args) {
-        System.out.println(getRecipes());
+        List<Recipe> list = RecipeDAO.getMostRatedRecipe(1);
+        for(Recipe o: list){
+            System.out.println(o);
+        }
     }
 
 }

@@ -26,11 +26,27 @@ public class User {
     private String phone;
     private String address;
     private Date dateRegister;
-    private boolean isActive = false;
+    private boolean isActive;
     private int storeID;
     private Date birthday;
 
     public User() {
+    }
+    
+    public User(int id, String role, String email, String password, String avatar, String name, String gender, String phone, String address, Date dateRegister, boolean isActive, int storeID, Date birthday) {
+        this.id = id;
+        this.role = role;
+        this.email = email;
+        this.password = password;
+        this.avatar = avatar;
+        this.name = name;
+        this.gender = gender;
+        this.phone = phone;
+        this.address = address;
+        this.dateRegister = dateRegister;
+        this.isActive = isActive;
+        this.storeID = storeID;
+        this.birthday = birthday;
     }
 
     public User(int id, String avatar, String name) {
@@ -93,6 +109,12 @@ public class User {
             String Address, Date DateRegister, int StoreID, Date Birthday) {
         this(ID, Role, Email, Password, Avatar, FirstName, LastName, Gender, Phone, Address, DateRegister, true, StoreID, Birthday);
     }
+
+    
+
+    
+    
+    
 
     public int getId() {
         return id;

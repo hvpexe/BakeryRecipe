@@ -1,6 +1,7 @@
 package com.bakeryRecipe.test;
 
 
+import dao.RecipeDAO;
 import dao.UserDAO;
 import dto.Recipe;
 import dto.User;
@@ -65,7 +66,9 @@ public class LoginPageTesting {
     }
     public static void main(String[] args) {
         
-        User user = UserDAO.getUserByID(3);
-        System.out.println(user);
+        List<User> list = UserDAO.showUserList();
+        for (User o : list){
+            System.out.println(o);
+        }
     }
 }
