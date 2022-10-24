@@ -57,9 +57,7 @@
                                     <img class="recipe-img" alt=""
                                      src="${cc.cover}" />
                                 </a>
-                                <div class="bookmark">
-                                    Save <i class="fa-regular fa-bookmark"></i>
-                                </div>
+                                
                                 <div class="react">
                                     <div>${cc.like} likes</div>
                                     <div>${cc.comment} comments</div>

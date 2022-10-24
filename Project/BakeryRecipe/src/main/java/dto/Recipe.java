@@ -35,6 +35,7 @@ public class Recipe {
     private int userID; //id người đăng recipe
     private String avatar; //avatar của người đăng recipe
     private String username; //dùng để lưu cả lastname + firstname của user
+    
 
     public Recipe() {
     }

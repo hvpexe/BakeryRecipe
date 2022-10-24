@@ -5,6 +5,7 @@
 package controller.recipe;
 
 import dao.RecipeDAO;
+import dao.UserDAO;
 import dto.Recipe;
 import dto.User;
 import java.io.IOException;
