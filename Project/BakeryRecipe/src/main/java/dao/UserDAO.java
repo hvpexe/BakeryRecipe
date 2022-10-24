@@ -582,7 +582,7 @@ public class UserDAO {
 
     private static final String SHOW_USER_LIST = "SELECT \n"
             + "[ID],[Role],[Email],[Password],[Avatar],\n"
-            + "[LastName] + ' ' + [FirstName] AS [Username],[Gender],[Phone],\n"
+            + "[LastName] , [FirstName],[Gender],[Phone],\n"
             + "[Address],[DateRegister],[IsActive],[StoreID], [Birthday]\n"
             + "FROM [BakeryRecipe].[dbo].[User]";
 
@@ -593,19 +593,35 @@ public class UserDAO {
             ResultSet rs = ps.executeQuery();
             List<User> list = new ArrayList<>();
             while (rs.next()) {
-                User user = new User(rs.getInt("ID"), 
-                        rs.getString("Role"), 
-                        rs.getString("Email"), 
-                        rs.getString("Password"), 
-                        rs.getString("Avatar"), 
-                        rs.getString("Username"), 
-                        rs.getString("Gender"), 
-                        rs.getString("Phone"), 
-                        rs.getString("Address"), 
-                        rs.getDate("DateRegister"), 
-                        rs.getBoolean("IsActive"), 
-                        rs.getInt("StoreID"), 
-                        rs.getDate("Birthday"));
+                String fullName = rs.getString("LastName") + rs.getString("FirstName");
+//                User user = new User(rs.getInt("ID"),
+//                        rs.getString("Role"),
+//                        rs.getString("Email"),
+//                        rs.getString("Password"),
+//                        rs.getString("Avatar"),
+//                        fullName,
+//                        rs.getString("Gender"),
+//                        rs.getString("Phone"),
+//                        rs.getString("Address"),
+//                        rs.getDate("DateRegister"),
+//                        rs.getBoolean("IsActive"),
+//                        rs.getInt("StoreID"),
+//                        rs.getDate("Birthday"));
+
+                int ID = rs.getInt("ID");
+                String role = rs.getString("Role");
+                String email = rs.getString("Email");
+                String avatar = rs.getString("Avatar");
+                String password = rs.getString("Password");
+                String FirstName = rs.getString("FirstName");
+                String LastName = rs.getString("LastName");
+                String Gender = rs.getString("Gender");
+                String phone = rs.getString("Phone");
+                String address = rs.getString("Address");
+                Date DateRegister = rs.getDate("DateRegister");
+                boolean isActive = rs.getBoolean("IsActive");
+                int StoreId = rs.getInt("StoreID");
+                User user = new User(ID, role, email, password, avatar, FirstName, LastName, Gender, phone, address, DateRegister, isActive, StoreId);
                 list.add(user);
             }
             return list;
@@ -617,7 +633,8 @@ public class UserDAO {
     }
 
     public static void main(String[] args) {
-        List<User> user = UserDAO.showUserList();
+        List<User> user = new ArrayList<>();
+        user = UserDAO.showUserList();
         for (User o : user) {
             System.out.println(o);
         }

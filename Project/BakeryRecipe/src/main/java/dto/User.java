@@ -4,7 +4,10 @@
  */
 package dto;
 
+import dao.UserDAO;
 import java.sql.Date;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  *
@@ -33,6 +36,22 @@ public class User {
     public User() {
     }
     
+//    public User(int id, String role, String email, String password, String avatar, String name, String gender, String phone, String address, Date dateRegister, boolean isActive, int storeID, Date birthday) {
+//        this.id = id;
+//        this.role = role;
+//        this.email = email;
+//        this.password = password;
+//        this.avatar = avatar;
+//        this.name = name;
+//        this.gender = gender;
+//        this.phone = phone;
+//        this.address = address;
+//        this.dateRegister = dateRegister;
+//        this.isActive = isActive;
+//        this.storeID = storeID;
+//        this.birthday = birthday;
+//    }
+
     public User(int id, String role, String email, String password, String avatar, String name, String gender, String phone, String address, Date dateRegister, boolean isActive, int storeID, Date birthday) {
         this.id = id;
         this.role = role;
@@ -48,6 +67,7 @@ public class User {
         this.storeID = storeID;
         this.birthday = birthday;
     }
+    
 
     public User(int id, String avatar, String name) {
         this.id = id;
@@ -248,4 +268,10 @@ public class User {
         return "User{" + "ID=" + id + ", Role=" + role + ", Email=" + email + ", Password=" + password + ", Avatar=" + avatar + ", FirstName=" + firstName + ", LastName=" + lastName + ", Gender=" + gender + ", Phone=" + phone + ", Address=" + address + ", DateRegister=" + dateRegister + ", IsActive=" + isActive + ", StoreID=" + storeID + '}';
     }
 
-}
+     public static void main(String[] args) {
+        List<User> user  = new ArrayList<>();
+               user = UserDAO.showUserList();
+        for (User o : user) {
+            System.out.println(o);
+        }
+}}

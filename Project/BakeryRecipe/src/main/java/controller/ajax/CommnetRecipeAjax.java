@@ -34,20 +34,20 @@ public class CommnetRecipeAjax extends HttpServlet {
             baker = UserDAO.getUserByID(bakerID);
             RecipeDAO recipeD = new RecipeDAO();
             recipeD.commentRecipe(comment, bakerID, recipeID);
-            out.print("    <img class=\"rounded-circle mr-2\"\n" +
-"                                             src=\"./"+baker.getAvatar()+"\" alt=\"avatar\"\n" +
-"                                             width=\"60\" height=\"60\" />\n" +
-"                                        <div class=\"card w-100\">\n" +
-"                                            <div class=\"card-body p-4\">\n" +
-"                                                <div class=\"\">\n" +
-"                                                    <h5>"+baker.getName()+"</h5>\n" +
-"                                                    <p class=\"small\">3 hours ago</p>\n" +
-"                                                    <p>\n" +
-"                                                        "+comment+"\n" +
-"                                                    </p>\n" +
-"                                                </div>\n" +
-"                                            </div>\n" +
-"                                        </div>");
+            out.print("    <img class=\"rounded-circle mr-2\"\n"
+                    + "                                             src=\"" + baker.getAvatar() + "\" alt=\"avatar\"\n"
+                    + "                                             width=\"60\" height=\"60\" />\n"
+                    + "                                        <div class=\"card w-100\">\n"
+                    + "                                            <div class=\"card-body p-4\">\n"
+                    + "                                                <div class=\"\">\n"
+                    + "                                                    <h5>" + baker.getName() + "</h5>\n"
+                    + "                                                    <p class=\"small\">3 hours ago</p>\n"
+                    + "                                                    <p>\n"
+                    + "                                                        " + comment + "\n"
+                    + "                                                    </p>\n"
+                    + "                                                </div>\n"
+                    + "                                            </div>\n"
+                    + "                                        </div>");
 
         }
     }

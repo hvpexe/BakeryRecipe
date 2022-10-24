@@ -223,10 +223,9 @@
                                 <!--test list_cmt-->
 
                                 <c:forEach items="${COMMENT_LIST}" var="cmt">
-                                    
                                     <div class="d-flex flex-start mb-4"  id="show-comment" >
                                         <img class="rounded-circle mr-2"
-                                             src="./assets/images/avt/${cmt.avatar}" alt="avatar"
+                                             src="assets/images/avt/${cmt.avatar}" alt="avatar"
                                              width="60" height="60" />
                                         <div class="card w-100">
                                             <div class="card-body p-4">
@@ -426,6 +425,7 @@
                         console.log(response);
                         var cmtShow = document.getElementById("show-comment");
                         cmtShow.innerHTML += response;
+                        
                     },
                     error: function (xhr) {
                         console.log("that bai");

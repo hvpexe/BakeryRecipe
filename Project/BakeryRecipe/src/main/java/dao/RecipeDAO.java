@@ -9,6 +9,7 @@ import dto.Ingredient;
 import dto.Instruction;
 import dto.Recipe;
 import dto.RecipeSearch;
+import dto.User;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -779,10 +780,13 @@ public class RecipeDAO {
     }
 
     public static void main (String[] args) {
-        List<Recipe> list = RecipeDAO.getMostRatedRecipe(1);
-        for(Recipe o: list){
-            System.out.println(o);
-        }
+//        List<Recipe> list = RecipeDAO.getMostRatedRecipe(1);
+//        for(Recipe o: list){
+//            System.out.println(o);
+//        }
+    
+  List<User> user  = new ArrayList<>();
+           user = UserDAO.showUserList();
     }
 
 }
