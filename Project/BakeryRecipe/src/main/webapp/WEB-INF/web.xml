@@ -138,7 +138,7 @@
     </servlet-mapping>
     <servlet-mapping>
         <servlet-name>CommnetRecipeAjax</servlet-name>
-        <url-pattern>/CommnetRecipeAjax</url-pattern>
+        <url-pattern>/ajax/CommnetRecipeAjax</url-pattern>
     </servlet-mapping>
     <servlet-mapping>
         <servlet-name>CommentController</servlet-name>

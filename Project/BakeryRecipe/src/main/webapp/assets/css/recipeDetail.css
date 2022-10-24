@@ -39,7 +39,7 @@ body {
 }
 
 .first-div {
-    /*display: flex;*/
+    display: inline-block;
     justify-content: space-between;
 }
 

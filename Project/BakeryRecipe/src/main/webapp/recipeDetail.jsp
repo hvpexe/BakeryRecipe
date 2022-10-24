@@ -73,14 +73,15 @@
 
                             <!--followButton(this,'Saved','Not Saved')-->
                             <!--followButton(this,'Like','UnLike')-->
+                            <div class="first-div">
+                                <c:if test="${sessionScope.login.id == USER_DETAIL.id}">
+                                    <span class="text-nowrap">
+                                        <a href="#" class="btn btn-style2"><i class="fa-regular fa-pen-to-square"></i> Edit</a>
+                                    </span>
+                                </c:if>
+                            </div>
                         </span>
-                        <div class="first-div">
-                            <c:if test="${sessionScope.login.id == USER_DETAIL.id}">
-                                <span class="text-nowrap">
-                                    <a href="#" class="btn btn-style2"><i class="fa-regular fa-pen-to-square"></i> Edit</a>
-                                </span>
-                            </c:if>
-                        </div>
+
 
                         <div class="recipe-name">
                             <!--White Chocolate Lemon Cupcakes White Chocolate Lemon Cupcakes-->
@@ -189,25 +190,12 @@
                                              src="${sessionScope.login.avatar}" alt="avatar"
                                              width="60" height="60" />
                                         <div class="w-100">
-                                            <form action="CommentController">
-                                                <div class="form-outline">
-                                                    <input class="form-control" id="textAreaExample" rows="4" type="textarea" name="txtCmt">
-                                                    <input type="hidden" name="bakerID" value="${sessionScope.login.id}">
-                                                    <input type="hidden" name="recipeID" value="${RECIPE_DETAIL.id}"
-                                                           <!--<textarea class="form-control" id="textAreaExample" rows="4"></textarea>-->
-                                                    <!--<label class="form-label" for="textAreaExample">What is your view?</label>-->
-                                                </div>
-                                                <div>
-                                                    <!--                                                    <button type="button" class="btn btn-style1 float-right">
-                                                                                                            Send <i class="fas fa-long-arrow-alt-right ms-1"></i>
-                                                                                                        </button>-->
-                                                </div>
-                                            </form>
-                                            <button  onclick="commentFunction()"> Load Comment</button>
+                                            <div class="form-outline">
+                                                <input  onkeyup="Comment(this,event)" class="form-control" id="textAreaExample" rows="4" type="textarea" name="txtCmt" value="">
+                                            </div>
                                         </div>
-                                    </div>
+                                    </div>  
                                 </div>
-
                                 <div class="d-flex flex-start mb-4">
                                     <img class="rounded-circle mr-2"
                                          src="https://mdbcdn.b-cdn.net/img/Photos/Avatars/img%20(32).webp" alt="avatar"
@@ -235,7 +223,8 @@
                                 <!--test list_cmt-->
 
                                 <c:forEach items="${COMMENT_LIST}" var="cmt">
-                                    <div class="d-flex flex-start mb-4">
+                                    
+                                    <div class="d-flex flex-start mb-4"  id="show-comment" >
                                         <img class="rounded-circle mr-2"
                                              src="./assets/images/avt/${cmt.avatar}" alt="avatar"
                                              width="60" height="60" />
@@ -246,13 +235,13 @@
                                                     <p class="small">3 hours ago</p>
                                                     <p>
                                                         ${cmt.comment}
-
                                                     </p>
                                                 </div>
                                             </div>
                                         </div>
                                     </div>
                                 </c:forEach>
+                                
 
                             </div>
                         </div>
@@ -294,16 +283,16 @@
         <!--PhuHV: nua dem fix bug cai nay, tien sư thang nao xoa script lam carousel ko chay -->                                             
         <script src="https://cdn.jsdelivr.net/npm/swiper@8/swiper-bundle.min.js"></script>
         <script>
-                                                const swiper = new Swiper('.swiper', {
-                                                    pagination: {
-                                                        el: '.swiper-pagination',
-                                                        clickable: true
-                                                    },
-                                                    navigation: {
-                                                        nextEl: '.swiper-button-next',
-                                                        prevEl: '.swiper-button-prev',
-                                                    },
-                                                });
+                                                        const swiper = new Swiper('.swiper', {
+                                                            pagination: {
+                                                                el: '.swiper-pagination',
+                                                                clickable: true
+                                                            },
+                                                            navigation: {
+                                                                nextEl: '.swiper-button-next',
+                                                                prevEl: '.swiper-button-prev',
+                                                            },
+                                                        });
         </script>
         <script>
             function  followButton(item, val1, val2, action) {
@@ -418,21 +407,35 @@
             }
         </script>
         <script>
-            $.ajax({
-                url: "/ajax/CommnetRecipeAjax",
-                type: "get", //send it through get method
-                data: {
-                    txtCmt: 4,
-                    bakerID: ${sessionScope.login.id},
-                    RecipeID: ${RECIPE_DETAIL.id}
-                },
-                success: function (response) {
-                    //Do Something
-                },
-                error: function (xhr) {
-                    //Do Something to handle error
-                }
-            });
+            function Comment(item,event) {
+                var textCmt = item.value;
+                if (event.key ==="Enter") {
+    
+
+
+                $.ajax({
+                    url: "ajax/CommnetRecipeAjax",
+                    type: "get", //send it through get method
+                    data: {
+                        txtCmt: textCmt,
+                        bakerID: "${sessionScope.login.id}",
+                        RecipeID: "${RECIPE_DETAIL.id}"
+                    },
+                    success: function (response) {
+                        //Do Something
+                        console.log(response);
+                        var cmtShow = document.getElementById("show-comment");
+                        cmtShow.innerHTML += response;
+                    },
+                    error: function (xhr) {
+                        console.log("that bai");
+                        //Do Something to handle error
+                    }
+                });}
+            }
+        </script>
+        <script>
+
         </script>
         <c:import url="footer.jsp"/>
     </body>
