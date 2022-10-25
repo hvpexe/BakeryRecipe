@@ -508,7 +508,16 @@ public class RecipeDAO {
             ResultSet rs = ps.executeQuery();
             ArrayList<Recipe> list = new ArrayList<Recipe>();
             while (rs.next()) {
-                Recipe recipe = new Recipe();
+                Recipe recipe = new Recipe(rs.getInt("ID"),
+                        rs.getString("Name"),
+                        rs.getString("Description"),
+                        rs.getInt("Like"), rs.getInt("Save"),
+                        rs.getInt("Comment"),
+                        rs.getTimestamp("DatePost"),
+                        rs.getString("Cover"),
+                        rs.getInt("UserID"),
+                        rs.getString("Avatar"),
+                        rs.getString("Username"));
                 list.add(recipe);
             }
             return list;
