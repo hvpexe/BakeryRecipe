@@ -26,7 +26,7 @@ public class HomeController extends HttpServlet {
      * @throws IOException      if an I/O error occurs
      */
     private static final String SUCCESS =  "home.jsp";
-    private static final String ERROR =  "login.jsp";
+    private static final String ERROR =  "landing.jsp";
     protected void processRequest (HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
