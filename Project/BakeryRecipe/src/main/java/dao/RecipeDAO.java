@@ -177,7 +177,7 @@ public class RecipeDAO {
     public static boolean addRecipe (String recipeName, String recipeDescription,
             String videoUrl, List<Part> pictureList, String[] ingreName,
             String[] ingreAmount, List<Part> instImgList,
-            String[] instDescription, int prepareTime, int cookTime, int userId ,int cover,ServletContext sc) throws SQLException {
+            String[] instDescription, int prepareTime, int cookTime, int userId, int cover, ServletContext sc) throws SQLException {
         Connection conn = DBUtils.getConnection();
         PreparedStatement ps = null;
         ResultSet rs = null;
@@ -205,9 +205,9 @@ public class RecipeDAO {
             int recipeId = -1;
             if (rs.next()) {
                 recipeId = rs.getInt("ID");
-                PictureDAO.addPicturesRecipe(pictureList,cover,recipeId,conn,sc);
-                IngredientDAO.addIngredientsRecipe(ingreName,ingreAmount,recipeId,conn,sc);
-                IntructionDAO.addInstructionsRecipe(instImgList,instDescription,recipeId,conn,sc);
+                PictureDAO.addPicturesRecipe(pictureList, cover, recipeId, conn, sc);
+                IngredientDAO.addIngredientsRecipe(ingreName, ingreAmount, recipeId, conn, sc);
+                IntructionDAO.addInstructionsRecipe(instImgList, instDescription, recipeId, conn, sc);
             }
             conn.commit();
             conn.setAutoCommit(true);
@@ -491,7 +491,8 @@ public class RecipeDAO {
         return null;
     }
 
-    private static final String POST_PROFILE_RECIPE_SQL = "SELECT U.ID AS UserID, U.FirstName + ' ' + U.LastName AS Username, U.Avatar, R.ID, R.Name, R.Description, R.[Like], R.[Save], R.Comment, R.DatePost, P.Img AS Cover\n"
+    private static final String POST_PROFILE_RECIPE_SQL
+            = "SELECT U.ID AS UserID, U.FirstName + ' ' + U.LastName AS Username, U.Avatar, R.ID, R.Name, R.Description, R.[Like], R.[Save], R.Comment, R.DatePost, P.Img AS Cover\n"
             + "FROM Recipe R\n"
             + "JOIN [User] U ON R.UserID = U.ID\n"
             + "JOIN Picture P ON P.RecipeID = R.ID\n"
@@ -507,16 +508,7 @@ public class RecipeDAO {
             ResultSet rs = ps.executeQuery();
             ArrayList<Recipe> list = new ArrayList<Recipe>();
             while (rs.next()) {
-                Recipe recipe = new Recipe(rs.getInt("ID"),
-                        rs.getString("Name"),
-                        rs.getString("Description"),
-                        rs.getInt("Like"), rs.getInt("Save"),
-                        rs.getInt("Comment"),
-                        rs.getTimestamp("DatePost"),
-                        rs.getString("Cover"),
-                        rs.getInt("UserID"),
-                        rs.getString("Avatar"),
-                        rs.getString("Username"));
+                Recipe recipe = new Recipe();
                 list.add(recipe);
             }
             return list;
@@ -528,7 +520,53 @@ public class RecipeDAO {
         }
         return null;
     }
+    private static final String SELECT_RECIPE_BY_ID
+            = "SELECT r.[ID]\n"
+            + "      ,[Name]\n"
+            + "      ,[Description]\n"
+            + "      ,[Like]\n"
+            + "      ,[Save]\n"
+            + "      ,[Comment]\n"
+            + "      ,[Video]\n"
+            + "      ,[DatePost]\n"
+            + "      ,[LastDateEdit]\n"
+            + "      ,[PrepTime]\n"
+            + "      ,[CookTime]\n"
+            + "      ,[IsDeleted]\n"
+            + "      ,[UserID]\n"
+            + "	  ,p.Img as Cover"
+            + "  FROM [Recipe] r \n"
+            + "  JOIN Picture p on p.IsCover = 1 and r.ID = p.RecipeID "
+            + "  WHERE ID = ?";
 
+    public static Recipe getRecipeByID (int id) {
+        try {
+            Connection conn = DBUtils.getConnection();
+            PreparedStatement ps = conn.
+                    prepareStatement(SELECT_RECIPE_BY_ID);
+            ps.setInt(1, id);
+            ResultSet rs = ps.executeQuery();
+            Recipe recipe = null;
+            if (rs.next()) {
+                recipe = new Recipe(id,
+                        rs.getString("Name"),
+                        rs.getString("Description"),
+                        rs.getInt("Like"),
+                        rs.getInt("Save"),
+                        rs.getInt("Comment"),
+                        rs.getTimestamp("DatePost"),
+                        rs.getTimestamp("LastDateEdit"),
+                        rs.getInt("PrepTime"), rs.getInt("CookTime"));
+                recipe.setCover(rs.getString("Cover"));
+                return recipe;
+            }
+        } catch (SQLException ex) {
+            System.out.println("Get Recipe By ID Query Error!" + ex.getMessage());
+        } catch (Exception ex) {
+            System.out.println("Error: " + ex.getMessage());
+        }
+        return null;
+    }
     private static final String COOK_DETAIL = "SELECT [Name],[Like],[Save],[Comment],[PrepTime],[CookTime],[Description],[DatePost],DatePost, LastDateEdit \n"
             + "FROM [dbo].[Recipe]recipe join [dbo].[User] baker\n"
             + "on recipe.UserID =baker.ID\n"
@@ -784,9 +822,9 @@ public class RecipeDAO {
 //        for(Recipe o: list){
 //            System.out.println(o);
 //        }
-    
-  List<User> user  = new ArrayList<>();
-           user = UserDAO.showUserList();
+
+        List<User> user = new ArrayList<>();
+        user = UserDAO.showUserList();
     }
 
 }

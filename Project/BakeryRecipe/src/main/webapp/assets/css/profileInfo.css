@@ -74,7 +74,8 @@ body {
 
 #profile-function li {
     padding: 8px 8px;
-    border: 2px solid var(--main-title-color);
+    box-sizing: border-box;
+    border: 5px outset var(--main-theme-color);
     border-radius: 20px;
     margin: 6px 0;
     color: var(--main-title-color);
@@ -107,6 +108,7 @@ body {
 
 .infor-detail>div {
     padding-left: 20px;
+    align-items: center;
 }
 
 .infor-detail:first-child {
