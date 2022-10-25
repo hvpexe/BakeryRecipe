@@ -32,28 +32,27 @@ public class IntructionDAO {
         ResultSet rs = null;
         String sql = null;
         String filename = null;
-        try{
+        String filePath = null;
+
+        try {
             sql = ADD_INSTRUCTION;
-            
-            
+
             ps = conn.prepareStatement(sql);
-            filename = "instruction_"+(index+1)+"_"+recipeId;
+            filename = "instruction_" + (index + 1) + "_" + recipeId;
+            filePath = Tools.getFilePath(filename, instImg);
             //set prepare value
-            ps.setInt(1, index+1);
+            ps.setInt(1, index + 1);
             ps.setString(2, detail);
-            ps.setString(3, filename);
+            ps.setString(3, filePath);
             ps.setInt(4, recipeId);
-            if(ps.executeUpdate()==0) {
+            if (ps.executeUpdate() == 0)
                 throw new SQLException("Add Recipe Failed!");
-            }
             Tools.saveFile(filename, instImg, sc, Instruction.IMG_PATH);
-        }finally{
-            if(ps!= null){
+        } finally {
+            if (ps != null)
                 ps.close();
-            }
-            if(rs!= null){
+            if (rs != null)
                 rs.close();
-            }
         }
         return true;
     }

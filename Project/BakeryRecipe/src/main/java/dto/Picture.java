@@ -28,6 +28,7 @@ public class Picture {
         if (img == null)
             return null;
         return IMG_PATH + img;
+        //:assets/images/recipe/picture/picture_0_2017.jpg
     }
 
     public void setImg (String Img) {

@@ -18,7 +18,7 @@ import utils.Tools;
  */
 public class Recipe {
 
-    public static final String COVER_PATH = "assets/images/recipe/";
+    public static final String COVER_PATH = Picture.IMG_PATH;
 
     private int id;
     private String name;
