@@ -29,8 +29,10 @@
                         <div class="swiper-wrapper">
                             <!-- Slides -->
                             <c:forEach items="${LIST_PIC}" var="cc">
-                                <div class="swiper-slide"><img src="./assets/images/recipe/${cc}" alt=""></div>
-                                </c:forEach>
+                                <div class="swiper-slide">
+                                    <img src="./assets/images/recipe/picture/${cc}" alt="">
+                                </div>
+                            </c:forEach>
                             <div class="swiper-slide">
                                 <iframe src="https://www.youtube.com/embed/${VIDEO_DETAIL}" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
                             </div>

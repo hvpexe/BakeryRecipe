@@ -1,4 +1,7 @@
+<%@page import="dao.UserDAO"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
+<c:set value="<%=UserDAO.getUserByID(15) %>" var="login" scope="session" />
 <!DOCTYPE html>
 <html>
     <head>
@@ -55,7 +58,7 @@
                                 </div>
                             </div>
                             <div class="row">
-                                <div class="col-md-3">Date Register</div>
+                                <div class="col-md-3">Date Registered</div>
                                 <div class="col-md-9">
                                     <input type="date" name="dateregister" value="${sessionScope.login.dateRegister}" readonly="">
                                 </div>

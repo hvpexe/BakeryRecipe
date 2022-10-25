@@ -34,14 +34,16 @@ public class PictureDAO {
         ResultSet rs = null;
         String sql = null;
         String filename = null;
+        String filePath = null;
         try {
             //set sql
             sql = INSERT_PICTURE;
             //picture path config
             System.out.println("--------------------------------------------------------------------------------------");
             filename = "picture_" + pictureIndex + "_" + recipeId;
+            filePath = Tools.getFilePath(filename, picture);
             ps = conn.prepareStatement(sql);
-            ps.setString(1, filename);
+            ps.setString(1, filePath);
             ps.setBoolean(2, isCover);
             ps.setInt(3, recipeId);
             rs = ps.executeQuery();

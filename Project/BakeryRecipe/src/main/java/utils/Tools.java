@@ -4,6 +4,8 @@
  */
 package utils;
 
+import java.awt.BorderLayout;
+import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -15,10 +17,15 @@ import java.sql.Date;
 import javax.servlet.ServletContext;
 import javax.servlet.http.Part;
 import java.io.FileOutputStream;
+import java.io.FileWriter;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
+import java.io.OutputStreamWriter;
+import java.net.URI;
 import java.net.URL;
+import javax.imageio.ImageIO;
+import org.checkerframework.checker.units.qual.A;
 
 /**
  *
@@ -36,10 +43,12 @@ public class Tools {
         }
         return null;
     }
+
     public static String[] toUTF8 (String[] inputs) {
 
-        for (String input : inputs) {
-            input = toUTF8(input);
+        for (int i = 0 ; i<inputs.length;i++) {
+            inputs[i] = toUTF8(inputs[i]);
+            System.out.println(inputs[i] + "+A");
         }
         return inputs;
     }
@@ -78,58 +87,71 @@ public class Tools {
         return string == null || string.trim().isEmpty();
     }
 
-    public static String saveFile (String filename, Part partFile, ServletContext sc, String filePath) {
+    public static String saveFile (String savedFileName, Part partFile, ServletContext sc, String filePath) {
         try {
-            String file = partFile.getSubmittedFileName();
-            if (file.isEmpty())
+            savedFileName = getFilePath(savedFileName, partFile);
+
+            if (savedFileName == null)
                 return null;
-            // refines the fileName in case it is an absolute path
-            file = new File(file).getName();
-            filename += file.substring(file.indexOf('.'), file.length());
-            String absoluteFilepath = sc.getRealPath("/" + filePath);
-            //D:\learning in FPT\Tools\UploadFile\build\web\images
-            String webFilepath = absoluteFilepath.replace("\\build", "");
+
+            String webFilePath = sc.getRealPath("/" + filePath);
+            String buildFilePath = webFilePath.
+                    replace("\\target\\BakeryRecipe-1.0-SNAPSHOT\\", "\\src\\main\\webapp\\");
 //            Tools.getFolderUpload(absoluteFilepath);
 //            Tools.getFolderUpload(webFilepath);
-//            System.out.println(id + "\n-" + absoluteFilepath + id + "\n-" + webFilepath + id);
-//        C:\Users\Admin\Documents\Github2\prj301-se1609-05\BOOKZ\Bookz\build\web\assets\images\bookCover\
-            File f = new File(absoluteFilepath);
+//absoluteFilepath = D:\learning in FPT\Ky_5\SWP391\BakeryRecipe\Project\BakeryRecipe\target\BakeryRecipe-1.0-SNAPSHOT\assets\images\avt
+//webFilepath = D:\learning in FPT\Ky_5\SWP391\BakeryRecipe\Project\BakeryRecipe\src\main\webapp\assets\images\avt
+
+            File f = new File(webFilePath);
             if (!f.exists())
                 f.mkdirs();
-            f = new File(webFilepath);
-            if (!f.exists())
-                f.mkdirs();
-            partFile.write(absoluteFilepath + filename);
-            partFile.write(webFilepath + filename);
-            System.out.println("path: " + filePath + filename);
-            return filePath + filename;
+            f = new File(buildFilePath);
+            partFile.write(webFilePath + savedFileName);
+            if (f.exists())
+                partFile.write(buildFilePath + savedFileName);
+            System.out.println("path: " + filePath + savedFileName);
+            return savedFileName;
         } catch (IOException ex) {
-            System.out.println("Error Cant Save to " + filePath + filename + "! " + ex.getMessage());
+            System.out.println("Error Cant Save to " + filePath + savedFileName + "! " + ex.getMessage());
         }
         return null;
     }
 
-    public static String saveImagefromURL (String imageUrl, String fileName, ServletContext sc, String imagePath) throws IOException {
-        URL url = new URL(imageUrl);
-        InputStream is = url.openStream();//get inputstream
-        String realPath = sc.getRealPath(imagePath);
-        String savedPath = realPath + fileName;
-        //new type of file writer
-        System.out.println(savedPath);
-        OutputStream os = new FileOutputStream(savedPath);
-        byte[] b = new byte[2048];
-        int length;
-        //write the file 
-        //it's not long this is what the saveFile function do to
-        while ((length = is.read(b)) != -1)
-            os.write(b, 0, length);
+    public static String saveImagefromURL (String imageUrl, String savedFileName, ServletContext sc, String imagePath) throws IOException {
+        BufferedImage image = null;
+        String webFilePath = null;
+        String buildFilePath = null;
+        File imageFile = null;
 
-        is.close();
-        os.close();
-        return fileName;
+        try {
+
+            URL url = new URL(imageUrl);
+            // read the url
+            image = ImageIO.read(url);
+
+            webFilePath = sc.getRealPath(imagePath);
+            imageFile = new File(webFilePath + savedFileName);
+            System.out.println(webFilePath + savedFileName);
+            ImageIO.write(image, "png", imageFile);
+
+            buildFilePath = webFilePath.replace("\\target\\BakeryRecipe-1.0-SNAPSHOT\\", "\\src\\main\\webapp\\");
+            imageFile = new File(buildFilePath + savedFileName);
+            if (new File(buildFilePath).exists())
+                ImageIO.write(image, "png", imageFile);
+            return savedFileName;
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        return null;
     }
 
-    public static void main (String[] args) {
-        PrintWriter pw = new PrintWriter(System.out, true);
+    public static String getFilePath (String filename, Part partFile) {
+        String submittedFileName = partFile.getSubmittedFileName();
+        if (submittedFileName.isEmpty())
+            return null;
+        // refines the fileName in case it is an absolute path
+        submittedFileName = new File(submittedFileName).getName();
+        filename += submittedFileName.substring(submittedFileName.indexOf('.'), submittedFileName.length());//get the '.' part
+        return filename;
     }
 }

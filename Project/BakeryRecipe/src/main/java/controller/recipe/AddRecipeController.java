@@ -78,8 +78,10 @@ public class AddRecipeController extends HttpServlet {
                 videoUrl = videoUrl.substring(index + 3, index + 14);
                 out.print("<br>" + videoUrl);
             }
-            String[] ingreName = Tools.toUTF8(request.getParameterValues("ingre-name"));//get all name
-            String[] ingreAmount = Tools.toUTF8(request.getParameterValues("ingre-amount"));//get all amount
+            String[] ingreName = request.getParameterValues("ingre-name");//get all name
+            String[] ingreAmount = request.getParameterValues("ingre-amount");//get all amount
+            ingreName=Tools.toUTF8(ingreAmount);
+            ingreAmount=Tools.toUTF8(ingreName);
             List<Part> instImgList = new LinkedList<Part>();//get all instuction images
             String[] instDescription = Tools.toUTF8(request.getParameterValues("inst-description"));//get all instuction descrition
             int prepareTime = Integer.parseInt(request.getParameter("prepare-time"));
