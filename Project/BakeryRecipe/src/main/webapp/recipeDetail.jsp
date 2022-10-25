@@ -183,7 +183,8 @@
                             <div class="head">
                                 COMMENTS
                             </div>
-                            <div class="body">
+                            <div class="body" >
+                                
                                 <div class="card-body p-2 mb-3">
                                     <div class="d-flex flex-start w-100">
                                         <img class="rounded-circle mr-2"
@@ -196,6 +197,7 @@
                                         </div>
                                     </div>  
                                 </div>
+                                             <div id="show-comment"></div>
                                 <div class="d-flex flex-start mb-4">
                                     <img class="rounded-circle mr-2"
                                          src="https://mdbcdn.b-cdn.net/img/Photos/Avatars/img%20(32).webp" alt="avatar"
@@ -223,9 +225,9 @@
                                 <!--test list_cmt-->
 
                                 <c:forEach items="${COMMENT_LIST}" var="cmt">
-                                    <div class="d-flex flex-start mb-4"  id="show-comment" >
+                                    <div class="d-flex flex-start mb-4"   >
                                         <img class="rounded-circle mr-2"
-                                             src="assets/images/avt/${cmt.avatar}" alt="avatar"
+                                             src="./assets/images/avt/${cmt.avatar}" alt="avatar"
                                              width="60" height="60" />
                                         <div class="card w-100">
                                             <div class="card-body p-4">
@@ -240,8 +242,6 @@
                                         </div>
                                     </div>
                                 </c:forEach>
-                                
-
                             </div>
                         </div>
                     </div>

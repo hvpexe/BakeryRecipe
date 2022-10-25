@@ -343,3 +343,19 @@ body {
 .recipe-author a:hover {
   color: inherit;
 }
+
+.btn-style1 {
+    padding: 0.25rem 0.7rem;
+    background-color: var(--main-theme-color);
+    color: var(--side-theme-color);
+    border-radius: 20px;
+    text-align: center;
+}
+
+
+.info-user span {
+    font-weight: 500;
+    font-size: 18px;
+    line-height: 22px;
+    margin: 0 5px;
+}

@@ -85,7 +85,27 @@
                                 id="imgImage"
                                 /><a class="mooncake"
                                 ><p class="mooncake-p"><span>${n.name}</span></p></a
-                            ><div class="follow-button"><div>Follow</div></div>
+                            ><c:if test="${sessionScope.login.id != USER_DETAIL.id}">
+                                <!--                                <div class="btn btn-style1" onclick="followButton(this, 'Follow', 'UnFollow', this.action)" >
+                                                                    <i class="fa-solid fa-user-plus"></i>
+                                                                    <span  class="txt-follow" this="">Follow</span>
+                                                                </div>-->
+                                <!--cach cua anh tú mượn mấy hôm trả-->
+                                <c:choose>
+                                    <c:when test="${CHECK_FOLLOW == 'false'}">
+                                        <div class="btn btn-style1" onclick="followButton(this, 'Follow', 'UnFollow', this.action)" >
+                                            <i class="fa-regular fa-heart"></i>
+                                            <span  class="txt-follow" this="">Follow</span>
+                                        </div>
+                                    </c:when>
+                                    <c:otherwise>
+                                        <div class="btn btn-style1 button-Follower" onclick="followButton(this, 'UnFollow', 'Follow', this.action)" >
+                                            <i class="fa-regular fa-heart"></i>
+                                            <span  class="txt-follow" this="">UnFollow</span>
+                                        </div>
+                                    </c:otherwise>
+                                </c:choose>
+                            </c:if>
                         </div>
                     </c:forEach>
                     <c:forEach items="${requestScope.LIST_RECIPE}" var="cc">

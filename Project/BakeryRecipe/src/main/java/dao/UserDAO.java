@@ -594,20 +594,6 @@ public class UserDAO {
             List<User> list = new ArrayList<>();
             while (rs.next()) {
                 String fullName = rs.getString("LastName") + rs.getString("FirstName");
-//                User user = new User(rs.getInt("ID"),
-//                        rs.getString("Role"),
-//                        rs.getString("Email"),
-//                        rs.getString("Password"),
-//                        rs.getString("Avatar"),
-//                        fullName,
-//                        rs.getString("Gender"),
-//                        rs.getString("Phone"),
-//                        rs.getString("Address"),
-//                        rs.getDate("DateRegister"),
-//                        rs.getBoolean("IsActive"),
-//                        rs.getInt("StoreID"),
-//                        rs.getDate("Birthday"));
-
                 int ID = rs.getInt("ID");
                 String role = rs.getString("Role");
                 String email = rs.getString("Email");

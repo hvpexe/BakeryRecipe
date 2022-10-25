@@ -4,8 +4,10 @@
  */
 package dto;
 
+import dao.RecipeDAO;
 import static dto.User.DEFAULT_AVATAR;
 import static dto.User.IMG_PATH;
+import java.sql.SQLException;
 import java.sql.Timestamp;
 import java.util.ArrayList;
 import utils.Tools;
@@ -35,7 +37,6 @@ public class Recipe {
     private int userID; //id người đăng recipe
     private String avatar; //avatar của người đăng recipe
     private String username; //dùng để lưu cả lastname + firstname của user
-    
 
     public Recipe() {
     }
@@ -98,11 +99,6 @@ public class Recipe {
         this.username = username;
     }
 
-
-
-    
-    
-    
     public int getId() {
         return id;
     }
@@ -249,5 +245,11 @@ public class Recipe {
     @Override
     public String toString() {
         return "Recipe{" + "id=" + id + ", name=" + name + ", description=" + description + ", like=" + like + ", save=" + save + ", comment=" + comment + ", datePost=" + datePost + ", lastDateEdit=" + lastDateEdit + ", prepTime=" + prepTime + ", cookTime=" + cookTime + ", isDeleted=" + isDeleted + ", userID=" + userID + ", img=" + img + ", cover=" + cover + ", username=" + username + '}';
+    }
+
+    public static void main(String[] args) throws SQLException {
+        Recipe recipe = new Recipe();
+        RecipeDAO rD = new RecipeDAO();
+        rD.listRelate(9);
     }
 }
