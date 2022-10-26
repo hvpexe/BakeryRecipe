@@ -1,3 +1,14 @@
+@keyframes loading {
+    0%{
+        rotate:0deg;
+    }
+    99.99%{
+        rotate:359deg;
+    }
+    100%{
+        rotate:0deg;
+    }
+}
 @keyframes appear {
     0% {
         display:none;
@@ -27,6 +38,41 @@
         top: 100px;
     }
 }
+.loading{
+    width: 100%;
+    height:200px;
+    background: white;
+    position: relative;
+    pointer-events: none;
+}
+.loading::before{
+    position: absolute;
+    content: '';
+    inset: 0;
+    top:20%;
+    bottom:20%;
+    margin: auto;
+    width: 10%;
+    aspect-ratio: 1;
+    border-radius: 50%;
+    background: conic-gradient(white 20%, gray 65%,black 100%, transparent 100%);
+    animation: loading infinite 2s;
+}
+.loading::after{
+    position: absolute;
+    content:'';
+    inset:0;
+    top:20%;
+    bottom:20%;
+    margin:auto;
+    width:8%;
+    aspect-ratio:1;    
+    border-radius: 50%;
+    background: white;
+}
+.c-pointer{
+    cursor: pointer;
+}
 .valid, .invalid{
     transition: 0.3s;
     border: 3px solid transparent;
@@ -49,10 +95,10 @@
     translate:0 -2px;
 }
 .hover-button-1:hover{
-    box-shadow: 0 0 400px inset #00000025;
+    box-shadow: 0 0 400px inset #00000010;
 }
 .hover-button-1:active{
-    box-shadow: 0 0 400px inset #00000050;
+    box-shadow: 0 0 400px inset #00000020;
 }
 .hover-button-2:hover{
     box-shadow: 0 -10px 10px 0 inset var(--brown-theme-50);
@@ -60,4 +106,7 @@
 .hover-button-2:active{
     box-shadow: 0 -15px 15px 0 inset var(--brown-theme-50);
 
+}
+.hover-underline:hover{
+    text-decoration: underline;
 }

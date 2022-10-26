@@ -4,12 +4,11 @@
  */
 package controller.ajax;
 
-import dao.CommentDAO;
 import dao.RecipeDAO;
-import dto.Comment;
 import dto.Recipe;
 import dto.User;
 import java.io.IOException;
+import java.io.PrintWriter;
 import java.util.LinkedList;
 import java.util.List;
 import javax.servlet.ServletException;
@@ -18,15 +17,17 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
+import utils.DaoHelper;
+import static utils.DaoHelper.execute;
 
 /**
  *
  * @author Admin
  */
-@WebServlet(name = "ProfileInfoCommentListAjax", urlPatterns = {"/ajax/ProfileInfoCommentListAjax"})
-public class ProfileInfoCommentListAjax extends HttpServlet {
+@WebServlet(name = "LikedRecipeListAjax", urlPatterns = {"/ajax/LikedRecipeListAjax"})
+public class LikedRecipeListAjax extends HttpServlet {
 
-    private static final String SUCCESS = "../profileinfo/commentListAjax.jsp";
+    private static final String SUCCESS = "../profileinfo/likedRecipeListAjax.jsp";
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code> methods.
@@ -37,27 +38,21 @@ public class ProfileInfoCommentListAjax extends HttpServlet {
      * @throws ServletException if a servlet-specific error occurs
      * @throws IOException      if an I/O error occurs
      */
-
     protected void processRequest (HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
-        String url = SUCCESS;
         HttpSession session = request.getSession();
-
         User user = (User) session.getAttribute("login");
-        List<Integer[]> cruIDList = CommentDAO.getCommentList(user.getId());
-        List<Comment> commentList = new LinkedList<>();
-        List<Recipe> RecipeList = new LinkedList<>();
-        //C Comment R Recipe U User this is not javascript
-        for (Integer[] ids : cruIDList) {
-            Comment comment = CommentDAO.getCommentByID(ids[0]);
-            Recipe recipe = RecipeDAO.getRecipeByID(ids[1]);
-            commentList.add(comment);
-            RecipeList.add(recipe);
+        
+        List<Object[]> list = execute("SELECT [RecipeID]\n"
+                + "      ,[UserID]\n"
+                + "  FROM [Like] WHERE UserID = ?",user.getId());
+        List<Recipe> recipeList = new LinkedList<>();
+        for (Object[] objects : list) {
+            recipeList.add(RecipeDAO.getRecipeByID((int) objects[0]));
         }
-        request.setAttribute("COMMENT_LIST", commentList);
-        request.setAttribute("RECIPE_LIST", RecipeList);
-        request.getRequestDispatcher(url).forward(request, response);
+        request.setAttribute("RECIPE_LIST", recipeList);
+        request.getRequestDispatcher(SUCCESS).forward(request, response);
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">

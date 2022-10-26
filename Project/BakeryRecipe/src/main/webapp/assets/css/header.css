@@ -24,8 +24,11 @@
 }
 /* main */
 body {
-  background-color: var(--web-background-color) !important;
-  font-family: 'Roboto', sans-serif;
+    background-color: var(--web-background-color) !important;
+    font-family: 'Roboto', sans-serif;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
 }
 .header-container {
     min-height: 60px;
@@ -171,7 +174,8 @@ body {
 }
 .header-user:hover .header-user_content {
     scale:1 1;
-    left:0;right:0;
+    left:0;
+    right:0;
     top:100%;
     transition-delay: var(--transition-time);
 }

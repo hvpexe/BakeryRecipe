@@ -247,9 +247,5 @@ public class Recipe {
         return "Recipe{" + "id=" + id + ", name=" + name + ", description=" + description + ", like=" + like + ", save=" + save + ", comment=" + comment + ", datePost=" + datePost + ", lastDateEdit=" + lastDateEdit + ", prepTime=" + prepTime + ", cookTime=" + cookTime + ", isDeleted=" + isDeleted + ", userID=" + userID + ", img=" + img + ", cover=" + cover + ", username=" + username + '}';
     }
 
-    public static void main(String[] args) throws SQLException {
-        Recipe recipe = new Recipe();
-        RecipeDAO rD = new RecipeDAO();
-        rD.listRelate(9);
-    }
+    
 }
