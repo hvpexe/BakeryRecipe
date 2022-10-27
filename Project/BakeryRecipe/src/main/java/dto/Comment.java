@@ -139,4 +139,9 @@ public class Comment {
     public Comment () {
     }
 
+    @Override
+    public String toString () {
+        return "Comment{" + "commentID=" + commentID + ", comment=" + comment + ", rate=" + rate + ", DateComment=" + DateComment + ", LastDateEdit=" + LastDateEdit + ", isDeleted=" + isDeleted + ", userID=" + userID + ", recipeID=" + recipeID + ", avatar=" + avatar + ", chefName=" + chefName + '}';
+    }
+
 }

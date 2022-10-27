@@ -1,0 +1,49 @@
+.fixed-container{
+    position: fixed;
+    display: none;
+    inset:0;
+    z-index: 1;
+}
+.fixed-container .gray-box{
+    background: gray;
+    opacity: 0.5;
+    position: absolute;
+    inset:0;
+}
+.fixed-container .exit-btn{
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    background: white;
+    border: 1px solid gray;
+    border-radius: 5px;
+    display: flex;
+    padding: 5px 10px;
+    align-content: center;
+}
+.fixed-container .exit-btn:hover{
+    background: var(--main-theme-color);
+}
+.fixed-container .exit-btn:active{
+    background: var(--main-theme-color-hover);
+}
+.fixed-container .content{
+    min-height: 100px;
+    margin:auto;
+    border-radius: 15px;
+    background: var(--web-background-color);
+    position: relative;
+    box-shadow: 0 0 12px rgb(0 0 0 / 6%);
+}
+@media (max-width:996px){
+    .fixed-container .content{
+        position: absolute;
+        inset:0;
+        border-radius: unset;
+    }
+}
+.avatar {
+    object-fit: cover;
+    object-position: center;
+    aspect-ratio:1;
+}

@@ -42,7 +42,8 @@ public class CommentDAO {
         }
         return null;
     }
-    private static final String SELECT_COMMENT_BY_ID = "SELECT [ID]\n"
+    private static final String SELECT_COMMENT_BY_ID = 
+            "SELECT [ID]\n"
             + "      ,[Comment]\n"
             + "      ,[DateComment]\n"
             + "      ,[LastDateEdit]\n"
@@ -53,7 +54,7 @@ public class CommentDAO {
             + "  WHERE ID = ?";
 
     public static Comment getCommentByID (int id) {
-        String sql = SELECT_PROFILE_COMMENT_LIST;
+        String sql = SELECT_COMMENT_BY_ID;
         Comment comment = null;
         try {
             PreparedStatement ps = conn.prepareStatement(sql);

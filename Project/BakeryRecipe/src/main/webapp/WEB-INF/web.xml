@@ -45,12 +45,20 @@
         <servlet-class>controller.LoginController</servlet-class>
     </servlet>
     <servlet>
+        <servlet-name>UserManagementController</servlet-name>
+        <servlet-class>controller.baker.UserManagementController</servlet-class>
+    </servlet>
+    <servlet>
         <servlet-name>EditInformationController</servlet-name>
         <servlet-class>controller.EditInformationController</servlet-class>
     </servlet>
     <servlet>
         <servlet-name>RegisterAccountController</servlet-name>
         <servlet-class>controller.baker.RegisterAccountController</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>ManageController</servlet-name>
+        <servlet-class>controller.ManageController</servlet-class>
     </servlet>
     <servlet>
         <servlet-name>MostRatedRecipeController</servlet-name>
@@ -93,8 +101,8 @@
         <servlet-class>controller.recipe.SearchByIngredientController</servlet-class>
     </servlet>
     <servlet>
-        <servlet-name>ProfileInfoCommentListAjax</servlet-name>
-        <servlet-class>controller.ajax.ProfileInfoCommentListAjax</servlet-class>
+        <servlet-name>AdminDashBoardController</servlet-name>
+        <servlet-class>controller.admin.AdminDashBoardController</servlet-class>
     </servlet>
     <servlet-mapping>
         <servlet-name>DebugController</servlet-name>
@@ -107,6 +115,14 @@
     <servlet-mapping>
         <servlet-name>ShowSavedRecipeListController</servlet-name>
         <url-pattern>/savedrecipe</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>UserManagementController</servlet-name>
+        <url-pattern>/manageuser</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>ManageController</servlet-name>
+        <url-pattern>/managestatus</url-pattern>
     </servlet-mapping>
     <servlet-mapping>
         <servlet-name>EditInformationController</servlet-name>
@@ -153,8 +169,8 @@
         <url-pattern>/searchByIngredient</url-pattern>
     </servlet-mapping>
     <servlet-mapping>
-        <servlet-name>ProfileInfoCommentListAjax</servlet-name>
-        <url-pattern>/ajax/ProfileInfoCommentListAjax</url-pattern>
+        <servlet-name>AdminDashBoardController</servlet-name>
+        <url-pattern>/AdminDashBoard</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

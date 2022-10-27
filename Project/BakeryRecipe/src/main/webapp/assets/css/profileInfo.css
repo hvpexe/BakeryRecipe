@@ -7,9 +7,6 @@
     --border-theme-color: #9c9c9c;
 }
 
-*{
-    font-family: Gelasio;
-}
 
 /* main */
 body {
@@ -18,9 +15,11 @@ body {
 
 /* SECTION */
 .section {
+    font-family: Inter;
+
     display: flex;
     flex-wrap: wrap;
-    margin: 25px auto 50px !important;
+    margin: 25px auto 50px;
     width: 100%;
     background-color: white;
     padding: 25px 1%;
@@ -43,13 +42,16 @@ body {
 .profile-header {
     background-color: var(--main-theme-color);
     border-radius: 20px 20px 0 0;
+    margin:0;
+    padding:10px 15px;
 }
 
 .info-title {
+    display: flex;
+    align-items: center;
     color: var(--main-title-color);
-    padding: 8px 20px 10px;
     font-size: 28px;
-    margin-bottom: 20px;
+    margin:0;
 }
 
 .profile-img {
@@ -83,6 +85,7 @@ body {
     user-select: none; /*làm cho text không thể được select.*/
     font-size: 24px;
     font-weight: 500;
+
     list-style: none;
 }
 
@@ -159,6 +162,37 @@ body {
     margin-left: 30px;
 }
 
+#liked-list  {
+    background: var(--white);
+}
+#liked-list > div:nth-child(2n+1){
+    padding-right: 0.5em;
 
+}
+#liked-list > div:nth-child(2n){
+    padding-left: 0.5em;
+}
+#liked-list > div > div {
+    border-radius: 10px;
+    border-spacing: 0;
+}
+#liked-list > div div.card-body {
+    border: 2px ridge var(--main-theme-color);
+    background: var(--web-background-color);
+}
+#liked-list .recipe-content span.h5{
+    display: -webkit-box;
+    -webkit-line-clamp: 3;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+}
+#liked-list .recipe-img{
+        background: gray;
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center;
+    aspect-ratio:1/1;
+    border: 1px solid gray;
+}
 
 

@@ -97,7 +97,7 @@ public class IngredientDAO {
             //set sql
             conn.setAutoCommit(false);
             sql = INSERT_INGREDIENT_RECIPE;
-            int ingreId = IngredientDAO.getIngredientID(ingreName, conn);
+            int ingreId = IngredientDAO.getIngredientIDByName(ingreName, conn);
             if (ingreId == -1)
                 ingreId = IngredientDAO.addIngredient(ingreName, conn);
             System.out.println("--------------------------------------------------------------------------------------");
@@ -119,14 +119,13 @@ public class IngredientDAO {
         }
         return false;
     }
-
+    
     public static boolean addIngredientsRecipe (String[] ingreNames, String[] ingreAmounts, int recipeId,
             Connection conn,
             ServletContext sc) throws SQLException {
         conn.setAutoCommit(false);
         for (int i = 0; i < ingreNames.length; i++)
             addIngredientRecipe(ingreNames[i], ingreAmounts[i], recipeId, conn, sc);
-        conn.commit();
         return true;
     }
     private static final String LIST_INGREDIENT = "select ingre.[Name],ingre.[Img],ingreRe.Amount\n"
@@ -167,7 +166,7 @@ public class IngredientDAO {
             + "  FROM [BakeryRecipe].[dbo].[Ingredient]\n"
             + "  WHERE [Name] = ?";
 
-    private static int getIngredientID (String name, Connection conn) {
+    public static int getIngredientIDByName (String name, Connection conn) {
         String sql = SELECT_INGREDIENT_ID_BY_NAME;
         try {
             PreparedStatement ps = conn.prepareStatement(sql);
@@ -229,6 +228,7 @@ public class IngredientDAO {
             String sql = ADD_INGREDIENT;
             ps = conn.prepareStatement(sql);
             ps.setString(1, ingreName);
+            ps.setString(2, null);
             rs = ps.executeQuery();
             if (rs.next())
                 return rs.getInt(1);

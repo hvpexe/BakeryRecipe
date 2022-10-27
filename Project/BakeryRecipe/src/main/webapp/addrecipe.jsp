@@ -52,12 +52,21 @@
                     <button class="save-button d-none" id="submit" form="add-recipe" >
                         <b class="save-b2">Save</b>
                     </button>
+                    <c:if test="${ADD_RECIPE_SUCCESS !=null}">
+                        <div class="text-success h6 my-auto mr-4 font-weight-bold">${ADD_RECIPE_SUCCESS}</div>
+                    </c:if>
+                    <c:if test="${ADD_RECIPE_FAILED !=null}">
+                        <div class="text-danger h6 my-auto mr-4 font-weight-bold">${ADD_RECIPE_FAILED}</div>
+                    </c:if>
+                    <c:remove scope="session" var="ADD_RECIPE_FAILED"></c:remove>
+                    <c:remove scope="session" var="ADD_RECIPE_SUCCESS"></c:remove>
                 </main>
                 <form action="AddRecipe"  class="section-div col-12 col-md-10 align-content-center align-self-center"
                       id="add-recipe" enctype="multipart/form-data" method="post" >
                     <div class="title-div col-12">
                         <b class="label">Title</b>
                         <input name='recipe-name' class="input col-12"  type="text" placeholder="Recipe's Name ">
+                        <span class="status"><span>
                     </div>
                     <div class="add-recipe-input col">
                         <b class="label">Description</b>
@@ -215,49 +224,6 @@
         <script src="assets/js/addrecipe.js"></script>
         <script>
             
-//                             Validator({
-//                                 form: '#add-recipe',
-//                                 status: '.status',
-//                                 rules: [
-//                                     Validator.isRequired('[name=recipe-name]'),
-//                                         ],
-//                                         onSubmit: (value) => {
-//                                             //Call api here
-//                                             console.log(value);
-//                                         },
-//                                     });
-                             ItemCopy({
-                                 selector: '#ingredient [name]',
-                                 run: (result, container,step) => {
-                                     if (step) {
-                                         var count = document.querySelector(step);
-                                         count.setAttribute('value', parseInt(count.value) + 1);
-                                     }
-                                     $(container).append(result);
-                                 },
-                                 count: '#ingredient [name=count]',
-                                 container: '#ingredient-container',
-                                 url: 'ajax/GetIngredientImage',
-                             });
-                             ItemCopy({
-                                 selector: '#instruction [name]',
-                                 run: (result, container, step) => {
-                                     if (step) {
-                                         var count = document.querySelector(step);
-                                         count.setAttribute('value', parseInt(count.value) + 1);
-                                     }
-                                     console.log(result);
-                                     $(container).append(result);
-                                     updateContainer(container);
-                                     $('#inst-container h5, #inst-container .inst-img, #inst-container .inst-img *\n\
-                                                ,#inst-container .item-trashbin, #inst-container .item-trashbin *').click(function (e) {
-                                         e.stopPropagation();
-                                     });
-                                 },
-                                 count: '#instruction [name=count]',
-                                 url: 'ajax/GetInstructionTemplate',
-                                 container: '#inst-container',
-                             });
         </script>
     </body>
 </html>

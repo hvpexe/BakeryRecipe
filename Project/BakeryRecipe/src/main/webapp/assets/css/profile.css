@@ -20,8 +20,8 @@
 }
 
 .profile-header {
-    justify-content: space-between;
     width: 90%;
+    margin: 0;
 }
 
 .avt-icon {
@@ -114,6 +114,15 @@
     border-radius: 10px;
     width: 100%;
     margin-bottom: 15px;
+    aspect-ratio: 1;
+    object-fit: cover;
+}
+#profile-information .recipe{
+    
+}
+#profile-information .recipe img{
+    max-width: 10%;
+    min-width: 5em;
     aspect-ratio: 1;
     object-fit: cover;
 }

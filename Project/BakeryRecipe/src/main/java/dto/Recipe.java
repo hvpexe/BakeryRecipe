@@ -47,6 +47,19 @@ public class Recipe {
         this.username = username;
     }
 
+    public Recipe(int id, String name, Timestamp datePost, Timestamp lastDateEdit, boolean isDeleted, String cover, int userID, String username) {
+        this.id = id;
+        this.name = name;
+        this.datePost = datePost;
+        this.lastDateEdit = lastDateEdit;
+        this.isDeleted = isDeleted;
+        this.cover = cover;
+        this.userID = userID;
+        this.username = username;
+    }
+    
+    
+
     public Recipe(int id, String name, String description, int like, int save, int comment, Timestamp datePost, Timestamp lastDateEdit, String cover, int userID, String username) {
         this.id = id;
         this.name = name;
@@ -256,9 +269,5 @@ public class Recipe {
         return "Recipe{" + "id=" + id + ", name=" + name + ", description=" + description + ", like=" + like + ", save=" + save + ", comment=" + comment + ", datePost=" + datePost + ", lastDateEdit=" + lastDateEdit + ", prepTime=" + prepTime + ", cookTime=" + cookTime + ", isDeleted=" + isDeleted + ", userID=" + userID + ", img=" + img + ", cover=" + cover + ", username=" + username + '}';
     }
 
-    public static void main(String[] args) throws SQLException {
-        Recipe recipe = new Recipe();
-        RecipeDAO rD = new RecipeDAO();
-        rD.listRelate(9);
-    }
+    
 }

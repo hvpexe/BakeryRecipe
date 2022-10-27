@@ -40,6 +40,7 @@ public class HomeController extends HttpServlet {
             }
             ArrayList<Recipe> list = RecipeDAO.getPostHomeRecipes(user.getId());
             request.setAttribute("homeRecipe", list);
+            
         } catch (Exception e) {
             e.printStackTrace();
         } finally {

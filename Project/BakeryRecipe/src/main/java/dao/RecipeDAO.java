@@ -551,9 +551,9 @@ public class RecipeDAO {
             + "	  ,p.Img as Cover"
             + "  FROM [Recipe] r \n"
             + "  JOIN Picture p on p.IsCover = 1 and r.ID = p.RecipeID "
-            + "  WHERE ID = ?";
+            + "  WHERE r.ID = ?";
 
-    public static Recipe getRecipeByID (int id) {
+    public static Recipe getRecipeByID(int id) {
         try {
             Connection conn = DBUtils.getConnection();
             PreparedStatement ps = conn.
@@ -576,8 +576,10 @@ public class RecipeDAO {
             }
         } catch (SQLException ex) {
             System.out.println("Get Recipe By ID Query Error!" + ex.getMessage());
+            ex.printStackTrace();
         } catch (Exception ex) {
             System.out.println("Error: " + ex.getMessage());
+            ex.printStackTrace();
         }
         return null;
     }
@@ -755,6 +757,54 @@ public class RecipeDAO {
 
     }
 
+    private static final String SHOW_RECIPE_LIST = "SELECT [Recipe].ID, [Recipe].[Name], [Recipe].DatePost, [Recipe].LastDateEdit, [Recipe].IsDeleted, [Picture].Img, [Recipe].UserID, [User].LastName + ' ' + [User].FirstName AS UserName\n"
+            + "FROM [Recipe]\n"
+            + "JOIN [User] ON [Recipe].[UserID] = [User].ID\n"
+            + "JOIN [Picture] ON [Picture].RecipeID = [Recipe].ID\n"
+            + "WHERE [Picture].IsCover = 1 AND [Recipe].IsDeleted = 0";
+
+    public static List<Recipe> showRecipeList() {
+        try {
+            Connection conn = DBUtils.getConnection();
+            PreparedStatement ps = conn.prepareStatement(SHOW_RECIPE_LIST);
+            ResultSet rs = ps.executeQuery();
+            List<Recipe> list = new ArrayList<>();
+            while (rs.next()) {
+                Recipe recipe = new Recipe(rs.getInt("ID"),
+                        rs.getString("Name"),
+                        rs.getTimestamp("DatePost"),
+                        rs.getTimestamp("LastDateEdit"),
+                        rs.getBoolean("IsDeleted"),
+                        rs.getString("Img"),
+                        rs.getInt("UserID"),
+                        rs.getString("UserName"));
+                list.add(recipe);
+            }
+            return list;
+        } catch (SQLException ex) {
+            System.out.println("showRecipeList Query Error!" + ex.
+                    getMessage());
+        }
+        return null;
+    }
+
+    private static final String UPDATE_DELETE = "UPDATE Recipe\n"
+            + "SET IsDeleted = 1\n"
+            + "WHERE Recipe.[ID] = ?";
+    
+    public static boolean deleteRecipe(int id) {
+        try {
+            Connection conn = DBUtils.getConnection();
+            PreparedStatement ps = conn.prepareStatement(UPDATE_DELETE);
+            ps.setInt(1, id);
+            ps.executeUpdate();
+            return true;
+        } catch (Exception ex) {
+            System.out.println("Query Delete Recipe For User error!" + ex.getMessage());
+        }
+        return false;
+    }
+
     private static final String SEARCH_EXACTLY = "SELECT recipe.[Name],[Description],[Like],recipe.ID\n"
             + "                   ,[DatePost],[LastDateEdit],[PrepTime],[CookTime]\n"
             + "                        [Save],[IsDeleted],[UserID],Comment,[Img],baker.FirstName +' '+baker.LastName as fullName\n"
@@ -891,6 +941,5 @@ public class RecipeDAO {
         }
         return list;
     }
-
 
 }

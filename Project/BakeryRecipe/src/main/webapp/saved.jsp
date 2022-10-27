@@ -45,7 +45,7 @@
   <body>
     <c:import url="header.jsp"/>
 
-        <div class="community">
+        <div class="community container">
             <div class="community-section mx-auto ">
                 <div class="title-container">
                     <h1 class="title">Saved</h1>
@@ -78,6 +78,7 @@
                 </div> 
             </div>
         </div>
+        
         <c:import url="footer.jsp"/>
         <script></script>
   </body>

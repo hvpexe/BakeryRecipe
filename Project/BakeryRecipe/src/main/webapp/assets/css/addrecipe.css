@@ -509,6 +509,9 @@ div[id$=container]{
     outline: 2px solid var(--dark);
 
 }
+[id$=container]> div{
+    margin-bottom: 10px;
+}
 #img-box input {
     border: 3px solid #00000025;
 }
