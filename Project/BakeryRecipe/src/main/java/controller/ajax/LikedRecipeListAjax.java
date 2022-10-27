@@ -1,23 +1,37 @@
-package controller.baker;
+/*
+ * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
+ * Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/Servlet.java to edit this template
+ */
+package controller.ajax;
 
+import dao.LikeDAO;
 import dao.RecipeDAO;
 import dto.Recipe;
 import dto.User;
 import java.io.IOException;
-import java.util.ArrayList;
+import java.io.PrintWriter;
+import java.util.LinkedList;
+import java.util.List;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
+import utils.DaoHelper;
+import static utils.DaoHelper.execute;
 
-@WebServlet(name = "HomeController", urlPatterns = {"/home"})
-public class HomeController extends HttpServlet {
+/**
+ *
+ * @author Admin
+ */
+@WebServlet(name = "LikedRecipeListAjax", urlPatterns = {"/ajax/LikedRecipeListAjax"})
+public class LikedRecipeListAjax extends HttpServlet {
+
+    private static final String SUCCESS = "../profileinfo/likedRecipeListAjax.jsp";
 
     /**
-     * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
-     * methods.
+     * Processes requests for both HTTP <code>GET</code> and <code>POST</code> methods.
      *
      * @param request  servlet request
      * @param response servlet response
@@ -25,27 +39,15 @@ public class HomeController extends HttpServlet {
      * @throws ServletException if a servlet-specific error occurs
      * @throws IOException      if an I/O error occurs
      */
-    private static final String SUCCESS =  "home.jsp";
-    private static final String ERROR =  "landing.jsp";
     protected void processRequest (HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
         HttpSession session = request.getSession();
-        String url = SUCCESS; 
-        try {
-            User user = (User) session.getAttribute("login");
-            if(user == null){
-                url = ERROR;
-                return;
-            }
-            ArrayList<Recipe> list = RecipeDAO.getPostHomeRecipes(user.getId());
-            request.setAttribute("homeRecipe", list);
-            
-        } catch (Exception e) {
-            e.printStackTrace();
-        } finally {
-            request.getRequestDispatcher(url).forward(request, response);
-        }
+        User user = (User) session.getAttribute("login");
+        
+       List<Recipe> recipeList = LikeDAO.getLikedRecipeFromUser(user.getId());
+        request.setAttribute("RECIPE_LIST", recipeList);
+        request.getRequestDispatcher(SUCCESS).forward(request, response);
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">

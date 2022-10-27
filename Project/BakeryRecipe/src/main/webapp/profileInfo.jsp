@@ -16,9 +16,9 @@
 
     <body>
         <jsp:include page="header.jsp" />
-        <div class="section container row">
+        <div class="section container row my-0">
             <!-- SECTION LEFT -->
-            <div class="col-md-12 col-lg-3 ">
+            <div class="col-md-6 col-lg-3">
                 <div class="profile-img ">
                     <img class="border border-dark col-3 col-lg-10 p-0 rounded-circle" src="${sessionScope.login.avatar}" alt="User Avt">
                 </div>
@@ -27,13 +27,14 @@
                     <li onclick="window.location = window.location" class="function-select">
                         Change information
                     </li>
-                    <li onclick="window.location = '${download}'">
+                    
+                    <li onclick="ajaxLoad('./ajax/ProfileInfoCommentListAjax')">
                         Your comment
                     </li>
-                    <li onclick="window.location = '${rating}'">
+                    <li onclick="ajaxLoad('./ajax/LikedRecipeListAjax')">
                         Liked recipe
                     </li>
-                    <li onclick="ajaxLoad('./profileChangePass.jsp')">
+                    <li onclick="ajaxLoad('./profileinfo/profileChangePass.jsp')">
                         Change password
                     </li>
                     <li onclick="window.location ='/BakeryRecipe/LogoutController'">
@@ -123,10 +124,13 @@
                 </div>
             </div>
         </div>
-
+                            
         <jsp:include page="footer.jsp"/>
         <script src="assets/js/Jquery/jquery-core.js"></script>
         <script src="assets/js/profileInfo.js"></script>
+        <script>
+//            document.querySelector('#profile-function :nth-child(2)').click()
+        </script>
     </body>
 </html>
 

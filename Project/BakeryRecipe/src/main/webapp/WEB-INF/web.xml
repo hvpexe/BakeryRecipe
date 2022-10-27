@@ -101,8 +101,8 @@
         <servlet-class>controller.recipe.SearchByIngredientController</servlet-class>
     </servlet>
     <servlet>
-        <servlet-name>ProfileInfoCommentListAjax</servlet-name>
-        <servlet-class>controller.ajax.ProfileInfoCommentListAjax</servlet-class>
+        <servlet-name>AdminDashBoardController</servlet-name>
+        <servlet-class>controller.admin.AdminDashBoardController</servlet-class>
     </servlet>
     <servlet-mapping>
         <servlet-name>DebugController</servlet-name>
@@ -169,8 +169,8 @@
         <url-pattern>/searchByIngredient</url-pattern>
     </servlet-mapping>
     <servlet-mapping>
-        <servlet-name>ProfileInfoCommentListAjax</servlet-name>
-        <url-pattern>/ajax/ProfileInfoCommentListAjax</url-pattern>
+        <servlet-name>AdminDashBoardController</servlet-name>
+        <url-pattern>/AdminDashBoard</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

@@ -5,16 +5,15 @@
 package controller.ajax;
 
 import dao.CommentDAO;
-import dao.PictureDAO;
 import dao.RecipeDAO;
 import dto.Comment;
 import dto.Recipe;
 import dto.User;
 import java.io.IOException;
-import java.io.PrintWriter;
 import java.util.LinkedList;
 import java.util.List;
 import javax.servlet.ServletException;
+import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -24,7 +23,10 @@ import javax.servlet.http.HttpSession;
  *
  * @author Admin
  */
+@WebServlet(name = "ProfileInfoCommentListAjax", urlPatterns = {"/ajax/ProfileInfoCommentListAjax"})
 public class ProfileInfoCommentListAjax extends HttpServlet {
+
+    private static final String SUCCESS = "../profileinfo/commentListAjax.jsp";
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code> methods.
@@ -35,7 +37,6 @@ public class ProfileInfoCommentListAjax extends HttpServlet {
      * @throws ServletException if a servlet-specific error occurs
      * @throws IOException      if an I/O error occurs
      */
-    private static final String SUCCESS = "commentListAjax.jsp";
 
     protected void processRequest (HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
@@ -56,6 +57,7 @@ public class ProfileInfoCommentListAjax extends HttpServlet {
         }
         request.setAttribute("COMMENT_LIST", commentList);
         request.setAttribute("RECIPE_LIST", RecipeList);
+        request.getRequestDispatcher(url).forward(request, response);
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">

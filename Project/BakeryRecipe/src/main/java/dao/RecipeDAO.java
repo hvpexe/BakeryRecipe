@@ -551,7 +551,7 @@ public class RecipeDAO {
             + "	  ,p.Img as Cover"
             + "  FROM [Recipe] r \n"
             + "  JOIN Picture p on p.IsCover = 1 and r.ID = p.RecipeID "
-            + "  WHERE ID = ?";
+            + "  WHERE r.ID = ?";
 
     public static Recipe getRecipeByID(int id) {
         try {
@@ -576,8 +576,10 @@ public class RecipeDAO {
             }
         } catch (SQLException ex) {
             System.out.println("Get Recipe By ID Query Error!" + ex.getMessage());
+            ex.printStackTrace();
         } catch (Exception ex) {
             System.out.println("Error: " + ex.getMessage());
+            ex.printStackTrace();
         }
         return null;
     }

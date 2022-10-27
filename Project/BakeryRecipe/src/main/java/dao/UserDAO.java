@@ -170,6 +170,7 @@ public class UserDAO {
         }
         return null;
     }
+
     private static final String SELECT_USER_BY_ID = "SELECT "
             + " [ID],[Role],[Email],[Password],[Avatar]"
             + ",[FirstName],[LastName],[Gender],[Phone]"
@@ -354,32 +355,34 @@ public class UserDAO {
         return false;
     }
 
-    public static String saveAvatar(String filename, Part file, ServletContext sc) {
+    //ham nay bi loi, tam thoi comment - PhuHV
+//    public static String saveAvatar(String filename, Part file, ServletContext sc) {
+//
+//        try {
+//            String fileName = file.getSubmittedFileName();
+//            if (fileName.isEmpty()) {
+//                return null;
+//            }
+//            // refines the fileName in case it is an absolute path
+//            fileName = new File(fileName).getName();
+//            filename += fileName.substring(fileName.indexOf('.'), fileName.length());
+//            String absoluteFilepath = sc.getRealPath("/" + User.IMG_PATH);
+////            System.out.println(absoluteFilepath);
+////absoluteFilepath = D:\learning in FPT\Ky_5\SWP391\BakeryRecipe\Project\BakeryRecipe\target\BakeryRecipe-1.0-SNAPSHOT\assets\images\avt
+////webFilepath = D:\learning in FPT\Ky_5\SWP391\BakeryRecipe\Project\BakeryRecipe\src\main\webapp\assets\images\avt
+//            String webFilepath = absoluteFilepath.replace("\\target\\BakeryRecipe-1.0-SNAPSHOT\\", "\\src\\main\\webapp\\");
+//            Tools.getFolderUpload(absoluteFilepath);
+//            Tools.getFolderUpload(webFilepath);
+////        D:\learning in FPT\Tools\UploadFile\web\assets\images
+//            file.write(absoluteFilepath + filename);
+//            file.write(webFilepath + filename);
+//            return filename;
+//        } catch (IOException ex) {
+//            System.out.println("Error Cant Save Avatar!" + ex.getMessage());
+//        }
+//        return null;
+//    }
 
-        try {
-            String fileName = file.getSubmittedFileName();
-            if (fileName.isEmpty()) {
-                return null;
-            }
-            // refines the fileName in case it is an absolute path
-            fileName = new File(fileName).getName();
-            filename += fileName.substring(fileName.indexOf('.'), fileName.length());
-            String absoluteFilepath = sc.getRealPath("/" + User.IMG_PATH);
-//            System.out.println(absoluteFilepath);
-//absoluteFilepath = D:\learning in FPT\Ky_5\SWP391\BakeryRecipe\Project\BakeryRecipe\target\BakeryRecipe-1.0-SNAPSHOT\assets\images\avt
-//webFilepath = D:\learning in FPT\Ky_5\SWP391\BakeryRecipe\Project\BakeryRecipe\src\main\webapp\assets\images\avt
-            String webFilepath = absoluteFilepath.replace("\\target\\BakeryRecipe-1.0-SNAPSHOT\\", "\\src\\main\\webapp\\");
-            Tools.getFolderUpload(absoluteFilepath);
-            Tools.getFolderUpload(webFilepath);
-//        D:\learning in FPT\Tools\UploadFile\web\assets\images
-            file.write(absoluteFilepath + filename);
-            file.write(webFilepath + filename);
-            return filename;
-        } catch (IOException ex) {
-            System.out.println("Error Cant Save Avatar!" + ex.getMessage());
-        }
-        return null;
-    }
     private static final String LIST_USER = "select[Email], [LastName],[FirstName] ,[Avatar] ,userRep.ID\n"
             + "                      from [dbo].[User] userRep join [dbo].[Recipe] recipe\n"
             + "					  on userRep.ID=recipe.UserID\n"
@@ -431,7 +434,6 @@ public class UserDAO {
             e.printStackTrace();
         }
         return check;
-
     }
 
     private static final String UN_FOLLOW = "delete [dbo].[Follow] where UserID =? and UserID2 = ?";
@@ -657,13 +659,4 @@ public class UserDAO {
         }
         return null;
     }
-
-    public static void main(String[] args) {
-        List<User> user = new ArrayList<>();
-        user = UserDAO.showUserList();
-        for (User o : user) {
-            System.out.println(o);
-        }
-    }
-
 }

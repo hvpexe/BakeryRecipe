@@ -43,7 +43,7 @@
                                   src="${re.cover}" />
                         </a>
                         <div class="recipe-react">
-                            <a href="javascript:void(0)" class="d-inline-block text-muted">
+                            <a  class="d-inline-block text-muted" onclick="getLikedList('${re.id}')">
                                 <span class="align-middle">
                                     <strong>${re.like}</strong> Likes</span>
                             </a>
@@ -51,12 +51,8 @@
                                 <span class="align-middle">
                                     <strong>${re.comment}</strong> Comments</span>
                             </a>
-                            <a href="#" class="d-inline-block text-muted ml-3">
-                                <i class="ion ion-md-share align-middle"></i>&nbsp;
-                                <span class="align-middle">Save</span>
-                            </a>
                             <a href="./cookdetail.jsp" class="d-inline-block text-muted ml-3">
-                                <i class="ion ion-md-share align-middle"></i>&nbsp;
+                                <i class="ion ion-md-share align-middle"></i>
                                 <span class="align-middle">View detail</span>
                             </a>
                         </div>

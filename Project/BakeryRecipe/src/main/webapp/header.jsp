@@ -23,7 +23,7 @@
                     <input type="hidden" name="action" value="Recipe">
                 </div>
             </form> 
-            <div class="p-0 d-flex align-items-center justify-content-center">
+            <div class="p-0 d-flex align-items-center justify-content-center ml-auto">
                 <i class="header-notification fa-solid fa-bell"></i>
             </div>
             <c:set var="login" value="${login}" scope="session"></c:set>
@@ -35,7 +35,7 @@
             <c:if test="${login != null}">
                 <div class="header-user position-relative ml-auto">
                     <a href="profile.jsp" class="header-user-button position-relative">
-                        <div class="header-button-detail p-0 pr-5">
+                        <div class="header-button-detail p-0 pl-1 pr-5">
                             ${login.name}   
                             <img id="user_avatar" class=" d-inline m-auto rounded-circle position-absolute" src="${login.avatar}"/>
                         </div>
