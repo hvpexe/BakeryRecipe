@@ -66,9 +66,10 @@ public class LoginPageTesting {
     }
     public static void main(String[] args) {
         
-        List<User> list = UserDAO.showUserList();
-        for (User o : list){
+        List<Recipe> recipe = RecipeDAO.showRecipeList();
+        for (Recipe o : recipe){
             System.out.println(o);
         }
+        
     }
 }

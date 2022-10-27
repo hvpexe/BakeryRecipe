@@ -54,6 +54,25 @@ public class UserDAO {
         }
         return false;
     }
+
+    public static boolean changeStatus(User user) {
+        String sql = "UPDATE [User]\n"
+                + "SET [IsActive] = ?\n"
+                + "WHERE [ID] = ?";
+        try {
+            Connection conn = DBUtils.getConnection();
+            PreparedStatement ps = conn.prepareStatement(sql);
+            ps.setBoolean(1, user.isIsActive());
+            ps.setInt(2, user.getId());
+            boolean check = ps.executeUpdate() > 0;
+            if (check) {
+                return true;
+            }
+        } catch (Exception e) {
+            System.out.println("Error at changeStatus: " + e.toString());
+        }return false;
+    }
+
     private static final String UPDATE_USER_PASSWORD = " UPDATE [User] SET Password = ? WHERE ID= ?";
 
     public static boolean changePassword(String userID, String password) {
@@ -154,7 +173,7 @@ public class UserDAO {
     private static final String SELECT_USER_BY_ID = "SELECT "
             + " [ID],[Role],[Email],[Password],[Avatar]"
             + ",[FirstName],[LastName],[Gender],[Phone]"
-            + ",[Address],[DateRegister],[IsActive][StoreID], [Birthday]"
+            + ",[Address],[DateRegister],[IsActive],[StoreID], [Birthday]"
             + " FROM [BakeryRecipe].[dbo].[User]"
             + " WHERE [ID] = ? and IsActive = ?";
 
@@ -178,7 +197,7 @@ public class UserDAO {
             User user = null;
             if (rs.next()) {
                 user = new User(rs.getInt(l[0]), rs.getString(l[1]), rs.getString(l[2]), rs.getString(l[3]), rs.getString(l[4]), rs.getString(l[5]),
-                        rs.getString(l[6]), rs.getString(l[7]), rs.getString(l[8]), rs.getString(l[9]), rs.getDate(l[10]), rs.getInt(l[12]), rs.getDate(l[13]));
+                        rs.getString(l[6]), rs.getString(l[7]), rs.getString(l[8]), rs.getString(l[9]), rs.getDate(l[10]), rs.getBoolean(l[11]), rs.getInt(l[12]), rs.getDate(l[13]));
             }
             return user;
         } catch (Exception e) {
@@ -599,15 +618,36 @@ public class UserDAO {
                 String email = rs.getString("Email");
                 String avatar = rs.getString("Avatar");
                 String password = rs.getString("Password");
+//                User user = new User(rs.getInt("ID"),
+//                        rs.getString("Role"),
+//                        rs.getString("Email"),
+//                        rs.getString("Password"),
+//                        rs.getString("Avatar"),
+//                        fullName,
+//                        rs.getString("Gender"),
+//                        rs.getString("Phone"),
+//                        rs.getString("Address"),
+//                        rs.getDate("DateRegister"),
+//                        rs.getBoolean("IsActive"),
+//                        rs.getInt("StoreID"),
+//                        rs.getDate("Birthday"));
+
+                int iD = rs.getInt("ID");
+                String Role = rs.getString("Role");
+                String Email = rs.getString("Email");
+                String Avatar = rs.getString("Avatar");
+                String Password = rs.getString("Password");
                 String FirstName = rs.getString("FirstName");
                 String LastName = rs.getString("LastName");
                 String Gender = rs.getString("Gender");
-                String phone = rs.getString("Phone");
-                String address = rs.getString("Address");
+                String Phone = rs.getString("Phone");
+                String Address = rs.getString("Address");
                 Date DateRegister = rs.getDate("DateRegister");
-                boolean isActive = rs.getBoolean("IsActive");
+                boolean IsActive = rs.getBoolean("IsActive");
                 int StoreId = rs.getInt("StoreID");
-                User user = new User(ID, role, email, password, avatar, FirstName, LastName, Gender, phone, address, DateRegister, isActive, StoreId);
+                Date Birthday = rs.getDate("Birthday");
+                //   User user = new User(iD, role, email, password, avatar, firstName, lastName, gender, phone, address, dateRegister, isActive, storeId);
+                User user = new User(iD, Role, Email, Password, Avatar, fullName, FirstName, LastName, Gender, Phone, Address, DateRegister, IsActive, StoreId, Birthday);
                 list.add(user);
             }
             return list;

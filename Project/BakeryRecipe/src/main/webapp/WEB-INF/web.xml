@@ -45,12 +45,20 @@
         <servlet-class>controller.LoginController</servlet-class>
     </servlet>
     <servlet>
+        <servlet-name>UserManagementController</servlet-name>
+        <servlet-class>controller.baker.UserManagementController</servlet-class>
+    </servlet>
+    <servlet>
         <servlet-name>EditInformationController</servlet-name>
         <servlet-class>controller.EditInformationController</servlet-class>
     </servlet>
     <servlet>
         <servlet-name>RegisterAccountController</servlet-name>
         <servlet-class>controller.baker.RegisterAccountController</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>ManageController</servlet-name>
+        <servlet-class>controller.ManageController</servlet-class>
     </servlet>
     <servlet>
         <servlet-name>MostRatedRecipeController</servlet-name>
@@ -107,6 +115,14 @@
     <servlet-mapping>
         <servlet-name>ShowSavedRecipeListController</servlet-name>
         <url-pattern>/savedrecipe</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>UserManagementController</servlet-name>
+        <url-pattern>/manageuser</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>ManageController</servlet-name>
+        <url-pattern>/managestatus</url-pattern>
     </servlet-mapping>
     <servlet-mapping>
         <servlet-name>EditInformationController</servlet-name>

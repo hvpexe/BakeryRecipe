@@ -2,25 +2,25 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/Servlet.java to edit this template
  */
-package controller.baker;
+package controller;
 
 import dao.UserDAO;
 import dto.User;
 import java.io.IOException;
 import java.io.PrintWriter;
-import java.util.List;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 /**
  *
  * @author kichi
  */
-@WebServlet(name = "UserManagementController", urlPatterns = {"/manageuser"})
-public class UserManagementController extends HttpServlet {
+@WebServlet(name = "ManageController", urlPatterns = {"/managestatus"})
+public class ManageController extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -34,9 +34,16 @@ public class UserManagementController extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
-        List<User> listuser = UserDAO.showUserList();
-        request.setAttribute("userlist", listuser);
-        request.getRequestDispatcher("manageuser.jsp").forward(request, response);
+        String action = request.getParameter("action");
+        HttpSession session = request.getSession();
+        if (action.equals("changestatus")) {
+            boolean active = Boolean.parseBoolean(request.getParameter("active"));
+            int userid = Integer.parseInt(request.getParameter("userid"));
+            User user = UserDAO.getUserByID(userid);
+            user.setIsActive(active);
+            UserDAO.changeStatus(user);
+        }
+        response.sendRedirect("manageuser");
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">

@@ -58,13 +58,13 @@
 
                 <!-- Nav Item - Pages Collapse Menu -->
                 <li class="nav-item">
-                    <a class="nav-link" href="#">
+                    <a class="nav-link" href="manageuser">
                         <i class="fa-solid fa-user"></i>
                         <span>Users</span></a>
                 </li>
 
                 <li class="nav-item">
-                    <a class="nav-link" href="#">
+                    <a class="nav-link" href="managerecipe">
                         <i class="fa-solid fa-bread-slice"></i>
                         <span>Recipes</span></a>
                 </li>
