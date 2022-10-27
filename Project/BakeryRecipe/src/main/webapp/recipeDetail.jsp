@@ -18,6 +18,7 @@
         <link rel="stylesheet" href="assets/css/recipeDetail.css?version=1" />
     </head>
     <body>
+        <c:catch var="e"> 
         <c:import url="header.jsp"/>
         <%--<c:catch var="e">--%>
         <div class="reccipe-container">
@@ -194,7 +195,7 @@
                                              width="60" height="60" />
                                         <div class="w-100">
                                             <div class="form-outline">
-                                                <input  onkeyup="Comment(this,event)" class="form-control" id="textAreaExample" rows="4" type="textarea" name="txtCmt" value="">
+                                                <textarea  onkeyup="Comment(this,event)" class="form-control" id="textAreaExample" rows="4" type="textarea" name="txtCmt" value=""></textarea>
                                             </div>
                                         </div>
                                     </div>  
@@ -235,7 +236,8 @@
                                             <div class="card-body p-4">
                                                 <div class="">
                                                     <h5>${cmt.chefName}</h5>
-                                                    <p class="small">3 hours ago</p>
+                                                    <p class="small">
+                                                        <c:out value="${cmt.getDateComment()}"/></p>
                                                     <p>
                                                         ${cmt.comment}
                                                     </p>
@@ -272,7 +274,7 @@
                                     </div>
                                 </div>
                                 <div class="related-recipe-name">${to.name}</div>
-                                <div class="recipe-author"><a href="#">${to.username}</a> 2 day ago</div>
+                                <div class="recipe-author"><a href="#">${to.username}</a><c:out value="${to.getDatePost()}"/></div>
                             </div>
                         </c:forEach>
                     </div>
@@ -280,6 +282,7 @@
             </div>
 
         </div>
+                                             </c:catch> ${e}
 
         <!--PhuHV: nua dem fix bug cai nay, tien sư thang nao xoa script lam carousel ko chay -->                                             
         <script src="https://cdn.jsdelivr.net/npm/swiper@8/swiper-bundle.min.js"></script>

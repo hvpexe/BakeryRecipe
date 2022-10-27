@@ -82,8 +82,8 @@ User sc ;
            
             
 //          check save
-            boolean checksave = UserDAO.checkSaveRecipe(userLogin.getId(), recipeID);
-            request.setAttribute("checksave", checksave);
+//            boolean checksave = UserDAO.checkSaveRecipe(userLogin.getId(), recipeID);
+//            request.setAttribute("checksave", checksave);
             
             boolean checklike = UserDAO.checkLikeRecipe(userLogin.getId(), recipeID);
             request.setAttribute("checklike", checklike);

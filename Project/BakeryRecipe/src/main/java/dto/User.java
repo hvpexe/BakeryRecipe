@@ -268,4 +268,7 @@ public class User {
         return "User{" + "ID=" + id + ", Role=" + role + ", Email=" + email + ", Password=" + password + ", Avatar=" + avatar + ", FirstName=" + firstName + ", LastName=" + lastName + ", Gender=" + gender + ", Phone=" + phone + ", Address=" + address + ", DateRegister=" + dateRegister + ", IsActive=" + isActive + ", StoreID=" + storeID + '}';
     }
 
+    public static void main(String[] args) {
+       User user = UserDAO.userDetail(4);
+    }
     }

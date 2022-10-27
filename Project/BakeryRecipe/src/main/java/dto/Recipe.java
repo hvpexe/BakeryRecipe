@@ -61,6 +61,15 @@ public class Recipe {
         this.username = username;
     }
 
+    public Recipe(String name, int like, int comment, String cover, String username,Timestamp datePost) {
+        this.name = name;
+        this.like = like;
+        this.comment = comment;
+        this.cover = cover;
+        this.username = username;
+        this.datePost =datePost;
+    }
+
     public Recipe(String name, int like, int comment, String cover, String username) {
         this.name = name;
         this.like = like;

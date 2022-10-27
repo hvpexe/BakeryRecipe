@@ -782,7 +782,8 @@ public class RecipeDAO {
                 int save = rs.getInt("Save");
                 String cakeName = rs.getString("Name");
                 String cover = rs.getString("Img");
-                recipe = new Recipe(cakeName, like, comment, cover, fullName);
+               Timestamp date =rs.getTimestamp("DatePost");
+                recipe = new Recipe(cakeName, like, comment, cover, fullName,date);
             }
         } catch (Exception e) {
             e.printStackTrace();
@@ -820,7 +821,7 @@ public class RecipeDAO {
         return check;
     }
 
-    private static final String LIST_COMMENT = "select baker.FirstName +' ' + baker.LastName as fullName ,cmt.ID,cmt.Comment,baker.Avatar\n"
+    private static final String LIST_COMMENT = "select baker.FirstName +' ' + baker.LastName as fullName ,DateComment,cmt.ID,cmt.Comment,baker.Avatar\n"
             + "            from [dbo].[Comment] cmt join [dbo].[User] baker\n"
             + "            on cmt.UserID = baker.ID\n"
             + "            where cmt.RecipeID = ?";
@@ -840,7 +841,8 @@ public class RecipeDAO {
                 String avatar = rs.getString("Avatar");
                 String comment = rs.getString("Comment");
                 String name = rs.getString("fullName");
-                Comment cmt = new Comment(commentID, comment, avatar, name);
+                Timestamp dateComment = rs.getTimestamp("DateComment");
+                Comment cmt = new Comment(commentID, comment, dateComment, avatar, name);
                 cmtList.add(cmt);
             }
         } catch (Exception e) {

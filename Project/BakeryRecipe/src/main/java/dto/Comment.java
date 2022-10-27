@@ -45,6 +45,14 @@ public class Comment {
         this.avatar = avatar;
     }
 
+    public Comment(int commentID, String comment, Timestamp DateComment, String avatar, String chefName) {
+        this.commentID = commentID;
+        this.comment = comment;
+        this.DateComment = DateComment;
+        this.avatar = avatar;
+        this.chefName = chefName;
+    }
+
     public Comment (int commentID, String comment, String avatar, String chefName) {
         this.commentID = commentID;
         this.comment = comment;

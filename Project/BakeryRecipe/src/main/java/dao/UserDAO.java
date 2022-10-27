@@ -392,7 +392,7 @@ public class UserDAO {
             System.out.println("System have a problem");
         }
         return user;
-    }
+    }   
 
     private static final String FOLLOW = "INSERT INTO [dbo].[Follow]([UserID],[UserID2]) VALUES(?,?)";
 
