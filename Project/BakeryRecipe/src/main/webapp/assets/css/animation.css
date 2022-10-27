@@ -71,17 +71,24 @@
     background: white;
 }
 .c-pointer{
-    cursor: pointer;
+    cursor: pointer!important;
 }
 .valid, .invalid{
-    transition: 0.3s;
     border: 3px solid transparent;
 }
 .valid {
     border-color: var(--success);
+    color:var(--success)!important;
 }
 .invalid {
-    border-color: var(--danger);
+    border-color: var(--main-theme-color);
+    color:var(--main-theme-color)!important;
+}
+:has(.valid) .status{
+    color:var(--success);
+}
+:has(.invalid) .status{
+    color:var(--main-theme-color);
 }
 [class^=hover] {
     transition:0.3s;
@@ -108,5 +115,5 @@
 
 }
 .hover-underline:hover{
-    text-decoration: underline;
+    text-decoration: underline!important;
 }

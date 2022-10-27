@@ -78,6 +78,7 @@
                 </div> 
             </div>
         </div>
+        
         <c:import url="footer.jsp"/>
         <script></script>
   </body>

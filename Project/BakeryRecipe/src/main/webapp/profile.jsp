@@ -48,28 +48,31 @@
             <div class=" section-profile">
                 <div class="row profile-header">
                     <img class="col-3 avt-icon"
-                         src=${sessionScope.login.avatar}
+                         src=${requestScope.user.avatar}
                          alt="" />
                     <div class="col-6">
-                        <h3 class="profile-name">${sessionScope.login.name}</h3>
+                        <h3 class="profile-name">${requestScope.user.name}</h3>
                         <span class="follow">1 Following</span>
                         <span class="follow">999 Follower</span>
 
                     </div>
-                    <a href="./profileInfo.jsp" class="btn edit-profile-button">Edit Profile</a>
+                    <c:if test="${requestScope.user == sessionScope.login}">
+                        <a href="./profileInfo.jsp" class="btn edit-profile-button">Edit Profile</a>
+                    </c:if>
                 </div>
-                <a href="#" class="btn input-button">Add your post</a>
+                <a href="./addrecipe" class="btn input-button">Add your post</a>
                 <div class="profile-activity">
                     <b>Activity</b>
                 </div>
                 <c:forEach items="${profileRecipe}" var="re">
                     <div class="profile-recipe">
                         <div class="media recipe-header">
-                            <img class="recipe-ava"
+                            <img class="recipe-ava c-pointer"
                                  src="<c:out value="${re.getAvatar()}"/>"
-                                 alt="" />
+                                 alt=""
+                                 onclick='location="./profile?userid=${re.userID}"'/>
                             <div class="media-body ml-3">
-                                ${re.username}
+                                <a href="./profile?userid=${requestScope.user.id}" class="text-dark c-pointer hover-underline">${re.username}</a>
                                 <div class="text-muted small"><c:out value="${re.getDatePostFormat()}"/></div>
                             </div>
                             <i class="fa-solid fa-ellipsis"></i>
@@ -79,25 +82,28 @@
                             ${re.description}
                         </div>
 
-                        <img class="recipe-img" alt=""
-                             src="${re.cover}" />
+                        <img class="recipe-img c-pointer" alt=""
+                             src="${re.cover}" onclick="location = './RecipeDetail?recipeID=${re.id}'" />
 
                         <div class="recipe-react">
-                            <a href="javascript:void(0)" class="d-inline-block text-muted">
-                                <span class="align-middle">
-                                    <strong>${re.like}</strong> Likes</span>
-                            </a>
-                            <a href="javascript:void(0)" class="d-inline-block text-muted ml-3">
-                                <span class="align-middle">
-                                    <strong>${re.comment}</strong> Comments</span>
-                            </a>
+                            <c:if test="${re.like>0}">
+                                <a href="javascript:void(0)" class="d-inline-block text-muted">
+                                    <span class="align-middle"><strong>${re.like}</strong> Likes</span>
+                                </a>
+                            </c:if>
+                            <c:if test="${re.comment>0}">
+                                <a href="javascript:void(0)" class="d-inline-block text-muted ml-3">
+                                    <span class="align-middle"><strong>${re.comment}</strong> Comments</span>
+                                </a>
+                            </c:if>
+
                             <a href="#" class="d-inline-block text-muted ml-3">
-                                <i class="ion ion-md-share align-middle"></i>&nbsp;
+                                <i class="fas fa-bookmark align-middle"></i>
                                 <span class="align-middle">Save</span>
                             </a>
                             <a href="#" class="d-inline-block text-muted ml-3">
-                                <i class="ion ion-md-share align-middle"></i>&nbsp;
-                                <span class="align-middle">View detail</span>
+                                <i class="fas fa-eye align-middle"></i>
+                                <span class="align-middle" onclick="location='./RecipeDetail?recipeID=${re.id}'">View detail</span>
                             </a>
                         </div>
                     </div>

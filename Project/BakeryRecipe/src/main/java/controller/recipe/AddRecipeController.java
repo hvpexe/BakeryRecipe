@@ -44,8 +44,8 @@ public class AddRecipeController extends HttpServlet {
      * @throws IOException      if an I/O error occurs
      */
     private static final String ERROR = "addrecipe.jsp";
-    private static final String ERROR_MISSING_USER = "profile.jsp";
-    private static final String SUCCESS = "addrecipe.jsp";
+    private static final String ERROR_MISSING_USER = "login.jsp";
+    private static final String SUCCESS = "profile";
 
     protected void processRequest (HttpServletRequest request,
             HttpServletResponse response)
@@ -80,8 +80,8 @@ public class AddRecipeController extends HttpServlet {
             }
             String[] ingreName = request.getParameterValues("ingre-name");//get all name
             String[] ingreAmount = request.getParameterValues("ingre-amount");//get all amount
-            ingreName=Tools.toUTF8(ingreAmount);
-            ingreAmount=Tools.toUTF8(ingreName);
+            ingreName=Tools.toUTF8(ingreName);
+            ingreAmount=Tools.toUTF8(ingreAmount);
             List<Part> instImgList = new LinkedList<Part>();//get all instuction images
             String[] instDescription = Tools.toUTF8(request.getParameterValues("inst-description"));//get all instuction descrition
             int prepareTime = Integer.parseInt(request.getParameter("prepare-time"));
@@ -90,7 +90,9 @@ public class AddRecipeController extends HttpServlet {
             int vIndex = 0;
             int iIndex = 0;
             int cover = Integer.parseInt(request.getParameter("cover"));//video image cover
-
+            for (String string : ingreName) {
+                out.print("<br>"+string);
+            }
             for (Part p : parts) {
                 if (p.getName().contains("video-image")) {
                     try {
@@ -144,9 +146,10 @@ public class AddRecipeController extends HttpServlet {
                             ingreAmount, instImgList, instDescription, prepareTime, cookTime, userId, cover, sc);
             if (recipeAdded) {
                 url = SUCCESS;
-                out.print("Recipe ADDED");
+                session.setAttribute("ADD_RECIPE_SUCCESS","Recipe added!");
+            }else{
+                session.setAttribute("ADD_RECIPE_FAILED","Recipe adding failed!");
             }
-
         } catch (Exception e) {
             e.printStackTrace(out);
             e.printStackTrace();
@@ -170,7 +173,7 @@ public class AddRecipeController extends HttpServlet {
     protected void doGet (HttpServletRequest request,
             HttpServletResponse response)
             throws ServletException, IOException {
-        processRequest(request, response);
+        request.getRequestDispatcher(ERROR).forward(request, response);
     }
 
     /**

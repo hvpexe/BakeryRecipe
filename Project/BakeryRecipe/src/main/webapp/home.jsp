@@ -9,7 +9,7 @@
         <link rel="stylesheet" href="assets/css/web/bootstrap-4.3.1.min.css" />
         <link rel="stylesheet" type="text/css" href="./assets/css/fontawesome-free-6.1.1-web/css/all.min.css">
         <link rel="stylesheet" href="assets/css/home.css" />
-
+        <script src="assets/js/Jquery/jquery-core.js"></script>
     </head>
     <body>
         <c:import url="header.jsp"/>
@@ -25,11 +25,11 @@
                 <c:forEach items="${homeRecipe}" var="re">
                     <div class="user-recipe">
                         <div class="media recipe-header">
-                            <img class="recipe-ava"
+                            <img class="recipe-ava c-pointer "
                                  src="<c:out value="${re.getAvatar()}"/>"
-                                 alt="avatar" />
+                                 alt="avatar" onclick='location="./profile?userid=${re.userID}"'/>
                             <div class="media-body ml-3">
-                                ${re.username}
+                                <a class="text-dark c-pointer hover-underline" href="./profile?userid=${re.userID}">${re.username}</a>
                                 <div class="text-muted small"><c:out value="${re.getDatePostFormat()}"/></div>
                             </div>
                             <i class="fa-solid fa-ellipsis"></i>
@@ -43,15 +43,19 @@
                                   src="${re.cover}" />
                         </a>
                         <div class="recipe-react">
-                            <a  class="d-inline-block text-muted" onclick="getLikedList('${re.id}')">
-                                <span class="align-middle">
-                                    <strong>${re.like}</strong> Likes</span>
-                            </a>
-                            <a href="javascript:void(0)" class="d-inline-block text-muted ml-3">
-                                <span class="align-middle">
-                                    <strong>${re.comment}</strong> Comments</span>
-                            </a>
-                            <a href="./cookdetail.jsp" class="d-inline-block text-muted ml-3">
+                            <c:if test="${re.like>0}">
+                                <a  class="d-inline-block text-muted hover-underline c-pointer mr-3" onclick="getLikedList('${re.id}')">
+                                    <span class="align-middle">
+                                        <strong>${re.like}</strong> Likes</span>
+                                </a>
+                            </c:if>
+                            <c:if test="${re.comment>0}">
+                                <a href="javascript:void(0)" class="d-inline-block text-muted mr-3">
+                                    <span class="align-middle">
+                                        <strong>${re.comment}</strong> Comments</span>
+                                </a>
+                            </c:if>
+                            <a href=".\RecipeDetail?recipeID=${re.getId()}" class="d-inline-block text-muted">
                                 <i class="ion ion-md-share align-middle"></i>
                                 <span class="align-middle">View detail</span>
                             </a>
@@ -94,13 +98,15 @@
                 </div>
             </div>
         </div>
-        <script>
-            var btnButton = document.getElementById("btnButton");
-            if (btnButton) {
-                btnButton.addEventListener("click", function (e) {
-                    window.location.href = "./addrecipe.jsp";
-                });
-            }
+        <!--fixed Container-->
+        <div class="fixed-container " id="liked-list" >
+            <div class="gray-box"></div>
+            <div class="content card-body col-12 col-md-6">
+
+            </div>
+        </div>
+        <script src="assets/js/home.js">
+
         </script>
     </body>
 </html>

@@ -1,3 +1,4 @@
+@import "universal.css";
 :root {
   --main-theme-color: #DB5A42;
   --main-theme-color-hover: #c22e14;
@@ -263,4 +264,22 @@ body {
   .frame-div {
     display: none;
   }
+}
+#liked-list .content {
+    background: #ffffff;
+}
+#liked-list .image{
+    width: 3em;
+    box-shadow: 0 0 8px 0 #25252525;
+    object-fit: cover;
+    object-position: center;
+    aspect-ratio:1;
+    border-style: dotted;
+    border-color: var(--hard-yellow-theme);
+}
+#liked-list .content .item{
+    /* box-shadow: 0 4px 4px 1px #00000025; */
+    border-radius: 25px;
+    background: #DDDDDD25;
+    padding: 15px 10px;
 }

@@ -2,11 +2,10 @@
 
 let formElem = document.getElementById('add-recipe');
 let instructionElem = document.getElementById('instruction');
-formElem.onsubmit = e => {
-
-    if (e.key == 'Enter')
+$('input').keydown(function (e) {
+    if (e.key === 'Enter')
         e.preventDefault();
-}
+});
 async function submitForm(selector) {
     const form = document.getElementById('add-recipe');
     var inputs = form.querySelectorAll('[name][count]:not([disabled])');
@@ -101,7 +100,7 @@ async function showBox(option) {
         }
         ;
     }
-
+    
 }
 function getLinkEmbed(value) {
     var embedUrl = value.match(/[\w\-]{11,}/)[0];
@@ -230,7 +229,7 @@ async function changeDisplayImage(elem, image) {
         image.style.backgroundSize = '';
     };
     elem.click();
-
+    
 }
 function getObjURL(file) {
     url = URL.revokeObjectURL(file);
@@ -288,7 +287,7 @@ function ItemCopy(option) {
     } else {
         console.log('error: nothing to copy');
     }
-
+    
 }
 ;
 function checkKeyEnter(e) {
@@ -382,11 +381,22 @@ $('#detail .save-btn').on('click', e => {
         changeImg(clone.parentElement, getObjURL(clone.files[0]))
         elemFile.remove();
     }
-
+    
     console.log(detail);
     console.log(elem);
     document.querySelector("#detail").classList.add('d-none');
 });
+function checkIngredient(value) {
+    var container = document.querySelector('#ingredient-container');
+    var inputs = container.querySelectorAll('input[name$=name]:not([disabled])');
+    for (var i = 0; i < inputs.length; i++) {
+        console.log(inputs[i].value.toUpperCase());
+        console.log(value.toUpperCase());
+        if (inputs[i].value.toUpperCase() === value.toUpperCase())
+            return false;
+    }
+    return true;
+}
 // stop img that have a camera calling ShowDetail first
 $('#inst-container h5, #inst-container .inst-img, #inst-container .inst-img *\n\
     ,#inst-container .item-trashbin, #inst-container .item-trashbin *').click(function (e) {
@@ -401,3 +411,74 @@ $('#detail :is(.gray-box, .exit-btn, .cancel-btn, .save-btn)').click(e => {
     document.querySelector("#detail").classList.add('d-none');
 }
 );
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+//                             Validator({
+//                                 form: '#add-recipe',
+//                                 status: '.status',
+//                                 rules: [
+//                                     Validator.isRequired('[name=recipe-name]'),
+//                                         ],
+//                                         onSubmit: (value) => {
+//                                             //Call api here
+//                                             console.log(value);
+//                                         },
+//                                     });
+ItemCopy({
+    selector: '#ingredient [name]',
+    run: (result, container, step) => {
+        if (step) {
+            var count = document.querySelector(step);
+            count.setAttribute('value', parseInt(count.value) + 1);
+        }
+        var doc = new DOMParser().parseFromString(result, "text/html");
+        var name = doc.querySelector('div input').value;
+        console.log(checkIngredient(name));
+        if (checkIngredient(name)) {
+            $(container).append(result);
+        } else
+        {
+            var error = document.createElement('div');
+            error.innerHTML= 'Cannot add same ingredient!';
+            $(error).insertAfter($('#ingredient'));
+            console.log(error);
+            setTimeout(()=>error.remove(),2000);
+        }
+    },
+    count: '#ingredient [name=count]',
+    container: '#ingredient-container',
+    url: 'ajax/GetIngredientImage',
+});
+ItemCopy({
+    selector: '#instruction [name]',
+    run: (result, container, step) => {
+        if (step) {
+            var count = document.querySelector(step);
+            count.setAttribute('value', parseInt(count.value) + 1);
+        }
+        console.log(result);
+        $(container).append(result);
+        updateContainer(container);
+        $('#inst-container h5, #inst-container .inst-img, #inst-container .inst-img *\n\
+                                                ,#inst-container .item-trashbin, #inst-container .item-trashbin *').click(function (e) {
+            e.stopPropagation();
+        });
+    },
+    count: '#instruction [name=count]',
+    url: 'ajax/GetInstructionTemplate',
+    container: '#inst-container',
+});

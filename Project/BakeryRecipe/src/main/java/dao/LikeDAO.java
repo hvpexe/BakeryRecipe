@@ -18,21 +18,25 @@ public class LikeDAO {
 
     public static List<Recipe> getLikedRecipeFromUser (int id) {
         List<Object[]> list = execute("SELECT [RecipeID]\n"
-                + "  FROM [Like] WHERE UserID = ?",id);
+                + "  FROM [Like] WHERE UserID = ?", id);
         List<Recipe> recipeList = new LinkedList<>();
-        for (Object[] objects : list) {
+        for (Object[] objects : list)
             recipeList.add(RecipeDAO.getRecipeByID((int) objects[0]));
-        }
+        if (recipeList.size() == 0)
+            return null;
         return recipeList;
     }
+
     public static List<User> getLikedUserFromRecipe (int id) {
         List<Object[]> list = execute("SELECT [UserID]\n"
-                + "  FROM [Like] WHERE RecipeID = ?",id);
+                + "  FROM [Like] WHERE RecipeID = ?", id);
         List<User> userList = new LinkedList<>();
-        for (Object[] objects : list) {
+        for (Object[] objects : list)
             userList.add(UserDAO.getUserByID((int) objects[0]));
-        }
+        if (userList.size() == 0)
+            return null;
         return userList;
+
     }
-    
+
 }

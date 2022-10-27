@@ -5,8 +5,10 @@
 package controller;
 
 import com.google.api.services.gmail.model.Message;
+import dao.IngredientDAO;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.sql.Connection;
 import javax.mail.internet.MimeMessage;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -16,6 +18,7 @@ import javax.servlet.http.HttpServletResponse;
 import utilities.CreateEmail;
 import utilities.CreateMessage;
 import utilities.SendMessage;
+import utils.DBUtils;
 
 /**
  *
@@ -29,32 +32,24 @@ public class DebugController extends HttpServlet {
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
      * methods.
      *
-     * @param request servlet request
+     * @param request  servlet request
      * @param response servlet response
+     *
      * @throws ServletException if a servlet-specific error occurs
-     * @throws IOException if an I/O error occurs
+     * @throws IOException      if an I/O error occurs
      */
-    protected void processRequest(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException {
+    protected void processRequest (HttpServletRequest request, HttpServletResponse response)
+            throws ServletException {
         response.setContentType("text/html;charset=UTF-8");
-        PrintWriter out = response.getWriter();
+        Connection conn = DBUtils.getConnection();
+        String ingreName = "eg";
         try {
-            out.println("Email Tesing");
-            MimeMessage mm
-                    = CreateEmail.createEmail("binhntse160860@fpt.edu.vn","binhnguyenthanh19242yahoo@gmail.com ", "Send Mail Test", "http://localhost:8080/BakeryRecipe/");
-
-            out.println("<br>");
-            out.println(mm.getContent());
-            Message mess = CreateMessage.createMessageWithEmail(mm);
-            out.println("<br>");
-            out.println(mess);
-
-            SendMessage.sendEmail("binhntse160860@fpt.edu.vn","binhnguyenthanh19242yahoo@gmail.com " );
-            out.println("<br>Email Send!" + mm);
-        } catch (Exception ex) {
-            System.out.println("==================================================================");
-            System.out.println(ex.getMessage());
-            ex.printStackTrace();
+            int ingreId = IngredientDAO.getIngredientIDByName(ingreName, conn);
+            if (ingreId == -1)
+                ingreId = IngredientDAO.addIngredient(ingreName, conn);
+            System.out.println("--------------------------------------------------------------------------------------");
+            System.out.println(" " + ingreId);
+        } catch (Exception e) {
 
         }
     }
@@ -63,13 +58,14 @@ public class DebugController extends HttpServlet {
     /**
      * Handles the HTTP <code>GET</code> method.
      *
-     * @param request servlet request
+     * @param request  servlet request
      * @param response servlet response
+     *
      * @throws ServletException if a servlet-specific error occurs
-     * @throws IOException if an I/O error occurs
+     * @throws IOException      if an I/O error occurs
      */
     @Override
-    protected void doGet(HttpServletRequest request, HttpServletResponse response)
+    protected void doGet (HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         processRequest(request, response);
     }
@@ -77,13 +73,14 @@ public class DebugController extends HttpServlet {
     /**
      * Handles the HTTP <code>POST</code> method.
      *
-     * @param request servlet request
+     * @param request  servlet request
      * @param response servlet response
+     *
      * @throws ServletException if a servlet-specific error occurs
-     * @throws IOException if an I/O error occurs
+     * @throws IOException      if an I/O error occurs
      */
     @Override
-    protected void doPost(HttpServletRequest request, HttpServletResponse response)
+    protected void doPost (HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         processRequest(request, response);
     }
@@ -94,7 +91,7 @@ public class DebugController extends HttpServlet {
      * @return a String containing servlet description
      */
     @Override
-    public String getServletInfo() {
+    public String getServletInfo () {
         return "Short description";
     }// </editor-fold>
 
