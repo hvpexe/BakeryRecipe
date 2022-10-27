@@ -25,7 +25,7 @@ public class LoginController extends HttpServlet {
 
     private static final String ERROR = "login.jsp";
     private static final String ADMIN = "admin";
-    private static final String ADMIN_PAGE = "home";
+    private static final String ADMIN_PAGE = "AdminDashBoard";
     private static final String US = "baker";
     private static final String USER_PAGE = "home";
 

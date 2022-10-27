@@ -92,6 +92,10 @@
         <servlet-name>SearchByIngredientController</servlet-name>
         <servlet-class>controller.recipe.SearchByIngredientController</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>AdminDashBoardController</servlet-name>
+        <servlet-class>controller.admin.AdminDashBoardController</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>DebugController</servlet-name>
         <url-pattern>/debug</url-pattern>
@@ -147,6 +151,10 @@
     <servlet-mapping>
         <servlet-name>SearchByIngredientController</servlet-name>
         <url-pattern>/searchByIngredient</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>AdminDashBoardController</servlet-name>
+        <url-pattern>/AdminDashBoard</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>
