@@ -1,7 +1,7 @@
 <%@page import="dao.UserDAO"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
-<c:set value="<%=UserDAO.getUserByID(13) %>" var="login" scope="session" />
+<c:set value="<%=UserDAO.getUserByID(15) %>" var="login" scope="session" />
 <!DOCTYPE html>
 <html>
     <head>
@@ -34,7 +34,7 @@
                     <li onclick="ajaxLoad('./ajax/LikedRecipeListAjax')">
                         Liked recipe
                     </li>
-                    <li onclick="ajaxLoad('./profileChangePass.jsp')">
+                    <li onclick="ajaxLoad('./profileinfo/profileChangePass.jsp')">
                         Change password
                     </li>
                     <li onclick="window.location ='/BakeryRecipe/LogoutController'">

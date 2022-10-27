@@ -4,6 +4,7 @@
  */
 package controller.ajax;
 
+import dao.LikeDAO;
 import dao.RecipeDAO;
 import dto.Recipe;
 import dto.User;
@@ -44,13 +45,7 @@ public class LikedRecipeListAjax extends HttpServlet {
         HttpSession session = request.getSession();
         User user = (User) session.getAttribute("login");
         
-        List<Object[]> list = execute("SELECT [RecipeID]\n"
-                + "      ,[UserID]\n"
-                + "  FROM [Like] WHERE UserID = ?",user.getId());
-        List<Recipe> recipeList = new LinkedList<>();
-        for (Object[] objects : list) {
-            recipeList.add(RecipeDAO.getRecipeByID((int) objects[0]));
-        }
+       List<Recipe> recipeList = LikeDAO.getLikedRecipeFromUser(user.getId());
         request.setAttribute("RECIPE_LIST", recipeList);
         request.getRequestDispatcher(SUCCESS).forward(request, response);
     }
