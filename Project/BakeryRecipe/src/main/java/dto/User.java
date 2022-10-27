@@ -35,22 +35,26 @@ public class User {
 
     public User() {
     }
+
+    public User(int id, String role, String email, String password, String avatar, String name, String firstName, String lastName, String gender, String phone, String address, Date dateRegister, boolean isActive, int storeID, Date birthday) {
+        this.id = id;
+        this.role = role;
+        this.email = email;
+        this.password = password;
+        this.avatar = avatar;
+        this.name = lastName + " " + firstName;
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.gender = gender;
+        this.phone = phone;
+        this.address = address;
+        this.dateRegister = dateRegister;
+        this.isActive = isActive;
+        this.storeID = storeID;
+        this.birthday = birthday;
+    }
     
-//    public User(int id, String role, String email, String password, String avatar, String name, String gender, String phone, String address, Date dateRegister, boolean isActive, int storeID, Date birthday) {
-//        this.id = id;
-//        this.role = role;
-//        this.email = email;
-//        this.password = password;
-//        this.avatar = avatar;
-//        this.name = name;
-//        this.gender = gender;
-//        this.phone = phone;
-//        this.address = address;
-//        this.dateRegister = dateRegister;
-//        this.isActive = isActive;
-//        this.storeID = storeID;
-//        this.birthday = birthday;
-//    }
+    
 
     public User(int id, String role, String email, String password, String avatar, String name, String gender, String phone, String address, Date dateRegister, boolean isActive, int storeID, Date birthday) {
         this.id = id;
@@ -243,8 +247,8 @@ public class User {
         return isActive;
     }
 
-    public void setIsActive(boolean IsActive) {
-        this.isActive = IsActive;
+    public void setIsActive(boolean isActive) {
+        this.isActive = isActive;
     }
 
     public int getStoreID() {
