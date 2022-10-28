@@ -176,7 +176,7 @@ public class UserDAO {
             + ",[FirstName],[LastName],[Gender],[Phone]"
             + ",[Address],[DateRegister],[IsActive],[StoreID], [Birthday]"
             + " FROM [BakeryRecipe].[dbo].[User]"
-            + " WHERE [ID] = ? and IsActive = ?";
+            + " WHERE [ID] = ? ";
 
     /**
      * Get User by ID but this <b>method</b> only select the <b>User</b> that
@@ -191,7 +191,6 @@ public class UserDAO {
             PreparedStatement ps = conn.prepareStatement(sql);
             //Set ps
             ps.setInt(1, id);
-            ps.setInt(2, 1);
             //run ps
             ResultSet rs = ps.executeQuery();
             String[] l = USER_COLUMN_NAME_LIST;
@@ -356,32 +355,28 @@ public class UserDAO {
     }
 
     //ham nay bi loi, tam thoi comment - PhuHV
-//    public static String saveAvatar(String filename, Part file, ServletContext sc) {
-//
-//        try {
-//            String fileName = file.getSubmittedFileName();
-//            if (fileName.isEmpty()) {
-//                return null;
-//            }
-//            // refines the fileName in case it is an absolute path
-//            fileName = new File(fileName).getName();
-//            filename += fileName.substring(fileName.indexOf('.'), fileName.length());
-//            String absoluteFilepath = sc.getRealPath("/" + User.IMG_PATH);
-////            System.out.println(absoluteFilepath);
-////absoluteFilepath = D:\learning in FPT\Ky_5\SWP391\BakeryRecipe\Project\BakeryRecipe\target\BakeryRecipe-1.0-SNAPSHOT\assets\images\avt
-////webFilepath = D:\learning in FPT\Ky_5\SWP391\BakeryRecipe\Project\BakeryRecipe\src\main\webapp\assets\images\avt
-//            String webFilepath = absoluteFilepath.replace("\\target\\BakeryRecipe-1.0-SNAPSHOT\\", "\\src\\main\\webapp\\");
-//            Tools.getFolderUpload(absoluteFilepath);
-//            Tools.getFolderUpload(webFilepath);
-////        D:\learning in FPT\Tools\UploadFile\web\assets\images
-//            file.write(absoluteFilepath + filename);
-//            file.write(webFilepath + filename);
-//            return filename;
-//        } catch (IOException ex) {
-//            System.out.println("Error Cant Save Avatar!" + ex.getMessage());
-//        }
-//        return null;
-//    }
+    public static String saveAvatar(String filename, Part file, ServletContext sc) {
+
+        try {
+            String fileName = file.getSubmittedFileName();
+            if (fileName.isEmpty()) {
+                return null;
+            }
+            // refines the fileName in case it is an absolute path
+            fileName = new File(fileName).getName();
+            filename += fileName.substring(fileName.indexOf('.'), fileName.length());
+            String absoluteFilepath = sc.getRealPath("/" + User.IMG_PATH);
+            String webFilepath = absoluteFilepath.replace("\\target\\BakeryRecipe-1.0-SNAPSHOT\\", "\\src\\main\\webapp\\");
+            Tools.getFolderUpload(absoluteFilepath);
+            Tools.getFolderUpload(webFilepath);
+            file.write(absoluteFilepath + filename);
+            file.write(webFilepath + filename);
+            return filename;
+        } catch (IOException ex) {
+            System.out.println("Error Cant Save Avatar!" + ex.getMessage());
+        }
+        return null;
+    }
 
     private static final String LIST_USER = "select[Email], [LastName],[FirstName] ,[Avatar] ,userRep.ID\n"
             + "                      from [dbo].[User] userRep join [dbo].[Recipe] recipe\n"
