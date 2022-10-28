@@ -15,7 +15,7 @@
         <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@8/swiper-bundle.min.css" />
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
         <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-        <link rel="stylesheet" href="assets/css/recipeDetail.css?version=1" />
+        <link rel="stylesheet" href="assets/css/recipeDetail1.css?version=1" />
     </head>
     <body>
         <c:catch var="e"> 
@@ -201,30 +201,7 @@
                                     </div>  
                                 </div>
                                              <div id="show-comment"></div>
-                                <div class="d-flex flex-start mb-4">
-                                    <img class="rounded-circle mr-2"
-                                         src="https://mdbcdn.b-cdn.net/img/Photos/Avatars/img%20(32).webp" alt="avatar"
-                                         width="60" height="60" />
-                                    <div class="card w-100">
-                                        <div class="card-body p-4">
-                                            <div class="">
-                                                <h5>Johny Cash</h5>
-                                                <p class="small">3 hours ago</p>
-                                                <p>
-                                                    Cras sit amet nibh libero, in gravida nulla. Nulla vel metus
-                                                    scelerisque
-                                                    ante sollicitudin. Cras purus odio, vestibulum in vulputate at,
-                                                    tempus
-                                                    viverra turpis. Fusce condimentum nunc ac nisi vulputate
-                                                    fringilla.
-                                                    Donec lacinia congue felis in faucibus ras purus odio,
-                                                    vestibulum in
-                                                    vulputate at, tempus viverra turpis.
-                                                </p>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
+                        
                                 <!--test list_cmt-->
 
                                 <c:forEach items="${COMMENT_LIST}" var="cmt">
@@ -265,9 +242,6 @@
                                 <div class="img-container">
                                     <img class="recipe-img" alt=""
                                          src="${to.cover}" />
-                                    <div class="bookmark">
-                                        Save <i class="fa-regular fa-bookmark"></i>
-                                    </div>
                                     <div class="react">
                                         <div>${to.like} likes</div>
                                         <div>${to.comment} comments</div>
