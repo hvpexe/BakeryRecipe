@@ -79,7 +79,6 @@ public class LoginController extends HttpServlet {
                     }
                     System.out.println(url);
                     response.sendRedirect(url);
-                    return;
                 }
             }
             request.getRequestDispatcher(url).forward(request, response);

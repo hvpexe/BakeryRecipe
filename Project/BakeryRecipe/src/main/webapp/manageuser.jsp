@@ -27,6 +27,8 @@
         <link href="admin/css/sb-admin-2.min.css" rel="stylesheet">
         <!-- Custom styles for this page -->
         <link href="admin/vendor/datatables/dataTables.bootstrap4.min.css" rel="stylesheet">
+        <link href="assets/css/fontawesome-free-6.1.1-web/css/all.min.css" rel="stylesheet" type="text/css">
+
 
     </head>
 
@@ -39,11 +41,8 @@
             <ul class="navbar-nav bg-gradient-primary sidebar sidebar-dark accordion" id="accordionSidebar">
 
                 <!-- Sidebar - Brand -->
-                <a class="sidebar-brand d-flex align-items-center justify-content-center" href="index.html">
-                    <div class="sidebar-brand-icon rotate-n-15">
-                        <i class="fas fa-laugh-wink"></i>
-                    </div>
-                    <div class="sidebar-brand-text mx-3">SB Admin <sup>2</sup></div>
+                <a class="sidebar-brand d-flex align-items-center justify-content-center" href="AdminDashBoard">
+                    <div class="sidebar-brand-text mx-3">BakeryRecipe</div>
                 </a>
 
                 <!-- Divider -->
@@ -51,7 +50,7 @@
 
                 <!-- Nav Item - Dashboard -->
                 <li class="nav-item">
-                    <a class="nav-link" href="index.html">
+                    <a class="nav-link" href="AdminDashBoard">
                         <i class="fas fa-fw fa-tachometer-alt"></i>
                         <span>Dashboard</span></a>
                 </li>
@@ -61,42 +60,51 @@
 
                 <!-- Heading -->
                 <div class="sidebar-heading">
-                    Interface
+                    Social network
+                </div>
+
+                <!-- Nav Item - Pages Collapse Menu -->
+                <li class="nav-item  active">
+                    <a class="nav-link" href="manageuser">
+                        <i class="fa-solid fa-user"></i>
+                        <span>Users</span></a>
+                </li>
+
+                <li class="nav-item">
+                    <a class="nav-link" href="managerecipe">
+                        <i class="fa-solid fa-bread-slice"></i>
+                        <span>Recipes</span></a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#">
+                        <i class="fa-solid fa-comment"></i>
+                        <span>Comments</span></a>
+                </li>
+
+                <!-- Divider -->
+                <hr class="sidebar-divider">
+
+                <!-- Heading -->
+                <div class="sidebar-heading">
+                    Report from users
                 </div>
 
                 <!-- Nav Item - Pages Collapse Menu -->
                 <li class="nav-item">
-                    <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseTwo"
-                       aria-expanded="true" aria-controls="collapseTwo">
-                        <i class="fas fa-fw fa-cog"></i>
-                        <span>Components</span>
-                    </a>
-                    <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
-                        <div class="bg-white py-2 collapse-inner rounded">
-                            <h6 class="collapse-header">Custom Components:</h6>
-                            <a class="collapse-item" href="buttons.html">Buttons</a>
-                            <a class="collapse-item" href="cards.html">Cards</a>
-                        </div>
-                    </div>
+                    <a class="nav-link" href="#">
+                        <i class="fa-solid fa-user"></i>
+                        <span>Users report</span></a>
                 </li>
 
-                <!-- Nav Item - Utilities Collapse Menu -->
                 <li class="nav-item">
-                    <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseUtilities"
-                       aria-expanded="true" aria-controls="collapseUtilities">
-                        <i class="fas fa-fw fa-wrench"></i>
-                        <span>Utilities</span>
-                    </a>
-                    <div id="collapseUtilities" class="collapse" aria-labelledby="headingUtilities"
-                         data-parent="#accordionSidebar">
-                        <div class="bg-white py-2 collapse-inner rounded">
-                            <h6 class="collapse-header">Custom Utilities:</h6>
-                            <a class="collapse-item" href="utilities-color.html">Colors</a>
-                            <a class="collapse-item" href="utilities-border.html">Borders</a>
-                            <a class="collapse-item" href="utilities-animation.html">Animations</a>
-                            <a class="collapse-item" href="utilities-other.html">Other</a>
-                        </div>
-                    </div>
+                    <a class="nav-link" href="#">
+                        <i class="fa-solid fa-bread-slice"></i>
+                        <span>Recipes report</span></a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#">
+                        <i class="fa-solid fa-comment"></i>
+                        <span>Comments report</span></a>
                 </li>
 
                 <!-- Divider -->
@@ -136,8 +144,8 @@
                 </li>
 
                 <!-- Nav Item - Tables -->
-                <li class="nav-item active">
-                    <a class="nav-link" href="tables.html">
+                <li class="nav-item">
+                    <a class="nav-link" href="adminTable.jsp">
                         <i class="fas fa-fw fa-table"></i>
                         <span>Tables</span></a>
                 </li>
@@ -333,9 +341,9 @@
                             <li class="nav-item dropdown no-arrow">
                                 <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button"
                                    data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                    <span class="mr-2 d-none d-lg-inline text-gray-600 small">Douglas McGee</span>
+                                    <span class="mr-2 d-none d-lg-inline text-gray-600 small">${sessionScope.login.name}</span>
                                     <img class="img-profile rounded-circle"
-                                         src="img/undraw_profile.svg">
+                                         src="${sessionScope.login.avatar}">
                                 </a>
                                 <!-- Dropdown - User Information -->
                                 <div class="dropdown-menu dropdown-menu-right shadow animated--grow-in"
