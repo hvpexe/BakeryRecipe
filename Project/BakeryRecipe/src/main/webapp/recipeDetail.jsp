@@ -404,6 +404,7 @@
                         console.log(response);
                         var cmtShow = document.getElementById("show-comment");
                         cmtShow.innerHTML += response;
+                        item.value ="";
                         
                     },
                     error: function (xhr) {

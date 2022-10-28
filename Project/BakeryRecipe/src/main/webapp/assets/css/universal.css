@@ -3,6 +3,7 @@
     display: none;
     inset:0;
     z-index: 1;
+    padding: 10vw 10vh;
 }
 .fixed-container .gray-box{
     background: gray;
@@ -36,11 +37,16 @@
     box-shadow: 0 0 12px rgb(0 0 0 / 6%);
 }
 @media (max-width:996px){
+    .fixed-container {
+            padding: 0;
+
+    }
     .fixed-container .content{
         position: absolute;
         inset:0;
         border-radius: unset;
     }
+    
 }
 .avatar {
     object-fit: cover;
