@@ -444,7 +444,7 @@
                                                                     <input type="hidden" name="action" value="changestatus">
                                                                 </form>
                                                             </c:if>
-                                                            <c:if test="${u.isActive != 'false'}">
+                                                            <c:if test="${u.isActive == 'true'}">
                                                                 <form action="managestatus">
                                                                     <button class="bg-success">BAN</button>
                                                                     <input type="hidden" name="userid" value="${u.id}">
