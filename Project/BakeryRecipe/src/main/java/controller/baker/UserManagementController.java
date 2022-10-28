@@ -36,7 +36,7 @@ public class UserManagementController extends HttpServlet {
         response.setContentType("text/html;charset=UTF-8");
         List<User> listuser = UserDAO.showUserList();
         request.setAttribute("userlist", listuser);
-        request.getRequestDispatcher("manageuser.jsp").forward(request, response);
+        request.getRequestDispatcher("manageUser.jsp").forward(request, response);
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">

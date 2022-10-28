@@ -427,9 +427,9 @@
                                                     <td class="align-middle col-1">
                                                         <!--neu muon Chinh button thi cho form bao lai de edit--> 
                                                         <form action="recipe">
-                                                            <button class="bg-side-color" style="width: max-content;">Recipe Details</button>
-                                                            <input type="hidden" name="recipeid" value="${u.id}">
-                                                            <input type="hidden" name="action" value="watch">
+                                                            <button class="bg-side-color" style="width: max-content;">
+                                                                <a href=".\RecipeDetail?recipeID=${u.id}">Recipe Details</a>
+                                                            </button>
                                                         </form>
                                                     </td>
                                                     <td class="  align-middle text-center">
