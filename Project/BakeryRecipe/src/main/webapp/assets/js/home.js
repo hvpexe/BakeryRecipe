@@ -10,12 +10,12 @@ function getLikedList(recipeID) {
     var likedList = $('#liked-list');
     var graybox = $('#liked-list .gray-box');
     var content = $('#liked-list .content');
-    graybox.click(()=>likedList.removeClass('d-flex'))
+    graybox.click(()=>likedList.removeClass('d-flex'));
     $.ajax(
             {
                 url: 'ajax/LikedUserListAjax',
                 data: {
-                    recipeid: recipeID,
+                    recipeid: recipeID
                 },
                 success: function (data) {
                     likedList.addClass('d-flex');
