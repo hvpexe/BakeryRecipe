@@ -83,13 +83,19 @@ body {
     border-radius: 100px;
     border: 1px solid #000;
     gap: 5px;
-    padding: 8px 20px;
+    padding: 8px 0px;
 }
+.searchbar:focus-within {
+    box-shadow: 0 4px 4px #00000025;
+}
+
 
 .searchbar-icon{
     color: var(--main-theme-color);
+    display: flex;
+    font-size: 1.2em;
+    align-items: center;
     margin-left: 8px;
-    margin-right: 8px;
 }
 
 .searchbar-input {
