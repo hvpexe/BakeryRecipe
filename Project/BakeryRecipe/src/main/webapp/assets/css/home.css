@@ -1,269 +1,274 @@
 @import "universal.css";
 :root {
-  --main-theme-color: #DB5A42;
-  --main-theme-color-hover: #c22e14;
-  --side-theme-color: #FFFFFF;
-  --main-title-color: #000000;
-  --web-background-color: #F7FAFC;
-  --border-theme-color: #9c9c9c;
+    --main-theme-color: #DB5A42;
+    --main-theme-color-hover: #c22e14;
+    --side-theme-color: #FFFFFF;
+    --main-title-color: #000000;
+    --web-background-color: #F7FAFC;
+    --border-theme-color: #9c9c9c;
 }
 
 /* main */
 body {
-  background-color: var(--web-background-color) !important;
-  font-family: 'Roboto', sans-serif;
+    background-color: var(--web-background-color) !important;
+    font-family: 'Roboto', sans-serif;
 }
 
 .home-container {
-  display: flex;
-  justify-content: center;
-  padding: 40px 0 50px;
-  gap: 50px;
-  font-size: 12px;
-  color: #000;
+    display: flex;
+    justify-content: center;
+    padding: 40px 0 50px;
+    gap: 50px;
+    font-size: 12px;
+    color: #000;
 }
 
 .post-section {
-  display: flex;
-  width: 450px;
-  flex-direction: column;
-  gap: 25px;
+    display: flex;
+    width: 450px;
+    flex-direction: column;
+    gap: 25px;
 }
 
 .posting-section {
-  border-radius: 20px;
-  display: flex;
-  align-items: center;
-  background-color: #fff;
-  box-shadow: 0 4px 12px rgba(79, 79, 186, 0.06);
-  padding: 16px 14px;
-  gap: 26px;
+    border-radius: 20px;
+    display: flex;
+    align-items: center;
+    background-color: #fff;
+    box-shadow: 0 4px 12px rgba(79, 79, 186, 0.06);
+    padding: 16px 14px;
+    gap: 26px;
 }
 
 .avatar-icon {
-  position: relative;
-  width: 45px;
-  height: 45px;
+      box-sizing: border-box;
+    padding: 0 !important;
+    width: 50px;
+    height: 50px;
+    /* width: 120px; */
+    aspect-ratio: 1/1;
+    /* border: 10px solid #EEE; */
+    border-radius: 50%
 }
 
 .btn-button {
-  border-radius: 20px;
-  flex-direction: row;
-  cursor: pointer;
-  border: 1.5px solid #d7d5d5;
-  background-color: transparent;
-  position: relative;
-  width: 300px;
-  justify-content: center;
-  padding: 10px 12px 10px 15px;
-  font-size: 12px;
-  color: var(--main-theme-color);
+    border-radius: 20px;
+    flex-direction: row;
+    cursor: pointer;
+    border: 1.5px solid #d7d5d5;
+    background-color: transparent;
+    position: relative;
+    width: 300px;
+    justify-content: center;
+    padding: 10px 12px 10px 15px;
+    font-size: 12px;
+    color: var(--main-theme-color);
 }
 
 .btn-button:hover {
-  background-color: #e2a074;
-  color: var(--side-theme-color)
+    background-color: #e2a074;
+    color: var(--side-theme-color)
 }
 .user-recipe {
-  border-radius: 20px;
-  box-shadow: 0 0 12px rgba(0, 0, 0, 0.06);
-  background-color: var(--side-theme-color);
-  width: 450px;
-  padding: 20px 20px;
-  font-size: 14px;
+    border-radius: 20px;
+    box-shadow: 0 0 12px rgba(0, 0, 0, 0.06);
+    background-color: var(--side-theme-color);
+    width: 450px;
+    padding: 20px 20px;
+    font-size: 14px;
 }
 
 .recipe-header {
-  margin-bottom: 10px;
+    margin-bottom: 10px;
 
 }
 
 .recipe-ava {
 
-  width: 50px;
-  height: 50px;
-  border-radius: 50%;
-  object-fit: cover;
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    object-fit: cover;
 }
 
 .recipe-text {
-  /* text-align: justify; */
-  margin-bottom: 10px;
+    /* text-align: justify; */
+    margin-bottom: 10px;
 
 }
 
 .recipe-img {
-  border-radius: 10px;
-  width: 100%;
-  aspect-ratio: 1;
-  object-fit: cover;
-  margin-bottom: 15px;
+    border-radius: 10px;
+    width: 100%;
+    aspect-ratio: 1;
+    object-fit: cover;
+    margin-bottom: 15px;
 }
 
 
 /* side section */
 .frame-div {
-  display: flex;
-  align-self: flex-start;
-  border-radius: 20px;
-  background-color: var(--side-theme-color);
-  box-shadow: 0 4px 4px rgba(0, 0, 0, 0.06);
-  flex-direction: column;
-  padding: 40px;
-  gap: 60px;
+    display: flex;
+    align-self: flex-start;
+    border-radius: 20px;
+    background-color: var(--side-theme-color);
+    box-shadow: 0 4px 4px rgba(0, 0, 0, 0.06);
+    flex-direction: column;
+    padding: 40px;
+    gap: 60px;
 }
 
 .banner-div {
-  position: relative;
-  width: 100%;
-  height: 165px;
-  color: var(--side-theme-color);
+    position: relative;
+    width: 100%;
+    height: 165px;
+    color: var(--side-theme-color);
 }
 
 .rectangle-div {
-  border-radius: 12px;
-  background-color: #ff4e4e;
-  position: absolute;
-  height: 100%;
-  width: 100%;
-  top: 0;
-  right: 0;
-  bottom: 0;
-  left: 0;
+    border-radius: 12px;
+    background-color: #ff4e4e;
+    position: absolute;
+    height: 100%;
+    width: 100%;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
 }
 
 .group-icon {
-  position: absolute;
-  inset: 0px 0px 0px 0px;
-  width: 100%;
+    position: absolute;
+    inset: 0px 0px 0px 0px;
+    width: 100%;
 }
 
 .btn-start {
-  position: absolute;
-  top: 121px;
-  left: 21px;
-  width: 100px;
-  height: 30px;
-  border-radius: 4px;
-  background: rgba(32, 32, 32, 0.2);
-  mix-blend-mode: normal;
-  z-index: 1;
+    position: absolute;
+    top: 121px;
+    left: 21px;
+    width: 100px;
+    height: 30px;
+    border-radius: 4px;
+    background: rgba(32, 32, 32, 0.2);
+    mix-blend-mode: normal;
+    z-index: 1;
 
 }
 
 .btn-start span {
-  position: absolute;
-  color: var(--side-theme-color);
-  top: 20%;
-  left: 15%;
-  font-size: 12px;
-  z-index: 2;
+    position: absolute;
+    color: var(--side-theme-color);
+    top: 20%;
+    left: 15%;
+    font-size: 12px;
+    z-index: 2;
 }
 
 .try-premium-membersh {
-  position: absolute;
-  left: 20px;
-  display: inline-block;
-  top: 55px;
-  line-height: 22px;
-  width: 265px;
+    position: absolute;
+    left: 20px;
+    display: inline-block;
+    top: 55px;
+    line-height: 22px;
+    width: 265px;
 }
 
 .title-div {
-  position: absolute;
-  left: 20px;
-  display: inline-block;
-  top: 20px;
-  font-size: 22px;
-  line-height: 30px;
+    position: absolute;
+    left: 20px;
+    display: inline-block;
+    top: 20px;
+    font-size: 22px;
+    line-height: 30px;
 }
 
 
 .recommend-cook {
-  width: 320px;
+    width: 320px;
 }
 .cook-title {
-  font-size: 30px;
-  line-height: 30px;
-  display: inline-block;
-  font-family: "Abhaya Libre";
+    font-size: 30px;
+    line-height: 30px;
+    display: inline-block;
+    font-family: "Abhaya Libre";
 }
 
 .cook-container {
-  width: 100%;
-  margin-top: 15px;
-  display: flex;
-  justify-content: space-between;
+    width: 100%;
+    margin-top: 15px;
+    display: flex;
+    justify-content: space-between;
 }
 .cook-ava {
-  width: 40px;
-  height: 40px;
-  margin-right: 5px;
-  object-fit: cover;
+    width: 40px;
+    height: 40px;
+    margin-right: 5px;
+    object-fit: cover;
 }
 
 .cook-info {
-  text-decoration: none;
-  font-size: 18px;
-  line-height: 20px;
-  color: var(--main-title-color);
-  /* display: inline-block; */
+    text-decoration: none;
+    font-size: 18px;
+    line-height: 20px;
+    color: var(--main-title-color);
+    /* display: inline-block; */
 }
 
 .cook-info:hover {
-  text-decoration: none;
-  color: var(--main-theme-color-hover);
+    text-decoration: none;
+    color: var(--main-theme-color-hover);
 }
 
 .follow-btn {
-  background-color: var(--main-theme-color);
-  color: var(--web-background-color);
-  border-radius: 20px;
+    background-color: var(--main-theme-color);
+    color: var(--web-background-color);
+    border-radius: 20px;
 }
 .follow-btn:hover {
-  background-color: var(--main-theme-color-hover);
-  color: var(--web-background-color);
+    background-color: var(--main-theme-color-hover);
+    color: var(--web-background-color);
 }
 
 .trend-cake {
-  position: relative;
-  font-size: 20px;
+    position: relative;
+    font-size: 20px;
 }
 
 .cake-title {
-  font-size: 30px;
-  line-height: 30px;
-  display: inline-block;
-  font-family: "Abhaya Libre";
+    font-size: 30px;
+    line-height: 30px;
+    display: inline-block;
+    font-family: "Abhaya Libre";
 }
 .cake-container {
-  width: 100%;
-  margin-top: 15px;
-  display: flex;
-  justify-content: space-between;
+    width: 100%;
+    margin-top: 15px;
+    display: flex;
+    justify-content: space-between;
 }
 .cake-img {
-  width: 40px;
-  height: 40px;
-  margin-right: 5px;
-  object-fit: cover;
+    width: 40px;
+    height: 40px;
+    margin-right: 5px;
+    object-fit: cover;
 }
 .cake-info {
-  text-decoration: none;
-  font-size: 18px;
-  line-height: 20px;
-  color: var(--main-title-color);
+    text-decoration: none;
+    font-size: 18px;
+    line-height: 20px;
+    color: var(--main-title-color);
 }
 
 .cake-info:hover {
-  text-decoration: none;
-  color: var(--main-theme-color-hover);
+    text-decoration: none;
+    color: var(--main-theme-color-hover);
 }
 
 @media screen and (max-width: 960px) {
-  .frame-div {
-    display: none;
-  }
+    .frame-div {
+        display: none;
+    }
 }
 #liked-list .content {
     background: #ffffff;

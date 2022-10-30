@@ -7,12 +7,14 @@ body {
   top: 40px;
   left: 70px;
   display: inline-block;
+  color: var(--main-theme-color);
 }
 .frame-input,
 .iconsearch {
   position: relative;
   width: 27px;
   height: 27px;
+color: var(--main-theme-color);
   flex-shrink: 0;
 }
 .frame-input {
@@ -20,6 +22,7 @@ body {
   background-color: transparent;
   width: 849px;
   height: 30px;
+    font-size:17px; 
   overflow: hidden;
 }
 .frame-form {
@@ -271,4 +274,11 @@ body {
 }
 .frame-dip2 .in-div{
     padding-left: 20px
+}
+.iconsearch-icon{
+    
+
+    color: var(--main-theme-color);
+    margin-left: 8px;
+    margin-right: 8px;
 }

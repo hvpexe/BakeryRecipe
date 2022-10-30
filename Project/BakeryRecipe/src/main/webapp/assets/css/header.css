@@ -1,4 +1,5 @@
 @import "animation.css";
+@import "universal.css";
 :root {
     --main-theme-color: #DB5A42;
     --main-theme-color-hover: #c22e14;
