@@ -43,6 +43,13 @@ public class ManageController extends HttpServlet {
             user.setIsActive(active);
             UserDAO.changeStatus(user);
         }
+        if(action.equals("changerole")){
+            String role = request.getParameter("role");
+            int userid = Integer.parseInt(request.getParameter("userid"));
+            User user = UserDAO.getUserByID(userid);
+            user.setRole(role);
+            UserDAO.changeRole(user);
+        }
         response.sendRedirect("manageuser");
     }
 

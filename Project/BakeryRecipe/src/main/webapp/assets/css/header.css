@@ -66,6 +66,8 @@ body {
     text-decoration: none !important;
     color: #000;
     text-align: center;
+        transition:0.4s;
+
 }
 
 .header-link.active {
@@ -84,13 +86,19 @@ body {
     border-radius: 100px;
     border: 1px solid #000;
     gap: 5px;
-    padding: 8px 20px;
+    padding: 8px 0px;
 }
+.searchbar:focus-within {
+    box-shadow: 0 4px 4px #00000025;
+}
+
 
 .searchbar-icon{
     color: var(--main-theme-color);
+    display: flex;
+    font-size: 1.2em;
+    align-items: center;
     margin-left: 8px;
-    margin-right: 8px;
 }
 
 .searchbar-input {
@@ -109,10 +117,21 @@ body {
     justify-content: space-between;
     align-items: center;
 }
+.header-notification i{
+    translate:0 -2px;
+}
 .header-notification {
     color: var(--main-theme-color);
     margin: 0 16px;
     font-size: 24px;
+    width: 40px;
+    height: 40px;
+    display: flex;
+    align-content: center;
+    justify-content: center;
+    align-items: center;
+
+    border-radius: 50%;
 }
 
 .header-user {

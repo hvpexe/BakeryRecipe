@@ -1,7 +1,3 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
 package dao;
 
 import java.sql.ResultSet;
@@ -70,6 +66,25 @@ public class UserDAO {
             }
         } catch (Exception e) {
             System.out.println("Error at changeStatus: " + e.toString());
+        }
+        return false;
+    }
+    
+    public static boolean changeRole(User user) {
+        String sql = "UPDATE [User]\n"
+                + "SET [Role] = ?\n"
+                + "WHERE [ID] = ?";
+        try {
+            Connection conn = DBUtils.getConnection();
+            PreparedStatement ps = conn.prepareStatement(sql);
+            ps.setString(1, user.getRole());
+            ps.setInt(2, user.getId());
+            boolean check = ps.executeUpdate() > 0;
+            if (check) {
+                return true;
+            }
+        } catch (Exception e) {
+            System.out.println("Error at changeRole: " + e.toString());
         }return false;
     }
 
@@ -356,7 +371,6 @@ public class UserDAO {
 
     //ham nay bi loi, tam thoi comment - PhuHV
     public static String saveAvatar(String filename, Part file, ServletContext sc) {
-
         try {
             String fileName = file.getSubmittedFileName();
             if (fileName.isEmpty()) {
@@ -409,7 +423,7 @@ public class UserDAO {
             System.out.println("System have a problem");
         }
         return user;
-    }   
+    }
 
     private static final String FOLLOW = "INSERT INTO [dbo].[Follow]([UserID],[UserID2]) VALUES(?,?)";
 
@@ -651,6 +665,29 @@ public class UserDAO {
         } catch (SQLException ex) {
             System.out.println("UserList Query Error!" + ex.
                     getMessage());
+        }
+        return null;
+    }
+
+    public static List<User> getRecommendUsers(int userID) {
+        String sql = "SELECT TOP 5 U.ID, U.Avatar, U.LastName + ' ' + U.FirstName as FullName, U.Follower\n"
+                + "FROM [User] U\n"
+                + "WHERE U.ID != ? AND U.IsActive = 1\n"
+                + "ORDER BY Follower DESC";
+        try {
+            PreparedStatement ps = conn.prepareStatement(sql);
+            ps.setInt(1, userID);
+            ResultSet rs = ps.executeQuery();
+            List<User> list = new ArrayList<>();
+            User user = null;
+            while (rs.next()) {
+                user = new User(rs.getInt("ID"), rs.getString("Avatar"), rs.getString("FullName"), rs.getInt("Follower"));
+                list.add(user);
+            }
+            return list;
+        } catch (Exception e) {
+            System.out.println("getRecommendUsers error:");
+            e.printStackTrace();
         }
         return null;
     }
