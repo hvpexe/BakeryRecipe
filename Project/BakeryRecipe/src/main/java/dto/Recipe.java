@@ -57,7 +57,16 @@ public class Recipe {
         this.userID = userID;
         this.username = username;
     }
-    
+
+    /**
+     * constructor này dành cho recommmed recipe
+     */
+    public Recipe(int id, String name, int like, String cover) {
+        this.id = id;
+        this.name = name;
+        this.like = like;
+        this.cover = cover;
+    }
     
 
     public Recipe(int id, String name, String description, int like, int save, int comment, Timestamp datePost, Timestamp lastDateEdit, String cover, int userID, String username) {

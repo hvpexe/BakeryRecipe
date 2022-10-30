@@ -450,7 +450,7 @@ public class RecipeDAO {
         return liststep;
     }
 
-    private static final String POST_HOME_RECIPE_SQL = "(SELECT U2.ID as UserID, U2.FirstName + ' ' + U2.LastName AS Username, U2.Avatar, R.ID, R.Name, R.Description, R.[Like], R.[Save], R.Comment, R.DatePost, P.Img AS Cover\n"
+    private static final String POST_HOME_RECIPE_SQL = "(SELECT U2.ID as UserID, U2.LastName + ' ' + U2.FirstName AS Username, U2.Avatar, R.ID, R.Name, R.Description, R.[Like], R.[Save], R.Comment, R.DatePost, P.Img AS Cover\n"
             + "FROM [User] U\n"
             + "JOIN Follow ON U.ID = Follow.UserID\n"
             + "JOIN [User] U2 ON U2.ID = Follow.UserID2\n"
@@ -458,7 +458,7 @@ public class RecipeDAO {
             + "JOIN Picture P ON P.RecipeID = R.ID\n"
             + "WHERE U.ID = ? AND R.IsDeleted = 0 AND P.IsCover = 1)\n"
             + "UNION\n"
-            + "(SELECT U.ID AS UserID, U.FirstName + ' ' + U.LastName AS Username, U.Avatar, R.ID, R.Name, R.Description, R.[Like], R.[Save], R.Comment, R.DatePost, P.Img AS Cover\n"
+            + "(SELECT U.ID AS UserID, U.LastName + ' ' + U.FirstName AS Username, U.Avatar, R.ID, R.Name, R.Description, R.[Like], R.[Save], R.Comment, R.DatePost, P.Img AS Cover\n"
             + "FROM Recipe R\n"
             + "JOIN [User] U ON R.UserID = U.ID\n"
             + "JOIN Picture P ON P.RecipeID = R.ID\n"
@@ -791,7 +791,7 @@ public class RecipeDAO {
     private static final String UPDATE_DELETE = "UPDATE Recipe\n"
             + "SET IsDeleted = 1\n"
             + "WHERE Recipe.[ID] = ?";
-    
+
     public static boolean deleteRecipe(int id) {
         try {
             Connection conn = DBUtils.getConnection();
@@ -832,8 +832,8 @@ public class RecipeDAO {
                 int save = rs.getInt("Save");
                 String cakeName = rs.getString("Name");
                 String cover = rs.getString("Img");
-               Timestamp date =rs.getTimestamp("DatePost");
-                recipe = new Recipe(cakeName, like, comment, cover, fullName,date);
+                Timestamp date = rs.getTimestamp("DatePost");
+                recipe = new Recipe(cakeName, like, comment, cover, fullName, date);
             }
         } catch (Exception e) {
             e.printStackTrace();
@@ -942,4 +942,29 @@ public class RecipeDAO {
         return list;
     }
 
+    public static List<Recipe> getRecommnedRecipes() {
+        String sql = "SELECT TOP 5 R.ID, Name, [Like], P.Img\n"
+                + "FROM Recipe R\n"
+                + "JOIN Picture P On R.ID = P.RecipeID\n"
+                + "WHERE DatePost > DATEADD(month, -1, GETDATE()) AND IsDeleted = 0 AND P.IsCover = 1\n"
+                + "ORDER BY [Like] + [Save]*5 + [Comment]*2 DESC";
+        ArrayList<Recipe> list = new ArrayList<Recipe>();
+        Connection conn = null;
+        try {
+            conn = DBUtils.getConnection();
+            PreparedStatement ps = conn.prepareStatement(sql);
+            ResultSet rs = ps.executeQuery();
+            while (rs.next()) {
+                Recipe recipe = new Recipe(rs.getInt("ID"), rs.getString("Name"), rs.getInt("Like"), rs.getString("Img"));
+                list.add(recipe);
+            }
+            return list;
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+        }
+        return null;
+    }
+    public static void main(String[] args) {
+        System.out.println(getRecommnedRecipes());
+    }
 }

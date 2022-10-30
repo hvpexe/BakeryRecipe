@@ -28,6 +28,8 @@ public class User {
     private String gender;
     private String phone;
     private String address;
+    private int following;
+    private int follower;
     private Date dateRegister;
     private boolean isActive;
     private int storeID;
@@ -53,8 +55,6 @@ public class User {
         this.storeID = storeID;
         this.birthday = birthday;
     }
-    
-    
 
     public User(int id, String role, String email, String password, String avatar, String name, String gender, String phone, String address, Date dateRegister, boolean isActive, int storeID, Date birthday) {
         this.id = id;
@@ -71,12 +71,18 @@ public class User {
         this.storeID = storeID;
         this.birthday = birthday;
     }
-    
 
     public User(int id, String avatar, String name) {
         this.id = id;
         this.avatar = avatar;
         this.name = name;
+    }
+    
+    public User(int id, String avatar, String name, int follower) {
+        this.id = id;
+        this.avatar = avatar;
+        this.name = name;
+        this.follower = follower;
     }
 
     public User(String email, String firstName, String lastName, String password) {
@@ -133,12 +139,6 @@ public class User {
             String Address, Date DateRegister, int StoreID, Date Birthday) {
         this(ID, Role, Email, Password, Avatar, FirstName, LastName, Gender, Phone, Address, DateRegister, true, StoreID, Birthday);
     }
-
-    
-
-    
-    
-    
 
     public int getId() {
         return id;
@@ -267,12 +267,26 @@ public class User {
         this.birthday = birthday != null ? birthday : this.birthday;
     }
 
-    @Override
-    public String toString() {
-        return "User{" + "ID=" + id + ", Role=" + role + ", Email=" + email + ", Password=" + password + ", Avatar=" + avatar + ", FirstName=" + firstName + ", LastName=" + lastName + ", Gender=" + gender + ", Phone=" + phone + ", Address=" + address + ", DateRegister=" + dateRegister + ", IsActive=" + isActive + ", StoreID=" + storeID + '}';
+    public int getFollowing() {
+        return following;
     }
 
-    public static void main(String[] args) {
-       User user = UserDAO.userDetail(4);
+    public void setFollowing(int following) {
+        this.following = following;
     }
+
+    public int getFollower() {
+        return follower;
     }
+
+    public void setFollower(int follower) {
+        this.follower = follower;
+    }
+
+    @Override
+    public String toString() {
+        return "User{" + "id=" + id + ", role=" + role + ", email=" + email + ", password=" + password + ", avatar=" + avatar + ", name=" + name + ", firstName=" + firstName + ", lastName=" + lastName + ", gender=" + gender + ", phone=" + phone + ", address=" + address + ", following=" + following + ", follower=" + follower + ", dateRegister=" + dateRegister + ", isActive=" + isActive + ", storeID=" + storeID + ", birthday=" + birthday + '}';
+    }
+
+    
+}
