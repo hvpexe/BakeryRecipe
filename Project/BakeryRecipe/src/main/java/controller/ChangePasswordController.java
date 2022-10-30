@@ -23,7 +23,7 @@ import static utils.HashingEncrypter.getHexaDigest;
 public class ChangePasswordController extends HttpServlet {
 
     private static final String ERROR = "profileChangePass.jsp";
-    private static final String SUCCESS = "profile.jsp";
+    private static final String SUCCESS = "profile";
 
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
