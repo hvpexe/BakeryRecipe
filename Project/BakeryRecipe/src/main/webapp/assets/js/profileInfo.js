@@ -1,6 +1,7 @@
 
 function ajaxLoad(url) {
-    if(event.target.classList.contains('function-select'))return;
+    if (event.target.classList.contains('function-select'))
+        return;
     event.target.parentElement.querySelector('.function-select').classList.remove('function-select');
     event.target.classList.add('function-select');
     var main = document.getElementById('profile-information');
@@ -9,6 +10,7 @@ function ajaxLoad(url) {
             {url: url,
                 success: function (data, textStatus, jqXHR) {
                     $(main).html(data);
+                    console.log(url);
                 },
                 error: function () {
 
@@ -17,3 +19,5 @@ function ajaxLoad(url) {
                 }
             });
 }
+
+

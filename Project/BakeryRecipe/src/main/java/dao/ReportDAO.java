@@ -21,7 +21,7 @@ public class ReportDAO {
             + "values (?,?,?,?,?,?)";
     
     
-    public boolean addReport(int bakerID, int recipeID,String detail,String reportType){
+    public static  boolean addReport(int bakerID, int recipeID,String detail,String reportType){
     Connection cnn;
         PreparedStatement ptm;
         ResultSet rs;

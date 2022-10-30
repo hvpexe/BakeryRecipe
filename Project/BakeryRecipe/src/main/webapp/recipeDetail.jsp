@@ -190,7 +190,7 @@
                                 <div class="body">
                                     <c:forEach items="${requestScope.LIST_STEP}" var="ep">
                                         <div class="instruction">
-                                            <div class="step">step : ${ep.getInsstep()}</div>
+                                            <div class="step">Step ${ep.getInsstep()}: </div>
                                             <p>
                                                 ${ep.getDetail()}
                                             </p>
@@ -290,6 +290,8 @@
                                 <option value="Spamming">Spamming or misleading</option>
                                 <option value="Community">The recipe is not suitable for the community</option>
                             </select>
+                            <input type="hidden" name="bakerID" value="${sessionScope.login.id}">
+                            <input type="hidden" name="recipeID" value="${RECIPE_DETAIL.id}">
                         </div>
                         <div class="form-group">
                             <textarea name="txtReport" class="txtareaRp" value=""></textarea>

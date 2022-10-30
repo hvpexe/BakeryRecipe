@@ -22,8 +22,8 @@ import static utils.HashingEncrypter.getHexaDigest;
 @WebServlet(name = "ChangePasswordController", urlPatterns = {"/ChangePasswordController"})
 public class ChangePasswordController extends HttpServlet {
 
-    private static final String ERROR = "profileChangePass.jsp";
-    private static final String SUCCESS = "profile.jsp";
+    private static final String ERROR = "./profileinfo/profileChangePass.jsp";
+    private static final String SUCCESS = "./profileinfo/profileChangePass.jsp";
 
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
