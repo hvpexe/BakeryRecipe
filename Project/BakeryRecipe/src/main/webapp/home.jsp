@@ -13,7 +13,7 @@
     </head>
     <body>
         <c:import url="header.jsp"/>
-        <div class="home-container">
+        <div class="home-container ">
             <div class="post-section">
                 <div class="posting-section">
                     <img class="avatar-icon rounded-circle"
@@ -96,11 +96,11 @@
                     <b class="recommend-title">Trend Recipes</b>
                     <c:forEach items="${listRecipe}" var="re">
                         <div class="list-container">
-                            <a class="list-info" href="profile?userid=${us.id}">
+                            <a class="list-info" href="RecipeDetail?recipeID=${re.id}">
                                 <img class="list-img rounded shadow-sm" alt="" src="${re.cover}" />
                                 ${re.name} 
                             </a>
-                            <a class="btn main-btn btn-sm hover-button-1" href="#">${re.like} Like</a>
+                            <a class="btn main-btn btn-sm hover-button-1" href="RecipeDetail?recipeID=${re.id}">${re.like} Like</a>
                         </div>
                     </c:forEach>
                 </div>

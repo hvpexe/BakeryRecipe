@@ -85,8 +85,8 @@ body {
 
 .recipe-ava {
 
-    width: 50px;
-    height: 50px;
+    width: 45px;
+    height: 45px;
     border-radius: 50%;
     object-fit: cover;
 }
@@ -112,7 +112,7 @@ body {
     align-self: flex-start;
     border-radius: 20px;
     background-color: var(--side-theme-color);
-    box-shadow: 0 4px 4px rgba(0, 0, 0, 0.06);
+    box-shadow: 0 4px 12px rgba(79, 79, 186, 0.06);
     flex-direction: column;
     padding: 40px;
     gap: 60px;

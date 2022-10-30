@@ -180,6 +180,14 @@
                                             </span>
                                         </div>
                                     </c:forEach>
+                                    <c:if test="${empty requestScope.LIST_INGREDIENT}">
+                                        <div class="empty">
+                                            <p>
+                                                This recipe does not have any ingredients.
+                                            </p>
+                                            <img src="assets/images/other/empty_ingre.png" />
+                                        </div>
+                                    </c:if>
                                 </div>
                             </div>
 
@@ -196,6 +204,14 @@
                                             </p>
                                         </div>
                                     </c:forEach>
+                                    <c:if test="${empty requestScope.LIST_STEP}">
+                                        <div class="empty">
+                                            <p>
+                                                This recipe does not have any instructions.
+                                            </p>
+                                            <img src="assets/images/other/empty_instruc.png" />
+                                        </div>
+                                    </c:if>
 
                                 </div>
                             </div>
