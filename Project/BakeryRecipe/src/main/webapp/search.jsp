@@ -43,39 +43,28 @@
     </head>
     <body>
         <c:import url="header.jsp"/>
-          <div class="saved-div">
+        <div class="saved-div">
             <div class="section-div">
-                <form action="Search" id="searchRec">
-                    <div class="frame-div1">
-                        <b class="saved-b">Search</b>
-                        <div class="frame-form">
-                            <img class="iconsearch" alt="" src=".\assets\css\fontawesome-free-6.1.1-web\svgs\solid\magnifying-glass.svg" />
-                            <input
-                                class="frame-input"
-                                type="text"
-                                placeholder="Search Recipes"
-                                name="searchKey"
-                                />
-                        </div>
+                <form action="Search" id="searchRec" class="card-body col-12 col-md-8 m-auto">
+
+                    <div class="frame-form col px-3">
+                        <i class="iconsearch fas fa-search"></i>
+                        <input class="frame-input" type="text" placeholder="Search Recipes" name="searchKey">
                     </div>
                     <div class="mid-div2">
-                        <select name="action">
+                        <select name="action" class="">
                             <option value="Recipe">
-                            <div class="frame-dip2 in-div1">
-                                <div class="newest-div">Recipe</div>
-                            </div>
+                                Recipe      
                             </option> 
                             <option value="Baker">
-                            <div class="frame-dip2 in-div" >
-                                <div class="newest-div">Baker</div>
-                            </div>
+                                Baker
                             </option>
                         </select>
                     </div>
-<!--                    <input type="submit" >-->
+                    <!--                    <input type="submit" >-->
                 </form>
-         
-                <div class="saved-item-div">
+
+                <div class="saved-item-div row col card-body">
                     <c:forEach items="${requestScope.LIST_BAKER}" var="n">
                         <div class="div1">
                             <img
@@ -109,37 +98,39 @@
                         </div>
                     </c:forEach>
                     <c:forEach items="${requestScope.LIST_RECIPE}" var="cc">
-                        <div class="recipe col-6 col-md-4 col-lg-3">
-                            <div class="img-container">
-                                <img class="recipe-img" alt=""
-                                     src="${cc.cover}" />
-                                <div class="bookmark">
-                                    Save <i class="fa-regular fa-bookmark"></i>
+                        <div class=" col-6 col-md-4 col-lg-3 p-2">
+                            <div class="recipe">
+                                <div class="img-container">
+                                    <img class="recipe-img" alt=""
+                                         src="${cc.cover}" />
+                                    <div class="bookmark">
+                                        Save <i class="fa-regular fa-bookmark"></i>
+                                    </div>
+                                    <div class="react">
+                                        <div>${cc.like} likes</div>
+                                        <div>${cc.comment} comments</div>
+                                    </div>
                                 </div>
-                                <div class="react">
-                                    <div>${cc.like} likes</div>
-                                    <div>${cc.comment} comments</div>
+                                <div class="recipe-name col">${cc.name}</div>
+                                <div class="recipe-author col">
+                                    <a href="#" class="text-truncate">${cc.username}</a> 
+
                                 </div>
                             </div>
-                            <div class="recipe-name">${cc.name}</div>
-                            <div class="recipe-author">
-                                <a href="#" class="text-truncate">${cc.username}</a> 
-                                
                         </div>
-                                </div>
                     </c:forEach>
-                
-                </div>
-            
 
-            <script>
-                var imgImage = document.getElementById("imgImage");
-                if (imgImage) {
-                    imgImage.addEventListener("click", function (e) {
-                        window.open("./cook-detaildone.html");
-                    });
-                }
-            </script>
-    </body>
-</html>
+                </div>
+
+
+                <script>
+                    var imgImage = document.getElementById("imgImage");
+                    if (imgImage) {
+                        imgImage.addEventListener("click", function (e) {
+                            window.open("./cook-detaildone.html");
+                        });
+                    }
+                </script>
+                </body>
+                </html>
 

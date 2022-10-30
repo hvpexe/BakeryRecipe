@@ -65,6 +65,8 @@ body {
     text-decoration: none !important;
     color: #000;
     text-align: center;
+        transition:0.4s;
+
 }
 
 .header-link.active {
@@ -114,10 +116,21 @@ body {
     justify-content: space-between;
     align-items: center;
 }
+.header-notification i{
+    translate:0 -2px;
+}
 .header-notification {
     color: var(--main-theme-color);
     margin: 0 16px;
     font-size: 24px;
+    width: 40px;
+    height: 40px;
+    display: flex;
+    align-content: center;
+    justify-content: center;
+    align-items: center;
+
+    border-radius: 50%;
 }
 
 .header-user {

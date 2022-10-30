@@ -126,7 +126,7 @@ public class RecipeDAO {
         ResultSet rs = null;
         try {
             conn = DBUtils.getConnection();
-            ptm = conn.prepareStatement(INSERT_RECIPE);
+            ptm = conn.prepareStatement(SEARCH_RECIPE);
             ptm.setString(1, name);
             rs = ptm.executeQuery();
             while (rs.next()) {
