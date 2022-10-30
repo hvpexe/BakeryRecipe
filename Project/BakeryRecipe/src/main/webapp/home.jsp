@@ -47,6 +47,7 @@
                                 <a  class="d-inline-block text-muted hover-underline c-pointer mr-3" onclick="getLikedList('${re.id}')">
                                     <span class="align-middle">
                                         <strong>${re.like}</strong> Likes</span>
+
                                 </a>
                             </c:if>
                             <c:if test="${re.comment>0}">
@@ -56,7 +57,7 @@
                                 </a>
                             </c:if>
                             <a href=".\RecipeDetail?recipeID=${re.getId()}" class="d-inline-block text-muted">
-                                <i class="ion ion-md-share align-middle"></i>
+                                <i class="fas fa-eye"></i>
                                 <span class="align-middle">View detail</span>
                             </a>
                         </div>

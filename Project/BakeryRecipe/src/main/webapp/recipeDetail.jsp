@@ -145,7 +145,7 @@
                 </div>
 
                 <!-- ingredient & instruction & comment -->
-                <div class="row body-info">
+                <div class="row body-info col">
                     <div class="col-md-8">
                         <div class="ingredient-container">
                             <div class="head">

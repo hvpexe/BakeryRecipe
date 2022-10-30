@@ -99,7 +99,7 @@
                     </c:forEach>
                     <c:forEach items="${requestScope.LIST_RECIPE}" var="cc">
                         <div class=" col-6 col-md-4 col-lg-3 p-2">
-                            <div class="recipe">
+                            <div class="recipe hover-highlight">
                                 <div class="img-container">
                                     <img class="recipe-img" alt=""
                                          src="${cc.cover}" />
