@@ -6,8 +6,7 @@
         <meta charset="utf-8" />
         <meta name="viewport" content="initial-scale=1, width=device-width" />
         <title>Home</title>
-        <link rel="stylesheet" href="assets/css/web/bootstrap-4.3.1.min.css" />
-        <link rel="stylesheet" type="text/css" href="./assets/css/fontawesome-free-6.1.1-web/css/all.min.css">
+        <c:import url="universal.jsp" />
         <link rel="stylesheet" href="assets/css/home.css" />
         <script src="assets/js/Jquery/jquery-core.js"></script>
     </head>

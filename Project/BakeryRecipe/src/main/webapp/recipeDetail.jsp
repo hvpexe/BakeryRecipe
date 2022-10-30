@@ -6,9 +6,9 @@
     <head>
         <meta charset="utf-8" />
         <meta name="viewport" content="initial-scale=1, width=device-width" />
-        <title>recipeDetail</title>
-        <link href="assets/css/fontawesome-free-6.1.1-web/css/all.min.css" rel="stylesheet" type="text/css" />
-        <link rel="stylesheet" href="assets/css/web/bootstrap-4.3.1.min.css" />
+        <title>${USER_DETAIL.name}</title>
+        <c:import url="universal.jsp" />
+
         <link rel="preconnect" href="https://fonts.googleapis.com">
         <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
         <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap" rel="stylesheet">
@@ -315,7 +315,7 @@
                         </div>
                     </form> 
                 </div>
-             
+
             </div>
 
         </div>

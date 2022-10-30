@@ -1,9 +1,3 @@
-<%-- 
-    Document   : login1
-    Created on : Oct 3, 2022, 8:36:01 AM
-    Author     : Admin
---%>
-
 <%@page import="dao.UserDAO"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ page language="java" pageEncoding="utf8" contentType="text/html;charset=UTF-8" %>
@@ -14,9 +8,9 @@
         <meta charset="utf-8" />
         <meta name="viewport" content="initial-scale=1, width=device-width" />
         <meta name="description" content="" />
-        <link rel="icon" href="./assets/images/logo/logo1.png" type="image/x-icon">
-
         <title>Welcome to Bakery Recipe</title>
+        <c:import url="universal.jsp" />
+
         <link
             rel="stylesheet"
             href="https://fonts.googleapis.com/css2?family=Gelasio:wght@400;500;700&display=swap"
@@ -143,7 +137,7 @@
     <script src="assets/js/validator.js"></script>
     <script>
         //login validator
-        $('form').css('scale','0 0').css('scale','1 1');
+        $('form').css('scale', '0 0').css('scale', '1 1');
         document.querySelector('form').classList.remove('d-none');
         Validator({
         form: '#formLogin',

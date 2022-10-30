@@ -5,9 +5,9 @@
     <head>
         <meta charset="utf-8" />
         <meta name="viewport" content="initial-scale=1, width=device-width" />
-        <title></title>
+        <title>${requestScope.user.name}</title>
         <meta name="description" content="" />
-
+        <c:import url="universal.jsp" />
 
         <link
             rel="stylesheet"
@@ -37,8 +37,6 @@
             rel="stylesheet"
             href="https://fonts.googleapis.com/css2?family=Beau Rivage:wght@400&display=swap"
             />
-
-        <link rel="stylesheet" href="assets/css/web/bootstrap-4.3.1.min.css"/>
         <link rel="stylesheet" href="assets/css/profile.css">
     </head>
     <body>
@@ -70,7 +68,7 @@
                             <img class="recipe-ava c-pointer"
                                  src="<c:out value="${re.getAvatar()}"/>"
                                  alt=""
-                                 onclick='location="./profile?userid=${re.userID}"'/>
+                                 onclick='location = "./profile?userid=${re.userID}"'/>
                             <div class="media-body ml-3">
                                 <a href="./profile?userid=${requestScope.user.id}" class="text-dark c-pointer hover-underline">${re.username}</a>
                                 <div class="text-muted small"><c:out value="${re.getDatePostFormat()}"/></div>
@@ -103,7 +101,7 @@
                             </a>
                             <a href="#" class="d-inline-block text-muted ml-3">
                                 <i class="fas fa-eye align-middle"></i>
-                                <span class="align-middle" onclick="location='./RecipeDetail?recipeID=${re.id}'">View detail</span>
+                                <span class="align-middle" onclick="location = './RecipeDetail?recipeID=${re.id}'">View detail</span>
                             </a>
                         </div>
                     </div>

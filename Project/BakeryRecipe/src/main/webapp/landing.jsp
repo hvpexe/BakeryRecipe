@@ -4,9 +4,8 @@
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title>JSP Page</title>
-        <link rel="stylesheet" href="assets/css/web/bootstrap-4.3.1.min.css" />
-        <link rel="stylesheet" type="text/css" href="./assets/css/fontawesome-free-6.1.1-web/css/all.min.css">
+        <title>BakeryRecipe</title>
+        <c:import url="universal.jsp" />
         <link rel="stylesheet" href="assets/css/landing.css" />
     </head>
     <body>

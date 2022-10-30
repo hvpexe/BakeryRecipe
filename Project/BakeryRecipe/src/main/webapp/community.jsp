@@ -6,13 +6,13 @@
         <meta charset="utf-8" />
         <meta name="viewport" content="initial-scale=1, width=device-width" />
         <title>Community</title>
-        <link rel="stylesheet" href="assets/css/community1.css" />
-        <link
-            rel="stylesheet"
+        <c:import url="universal.jsp" />
+        
+        <link rel="stylesheet" href="assets/css/community.css" />
+        <link rel="stylesheet"
             href="https://fonts.googleapis.com/css2?family=Gelasio:wght@400;500;700&display=swap"
             />
-        <link rel="stylesheet" href="assets/css/web/bootstrap-4.3.1.min.css" />
-        <link rel="stylesheet" type="text/css" href="./assets/css/fontawesome-free-6.1.1-web/css/all.min.css">
+
 
     </head>
     <body>
@@ -109,24 +109,24 @@
         <c:import url="footer.jsp"/>
         <script src="assets/js/Jquery/jquery-core.js" ></script>
         <script>
-                                    function changeSave(elem) {
-                                        console.log(${login.id});
-                                        console.log(elem.getAttribute('recipeid'));
-                                        $.ajax({
-                                            url: "ajax/updatesaverecipe",
-                                            data: {
-                                                user: ${login.id},
-                                                recipe: elem.getAttribute('recipeid')
-                                            },
-                                            success: function (data) {
-                                                elem.classList.toggle('check');
-                                                if (elem.classList.contains('check')) {
-                                                        elem.innerHTML = elem.innerHTML.replace('Save','UnSave');
-                                                }else
-                                                        elem.innerHTML = elem.innerHTML.replace('UnSave','Save');
-                                            }
-                                        });
-                                    }
+            function changeSave(elem) {
+                console.log(${login.id});
+                console.log(elem.getAttribute('recipeid'));
+                $.ajax({
+                    url: "ajax/updatesaverecipe",
+                    data: {
+                        user: ${login.id},
+                        recipe: elem.getAttribute('recipeid')
+                    },
+                    success: function (data) {
+                        elem.classList.toggle('check');
+                        if (elem.classList.contains('check')) {
+                            elem.innerHTML = elem.innerHTML.replace('Save', 'UnSave');
+                        } else
+                            elem.innerHTML = elem.innerHTML.replace('UnSave', 'Save');
+                    }
+                });
+            }
         </script>
     </body>
 </html>

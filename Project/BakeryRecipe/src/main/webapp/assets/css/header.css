@@ -49,9 +49,7 @@ body {
 
 /* header left */
 .header-logo img {
-
     width: 120px;
-    display: flex;
 }
 
 .header-links {
@@ -66,7 +64,7 @@ body {
     text-decoration: none !important;
     color: #000;
     text-align: center;
-        transition:0.4s;
+    transition:0.4s;
 
 }
 
@@ -97,6 +95,7 @@ body {
     color: var(--main-theme-color);
     display: flex;
     font-size: 1.2em;
+    //font-size logo
     align-items: center;
     margin-left: 8px;
 }
@@ -135,23 +134,22 @@ body {
 }
 
 .header-user {
-    --transition-time: 0.1s;
     display: flex;
-    padding: 6px;
-    margin: 0;
     cursor: pointer;
     align-items: center;
     background: #fff;
-    padding: 10px 5px;
+    color: #c5513d;
+    padding: 7px 5px;
     box-shadow: 0 0 0 1px #c5513d;
     border-radius: 25px;
+    --transition-time: 0.1s;
     transition: var(--transition-time);
-    color: #c5513d;
     transition-delay: var(--transition-time);
     white-space: nowrap;
 }
 .header-user:hover {
     background: #c5513d;
+    text-decoration: none;
     box-shadow: 0 0 0 2px var(--main-theme-color);
     color: #fff;
     transition-delay: 0s;
@@ -163,7 +161,6 @@ body {
     width: 35px;
     aspect-ratio: 1;
     box-sizing: border-box;
-    border: 1px #ccc groove;
     object-fit: cover;
 }
 
@@ -217,29 +214,35 @@ body {
 }
 
 @media (max-width:996px) {
-    .group-div {
-        justify-content: space-around;
+    .header-container {
+        font-size: 15px;
+    }
+    .header-links {
+        font-size: inherit;
+    }
+    .header-user {
+        font-size: inherit;
     }
     .header-logo img {
-        width: 110px;
+        width: 100px;
     }
 }
 
 @media (max-width:767px) {
     .header-container {
         position: unset;
+        font-size: 14px;
 
     }
     .header-links {
-        font-size: 22px;
+        font-size: inherit;
+    }
+    .header-user {
+        font-size: inherit;
     }
     .header-logo img {
-        /* margin: auto;
-        width: 25% !important; */
-        display: none;
+        width: 80px;
     }
-    .header-right {
-        /* margin-bottom: 8px; */
-    }
+
 }
 
