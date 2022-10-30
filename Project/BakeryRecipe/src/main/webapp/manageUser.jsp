@@ -442,7 +442,7 @@
                                                     <td class="align-middle col-1">
                                                         <c:if test="${u.id eq sessionScope.login.id}">
                                                             <form action="profile.jsp">
-                                                                <button class="bg-success">User Profile</button>
+                                                                <button class="bg-success">My Profile</button>
                                                             </form>
                                                         </c:if>
                                                         <c:if test="${u.id ne sessionScope.login.id}">
@@ -452,6 +452,11 @@
                                                                     <input type="hidden" name="userid" value="${u.id}">
                                                                     <input type="hidden" name="action" value="changerole">
                                                                     <input type="hidden" name="role" value="user">
+                                                                </form>
+                                                                <form action="user">
+                                                                    <button class="bg-success" style="width: max-content;">
+                                                                        <a href="./profile?userid=${u.id}">User Profile</a>
+                                                                    </button>
                                                                 </form>
                                                             </c:if>
                                                             <c:if test="${u.role == 'user'}">
@@ -476,6 +481,11 @@
                                                                     <input type="hidden" name="userid" value="${u.id}">
                                                                     <input type="hidden" name="action" value="changerole">
                                                                     <input type="hidden" name="role" value="admin">
+                                                                </form>
+                                                                <form action="user">
+                                                                    <button class="bg-success" style="width: max-content;">
+                                                                        <a href="./profile?userid=${u.id}">User Profile</a>
+                                                                    </button>
                                                                 </form>
                                                             </c:if>
                                                         </c:if>
