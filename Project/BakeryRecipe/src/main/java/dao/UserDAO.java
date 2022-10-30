@@ -69,7 +69,7 @@ public class UserDAO {
         }
         return false;
     }
-    
+
     public static boolean changeRole(User user) {
         String sql = "UPDATE [User]\n"
                 + "SET [Role] = ?\n"
@@ -85,7 +85,8 @@ public class UserDAO {
             }
         } catch (Exception e) {
             System.out.println("Error at changeRole: " + e.toString());
-        }return false;
+        }
+        return false;
     }
 
     private static final String UPDATE_USER_PASSWORD = " UPDATE [User] SET Password = ? WHERE ID= ?";
@@ -186,12 +187,10 @@ public class UserDAO {
         return null;
     }
 
-    private static final String SELECT_USER_BY_ID = "SELECT "
-            + " [ID],[Role],[Email],[Password],[Avatar]"
-            + ",[FirstName],[LastName],[Gender],[Phone]"
-            + ",[Address],[DateRegister],[IsActive],[StoreID], [Birthday]"
-            + " FROM [BakeryRecipe].[dbo].[User]"
-            + " WHERE [ID] = ? ";
+    private static final String SELECT_USER_BY_ID = "SELECT [ID],[Role],[Email],[Password],[Avatar],[FirstName],[LastName],[Gender],[Phone]\n"
+            + ",[Address], [Following],[Follower],[DateRegister],[IsActive],[StoreID], [Birthday]\n"
+            + "FROM [BakeryRecipe].[dbo].[User]\n"
+            + "WHERE [ID] = ?";
 
     /**
      * Get User by ID but this <b>method</b> only select the <b>User</b> that
@@ -208,11 +207,24 @@ public class UserDAO {
             ps.setInt(1, id);
             //run ps
             ResultSet rs = ps.executeQuery();
-            String[] l = USER_COLUMN_NAME_LIST;
             User user = null;
             if (rs.next()) {
-                user = new User(rs.getInt(l[0]), rs.getString(l[1]), rs.getString(l[2]), rs.getString(l[3]), rs.getString(l[4]), rs.getString(l[5]),
-                        rs.getString(l[6]), rs.getString(l[7]), rs.getString(l[8]), rs.getString(l[9]), rs.getDate(l[10]), rs.getBoolean(l[11]), rs.getInt(l[12]), rs.getDate(l[13]));
+                user = new User(rs.getInt("ID"),
+                        rs.getString("Role"),
+                        rs.getString("Email"),
+                        rs.getString("Password"),
+                        rs.getString("Avatar"),
+                        rs.getString("FirstName"),
+                        rs.getString("LastName"),
+                        rs.getString("Gender"),
+                        rs.getString("Phone"),
+                        rs.getString("Address"),
+                        rs.getInt("Following"),
+                        rs.getInt("Follower"),
+                        rs.getDate("DateRegister"),
+                        rs.getBoolean("IsActive"),
+                        rs.getInt("StoreID"),
+                        rs.getDate("Birthday"));
             }
             return user;
         } catch (Exception e) {

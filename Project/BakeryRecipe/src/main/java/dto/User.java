@@ -116,7 +116,10 @@ public class User {
         this(ID, Role, Email, Password, Avatar, FirstName, LastName, Gender, Phone, Address, DateRegister, true, StoreID);
     }
 
-    public User(int ID, String Role, String Email, String Password, String Avatar, String FirstName, String LastName, String Gender, String Phone, String Address, Date DateRegister, boolean IsActive, int StoreID, Date Birthday) {
+    public User(int ID, String Role, String Email, String Password, String Avatar, 
+            String FirstName, String LastName, String Gender, String Phone, 
+            String Address, Date DateRegister, boolean IsActive, int StoreID, 
+            Date Birthday) {
         this.id = ID;
         this.role = Role;
         this.email = Email;
@@ -133,6 +136,30 @@ public class User {
         this.name = lastName + " " + firstName;
         this.birthday = Birthday;
     }
+
+    public User(int id, String role, String email, String password, String avatar, 
+            String firstName, String lastName, String gender, 
+            String phone, String address, int following, int follower, 
+            Date dateRegister, boolean isActive, int storeID, Date birthday) {
+        this.id = id;
+        this.role = role;
+        this.email = email;
+        this.password = password;
+        this.avatar = avatar;
+        this.name = lastName + " " + firstName;
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.gender = gender;
+        this.phone = phone;
+        this.address = address;
+        this.following = following;
+        this.follower = follower;
+        this.dateRegister = dateRegister;
+        this.isActive = isActive;
+        this.storeID = storeID;
+        this.birthday = birthday;
+    }
+    
 
     public User(int ID, String Role, String Email, String Password, String Avatar,
             String FirstName, String LastName, String Gender, String Phone,

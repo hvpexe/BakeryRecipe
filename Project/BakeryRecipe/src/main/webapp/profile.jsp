@@ -50,8 +50,8 @@
                          alt="" />
                     <div class="col-6">
                         <h3 class="profile-name">${requestScope.user.name}</h3>
-                        <span class="follow">1 Following</span>
-                        <span class="follow">999 Follower</span>
+                        <span class="follow">${requestScope.user.follower} Follower</span>
+                        <span class="follow">${requestScope.user.following} Following</span>
 
                     </div>
                     <c:if test="${requestScope.user == sessionScope.login}">

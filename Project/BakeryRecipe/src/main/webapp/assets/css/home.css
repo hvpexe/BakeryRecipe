@@ -183,34 +183,23 @@ body {
     line-height: 30px;
 }
 
-
-.recommend-cook {
+.recommend-wrap {
     width: 320px;
 }
-.cook-title {
-    font-size: 30px;
-    line-height: 30px;
-    display: inline-block;
-    font-family: "Abhaya Libre";
+.recommend-title {
+    font-size: 26px;
+    line-height: 26px;
 }
 
-.cook-container {
+.list-container {
     width: 100%;
     margin-top: 15px;
     display: flex;
     justify-content: space-between;
+    align-items: center;
 }
-.cook-ava {
-    width: 40px;
-    height: 40px;
-    margin-right: 5px;
-    object-fit: cover;
-}
-
-.cook-info {
-    text-decoration: none;
-    font-size: 18px;
-    line-height: 20px;
+.list-info {
+    font-size: 16px;
     color: var(--main-title-color);
     display: flex;
     align-items: center;
@@ -218,54 +207,26 @@ body {
     word-break: break-word;
 }
 
-.cook-info:hover {
+.list-info:hover {
     text-decoration: none;
     color: var(--main-theme-color-hover);
 }
-
-.follow-btn {
-    background-color: var(--main-theme-color);
-    color: var(--web-background-color);
-    border-radius: 20px;
-}
-.follow-btn:hover {
-    background-color: var(--main-theme-color-hover);
-    color: var(--web-background-color);
-}
-
-.trend-cake {
-    position: relative;
-    font-size: 20px;
-}
-
-.cake-title {
-    font-size: 30px;
-    line-height: 30px;
-    display: inline-block;
-    font-family: "Abhaya Libre";
-}
-.cake-container {
-    width: 100%;
-    margin-top: 15px;
-    display: flex;
-    justify-content: space-between;
-}
-.cake-img {
+.list-img {
     width: 40px;
     height: 40px;
     margin-right: 5px;
     object-fit: cover;
 }
-.cake-info {
-    text-decoration: none;
-    font-size: 18px;
-    line-height: 20px;
-    color: var(--main-title-color);
-}
 
-.cake-info:hover {
-    text-decoration: none;
-    color: var(--main-theme-color-hover);
+.main-btn {
+    background-color: var(--main-theme-color);
+    color: var(--web-background-color);
+    border-radius: 20px;
+    white-space: nowrap;
+}
+.main-btn:hover {
+    background-color: var(--main-theme-color-hover);
+    color: var(--web-background-color);
 }
 
 @media screen and (max-width: 960px) {
