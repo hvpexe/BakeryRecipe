@@ -17,15 +17,13 @@
     <div class="header-right align-items-center flex-md-nowrap col-sm-12 col-md px-2 justify-content-md-center">
         <div class="col-sm d-flex align-items-center">
             <form action="Search"> 
-                <div class="searchbar px-3 px-md-0">
+                <div class="searchbar">
                     <i class="searchbar-icon fa-solid fa-magnifying-glass"></i>
                     <input class="searchbar-input col p-0" type="text" placeholder="Search" name="searchKey" value="" size="40">
                     <input type="hidden" name="action" value="Recipe">
                 </div>
             </form> 
-            <div class="p-0 d-flex align-items-center justify-content-center ml-auto">
-                <i class="header-notification fa-solid fa-bell"></i>
-            </div>
+
             <c:set var="login" value="${login}" scope="session"></c:set>
             <c:if test="${login == null}">
                 <a href="login.jsp" class="header-user ml-auto" data-type="register">
@@ -33,18 +31,23 @@
                 </a>
             </c:if>
             <c:if test="${login != null}">
-                <div class="header-user position-relative ml-auto">
-                    <a href="profile.jsp" class="header-user-button position-relative">
-                        <div class="header-button-detail p-0 pl-1 pr-5">
-                            ${login.name}   
-                            <img id="user_avatar" class=" d-inline m-auto rounded-circle position-absolute" src="${login.avatar}"/>
-                        </div>
-                    </a>
-                    <div class="header-user_content  position-absolute">
-                        <div class="list-group flex-column justify-content-start" href="#" >
-                            <a class="list-group-item text-dark text-decoration-none nav-item" href="./profile.jsp"><div>Profile</div></a>
-                            <a class="list-group-item text-dark text-decoration-none nav-item" href="#"><div>Setting</div></a>
-                            <a class="list-group-item text-dark text-decoration-none nav-item" href="logout"><div> Logout</div></a>
+                <div class="d-inline-flex ml-auto">
+                    <div class="p-0 d-flex align-items-center justify-content-center ml-auto">
+                        <i class="header-notification fa-solid fa-bell"></i>
+                    </div>
+                    <div class="header-user position-relative ml-auto">
+                        <a href="profile.jsp" class="header-user-button position-relative">
+                            <div class="header-button-detail p-0 pl-1 pr-5">
+                                ${login.name}   
+                                <img id="user_avatar" class=" d-inline m-auto rounded-circle position-absolute" src="${login.avatar}"/>
+                            </div>
+                        </a>
+                        <div class="header-user_content  position-absolute">
+                            <div class="list-group flex-column justify-content-start" href="#" >
+                                <a class="list-group-item text-dark text-decoration-none nav-item" href="./profile.jsp"><div>Profile</div></a>
+                                <a class="list-group-item text-dark text-decoration-none nav-item" href="#"><div>Setting</div></a>
+                                <a class="list-group-item text-dark text-decoration-none nav-item" href="logout"><div> Logout</div></a>
+                            </div>
                         </div>
                     </div>
                 </div>
