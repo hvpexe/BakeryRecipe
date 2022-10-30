@@ -41,9 +41,14 @@ body {
 }
 
 .avatar-icon {
-    position: relative;
-    width: 45px;
-    height: 45px;
+      box-sizing: border-box;
+    padding: 0 !important;
+    width: 50px;
+    height: 50px;
+    /* width: 120px; */
+    aspect-ratio: 1/1;
+    /* border: 10px solid #EEE; */
+    border-radius: 50%
 }
 
 .btn-button {
@@ -179,62 +184,85 @@ body {
 }
 
 
-.recommend-wrap {
+.recommend-cook {
     width: 320px;
 }
-.recommend-title {
+.cook-title {
     font-size: 30px;
     line-height: 30px;
     display: inline-block;
     font-family: "Abhaya Libre";
 }
 
-.list-container {
+.cook-container {
     width: 100%;
     margin-top: 15px;
     display: flex;
-
-    align-items: center;
     justify-content: space-between;
 }
-
-.list-info {
-    text-decoration: none;
-    font-size: 16px;
-    line-height: 20px;
-    color: var(--main-title-color);
-    display: flex;
-    align-items: center;
-
-}
-
-.list-info:hover {
-    text-decoration: none;
-    color: var(--main-theme-color-hover);
-}
-
-.list-img {
+.cook-ava {
     width: 40px;
     height: 40px;
     margin-right: 5px;
     object-fit: cover;
 }
 
-.img-wrap {
+.cook-info {
+    text-decoration: none;
+    font-size: 18px;
+    line-height: 20px;
+    color: var(--main-title-color);
+    /* display: inline-block; */
+}
 
+.cook-info:hover {
+    text-decoration: none;
+    color: var(--main-theme-color-hover);
 }
-.list-name {
-    vertical-align: middle;
-}
-.main-btn {
+
+.follow-btn {
     background-color: var(--main-theme-color);
     color: var(--web-background-color);
     border-radius: 20px;
-    white-space: nowrap;
 }
-.main-btn:hover {
+.follow-btn:hover {
     background-color: var(--main-theme-color-hover);
     color: var(--web-background-color);
+}
+
+.trend-cake {
+    position: relative;
+    font-size: 20px;
+}
+
+.cake-title {
+    font-size: 30px;
+    line-height: 30px;
+    display: inline-block;
+    font-family: "Abhaya Libre";
+}
+.cake-container {
+    width: 100%;
+    margin-top: 15px;
+    display: flex;
+    justify-content: space-between;
+}
+.cake-img {
+    width: 40px;
+    height: 40px;
+    margin-right: 5px;
+    object-fit: cover;
+}
+.cake-info {
+    text-decoration: none;
+    font-size: 18px;
+    line-height: 20px;
+    color: var(--main-title-color);
+}
+
+.cake-info:hover {
+    text-decoration: none;
+    color: var(--main-theme-color-hover);
 }
 
 @media screen and (max-width: 960px) {

@@ -110,7 +110,6 @@
         <div class="fixed-container " id="liked-list" >
             <div class="gray-box"></div>
             <div class="content card-body col-12 col-md-6">
-
             </div>
         </div>
         <script src="assets/js/home.js">

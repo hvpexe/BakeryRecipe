@@ -322,3 +322,63 @@ body {
     transition: border-color .15s ease-in-out,box-shadow .15s ease-in-out;
 
 }
+.button-recipe img{
+        height: 30px;
+    width: 30px;
+    border-radius: 50%;
+    display: inline-block; 
+}
+.button-recipe{
+    width: 30px;
+    height: 30px;
+    display: inline-block;
+}
+
+/*//text ham d*/
+.dropdown {
+  display: inline-block;
+  position: relative;
+}
+
+button{
+  border:none;
+ 
+}
+
+button:hover{
+  background-color:#FFFFFF;
+}
+
+.dropdown-options {
+  display: none;
+  position: absolute;
+  overflow: auto;
+  background-color: #FFFFFF;
+  border-radius:5px;
+/*  box-shadow: 0px 10px 10px 0px rgba(0,0,0,0.4);*/
+}
+
+.dropdown:hover .dropdown-options {
+  display: block;
+}
+
+.dropdown-options a {
+  display: block;
+  color: #000000;
+  padding: 5px;
+  text-decoration: none;
+  padding:20px 40px;
+}
+
+.dropdown-options a:hover {
+  color: #0a0a23;
+  background-color: #ddd;
+  border-radius:5px;
+}
+
+.txtareaRp{
+    width: 340px;
+}
+.card-body{
+    width: 200px
+}   

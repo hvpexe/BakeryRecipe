@@ -49,6 +49,7 @@
                     </div>
                     <div class="col-md-8">
                         <div class="first-div">
+
                             <span class="info-user">
                                 <img src="${USER_DETAIL.getAvatar()}">
                                 <span>${USER_DETAIL.getName()}</span>
@@ -83,7 +84,22 @@
                                         </span>
                                     </c:if>
                                 </div>
+
                             </span>
+                            <!--                             <div     class="button-recipe">
+                                                        <img src=".\assets\css\fontawesome-free-6.1.1-web\svgs\solid\ellipsis-vertical.svg" height="200px" width="100px">
+                                                        </div>-->
+
+                            <div class="dropdown">
+                                <button><i class="fa-solid fa-ellipsis"></i></button>
+                                <div class="dropdown-options">
+                                    <a   class="d-inline-block text-muted hover-underline c-pointer mr-3" onclick="getReport(${RECIPE_DETAIL.getId()})" href="#">
+                                        <span class="align-middle">
+                                            <strong>${re.like}</strong> Report</span></a>
+                                    <a href="#">Delete</a>
+                                </div>
+                            </div>
+
 
 
                             <div class="recipe-name">
@@ -99,37 +115,39 @@
                                 <span>Saved: ${RECIPE_DETAIL.getSave()}</span>
                             </div>
 
-                            <div class="react-action">
-                                <c:choose>
-                                    <c:when test="${checklike == 'false'}">
-                                        <div class="btn btn-style1" onclick="likeButton(this, 'Like', 'UnLike', this.action)" >
-                                            <i class="fa-regular fa-heart"></i>
-                                            <span  class="txt-follow" this="">Like</span>
-                                        </div>
-                                    </c:when>
-                                    <c:otherwise>
-                                        <div class="btn btn-style1 button-Follower" onclick="likeButton(this, 'UnLike', 'Like', this.action)" >
-                                            <i class="fa-regular fa-heart"></i>
-                                            <span  class="txt-follow" this="">UnLike</span>
-                                        </div>
-                                    </c:otherwise>
-                                </c:choose>
-                                &nbsp;
-                                <c:choose>
-                                    <c:when test="${checksave == 'false'}">
-                                        <div class="btn btn-style1" onclick="saveButton(this, 'Save', 'UnSave', this.action)" >
-                                            <i class="fa-regular fa-bookmark"></i>
-                                            <span  class="txt-follow" this="">Save</span>
-                                        </div>
-                                    </c:when>
-                                    <c:otherwise>
-                                        <div class="btn btn-style1 button-Follower" onclick="saveButton(this, 'UnSave', 'Save', this.action)" >
-                                            <i class="fa-regular fa-bookmark"></i>
-                                            <span  class="txt-follow" this="">UnSave</span>
-                                        </div>
-                                    </c:otherwise>
-                                </c:choose>
-                            </div>
+                            <c:if test="${sessionScope.login.id != USER_DETAIL.getId()}">
+                                <div class="react-action">
+                                    <c:choose>
+                                        <c:when test="${checklike == 'false'}">
+                                            <div class="btn btn-style1" onclick="likeButton(this, 'Like', 'UnLike', this.action)" >
+                                                <i class="fa-regular fa-heart"></i>
+                                                <span  class="txt-follow" this="">Like</span>
+                                            </div>
+                                        </c:when>
+                                        <c:otherwise>
+                                            <div class="btn btn-style1 button-Follower" onclick="likeButton(this, 'UnLike', 'Like', this.action)" >
+                                                <i class="fa-regular fa-heart"></i>
+                                                <span  class="txt-follow" this="">UnLike</span>
+                                            </div>
+                                        </c:otherwise>
+                                    </c:choose>
+                                    &nbsp;
+                                    <c:choose>
+                                        <c:when test="${checksave == 'false'}">
+                                            <div class="btn btn-style1" onclick="saveButton(this, 'Save', 'UnSave', this.action)" >
+                                                <i class="fa-regular fa-bookmark"></i>
+                                                <span  class="txt-follow" this="">Save</span>
+                                            </div>
+                                        </c:when>
+                                        <c:otherwise>
+                                            <div class="btn btn-style1 button-Follower" onclick="saveButton(this, 'UnSave', 'Save', this.action)" >
+                                                <i class="fa-regular fa-bookmark"></i>
+                                                <span  class="txt-follow" this="">UnSave</span>
+                                            </div>
+                                        </c:otherwise>
+                                    </c:choose>
+                                </div>
+                            </c:if>
                             <div class="detail">
                                 <!--                        These lemon cupcakes have an ultra soft and moist texture and are served with a fragrant white
                                                         chocolate whipped cream and strawberries. This recipe is for you if you enjoy a decadent dessert
@@ -140,10 +158,11 @@
                                 <i class="fa-regular fa-clock"></i> Prep: ${RECIPE_DETAIL.getPrepTime()}min &nbsp; &nbsp; &nbsp; Cook: ${RECIPE_DETAIL.getCookTime()}min
                             </div>
                         </div>
+
                     </div>
 
                     <!-- ingredient & instruction & comment -->
-                    <div class="row body-info col">
+                    <div class="row body-info col-12">
                         <div class="col-md-8">
                             <div class="ingredient-container">
                                 <div class="head">
@@ -272,7 +291,34 @@
             </div>
         </c:catch> ${e}
 
-        <!--PhuHV: nua dem fix bug cai nay, tien sư thang nao xoa script lam carousel ko chay -->                                             
+        <!--PhuHV: nua dem fix bug cai nay, tien sư thang nao xoa script lam carousel ko chay -->
+        <!--ham container-->
+        <div class="fixed-container " id="report_list" >
+            <div class="gray-box"></div>
+            <div class="content card-body col-12 col-md-4">
+                <div class="col-6">
+                    <div class="report-title">Report Recipe</div>
+                    <form action="ReportController">
+                        <div class="form-group">
+                            <select name="typeReport" class="selectReport">
+                                <option value="Content">Inappropriate Content</option>
+                                <option value="Intellectual">Infringement on intellectual property</option>
+                                <option value="Spamming">Spamming or misleading</option>
+                                <option value="Community">The recipe is not suitable for the community</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <textarea name="txtReport" class="txtareaRp" value=""></textarea>
+                        </div>  
+                        <div class="form-group">
+                            <button type="submit">Send Report</button>
+                        </div>
+                    </form> 
+                </div>
+             
+            </div>
+
+        </div>
         <script src="https://cdn.jsdelivr.net/npm/swiper@8/swiper-bundle.min.js"></script>
         <script>
                                                         const swiper = new Swiper('.swiper', {
@@ -428,9 +474,24 @@
                     });
                 }
             }
-        </script>
-        <script>
 
+            function getReport(recipeID) {
+                console.log("2");
+                var report = $('#report_list');
+                var graybox = $('#report_list .gray-box');
+                var content = $('#report_list .content');
+                graybox.click(() => report.removeClass('d-flex'));
+                var exit_button = document.createElement("div").classList.add('exit-btn');
+                //load content
+                report.addClass('d-flex');
+                //
+                $('#report_list .exit-btn').click(() => report.removeClass('d-flex'));
+            }
+        </script>
+
+
+        <script>
+            getReport(2);
         </script>
         <c:import url="footer.jsp"/>
     </body>

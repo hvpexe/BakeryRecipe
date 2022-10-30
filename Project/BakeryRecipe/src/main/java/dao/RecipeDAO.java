@@ -841,7 +841,7 @@ public class RecipeDAO {
         return recipe;
     }
 
-    private static final String CMT_RECIPE = "INSERT INTO [dbo].[Comment]([Comment],[Rate],[DateComment],[IsDeleted],[UserID],[RecipeID])\n"
+    private static final String CMT_RECIPE = "INSERT INTO [dbo].[Comment]([Comment],[DateComment],[LastDateEdit],[IsDeleted],[UserID],[RecipeID])\n"
             + "VALUES (?,?,?,?,?,?)";
 
     public static boolean commentRecipe(String comment, int UserID,
@@ -859,7 +859,7 @@ public class RecipeDAO {
             cnn = DBUtils.getConnection();
             ptm = cnn.prepareStatement(CMT_RECIPE);
             ptm.setString(1, comment);
-            ptm.setBoolean(2, true);
+            ptm.setString(2, date);
             ptm.setString(3, date);
             ptm.setBoolean(4, false);
             ptm.setInt(5, UserID);

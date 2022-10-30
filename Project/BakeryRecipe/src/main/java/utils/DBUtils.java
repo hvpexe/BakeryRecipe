@@ -42,6 +42,27 @@ public class DBUtils {
             ex.printStackTrace();
         }
         return null;
+
+    }
+//    public static Connection getConnection() {
+//        Connection con = null;
+//        try {
+//            //1. load driver
+//            Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver");
+//            //2. make connection string
+//            String con_url = "jdbc:sqlserver://167.172.92.134:1433;database=BakeryRecipe;encrypt=true;trustServerCertificate=true;CharacterSet=UTF-8";
+//            //3. open connection
+//            con = DriverManager.getConnection(con_url, "sa", "Huynhvanphu102Exe");
+//        } catch (Exception ex) {
+//            ex.printStackTrace();
+//        }
+//        return con;
+//    }
+
+    public static void main(String[] args) {
+        System.out.println(
+                "-------------------------\n\n\n\n\n" + DBUtils.getConnection() + "\n\"-------------------------\\n\\n\\n\\n\\n\"");
+
     }
     
 //    public static Connection getConnection() {
