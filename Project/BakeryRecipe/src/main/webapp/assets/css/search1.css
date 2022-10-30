@@ -284,6 +284,7 @@ form.card-body{
     max-width: 100%;
     aspect-ratio: 1;
     object-fit: cover;
+    width: 100%;
     border-bottom: 2px solid var(--yellow-theme);
 }
 
