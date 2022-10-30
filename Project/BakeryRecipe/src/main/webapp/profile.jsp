@@ -64,6 +64,12 @@
                 <div class="profile-activity">
                     <b>Activity</b>
                 </div>
+                <c:if test="${empty profileRecipe}">
+                    <div class="activity-empty">
+                        ${requestScope.user.name} hasn’t posted any recipes. <br>
+                        When they do, their recipes will show up here.
+                    </div>
+                </c:if>
                 <c:forEach items="${profileRecipe}" var="re">
                     <div class="profile-recipe">
                         <div class="media recipe-header">
