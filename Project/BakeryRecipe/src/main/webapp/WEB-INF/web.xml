@@ -108,6 +108,10 @@
         <servlet-name>ReportController</servlet-name>
         <servlet-class>ReportController</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>EditRecipeController</servlet-name>
+        <servlet-class>controller.recipe.EditRecipeController</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>DebugController</servlet-name>
         <url-pattern>/debug</url-pattern>
@@ -179,6 +183,11 @@
     <servlet-mapping>
         <servlet-name>ReportController</servlet-name>
         <url-pattern>/ReportController</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+
+        <servlet-name>EditRecipeController</servlet-name>
+        <url-pattern>/editrecipe</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

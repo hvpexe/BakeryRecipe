@@ -18,7 +18,7 @@
                 <div class="posting-section">
                     <img class="avatar-icon rounded-circle"
                          src="${login.avatar}" alt="ava" />
-                    <button class="btn-button" id="btnButton">
+                    <button class="btn-button m-auto" id="btnButton">
                         <i class="fa-solid fa-plus"></i> Add your recipe
                     </button>
                 </div>
@@ -100,7 +100,7 @@
                                 <img class="list-img rounded shadow-sm" alt="" src="${re.cover}" />
                                 ${re.name} 
                             </a>
-                            <a class="btn main-btn btn-sm" href="#">${re.like} Like</a>
+                            <a class="btn main-btn btn-sm hover-button-1" href="#">${re.like} Like</a>
                         </div>
                     </c:forEach>
                 </div>

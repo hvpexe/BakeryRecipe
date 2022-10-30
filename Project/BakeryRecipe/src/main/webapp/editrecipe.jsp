@@ -5,7 +5,7 @@
     <head>
         <meta charset="utf-8" />
         <meta name="viewport" content="initial-scale=1, width=device-width" />
-        <title>Let's Create A Recipe</title>
+        <title>Edit Your Recipe</title>
         <meta name="description" content="" />
         <link
             rel="stylesheet"
@@ -33,7 +33,7 @@
             />
         <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@8/swiper-bundle.min.css">
         <link rel="stylesheet" href="./assets/css/animation.css" />
-        <link rel="stylesheet" href="./assets/css/addrecipe.css" />
+        <link rel="stylesheet" href="./assets/css/editrecipe.css" />
         <script src="assets/js/Jquery/jquery-core.js"></script>
 
     </head>
@@ -46,7 +46,7 @@
                     <div class="create-recipe-div ">
                         <h2 class="text-h2" onclick="history.go(-1);">
                             <i class="fas fa-arrow-left"></i>
-                            <b class="create-recipe-b d-inline-block ">Create Recipe</b>
+                            <b class="create-recipe-b d-inline-block ">Your's Recipe</b>
                         </h2>
                     </div>
                     <button class="save-button d-none" id="submit" form="add-recipe" >

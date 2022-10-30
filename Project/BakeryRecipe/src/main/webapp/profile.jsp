@@ -5,7 +5,7 @@
     <head>
         <meta charset="utf-8" />
         <meta name="viewport" content="initial-scale=1, width=device-width" />
-        <title></title>
+        <title>${user.name}</title>
         <meta name="description" content="" />
 
 
@@ -60,7 +60,9 @@
                         <a href="./profileInfo.jsp" class="btn edit-profile-button">Edit Profile</a>
                     </c:if>
                 </div>
-                <a href="./addrecipe" class="btn input-button">Add your post</a>
+                <c:if test="${login.id eq user.id}">
+                    <a href="./addrecipe" class="btn input-button">Add your post</a>
+                </c:if>
                 <div class="profile-activity">
                     <b>Activity</b>
                 </div>
@@ -70,7 +72,7 @@
                             <img class="recipe-ava c-pointer"
                                  src="<c:out value="${re.getAvatar()}"/>"
                                  alt=""
-                                 onclick='location="./profile?userid=${re.userID}"'/>
+                                 onclick='location = "./profile?userid=${re.userID}"'/>
                             <div class="media-body ml-3">
                                 <a href="./profile?userid=${requestScope.user.id}" class="text-dark c-pointer hover-underline">${re.username}</a>
                                 <div class="text-muted small"><c:out value="${re.getDatePostFormat()}"/></div>
@@ -103,7 +105,7 @@
                             </a>
                             <a href="#" class="d-inline-block text-muted ml-3">
                                 <i class="fas fa-eye align-middle"></i>
-                                <span class="align-middle" onclick="location='./RecipeDetail?recipeID=${re.id}'">View detail</span>
+                                <span class="align-middle" onclick="location = './RecipeDetail?recipeID=${re.id}'">View detail</span>
                             </a>
                         </div>
                     </div>
