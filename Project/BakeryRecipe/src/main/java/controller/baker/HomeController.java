@@ -1,10 +1,12 @@
 package controller.baker;
 
 import dao.RecipeDAO;
+import dao.UserDAO;
 import dto.Recipe;
 import dto.User;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.List;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -39,7 +41,11 @@ public class HomeController extends HttpServlet {
                 return;
             }
             ArrayList<Recipe> list = RecipeDAO.getPostHomeRecipes(user.getId());
+            List<User> listUser = UserDAO.getRecommendUsers(user.getId());
+            List<Recipe> listRecipe = RecipeDAO.getRecommnedRecipes();
             request.setAttribute("homeRecipe", list);
+            request.setAttribute("listUser", listUser);
+            request.setAttribute("listRecipe", listRecipe);
             
         } catch (Exception e) {
             e.printStackTrace();

@@ -16,7 +16,7 @@
         <div class="home-container">
             <div class="post-section">
                 <div class="posting-section">
-                    <img class="avatar-icon"
+                    <img class="avatar-icon rounded-circle"
                          src="${login.avatar}" alt="ava" />
                     <button class="btn-button" id="btnButton">
                         <i class="fa-solid fa-plus"></i> Add your recipe
@@ -25,9 +25,9 @@
                 <c:forEach items="${homeRecipe}" var="re">
                     <div class="user-recipe">
                         <div class="media recipe-header">
-                            <img class="recipe-ava c-pointer "
+                            <img class="recipe-ava c-pointer"
                                  src="<c:out value="${re.getAvatar()}"/>"
-                                 alt="avatar" onclick='location="./profile?userid=${re.userID}"'/>
+                                 alt="avatar" onclick='location = "./profile?userid=${re.userID}"'/>
                             <div class="media-body ml-3">
                                 <a class="text-dark c-pointer hover-underline" href="./profile?userid=${re.userID}">${re.username}</a>
                                 <div class="text-muted small"><c:out value="${re.getDatePostFormat()}"/></div>
@@ -77,24 +77,31 @@
                         <span>Start Now <i class="fa-sharp fa-solid fa-right-to-bracket"></i></span>
                     </a>
                 </div>
-                <div class="recommend-cook">
-                    <b class="cook-title">Good Cook</b>
-                    <div class="cook-container">
-                        <a class="cook-info" href="./profile.html">
-                            <img class="cook-ava" alt="" src="assets/images/avt/avatarimage2@2x.png" />
-                            Cammy Hedling
-                        </a>
-                        <a class="btn follow-btn" href="#">Follow</a>
-                    </div>
+                <div class="recommend-wrap">
+                    <b class="recommend-title">Recommend bakers</b>
+                    <c:forEach items="${listUser}" var="us">
+                        <div class="list-container">
+                            <a class="list-info" href="profile?userid=${us.id}">
+                                <div class="img-wrap ">
+                                    <img class="list-img rounded-circle shadow-sm" alt="" src="${us.avatar}" />
+                                </div>
+                                <div class="list-name">${us.name}</div>  
+                            </a>
+                            <a class="btn main-btn btn-sm" href="profile?userid=${us.id}">${us.follower} Follower</a>
+                        </div>
+                    </c:forEach>
                 </div>
-                <div class="trend-cake">
-                    <b class="cake-title">Trend Cakes</b>
-                    <div class="cake-container">
-                        <a class="cake-info" href="#">
-                            <img class="cake-img" alt="" src="assets/images/avt/avatar1@2x.png" />
-                            Tiramisu
-                        </a>
-                    </div>
+                <div class="recommend-wrap">
+                    <b class="recommend-title">Trend Recipes</b>
+                    <c:forEach items="${listRecipe}" var="re">
+                        <div class="list-container">
+                            <a class="list-info" href="profile?userid=${us.id}">
+                                <img class="list-img rounded shadow-sm" alt="" src="${re.cover}" />
+                                ${re.name} 
+                            </a>
+                            <a class="btn main-btn btn-sm" href="#">${re.like} Like</a>
+                        </div>
+                    </c:forEach>
                 </div>
             </div>
         </div>
