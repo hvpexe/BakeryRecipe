@@ -400,7 +400,8 @@
                                                 <th>Birthday</th>
                                                 <th>Email</th>
                                                 <th>Role</th>
-                                                <th>User Status</th>
+                                                <th>Status</th>
+                                                <th>Action</th>
                                             </tr>
                                         </thead>
                                         <tfoot>
@@ -413,7 +414,8 @@
                                                 <th>Birthday</th>
                                                 <th>Email</th>
                                                 <th>Role</th>
-                                                <th>User Status</th>
+                                                <th>Status</th>
+                                                <th>Action</th>
                                             </tr>
                                         </tfoot>
                                         <tbody>
@@ -423,12 +425,20 @@
                                                     <td class="col-1">
                                                         <img class="p-1 d-block w-100" src="${u.avatar}" style="aspect-ratio: 1 / 1; border: 2px solid gray;" alt="">
                                                     </td>
-                                                    <td class="align-middle col-2">${u.lastName}</td>
+                                                    <td class="align-middle col-1">${u.lastName}</td>
                                                     <td class="align-middle col-1">${u.firstName}</td>
                                                     <td class="align-middle col-1">${u.gender}</td>
                                                     <td class="align-middle col-1">${u.birthday}</td>
                                                     <td class="align-middle col-2">${u.email}</td>
                                                     <td class="align-middle col-1">${u.role}</td>  
+                                                    <td class="align-middle col-1">
+                                                        <c:if test="${u.isActive == 'false'}">
+                                                            Inactive
+                                                        </c:if>
+                                                        <c:if test="${u.isActive == 'true'}">
+                                                            Active
+                                                        </c:if>
+                                                    </td>
                                                     <td class="align-middle col-1">
                                                         <c:if test="${u.id eq sessionScope.login.id}">
                                                             <form action="profile.jsp">
@@ -436,20 +446,36 @@
                                                             </form>
                                                         </c:if>
                                                         <c:if test="${u.id ne sessionScope.login.id}">
-                                                            <c:if test="${u.isActive == 'false'}">
+                                                            <c:if test="${u.role == 'admin'}">
                                                                 <form action="managestatus">
-                                                                    <button class="bg-success">UNBAN</button>
+                                                                    <button class="bg-success">Remove Admin</button>
                                                                     <input type="hidden" name="userid" value="${u.id}">
-                                                                    <input type="hidden" name="active" value="true">
-                                                                    <input type="hidden" name="action" value="changestatus">
+                                                                    <input type="hidden" name="action" value="changerole">
+                                                                    <input type="hidden" name="role" value="user">
                                                                 </form>
                                                             </c:if>
-                                                            <c:if test="${u.isActive == 'true'}">
+                                                            <c:if test="${u.role == 'user'}">
+                                                                <c:if test="${u.isActive == 'false'}">
+                                                                    <form action="managestatus">
+                                                                        <button class="bg-success">UNBAN</button>
+                                                                        <input type="hidden" name="userid" value="${u.id}">
+                                                                        <input type="hidden" name="active" value="true">
+                                                                        <input type="hidden" name="action" value="changestatus">
+                                                                    </form>
+                                                                </c:if>
+                                                                <c:if test="${u.isActive == 'true'}">
+                                                                    <form action="managestatus">
+                                                                        <button class="bg-success">BAN</button>
+                                                                        <input type="hidden" name="userid" value="${u.id}">
+                                                                        <input type="hidden" name="active" value="false">
+                                                                        <input type="hidden" name="action" value="changestatus">
+                                                                    </form>
+                                                                </c:if>
                                                                 <form action="managestatus">
-                                                                    <button class="bg-success">BAN</button>
+                                                                    <button class="bg-success">Set Admin</button>
                                                                     <input type="hidden" name="userid" value="${u.id}">
-                                                                    <input type="hidden" name="active" value="false">
-                                                                    <input type="hidden" name="action" value="changestatus">
+                                                                    <input type="hidden" name="action" value="changerole">
+                                                                    <input type="hidden" name="role" value="admin">
                                                                 </form>
                                                             </c:if>
                                                         </c:if>

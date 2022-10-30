@@ -72,6 +72,24 @@ public class UserDAO {
             System.out.println("Error at changeStatus: " + e.toString());
         }return false;
     }
+    
+    public static boolean changeRole(User user) {
+        String sql = "UPDATE [User]\n"
+                + "SET [Role] = ?\n"
+                + "WHERE [ID] = ?";
+        try {
+            Connection conn = DBUtils.getConnection();
+            PreparedStatement ps = conn.prepareStatement(sql);
+            ps.setString(1, user.getRole());
+            ps.setInt(2, user.getId());
+            boolean check = ps.executeUpdate() > 0;
+            if (check) {
+                return true;
+            }
+        } catch (Exception e) {
+            System.out.println("Error at changeRole: " + e.toString());
+        }return false;
+    }
 
     private static final String UPDATE_USER_PASSWORD = " UPDATE [User] SET Password = ? WHERE ID= ?";
 
