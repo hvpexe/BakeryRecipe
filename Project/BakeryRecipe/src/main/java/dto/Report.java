@@ -14,7 +14,7 @@ public class Report {
 
     private String id;
     private Date DateReport;
-    private String detasil;
+    private String detail;
     private int userID;
     private String reportType;
 

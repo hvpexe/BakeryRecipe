@@ -212,7 +212,10 @@ body {
     font-size: 18px;
     line-height: 20px;
     color: var(--main-title-color);
-    /* display: inline-block; */
+    display: flex;
+    align-items: center;
+    word-wrap: break-word;
+    word-break: break-word;
 }
 
 .cook-info:hover {

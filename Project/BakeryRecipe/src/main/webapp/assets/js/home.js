@@ -4,7 +4,6 @@ if (btnButton) {
         window.location.href = "./addrecipe.jsp";
     });
 }
-
 function getLikedList(recipeID) {
     console.log("2");
     var likedList = $('#liked-list');

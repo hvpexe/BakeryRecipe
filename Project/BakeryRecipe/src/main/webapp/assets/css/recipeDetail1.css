@@ -382,3 +382,7 @@ button:hover{
 .card-body{
     width: 200px
 }   
+
+#textAreaExample{
+    width: 638px;
+}

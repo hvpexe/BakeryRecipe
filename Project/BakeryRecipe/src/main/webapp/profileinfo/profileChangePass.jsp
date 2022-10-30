@@ -49,7 +49,7 @@
                 </div>
                 <div class="card card-outline-secondary">
                     <div class="card-body">
-                        <form action="ChangePasswordController" class="form" role="form" autocomplete="off">
+                        <!--<form action="ChangePasswordController" class="form" role="form" autocomplete="off">-->
                             <div class="form-group">
                                 <label for="inputPasswordOld">Current Password</label>
                                 <input type="password" name="oldPassword" class="form-control" id="inputPasswordOld"
@@ -74,15 +74,16 @@
                             <div class="form-group">
                                 <input type="hidden" name="userID" value="${sessionScope.login.id}">
                                 <button type="submit" class="btn btn-main-theme" id="frameButton">
-                                    <b class="save-b2">Save</b>
+                                    <b class="save-b2" onclick="ajaxChangePass()">Save</b>
                                 </button>
+                                <div id="message_changePass"></div>
                                 <c:if test="${not empty requestScope.PASSWORD_ERROR}"><span
                                         class="pass-error">${requestScope.PASSWORD_ERROR}</span></c:if>
                                 <c:if test="${not empty requestScope.PASSWORD_SUCCESS}"><span
                                         class="pass-success">${requestScope.PASSWORD_SUCCESS}</span></c:if>
 
                             </div>
-                        </form>
+                        <!--</form>-->
                     </div>
                 </div>
             <!--</div>-->
@@ -96,3 +97,30 @@
 </body>
 
 </html>-->
+    <script>
+        function ajaxChangePass() {
+    var verifyPass = document.querySelector('#inputPasswordNewVerify');
+    var newpass = document.getElementById('inputPasswordNew');
+    var oldpass = document.getElementById('inputPasswordOld');
+    
+    
+    $.ajax({
+                    url: "ajax/ChangePasswordAjax",
+                    type: "get", //send it through get method
+                    data: {
+                       oldPassword :oldpass.value,
+                       newPassword :newpass.value,
+                       confirmNewPassword :verifyPass.value,
+                       userID: '${sessionScope.login.id}'
+                    },
+                    success: function (refe) {
+                                $('#message_changePass').html('Change password Success');
+                     
+                    },
+                    error: function () {
+                       $('#message_changePass').html('Change password Fail');
+                    }
+                });
+
+}
+    </script>

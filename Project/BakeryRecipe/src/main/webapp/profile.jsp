@@ -5,7 +5,7 @@
     <head>
         <meta charset="utf-8" />
         <meta name="viewport" content="initial-scale=1, width=device-width" />
-        <title>${requestScope.user.name}</title>
+        <title>${user.name}</title>
         <meta name="description" content="" />
         <c:import url="universal.jsp" />
 
@@ -58,7 +58,9 @@
                         <a href="./profileInfo.jsp" class="btn edit-profile-button">Edit Profile</a>
                     </c:if>
                 </div>
-                <a href="./addrecipe" class="btn input-button">Add your post</a>
+                <c:if test="${login.id eq user.id}">
+                    <a href="./addrecipe" class="btn input-button">Add your post</a>
+                </c:if>
                 <div class="profile-activity">
                     <b>Activity</b>
                 </div>
