@@ -80,7 +80,7 @@
                                 <div class="first-div">
                                     <c:if test="${sessionScope.login.id == USER_DETAIL.id}">
                                         <span class="text-nowrap">
-                                            <a href="#" class="btn btn-style2"><i class="fa-regular fa-pen-to-square"></i> Edit</a>
+                                            <a href="./editrecipe?recipeid=${param.recipeID}" class="btn btn-style2"><i class="fa-regular fa-pen-to-square"></i> Edit</a>
                                         </span>
                                     </c:if>
                                 </div>
@@ -296,11 +296,11 @@
         <div class="fixed-container " id="report_list" >
             <div class="gray-box"></div>
             <div class="content card-body col-12 col-md-4">
-                <div class="col-6">
-                    <div class="report-title">Report Recipe</div>
-                    <form action="ReportController">
+                <div class="col-12 p-0">
+                    <div class="report-title h3 font-weight-bold">Report Recipe màu nhạt vl</div>
+                    <form action="ReportController" class="col">
                         <div class="form-group">
-                            <select name="typeReport" class="selectReport">
+                            <select name="typeReport" class="selectReport w-100">
                                 <option value="Content">Inappropriate Content</option>
                                 <option value="Intellectual">Infringement on intellectual property</option>
                                 <option value="Spamming">Spamming or misleading</option>
@@ -310,10 +310,10 @@
                             <input type="hidden" name="recipeID" value="${RECIPE_DETAIL.id}">
                         </div>
                         <div class="form-group">
-                            <textarea name="txtReport" class="txtareaRp" value=""></textarea>
+                            <textarea name="txtReport" class="txtareaRp w-100" value=""></textarea>
                         </div>  
                         <div class="form-group">
-                            <button type="submit">Send Report</button>
+                            <button class="hover" type="submit">Send Report</button>
                         </div>
                     </form> 
                 </div>
@@ -478,10 +478,10 @@
             }
 
             function getReport(recipeID) {
-                console.log("2");
+                console.log(recipeID);
                 var report = $('#report_list');
                 var graybox = $('#report_list .gray-box');
-                var content = $('#report_list .content');
+                //       var content = $('#report_list .content');
                 graybox.click(() => report.removeClass('d-flex'));
                 var exit_button = document.createElement("div").classList.add('exit-btn');
                 //load content
