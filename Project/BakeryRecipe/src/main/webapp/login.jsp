@@ -47,7 +47,7 @@
                 crossorigin="anonymous"></script>-->
         <script src="https://accounts.google.com/gsi/client" async defer></script>
         <script src="assets/js/googleLogin.js"></script>
-        <link rel="stylesheet" href="assets/css/login1.css?v=3" />
+        <link rel="stylesheet" href="assets/css/login.css" />
     </head>
     <body>
         <c:import url="header.jsp"/>

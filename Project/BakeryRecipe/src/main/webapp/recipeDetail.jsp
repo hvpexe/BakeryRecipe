@@ -15,7 +15,7 @@
         <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@8/swiper-bundle.min.css" />
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
         <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-        <link rel="stylesheet" href="assets/css/recipeDetail1.css?version=1" />
+        <link rel="stylesheet" href="assets/css/recipeDetail.css?version=1" />
     </head>
     <body>
         <c:catch var="e"> 

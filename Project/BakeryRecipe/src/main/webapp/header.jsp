@@ -47,6 +47,7 @@
                         </a>
                         <div class="header-user_content  position-absolute">
                             <div class="list-group flex-column justify-content-start" href="#" >
+                                <a class="list-group-item text-dark text-decoration-none nav-item" href="AdminDashBoard"><div>Dashboard</div></a>
                                 <a class="list-group-item text-dark text-decoration-none nav-item" href="./profile.jsp"><div>Profile</div></a>
                                 <a class="list-group-item text-dark text-decoration-none nav-item" href="./profileInfo.jsp"><div>Setting</div></a>
                                 <a class="list-group-item text-dark text-decoration-none nav-item" href="logout"><div> Logout</div></a>
