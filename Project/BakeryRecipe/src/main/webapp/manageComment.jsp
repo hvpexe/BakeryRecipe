@@ -419,7 +419,7 @@
                                                     <td class="align-middle style col-1">${u.commentID}</td>
                                                     <td class="align-middle style align-items-center col-1">${u.chefName}</td>
                                                     <td class="align-middle style col-3">${u.comment}</td>
-                                                    <td class="align-middle style col-1">${u.recipeName}</td>
+                                                    <td class="align-middle style col-2">${u.recipeName}</td>
                                                     <td class="align-middle style align-items-center col-2 text-nowrap">${u.getDateComment()}</td>
                                                     <td class="align-middle style align-items-center col-2 text-nowrap">${u.getLastDateEdit()}</td> 
                                                     <td class="align-middle style text-center">

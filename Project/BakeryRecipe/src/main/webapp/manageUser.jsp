@@ -76,7 +76,7 @@
                         <span>Recipes</span></a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="#">
+                    <a class="nav-link" href="commentlist">
                         <i class="fa-solid fa-comment"></i>
                         <span>Comments</span></a>
                 </li>
@@ -451,7 +451,7 @@
                                                                     <button class="bg-success">Remove Admin</button>
                                                                     <input type="hidden" name="userid" value="${u.id}">
                                                                     <input type="hidden" name="action" value="changerole">
-                                                                    <input type="hidden" name="role" value="user">
+                                                                    <input type="hidden" name="role" value="baker">
                                                                 </form>
                                                                 <form action="user">
                                                                     <button class="bg-success" style="width: max-content;">

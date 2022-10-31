@@ -75,7 +75,7 @@
                         <span>Recipes</span></a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="#">
+                    <a class="nav-link" href="commentlist">
                         <i class="fa-solid fa-comment"></i>
                         <span>Comments</span></a>
                 </li>
