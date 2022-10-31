@@ -118,6 +118,7 @@
                                             <c:forEach items="${LIST_PIC}" var="pic" varStatus="i">
                                                 <span class="col-2 p-0 swiper-slide ${pic.isCover?'cover':''} hover-button-2 list-group-item rounded"
                                                       style='background-image: url("${pic.img}");'
+                                                      src="${pic.img}"
                                                       onclick="selectContent(this.parentElement, this)">
                                                     <input type="file" name="video-image" class="d-none" count="${i.index}">
                                                 </span>
@@ -139,7 +140,8 @@
                                                 <input name="ingre-name" readonly="" class="col text-capitalize" value="${il.name}">
                                                 <span>Amount:</span> 
                                                 <input name="ingre-amount" class="col-2 bg-white ml-2 mr-4" placeholder="1 oz" value="${il.amount}"/> 
-                                                <div class="item-trashbin fas fa-trash ml-auto description-button" onclick="this.parentElement.remove()">
+                                                <div class="item-trashbin fas fa-trash ml-auto description-button" 
+                                                     onclick="this.parentElement.remove()">
                                                 </div>
                                             </div>
                                         </c:forEach>
