@@ -136,7 +136,7 @@ public class IngredientDAO {
 
     
 
-    public List<Ingredient> listIngredient (int recipeID) throws SQLException {
+    public static List<Ingredient> listIngredient (int recipeID) throws SQLException {
         List<Ingredient> listIgre = new ArrayList<>();
         Connection conn = null;
         PreparedStatement ptm = null;
@@ -157,6 +157,7 @@ public class IngredientDAO {
             }
         } catch (Exception e) {
             System.out.println("System have error !!!");
+            e.printStackTrace();
         }
         return listIgre;
 

@@ -5,13 +5,16 @@
 package dao;
 
 import dto.Picture;
+import dto.Recipe;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.List;
 import javax.servlet.ServletContext;
 import javax.servlet.http.Part;
+import utils.DBUtils;
 import utils.Tools;
 
 /**
@@ -77,5 +80,34 @@ public class PictureDAO {
         }
         conn.commit();
         return true;
+    }
+
+    private static final String SELECT_PICTURE_LIST = "SELECT [ID]\n"
+            + "      ,[Img]\n"
+            + "      ,[IsCover]\n"
+            + "      ,[RecipeID]\n"
+            + "  FROM [BakeryRecipe].[dbo].[Picture]\n"
+            + "  where RecipeID = ?";
+
+    public static List<Picture> getPictureList (int recipeID) {
+        List<Picture> listPicture = new ArrayList<>();
+        Recipe recipe = new Recipe();
+        Connection conn = null;
+        PreparedStatement ptm = null;
+        ResultSet rs = null;
+        try {
+            conn = DBUtils.getConnection();
+            ptm = conn.prepareStatement(SELECT_PICTURE_LIST);
+            ptm.setInt(1, recipeID);
+            rs = ptm.executeQuery();
+            while (rs.next()) {
+                Picture picture = new Picture(rs.getString(2), rs.getBoolean(3), rs.getString(4));
+                listPicture.add(picture);
+            }
+        } catch (Exception e) {
+            System.out.println("System have error !!!");
+            e.printStackTrace();
+        }
+        return listPicture;
     }
 }

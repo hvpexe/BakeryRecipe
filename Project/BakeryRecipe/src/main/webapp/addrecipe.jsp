@@ -71,7 +71,8 @@
                     <div class="add-recipe-input col">
                         <b class="label">Description</b>
                         <textarea name="recipe-description" class="boxdes-textarea  py-3 col-12" placeholder="Add description"></textarea>
-                    </div>    <!--                Video And Image Picture                            -->
+                    </div>    
+                    <!--                Video And Image Picture                            -->
                     <div class="add-recipe-input col" style="gap: 10px;">
                         <div class="d-flex col p-0 justify-content-start" style="gap: 10px;">
                             <div class="description-button"  id="add-video-btn">

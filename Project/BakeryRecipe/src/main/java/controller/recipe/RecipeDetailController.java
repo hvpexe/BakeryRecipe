@@ -33,7 +33,7 @@ public class RecipeDetailController extends HttpServlet {
     private static final String SUCCESS = "recipeDetail.jsp";
     private static final String ERROR = "recipeDetail.jsp";
 
-    protected void processRequest(HttpServletRequest request, HttpServletResponse response)
+    protected void processRequest (HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
         String url = ERROR;
@@ -44,26 +44,27 @@ public class RecipeDetailController extends HttpServlet {
 //           Recipe ID = (Recipe) session.getAttribute("RECIPE_DETAIL");
             int recipeID = Integer.parseInt(request.getParameter("recipeID"));
             RecipeDAO recipe = new RecipeDAO();
-User sc ;
-            sc =   UserDAO.userDetail(recipeID);
-            int ID = sc.getId();
+            User user;
+            user = UserDAO.userDetail(recipeID);
+            int ID = user.getId();
             List<String> picRecp;
             picRecp = recipe.listPicture(recipeID);
             request.setAttribute("LIST_PIC", picRecp);
 
-            User user;
-            user = UserDAO.userDetail(recipeID);
-            request.setAttribute("USER_DETAIL", user);
+            User userPost;
+            userPost = UserDAO.userDetail(recipeID);
+            request.setAttribute("USER_DETAIL", userPost);
 
             IngredientDAO dao = new IngredientDAO();
 
             List<Ingredient> listIngre;
             listIngre = dao.listIngredient(recipeID);
             request.setAttribute("LIST_INGREDIENT", listIngre);
-
+            System.out.println(listIngre);
             List<Instruction> liststep;
             liststep = recipe.listStep(recipeID);
             request.setAttribute("LIST_STEP", liststep);
+            System.out.println(liststep);
 
             Recipe recipedl;
             recipedl = recipe.recipeDetail(recipeID);
@@ -79,23 +80,15 @@ User sc ;
             List<Comment> cmt = recipe.commentList(recipeID);
             request.setAttribute("COMMENT_LIST", cmt);
 
-           
-            
 //          check save
 //            boolean checksave = UserDAO.checkSaveRecipe(userLogin.getId(), recipeID);
 //            request.setAttribute("checksave", checksave);
-            
             boolean checklike = UserDAO.checkLikeRecipe(userLogin.getId(), recipeID);
             request.setAttribute("checklike", checklike);
-            
+
             boolean checkfollow = UserDAO.checkFollowUser(userLogin.getId(), ID);
             request.setAttribute("CHECK_FOLLOW", checkfollow);
-            
-            
-           
-            
-            
-           
+
             url = SUCCESS;
 
         } catch (Exception e) {
@@ -109,13 +102,14 @@ User sc ;
     /**
      * Handles the HTTP <code>GET</code> method.
      *
-     * @param request servlet request
+     * @param request  servlet request
      * @param response servlet response
+     *
      * @throws ServletException if a servlet-specific error occurs
-     * @throws IOException if an I/O error occurs
+     * @throws IOException      if an I/O error occurs
      */
     @Override
-    protected void doGet(HttpServletRequest request, HttpServletResponse response)
+    protected void doGet (HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         processRequest(request, response);
     }
@@ -123,13 +117,14 @@ User sc ;
     /**
      * Handles the HTTP <code>POST</code> method.
      *
-     * @param request servlet request
+     * @param request  servlet request
      * @param response servlet response
+     *
      * @throws ServletException if a servlet-specific error occurs
-     * @throws IOException if an I/O error occurs
+     * @throws IOException      if an I/O error occurs
      */
     @Override
-    protected void doPost(HttpServletRequest request, HttpServletResponse response)
+    protected void doPost (HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         processRequest(request, response);
     }
@@ -140,7 +135,7 @@ User sc ;
      * @return a String containing servlet description
      */
     @Override
-    public String getServletInfo() {
+    public String getServletInfo () {
         return "Short description";
     }// </editor-fold>
 

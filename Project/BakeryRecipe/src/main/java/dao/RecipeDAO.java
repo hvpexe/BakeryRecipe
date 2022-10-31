@@ -384,6 +384,7 @@ public class RecipeDAO {
             }
         } catch (Exception e) {
             System.out.println("System have error !!!");
+            e.printStackTrace();
         }
         return listPicture;
 
@@ -424,7 +425,7 @@ public class RecipeDAO {
             + "ON instruc.RecipeID = recipe.ID\n"
             + "WHERE recipe.ID = ?";
 
-    public List<Instruction> listStep(int recipeID) throws SQLException {
+    public static List<Instruction> listStep(int recipeID) throws SQLException {
         List<Instruction> liststep = new ArrayList<>();
         Connection conn = null;
         PreparedStatement ptm = null;
@@ -623,7 +624,7 @@ public class RecipeDAO {
             + "ON recipe.[UserID]= baker.[ID]\n"
             + "WHERE recipe.[ID] = ?";
 
-    public String recipeVideo(int userID) {
+    public static String recipeVideo(int recipeid) {
         Connection conn = null;
         PreparedStatement ptm = null;
         ResultSet rs = null;
@@ -631,13 +632,15 @@ public class RecipeDAO {
         try {
             conn = DBUtils.getConnection();
             ptm = conn.prepareStatement(VIDEO_DETAIL);
-            ptm.setInt(1, userID);
+            ptm.setInt(1, recipeid);
             rs = ptm.executeQuery();
             while (rs.next()) {
                 String video = rs.getString("Video");
                 theVideo = video;
             }
         } catch (Exception e) {
+            System.out.println("recipe Video exception:"+ e.getMessage());
+            e.printStackTrace();
         }
         return theVideo;
     }

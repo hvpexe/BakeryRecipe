@@ -88,8 +88,8 @@ input,textarea{
     border:none;
 }
 :is(input,textarea):focus{
-    outline: 3px outset var(hard-yellow-75);
-
+    outline: 2px ridge var(--main-theme-color-hover);
+    outline-style: solid;
 }
 
 .title-div {
@@ -133,9 +133,10 @@ input,textarea{
     box-shadow: 0 4px 4px rgba(0, 0, 0, 0.25);
     box-sizing: border-box;
     min-height: 80px;
+    max-height: 1000px;
     flex-shrink: 0;
-    overflow: hidden;
     text-align: left;
+    resize: vertical;
     aspect-ratio: 12/2;
 }
 .display-image{

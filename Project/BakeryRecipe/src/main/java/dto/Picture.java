@@ -12,10 +12,10 @@ public class Picture {
 
     public static final String IMG_PATH = "assets/images/recipe/picture/";
     private String img;
-    private String isCover;
+    private boolean isCover;
     private String recipeID;
 
-    public Picture (String img, String isCover, String recipeID) {
+    public Picture (String img, boolean isCover, String recipeID) {
         this.img = img;
         this.isCover = isCover;
         this.recipeID = recipeID;
@@ -35,11 +35,11 @@ public class Picture {
         this.img = Img;
     }
 
-    public String getIsCover () {
+    public boolean getIsCover () {
         return isCover;
     }
 
-    public void setIsCover (String IsCover) {
+    public void setIsCover (boolean IsCover) {
         this.isCover = IsCover;
     }
 
