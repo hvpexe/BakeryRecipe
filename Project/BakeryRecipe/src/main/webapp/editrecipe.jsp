@@ -5,6 +5,7 @@
 <html>
     <head>
         <meta charset="utf-8" />
+        <link rel="icon" href="./assets/images/logo/logo-title.png" type="image/x-icon">
         <meta name="viewport" content="initial-scale=1, width=device-width" />
         <title>Edit Your Recipe</title>
         <meta name="description" content="" />
@@ -61,8 +62,9 @@
                     <c:remove scope="session" var="ADD_RECIPE_FAILED"></c:remove>
                     <c:remove scope="session" var="ADD_RECIPE_SUCCESS"></c:remove>
                     </main>
-                    <form action="AddRecipe"  class="section-div col-12 col-md-10 align-content-center align-self-center"
+                    <form action="editrecipe"  class="section-div col-12 col-md-10 align-content-center align-self-center"
                           id="add-recipe" enctype="multipart/form-data" method="post" >
+                        <input name="recipe-id" type="hidden" value="${recipe.id}">
                         <div class="title-div col-12">
                             <b class="label">Title</b>
                             <input name='recipe-name' class="input col-12"  type="text" placeholder="Recipe's Name "
@@ -93,7 +95,7 @@
                                             <div class="description-button" form="dissabled" id="to-cover-btn">
                                                 Set As Cover
                                             </div>
-                                            <input type="hidden" name="cover" value="0">
+                                            <input type="hidden" name="cover" value="">
                                             <div class="description-button ml-2" form="dissabled" id="change-img-btn">
                                                 Change Image
                                             </div>
@@ -120,13 +122,12 @@
                                                       style='background-image: url("${pic.img}");'
                                                       src="${pic.img}"
                                                       onclick="selectContent(this.parentElement, this)">
-                                                    <input type="file" name="video-image" class="d-none" count="${i.index}">
+                                                    <input type="file" name="video-image" class="d-none" count="${i.index+1}">
                                                 </span>
                                             </c:forEach>
                                         </div>
 
                                     </div>
-                                    ${VIDEO_DETAIL}
 
 
                                 </div>
@@ -135,7 +136,7 @@
                                     <b class="label">Ingredients</b>
                                     <div class="col p-0" id="ingredient-container">
                                         <c:forEach items="${LIST_INGREDIENT}" var="il" varStatus="i">
-                                            <div class="col p-0  align-items-center p-0 pr-2 border border-secondary" id="item${i.index}">
+                                            <div class="col p-0  align-items-center p-0 pr-2 border border-secondary" id="item${i.index+1}">
                                                 <img src="${il.img}" alt=" "/> 
                                                 <input name="ingre-name" readonly="" class="col text-capitalize" value="${il.name}">
                                                 <span>Amount:</span> 
@@ -150,7 +151,7 @@
                                         <input class="instruction-box-input col-7 " form="disabled" name="iname" id="name" type="text" placeholder="Add one ingredient">
                                         <span class="col d-flex align-items-center pr-0">Amount:</span>
                                         <input class="instruction-box-input col-3 ml-1" form="disabled"  name="iamount" id="amount"  type="text" placeholder="1 Piece">
-                                        <input type="hidden" name="count" value="1">
+                                        <input type="hidden" name="count" value="${LIST_INGREDIENT.size()}">
                                     </div>
                                 </div>                    
                                 <!--                INSTRUCTION                            -->
@@ -172,26 +173,41 @@
                                                 <div class="item-trashbin fas fa-trash ml-auto description-button" onclick="removeElem(this.parentElement)"></div>
                                             </div>
                                         </div>
-
+                                        <c:forEach items="${LIST_STEP}" var="st" varStatus="i">
+                                            <div class="col align-items-center p-0 " id="inst${i.index+1}">
+                                                <h5 class="text-secondary col-12 p-0">
+                                                    Step <span>${st.insstep}</span>
+                                                    <input name="step" onclick="this.previousElementSibling.innerText = this.value" type="hidden" value="${st.insstep}">
+                                                </h5>
+                                                <div class="col hover-highlight  p-0 pr-2 d-flex align-items-center border border-secondary rounded" onclick="showDetail(this.parentElement);">
+                                                    <div class="inst-img d-inline-flex ${empty st.img?'fas fa-camera':''} position-relative align-items-center justify-content-center" 
+                                                         src="${st.img}" 
+                                                         style="background-image: url(${st.img});"
+                                                         onclick="this.querySelector('input').click();">
+                                                        <input name="inst-image" id="inst-image${i.index}" class="d-none" readonly="" type="file" accept="image/*" onchange="changeImg(this.parentElement, window.URL.createObjectURL(this.files[0]), event)">
+                                                    </div>
+                                                    <textarea class="instruction-box-input col " value="Efad" readonly="" name="inst-description" id="inst-description1" type="text">${st.detail}</textarea>
+                                                    <div class="item-trashbin fas fa-trash ml-auto description-button" onclick="removeElem(this.parentElement)"></div>
+                                                </div>
+                                            </div>
+                                        </c:forEach>
                                     </div>
 
                                 </div>
-                                <div id="test"></div>
-
                                 <div class="col" id="instruction">
                                     <textarea class="instruction-box-input col-11  py-3 pr-3" form="disabled" name="idetail" type="text" placeholder="Paste one or multiple steps (e.g. Finely chop the garlic)"></textarea>
-                                    <input type="hidden" name="count" value="1">
+                                    <input type="hidden" name="count" value="${LIST_STEP.size()}">
                                     <div class="accept-input fas fa-check d-flex align-items-center justify-content-center col-1 hover-button-1"></div>
                                 </div>
                                 <!-- Prepare Time and Cook Time-->
                                 <div class="time-to-cook-div col">
                                     <div class="add-recipe-input col">
                                         <label class="label col p-0">Prepare Time</label>
-                                        <input class="pre-box-input col" type="number" name="prepare-time" placeholder="0">
+                                        <input class="pre-box-input col" type="number" name="prepare-time" value="${recipe.prepTime}" placeholder="30">
                                     </div>
                                     <div class="add-recipe-input col">
                                         <label class="label col p-0">Cook Time</label>
-                                        <input class="pre-box-input col" type="number" name="cook-time" placeholder="0">
+                                        <input class="pre-box-input col" type="number" name="cook-time" value="${recipe.cookTime}" placeholder="30">
                                     </div>
                                 </div>
                                 <div class="save-button ml-auto" onclick="submitForm('form#add-recipe')">

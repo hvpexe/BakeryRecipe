@@ -12,12 +12,17 @@ async function submitForm(selector) {
     var smbtn = document.getElementById('submit');
     const output = document.getElementById('test');
     var cover = document.querySelector('[name=cover]');
+    var pictures = document.querySelectorAll(':has(> [name^=video-image])');
+    for (var i = 0; i < pictures.length; i++) {
+        if(pictures[i].classList.contains('cover')){
+            cover.setAttribute('value',i) ;
+        }
+    }
     if (!cover.value)
         cover.value = 0;
     for (var i = 0; i < inputs.length; i++) {
         inputs[i].setAttribute('name', inputs[i].getAttribute('name') + inputs[i].getAttribute('count'));
     }
-    console.log(output);
     smbtn.click();
 }
 //add video and picture

@@ -10,7 +10,9 @@ package dto;
  */
 public class Instruction {
 
-    public static final String IMG_PATH= "assets/images/recipe/instruction/";
+    
+
+    public static final String IMG_PATH= "./assets/images/recipe/instruction/";
    
     private int insstep;
     
@@ -43,11 +45,17 @@ public class Instruction {
     }
 
     public String getImg() {
-        return img;
+        if(img == null)  return null;
+        return IMG_PATH+img;
     }
 
     public void setImg(String img) {
         this.img = img;
+    }
+
+    @Override
+    public String toString () {
+        return "Instruction{" + "insstep=" + insstep + ", detail=" + detail + ", img=" + img + '}';
     }
 
 }

@@ -19,17 +19,21 @@ import java.io.PrintWriter;
 import java.util.List;
 import java.util.logging.Logger;
 import javax.servlet.ServletException;
+import javax.servlet.annotation.MultipartConfig;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.Part;
 
 /**
  *
  * @author Admin
  */
 @WebServlet(name = "EditRecipeController", urlPatterns = {"/editrecipe"})
-
+@MultipartConfig(fileSizeThreshold = 1024 * 1024 * 100, // 50MB
+        maxFileSize = 1024 * 1024 * 100, // 50MB
+        maxRequestSize = 1024 * 1024 * 100) // 50MB
 public class EditRecipeController extends HttpServlet {
 
     private static final String SUCCESS_GET = "editrecipe.jsp";
@@ -49,17 +53,27 @@ public class EditRecipeController extends HttpServlet {
     protected void processRequest (HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
-        try ( PrintWriter out = response.getWriter()) {
+        try {
+
+            PrintWriter out = response.getWriter();
             /* TODO output your page here. You may use following sample code. */
-            out.println("<!DOCTYPE html>");
-            out.println("<html>");
-            out.println("<head>");
-            out.println("<title>Servlet EditRecipeController</title>");
-            out.println("</head>");
-            out.println("<body>");
-            out.println("<h1>Servlet EditRecipeController at " + request.getContextPath() + "</h1>");
-            out.println("</body>");
-            out.println("</html>");
+            List<Part> parts = (List<Part>) request.getParts();
+            for (Part part : parts) {
+                out.println("<br>" + part.getName());
+                try {
+                    if (part.getSubmittedFileName() != null) {
+                        out.println(" " + part.getSubmittedFileName());
+                        out.println(" " + part.getSubmittedFileName().substring(part.getSubmittedFileName().
+                                lastIndexOf(".")));
+                    }else{
+                        out.println( " "+request.getParameter(part.getName()));
+                    }
+                } catch (Exception e) {
+
+                }
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
         }
 
     }
@@ -77,7 +91,7 @@ public class EditRecipeController extends HttpServlet {
             picRecp = PictureDAO.getPictureList(recipeID);;
             request.setAttribute("LIST_PIC", picRecp);
             System.out.println(picRecp);
-            
+
             List<Ingredient> listIngre;
             listIngre = dao.listIngredient(recipeID);
             request.setAttribute("LIST_INGREDIENT", listIngre);
@@ -85,7 +99,7 @@ public class EditRecipeController extends HttpServlet {
             List<Instruction> liststep;
             liststep = RecipeDAO.listStep(recipeID);
             request.setAttribute("LIST_STEP", liststep);
-            
+
             String videoDetail = RecipeDAO.recipeVideo(recipeID);
             request.setAttribute("VIDEO_DETAIL", videoDetail);
 //            recipe.commentList(recipeID);

@@ -431,6 +431,9 @@ div[id^=inst] .inst-img{
     background-position: center;
     background-size: cover;
 }
+div[id^=inst] .instruction-box-input{
+    outline:none;
+}
 div[id^=inst] .inst-img img[src]{
     position: absolute;
     left:0;

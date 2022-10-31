@@ -164,11 +164,11 @@
                     <div class="time-to-cook-div col">
                         <div class="add-recipe-input col">
                             <label class="label col p-0">Prepare Time</label>
-                            <input class="pre-box-input col" type="number" name="prepare-time" placeholder="0">
+                            <input class="pre-box-input col" type="number" name="prepare-time" placeholder="30">
                         </div>
                         <div class="add-recipe-input col">
                             <label class="label col p-0">Cook Time</label>
-                            <input class="pre-box-input col" type="number" name="cook-time" placeholder="0">
+                            <input class="pre-box-input col" type="number" name="cook-time" placeholder="30">
                         </div>
                     </div>
                     <div class="save-button ml-auto" onclick="submitForm('form#add-recipe')">
