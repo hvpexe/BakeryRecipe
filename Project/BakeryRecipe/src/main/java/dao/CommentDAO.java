@@ -4,6 +4,7 @@ import dto.Comment;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;
@@ -24,7 +25,7 @@ public class CommentDAO {
             + "  WHERE c.UserID = ? and c.IsDeleted= 0\n"
             + "  Order By c.DateComment";
 
-    public static List<Integer[]> getCommentList (int userid) {
+    public static List<Integer[]> getCommentList(int userid) {
         String sql = SELECT_PROFILE_COMMENT_LIST;
         List<Integer[]> list = new LinkedList<>();
         try {
@@ -42,8 +43,8 @@ public class CommentDAO {
         }
         return null;
     }
-    private static final String SELECT_COMMENT_BY_ID = 
-            "SELECT [ID]\n"
+    private static final String SELECT_COMMENT_BY_ID
+            = "SELECT [ID]\n"
             + "      ,[Comment]\n"
             + "      ,[DateComment]\n"
             + "      ,[LastDateEdit]\n"
@@ -53,22 +54,77 @@ public class CommentDAO {
             + "  FROM [Comment]"
             + "  WHERE ID = ?";
 
-    public static Comment getCommentByID (int id) {
+    public static Comment getCommentByID(int id) {
         String sql = SELECT_COMMENT_BY_ID;
         Comment comment = null;
         try {
             PreparedStatement ps = conn.prepareStatement(sql);
             ps.setInt(1, id);
             ResultSet rs = ps.executeQuery();
-            if (rs.next())
+            if (rs.next()) {
                 comment = new Comment(id, rs.getString(2), rs.getTimestamp(3),
                         rs.getTimestamp(4), rs.getBoolean(5),
                         rs.getInt(6), rs.getInt(7));
+            }
             return comment;
         } catch (Exception e) {
             System.out.println("Get Comment List Error" + e.getMessage());
             e.printStackTrace();
         }
         return null;
+    }
+
+    private static final String MANAGE_COMMENT_LIST = "SELECT [Comment].ID, [Comment].Comment, "
+            + "[Comment].DateComment, [Comment].LastDateEdit, "
+            + "[User].Avatar, [User].FirstName + ' ' + [User].LastName AS [Username], "
+            + "[User].ID AS [UserID], [Recipe].ID AS [RecipeID], "
+            + "[Recipe].[Name] AS [RecipeName], [Comment].IsDeleted\n"
+            + "FROM [Comment]\n"
+            + "JOIN [Recipe] ON [Comment].RecipeID = [Recipe].ID\n"
+            + "JOIN [User] ON [Comment].UserID = [User].ID\n"
+            + "WHERE [Comment].IsDeleted = 0;";
+
+    public static List<Comment> manageCommentList() {
+        try {
+            Connection conn = DBUtils.getConnection();
+            PreparedStatement ps = conn.prepareCall(MANAGE_COMMENT_LIST);
+            ResultSet rs = ps.executeQuery();
+            List<Comment> list = new ArrayList<>();
+            while (rs.next()) {
+                Comment comment = new Comment(rs.getInt("ID"), 
+                        rs.getString("Comment"), 
+                        rs.getTimestamp("DateComment"), 
+                        rs.getTimestamp("LastDateEdit"), 
+                        rs.getBoolean("IsDeleted"), 
+                        rs.getInt("UserID"), 
+                        rs.getInt("RecipeID"), 
+                        rs.getString("Avatar"), 
+                        rs.getString("Username"), 
+                        rs.getString("RecipeName"));
+                list.add(comment);
+            }
+            return list;
+        } catch (SQLException ex) {
+            System.out.println("CommentList Query Error!" + ex.
+                    getMessage());
+        }
+        return null;
+    }
+    
+    private static final String UPDATE_DELETE = "UPDATE Comment\n" +
+"            SET IsDeleted = 1\n" +
+"            WHERE Comment.[ID] = ?";
+
+    public static boolean deleteComment(int id) {
+        try {
+            Connection conn = DBUtils.getConnection();
+            PreparedStatement ps = conn.prepareStatement(UPDATE_DELETE);
+            ps.setInt(1, id);
+            ps.executeUpdate();
+            return true;
+        } catch (Exception ex) {
+            System.out.println("Query Delete Comment For User error!" + ex.getMessage());
+        }
+        return false;
     }
 }

@@ -22,6 +22,17 @@ public class Comment {
     private int recipeID;
     private String avatar;
     private String chefName;
+    private String recipeName;
+
+    
+
+    public String getRecipeName() {
+        return recipeName;
+    }
+
+    public void setRecipeName(String recipeName) {
+        this.recipeName = recipeName;
+    }
 
     public String getChefName () {
         return chefName;
@@ -45,6 +56,19 @@ public class Comment {
         this.avatar = avatar;
     }
 
+    public Comment(int commentID, String comment, Timestamp DateComment, Timestamp LastDateEdit, boolean isDeleted, int userID, int recipeID, String avatar, String chefName, String recipeName) {
+        this.commentID = commentID;
+        this.comment = comment;
+        this.DateComment = DateComment;
+        this.LastDateEdit = LastDateEdit;
+        this.isDeleted = isDeleted;
+        this.userID = userID;
+        this.recipeID = recipeID;
+        this.avatar = avatar;
+        this.chefName = chefName;
+        this.recipeName = recipeName;
+    }
+    
     public Comment(int commentID, String comment, Timestamp DateComment, String avatar, String chefName) {
         this.commentID = commentID;
         this.comment = comment;

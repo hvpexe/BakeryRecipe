@@ -420,7 +420,7 @@
                                         </tfoot>
                                         <tbody>
                                             <c:forEach items="${userlist}" var="u">
-                                                <tr class="col-11">
+                                                <tr class="col-12">
                                                     <td class="align-middle col-1">${u.id}</td>
                                                     <td class="col-1">
                                                         <img class="p-1 d-block w-100" src="${u.avatar}" style="aspect-ratio: 1 / 1; border: 2px solid gray;" alt="">
@@ -428,7 +428,7 @@
                                                     <td class="align-middle col-1">${u.lastName}</td>
                                                     <td class="align-middle col-1">${u.firstName}</td>
                                                     <td class="align-middle col-1">${u.gender}</td>
-                                                    <td class="align-middle col-1">${u.birthday}</td>
+                                                    <td class="align-middle col-2">${u.birthday}</td>
                                                     <td class="align-middle col-2">${u.email}</td>
                                                     <td class="align-middle col-1">${u.role}</td>  
                                                     <td class="align-middle col-1">
@@ -459,7 +459,7 @@
                                                                     </button>
                                                                 </form>
                                                             </c:if>
-                                                            <c:if test="${u.role == 'user'}">
+                                                            <c:if test="${u.role == 'baker'}">
                                                                 <c:if test="${u.isActive == 'false'}">
                                                                     <form action="managestatus">
                                                                         <button class="bg-success">UNBAN</button>

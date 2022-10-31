@@ -53,6 +53,10 @@
         <servlet-class>controller.EditInformationController</servlet-class>
     </servlet>
     <servlet>
+        <servlet-name>ShowCommentListController</servlet-name>
+        <servlet-class>controller.admin.ShowCommentListController</servlet-class>
+    </servlet>
+    <servlet>
         <servlet-name>RegisterAccountController</servlet-name>
         <servlet-class>controller.baker.RegisterAccountController</servlet-class>
     </servlet>
@@ -155,6 +159,10 @@
     <servlet-mapping>
         <servlet-name>ProfileController</servlet-name>
         <url-pattern>/profile</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>ShowCommentListController</servlet-name>
+        <url-pattern>/commentlist</url-pattern>
     </servlet-mapping>
     <servlet-mapping>
         <servlet-name>FollowController</servlet-name>

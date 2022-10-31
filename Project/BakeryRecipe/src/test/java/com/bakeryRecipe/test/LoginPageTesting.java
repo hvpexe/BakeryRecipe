@@ -1,8 +1,10 @@
 package com.bakeryRecipe.test;
 
 
+import dao.CommentDAO;
 import dao.RecipeDAO;
 import dao.UserDAO;
+import dto.Comment;
 import dto.Recipe;
 import dto.User;
 import java.sql.Connection;
@@ -66,8 +68,8 @@ public class LoginPageTesting {
     }
     public static void main(String[] args) {
         
-        List<Recipe> recipe = RecipeDAO.showRecipeList();
-        for (Recipe o : recipe){
+        List<Comment> comment = CommentDAO.manageCommentList();
+        for (Comment o : comment){
             System.out.println(o);
         }
         

@@ -396,7 +396,7 @@
                                                 <th>Name</th>
                                                 <th>Baker</th>
                                                 <th>Post Date</th>
-                                                <th>Latest Edit Date</th>
+                                                <th>Last Edit Date</th>
                                                 <th class="table-secondary text-dark">Recipe Details</th>
                                                 <th class="table-light text-dark">Delete</th>
                                             </tr>
@@ -423,7 +423,7 @@
                                                     <td class="align-middle col-2">${u.name}</td>
                                                     <td class="align-middle align-items-center col-1">${u.username}</td>
                                                     <td class="align-middle align-items-center col-1 text-nowrap">${u.datePost}</td>
-                                                    <td class="align-middle align-items-center col-1 text-nowrap">${u.lastDateEdit}</td>
+                                                    <td class="align-middle align-items-center col-2 text-nowrap">${u.lastDateEdit}</td>
                                                     <td class="align-middle col-1">
                                                         <!--neu muon Chinh button thi cho form bao lai de edit--> 
                                                         <form action="recipe">
@@ -432,7 +432,7 @@
                                                             </button>
                                                         </form>
                                                     </td>
-                                                    <td class="  align-middle text-center">
+                                                    <td class="align-middle text-center col-1">
                                                         <form action="recipe">
                                                             <button class="bg-white">Delete</button>
                                                             <input type="hidden" name="recipeid" value="${u.id}">
