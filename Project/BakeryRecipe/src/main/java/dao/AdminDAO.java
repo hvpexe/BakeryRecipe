@@ -7,6 +7,11 @@ package dao;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.Date;
+import java.util.List;
+import org.json.simple.JSONValue;
 import utils.DBUtils;
 
 /**
@@ -128,7 +133,45 @@ public class AdminDAO {
         return count;
     }
 
+    public static String getSumUserRegisterInMonthByYear(int year) {
+        String sql = "SELECT YEAR(U.DateRegister) as yyyy,\n"
+                + "       MONTH(U.DateRegister) as mm,\n"
+                + "       COUNT(U.ID) as NoUser \n"
+                + "FROM [User] U\n"
+                + "WHERE YEAR(U.DateRegister) = ?\n"
+                + "GROUP BY YEAR(U.DateRegister), MONTH(U.DateRegister)\n"
+                + "ORDER BY YEAR(U.DateRegister), MONTH(U.DateRegister);";
+        List<Integer> noUserByMonth = new ArrayList<>();
+        try {
+            PreparedStatement ps = conn.prepareStatement(sql);
+            ps.setInt(1, year);
+            ResultSet rs = ps.executeQuery();
+            int[] noUserByMonthTemp = new int[12];
+            while (rs.next()) {
+                int mm = (Integer) rs.getInt("mm");
+                int noUser = (Integer) rs.getInt("noUser");
+                noUserByMonthTemp[mm - 1] = noUser;
+            }
+            int maxMonth;
+            int currentYear = Calendar.getInstance().get(Calendar.YEAR);
+            if (year < currentYear) {
+                maxMonth = 11;
+            } else {
+                maxMonth = Calendar.getInstance().get(Calendar.MONTH);
+            }
+            for (int i = 0; i <= maxMonth; i++) {
+                noUserByMonth.add(noUserByMonthTemp[i]);
+            }
+            String jsonText = JSONValue.toJSONString(noUserByMonth);
+            return jsonText;
+        } catch (Exception e) {
+            System.out.println("getSumUserRegisterInMonthByYear error:");
+            e.printStackTrace();
+        }
+        return null;
+    }
+
     public static void main(String[] args) {
-        System.out.println(getNumberFollow());
+        System.out.println(getSumUserRegisterInMonthByYear(2021));
     }
 }

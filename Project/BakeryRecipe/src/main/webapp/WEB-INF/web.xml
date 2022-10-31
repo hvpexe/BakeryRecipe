@@ -116,6 +116,10 @@
         <servlet-name>ChangePasswordAjax</servlet-name>
         <servlet-class>controller.ajax.ChangePasswordAjax</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>getSumUserRegisterInMonthByYearAjax</servlet-name>
+        <servlet-class>controller.admin.getSumUserRegisterInMonthByYearAjax</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>DebugController</servlet-name>
         <url-pattern>/debug</url-pattern>
@@ -195,6 +199,10 @@
     <servlet-mapping>
         <servlet-name>ChangePasswordAjax</servlet-name>
         <url-pattern>/ChangePasswordAjax</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>getSumUserRegisterInMonthByYearAjax</servlet-name>
+        <url-pattern>/getSumUserRegisterInMonthByYearAjax</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>
