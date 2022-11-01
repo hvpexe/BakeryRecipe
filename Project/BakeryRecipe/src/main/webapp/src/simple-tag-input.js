@@ -132,7 +132,7 @@ function simpleTagsInputAddTag(e) {
             let liTag = `<li>
                             ${tag} 
                             <span data-value='${tag}' data-target='${this.bridgeID}' onclick="simpleTagsInputRemoveTag(this)">X</span>
-                            <input type='hidden' name='ingre' value=${tag} />
+                            <input type='hidden' name='ingre' value='${tag}' />
                         </li>`;
             this.ul.insertAdjacentHTML("afterbegin", liTag);
         });

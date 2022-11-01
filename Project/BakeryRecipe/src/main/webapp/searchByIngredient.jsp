@@ -37,37 +37,49 @@
                 </div>
 
                 <div class="recipe-list">
-                    <c:forEach items="${searchByIngre}" var="re">
-                        <div class="recipe row">
-                            <div class="col-md-3">
-                                <div class="img-container">
-                                    <img class="recipe-img" alt=""
-                                         src="${re.cover}" />
-                                    <div class="bookmark">
-                                        Save <i class="fa-regular fa-bookmark"></i>
-                                    </div>
-                                    <div class="react">
-                                        <div>${re.like} likes</div>
-                                        <div>${re.comment} comments</div>
+                    <c:forEach items="${searchByIngre}" var="re" begin="0" end="19">
+                        <c:if test="${re.match > 0}">
+                            <div class="recipe row">
+                                <div class="col-md-3">
+                                    <div class="img-container">
+                                        <a href=".\RecipeDetail?recipeID=${re.id}">
+                                            <img class="recipe-img" alt=""
+                                                 src="${re.cover}" />
+                                        </a>
+                                        <div class="react">
+                                            <div>${re.like} likes</div>
+                                            <div>${re.comment} comments</div>
+                                        </div>
                                     </div>
                                 </div>
-                            </div>
-                            <div class="col-md-9">
-                                <div class="recipe-detail"> 
-                                    <div class="recipe-name">${re.name}</div>
-                                    <div class="recipe-author">
-                                        <a href="#" class="text-truncate">${re.username} </a>
-                                        <c:out value="${re.getDatePostFormat()}"/>
-                                    </div>
-                                    <div class="ingre-container">
-                                        <c:forEach items="${re.ingre}" var="ingre">
+                                <div class="col-md-9">
+                                    <div class="recipe-detail"> 
+                                        <div class="recipe-name">${re.name}</div>
+                                        <div class="recipe-author">
+                                            <a href="#" class="text-truncate">${re.username}</a>
+                                            <c:out value="${re.getDatePostFormat()}"/>
+                                        </div>
+                                        <div class="ingre-container">
+                                            <c:forEach items="${re.ingreFound}" var="ingre">
+                                                <c:if test="${ingre.value}">
+                                                    <span class="ingre-active">${ingre.key}</span>
+                                                </c:if>
+                                                <c:if test="${!ingre.value}">
+                                                    <span class="ingre-inactive">${ingre.key}</span>
+                                                </c:if>
+                                            </c:forEach>
+                                        </div>
+                                        <!--                                        
+                                        <div class="ingre-container">
+                                            <c:forEach items="${re.ingre}" var="ingre">
                                             <span class="ingre-active">${ingre}</span>
-                                        </c:forEach>
-                                        <!--<span class="ingre-inactive">Water</span>-->
+                                            </c:forEach>
+                                            ${re.match}
+                                       </div>-->
                                     </div>
                                 </div>
                             </div>
-                        </div>
+                        </c:if>
                     </c:forEach>
 
                 </div>
@@ -81,8 +93,10 @@
             <% List<String> list = IngredientDAO.getAllIngredients(); %>
                         var ingres = [];
             <% for (String element : list) {
-            %> ingres[++ingres.length] = "<%= element%>";
-            <% }%>
+            %>
+                        ingres[++ingres.length] = "<%= element%>";
+            <%
+                }%>
                         console.log(ingres);
                         let options = {
                             inputEl: "tagsInput",

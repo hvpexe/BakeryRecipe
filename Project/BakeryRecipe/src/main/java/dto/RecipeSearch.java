@@ -4,9 +4,8 @@
  */
 package dto;
 
-import static dto.Recipe.COVER_PATH;
 import java.sql.Timestamp;
-import java.util.ArrayList;
+import java.util.HashMap;
 import utils.Tools;
 
 /**
@@ -16,7 +15,7 @@ import utils.Tools;
  */
 public class RecipeSearch implements Comparable<RecipeSearch> {
 
-    public static final String COVER_PATH = "assets/images/recipe/";
+    public static final String COVER_PATH = "assets/images/recipe/picture/";
 
     private int id;
     private String name;
@@ -24,7 +23,8 @@ public class RecipeSearch implements Comparable<RecipeSearch> {
     private int like;
     private int comment;
     private Timestamp datePost; //timestamp mới thể hiện hết giờ phút giây, class Date ko làm đc
-    private ArrayList<String> ingre;
+    private HashMap<String, Integer> ingre;  
+    private HashMap<String, Boolean> ingreFound;  
     private float match; //field này lưu điểm đánh giá giữa tập ingre của recipe này với tập ingre của search (dùng trong searchByIngre)
     private String cover; //field này dùng để lưu ảnh cover
     private int userID; //id người đăng recipe
@@ -36,7 +36,7 @@ public class RecipeSearch implements Comparable<RecipeSearch> {
     /**
      * constructor nay dung de hien recipe tren search by ingre
      */
-    public RecipeSearch(int id, String name, String description, Timestamp datePost, ArrayList<String> ingre, String cover) {
+    public RecipeSearch(int id, String name, String description, Timestamp datePost, HashMap<String, Integer> ingre, String cover) {
         this.id = id;
         this.name = name;
         this.description = description;
@@ -45,25 +45,31 @@ public class RecipeSearch implements Comparable<RecipeSearch> {
         this.cover = cover;
     }
 
-    public RecipeSearch(int id, String name, String description, int like, int comment, Timestamp datePost, ArrayList<String> ingre, String cover, int userID, String username) {
+    public RecipeSearch(int id, String name, int like, int comment, Timestamp datePost, HashMap<String, Integer> ingre, String cover, int userID, String username) {
         this.id = id;
         this.name = name;
-        this.description = description;
         this.like = like;
         this.comment = comment;
         this.datePost = datePost;
         this.ingre = ingre;
-        this.match = match;
         this.cover = cover;
         this.userID = userID;
         this.username = username;
     }
+
+    public HashMap<String, Boolean> getIngreFound() {
+        return ingreFound;
+    }
+
+    public void setIngreFound(HashMap<String, Boolean> ingreFound) {
+        this.ingreFound = ingreFound;
+    }
     
-    public ArrayList<String> getIngre() {
+    public HashMap<String, Integer> getIngre() {
         return ingre;
     }
 
-    public void setIngre(ArrayList<String> ingre) {
+    public void setIngre(HashMap<String, Integer> ingre) {
         this.ingre = ingre;
     }
 

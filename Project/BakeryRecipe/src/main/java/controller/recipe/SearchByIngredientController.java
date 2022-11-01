@@ -4,6 +4,7 @@
  */
 package controller.recipe;
 
+import dao.IngredientDAO;
 import dao.RecipeDAO;
 import dto.Recipe;
 import dto.RecipeSearch;
@@ -13,6 +14,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collection;
 import java.util.Collections;
+import java.util.HashMap;
 import java.util.List;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
@@ -25,7 +27,7 @@ import javax.servlet.http.HttpSession;
  * @author PhuHV
  */
 public class SearchByIngredientController extends HttpServlet {
-
+    HashMap<String, Integer> listIngre = IngredientDAO.getAllIngredientsWithPoint();
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
      * methods.
@@ -45,22 +47,44 @@ public class SearchByIngredientController extends HttpServlet {
 
         for (RecipeSearch recipe : listRecipe) {
             recipe.setMatch(compare2RecipeIngres(ingresSearch, recipe.getIngre()));
+            recipe.setIngreFound(findIngrefound(ingresSearch, recipe.getIngre()));
         }
         Collections.sort(listRecipe);
         request.setAttribute("searchByIngre", listRecipe);
         request.getRequestDispatcher("searchByIngredient.jsp").forward(request, response);
     }
+    
+    private int calculateTotalPointOfIngres(HashMap<String, Integer> ingresRecipe) {
+        int total = 0;
+        for (String ingre : ingresRecipe.keySet()) {
+            if (listIngre.containsKey(ingre)){
+                total += listIngre.get(ingre);
+            }
+        }
+        return total;
+    }
 
-    private float compare2RecipeIngres(List<String> ingresSearch, ArrayList<String> ingresRecipe) {
-        int total = ingresRecipe.size();
+    private float compare2RecipeIngres(List<String> ingresSearch, HashMap<String, Integer> ingresRecipe) {
+        int total = calculateTotalPointOfIngres(ingresRecipe);
+        if (total == 0) {
+            return 0;
+        }
         int match = 0;
         for (String ingre : ingresSearch) {
-            if (ingresRecipe.contains(ingre)) {
-                match++;
+            if (ingresRecipe.containsKey(ingre)) {
+                match += ingresRecipe.get(ingre);
             }
         }
         float result = ((float) match) / total;
-        return ((float) match / total);
+        return result;
+    }
+
+    private HashMap<String, Boolean> findIngrefound(List<String> ingresSearch, HashMap<String, Integer> ingresRecipe) {
+        HashMap<String, Boolean> map = new HashMap<>();
+        for (String name : ingresRecipe.keySet()) {
+            map.put(name, ingresSearch.contains(name));
+        }
+        return map;
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
