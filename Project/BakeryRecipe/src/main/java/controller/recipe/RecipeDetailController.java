@@ -81,8 +81,8 @@ public class RecipeDetailController extends HttpServlet {
             request.setAttribute("COMMENT_LIST", cmt);
 
 //          check save
-//            boolean checksave = UserDAO.checkSaveRecipe(userLogin.getId(), recipeID);
-//            request.setAttribute("checksave", checksave);
+            boolean checksave = UserDAO.checkSaveRecipe(userLogin.getId(), recipeID);
+            request.setAttribute("checksave", checksave);
             boolean checklike = UserDAO.checkLikeRecipe(userLogin.getId(), recipeID);
             request.setAttribute("checklike", checklike);
 
