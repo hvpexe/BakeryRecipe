@@ -298,203 +298,36 @@
             <div class="content card-body col-12 col-md-4">
                 <div class="col-12 p-0">
                     <div class="report-title h3 font-weight-bold">Report Recipe màu nhạt vl</div>
-                    <form action="ReportController" class="col">
+<!--                    <form action="ReportController" class="col">-->
                         <div class="form-group">
-                            <select name="typeReport" class="selectReport w-100">
+                            <select name="typeReport" class="selectReport w-100" id="select_Rp">
                                 <option value="Content">Inappropriate Content</option>
                                 <option value="Intellectual">Infringement on intellectual property</option>
                                 <option value="Spamming">Spamming or misleading</option>
                                 <option value="Community">The recipe is not suitable for the community</option>
                             </select>
-                            <input type="hidden" name="bakerID" value="${sessionScope.login.id}">
-                            <input type="hidden" name="recipeID" value="${RECIPE_DETAIL.id}">
+                           ${sessionScope.login.id}
+                           ${RECIPE_DETAIL.id}
+                            <input  type="hidden" id="loginID">
+<!--                            <input type="hidden" name="bakerID" id="loginID" value="">
+                            <input type="hidden" name="recipeID" id="recipeID" value="">-->
                         </div>
-                        <div class="form-group">
-                            <textarea name="txtReport" class="txtareaRp w-100" value=""></textarea>
+                        <div class="form-group" >
+                            <textarea name="txtReport" class="txtareaRp w-100"  id="txtReport" value=""></textarea>
                         </div>  
                         <div class="form-group">
-                            <button class="hover" type="submit">Send Report</button>
+                            <button class="hover" type="submit" onclick="sendReport()">Send Report</button>
                         </div>
-                    </form> 
+                        
+                    <!--</form>--> 
                 </div>
+                            <div id="thankReport"></div>
 
             </div>
-
         </div>
+                       <!--ket thuc ham container-->
         <script src="https://cdn.jsdelivr.net/npm/swiper@8/swiper-bundle.min.js"></script>
-        <script>
-                                                        const swiper = new Swiper('.swiper', {
-                                                            pagination: {
-                                                                el: '.swiper-pagination',
-                                                                clickable: true
-                                                            },
-                                                            navigation: {
-                                                                nextEl: '.swiper-button-next',
-                                                                prevEl: '.swiper-button-prev',
-                                                            },
-                                                        });
-        </script>
-        <script>
-            function  followButton(item, val1, val2, action) {
-                //                eventac.target.style.backgroundColor = 'white';
-                //                event.target.classList.toggle("button-Follower");
-                ///
-                //                console.log(event.target.classList);
-
-                var action = val1;
-                $.ajax({
-                    url: "ajax/UpdateUserFollowAjax",
-                    type: "get", //send it through get method
-                    data: {
-                        follower: "${USER_DETAIL.id}",
-                        action: action,
-                        followed: "${sessionScope.login.id}"
-                    },
-                    success: function () {
-                        console.log(item);
-                        item.classList.toggle("button-Follower");
-                        let txtFollow = item.querySelector("span");
-                        if (txtFollow.innerText !== val2)
-                            txtFollow.innerText = val2;
-                        else
-                            txtFollow.innerText = val1;
-                        // console.log(action);
-
-                        //    action = unFollow;
-                        console.log(action);
-                        //Do Something
-                    },
-                    error: function () {
-                        //Do Something to handle error
-                        console.log("thanh cong roi kia");
-                    }
-                });
-            }
-
-        </script>
-        <script>
-            function  saveButton(item, val1, val2, action) {
-                //                eventac.target.style.backgroundColor = 'white';
-                //                event.target.classList.toggle("button-Follower");
-                ///
-                //                console.log(event.target.classList);
-
-                var action = val1;
-                $.ajax({
-                    url: "ajax/updatesaverecipe",
-                    type: "get", //send it through get method
-                    data: {
-                        recipe: "${RECIPE_DETAIL.id}",
-                        action: action,
-                        user: "${sessionScope.login.id}"
-                    },
-                    success: function () {
-                        console.log(item);
-                        item.classList.toggle("button-Follower");
-                        let txtFollow = item.querySelector("span");
-                        if (txtFollow.innerText !== val2)
-                            txtFollow.innerText = val2;
-                        else
-                            txtFollow.innerText = val1;
-                        // console.log(action);
-
-                        //    action = unFollow;
-                        console.log(action);
-                        //Do Something
-                    },
-                    error: function () {
-                        //Do Something to handle error
-                        console.log("thanh cong roi kia");
-                    }
-                });
-            }
-        </script>
-        <script>
-            function  likeButton(item, val1, val2, action) {
-                //                eventac.target.style.backgroundColor = 'white';
-                //                event.target.classList.toggle("button-Follower");
-                ///
-                //                console.log(event.target.classList);
-
-                var action = val1;
-                $.ajax({
-                    url: "ajax/likerecipe",
-                    type: "get", //send it through get method
-                    data: {
-                        recipe: "${RECIPE_DETAIL.id}",
-                        action: action,
-                        user: "${sessionScope.login.id}"
-                    },
-                    success: function () {
-                        console.log(item);
-                        item.classList.toggle("button-Follower");
-                        let txtFollow = item.querySelector("span");
-                        if (txtFollow.innerText !== val2)
-                            txtFollow.innerText = val2;
-                        else
-                            txtFollow.innerText = val1;
-                        // console.log(action);
-
-                        //    action = unFollow;
-                        console.log(action);
-                        //Do Something
-                    },
-                    error: function () {
-                        //Do Something to handle error
-                        console.log("thanh cong roi kia");
-                    }
-                });
-            }
-        </script>
-        <script>
-            function Comment(item, event) {
-                var textCmt = item.value;
-                if (event.key === "Enter") {
-
-
-
-                    $.ajax({
-                        url: "ajax/CommnetRecipeAjax",
-                        type: "get", //send it through get method
-                        data: {
-                            txtCmt: textCmt,
-                            bakerID: "${sessionScope.login.id}",
-                            RecipeID: "${RECIPE_DETAIL.id}"
-                        },
-                        success: function (response) {
-                            //Do Something
-                            console.log(response);
-                            var cmtShow = document.getElementById("show-comment");
-                            cmtShow.innerHTML += response;
-                            item.value = "";
-
-                        },
-                        error: function (xhr) {
-                            console.log("that bai");
-                            //Do Something to handle error
-                        }
-                    });
-                }
-            }
-
-            function getReport(recipeID) {
-                console.log(recipeID);
-                var report = $('#report_list');
-                var graybox = $('#report_list .gray-box');
-                //       var content = $('#report_list .content');
-                graybox.click(() => report.removeClass('d-flex'));
-                var exit_button = document.createElement("div").classList.add('exit-btn');
-                //load content
-                report.addClass('d-flex');
-                //
-                $('#report_list .exit-btn').click(() => report.removeClass('d-flex'));
-            }
-        </script>
-
-
-        <script>
-            getReport(2);
-        </script>
+        <script src="assets/js/recipeDetail.js"></script>
         <c:import url="footer.jsp"/>
     </body>
 </html>

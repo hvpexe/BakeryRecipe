@@ -17,8 +17,8 @@ import utils.DBUtils;
  */
 public class ReportDAO {
     
-    private static String ADD_REPORT = "insert into [dbo].[ReportRecipe]([ID],[DateReport],[Detail],[RecipeID],[UserID],[ReportType]) "
-            + "values (?,?,?,?,?,?)";
+    private static final String ADD_REPORT = "insert into [dbo].[ReportRecipe]([DateReport],[Detail],[RecipeID],[UserID],[ReportType]) "
+            + "values (?,?,?,?,?)";
     
     
     public static  boolean addReport(int bakerID, int recipeID,String detail,String reportType){
@@ -33,12 +33,12 @@ public class ReportDAO {
         try {
             cnn = DBUtils.getConnection();
             ptm = cnn.prepareCall(ADD_REPORT);
-            ptm.setInt(1, random_int);
-            ptm.setString(2, date);
-            ptm.setString(3, detail);
-            ptm.setInt(4, recipeID);
-            ptm.setInt(5, bakerID);
-            ptm.setString(6,reportType );
+           
+            ptm.setString(1, date);
+            ptm.setString(2, detail);
+            ptm.setInt(3, recipeID);
+            ptm.setInt(4, bakerID);
+            ptm.setString(5,reportType );
              check = ptm.executeUpdate() > 0 ? true : false;
             
         } catch (Exception e) {

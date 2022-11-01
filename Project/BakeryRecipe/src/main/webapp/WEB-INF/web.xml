@@ -110,7 +110,7 @@
     </servlet>
     <servlet>
         <servlet-name>ReportController</servlet-name>
-        <servlet-class>ReportController</servlet-class>
+        <servlet-class>controller.ReportController</servlet-class>
     </servlet>
     <servlet>
         <servlet-name>ChangePasswordAjax</servlet-name>
@@ -119,6 +119,10 @@
     <servlet>
         <servlet-name>getSumUserRegisterInMonthByYearAjax</servlet-name>
         <servlet-class>controller.admin.getSumUserRegisterInMonthByYearAjax</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>ReportRecipeAjax</servlet-name>
+        <servlet-class>controller.ajax.ReportRecipeAjax</servlet-class>
     </servlet>
     <servlet-mapping>
         <servlet-name>DebugController</servlet-name>
@@ -203,6 +207,10 @@
     <servlet-mapping>
         <servlet-name>getSumUserRegisterInMonthByYearAjax</servlet-name>
         <url-pattern>/getSumUserRegisterInMonthByYearAjax</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>ReportRecipeAjax</servlet-name>
+        <url-pattern>/ReportRecipeAjax</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

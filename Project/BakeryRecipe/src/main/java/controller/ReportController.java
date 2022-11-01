@@ -1,8 +1,9 @@
+package controller;
+
 /*
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/Servlet.java to edit this template
  */
-
 import dao.ReportDAO;
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -17,24 +18,21 @@ import javax.servlet.http.HttpServletResponse;
  */
 public class ReportController extends HttpServlet {
 
-   
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
-     String typeReport = request.getParameter("typeReport");
-     String txtReport = request.getParameter("txtReport");
-     int bakerID =Integer.parseInt(request.getParameter("bakerID"));
-     int recipeID =Integer.parseInt(request.getParameter("recipeID"));
-boolean check = false;        
-     try {
+        String typeReport = request.getParameter("typeReport");
+        String txtReport = request.getParameter("txtReport");
+        int bakerID = Integer.parseInt(request.getParameter("bakerID"));
+        int recipeID = Integer.parseInt(request.getParameter("recipeID"));
+        boolean check = false;
+        try {
             boolean rr = ReportDAO.addReport(bakerID, recipeID, txtReport, typeReport);
-           
+
         } catch (Exception e) {
             e.printStackTrace();
         }
-     
-     
-             
+
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
