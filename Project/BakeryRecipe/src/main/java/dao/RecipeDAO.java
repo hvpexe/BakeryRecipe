@@ -230,6 +230,51 @@ public class RecipeDAO {
         }
         return false;
     }
+    private static final String UPDATE_RECIPE = "UPDATE [dbo].[Recipe]\n"
+            + "   SET [Name] = ?\n"
+            + "      ,[Description] = ?\n"
+            + "      ,[Video] = ?\n"
+            + "      ,[LastDateEdit] = ?\n"
+            + "      ,[PrepTime] = ?\n"
+            + "      ,[CookTime] = ?\n"
+            + " WHERE Recipe.ID = ?";
+
+    public static boolean updateRecipe (String recipeName, String recipeDescription, String videoUrl,
+            List<Part> pictureList, String[] ingreName, String[] ingreAmount, List<Part> instImgList,
+            String[] instDescription, int prepareTime, int cookTime, int userId, int recipeId, int cover,
+            ServletContext sc) throws SQLException {
+        String sql = UPDATE_RECIPE;
+        Connection conn = DBUtils.getConnection();
+        PreparedStatement ps = conn.prepareStatement(sql);
+
+        try {
+            conn.setAutoCommit(false);
+            ps.setString(1, recipeName);
+            ps.setString(2, recipeDescription);
+            ps.setString(3, videoUrl);
+            ps.setTimestamp(4, new Timestamp(System.currentTimeMillis()));
+            ps.setInt(5, prepareTime);
+            ps.setInt(6, cookTime);
+            ps.setInt(7, recipeId);
+            boolean check = ps.executeUpdate()>0;
+            if (check) {
+                check = PictureDAO.updatePicturesRecipe(pictureList, cover, recipeId, conn, sc);
+                if(check){
+                    check = IngredientDAO.updateIngredientsRecipe(ingreName, ingreAmount, recipeId, conn, sc);
+                }
+            }
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
+            e.printStackTrace();
+        } finally {
+            if (conn != null)
+                conn.close();
+            if (ps != null)
+                ps.close();
+        }
+        return false;
+    }
+
     private static final String TOP8_MOST_RATED_SQL = "SELECT TOP 8 Recipe.ID, Name, Description, [Like], [Save], Comment, DatePost, LastDateEdit, Img, UserID, LastName + ' ' + FirstName AS Username\n"
             + "FROM Recipe\n"
             + "JOIN [User] ON Recipe.UserID = [User].ID\n"
@@ -421,10 +466,11 @@ public class RecipeDAO {
 
     }
 
-    private static final String LIST_STEP = "SELECT [InsStep],[Detail],[Img]\n"
-            + "FROM [dbo].[Instruction] instruc join [dbo].[Recipe] recipe \n"
-            + "ON instruc.RecipeID = recipe.ID\n"
-            + "WHERE recipe.ID = ?";
+    private static final String LIST_STEP = " SELECT  [ID]\n"
+            + "      ,[InsStep],[Detail]\n"
+            + "      ,[Img],[RecipeID]\n"
+            + "  FROM [dbo].[Instruction]"
+            + "  WHERE RecipeID = ?";
 
     public static List<Instruction> listStep (int recipeID) throws SQLException {
         List<Instruction> liststep = new ArrayList<>();
@@ -448,6 +494,13 @@ public class RecipeDAO {
         } catch (Exception e) {
             System.out.println("System have error !!!" + e);
 
+        } finally {
+            if (conn != null)
+                conn.close();
+            if (ptm != null)
+                ptm.close();
+            if (rs != null)
+                rs.close();
         }
         return liststep;
     }

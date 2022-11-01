@@ -55,6 +55,7 @@ public class DBUtils {
         } catch (Exception ex) {
             ex.printStackTrace();
         }
+        System.out.println("==============================================Connected==============================================");
         return con;
     }
 

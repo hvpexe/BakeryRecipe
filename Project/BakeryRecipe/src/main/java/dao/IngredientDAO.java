@@ -244,4 +244,9 @@ public class IngredientDAO {
         }
         return -1;
     }
+    
+    static boolean updateIngredientsRecipe (String[] ingreName, String[] ingreAmount, int recipeId, Connection conn,
+            ServletContext sc) {
+        
+    }
 }

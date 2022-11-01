@@ -49,7 +49,7 @@ public class EditInformationController extends HttpServlet {
             String lastname = Tools.toUTF8(request.getParameter("lastname"));
             String birthdayString = request.getParameter("birthday");
             Date birthday = null;
-            if (!Tools.isNullOrEmpty(birthdayString)) {
+           if (!Tools.isNullOrEmpty(birthdayString)) {
                 birthday = Date.valueOf(birthdayString);
             }
             String gender = request.getParameter("gender");

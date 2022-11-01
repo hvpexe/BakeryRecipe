@@ -11,15 +11,19 @@ package dto;
 public class Picture {
 
     public static final String IMG_PATH = "assets/images/recipe/picture/";
+    private int id;
     private String img;
     private boolean isCover;
     private String recipeID;
 
-    public Picture (String img, boolean isCover, String recipeID) {
+    public Picture (int id, String img, boolean isCover, String recipeID) {
+        this.id = id;
         this.img = img;
         this.isCover = isCover;
         this.recipeID = recipeID;
     }
+
+
 
     public Picture () {
     }
@@ -45,6 +49,14 @@ public class Picture {
 
     public String getRecipeID () {
         return recipeID;
+    }
+
+    public int getId () {
+        return id;
+    }
+
+    public void setId (int id) {
+        this.id = id;
     }
 
     public void setRecipeID (String RecipeID) {
