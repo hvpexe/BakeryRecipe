@@ -35,10 +35,12 @@ public class User {
     private int storeID;
     private Date birthday;
 
-    public User() {
+    public User () {
     }
 
-    public User(int id, String role, String email, String password, String avatar, String name, String firstName, String lastName, String gender, String phone, String address, Date dateRegister, boolean isActive, int storeID, Date birthday) {
+    public User (int id, String role, String email, String password, String avatar, String name, String firstName,
+            String lastName, String gender, String phone, String address, Date dateRegister, boolean isActive,
+            int storeID, Date birthday) {
         this.id = id;
         this.role = role;
         this.email = email;
@@ -56,7 +58,8 @@ public class User {
         this.birthday = birthday;
     }
 
-    public User(int id, String role, String email, String password, String avatar, String name, String gender, String phone, String address, Date dateRegister, boolean isActive, int storeID, Date birthday) {
+    public User (int id, String role, String email, String password, String avatar, String name, String gender,
+            String phone, String address, Date dateRegister, boolean isActive, int storeID, Date birthday) {
         this.id = id;
         this.role = role;
         this.email = email;
@@ -72,20 +75,20 @@ public class User {
         this.birthday = birthday;
     }
 
-    public User(int id, String avatar, String name) {
+    public User (int id, String avatar, String name) {
         this.id = id;
         this.avatar = avatar;
         this.name = name;
     }
-    
-    public User(int id, String avatar, String name, int follower) {
+
+    public User (int id, String avatar, String name, int follower) {
         this.id = id;
         this.avatar = avatar;
         this.name = name;
         this.follower = follower;
     }
 
-    public User(String email, String firstName, String lastName, String password) {
+    public User (String email, String firstName, String lastName, String password) {
         this.email = email;
         this.password = password;
         this.firstName = firstName;
@@ -93,7 +96,8 @@ public class User {
         this.name = lastName + " " + firstName;
     }
 
-    public User(int ID, String Role, String Email, String Password, String Avatar, String FirstName, String LastName, String Gender, String Phone, String Address, Date DateRegister, boolean IsActive, int StoreID) {
+    public User (int ID, String Role, String Email, String Password, String Avatar, String FirstName, String LastName,
+            String Gender, String Phone, String Address, Date DateRegister, boolean IsActive, int StoreID) {
         this.id = ID;
         this.role = Role;
         this.email = Email;
@@ -110,15 +114,15 @@ public class User {
         this.name = lastName + " " + firstName;
     }
 
-    public User(int ID, String Role, String Email, String Password, String Avatar,
+    public User (int ID, String Role, String Email, String Password, String Avatar,
             String FirstName, String LastName, String Gender, String Phone,
             String Address, Date DateRegister, int StoreID) {
         this(ID, Role, Email, Password, Avatar, FirstName, LastName, Gender, Phone, Address, DateRegister, true, StoreID);
     }
 
-    public User(int ID, String Role, String Email, String Password, String Avatar, 
-            String FirstName, String LastName, String Gender, String Phone, 
-            String Address, Date DateRegister, boolean IsActive, int StoreID, 
+    public User (int ID, String Role, String Email, String Password, String Avatar,
+            String FirstName, String LastName, String Gender, String Phone,
+            String Address, Date DateRegister, boolean IsActive, int StoreID,
             Date Birthday) {
         this.id = ID;
         this.role = Role;
@@ -137,9 +141,9 @@ public class User {
         this.birthday = Birthday;
     }
 
-    public User(int id, String role, String email, String password, String avatar, 
-            String firstName, String lastName, String gender, 
-            String phone, String address, int following, int follower, 
+    public User (int id, String role, String email, String password, String avatar,
+            String firstName, String lastName, String gender,
+            String phone, String address, int following, int follower,
             Date dateRegister, boolean isActive, int storeID, Date birthday) {
         this.id = id;
         this.role = role;
@@ -159,161 +163,159 @@ public class User {
         this.storeID = storeID;
         this.birthday = birthday;
     }
-    
 
-    public User(int ID, String Role, String Email, String Password, String Avatar,
+    public User (int ID, String Role, String Email, String Password, String Avatar,
             String FirstName, String LastName, String Gender, String Phone,
             String Address, Date DateRegister, int StoreID, Date Birthday) {
         this(ID, Role, Email, Password, Avatar, FirstName, LastName, Gender, Phone, Address, DateRegister, true, StoreID, Birthday);
     }
 
-    public int getId() {
+    public int getId () {
         return id;
     }
 
-    public void setId(int id) {
+    public void setId (int id) {
         this.id = id;
     }
 
-    public String getRole() {
+    public String getRole () {
         return role;
     }
 
-    public void setRole(String Role) {
+    public void setRole (String Role) {
         this.role = Role;
     }
 
-    public String getEmail() {
+    public String getEmail () {
         return email;
     }
 
-    public void setEmail(String Email) {
+    public void setEmail (String Email) {
         this.email = Email;
     }
 
-    public String getPassword() {
+    public String getPassword () {
         return password;
     }
 
-    public void setPassword(String Password) {
+    public void setPassword (String Password) {
         this.password = Password;
     }
 
-    public String getName() {
-        return name;
+    public String getName () {
+        return lastName + " " + firstName;
     }
 
-    public void setName(String name) {
+    public void setName (String name) {
         this.name = name;
     }
 
-    public void setAvatar(String Avatar) {
+    public void setAvatar (String Avatar) {
         this.avatar = Avatar;
     }
 
-    public String getAvatar() {
+    public String getAvatar () {
         if (avatar == null) {
             return DEFAULT_AVATAR;
         }
         return IMG_PATH + avatar;
     }
 
-    public String getAvatarToDB() {
+    public String getAvatarToDB () {
         return avatar;
     }
 
-    public String getFirstName() {
+    public String getFirstName () {
         return firstName;
     }
 
-    public void setFirstName(String FirstName) {
+    public void setFirstName (String FirstName) {
         this.firstName = FirstName;
     }
 
-    public String getLastName() {
+    public String getLastName () {
         return lastName;
     }
 
-    public void setLastName(String LastName) {
+    public void setLastName (String LastName) {
         this.lastName = LastName;
     }
 
-    public String getGender() {
+    public String getGender () {
         return gender;
     }
 
-    public void setGender(String Gender) {
+    public void setGender (String Gender) {
         this.gender = Gender;
     }
 
-    public String getPhone() {
+    public String getPhone () {
         return phone;
     }
 
-    public void setPhone(String Phone) {
+    public void setPhone (String Phone) {
         this.phone = Phone;
     }
 
-    public String getAddress() {
+    public String getAddress () {
         return address;
     }
 
-    public void setAddress(String Address) {
+    public void setAddress (String Address) {
         this.address = Address;
     }
 
-    public Date getDateRegister() {
+    public Date getDateRegister () {
         return dateRegister;
     }
 
-    public void setDateRegister(Date DateRegister) {
+    public void setDateRegister (Date DateRegister) {
         this.dateRegister = DateRegister;
     }
 
-    public boolean isIsActive() {
+    public boolean isIsActive () {
         return isActive;
     }
 
-    public void setIsActive(boolean isActive) {
+    public void setIsActive (boolean isActive) {
         this.isActive = isActive;
     }
 
-    public int getStoreID() {
+    public int getStoreID () {
         return storeID;
     }
 
-    public void setStoreID(int StoreID) {
+    public void setStoreID (int StoreID) {
         this.storeID = StoreID;
     }
 
-    public Date getBirthday() {
+    public Date getBirthday () {
         return birthday;
     }
 
-    public void setBirthday(Date birthday) {
+    public void setBirthday (Date birthday) {
         this.birthday = birthday != null ? birthday : this.birthday;
     }
 
-    public int getFollowing() {
+    public int getFollowing () {
         return following;
     }
 
-    public void setFollowing(int following) {
+    public void setFollowing (int following) {
         this.following = following;
     }
 
-    public int getFollower() {
+    public int getFollower () {
         return follower;
     }
 
-    public void setFollower(int follower) {
+    public void setFollower (int follower) {
         this.follower = follower;
     }
 
     @Override
-    public String toString() {
+    public String toString () {
         return "User{" + "id=" + id + ", role=" + role + ", email=" + email + ", password=" + password + ", avatar=" + avatar + ", name=" + name + ", firstName=" + firstName + ", lastName=" + lastName + ", gender=" + gender + ", phone=" + phone + ", address=" + address + ", following=" + following + ", follower=" + follower + ", dateRegister=" + dateRegister + ", isActive=" + isActive + ", storeID=" + storeID + ", birthday=" + birthday + '}';
     }
 
-    
 }

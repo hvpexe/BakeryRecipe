@@ -480,7 +480,7 @@ public class UserDAO {
 
     private static final String SAVE = "INSERT INTO [Save] (RecipeID, UserID) VALUES (?, ?)";
 
-    public static boolean SaveRecipe (int recipeID, int userID) {
+    public boolean SaveRecipe (int recipeID, int userID) {
         boolean check = false;
         Connection conn = null;
         PreparedStatement ptm = null;

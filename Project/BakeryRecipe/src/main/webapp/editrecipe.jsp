@@ -184,7 +184,7 @@
                                                          src="${st.img}" 
                                                          style="background-image: url(${st.img});"
                                                          onclick="this.querySelector('input').click();">
-                                                        <input name="inst-image" id="inst-image${i.index}" class="d-none" readonly="" type="file" accept="image/*" onchange="changeImg(this.parentElement, window.URL.createObjectURL(this.files[0]), event)">
+                                                        <input name="inst-image" id="inst-image${i.index8}" class="d-none" readonly="" type="file" accept="image/*" onchange="changeImg(this.parentElement, window.URL.createObjectURL(this.files[0]), event)">
                                                     </div>
                                                     <textarea class="instruction-box-input col " value="Efad" readonly="" name="inst-description" id="inst-description1" type="text">${st.detail}</textarea>
                                                     <div class="item-trashbin fas fa-trash ml-auto description-button" onclick="removeElem(this.parentElement)"></div>

@@ -11,7 +11,7 @@ import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
-import org.json.simple.JSONValue;
+//import org.json.simple.JSONValue;
 import utils.DBUtils;
 
 /**
@@ -162,7 +162,7 @@ public class AdminDAO {
             for (int i = 0; i <= maxMonth; i++) {
                 noUserByMonth.add(noUserByMonthTemp[i]);
             }
-            String jsonText = JSONValue.toJSONString(noUserByMonth);
+                  String jsonText = JSONValue.toJSONString(noUserByMonth);
             return jsonText;
         } catch (Exception e) {
             System.out.println("getSumUserRegisterInMonthByYear error:");
