@@ -41,7 +41,6 @@ public class EditInformationController extends HttpServlet {
         try {
             HttpSession session = request.getSession();
             User user = null;
-            User userLogin = (User) session.getAttribute("login");
 
             String ID = request.getParameter("userID");
             int userID = Integer.parseInt(ID);
@@ -75,6 +74,7 @@ public class EditInformationController extends HttpServlet {
             System.out.println("avatar:" + avatar);
             if (UserDAO.EditInfo(user)) {
                 session.setAttribute("login", user);
+                session.setAttribute("user", user);
                 url = SUCCESS;
             }
 
