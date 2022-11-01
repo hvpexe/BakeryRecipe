@@ -499,7 +499,7 @@ public class RecipeDAO {
     }
 
     private static final String POST_PROFILE_RECIPE_SQL
-            = "SELECT U.ID AS UserID, U.FirstName + ' ' + U.LastName AS Username, U.Avatar, R.ID, R.Name, R.Description, R.[Like], R.[Save], R.Comment, R.DatePost, P.Img AS Cover\n"
+            = "SELECT U.ID AS UserID, U.LastName + ' ' + U.FirstName AS Username, U.Avatar, R.ID, R.Name, R.Description, R.[Like], R.[Save], R.Comment, R.DatePost, P.Img AS Cover\n"
             + "FROM Recipe R\n"
             + "JOIN [User] U ON R.UserID = U.ID\n"
             + "JOIN Picture P ON P.RecipeID = R.ID\n"

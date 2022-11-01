@@ -1,7 +1,7 @@
 var btnButton = document.getElementById("btnButton");
 if (btnButton) {
     btnButton.addEventListener("click", function (e) {
-        window.location.href = "./addrecipe.jsp";
+        window.location.href = "./addrecipe";
     });
 }
 function getLikedList(recipeID) {

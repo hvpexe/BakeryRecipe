@@ -178,7 +178,7 @@
     </servlet-mapping>
     <servlet-mapping>
         <servlet-name>AddRecipeController</servlet-name>
-        <url-pattern>/AddRecipe</url-pattern>
+        <url-pattern>/addrecipe</url-pattern>
     </servlet-mapping>
     <servlet-mapping>
         <servlet-name>CommnetRecipeAjax</servlet-name>

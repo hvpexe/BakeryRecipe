@@ -61,7 +61,7 @@
                     <c:remove scope="session" var="ADD_RECIPE_FAILED"></c:remove>
                     <c:remove scope="session" var="ADD_RECIPE_SUCCESS"></c:remove>
                 </main>
-                <form action="AddRecipe"  class="section-div col-12 col-md-10 align-content-center align-self-center"
+                <form action="addrecipe"  class="section-div col-12 col-md-10 align-content-center align-self-center"
                       id="add-recipe" enctype="multipart/form-data" method="post" >
                     <div class="title-div col-12">
                         <b class="label">Title</b>
