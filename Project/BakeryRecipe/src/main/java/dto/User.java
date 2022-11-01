@@ -75,16 +75,20 @@ public class User {
         this.birthday = birthday;
     }
 
-    public User (int id, String avatar, String name) {
+    public User (int id, String avatar, String name,String lastName, String firstName) {
         this.id = id;
         this.avatar = avatar;
+        this.lastName = lastName;
+        this.firstName = firstName;
         this.name = name;
     }
 
-    public User (int id, String avatar, String name, int follower) {
+    public User (int id, String avatar, String name,String lastName,String firstName, int follower) {
         this.id = id;
         this.avatar = avatar;
         this.name = name;
+        this.lastName = lastName;
+        this.firstName = firstName;
         this.follower = follower;
     }
 

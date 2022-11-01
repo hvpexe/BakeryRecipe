@@ -427,7 +427,7 @@ public class UserDAO {
                     String firstName = rs.getString("FirstName");
                     String Avatar = rs.getString("Avatar");
                     String fullName = lastName + " " + firstName;
-                    user = new User(userID, Avatar, fullName);
+                    user = new User(userID, Avatar, fullName,lastName, firstName);
 
                 }
             }
@@ -680,7 +680,7 @@ public class UserDAO {
     }
 
     public static List<User> getRecommendUsers (int userID) {
-        String sql = "SELECT TOP 5 U.ID, U.Avatar, U.LastName + ' ' + U.FirstName as FullName, U.Follower\n"
+        String sql = "SELECT TOP 5 U.ID, U.Avatar, U.LastName + ' ' + U.FirstName as FullName, U.LastName , U.FirstName , U.Follower\n"
                 + "FROM [User] U\n"
                 + "WHERE U.ID != ? AND U.IsActive = 1\n"
                 + "ORDER BY Follower DESC";
@@ -691,7 +691,11 @@ public class UserDAO {
             List<User> list = new ArrayList<>();
             User user = null;
             while (rs.next()) {
-                user = new User(rs.getInt("ID"), rs.getString("Avatar"), rs.getString("FullName"), rs.getInt("Follower"));
+                user = new User(rs.getInt("ID"), rs.getString("Avatar")
+                        , rs.getString("FullName")
+                        , rs.getString("LastName")
+                        , rs.getString("FirstName")
+                        , rs.getInt("Follower"));
                 list.add(user);
             }
             return list;

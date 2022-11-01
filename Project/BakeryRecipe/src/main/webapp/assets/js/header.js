@@ -36,3 +36,4 @@ if (window.location.href.indexOf('/home') !== -1) {
 if (window.location.href.indexOf('/savedrecipe') !== -1) {
   document.getElementById("saved").className += ' active';
 }
+textFit(document.querySelector(".header-notification"));

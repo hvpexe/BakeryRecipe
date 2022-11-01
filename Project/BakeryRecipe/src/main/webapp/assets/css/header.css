@@ -129,10 +129,32 @@ body {
     align-content: center;
     justify-content: center;
     align-items: center;
-
+    position: relative;
     border-radius: 50%;
 }
 
+.header-notification::after {
+    content: attr(data-notices);
+    position: absolute;
+    top: 0;
+    min-width: fit-content;
+    width: 20px;
+    aspect-ratio:1/1;
+    display: flex;
+    right: 0;
+    font-size: 13px;
+    border-radius: 50%;
+    z-index: 1;
+    color: black;
+    background: var(--hard-yellow-theme);
+    justify-content: center;
+    align-items: center;
+}
+.header-notification:hover::after {
+    transition: 0.3s;
+    color:white;
+    background: var(--yellow-theme)
+}
 .header-user {
     display: flex;
     cursor: pointer;
@@ -212,6 +234,7 @@ body {
     background: #ddd;
     transition: calc(var(--transition-time) *  8);
 }
+
 
 @media (max-width:996px) {
     .header-container {
