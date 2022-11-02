@@ -35,8 +35,12 @@ public class UserDAO {
         String sql = "SELECT ID\n"
                 + "FROM [User]\n"
                 + "WHERE ID = ? AND Password = ?";
+        Connection conn = null;
+        PreparedStatement ps = null;
+        ResultSet rs = null;
         try {
-            PreparedStatement ps = conn.prepareStatement(sql);
+            conn = DBUtils.getConnection();
+            ps = conn.prepareStatement(sql);
             System.out.println(userID + " " + password);
             ps.setString(1, userID);
             ps.setString(2, password);
@@ -47,6 +51,14 @@ public class UserDAO {
             }
         } catch (Exception e) {
             System.out.println("Error at checkOldPassword: " + e.toString());
+        } finally {
+            if (conn != null)
+                conn.close();
+            if (ps != null)
+                ps.close();
+            if (rs != null)
+                rs.close();
+
         }
         return false;
     }
@@ -55,6 +67,8 @@ public class UserDAO {
         String sql = "UPDATE [User]\n"
                 + "SET [IsActive] = ?\n"
                 + "WHERE [ID] = ?";
+        Connection conn = null;
+        PreparedStatement ps = null;
         try {
             Connection conn = DBUtils.getConnection();
             PreparedStatement ps = conn.prepareStatement(sql);
@@ -65,6 +79,12 @@ public class UserDAO {
                 return true;
         } catch (Exception e) {
             System.out.println("Error at changeStatus: " + e.toString());
+        } finally {
+            if (conn != null)
+                conn.close();
+            if (ps != null)
+                ps.close();
+
         }
         return false;
     }
@@ -73,9 +93,11 @@ public class UserDAO {
         String sql = "UPDATE [User]\n"
                 + "SET [Role] = ?\n"
                 + "WHERE [ID] = ?";
+        Connection conn = null;
+        PreparedStatement ps = null;
         try {
-            Connection conn = DBUtils.getConnection();
-            PreparedStatement ps = conn.prepareStatement(sql);
+            conn = DBUtils.getConnection();
+            ps = conn.prepareStatement(sql);
             ps.setString(1, user.getRole());
             ps.setInt(2, user.getId());
             boolean check = ps.executeUpdate() > 0;
@@ -83,6 +105,12 @@ public class UserDAO {
                 return true;
         } catch (Exception e) {
             System.out.println("Error at changeRole: " + e.toString());
+        } finally {
+            if (conn != null)
+                conn.close();
+            if (ps != null)
+                ps.close();
+
         }
         return false;
     }
@@ -91,7 +119,11 @@ public class UserDAO {
 
     public static boolean changePassword (String userID, String password) {
         String sql = UPDATE_USER_PASSWORD;
+        Connection conn = null;
+        PreparedStatement ps = null;
         try {
+            Connection conn = DBUtils.getConnection();
+
             PreparedStatement ps = conn.prepareStatement(sql);
             //Set ps
             ps.setString(1, password);
@@ -102,12 +134,20 @@ public class UserDAO {
         } catch (Exception e) {
             System.out.println("Change Password error:");
             e.printStackTrace();
+        } finally {
+            if (conn != null)
+                conn.close();
+            if (ps != null)
+                ps.close();
+
         }
         return false;
     }
 
     public static User loginWithGoogle (String email) {
         String sql = SELECT_USER_BY_EMAIL;
+        Connection conn = DBUtils.getConnection();
+
         try {
             System.out.println(conn);
             PreparedStatement ps = conn.prepareStatement(sql);
@@ -132,6 +172,8 @@ public class UserDAO {
     //ham nay tim user su dung email va password
     public static User login (String email, String password) {
         String sql = SELECT_LOGIN;
+        Connection conn = DBUtils.getConnection();
+
         try {
             System.out.println(conn);
             PreparedStatement ps = conn.prepareStatement(sql);
@@ -167,6 +209,8 @@ public class UserDAO {
      */
     public static List<User> getAllUser () {
         String sql = SELECT_ALL_USER;
+        Connection conn = DBUtils.getConnection();
+
         try {
             PreparedStatement ps = conn.prepareStatement(sql);
             ResultSet rs = ps.executeQuery();
@@ -203,6 +247,8 @@ public class UserDAO {
      */
     public static User getUserByID (int id) {
         String sql = SELECT_USER_BY_ID;
+        Connection conn = DBUtils.getConnection();
+
         try {
             PreparedStatement ps = conn.prepareStatement(sql);
             //Set ps
@@ -240,6 +286,8 @@ public class UserDAO {
     //ham nay dung de kiem tra email co bi trung ko, ap dung khi tao tk moi
     public static boolean checkDuplicateEmail (String email) {
         String sql = SELECT_USER_BY_EMAIL;
+        Connection conn = DBUtils.getConnection();
+
         try {
             PreparedStatement ps = conn.prepareStatement(sql);
             ps.setString(1, email);
@@ -258,6 +306,8 @@ public class UserDAO {
     //dang ki mot tk moi
     public static boolean register (String email, String password, String firstname, String lastname) {
         String sql = INSERT_NEW_USER;
+        Connection conn = DBUtils.getConnection();
+
         try {
             PreparedStatement ps = conn.prepareStatement(sql);
             ps.setString(1, "baker");
@@ -294,6 +344,8 @@ public class UserDAO {
     public static boolean updateAvatar (String email, String avatar) {
         String sql = UPDATE_USER_IMAGE;
         try {
+            Connection conn = DBUtils.getConnection();
+
             PreparedStatement ps = conn.prepareStatement(sql);
             ps.setString(1, avatar);//set avatar path
             ps.setString(2, email);//where user have this email 
@@ -404,10 +456,10 @@ public class UserDAO {
     }
 
     private static final String LIST_USER
-            = " select [Email], [LastName],[FirstName] ,[Avatar] ,userRep.ID  \n" +
-" from [dbo].[User] userRep join [dbo].[Recipe] recipe  \n" +
-" on userRep.ID=recipe.UserID  \n" +
-" where recipe.ID = ?";
+            = " select [Email], [LastName],[FirstName] ,[Avatar] ,userRep.ID  \n"
+            + " from [dbo].[User] userRep join [dbo].[Recipe] recipe  \n"
+            + " on userRep.ID=recipe.UserID  \n"
+            + " where recipe.ID = ?";
 
     public static User userDetail (int recipeID) {
         User user = null;
@@ -427,7 +479,7 @@ public class UserDAO {
                     String firstName = rs.getString("FirstName");
                     String Avatar = rs.getString("Avatar");
                     String fullName = lastName + " " + firstName;
-                    user = new User(userID, Avatar, fullName,lastName, firstName);
+                    user = new User(userID, Avatar, fullName, lastName, firstName);
 
                 }
             }
@@ -691,11 +743,11 @@ public class UserDAO {
             List<User> list = new ArrayList<>();
             User user = null;
             while (rs.next()) {
-                user = new User(rs.getInt("ID"), rs.getString("Avatar")
-                        , rs.getString("FullName")
-                        , rs.getString("LastName")
-                        , rs.getString("FirstName")
-                        , rs.getInt("Follower"));
+                user = new User(rs.getInt("ID"), rs.getString("Avatar"),
+                        rs.getString("FullName"),
+                        rs.getString("LastName"),
+                        rs.getString("FirstName"),
+                        rs.getInt("Follower"));
                 list.add(user);
             }
             return list;
