@@ -21,7 +21,6 @@ import java.util.Collection;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.logging.Logger;
-import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.MultipartConfig;
 import javax.servlet.annotation.WebServlet;
@@ -45,11 +44,12 @@ public class EditRecipeController extends HttpServlet {
     private static final String SUCCESS_GET = "editrecipe.jsp";
     private static final String ERROR_GET = "RecipeDetail";
     private static final String SUCCESS_POST = "RecipeDetail";
-    private static final String ERROR_POST_MISSING_USER = "login.jsp";
     private static final String ERROR_POST = "editrecipe.jsp";
+    private static final String ERROR_POST_MISSING_USER = "login.jsp";
 
     /**
-     * Processes requests for both HTTP <code>GET</code> and <code>POST</code> methods.
+     * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
+     * methods.
      *
      * @param request  servlet request
      * @param response servlet response
@@ -62,7 +62,6 @@ public class EditRecipeController extends HttpServlet {
         response.setContentType("text/html;charset=UTF-8");
         PrintWriter out = response.getWriter();
         HttpSession session = request.getSession();
-        ServletContext sc = getServletContext();
         String url = ERROR_POST;
         try {
 
@@ -108,8 +107,9 @@ public class EditRecipeController extends HttpServlet {
             out.print("<br>" + recipeDescription);
             if (ingreName != null)
                 for (int i = 0; i < ingreName.length; i++) {
-                    if(ingreAmount[i].isEmpty()) ingreAmount[i] = "1 oz";
-                    out.print("<br>" + ingreAmount[i] +" of "+ ingreName[i]);
+                    if (ingreAmount[i].isEmpty())
+                        ingreAmount[i] = "1 oz";
+                    out.print("<br>" + ingreAmount[i] + " of " + ingreName[i]);
                 }
             for (Part p : parts) {
                 if (p.getName().contains("video-image")) {
@@ -121,46 +121,29 @@ public class EditRecipeController extends HttpServlet {
                         out.print(", " + (vIndex == cover));
                         pictureList.add(p);
                     } catch (Exception e) {
-
                     }
-                    vIndex++;
-                }
-                if (p.getName().contains("inst-image")) {
-                    try {
-                        out.print("<hr>" + p.getName());
-                        out.print(", " + p.getSubmittedFileName().isEmpty());
-                        out.print(", " + p.getSubmittedFileName());
-                        out.print(", " + p.getContentType());
-                        out.print(", " + instDescription[iIndex]);
-                        instImgList.add(p);
-                    } catch (Exception e) {
-
-                    }
-                    iIndex++;
                 }
             }
-            out.print("<hr>" + pictureList);
-            out.print("<hr>" + instImgList);
-            out.print("<br>" + prepareTime);
-            out.print("<br>" + cookTime);
-            boolean recipeUpdated
-                    = RecipeDAO.updateRecipe(recipeName, recipeDescription, videoUrl, pictureList, ingreName,
-                            ingreAmount, instImgList, instDescription, prepareTime, cookTime, userId, recipeId, cover, sc);
-            if (recipeUpdated) {
-                url = SUCCESS_POST;
-                session.setAttribute("EDIT_RECIPE_SUCCESS", "Recipe Edited!");
-            } else {
-                session.setAttribute("EDIT_RECIPE_FAILED", "Recipe Edit failed!");
+            for (Part part : parts) {
+                out.println("<br>" + part.getName());
+                try {
+                    if (part.getSubmittedFileName() != null) {
+                        out.println(" " + part.getSubmittedFileName());
+                        out.println(" " + part.getSubmittedFileName().substring(part.getSubmittedFileName().
+                                lastIndexOf(".")));
+                    } else {
+                        out.println(" " + request.getParameter(part.getName()));
+                    }
+                } catch (Exception e) {
+                }
             }
+
         } catch (Exception e) {
             e.printStackTrace();
-        } finally {
-//            request.getRequestDispatcher(url).forward(request, response);
         }
-
     }
 
-    private void loadRecipe (HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+private void loadRecipe (HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         String url = SUCCESS_GET;
         try {
             int recipeID = Integer.parseInt(request.getParameter("recipeid"));
@@ -203,7 +186,7 @@ public class EditRecipeController extends HttpServlet {
      * @throws IOException      if an I/O error occurs
      */
     @Override
-    protected void doGet (HttpServletRequest request, HttpServletResponse response)
+protected void doGet (HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         loadRecipe(request, response);
     }
@@ -218,7 +201,7 @@ public class EditRecipeController extends HttpServlet {
      * @throws IOException      if an I/O error occurs
      */
     @Override
-    protected void doPost (HttpServletRequest request, HttpServletResponse response)
+protected void doPost (HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         processRequest(request, response);
     }
@@ -229,7 +212,7 @@ public class EditRecipeController extends HttpServlet {
      * @return a String containing servlet description
      */
     @Override
-    public String getServletInfo () {
+public String getServletInfo () {
         return "Short description";
     }// </editor-fold>
 

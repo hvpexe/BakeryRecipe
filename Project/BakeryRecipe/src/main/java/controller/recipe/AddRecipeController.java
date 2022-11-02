@@ -141,7 +141,7 @@ public class AddRecipeController extends HttpServlet {
             count=3
             prepare-time=180
             cook-time=180*/
-           boolean recipeAdded
+            boolean recipeAdded
                     = RecipeDAO.addRecipe(recipeName, recipeDescription, videoUrl, pictureList, ingreName,
                             ingreAmount, instImgList, instDescription, prepareTime, cookTime, userId, cover, sc);
             if (recipeAdded) {

@@ -82,11 +82,12 @@ public class PictureDAO {
         conn.commit();
         return true;
     }
+
     private static final String SELECT_PICTURE_LIST = "SELECT [ID]\n"
             + "      ,[Img]\n"
             + "      ,[IsCover]\n"
             + "      ,[RecipeID]\n"
-            + "  FROM [dbo].[Picture]\n"
+            + "  FROM [BakeryRecipe].[dbo].[Picture]\n"
             + "  where RecipeID = ?";
 
     public static List<Picture> getPictureList (int recipeID) {
@@ -101,7 +102,7 @@ public class PictureDAO {
             ptm.setInt(1, recipeID);
             rs = ptm.executeQuery();
             while (rs.next()) {
-                Picture picture = new Picture(rs.getInt(1), rs.getString(2), rs.getBoolean(3), rs.getString(4));
+                Picture picture = new Picture(rs.getString(2), rs.getBoolean(3), rs.getString(4));
                 listPicture.add(picture);
             }
         } catch (Exception e) {

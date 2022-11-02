@@ -59,27 +59,22 @@
                     <c:if test="${ADD_RECIPE_FAILED !=null}">
                         <div class="text-danger h6 my-auto mr-4 font-weight-bold">${ADD_RECIPE_FAILED}</div>
                     </c:if>
-                    <c:remove scope="session" var="ADD_RECIPE_FAILED"/>
-                    <c:remove scope="session" var="ADD_RECIPE_SUCCESS"/>
-                </main>
-                <form action="editrecipe"  class="section-div col-12 col-md-10 align-content-center align-self-center"
-                      id="add-recipe" enctype="multipart/form-data" method="post" >
-                    <input name="recipe-id" type="hidden" value="${recipe.id}">
-                    <c:catch var="e">
+                    <c:remove scope="session" var="ADD_RECIPE_FAILED"></c:remove>
+                    <c:remove scope="session" var="ADD_RECIPE_SUCCESS"></c:remove>
+                    </main>
+                    <form action="editrecipe"  class="section-div col-12 col-md-10 align-content-center align-self-center"
+                          id="add-recipe" enctype="multipart/form-data" method="post" >
+                        <input name="recipe-id" type="hidden" value="${recipe.id}">
                         <div class="title-div col-12">
                             <b class="label">Title</b>
                             <input name='recipe-name' class="input col-12"  type="text" placeholder="Recipe's Name "
                                    value="${recipe.name}">
-                            <span class="status"><span>
-                                    </div>
-                                </c:catch> ${e}
-                                <c:catch var="e">
-                                    <div class="add-recipe-input col">
-                                        <b class="label">Description</b>
-                                        <textarea name="recipe-description" class="boxdes-textarea  py-3 col-12" placeholder="Add description">${recipe.description}</textarea>
-                                    </div>    
-                                </c:catch> ${e}
-
+                        <span class="status"><span>
+                                </div>
+                                <div class="add-recipe-input col">
+                                    <b class="label">Description</b>
+                                    <textarea name="recipe-description" class="boxdes-textarea  py-3 col-12" placeholder="Add description">${recipe.description}</textarea>
+                                </div>    
                                 <!--                Video And Image Picture                            -->
                                 <div class="add-recipe-input col" style="gap: 10px;">
                                     <div class="d-flex col p-0 justify-content-start" style="gap: 10px;">
@@ -107,135 +102,119 @@
                                         </div>
                                     </div>
                                     <c:set scope="page" var="check" value="${VIDEO_DETAIL!=null}"/>
-                                    <c:catch var="e">
-                                        <div class="video-and-image swiper ${check?'':'d-none'} col-12 p-0">
-                                            <div class="swiper-wrapper col p-0" id="img-content">
-                                                <span class="col-2 p-0 swiper-slide hover-button-2 list-group-item rounded add-img"></span>
-
-                                                <c:if test="${empty VIDEO_DETAIL}">
-                                                    <span class="col-2 d-none p-0 swiper-slide hover-button-2 list-group-item rounded video" onclick="selectContent(this.parentElement, this)">
-                                                        <input type="hidden" name="video-url">
-                                                    </span>
-                                                </c:if>
-                                                <c:if test="${!(empty VIDEO_DETAIL)}">
-                                                    <span class="col-2 p-0 swiper-slide hover-button-2 list-group-item rounded video"
-                                                          style='background-image: url("https://img.youtube.com/vi/${VIDEO_DETAIL}/0.jpg");'
-                                                          onclick="selectContent(this.parentElement, this)">
-                                                        <input type="hidden" name="video-url" value="https://www.youtube.com/watch?v=${VIDEO_DETAIL}">
-                                                    </span>
-                                                </c:if>
-                                                <c:forEach items="${LIST_PIC}" var="pic" varStatus="i">
-                                                    <span class="col-2 p-0 swiper-slide ${pic.isCover?'cover':''} hover-button-2 list-group-item rounded"
-                                                          style='background-image: url("${pic.img}");'
-                                                          src="${pic.img}"
-                                                          onclick="selectContent(this.parentElement, this)">
-                                                        <input type="file" name="video-image" class="d-none" count="${i.index+1}">
-                                                    </span>
-                                                </c:forEach>
-
-                                            </div>
-
+                                    <div class="video-and-image swiper ${check?'':'d-none'} col-12 p-0">
+                                        <div class="swiper-wrapper col p-0" id="img-content">
+                                            <span class="col-2 p-0 swiper-slide hover-button-2 list-group-item rounded add-img"></span>
+                                            <c:if test="${empty VIDEO_DETAIL}">
+                                                <span class="col-2 d-none p-0 swiper-slide hover-button-2 list-group-item rounded video" onclick="selectContent(this.parentElement, this)">
+                                                    <input type="hidden" name="video-url">
+                                                </span>
+                                            </c:if>
+                                            <c:if test="${!(empty VIDEO_DETAIL)}">
+                                                <span class="col-2 p-0 swiper-slide hover-button-2 list-group-item rounded video"
+                                                      style='background-image: url("https://img.youtube.com/vi/${VIDEO_DETAIL}/0.jpg");'
+                                                      onclick="selectContent(this.parentElement, this)">
+                                                    <input type="hidden" name="video-url" value="https://www.youtube.com/watch?v=${VIDEO_DETAIL}">
+                                                </span>
+                                            </c:if>
+                                            <c:forEach items="${LIST_PIC}" var="pic" varStatus="i">
+                                                <span class="col-2 p-0 swiper-slide ${pic.isCover?'cover':''} hover-button-2 list-group-item rounded"
+                                                      style='background-image: url("${pic.img}");'
+                                                      src="${pic.img}"
+                                                      onclick="selectContent(this.parentElement, this)">
+                                                    <input type="file" name="video-image" class="d-none" count="${i.index+1}">
+                                                </span>
+                                            </c:forEach>
                                         </div>
-                                    </c:catch> ${e}
+
+                                    </div>
+
 
                                 </div>
                                 <!--                INGREDIENTS                            -->
-                                <c:catch var="e">
-                                    <div class="add-recipe-input col-12">
-                                        <b class="label">Ingredients</b>
-                                        <div class="col p-0" id="ingredient-container">
-                                            <c:forEach items="${LIST_INGREDIENT}" var="il" varStatus="i">
-                                                <div class="col p-0  align-items-center p-0 pr-2 border border-secondary" id="item${i.index+1}">
-                                                    <img src="${il.img}" alt=" "/> 
-                                                    <input name="ingre-name" readonly="" class="col text-capitalize" value="${il.name}">
-                                                    <span>Amount:</span> 
-                                                    <input name="ingre-amount" class="col-2 bg-white ml-2 mr-4" placeholder="1 oz" value="${il.amount}"/> 
-                                                    <div class="item-trashbin fas fa-trash ml-auto description-button" 
-                                                         onclick="this.parentElement.remove()">
-                                                    </div>
+                                <div class="add-recipe-input col-12">
+                                    <b class="label">Ingredients</b>
+                                    <div class="col p-0" id="ingredient-container">
+                                        <c:forEach items="${LIST_INGREDIENT}" var="il" varStatus="i">
+                                            <div class="col p-0  align-items-center p-0 pr-2 border border-secondary" id="item${i.index+1}">
+                                                <img src="${il.img}" alt=" "/> 
+                                                <input name="ingre-name" readonly="" class="col text-capitalize" value="${il.name}">
+                                                <span>Amount:</span> 
+                                                <input name="ingre-amount" class="col-2 bg-white ml-2 mr-4" placeholder="1 oz" value="${il.amount}"/> 
+                                                <div class="item-trashbin fas fa-trash ml-auto description-button" 
+                                                     onclick="this.parentElement.remove()">
                                                 </div>
-                                            </c:forEach>
-                                        </div>
-                                        <div class="d-flex p-0 col align-items-center" id="ingredient"  >
-                                            <input class="instruction-box-input col-7 " form="disabled" name="iname" id="name" type="text" placeholder="Add one ingredient">
-                                            <span class="col d-flex align-items-center pr-0">Amount:</span>
-                                            <input class="instruction-box-input col-3 ml-1" form="disabled"  name="iamount" id="amount"  type="text" placeholder="1 Piece">
-                                            <input type="hidden" name="count" value="${LIST_INGREDIENT.size()}">
-                                        </div>
+                                            </div>
+                                        </c:forEach>
                                     </div>
-                                </c:catch> ${e}
-
+                                    <div class="d-flex p-0 col align-items-center" id="ingredient"  >
+                                        <input class="instruction-box-input col-7 " form="disabled" name="iname" id="name" type="text" placeholder="Add one ingredient">
+                                        <span class="col d-flex align-items-center pr-0">Amount:</span>
+                                        <input class="instruction-box-input col-3 ml-1" form="disabled"  name="iamount" id="amount"  type="text" placeholder="1 Piece">
+                                        <input type="hidden" name="count" value="${LIST_INGREDIENT.size()}">
+                                    </div>
+                                </div>                    
                                 <!--                INSTRUCTION                            -->
-                                <c:catch var="e">
-
-                                    <div class="add-recipe-input col-12">
-                                        <b class="label">Instructions</b>
-                                        <div class="col d-block p-0 " id="inst-container" >
-                                            <div class="col align-items-center p-0 " id="inst">
+                                <div class="add-recipe-input col-12">
+                                    <b class="label">Instructions</b>
+                                    <div class="col d-block p-0 " id="inst-container" >
+                                        <div class="col align-items-center p-0 " id="inst">
+                                            <h5 class="text-secondary col-12 p-0">
+                                                Step <span>0</span>
+                                                <input name="step" disabled onchange="this.previousElementSibling.innerText = this.value" type="hidden" value="0">
+                                            </h5>
+                                            <div class="col hover-highlight  p-0 pr-2 d-flex align-items-center border border-secondary rounded" onclick="showDetail(this.parentElement);">
+                                                <div class="inst-img d-inline-flex fas fa-camera position-relative align-items-center justify-content-center" src="assets/images/image-29@2x.png" onclick="this.querySelector('input').click();">
+                                                    <input name="inst-image" disabled id="inst-image" class="d-none" readonly="" type="file" accept="image/*" 
+                                                           onchange="changeImg(this.parentElement, window.URL.createObjectURL(this.files[0]), event)">
+                                                </div>
+                                                <input class="instruction-box-input col " disabled value=""
+                                                       readonly="" name="inst-description" id="inst-description" type="text">
+                                                <div class="item-trashbin fas fa-trash ml-auto description-button" onclick="removeElem(this.parentElement)"></div>
+                                            </div>
+                                        </div>
+                                        <c:forEach items="${LIST_STEP}" var="st" varStatus="i">
+                                            <div class="col align-items-center p-0 " id="inst${i.index+1}">
                                                 <h5 class="text-secondary col-12 p-0">
-                                                    Step <span>0</span>
-                                                    <input name="step" disabled onchange="this.previousElementSibling.innerText = this.value" type="hidden" value="0">
+                                                    Step <span>${st.insstep}</span>
+                                                    <input name="step" onclick="this.previousElementSibling.innerText = this.value" type="hidden" value="${st.insstep}">
                                                 </h5>
                                                 <div class="col hover-highlight  p-0 pr-2 d-flex align-items-center border border-secondary rounded" onclick="showDetail(this.parentElement);">
-                                                    <div class="inst-img d-inline-flex fas fa-camera position-relative align-items-center justify-content-center" src="assets/images/image-29@2x.png" onclick="this.querySelector('input').click();">
-                                                        <input name="inst-image" disabled id="inst-image" class="d-none" readonly="" type="file" accept="image/*" 
-                                                               onchange="changeImg(this.parentElement, window.URL.createObjectURL(this.files[0]), event)">
+                                                    <div class="inst-img d-inline-flex ${empty st.img?'fas fa-camera':''} position-relative align-items-center justify-content-center" 
+                                                         src="${st.img}" 
+                                                         style="background-image: url(${st.img});"
+                                                         onclick="this.querySelector('input').click();">
+                                                        <input name="inst-image" id="inst-image${i.index8}" class="d-none" readonly="" type="file" accept="image/*" onchange="changeImg(this.parentElement, window.URL.createObjectURL(this.files[0]), event)">
                                                     </div>
-                                                    <input class="instruction-box-input col " disabled value=""
-                                                           readonly="" name="inst-description" id="inst-description" type="text">
+                                                    <textarea class="instruction-box-input col " value="Efad" readonly="" name="inst-description" id="inst-description1" type="text">${st.detail}</textarea>
                                                     <div class="item-trashbin fas fa-trash ml-auto description-button" onclick="removeElem(this.parentElement)"></div>
                                                 </div>
                                             </div>
-                                            <c:forEach items="${LIST_STEP}" var="st" varStatus="i">
-                                                <div class="col align-items-center p-0 " id="inst${i.index+1}">
-                                                    <h5 class="text-secondary col-12 p-0">
-                                                        Step <span>${i.index+1}</span>
-                                                        <input name="step" onclick="this.previousElementSibling.innerText = this.value" type="hidden" value="${i.index+1}">
-                                                    </h5>
-                                                    
-                                                    <div class="col hover-highlight  p-0 pr-2 d-flex align-items-center border border-secondary rounded" onclick="showDetail(this.parentElement);">
-                                                        <div class="inst-img ${empty st.img?'fas fa-camera':''} d-inline-flex position-relative align-items-center justify-content-center" 
-                                                             src="${st.img}" 
-                                                             onclick="this.querySelector('input').click();"
-                                                             ${not empty st.img?"style='background-image: url(${st.img})'":""}>
-                                                            <input name="inst-image1" id="inst-image1" class="d-none" readonly type="file" accept="image/*" onchange="changeImg(this.parentElement, window.URL.createObjectURL(this.files[0]), event)">
-                                                        </div>
-                                                        <textarea class="instruction-box-input col " value="${st.detail}" readonly name="inst-description" id="inst-description1" type="text">${st.detail}</textarea>
-                                                        <div class="item-trashbin fas fa-trash ml-auto description-button" onclick="removeElem(this.parentElement)"></div>
-                                                    </div>
-                                                </div>
-                                            </c:forEach>
-                                            
-                                        </div>
-
+                                        </c:forEach>
                                     </div>
-                                </c:catch> ${e}
-                                <c:catch var="e">
-                                    <div class="col" id="instruction">
-                                        <textarea class="instruction-box-input col-11  py-3 pr-3" form="disabled" name="idetail" type="text" placeholder="Paste one or multiple steps (e.g. Finely chop the garlic)"></textarea>
-                                        <input type="hidden" name="count" value="${LIST_STEP.size()}">
-                                        <div class="accept-input fas fa-check d-flex align-items-center justify-content-center col-1 hover-button-1"></div>
-                                    </div>
-                                </c:catch> ${e}
 
+                                </div>
+                                <div class="col" id="instruction">
+                                    <textarea class="instruction-box-input col-11  py-3 pr-3" form="disabled" name="idetail" type="text" placeholder="Paste one or multiple steps (e.g. Finely chop the garlic)"></textarea>
+                                    <input type="hidden" name="count" value="${LIST_STEP.size()}">
+                                    <div class="accept-input fas fa-check d-flex align-items-center justify-content-center col-1 hover-button-1"></div>
+                                </div>
                                 <!-- Prepare Time and Cook Time-->
-                                <c:catch var="e">
-                                    <div class="time-to-cook-div col">
-                                        <div class="add-recipe-input col">
-                                            <label class="label col p-0">Prepare Time</label>
-                                            <input class="pre-box-input col" type="number" name="prepare-time" value="${recipe.prepTime}" placeholder="30">
-                                        </div>
-                                        <div class="add-recipe-input col">
-                                            <label class="label col p-0">Cook Time</label>
-                                            <input class="pre-box-input col" type="number" name="cook-time" value="${recipe.cookTime}" placeholder="30">
-                                        </div>
+                                <div class="time-to-cook-div col">
+                                    <div class="add-recipe-input col">
+                                        <label class="label col p-0">Prepare Time</label>
+                                        <input class="pre-box-input col" type="number" name="prepare-time" value="${recipe.prepTime}" placeholder="30">
                                     </div>
-                                </c:catch> ${e}
-
+                                    <div class="add-recipe-input col">
+                                        <label class="label col p-0">Cook Time</label>
+                                        <input class="pre-box-input col" type="number" name="cook-time" value="${recipe.cookTime}" placeholder="30">
+                                    </div>
+                                </div>
                                 <div class="save-button ml-auto" onclick="submitForm('form#add-recipe')">
                                     <b class="save-b2">Add recipe</b>
                                 </div>
                                 </form>
+
                                 </main>
                                 </main>
                                 <!--Detail Showing Video and image config-->
@@ -283,7 +262,6 @@
                                 <script src="https://cdn.jsdelivr.net/npm/swiper@8/swiper-bundle.min.js"></script>
                                 <script src="assets/js/validator.js"></script>
                                 <script src="assets/js/editrecipe.js"></script>
-                                <script>
-                                </script>
+                                <script></script>
                                 </body>
                                 </html>

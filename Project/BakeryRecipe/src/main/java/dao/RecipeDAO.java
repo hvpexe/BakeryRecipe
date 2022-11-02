@@ -469,11 +469,10 @@ public class RecipeDAO {
 
     }
 
-    private static final String LIST_STEP = " SELECT  [ID]\n"
-            + "      ,[InsStep],[Detail]\n"
-            + "      ,[Img],[RecipeID]\n"
-            + "  FROM [dbo].[Instruction]"
-            + "  WHERE RecipeID = ?";
+    private static final String LIST_STEP = "SELECT [InsStep],[Detail],[Img]\n"
+            + "FROM [dbo].[Instruction] instruc join [dbo].[Recipe] recipe \n"
+            + "ON instruc.RecipeID = recipe.ID\n"
+            + "WHERE recipe.ID = ?";
 
     public static List<Instruction> listStep(int recipeID) throws SQLException {
         List<Instruction> liststep = new ArrayList<>();
@@ -497,13 +496,6 @@ public class RecipeDAO {
         } catch (Exception e) {
             System.out.println("System have error !!!" + e);
 
-        } finally {
-            if (conn != null)
-                conn.close();
-            if (ptm != null)
-                ptm.close();
-            if (rs != null)
-                rs.close();
         }
         return liststep;
     }
