@@ -105,7 +105,7 @@
     
     
     $.ajax({
-                    url: "ajax/ChangePasswordAjax",
+                    url: "ChangePasswordAjax",
                     type: "get", //send it through get method
                     data: {
                        oldPassword :oldpass.value,

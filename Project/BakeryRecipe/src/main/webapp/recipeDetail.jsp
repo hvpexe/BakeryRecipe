@@ -6,6 +6,7 @@
     <head>
         <meta charset="utf-8" />
         <meta name="viewport" content="initial-scale=1, width=device-width" />
+        <meta name="description" content="">
         <title>${USER_DETAIL.name}</title>
         <c:import url="universal.jsp" />
 
@@ -306,8 +307,9 @@
                                 <option value="Spamming">Spamming or misleading</option>
                                 <option value="Community">The recipe is not suitable for the community</option>
                             </select>
-                           ${sessionScope.login.id}
-                           ${RECIPE_DETAIL.id}
+                            
+                          
+                           
                             <input  type="hidden" id="loginID">
 <!--                            <input type="hidden" name="bakerID" id="loginID" value="">
                             <input type="hidden" name="recipeID" id="recipeID" value="">-->
@@ -326,8 +328,14 @@
             </div>
         </div>
                        <!--ket thuc ham container-->
+                          <script>
+        var loginID  = ${sessionScope.login.id};
+        var recipeID =${RECIPE_DETAIL.id};
+        var userID = ${USER_DETAIL.id};
+    </script>
         <script src="https://cdn.jsdelivr.net/npm/swiper@8/swiper-bundle.min.js"></script>
         <script src="assets/js/recipeDetail.js"></script>
         <c:import url="footer.jsp"/>
     </body>
+ 
 </html>
