@@ -47,7 +47,7 @@ public class GetIngredientImage extends HttpServlet {
 
             if (item == null)
             {
-                item = new Ingredient(name, null, amount);
+                item = new Ingredient( name, null, amount);
             }
             out.println("<div class=\"col p-0  align-items-center p-0 pr-2 border border-secondary\" id=\"item" + count + "\">\n"
                     + "                                <img src=\"" + item.getImg() + "\" alt=' ' > \n"

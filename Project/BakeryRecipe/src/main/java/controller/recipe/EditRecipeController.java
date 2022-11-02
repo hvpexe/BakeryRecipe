@@ -106,7 +106,11 @@ public class EditRecipeController extends HttpServlet {
             out.print("<br>" + recipeId);
             out.print("<br>" + recipeName);
             out.print("<br>" + recipeDescription);
-
+            if (ingreName != null)
+                for (int i = 0; i < ingreName.length; i++) {
+                    if(ingreAmount[i].isEmpty()) ingreAmount[i] = "1 oz";
+                    out.print("<br>" + ingreAmount[i] +" of "+ ingreName[i]);
+                }
             for (Part p : parts) {
                 if (p.getName().contains("video-image")) {
                     try {
@@ -171,7 +175,7 @@ public class EditRecipeController extends HttpServlet {
             System.out.println(picRecp);
 
             List<Ingredient> listIngre;
-            listIngre = dao.listIngredient(recipeID);
+            listIngre = dao.getListIngredient(recipeID);
             request.setAttribute("LIST_INGREDIENT", listIngre);
 
             List<Instruction> liststep;

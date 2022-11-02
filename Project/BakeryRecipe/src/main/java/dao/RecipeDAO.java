@@ -261,6 +261,9 @@ public class RecipeDAO {
                 check = PictureDAO.updatePicturesRecipe(pictureList, cover, recipeId, conn, sc);
                 if(check){
                     check = IngredientDAO.updateIngredientsRecipe(ingreName, ingreAmount, recipeId, conn, sc);
+                    if(check){
+                        check = IntructionDAO.updateInstructionsRecipe(instImgList, instDescription, recipeId, conn, sc);
+                    }
                 }
             }
         } catch (Exception e) {
@@ -901,8 +904,7 @@ public class RecipeDAO {
     private static final String CMT_RECIPE = "INSERT INTO [dbo].[Comment]([Comment],[DateComment],[LastDateEdit],[IsDeleted],[UserID],[RecipeID])\n"
             + "VALUES (?,?,?,?,?,?)";
 
-    public static boolean commentRecipe (String comment, int UserID,
-            int RecipeID) {
+    public static boolean commentRecipe (String comment, int UserID,int RecipeID) {
         Connection cnn = null;
         PreparedStatement ptm = null;
         ResultSet rs = null;

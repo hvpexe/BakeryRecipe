@@ -56,7 +56,7 @@ public class RecipeDetailController extends HttpServlet {
             IngredientDAO dao = new IngredientDAO();
 
             List<Ingredient> listIngre;
-            listIngre = dao.listIngredient(recipeID);
+            listIngre = dao.getListIngredient(recipeID);
             request.setAttribute("LIST_INGREDIENT", listIngre);
             System.out.println(listIngre);
             List<Instruction> liststep;

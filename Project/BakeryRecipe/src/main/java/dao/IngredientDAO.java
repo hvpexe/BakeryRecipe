@@ -119,7 +119,7 @@ public class IngredientDAO {
         }
         return false;
     }
-    
+
     public static boolean addIngredientsRecipe (String[] ingreNames, String[] ingreAmounts, int recipeId,
             Connection conn,
             ServletContext sc) throws SQLException {
@@ -128,15 +128,13 @@ public class IngredientDAO {
             addIngredientRecipe(ingreNames[i], ingreAmounts[i], recipeId, conn, sc);
         return true;
     }
-    private static final String LIST_INGREDIENT = "select ingre.[Name],ingre.[Img],ingreRe.Amount\n"
+    private static final String LIST_INGREDIENT = "select ingre.[ID],ingre.[Name],ingre.[Img],ingreRe.Amount\n"
             + "            from [dbo].[Ingredient] ingre join [dbo].[IngredientRecipe] ingreRe\n"
             + "            on ingre.ID =ingreRe.IngredientID\n"
             + "            join [dbo].[Recipe] re on ingreRe.RecipeID =re.ID\n"
             + "            where re.ID = ? ";
 
-    
-
-    public static List<Ingredient> listIngredient (int recipeID) throws SQLException {
+    public static List<Ingredient> getListIngredient (int recipeID) throws SQLException {
         List<Ingredient> listIgre = new ArrayList<>();
         Connection conn = null;
         PreparedStatement ptm = null;
@@ -148,11 +146,12 @@ public class IngredientDAO {
 //            ptm.setString(2, des);
             rs = ptm.executeQuery();
             while (rs.next()) {
+                int id = rs.getInt("ID");
                 String name = rs.getString("Name");
                 String img = rs.getString("Img");
                 String amount = rs.getString("Amount");
                 Ingredient sc;
-                sc = new Ingredient(name, img, amount);
+                sc = new Ingredient(id, name, img, amount);
                 listIgre.add(sc);
             }
         } catch (Exception e) {
@@ -244,9 +243,73 @@ public class IngredientDAO {
         }
         return -1;
     }
-    
+
+    /**
+     * edit Ingredient name
+     * if old list larger than new list delete old list
+     * if old list smaller than new list add more ingredients
+     * if index is equal update it
+     *
+     * @param ingreName
+     * @param ingreAmount
+     * @param recipeId
+     * @param conn
+     * @param sc
+     *
+     * @return
+     */
     static boolean updateIngredientsRecipe (String[] ingreName, String[] ingreAmount, int recipeId, Connection conn,
-            ServletContext sc) {
-        
+            ServletContext sc) throws SQLException {
+        List<Ingredient> oldIngredientList = getListIngredient(recipeId);
+        int newSize = 0;
+        if (ingreName != null)
+            newSize = ingreName.length;
+        int oldSize = oldIngredientList.size();
+        int maxSize = Integer.max(newSize, oldSize);
+        for (int i = 0; i < maxSize; i++) {
+
+            if (i < newSize && i < oldSize) {//update ingredient
+
+                Ingredient oldIngredient = oldIngredientList.get(i);
+                updateIngredientRecipe(ingreName[i], ingreAmount[i], recipeId, oldIngredient.getId(), conn, sc);
+            }
+            if (i < newSize && i >= oldSize) { //add ingredient
+                addIngredientRecipe(ingreName[i], ingreAmount[i], recipeId, conn, sc);
+            }
+            if (i >= newSize && i < oldSize) { //delete ingredient
+                deleteIngredientRecipe(oldIngredientList.get(i).getId(), conn);
+            }
+
+        }
+        return true;
+    }
+    private static final String UPDATE_INGREDIENT_RECIPE = 
+            "UPDATE [IngredientRecipe]\n"
+            + "   SET "
+            + " IngredientID= ?,[Amount] = ?"
+            + " WHERE IngredientID = ?";
+
+    private static boolean updateIngredientRecipe (String ingreName, String ingreAmount, int recipeId, int ingreId,
+            Connection conn, ServletContext sc) throws SQLException {
+        String sql = UPDATE_INGREDIENT_RECIPE;
+        PreparedStatement ps = conn.prepareStatement(sql);
+        int id = getIngredientIDByName(ingreName, conn);
+        ps.setInt(1, id);
+        ps.setString(2, ingreAmount);
+        ps.setInt(3, ingreId);
+        if(ps.executeUpdate()==1){
+            System.out.println("Updated Ingredient Relation" + id +" "+ ingreName);
+        }
+        return false;
+    }
+    private static final String DELETE_INGREDIENT_RECIPE = "DELETE [IngredientRecipe] WHERE ID = ?";
+
+    private static boolean deleteIngredientRecipe (int id, Connection conn) throws SQLException {
+        PreparedStatement ps = conn.prepareStatement(DELETE_INGREDIENT_RECIPE);
+        if (ps.executeUpdate() == 1) {
+            System.out.println("DELETED Ingredient Recipe " + id);
+            return true;
+        }
+        return false;
     }
 }

@@ -52,6 +52,7 @@ public class PictureDAO {
             rs = ps.executeQuery();
             if (rs.next()) {
                 Tools.saveFile(filename, picture, sc, Picture.IMG_PATH);
+                System.out.println("Added Picture " + rs.getInt(1) + " " + filePath);
                 return true;
             }
             return false;
@@ -138,8 +139,7 @@ public class PictureDAO {
         {
             ps = conn.prepareStatement(sql);
             filename = "picture_" + pictureIndex + "_" + recipeId;
-            filename = Tools.saveFile(filename, picture, sc, filename);
-            ps.setString(1, filename);
+            ps.setString(1, Tools.getFilePath(filename, picture));
             ps.setBoolean(2, cover);
             ps.setInt(3, recipeId);
             ps.setInt(4, picid);
@@ -150,8 +150,12 @@ public class PictureDAO {
             ps.setInt(2, recipeId);
             ps.setInt(3, picid);
         }
-        if(ps.executeUpdate() == 1) {
-            System.out.println("Picture "+picid+" Updated");
+        if (ps.executeUpdate() == 1) {
+            System.out.println("Picture " + picid + " Updated");
+            if (filename != null) {
+                filename = Tools.saveFile(filename, picture, sc, filename);
+                System.out.println(filename);
+            }
         }
         return false;
     }
@@ -176,13 +180,17 @@ public class PictureDAO {
     static boolean updatePicturesRecipe (List<Part> pictureList, int cover, int recipeId, Connection conn,
             ServletContext sc) throws SQLException {
         List<Picture> oldPictureList = getPictureList(recipeId);
-        if (pictureList == null || pictureList.size() == 0)
-            return true; //do nothing
+        int newSize = 0;
+        int oldSize = 0;
 
-        if (cover >= pictureList.size())//if cover number bigger than the size() cover is set to 0
+        if (pictureList != null)
+            newSize = pictureList.size();
+        //do nothing
+        if (oldPictureList != null)
+            oldSize = oldPictureList.size();
+        if (pictureList != null && cover >= pictureList.size())//if cover number bigger than the size() cover is set to 0
             cover = 0;
-        int oldSize = oldPictureList.size();
-        int newSize = pictureList.size();
+
         int maxSize = Integer.max(newSize, oldSize);
         for (int i = 0; i < maxSize; i++) {
             boolean isCover = false;
@@ -199,7 +207,7 @@ public class PictureDAO {
                 addPictureRecipe(picture, isCover, i, recipeId, conn, sc);
             }
             if (i >= newSize && i < oldSize) { //delete picture
-                deletePicture(oldPictureList.get(i).getId(), conn);
+                deletePictureRecipe(oldPictureList.get(i).getId(), conn);
             }
 
         }
@@ -208,10 +216,14 @@ public class PictureDAO {
     private static final String REMOVE_PICTURE = "DELETE Picture\n"
             + "WHERE ID = ?";
 
-    private static boolean deletePicture (int id, Connection conn) throws SQLException {
+    private static boolean deletePictureRecipe (int id, Connection conn) throws SQLException {
         PreparedStatement ps = conn.prepareStatement(REMOVE_PICTURE);
         ps.setInt(1, id);
-        return ps.executeUpdate()==1;
+        if (ps.executeUpdate() == 1) {
+            System.out.println("Deleted picture " + id);
+            return true;
+        }
+        return false;
     }
 
 }

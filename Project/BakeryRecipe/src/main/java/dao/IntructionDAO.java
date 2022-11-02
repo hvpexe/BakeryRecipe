@@ -68,4 +68,43 @@ public class IntructionDAO {
         return true;
     }
 
+    static boolean updateInstructionsRecipe (List<Part> instImgList, String[] instDescription, int recipeId,
+            Connection conn, ServletContext sc) throws SQLException {
+        List<Instruction> oldList = IntructionDAO.getInstructionRecipeList();
+        int oldSize = 0;
+        int newSize = 0;
+        if (oldList != null)
+            oldSize = oldList.size();
+        if (instImgList != null)
+            newSize = instImgList.size();
+
+        int maxSize = Integer.max(oldSize, newSize);
+        for (int i = 0; i < maxSize; i++) {
+            if (i < newSize && i < oldSize) {//update Instruction
+
+                Instruction oldInstruction = oldList.get(i);
+                updateInstructionRecipe(instImgList, instDescription[i], recipeId, oldInstruction, i, conn, sc);
+            }
+            if (i < newSize && i >= oldSize) { //add Instruction
+                addInstructionRecipe(instImgList.get(i), instDescription[i], recipeId, i, conn, sc);
+            }
+            if (i >= newSize && i < oldSize) { //delete Instruction
+                deleteInstructionRecipe(oldList.get(i).getInsstep(), recipeId, conn);
+            }
+        }
+        return true;
+    }
+
+    private static List<Instruction> getInstructionRecipeList () {
+        return null;
+    }
+
+    private static void updateInstructionRecipe (List<Part> instImgList, String string, int recipeId,
+            Instruction oldInstruction, int i, Connection conn, ServletContext sc) {
+        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    }
+
+    private static void deleteInstructionRecipe (int insStep, int recipeId, Connection conn) {
+    }
+
 }
