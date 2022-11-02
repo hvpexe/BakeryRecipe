@@ -92,7 +92,7 @@
                                                         </div>-->
 
                             <div class="dropdown">
-                                <button><i class="fa-solid fa-ellipsis"></i></button>
+                                <button style="color: white"><i class="fa-solid fa-ellipsis"></i></button>
                                 <div class="dropdown-options">
                                     <a   class="d-inline-block text-muted hover-underline c-pointer mr-3" onclick="getReport(${RECIPE_DETAIL.getId()})" href="#">
                                         <span class="align-middle">
@@ -111,7 +111,7 @@
                                 <c:out value="${RECIPE_DETAIL.getDatePostFormat()}"/>
                             </div>
                             <div class="recipe-react">
-                                <span>Like: ${RECIPE_DETAIL.getLike()}</span>
+                                <span id="like-data" val>Like: ${RECIPE_DETAIL.getLike()}</span>
                                 <span>Comment: ${RECIPE_DETAIL.getComment()}</span>
                                 <span>Saved: ${RECIPE_DETAIL.getSave()}</span>
                             </div>
@@ -246,7 +246,20 @@
                                             <div class="card w-100">
                                                 <div class="card-body p-4">
                                                     <div class="">
+                                                        <div id="baseline">
                                                         <h5>${cmt.chefName}</h5>
+                                                        <!--report comment--> 
+                                                        <div class="dropdown">
+                                                            <button style="color: white"><i class="fa-solid fa-ellipsis"></i></button>
+                                                            <div class="dropdown-options">
+                                                                <a   class="d-inline-block text-muted hover-underline c-pointer mr-3" onclick="getReport(${RECIPE_DETAIL.getId()})" href="#">
+                                                                    <span class="align-middle">
+                                                                        <strong>${re.like}</strong> Report</span></a>
+                                                                <a href="#">Delete</a>
+                                                            </div>
+                                                        </div>
+                                                        <!--ket thuc comment--> 
+                                                        </div>
                                                         <p class="small">
                                                             <c:out value="${cmt.getDateComment()}"/></p>
                                                         <p>
@@ -256,6 +269,7 @@
                                                 </div>
                                             </div>
                                         </div>
+
                                     </c:forEach>
                                 </div>
                             </div>
@@ -299,43 +313,44 @@
             <div class="content card-body col-12 col-md-4">
                 <div class="col-12 p-0">
                     <div class="report-title h3 font-weight-bold">Report Recipe màu nhạt vl</div>
-<!--                    <form action="ReportController" class="col">-->
-                        <div class="form-group">
-                            <select name="typeReport" class="selectReport w-100" id="select_Rp">
-                                <option value="Content">Inappropriate Content</option>
-                                <option value="Intellectual">Infringement on intellectual property</option>
-                                <option value="Spamming">Spamming or misleading</option>
-                                <option value="Community">The recipe is not suitable for the community</option>
-                            </select>
-                            
-                          
-                           
-                            <input  type="hidden" id="loginID">
-<!--                            <input type="hidden" name="bakerID" id="loginID" value="">
-                            <input type="hidden" name="recipeID" id="recipeID" value="">-->
-                        </div>
-                        <div class="form-group" >
-                            <textarea name="txtReport" class="txtareaRp w-100"  id="txtReport" value=""></textarea>
-                        </div>  
-                        <div class="form-group">
-                            <button class="hover" type="submit" onclick="sendReport()">Send Report</button>
-                        </div>
-                        
+                    <!--                    <form action="ReportController" class="col">-->
+                    <div class="form-group">
+                        <select name="typeReport" class="selectReport w-100" id="select_Rp">
+                            <option value="Content">Inappropriate Content</option>
+                            <option value="Intellectual">Infringement on intellectual property</option>
+                            <option value="Spamming">Spamming or misleading</option>
+                            <option value="Community">The recipe is not suitable for the community</option>
+                        </select>
+
+
+
+                        <input  type="hidden" id="loginID">
+                        <!--                            <input type="hidden" name="bakerID" id="loginID" value="">
+                                                    <input type="hidden" name="recipeID" id="recipeID" value="">-->
+                    </div>
+                    <div class="form-group" >
+                        <textarea name="txtReport" class="txtareaRp w-100"  id="txtReport" value=""></textarea>
+                    </div>  
+                    <div class="form-group">
+                        <button class="hover" type="submit" onclick="sendReport()">Send Report</button>
+                    </div>
+
                     <!--</form>--> 
                 </div>
-                            <div id="thankReport"></div>
+                <div id="thankReport"></div>
 
             </div>
         </div>
-                       <!--ket thuc ham container-->
-                          <script>
-        var loginID  = ${sessionScope.login.id};
-        var recipeID =${RECIPE_DETAIL.id};
-        var userID = ${USER_DETAIL.id};
-    </script>
+        <!--ket thuc ham container-->
+        <script>
+                              var loginID = ${sessionScope.login.id};
+                              var recipeID =${RECIPE_DETAIL.id};
+                              var userID = ${USER_DETAIL.id};
+                              var likeNum =${RECIPE_DETAIL.getLike()};
+        </script>
         <script src="https://cdn.jsdelivr.net/npm/swiper@8/swiper-bundle.min.js"></script>
         <script src="assets/js/recipeDetail.js"></script>
         <c:import url="footer.jsp"/>
     </body>
- 
+
 </html>

@@ -385,3 +385,6 @@ button:hover{
 #textAreaExample{
     width: 638px;
 }
+#baseline{
+    align-items: baseline;
+}

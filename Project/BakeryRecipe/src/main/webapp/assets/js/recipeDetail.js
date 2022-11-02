@@ -84,6 +84,14 @@ function  likeButton(item, val1, val2, action) {
     //                console.log(event.target.classList);
 
     var action = val1;
+    
+    console.log(item);
+   if(val1==='UnLike'){
+       likeNum-=1;
+   }else{
+       likeNum+=1;
+   }
+    console.log(likeNum+"1111");
     $.ajax({
         url: "ajax/likerecipe",
         type: "get", //send it through get method

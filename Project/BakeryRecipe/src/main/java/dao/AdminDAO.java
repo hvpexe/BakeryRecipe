@@ -7,6 +7,7 @@ package dao;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
@@ -22,14 +23,16 @@ public class AdminDAO {
 
     private static Connection conn = DBUtils.getConnection();
 
-    public static int getNumberUserActive() {
+    public static int getNumberUserActive() throws SQLException {
         String sql = "SELECT COUNT(U.ID)\n"
                 + "FROM [User] U\n"
                 + "WHERE U.IsActive = 1";
         int count = 0;
+        PreparedStatement ps = null;
+        ResultSet rs = null;
         try {
-            PreparedStatement ps = conn.prepareStatement(sql);
-            ResultSet rs = ps.executeQuery();
+            ps = conn.prepareStatement(sql);
+            rs = ps.executeQuery();
             if (rs.next()) {
                 count = rs.getInt(1);
                 return count;
@@ -37,18 +40,30 @@ public class AdminDAO {
         } catch (Exception e) {
             System.out.println("getNumberUserActive error:");
             e.printStackTrace();
+        } finally {
+            if (rs != null) {
+                rs.close();
+            }
+            if (ps != null) {
+                ps.close();
+            }
+            if (conn != null) {
+                conn.close();
+            }
         }
         return count;
     }
 
-    public static int getNumberRecipeAvailable() {
+    public static int getNumberRecipeAvailable() throws SQLException {
         String sql = "SELECT COUNT(ID)\n"
                 + "FROM Recipe\n"
                 + "WHERE IsDeleted = 0";
         int count = 0;
+        PreparedStatement ps = null;
+        ResultSet rs = null;
         try {
-            PreparedStatement ps = conn.prepareStatement(sql);
-            ResultSet rs = ps.executeQuery();
+            ps = conn.prepareStatement(sql);
+            rs = ps.executeQuery();
             if (rs.next()) {
                 count = rs.getInt(1);
                 return count;
@@ -56,18 +71,31 @@ public class AdminDAO {
         } catch (Exception e) {
             System.out.println("getNumberRecipeAvailable error:");
             e.printStackTrace();
+        } finally {
+            if (rs != null) {
+                rs.close();
+            }
+            if (ps != null) {
+                ps.close();
+            }
+            if (conn != null) {
+                conn.close();
+            }
         }
         return count;
     }
 
-    public static int getNumberCommentAvailable() {
+    public static int getNumberCommentAvailable() throws SQLException {
         String sql = "SELECT COUNT(ID)\n"
                 + "FROM Comment\n"
                 + "WHERE IsDeleted = 0";
         int count = 0;
+        PreparedStatement ps = null;
+        ResultSet rs = null;
+
         try {
-            PreparedStatement ps = conn.prepareStatement(sql);
-            ResultSet rs = ps.executeQuery();
+            ps = conn.prepareStatement(sql);
+            rs = ps.executeQuery();
             if (rs.next()) {
                 count = rs.getInt(1);
                 return count;
@@ -75,17 +103,29 @@ public class AdminDAO {
         } catch (Exception e) {
             System.out.println("getNumberCommentAvailable error:");
             e.printStackTrace();
+        } finally {
+            if (rs != null) {
+                rs.close();
+            }
+            if (ps != null) {
+                ps.close();
+            }
+            if (conn != null) {
+                conn.close();
+            }
         }
         return count;
     }
 
-    public static int getNumberLike() {
+    public static int getNumberLike() throws SQLException {
         String sql = "SELECT COUNT(*)\n"
                 + "FROM [Like]";
         int count = 0;
+        PreparedStatement ps = null;
+        ResultSet rs = null;
         try {
-            PreparedStatement ps = conn.prepareStatement(sql);
-            ResultSet rs = ps.executeQuery();
+            ps = conn.prepareStatement(sql);
+            rs = ps.executeQuery();
             if (rs.next()) {
                 count = rs.getInt(1);
                 return count;
@@ -93,17 +133,29 @@ public class AdminDAO {
         } catch (Exception e) {
             System.out.println("getNumberLike error:");
             e.printStackTrace();
+        } finally {
+            if (rs != null) {
+                rs.close();
+            }
+            if (ps != null) {
+                ps.close();
+            }
+            if (conn != null) {
+                conn.close();
+            }
         }
         return count;
     }
 
-    public static int getNumberSave() {
+    public static int getNumberSave() throws SQLException {
         String sql = "SELECT COUNT(*)\n"
                 + "FROM [Save]";
         int count = 0;
+        PreparedStatement ps = null;
+        ResultSet rs = null;
         try {
-            PreparedStatement ps = conn.prepareStatement(sql);
-            ResultSet rs = ps.executeQuery();
+            ps = conn.prepareStatement(sql);
+            rs = ps.executeQuery();
             if (rs.next()) {
                 count = rs.getInt(1);
                 return count;
@@ -111,17 +163,29 @@ public class AdminDAO {
         } catch (Exception e) {
             System.out.println("getNumberSave error:");
             e.printStackTrace();
+        } finally {
+            if (rs != null) {
+                rs.close();
+            }
+            if (ps != null) {
+                ps.close();
+            }
+            if (conn != null) {
+                conn.close();
+            }
         }
         return count;
     }
 
-    public static int getNumberFollow() {
+    public static int getNumberFollow() throws SQLException {
         String sql = "SELECT COUNT(*)\n"
                 + "FROM Follow";
         int count = 0;
+        PreparedStatement ps =null;
+          ResultSet rs = null;
         try {
-            PreparedStatement ps = conn.prepareStatement(sql);
-            ResultSet rs = ps.executeQuery();
+          ps = conn.prepareStatement(sql);
+             rs = ps.executeQuery();
             if (rs.next()) {
                 count = rs.getInt(1);
                 return count;
@@ -129,11 +193,21 @@ public class AdminDAO {
         } catch (Exception e) {
             System.out.println("getNumberFollow error:");
             e.printStackTrace();
+        }finally {
+            if (rs != null) {
+                rs.close();
+            }
+            if (ps != null) {
+                ps.close();
+            }
+            if (conn != null) {
+                conn.close();
+            }
         }
         return count;
     }
 
-    public static String getSumUserRegisterInMonthByYear(int year) {
+    public static String getSumUserRegisterInMonthByYear(int year) throws SQLException {
         String sql = "SELECT YEAR(U.DateRegister) as yyyy,\n"
                 + "       MONTH(U.DateRegister) as mm,\n"
                 + "       COUNT(U.ID) as NoUser \n"
@@ -142,10 +216,12 @@ public class AdminDAO {
                 + "GROUP BY YEAR(U.DateRegister), MONTH(U.DateRegister)\n"
                 + "ORDER BY YEAR(U.DateRegister), MONTH(U.DateRegister);";
         List<Integer> noUserByMonth = new ArrayList<>();
+             PreparedStatement ps = null;
+                        ResultSet rs = null;
         try {
-            PreparedStatement ps = conn.prepareStatement(sql);
+      ps = conn.prepareStatement(sql);
             ps.setInt(1, year);
-            ResultSet rs = ps.executeQuery();
+     rs = ps.executeQuery();
             int[] noUserByMonthTemp = new int[12];
             while (rs.next()) {
                 int mm = (Integer) rs.getInt("mm");
@@ -162,16 +238,26 @@ public class AdminDAO {
             for (int i = 0; i <= maxMonth; i++) {
                 noUserByMonth.add(noUserByMonthTemp[i]);
             }
-                  String jsonText = JSONValue.toJSONString(noUserByMonth);
+            String jsonText = JSONValue.toJSONString(noUserByMonth);
             return jsonText;
         } catch (Exception e) {
             System.out.println("getSumUserRegisterInMonthByYear error:");
             e.printStackTrace();
+        }finally {
+            if (rs != null) {
+                rs.close();
+            }
+            if (ps != null) {
+                ps.close();
+            }
+            if (conn != null) {
+                conn.close();
+            }
         }
         return null;
     }
 
-    public static void main(String[] args) {
+    public static void main(String[] args) throws SQLException {
         System.out.println(getSumUserRegisterInMonthByYear(2021));
     }
 }

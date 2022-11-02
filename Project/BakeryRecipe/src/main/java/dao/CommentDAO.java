@@ -25,13 +25,15 @@ public class CommentDAO {
             + "  WHERE c.UserID = ? and c.IsDeleted= 0\n"
             + "  Order By c.DateComment";
 
-    public static List<Integer[]> getCommentList(int userid) {
+    public static List<Integer[]> getCommentList(int userid) throws SQLException {
         String sql = SELECT_PROFILE_COMMENT_LIST;
         List<Integer[]> list = new LinkedList<>();
+             PreparedStatement ps = null;
+              ResultSet rs = null;
         try {
-            PreparedStatement ps = conn.prepareStatement(sql);
+        ps = conn.prepareStatement(sql);
             ps.setInt(1, userid);
-            ResultSet rs = ps.executeQuery();
+       rs = ps.executeQuery();
             while (rs.next()) {
                 Integer[] cruID = {rs.getInt(1), rs.getInt(2), rs.getInt(3)};
                 list.add(cruID);
@@ -40,6 +42,16 @@ public class CommentDAO {
         } catch (Exception e) {
             System.out.println("Get Comment List Error" + e.getMessage());
             e.printStackTrace();
+        } finally {
+            if (rs != null) {
+                rs.close();
+            }
+            if (ps != null) {
+                ps.close();
+            }
+            if (conn != null) {
+                conn.close();
+            }
         }
         return null;
     }
@@ -54,13 +66,15 @@ public class CommentDAO {
             + "  FROM [Comment]"
             + "  WHERE ID = ?";
 
-    public static Comment getCommentByID(int id) {
+    public static Comment getCommentByID(int id) throws SQLException {
         String sql = SELECT_COMMENT_BY_ID;
         Comment comment = null;
+            PreparedStatement ps =null;
+                ResultSet rs = null;
         try {
-            PreparedStatement ps = conn.prepareStatement(sql);
+      ps = conn.prepareStatement(sql);
             ps.setInt(1, id);
-            ResultSet rs = ps.executeQuery();
+        rs = ps.executeQuery();
             if (rs.next()) {
                 comment = new Comment(id, rs.getString(2), rs.getTimestamp(3),
                         rs.getTimestamp(4), rs.getBoolean(5),
@@ -70,6 +84,16 @@ public class CommentDAO {
         } catch (Exception e) {
             System.out.println("Get Comment List Error" + e.getMessage());
             e.printStackTrace();
+        }finally {
+            if (rs != null) {
+                rs.close();
+            }
+            if (ps != null) {
+                ps.close();
+            }
+            if (conn != null) {
+                conn.close();
+            }
         }
         return null;
     }
@@ -84,11 +108,14 @@ public class CommentDAO {
             + "JOIN [User] ON [Comment].UserID = [User].ID\n"
             + "WHERE [Comment].IsDeleted = 0;";
 
-    public static List<Comment> manageCommentList() {
+    public static List<Comment> manageCommentList() throws SQLException {
+        Connection conn =null;
+             PreparedStatement ps = null;
+                   ResultSet rs =null;
         try {
-            Connection conn = DBUtils.getConnection();
-            PreparedStatement ps = conn.prepareCall(MANAGE_COMMENT_LIST);
-            ResultSet rs = ps.executeQuery();
+         conn = DBUtils.getConnection();
+ps = conn.prepareCall(MANAGE_COMMENT_LIST);
+ rs = ps.executeQuery();
             List<Comment> list = new ArrayList<>();
             while (rs.next()) {
                 Comment comment = new Comment(rs.getInt("ID"), 
@@ -107,6 +134,16 @@ public class CommentDAO {
         } catch (SQLException ex) {
             System.out.println("CommentList Query Error!" + ex.
                     getMessage());
+        }finally {
+            if (rs != null) {
+                rs.close();
+            }
+            if (ps != null) {
+                ps.close();
+            }
+            if (conn != null) {
+                conn.close();
+            }
         }
         return null;
     }
@@ -115,15 +152,25 @@ public class CommentDAO {
 "            SET IsDeleted = 1\n" +
 "            WHERE Comment.[ID] = ?";
 
-    public static boolean deleteComment(int id) {
+    public static boolean deleteComment(int id) throws SQLException {
+           Connection conn = null;
+                   PreparedStatement ps = null;
         try {
-            Connection conn = DBUtils.getConnection();
-            PreparedStatement ps = conn.prepareStatement(UPDATE_DELETE);
+        conn = DBUtils.getConnection();
+    ps = conn.prepareStatement(UPDATE_DELETE);
             ps.setInt(1, id);
             ps.executeUpdate();
             return true;
         } catch (Exception ex) {
             System.out.println("Query Delete Comment For User error!" + ex.getMessage());
+        }finally {
+           
+            if (ps != null) {
+                ps.close();
+            }
+            if (conn != null) {
+                conn.close();
+            }
         }
         return false;
     }

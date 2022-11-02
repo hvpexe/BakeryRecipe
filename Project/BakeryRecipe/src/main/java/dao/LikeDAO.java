@@ -6,6 +6,7 @@ package dao;
 
 import dto.Recipe;
 import dto.User;
+import java.sql.SQLException;
 import java.util.LinkedList;
 import java.util.List;
 import static utils.DaoHelper.execute;
@@ -16,7 +17,7 @@ import static utils.DaoHelper.execute;
  */
 public class LikeDAO {
 
-    public static List<Recipe> getLikedRecipeFromUser (int id) {
+    public static List<Recipe> getLikedRecipeFromUser (int id) throws SQLException {
         List<Object[]> list = execute("SELECT [RecipeID]\n"
                 + "  FROM [Like] WHERE UserID = ?", id);
         List<Recipe> recipeList = new LinkedList<>();
@@ -27,7 +28,7 @@ public class LikeDAO {
         return recipeList;
     }
 
-    public static List<User> getLikedUserFromRecipe (int id) {
+    public static List<User> getLikedUserFromRecipe (int id) throws SQLException {
         List<Object[]> list = execute("SELECT [UserID]\n"
                 + "  FROM [Like] WHERE RecipeID = ?", id);
         List<User> userList = new LinkedList<>();

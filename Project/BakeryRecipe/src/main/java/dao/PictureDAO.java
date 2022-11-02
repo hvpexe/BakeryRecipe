@@ -90,7 +90,7 @@ public class PictureDAO {
             + "  FROM [BakeryRecipe].[dbo].[Picture]\n"
             + "  where RecipeID = ?";
 
-    public static List<Picture> getPictureList (int recipeID) {
+    public static List<Picture> getPictureList (int recipeID) throws SQLException {
         List<Picture> listPicture = new ArrayList<>();
         Recipe recipe = new Recipe();
         Connection conn = null;
@@ -108,6 +108,16 @@ public class PictureDAO {
         } catch (Exception e) {
             System.out.println("System have error !!!");
             e.printStackTrace();
+        }finally {
+            if (rs != null) {
+                rs.close();
+            }
+            if (ptm != null) {
+                ptm.close();
+            }
+            if (conn != null) {
+                conn.close();
+            }
         }
         return listPicture;
     }
@@ -158,6 +168,8 @@ public class PictureDAO {
                 System.out.println(filename);
             }
         }
+        ps.close();
+        conn.close();
         return false;
     }
 
@@ -224,6 +236,8 @@ public class PictureDAO {
             System.out.println("Deleted picture " + id);
             return true;
         }
+        ps.close();
+        conn.close();
         return false;
     }
 
