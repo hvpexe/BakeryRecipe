@@ -35,9 +35,11 @@ public class UserDAO {
         String sql = "SELECT ID\n"
                 + "FROM [User]\n"
                 + "WHERE ID = ? AND Password = ?";
+        Connection conn = null;
         PreparedStatement ps = null;
         ResultSet rs = null;
         try {
+            conn = DBUtils.getConnection();
             ps = conn.prepareStatement(sql);
             System.out.println(userID + " " + password);
             ps.setString(1, userID);
@@ -50,15 +52,13 @@ public class UserDAO {
         } catch (Exception e) {
             System.out.println("Error at checkOldPassword: " + e.toString());
         } finally {
-            if (rs != null) {
-                rs.close();
-            }
-            if (ps != null) {
-                ps.close();
-            }
-            if (conn != null) {
+            if (conn != null)
                 conn.close();
-            }
+            if (ps != null)
+                ps.close();
+            if (rs != null)
+                rs.close();
+
         }
         return false;
     }
@@ -123,9 +123,12 @@ public class UserDAO {
 
     public static boolean changePassword(String userID, String password) throws SQLException {
         String sql = UPDATE_USER_PASSWORD;
+        Connection conn = null;
         PreparedStatement ps = null;
         try {
-            ps = conn.prepareStatement(sql);
+             conn = DBUtils.getConnection();
+
+             ps = conn.prepareStatement(sql);
             //Set ps
             ps.setString(1, password);
             ps.setString(2, userID);

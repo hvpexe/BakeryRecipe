@@ -8,15 +8,10 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 import javax.servlet.ServletContext;
-import javax.servlet.http.Part;
 import utils.DBUtils;
-import static dao.PictureDAO.addPictureRecipe;
-import dto.IngredientRecipe;
-import dto.Picture;
 import java.util.HashMap;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import utils.Tools;
 
 /**
  *
@@ -114,7 +109,7 @@ public class IngredientDAO {
             + "     VALUES\n"
             + "           (?,?,?)";
 
-    public static boolean addIngredientRecipe(String ingreName, String ingreAmount, int recipeId, Connection conn,
+    public static boolean addIngredientRecipe (String ingreName, String ingreAmount, int recipeId, Connection conn,
             ServletContext sc) throws SQLException {
         PreparedStatement ps = null;
         ResultSet rs = null;
@@ -150,7 +145,7 @@ public class IngredientDAO {
         return false;
     }
 
-    public static boolean addIngredientsRecipe(String[] ingreNames, String[] ingreAmounts, int recipeId,
+    public static boolean addIngredientsRecipe (String[] ingreNames, String[] ingreAmounts, int recipeId,
             Connection conn,
             ServletContext sc) throws SQLException {
         conn.setAutoCommit(false);
@@ -312,7 +307,7 @@ public class IngredientDAO {
             + "     VALUES\n"
             + "           (?,?)";
 
-    public static int addIngredient(String ingreName, Connection conn) throws SQLException {
+    public static int addIngredient (String ingreName, Connection conn) throws SQLException {
 
         PreparedStatement ps = null;
         ResultSet rs = null;
@@ -403,15 +398,24 @@ public class IngredientDAO {
         conn.close();
         return false;
     }
-    private static final String DELETE_INGREDIENT_RECIPE = "DELETE [IngredientRecipe] WHERE ID = ?";
+    private static final String DELETE_INGREDIENT_RECIPE
+            = "DELETE FROM [IngredientRecipe]\n"
+            + "      WHERE ID = ?";
 
-    private static boolean deleteIngredientRecipe(int id, Connection conn) throws SQLException {
-        PreparedStatement ps = conn.prepareStatement(DELETE_INGREDIENT_RECIPE);
-        if (ps.executeUpdate() == 1) {
-            System.out.println("DELETED Ingredient Recipe " + id);
-            return true;
-        }ps.close();
-        conn.close();
+    private static boolean deleteIngredientRecipe (int id, Connection conn) throws SQLException {
+        PreparedStatement ps = null;
+        try {
+            ps = conn.prepareStatement(DELETE_INGREDIENT_RECIPE);
+            ps.setInt(1, id);
+            if (ps.executeUpdate() == 1) {
+                System.out.println("DELETED Ingredient Recipe " + id);
+                return true;
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }finally{
+            if(ps != null) ps.close();
+        }
         return false;
     }
 }

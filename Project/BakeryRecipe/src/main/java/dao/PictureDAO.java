@@ -226,15 +226,22 @@ public class PictureDAO {
         }
         return true;
     }
-    private static final String REMOVE_PICTURE = "DELETE Picture\n"
+    private static final String REMOVE_PICTURE = "DELETE FROM [Picture]\n"
             + "WHERE ID = ?";
 
     private static boolean deletePictureRecipe (int id, Connection conn) throws SQLException {
-        PreparedStatement ps = conn.prepareStatement(REMOVE_PICTURE);
-        ps.setInt(1, id);
-        if (ps.executeUpdate() == 1) {
-            System.out.println("Deleted picture " + id);
-            return true;
+        PreparedStatement ps = null;
+        try {
+            ps = conn.prepareStatement(REMOVE_PICTURE);
+            ps.setInt(1, id);
+            if (ps.executeUpdate() == 1) {
+                System.out.println("DELETED Picture Recipe " + id);
+                return true;
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }finally{
+            if(ps != null) ps.close();
         }
         ps.close();
         conn.close();
