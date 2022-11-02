@@ -1,4 +1,5 @@
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!--<!DOCTYPE html>
 <html>
 
@@ -50,11 +51,13 @@
                 <div class="card card-outline-secondary">
                     <div class="card-body">
                         <!--<form action="ChangePasswordController" class="form" role="form" autocomplete="off">-->
-                            <div class="form-group">
+                        <c:if test="${ not empty sessionScope.login.password }"> 
+                        <div class="form-group">
                                 <label for="inputPasswordOld">Current Password</label>
                                 <input type="password" name="oldPassword" class="form-control" id="inputPasswordOld"
                                     required="">
                             </div>
+                        </c:if> 
                             <div class="form-group">
                                 <label for="inputPasswordNew">New Password</label>
                                 <input type="password" name="newPassword" class="form-control" id="inputPasswordNew"
@@ -86,6 +89,8 @@
                         <!--</form>-->
                     </div>
                 </div>
+                                        <!--test pass-->
+                                    
             <!--</div>-->
 <!--        </div>
     </div>
@@ -105,7 +110,7 @@
     
     
     $.ajax({
-                    url: "ajax/ChangePasswordAjax",
+                    url: "ChangePasswordAjax",
                     type: "get", //send it through get method
                     data: {
                        oldPassword :oldpass.value,

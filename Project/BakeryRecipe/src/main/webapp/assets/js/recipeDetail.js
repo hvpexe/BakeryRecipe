@@ -15,9 +15,9 @@ function  followButton(item, val1, val2, action) {
         url: "ajax/UpdateUserFollowAjax",
         type: "get", //send it through get method
         data: {
-            follower: "${USER_DETAIL.id}",
+            follower: userID,
             action: action,
-            followed: "${sessionScope.login.id}"
+            followed: loginID
         },
         success: function () {
             console.log(item);
@@ -52,9 +52,9 @@ function  saveButton(item, val1, val2, action) {
         url: "ajax/updatesaverecipe",
         type: "get", //send it through get method
         data: {
-            recipe: "${RECIPE_DETAIL.id}",
+            recipe:recipeID,
             action: action,
-            user: "${sessionScope.login.id}"
+            user: loginID
         },
         success: function () {
             console.log(item);
@@ -88,9 +88,9 @@ function  likeButton(item, val1, val2, action) {
         url: "ajax/likerecipe",
         type: "get", //send it through get method
         data: {
-            recipe: "${RECIPE_DETAIL.id}",
+            recipe:recipeID,
             action: action,
-            user: "${sessionScope.login.id}"
+            user: loginID
         },
         success: function () {
             console.log(item);
@@ -120,14 +120,13 @@ function Comment(item, event) {
     if (event.key === "Enter") {
 
 
-
         $.ajax({
             url: "ajax/CommnetRecipeAjax",
             type: "get", //send it through get method
             data: {
                 txtCmt: textCmt,
-                bakerID: "${sessionScope.login.id}",
-                RecipeID: "${RECIPE_DETAIL.id}"
+                bakerID: loginID,
+                RecipeID: recipeID
             },
             success: function (response) {
                 //Do Something
@@ -175,7 +174,7 @@ const swiper = new Swiper('.swiper', {
 function sendReport(){
     var selectReport = document.querySelector('#select_Rp').value;
     var txtReport =document.querySelector('#txtReport').value;
-    var loginID =document.querySelector('#loginID').value;
+  
     console.log(loginID);
    console.log(selectReport);
    console.log(txtReport);
@@ -185,8 +184,8 @@ function sendReport(){
             data: {
                 typeReport: selectReport,
                 txtReport: txtReport,
-                bakerID: '${sessionScope.login.id}',
-                recipeID: '${RECIPE_DETAIL.id}'
+                bakerID: loginID,
+                recipeID:recipeID
             },
             success: function (response) {
                 //Do Something

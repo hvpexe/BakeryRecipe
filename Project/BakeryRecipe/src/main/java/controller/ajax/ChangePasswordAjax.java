@@ -19,7 +19,7 @@ import static utils.HashingEncrypter.getHexaDigest;
  *
  * @author VO MINH MAN
  */
-@WebServlet(name = "CommnetRecipeAjax", urlPatterns = {"/ajax/ChangePasswordAjax"})
+@WebServlet(name = "CommnetRecipeAjax", urlPatterns = {"/ChangePasswordAjax"})
 public class ChangePasswordAjax extends HttpServlet {
 
 
