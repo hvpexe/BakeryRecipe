@@ -10,12 +10,15 @@ import dto.Recipe;
 import dto.RecipeSearch;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collection;
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -27,7 +30,11 @@ import javax.servlet.http.HttpSession;
  * @author PhuHV
  */
 public class SearchByIngredientController extends HttpServlet {
-    HashMap<String, Integer> listIngre = IngredientDAO.getAllIngredientsWithPoint();
+    HashMap<String, Integer> listIngre;
+
+    public SearchByIngredientController() throws SQLException {
+        this.listIngre = IngredientDAO.getAllIngredientsWithPoint();
+    }
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
      * methods.
@@ -36,9 +43,10 @@ public class SearchByIngredientController extends HttpServlet {
      * @param response servlet response
      * @throws ServletException if a servlet-specific error occurs
      * @throws IOException if an I/O error occurs
+     * @throws java.sql.SQLException
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException {
+            throws ServletException, IOException, SQLException {
         response.setContentType("text/html;charset=UTF-8");
         String[] ingresSearchTemp = request.getParameterValues("ingre");
         List<String> ingresSearch = Arrays.asList(ingresSearchTemp);
@@ -99,7 +107,11 @@ public class SearchByIngredientController extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        processRequest(request, response);
+        try {
+            processRequest(request, response);
+        } catch (SQLException ex) {
+            Logger.getLogger(SearchByIngredientController.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
 
     /**
@@ -113,7 +125,11 @@ public class SearchByIngredientController extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        processRequest(request, response);
+        try {
+            processRequest(request, response);
+        } catch (SQLException ex) {
+            Logger.getLogger(SearchByIngredientController.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
 
     /**

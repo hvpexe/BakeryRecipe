@@ -12,7 +12,7 @@
   </component>
   <component name="JavacSettings">
     <option name="ADDITIONAL_OPTIONS_OVERRIDE">
-      <module name="BakeryRecipe" options="-endorseddirs &quot;D:\learning in FPT\Ky_5\SWP391\BakeryRecipe\Project\BakeryRecipe\target/endorsed&quot;" />
+      <module name="BakeryRecipe" options="-endorseddirs &quot;C:\Users\VO MINH MAN\Music\swp_project\BakeryRecipe\Project\BakeryRecipe\target/endorsed&quot;" />
     </option>
   </component>
 </project>
