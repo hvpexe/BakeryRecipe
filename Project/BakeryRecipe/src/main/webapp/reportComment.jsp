@@ -1,5 +1,9 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
+<!-- PhuHV
+    đây là trang dùng để hiển thị table user, recipe, comment
+    yêu cầu custom lại cho phù hợp
+-->
 <!DOCTYPE html>
 <html lang="en">
 
@@ -9,17 +13,23 @@
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
         <meta name="description" content="">
-        <c:import url="universal.jsp" />
-        <title>Admin Dashboard</title>
+        <meta name="author" content="">
 
-        <!-- Custom fonts for this template-->
+        <title>SB Admin 2 - Tables</title>
+
+        <!-- Custom fonts for this template -->
+        <link href="admin/vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
         <link
             href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i"
             rel="stylesheet">
 
-        <!-- Custom styles for this template-->
-        <link href="admin/vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
+        <!-- Custom styles for this template -->
         <link href="admin/css/sb-admin-2.min.css" rel="stylesheet">
+        <link href="assets/css/elestyle.css" rel="stylesheet"> 
+        <!-- Custom styles for this page -->
+        <link href="admin/vendor/datatables/dataTables.bootstrap4.min.css" rel="stylesheet">
+        <link href="assets/css/fontawesome-free-6.1.1-web/css/all.min.css" rel="stylesheet" type="text/css">
+
 
     </head>
 
@@ -40,7 +50,7 @@
                 <hr class="sidebar-divider my-0">
 
                 <!-- Nav Item - Dashboard -->
-                <li class="nav-item active">
+                <li class="nav-item">
                     <a class="nav-link" href="AdminDashBoard">
                         <i class="fas fa-fw fa-tachometer-alt"></i>
                         <span>Dashboard</span></a>
@@ -92,8 +102,8 @@
                         <i class="fa-solid fa-bread-slice"></i>
                         <span>Recipes report</span></a>
                 </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="reportCmtList">
+                <li class="nav-item active">
+                    <a class="nav-link" href="#">
                         <i class="fa-solid fa-comment"></i>
                         <span>Comments report</span></a>
                 </li>
@@ -162,15 +172,12 @@
                     <nav class="navbar navbar-expand navbar-light bg-white topbar mb-4 static-top shadow">
 
                         <!-- Sidebar Toggle (Topbar) -->
-                        <button id="sidebarToggleTop" class="btn btn-link d-md-none rounded-circle mr-3">
-                            <i class="fa fa-bars"></i>
-                        </button>
-                        <a href="home" class="btn btn-primary btn-home btn-icon-split">
-                            <span class="icon text-white-50">
-                                <i class="fa-solid fa-house"></i>
-                            </span>
-                            <span class="text">Back to home</span>
-                        </a>
+                        <form class="form-inline">
+                            <button id="sidebarToggleTop" class="btn btn-link d-md-none rounded-circle mr-3">
+                                <i class="fa fa-bars"></i>
+                            </button>
+                        </form>
+
                         <!-- Topbar Search -->
                         <form
                             class="d-none d-sm-inline-block form-inline mr-auto ml-md-3 my-2 my-md-0 mw-100 navbar-search">
@@ -263,6 +270,72 @@
                                 </div>
                             </li>
 
+                            <!-- Nav Item - Messages -->
+                            <li class="nav-item dropdown no-arrow mx-1">
+                                <a class="nav-link dropdown-toggle" href="#" id="messagesDropdown" role="button"
+                                   data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                    <i class="fas fa-envelope fa-fw"></i>
+                                    <!-- Counter - Messages -->
+                                    <span class="badge badge-danger badge-counter">7</span>
+                                </a>
+                                <!-- Dropdown - Messages -->
+                                <div class="dropdown-list dropdown-menu dropdown-menu-right shadow animated--grow-in"
+                                     aria-labelledby="messagesDropdown">
+                                    <h6 class="dropdown-header">
+                                        Message Center
+                                    </h6>
+                                    <a class="dropdown-item d-flex align-items-center" href="#">
+                                        <div class="dropdown-list-image mr-3">
+                                            <img class="rounded-circle" src="img/undraw_profile_1.svg"
+                                                 alt="...">
+                                            <div class="status-indicator bg-success"></div>
+                                        </div>
+                                        <div class="font-weight-bold">
+                                            <div class="text-truncate">Hi there! I am wondering if you can help me with a
+                                                problem I've been having.</div>
+                                            <div class="small text-gray-500">Emily Fowler · 58m</div>
+                                        </div>
+                                    </a>
+                                    <a class="dropdown-item d-flex align-items-center" href="#">
+                                        <div class="dropdown-list-image mr-3">
+                                            <img class="rounded-circle" src="img/undraw_profile_2.svg"
+                                                 alt="...">
+                                            <div class="status-indicator"></div>
+                                        </div>
+                                        <div>
+                                            <div class="text-truncate">I have the photos that you ordered last month, how
+                                                would you like them sent to you?</div>
+                                            <div class="small text-gray-500">Jae Chun · 1d</div>
+                                        </div>
+                                    </a>
+                                    <a class="dropdown-item d-flex align-items-center" href="#">
+                                        <div class="dropdown-list-image mr-3">
+                                            <img class="rounded-circle" src="img/undraw_profile_3.svg"
+                                                 alt="...">
+                                            <div class="status-indicator bg-warning"></div>
+                                        </div>
+                                        <div>
+                                            <div class="text-truncate">Last month's report looks great, I am very happy with
+                                                the progress so far, keep up the good work!</div>
+                                            <div class="small text-gray-500">Morgan Alvarez · 2d</div>
+                                        </div>
+                                    </a>
+                                    <a class="dropdown-item d-flex align-items-center" href="#">
+                                        <div class="dropdown-list-image mr-3">
+                                            <img class="rounded-circle" src="https://source.unsplash.com/Mv9hjnEUHR4/60x60"
+                                                 alt="...">
+                                            <div class="status-indicator bg-success"></div>
+                                        </div>
+                                        <div>
+                                            <div class="text-truncate">Am I a good boy? The reason I ask is because someone
+                                                told me that people say this to all dogs, even if they aren't good...</div>
+                                            <div class="small text-gray-500">Chicken the Dog · 2w</div>
+                                        </div>
+                                    </a>
+                                    <a class="dropdown-item text-center small text-gray-500" href="#">Read More Messages</a>
+                                </div>
+                            </li>
+
                             <div class="topbar-divider d-none d-sm-block"></div>
 
                             <!-- Nav Item - User Information -->
@@ -270,7 +343,8 @@
                                 <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button"
                                    data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                     <span class="mr-2 d-none d-lg-inline text-gray-600 small">${sessionScope.login.name}</span>
-                                    <img class="img-profile rounded-circle" src="${sessionScope.login.avatar}">
+                                    <img class="img-profile rounded-circle"
+                                         src="${sessionScope.login.avatar}">
                                 </a>
                                 <!-- Dropdown - User Information -->
                                 <div class="dropdown-menu dropdown-menu-right shadow animated--grow-in"
@@ -304,169 +378,83 @@
                     <div class="container-fluid">
 
                         <!-- Page Heading -->
-                        <div class="d-sm-flex align-items-center justify-content-between mb-4">
-                            <h1 class="h3 mb-0 text-gray-800">Dashboard</h1>
-                        </div>
+                        <h1 class="h3 mb-2 text-gray-800">Tables</h1>
+                        <p class="mb-4">DataTables is a third party plugin that is used to generate the demo table below.
+                            For more information about DataTables, please visit the <a target="_blank"
+                                                                                       href="https://datatables.net">official DataTables documentation</a>.</p>
 
-                        <!-- Content Row -->
-                        <div class="row">
-
-                            <!-- Earnings (Monthly) Card Example -->
-                            <div class="col-xl-4 col-md-6 mb-4">
-                                <div class="card border-left-primary shadow h-100 py-2">
-                                    <div class="card-body">
-                                        <div class="row no-gutters align-items-center">
-                                            <div class="col mr-2">
-                                                <div class="text-xs font-weight-bold text-primary text-uppercase mb-1">
-                                                    Total baker active</div>
-                                                <div class="h5 mb-0 font-weight-bold text-gray-800">${noUser}</div>
-                                            </div>
-                                            <div class="col-auto">
-                                                <i class="fas fa-user fa-2x text-gray-300"></i>
-                                            </div>
-                                        </div>
-                                    </div>
+                        <!-- DataTales Example -->
+                        <div class="card shadow mb-4">
+                            <div class="card-header py-3">
+                                <h6 class="m-0 font-weight-bold text-primary">DataTables Example</h6>
+                            </div>
+                            <div class="card-body">
+                                <div class="table-responsive">
+                                    <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+                                        <thead>
+                                            <tr>
+                                                <th>Id</th>
+                                                <th>Comment</th>
+                                                <th>Report Type</th>
+                                                <th>Details</th>
+                                                <th>Date Report</th>
+                                                <th>User Report</th>
+                                                <th>Report State</th>
+                                                <th>Action</th>
+                                            </tr>
+                                        </thead>
+                                        <tfoot>
+                                            <tr>
+                                                <th>Id</th>
+                                                <th>Comment</th>
+                                                <th>Report Type</th>
+                                                <th>Details</th>
+                                                <th>Date Report</th>
+                                                <th>User Report</th>
+                                                <th>Report State</th>
+                                                <th>Action</th>
+                                            </tr>
+                                        </tfoot>
+                                        <tbody>
+                                            <c:forEach items="${reportcomment}" var="u">
+                                                <tr class="col-12 ml-auto mr-auto col">
+                                                    <td class="align-middle style col-1">${u.id}</td>
+                                                    <td class="align-middle style col-3">${u.comment}</td>
+                                                    <td class="align-middle style col-1">${u.reportType}</td>
+                                                    <td class="align-middle style col-2">${u.detail}</td>
+                                                    <td class="align-middle style align-items-center col-2 text-nowrap">${u.getDateReport()}</td>
+                                                    <td class="align-middle style col-1">${u.reporter}</td> 
+                                                    <td class="align-middle align-items-center col-1 text-nowrap">
+                                                        <c:choose>
+                                                            <c:when test="${u.status == 'Approved'}">
+                                                                <c:set var="status" value="green"></c:set>
+                                                            </c:when>
+                                                            <c:when test="${u.status == 'Denied'}">
+                                                                <c:set var="status" value="red"></c:set>
+                                                            </c:when>
+                                                            <c:otherwise>
+                                                                <c:set var="status" value="blue"></c:set>
+                                                            </c:otherwise>
+                                                        </c:choose>
+                                                        <div style="color: ${status}"><b> ${u.status}</b></div>
+                                                    </td>
+                                                    <td class="align-middle col-1">
+                                                        <div class="d-flex flex-wrap ">
+                                                            <form action="report" class="flex-grow-1">
+                                                                <input type="hidden" name="reportID" value="${u.id}">
+                                                                <c:if test="${u.status == 'Process'}">
+                                                                    <button class="bg-success" name="action" value="Approved">Approved Report</button>
+                                                                    <button class="bg-danger" name="action" value="Denied">Denied Report</button>
+                                                                </c:if>
+                                                            </form>
+                                                        </div>
+                                                    </td>
+                                                </tr>
+                                            </c:forEach>
+                                        </tbody>
+                                    </table>
                                 </div>
                             </div>
-
-                            <!-- Earnings (Monthly) Card Example -->
-                            <div class="col-xl-4 col-md-6 mb-4">
-                                <div class="card border-left-success shadow h-100 py-2">
-                                    <div class="card-body">
-                                        <div class="row no-gutters align-items-center">
-                                            <div class="col mr-2">
-                                                <div class="text-xs font-weight-bold text-success text-uppercase mb-1">
-                                                    Total recipe available</div>
-                                                <div class="h5 mb-0 font-weight-bold text-gray-800">${noRecipe}</div>
-                                            </div>
-                                            <div class="col-auto">
-                                                <i class="fas fa-bowl-food fa-2x text-gray-300"></i>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-
-                            <!-- Earnings (Monthly) Card Example -->
-                            <div class="col-xl-4 col-md-6 mb-4">
-                                <div class="card border-left-info shadow h-100 py-2">
-                                    <div class="card-body">
-                                        <div class="row no-gutters align-items-center">
-                                            <div class="col mr-2">
-                                                <div class="text-xs font-weight-bold text-info text-uppercase mb-1">
-                                                    Total comment available
-                                                </div>
-                                                <div class="h5 mb-0 mr-3 font-weight-bold text-gray-800">${noComment}</div>
-                                            </div>
-                                            <div class="col-auto">
-                                                <i class="fas fa-comment fa-2x text-gray-300"></i>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-
-                            <div class="col-xl-4 col-md-6 mb-4">
-                                <div class="card border-left-success shadow h-100 py-2">
-                                    <div class="card-body">
-                                        <div class="row no-gutters align-items-center">
-                                            <div class="col mr-2">
-                                                <div class="text-xs font-weight-bold text-success text-uppercase mb-1">
-                                                    Total follow</div>
-                                                <div class="h5 mb-0 font-weight-bold text-gray-800">${noFollow}</div>
-                                            </div>
-                                            <div class="col-auto">
-                                                <i class="fas fa-user-plus fa-2x text-gray-300"></i>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-xl-4 col-md-6 mb-4">
-                                <div class="card border-left-info shadow h-100 py-2">
-                                    <div class="card-body">
-                                        <div class="row no-gutters align-items-center">
-                                            <div class="col mr-2">
-                                                <div class="text-xs font-weight-bold text-info text-uppercase mb-1">
-                                                    Total like
-                                                </div>
-                                                <div class="h5 mb-0 mr-3 font-weight-bold text-gray-800">${noLike}</div>
-                                            </div>
-                                            <div class="col-auto">
-                                                <i class="fas fa-thumbs-up fa-2x text-gray-300"></i>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-xl-4 col-md-6 mb-4">
-                                <div class="card border-left-warning shadow h-100 py-2">
-                                    <div class="card-body">
-                                        <div class="row no-gutters align-items-center">
-                                            <div class="col mr-2">
-                                                <div class="text-xs font-weight-bold text-warning text-uppercase mb-1">
-                                                    Total save</div>
-                                                <div class="h5 mb-0 font-weight-bold text-gray-800">${noSave}</div>
-                                            </div>
-                                            <div class="col-auto">
-                                                <i class="fas fa-bookmark fa-2x text-gray-300"></i>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-
-                        <!-- Content Row -->
-
-                        <div class="row">
-
-                            <!-- Area Chart -->
-                            <div class="col-12">
-                                <div class="card shadow mb-4">
-                                    <!-- Card Header - Dropdown -->
-                                    <div
-                                        class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
-                                        <h6 class="m-0 font-weight-bold text-primary">Users Registration Overview</h6>
-                                        <select onchange="getSumUserRegisterInMonthByYear(this)" id="year" name="year" class=""></select>
-                                    </div>
-
-                                    <!-- Card Body -->
-                                    <div class="card-body">
-                                        <div id="user-registration-overview" class="chart-area">
-                                            <canvas id="user-registration-overview-chart"></canvas>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-
-                            <!-- Pie Chart -->
-<!--                            <div class="col-xl-4 col-lg-5">
-                                <div class="card shadow mb-4">
-                                     Card Header - Dropdown 
-                                    <div
-                                        class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
-                                        <h6 class="m-0 font-weight-bold text-primary">Revenue Sources</h6>
-                                    </div>
-                                     Card Body 
-                                    <div class="card-body">
-                                        <div class="chart-pie pt-4 pb-2">
-                                            <canvas id="myPieChart"></canvas>
-                                        </div>
-                                        <div class="mt-4 text-center small">
-                                            <span class="mr-2">
-                                                <i class="fas fa-circle text-primary"></i> Direct
-                                            </span>
-                                            <span class="mr-2">
-                                                <i class="fas fa-circle text-success"></i> Social
-                                            </span>
-                                            <span class="mr-2">
-                                                <i class="fas fa-circle text-info"></i> Referral
-                                            </span>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>-->
                         </div>
 
                     </div>
@@ -479,7 +467,7 @@
                 <footer class="sticky-footer bg-white">
                     <div class="container my-auto">
                         <div class="copyright text-center my-auto">
-                            <span>Copyright &copy; BakeryRecipe 2022</span>
+                            <span>Copyright &copy; Your Website 2020</span>
                         </div>
                     </div>
                 </footer>
@@ -510,7 +498,7 @@
                     <div class="modal-body">Select "Logout" below if you are ready to end your current session.</div>
                     <div class="modal-footer">
                         <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancel</button>
-                        <a class="btn btn-primary" href="logout">Logout</a>
+                        <a class="btn btn-primary" href="login.html">Logout</a>
                     </div>
                 </div>
             </div>
@@ -527,52 +515,15 @@
         <script src="admin/js/sb-admin-2.min.js"></script>
 
         <!-- Page level plugins -->
-        <script src="admin/vendor/chart.js/Chart.min.js"></script>
+        <script src="admin/vendor/datatables/jquery.dataTables.min.js"></script>
+        <script src="admin/vendor/datatables/dataTables.bootstrap4.min.js"></script>
+
         <!-- Page level custom scripts -->
-        
-        <script>
-            var noUserByMonth = ${noUserByMonth};
-
-            (function () {
-                let year_satart = 2020;
-                let year_end = (new Date).getFullYear(); // current year
-                let year_selected = (new Date).getFullYear();
-
-                let option = '';
-                //option = '<option>Year</option>'; // first option
-
-                for (let i = year_end; i >= year_satart; i--) {
-                    let selected = (i === year_selected ? ' selected' : '');
-                    option += '<option value="' + i + '"' + selected + '>' + i + '</option>';
-                }
-
-                document.getElementById("year").innerHTML = option;
-            })();
-            function getSumUserRegisterInMonthByYear(param) {
-                var year = param.value;
-                console.log(year);
-                $.ajax({
-                    url: "getSumUserRegisterInMonthByYearAjax",
-                    type: "POST",
-                    data: {
-                        year: year
-                    },
-                    success: function (data) {
-                        console.log(typeof(data));
-                        var obj = JSON.parse(data);
-                        myLineChart.data.datasets[0].data = obj;
-                        myLineChart.update();
-
-                    },
-                    error: function (data) {
-                        //do something
-                    }
-                });
-            }
-        </script>
-        <script src="admin/js/demo/chart-area-demo.js"></script>
-        <script src="admin/js/demo/chart-pie-demo.js"></script>
+        <script src="admin/js/demo/datatables-demo.js"></script>
 
     </body>
+
+
+
 
 </html>

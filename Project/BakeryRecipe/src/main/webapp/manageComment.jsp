@@ -65,7 +65,7 @@
                 </div>
 
                 <!-- Nav Item - Pages Collapse Menu -->
-                <li class="nav-item  active">
+                <li class="nav-item">
                     <a class="nav-link" href="manageuser">
                         <i class="fa-solid fa-user"></i>
                         <span>Users</span></a>
@@ -76,7 +76,7 @@
                         <i class="fa-solid fa-bread-slice"></i>
                         <span>Recipes</span></a>
                 </li>
-                <li class="nav-item">
+                <li class="nav-item active">
                     <a class="nav-link" href="commentlist">
                         <i class="fa-solid fa-comment"></i>
                         <span>Comments</span></a>
@@ -394,7 +394,7 @@
                                         <thead>
                                             <tr>
                                                 <th>Id</th>
-                                                <th>Commentator</th>
+                                                <th>Commenter</th>
                                                 <th>Comment</th>
                                                 <th>Recipe Name</th>
                                                 <th>Date Comment</th>
@@ -405,7 +405,7 @@
                                         <tfoot>
                                             <tr>
                                                 <th>Id</th>
-                                                <th>Commentator</th>
+                                                <th>Commenter</th>
                                                 <th>Comment</th>
                                                 <th>Recipe Name</th>
                                                 <th>Date Comment</th>
@@ -422,7 +422,7 @@
                                                     <td class="align-middle style col-2">${u.recipeName}</td>
                                                     <td class="align-middle style align-items-center col-2 text-nowrap">${u.getDateComment()}</td>
                                                     <td class="align-middle style align-items-center col-2 text-nowrap">${u.getLastDateEdit()}</td> 
-                                                    <td class="align-middle style text-center">
+                                                    <td class="align-middle style align-items-center col-1">
                                                         <c:if test="${u.userID ne sessionScope.login.id }">
                                                             <form action="user">
                                                                 <button class="bg-success" style="width: max-content;">

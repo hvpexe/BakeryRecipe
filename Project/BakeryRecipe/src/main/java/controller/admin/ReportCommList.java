@@ -4,8 +4,9 @@
  */
 package controller.admin;
 
-import dao.CommentDAO;
-import dto.Comment;
+import controller.recipe.MostRatedRecipeController;
+import dao.ReportDAO;
+import dto.Report;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.sql.SQLException;
@@ -22,8 +23,8 @@ import javax.servlet.http.HttpServletResponse;
  *
  * @author kichi
  */
-@WebServlet(name = "ShowCommentListController", urlPatterns = {"/commentlist"})
-public class ShowCommentListController extends HttpServlet {
+@WebServlet(name = "ReportCommList", urlPatterns = {"/reportCmtList"})
+public class ReportCommList extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -37,9 +38,9 @@ public class ShowCommentListController extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException, SQLException {
         response.setContentType("text/html;charset=UTF-8");
-        List<Comment> commentList = CommentDAO.manageCommentList();
-        request.setAttribute("commentlist", commentList);
-        request.getRequestDispatcher("manageComment.jsp").forward(request, response);
+        List<Report> reportCmtList = ReportDAO.reportCMTList();
+        request.setAttribute("reportcomment", reportCmtList);
+        request.getRequestDispatcher("reportComment.jsp").forward(request, response);
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
@@ -57,7 +58,7 @@ public class ShowCommentListController extends HttpServlet {
         try {
             processRequest(request, response);
         } catch (SQLException ex) {
-            Logger.getLogger(ShowCommentListController.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(ReportCommList.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
 
@@ -75,7 +76,7 @@ public class ShowCommentListController extends HttpServlet {
         try {
             processRequest(request, response);
         } catch (SQLException ex) {
-            Logger.getLogger(ShowCommentListController.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(ReportCommList.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
 

@@ -181,11 +181,11 @@ public class AdminDAO {
         String sql = "SELECT COUNT(*)\n"
                 + "FROM Follow";
         int count = 0;
-        PreparedStatement ps =null;
-          ResultSet rs = null;
+        PreparedStatement ps = null;
+        ResultSet rs = null;
         try {
-          ps = conn.prepareStatement(sql);
-             rs = ps.executeQuery();
+            ps = conn.prepareStatement(sql);
+            rs = ps.executeQuery();
             if (rs.next()) {
                 count = rs.getInt(1);
                 return count;
@@ -193,7 +193,7 @@ public class AdminDAO {
         } catch (Exception e) {
             System.out.println("getNumberFollow error:");
             e.printStackTrace();
-        }finally {
+        } finally {
             if (rs != null) {
                 rs.close();
             }
@@ -216,12 +216,12 @@ public class AdminDAO {
                 + "GROUP BY YEAR(U.DateRegister), MONTH(U.DateRegister)\n"
                 + "ORDER BY YEAR(U.DateRegister), MONTH(U.DateRegister);";
         List<Integer> noUserByMonth = new ArrayList<>();
-             PreparedStatement ps = null;
-                        ResultSet rs = null;
+        PreparedStatement ps = null;
+        ResultSet rs = null;
         try {
-      ps = conn.prepareStatement(sql);
+            ps = conn.prepareStatement(sql);
             ps.setInt(1, year);
-     rs = ps.executeQuery();
+            rs = ps.executeQuery();
             int[] noUserByMonthTemp = new int[12];
             while (rs.next()) {
                 int mm = (Integer) rs.getInt("mm");
@@ -243,7 +243,7 @@ public class AdminDAO {
         } catch (Exception e) {
             System.out.println("getSumUserRegisterInMonthByYear error:");
             e.printStackTrace();
-        }finally {
+        } finally {
             if (rs != null) {
                 rs.close();
             }
@@ -255,6 +255,35 @@ public class AdminDAO {
             }
         }
         return null;
+    }
+
+    public static boolean updateStatusReport(int id, String status) throws SQLException {
+        boolean check = false;
+        Connection conn = null;
+        PreparedStatement ps = null;
+        try {
+            conn = DBUtils.getConnection();
+            if (conn != null) {
+                String sql = "UPDATE [ReportComment]\n"
+                        + "SET [Status] = ?\n"
+                        + "WHERE [ReportComment].ID = ?";
+                ps = conn.prepareStatement(sql);
+                ps.setString(1, status);
+                ps.setInt(2, id);
+                check = ps.executeUpdate() > 0;
+            }
+        } catch (Exception e) {
+            System.out.println("Error at updateStatusReport: " + e.toString());
+        } finally {
+            if (ps != null) {
+                ps.close();
+            }
+            if (conn != null) {
+                conn.close();
+            }
+
+        }
+        return check;
     }
 
     public static void main(String[] args) throws SQLException {
