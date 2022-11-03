@@ -25,15 +25,17 @@ public class CommentDAO {
             + "  WHERE c.UserID = ? and c.IsDeleted= 0\n"
             + "  Order By c.DateComment";
 
-    public static List<Integer[]> getCommentList(int userid) throws SQLException {
+    public static List<Integer[]> getCommentList (int userid) throws SQLException {
         String sql = SELECT_PROFILE_COMMENT_LIST;
         List<Integer[]> list = new LinkedList<>();
-             PreparedStatement ps = null;
-              ResultSet rs = null;
+        PreparedStatement ps = null;
+        ResultSet rs = null;
+        Connection conn = null;
         try {
-        ps = conn.prepareStatement(sql);
+        conn = DBUtils.getConnection();
+            ps = conn.prepareStatement(sql);
             ps.setInt(1, userid);
-       rs = ps.executeQuery();
+            rs = ps.executeQuery();
             while (rs.next()) {
                 Integer[] cruID = {rs.getInt(1), rs.getInt(2), rs.getInt(3)};
                 list.add(cruID);
@@ -66,15 +68,17 @@ public class CommentDAO {
             + "  FROM [Comment]"
             + "  WHERE ID = ?";
 
-    public static Comment getCommentByID(int id) throws SQLException {
+    public static Comment getCommentByID (int id) throws SQLException {
         String sql = SELECT_COMMENT_BY_ID;
         Comment comment = null;
-            PreparedStatement ps =null;
-                ResultSet rs = null;
+        PreparedStatement ps = null;
+        ResultSet rs = null;
+           Connection conn = null;    
         try {
-      ps = conn.prepareStatement(sql);
+            conn = DBUtils.getConnection();
+            ps = conn.prepareStatement(sql);
             ps.setInt(1, id);
-        rs = ps.executeQuery();
+            rs = ps.executeQuery();
             if (rs.next()) {
                 comment = new Comment(id, rs.getString(2), rs.getTimestamp(3),
                         rs.getTimestamp(4), rs.getBoolean(5),
@@ -84,7 +88,7 @@ public class CommentDAO {
         } catch (Exception e) {
             System.out.println("Get Comment List Error" + e.getMessage());
             e.printStackTrace();
-        }finally {
+        } finally {
             if (rs != null) {
                 rs.close();
             }
@@ -108,25 +112,25 @@ public class CommentDAO {
             + "JOIN [User] ON [Comment].UserID = [User].ID\n"
             + "WHERE [Comment].IsDeleted = 0;";
 
-    public static List<Comment> manageCommentList() throws SQLException {
-        Connection conn =null;
-             PreparedStatement ps = null;
-                   ResultSet rs =null;
+    public static List<Comment> manageCommentList () throws SQLException {
+        Connection conn = null;
+        PreparedStatement ps = null;
+        ResultSet rs = null;
         try {
-         conn = DBUtils.getConnection();
-ps = conn.prepareCall(MANAGE_COMMENT_LIST);
- rs = ps.executeQuery();
+            conn = DBUtils.getConnection();
+            ps = conn.prepareCall(MANAGE_COMMENT_LIST);
+            rs = ps.executeQuery();
             List<Comment> list = new ArrayList<>();
             while (rs.next()) {
-                Comment comment = new Comment(rs.getInt("ID"), 
-                        rs.getString("Comment"), 
-                        rs.getTimestamp("DateComment"), 
-                        rs.getTimestamp("LastDateEdit"), 
-                        rs.getBoolean("IsDeleted"), 
-                        rs.getInt("UserID"), 
-                        rs.getInt("RecipeID"), 
-                        rs.getString("Avatar"), 
-                        rs.getString("Username"), 
+                Comment comment = new Comment(rs.getInt("ID"),
+                        rs.getString("Comment"),
+                        rs.getTimestamp("DateComment"),
+                        rs.getTimestamp("LastDateEdit"),
+                        rs.getBoolean("IsDeleted"),
+                        rs.getInt("UserID"),
+                        rs.getInt("RecipeID"),
+                        rs.getString("Avatar"),
+                        rs.getString("Username"),
                         rs.getString("RecipeName"));
                 list.add(comment);
             }
@@ -134,7 +138,7 @@ ps = conn.prepareCall(MANAGE_COMMENT_LIST);
         } catch (SQLException ex) {
             System.out.println("CommentList Query Error!" + ex.
                     getMessage());
-        }finally {
+        } finally {
             if (rs != null) {
                 rs.close();
             }
@@ -147,24 +151,24 @@ ps = conn.prepareCall(MANAGE_COMMENT_LIST);
         }
         return null;
     }
-    
-    private static final String UPDATE_DELETE = "UPDATE Comment\n" +
-"            SET IsDeleted = 1\n" +
-"            WHERE Comment.[ID] = ?";
 
-    public static boolean deleteComment(int id) throws SQLException {
-           Connection conn = null;
-                   PreparedStatement ps = null;
+    private static final String UPDATE_DELETE = "UPDATE Comment\n"
+            + "            SET IsDeleted = 1\n"
+            + "            WHERE Comment.[ID] = ?";
+
+    public static boolean deleteComment (int id) throws SQLException {
+        Connection conn = null;
+        PreparedStatement ps = null;
         try {
-        conn = DBUtils.getConnection();
-    ps = conn.prepareStatement(UPDATE_DELETE);
+            conn = DBUtils.getConnection();
+            ps = conn.prepareStatement(UPDATE_DELETE);
             ps.setInt(1, id);
             ps.executeUpdate();
             return true;
         } catch (Exception ex) {
             System.out.println("Query Delete Comment For User error!" + ex.getMessage());
-        }finally {
-           
+        } finally {
+
             if (ps != null) {
                 ps.close();
             }

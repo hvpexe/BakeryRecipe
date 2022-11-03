@@ -144,26 +144,34 @@ public class IntructionDAO {
         String filename = null;
         String sql = UPDATE_INSTRUCTION;
         PreparedStatement ps = null;
-        if (!instImg.getSubmittedFileName().isEmpty())//instImg is null ignore add picture
-        {
-            ps = conn.prepareStatement(sql);
-            filename = "instruction_" + (index + 1) + "_" + recipeId;
-            ps.setString(1, detail);
-            ps.setString(2, Tools.getFilePath(filename, instImg));
-            ps.setInt(3, recipeId);
-            ps.setInt(4, insStep);
-        } else {
-            sql = sql.replace(",[Img] = ?", "");
-            ps = conn.prepareStatement(sql);
-            ps.setString(1, detail);
-            ps.setInt(2, recipeId);
-            ps.setInt(3, insStep);
-        }
-        if (ps.executeUpdate() == 1) {
-            System.out.println("Instruction " + insStep + "_" + recipeId + " Updated");
-            if (filename != null) {
-                filename = Tools.saveFile(filename, instImg, sc, filename);
-                System.out.println(filename);
+        try {
+            if (!instImg.getSubmittedFileName().isEmpty())//instImg is null ignore add picture
+            {
+                ps = conn.prepareStatement(sql);
+                filename = "instruction_" + (index + 1) + "_" + recipeId;
+                ps.setString(1, detail);
+                ps.setString(2, Tools.getFilePath(filename, instImg));
+                ps.setInt(3, recipeId);
+                ps.setInt(4, insStep);
+            } else {
+                sql = sql.replace(",[Img] = ?", "");
+                ps = conn.prepareStatement(sql);
+                ps.setString(1, detail);
+                ps.setInt(2, recipeId);
+                ps.setInt(3, insStep);
+            }
+            if (ps.executeUpdate() == 1) {
+                System.out.println("Instruction " + insStep + "_" + recipeId + " Updated");
+                if (filename != null) {
+                    filename = Tools.saveFile(filename, instImg, sc, filename);
+                    System.out.println(filename);
+                }
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+            if(ps!=null){
+                ps.close();
             }
         }
         return false;
@@ -179,7 +187,7 @@ public class IntructionDAO {
             ps.setInt(1, recipeId);
             ps.setInt(2, insStep);
             if (ps.executeUpdate() == 1) {
-                System.out.println("DELETED Instruction  " + insStep+" "+recipeId);
+                System.out.println("DELETED Instruction  " + insStep + " " + recipeId);
                 return true;
             }
         } catch (SQLException e) {

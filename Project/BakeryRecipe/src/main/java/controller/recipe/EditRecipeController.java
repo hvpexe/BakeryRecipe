@@ -21,6 +21,7 @@ import java.util.Collection;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.logging.Logger;
+import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.MultipartConfig;
 import javax.servlet.annotation.WebServlet;
@@ -63,6 +64,7 @@ public class EditRecipeController extends HttpServlet {
         PrintWriter out = response.getWriter();
         HttpSession session = request.getSession();
         String url = ERROR_POST;
+        ServletContext sc = request.getServletContext();
         try {
 
             /* TODO output your page here. You may use following sample code. */
@@ -137,7 +139,12 @@ public class EditRecipeController extends HttpServlet {
                 } catch (Exception e) {
                 }
             }
-
+            boolean updateRecipe = RecipeDAO.updateRecipe(recipeName, recipeDescription, videoUrl, pictureList
+                    , ingreName, ingreAmount, instImgList, instDescription, prepareTime,
+                    cookTime, userId, recipeId, cover, sc);
+            if(updateRecipe) {
+                System.out.println("success");
+            }
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -155,7 +162,6 @@ private void loadRecipe (HttpServletRequest request, HttpServletResponse respons
             List<Picture> picRecp;
             picRecp = PictureDAO.getPictureList(recipeID);;
             request.setAttribute("LIST_PIC", picRecp);
-            System.out.println(picRecp);
 
             List<Ingredient> listIngre;
             listIngre = dao.getListIngredient(recipeID);

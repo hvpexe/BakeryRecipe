@@ -42,29 +42,22 @@ public class DBUtils {
         }
         return null;
     }
-//    public static Connection getConnection() {
-//        Connection con = null;
+//    public static Connection getConnection () {
+//        Connection conn = null;
 //        try {
-//            if (conn != null)
-//                return conn;
-//            String url = "jdbc:sqlserver://" + SERVER_NAME + ":" + PORT + "\\" + INSTANCE + ";databaseName=" + DB_NAME;
-//            if (INSTANCE == null || INSTANCE.trim().isEmpty())
-//                url = "jdbc:sqlserver://" + SERVER_NAME + ":" + PORT + ";databaseName=" + DB_NAME;
-//            url += ";encrypt=true;trustServerCertificate=true;CharacterSet=UTF-8";//important to add UTF-8 format
+//            String url = "jdbc:sqlserver://167.172.92.134:1433;database=BakeryRecipe;encrypt=true;trustServerCertificate=true;CharacterSet=UTF-8";;
 //            Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver");
 //            System.out.println("==================================Connected=====================================");
-//            return (conn = DriverManager.getConnection(url, USER_ID, PASSWORD)) != null ? conn : null;
+//            conn = DriverManager.getConnection(url, "sa", "Huynhvanphu102Exe");
 //        } catch (SQLException ex) {
 //            System.out.println("Connection error! " + ex.getMessage());
 //            ex.printStackTrace();
 //        } catch (ClassNotFoundException ex) {
 //            System.out.println("Connection error! " + ex.getMessage());
 //            ex.printStackTrace();
-//        } finally {
-//        }
-//        return null;
+//        } 
+//        return conn;
 //    }
-   
 
     public static void main (String[] args) {
         System.out.println(DBUtils.getConnection());

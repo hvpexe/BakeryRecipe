@@ -44,7 +44,7 @@ public class DebugController extends HttpServlet {
         Connection conn = DBUtils.getConnection();
         String ingreName = "eg";
         try {
-            int ingreId = IngredientDAO.getIngredientIDByName(ingreName, conn);
+            int ingreId = IngredientDAO.getIngredientIDByName(ingreName);
             if (ingreId == -1)
                 ingreId = IngredientDAO.addIngredient(ingreName, conn);
             System.out.println("--------------------------------------------------------------------------------------");

@@ -31,7 +31,7 @@ public class UserDAO {
                 String.class, Boolean.class, String.class, String.class, Timestamp.class, String.class, Integer.class};
 
     //ay da ko xem database code sai r
-    public static boolean checkOldPassword(String userID, String password) throws SQLException {
+    public static boolean checkOldPassword (String userID, String password) throws SQLException {
         String sql = "SELECT ID\n"
                 + "FROM [User]\n"
                 + "WHERE ID = ? AND Password = ?";
@@ -63,7 +63,7 @@ public class UserDAO {
         return false;
     }
 
-    public static boolean changeStatus(User user) throws SQLException {
+    public static boolean changeStatus (User user) throws SQLException {
         String sql = "UPDATE [User]\n"
                 + "SET [IsActive] = ?\n"
                 + "WHERE [ID] = ?";
@@ -91,7 +91,7 @@ public class UserDAO {
         return false;
     }
 
-    public static boolean changeRole(User user) throws SQLException {
+    public static boolean changeRole (User user) throws SQLException {
         String sql = "UPDATE [User]\n"
                 + "SET [Role] = ?\n"
                 + "WHERE [ID] = ?";
@@ -121,14 +121,14 @@ public class UserDAO {
 
     private static final String UPDATE_USER_PASSWORD = " UPDATE [User] SET Password = ? WHERE ID= ?";
 
-    public static boolean changePassword(String userID, String password) throws SQLException {
+    public static boolean changePassword (String userID, String password) throws SQLException {
         String sql = UPDATE_USER_PASSWORD;
         Connection conn = null;
         PreparedStatement ps = null;
         try {
-             conn = DBUtils.getConnection();
+            conn = DBUtils.getConnection();
 
-             ps = conn.prepareStatement(sql);
+            ps = conn.prepareStatement(sql);
             //Set ps
             ps.setString(1, password);
             ps.setString(2, userID);
@@ -149,12 +149,14 @@ public class UserDAO {
         return false;
     }
 
-    public static User loginWithGoogle(String email) throws SQLException {
+    public static User loginWithGoogle (String email) throws SQLException {
         String sql = SELECT_USER_BY_EMAIL;
         PreparedStatement ps = null;
         ResultSet rs = null;
+        Connection conn = null;
         try {
-            System.out.println(conn);
+            conn = DBUtils.getConnection();
+
             ps = conn.prepareStatement(sql);
             //Set ps
             ps.setString(1, email);
@@ -185,12 +187,14 @@ public class UserDAO {
             + "WHERE Email = ? AND Password = ?";
 
     //ham nay tim user su dung email va password
-    public static User login(String email, String password) throws SQLException {
+    public static User login (String email, String password) throws SQLException {
         String sql = SELECT_LOGIN;
         PreparedStatement ps = null;
         ResultSet rs = null;
+        Connection conn = null;
         try {
-            System.out.println(conn);
+            conn = DBUtils.getConnection();
+
             ps = conn.prepareStatement(sql);
             //Set ps
             ps.setString(1, email);
@@ -231,13 +235,16 @@ public class UserDAO {
      * @param id the <b>id</b> of the <b>User</b>
      *
      * @return the User Object with the same <b>id</b> as the inputted <b>id</b>
+     *
      * @throws java.sql.SQLException
      */
-    public static List<User> getAllUser() throws SQLException {
+    public static List<User> getAllUser () throws SQLException {
         String sql = SELECT_ALL_USER;
         PreparedStatement ps = null;
         ResultSet rs = null;
+        Connection conn = null;
         try {
+            conn = DBUtils.getConnection();
             ps = conn.prepareStatement(sql);
             rs = ps.executeQuery();
             String[] l = USER_COLUMN_NAME_LIST;
@@ -281,11 +288,13 @@ public class UserDAO {
      *
      * @return the User Object with the same <b>id</b> as the inputted <b>id</b>
      */
-    public static User getUserByID(int id) throws SQLException {
+    public static User getUserByID (int id) throws SQLException {
         String sql = SELECT_USER_BY_ID;
         PreparedStatement ps = null;
         ResultSet rs = null;
+        Connection conn = null;
         try {
+            conn = DBUtils.getConnection();
             ps = conn.prepareStatement(sql);
             //Set ps
             ps.setInt(1, id);
@@ -331,11 +340,13 @@ public class UserDAO {
     private static final String SELECT_USER_BY_EMAIL = "SELECT ID FROM [User] WHERE Email = ?";
 
     //ham nay dung de kiem tra email co bi trung ko, ap dung khi tao tk moi
-    public static boolean checkDuplicateEmail(String email) throws SQLException {
+    public static boolean checkDuplicateEmail (String email) throws SQLException {
         String sql = SELECT_USER_BY_EMAIL;
         PreparedStatement ps = null;
         ResultSet rs = null;
+        Connection conn = null;
         try {
+            conn = DBUtils.getConnection();
             ps = conn.prepareStatement(sql);
             ps.setString(1, email);
             rs = ps.executeQuery();
@@ -362,12 +373,13 @@ public class UserDAO {
             + "(?, ?, ?, ?, ?, ?, 1);";
 
     //dang ki mot tk moi
-    public static boolean register(String email, String password, String firstname, String lastname) throws SQLException {
+    public static boolean register (String email, String password, String firstname, String lastname) throws SQLException {
         String sql = INSERT_NEW_USER;
         PreparedStatement ps = null;
-
+        Connection conn = null;
         try {
-             ps = conn.prepareStatement(sql);
+            conn = DBUtils.getConnection();
+            ps = conn.prepareStatement(sql);
             ps.setString(1, "baker");
             ps.setString(2, email);
             ps.setString(3, password);
@@ -398,13 +410,14 @@ public class UserDAO {
      * @param email
      * @param password
      * @param firstname
-     * @param avatar the avatar of the user
+     * @param avatar    the avatar of the user
      * @param lastname
      *
      * @return true if login success
+     *
      * @throws java.sql.SQLException
      */
-    public static boolean register(String email, String password, String firstname, String lastname, String avatar) throws SQLException {
+    public static boolean register (String email, String password, String firstname, String lastname, String avatar) throws SQLException {
         if (register(email, password, firstname, lastname)) {
             updateAvatar(email, avatar);
             return true;
@@ -413,12 +426,13 @@ public class UserDAO {
     }
     private static final String UPDATE_USER_IMAGE = "UPDATE [User] SET [Avatar] = ? WHERE Email= ?";
 
-    public static boolean updateAvatar(String email, String avatar) throws SQLException {
+    public static boolean updateAvatar (String email, String avatar) throws SQLException {
         String sql = UPDATE_USER_IMAGE;
         PreparedStatement ps = null;
-
+        Connection conn = null;
         try {
-           ps = conn.prepareStatement(sql);
+            conn = DBUtils.getConnection();
+            ps = conn.prepareStatement(sql);
             ps.setString(1, avatar);//set avatar path
             ps.setString(2, email);//where user have this email 
             ps.executeUpdate();
@@ -443,7 +457,7 @@ public class UserDAO {
             + "FROM [dbo].[User]\n"
             + "WHERE  [LastName] like ? or [FirstName] like ?";
 
-    public List<User> searchName(String search) throws SQLException {
+    public List<User> searchName (String search) throws SQLException {
         ArrayList<User> listName = new ArrayList<>();
         Connection conn = null;
         PreparedStatement ptm = null;
@@ -476,7 +490,7 @@ public class UserDAO {
         } catch (Exception e) {
             System.out.println("System have problem !!!" + e.toString());
 
-        }finally {
+        } finally {
             if (rs != null) {
                 rs.close();
             }
@@ -490,7 +504,7 @@ public class UserDAO {
         return listName;
     }
 
-    public static boolean EditInfo(User user) throws SQLException {
+    public static boolean EditInfo (User user) throws SQLException {
         String sql = "UPDATE [User]\n"
                 + "SET FirstName = ?,\n"
                 + "    LastName = ?,\n"
@@ -500,11 +514,11 @@ public class UserDAO {
                 + "    [Address] = ?,\n"
                 + "	Avatar = ?\n"
                 + "WHERE ID = ?";
-         Connection conn =null;
-          PreparedStatement ps =null;
-         
+        Connection conn = null;
+        PreparedStatement ps = null;
+
         try {
-             conn = DBUtils.getConnection();
+            conn = DBUtils.getConnection();
             ps = conn.prepareStatement(sql);
             System.out.println(user.getAvatar());
             ps.setString(1, user.getFirstName());
@@ -521,8 +535,8 @@ public class UserDAO {
             }
         } catch (Exception e) {
             System.out.println("Error at editInfo: " + e.toString());
-        }finally {
-           
+        } finally {
+
             if (ps != null) {
                 ps.close();
             }
@@ -534,7 +548,7 @@ public class UserDAO {
     }
 
     //ham nay bi loi, tam thoi comment - PhuHV
-    public static String saveAvatar(String filename, Part file, ServletContext sc) {
+    public static String saveAvatar (String filename, Part file, ServletContext sc) {
         try {
             String fileName = file.getSubmittedFileName();
             if (fileName.isEmpty()) {
@@ -563,7 +577,7 @@ public class UserDAO {
             + " on userRep.ID=recipe.UserID  \n"
             + " where recipe.ID = ?";
 
-    public static User userDetail(int recipeID) throws SQLException, SQLException {
+    public static User userDetail (int recipeID) throws SQLException, SQLException {
         User user = null;
         Connection conn = null;
         PreparedStatement ptm = null;
@@ -588,7 +602,7 @@ public class UserDAO {
         } catch (Exception e) {
             System.out.println("System have a problem");
             e.printStackTrace();
-        }finally {
+        } finally {
             if (rs != null) {
                 rs.close();
             }
@@ -604,7 +618,7 @@ public class UserDAO {
 
     private static final String FOLLOW = "INSERT INTO [dbo].[Follow]([UserID],[UserID2]) VALUES(?,?)";
 
-    public static boolean followUSer(int IDUser1, int IDUser2) throws SQLException {
+    public static boolean followUSer (int IDUser1, int IDUser2) throws SQLException {
         boolean check = false;
         Connection conn = null;
         PreparedStatement ptm = null;
@@ -618,8 +632,8 @@ public class UserDAO {
             }
         } catch (Exception e) {
             e.printStackTrace();
-        }finally {
-           
+        } finally {
+
             if (ptm != null) {
                 ptm.close();
             }
@@ -632,7 +646,7 @@ public class UserDAO {
 
     private static final String UN_FOLLOW = "delete [dbo].[Follow] where UserID =? and UserID2 = ?";
 
-    public boolean UNFollow(int userID1, int userID2) throws SQLException {
+    public boolean UNFollow (int userID1, int userID2) throws SQLException {
         boolean check = false;
         Connection conn = null;
         PreparedStatement ptm = null;
@@ -646,8 +660,8 @@ public class UserDAO {
             }
         } catch (Exception e) {
             e.printStackTrace();
-        }finally {
-           
+        } finally {
+
             if (ptm != null) {
                 ptm.close();
             }
@@ -660,7 +674,7 @@ public class UserDAO {
 
     private static final String SAVE = "INSERT INTO [Save] (RecipeID, UserID) VALUES (?, ?)";
 
-    public boolean SaveRecipe(int recipeID, int userID) throws SQLException {
+    public boolean SaveRecipe (int recipeID, int userID) throws SQLException {
         boolean check = false;
         Connection conn = null;
         PreparedStatement ptm = null;
@@ -674,8 +688,8 @@ public class UserDAO {
             }
         } catch (Exception e) {
             e.printStackTrace();
-        }finally {
-           
+        } finally {
+
             if (ptm != null) {
                 ptm.close();
             }
@@ -689,7 +703,7 @@ public class UserDAO {
 
     private static final String UN_SAVED = "DELETE [Save] WHERE [Save].RecipeID = ? AND [Save].UserID = ?";
 
-    public boolean Unsave(int recipeID, int userID) throws SQLException {
+    public boolean Unsave (int recipeID, int userID) throws SQLException {
         boolean check = false;
         Connection conn = null;
         PreparedStatement ptm = null;
@@ -703,8 +717,8 @@ public class UserDAO {
             }
         } catch (Exception e) {
             e.printStackTrace();
-        }finally {
-           
+        } finally {
+
             if (ptm != null) {
                 ptm.close();
             }
@@ -719,13 +733,13 @@ public class UserDAO {
             + "FROM [Save]\n"
             + "WHERE UserID = ? AND RecipeID = ?";
 
-    public static boolean checkSaveRecipe(int userID, int recipeID) throws SQLException {
+    public static boolean checkSaveRecipe (int userID, int recipeID) throws SQLException {
         boolean check = false;
-        Connection conn =null;
-        PreparedStatement ps=null;
+        Connection conn = null;
+        PreparedStatement ps = null;
         try {
-           conn = DBUtils.getConnection();
-           ps = conn.prepareStatement(CHECK_SAVE_RECIPE);
+            conn = DBUtils.getConnection();
+            ps = conn.prepareStatement(CHECK_SAVE_RECIPE);
             ps.setInt(1, userID);
             ps.setInt(2, recipeID);
             ResultSet rs = ps.executeQuery();
@@ -734,8 +748,8 @@ public class UserDAO {
             }
         } catch (Exception e) {
             e.printStackTrace();
-        }finally {
-           
+        } finally {
+
             if (ps != null) {
                 ps.close();
             }
@@ -750,23 +764,23 @@ public class UserDAO {
             + "FROM [Follow]\n"
             + "WHERE UserID = ? AND UserID2 = ?";
 
-    public static boolean checkFollowUser(int userID, int userID2) throws SQLException {
+    public static boolean checkFollowUser (int userID, int userID2) throws SQLException {
         boolean check = false;
-        Connection conn=null;
-        PreparedStatement ps =null;
-             ResultSet rs=null;
+        Connection conn = null;
+        PreparedStatement ps = null;
+        ResultSet rs = null;
         try {
-          conn = DBUtils.getConnection();
-             ps = conn.prepareStatement(CHECK_FOLLOW_USER);
+            conn = DBUtils.getConnection();
+            ps = conn.prepareStatement(CHECK_FOLLOW_USER);
             ps.setInt(1, userID);
             ps.setInt(2, userID2);
-             rs = ps.executeQuery();
+            rs = ps.executeQuery();
             if (rs.next()) {
                 return true;
             }
         } catch (Exception e) {
             e.printStackTrace();
-        }finally {
+        } finally {
             if (rs != null) {
                 rs.close();
             }
@@ -782,7 +796,7 @@ public class UserDAO {
 
     private static final String LIKE = "INSERT INTO [Like] (RecipeID, UserID) VALUES (?, ?)";
 
-    public boolean LikeRecipe(int recipeID, int userID) throws SQLException {
+    public boolean LikeRecipe (int recipeID, int userID) throws SQLException {
         boolean check = false;
         Connection conn = null;
         PreparedStatement ptm = null;
@@ -796,8 +810,8 @@ public class UserDAO {
             }
         } catch (Exception e) {
             e.printStackTrace();
-        }finally {
-          
+        } finally {
+
             if (ptm != null) {
                 ptm.close();
             }
@@ -811,7 +825,7 @@ public class UserDAO {
 
     private static final String UN_LIKE = "DELETE [Like] WHERE [Like].RecipeID = ? AND [Like].UserID = ?";
 
-    public boolean Unlike(int recipeID, int userID) throws SQLException {
+    public boolean Unlike (int recipeID, int userID) throws SQLException {
         boolean check = false;
         Connection conn = null;
         PreparedStatement ptm = null;
@@ -825,8 +839,8 @@ public class UserDAO {
             }
         } catch (Exception e) {
             e.printStackTrace();
-        }finally {
-            
+        } finally {
+
             if (ptm != null) {
                 ptm.close();
             }
@@ -841,14 +855,14 @@ public class UserDAO {
             + "FROM [Like]\n"
             + "WHERE UserID = ? AND RecipeID = ?";
 
-    public static boolean checkLikeRecipe(int userID, int recipeID) throws SQLException {
+    public static boolean checkLikeRecipe (int userID, int recipeID) throws SQLException {
         boolean check = false;
-         Connection conn=null;
-         PreparedStatement ps=null;
-          ResultSet rs =null;
+        Connection conn = null;
+        PreparedStatement ps = null;
+        ResultSet rs = null;
         try {
-        conn = DBUtils.getConnection();
-           ps = conn.prepareStatement(CHECK_LIKE_RECIPE);
+            conn = DBUtils.getConnection();
+            ps = conn.prepareStatement(CHECK_LIKE_RECIPE);
             ps.setInt(1, userID);
             ps.setInt(2, recipeID);
             rs = ps.executeQuery();
@@ -857,7 +871,7 @@ public class UserDAO {
             }
         } catch (Exception e) {
             e.printStackTrace();
-        }finally {
+        } finally {
             if (rs != null) {
                 rs.close();
             }
@@ -877,14 +891,14 @@ public class UserDAO {
             + "[Address],[DateRegister],[IsActive],[StoreID], [Birthday]\n"
             + "FROM [BakeryRecipe].[dbo].[User]";
 
-    public static List<User> showUserList() throws SQLException {
-        Connection conn =null;
-           PreparedStatement ps=null;
-            ResultSet rs=null;
+    public static List<User> showUserList () throws SQLException {
+        Connection conn = null;
+        PreparedStatement ps = null;
+        ResultSet rs = null;
         try {
-          conn = DBUtils.getConnection();
+            conn = DBUtils.getConnection();
             ps = conn.prepareStatement(SHOW_USER_LIST);
-          rs = ps.executeQuery();
+            rs = ps.executeQuery();
             List<User> list = new ArrayList<>();
             while (rs.next()) {
                 String fullName = rs.getString("LastName") + rs.getString("FirstName");
@@ -929,7 +943,7 @@ public class UserDAO {
         } catch (SQLException ex) {
             System.out.println("UserList Query Error!" + ex.
                     getMessage());
-        }finally {
+        } finally {
             if (rs != null) {
                 rs.close();
             }
@@ -943,17 +957,19 @@ public class UserDAO {
         return null;
     }
 
-    public static List<User> getRecommendUsers(int userID) throws SQLException {
+    public static List<User> getRecommendUsers (int userID) throws SQLException {
         String sql = "SELECT TOP 5 U.ID, U.Avatar, U.LastName + ' ' + U.FirstName as FullName, U.LastName , U.FirstName , U.Follower\n"
                 + "FROM [User] U\n"
                 + "WHERE U.ID != ? AND U.IsActive = 1\n"
                 + "ORDER BY Follower DESC";
-          PreparedStatement ps=null;
-          ResultSet rs=null;
+        PreparedStatement ps = null;
+        ResultSet rs = null;
+        Connection conn = null;
         try {
-             ps = conn.prepareStatement(sql);
+            conn = DBUtils.getConnection();
+            ps = conn.prepareStatement(sql);
             ps.setInt(1, userID);
-           rs = ps.executeQuery();
+            rs = ps.executeQuery();
             List<User> list = new ArrayList<>();
             User user = null;
             while (rs.next()) {
@@ -968,7 +984,7 @@ public class UserDAO {
         } catch (Exception e) {
             System.out.println("getRecommendUsers error:");
             e.printStackTrace();
-        }finally {
+        } finally {
             if (rs != null) {
                 rs.close();
             }

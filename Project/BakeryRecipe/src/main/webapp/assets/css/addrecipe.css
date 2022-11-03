@@ -299,6 +299,7 @@ input,textarea{
     background-color: #faf8f8;
     box-shadow: 0 4px 4px rgba(0, 0, 0, 0.25);
     box-sizing: border-box;
+    resize: none;
 }
 .instruction-box-input,
 .pre-box-input{
@@ -472,8 +473,8 @@ div[id^=inst] [id^=inst-desc] {
     bottom: calc(100% - 39px);
     margin: auto;
 }
-div[id$=container]{
-
+div[id$=container] input{
+    outline: none;
 }
 :is(#detail, #img-box) {
     font-family: 'Gelasio';

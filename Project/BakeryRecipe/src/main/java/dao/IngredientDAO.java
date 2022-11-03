@@ -35,7 +35,7 @@ public class IngredientDAO {
      * @return the Ingredient Object with the same <b>id</b> as the inputted
      * <b>id</b>
      */
-    public static Ingredient getIngredientByID(int ID) throws SQLException {
+    public static Ingredient getIngredientByID (int ID) throws SQLException {
         String sql = SELECT_INGREDIENT_BY_ID;
         ResultSet rs = null;
         PreparedStatement ps = null;
@@ -69,7 +69,7 @@ public class IngredientDAO {
     private static final String SELECT_INGREDIENT_BY_NAME = SELECT_ALL_INGREDIENT
             + "  Where [Name] = ?";
 
-    public static Ingredient getIngredientByName(String name) throws SQLException {
+    public static Ingredient getIngredientByName (String name) throws SQLException {
         String sql = SELECT_INGREDIENT_BY_NAME;
         PreparedStatement ps = null;
         ResultSet rs = null;
@@ -119,7 +119,7 @@ public class IngredientDAO {
             //set sql
             conn.setAutoCommit(false);
             sql = INSERT_INGREDIENT_RECIPE;
-            int ingreId = IngredientDAO.getIngredientIDByName(ingreName, conn);
+            int ingreId = IngredientDAO.getIngredientIDByName(ingreName);
             if (ingreId == -1) {
                 ingreId = IngredientDAO.addIngredient(ingreName, conn);
             }
@@ -160,7 +160,7 @@ public class IngredientDAO {
             + "            join [dbo].[Recipe] re on ingreRe.RecipeID =re.ID\n"
             + "            where re.ID = ? ";
 
-    public static List<Ingredient> getListIngredient(int recipeID) throws SQLException {
+    public static List<Ingredient> getListIngredient (int recipeID) throws SQLException {
         List<Ingredient> listIgre = new ArrayList<>();
         Connection conn = null;
         PreparedStatement ptm = null;
@@ -183,7 +183,7 @@ public class IngredientDAO {
         } catch (Exception e) {
             System.out.println("System have error !!!");
             e.printStackTrace();
-        }finally {
+        } finally {
             if (rs != null) {
                 rs.close();
             }
@@ -202,16 +202,17 @@ public class IngredientDAO {
             + "  FROM [BakeryRecipe].[dbo].[Ingredient]\n"
             + "  WHERE [Name] = ?";
 
-    public static int getIngredientIDByName(String name, Connection conn) throws SQLException {
+    public static int getIngredientIDByName (String name) throws SQLException {
         String sql = SELECT_INGREDIENT_ID_BY_NAME;
-                    PreparedStatement ps = null;
-                                ResultSet rs = null;
+        Connection conn = null;
+        PreparedStatement ps = null;
+        ResultSet rs = null;
         try {
-          ps = conn.prepareStatement(sql);
+            ps = conn.prepareStatement(sql);
             //Set ps
             ps.setString(1, name);
             //run ps
-   rs = ps.executeQuery();
+            rs = ps.executeQuery();
             int id = -1;
             if (rs.next()) {
                 id = rs.getInt(1);
@@ -221,7 +222,7 @@ public class IngredientDAO {
         } catch (Exception e) {
             System.out.println("getIngredientByID error:");
             e.printStackTrace();
-        }finally {
+        } finally {
             if (rs != null) {
                 rs.close();
             }
@@ -237,7 +238,7 @@ public class IngredientDAO {
     private static final String ALL_INGREDIENT = "SELECT Name\n"
             + "FROM Ingredient";
 
-    public static List<String> getAllIngredients() throws SQLException {
+    public static List<String> getAllIngredients () throws SQLException {
         List<String> list = new ArrayList<String>();
         Connection conn = null;
         PreparedStatement ptm = null;
@@ -253,7 +254,7 @@ public class IngredientDAO {
             }
         } catch (Exception e) {
             System.out.println("getAllIngredients have error !!!");
-        }finally {
+        } finally {
             if (rs != null) {
                 rs.close();
             }
@@ -267,7 +268,7 @@ public class IngredientDAO {
         return list;
     }
 
-    public static HashMap<String, Integer> getAllIngredientsWithPoint() throws SQLException {
+    public static HashMap<String, Integer> getAllIngredientsWithPoint () throws SQLException {
         String sql = "SELECT Name, Point\n"
                 + "FROM Ingredient";
         HashMap<String, Integer> list = new HashMap<String, Integer>();
@@ -285,7 +286,7 @@ public class IngredientDAO {
             }
         } catch (Exception e) {
             System.out.println("getAllIngredientsWithPoint have error !!!");
-        }finally {
+        } finally {
             if (rs != null) {
                 rs.close();
             }
@@ -312,10 +313,6 @@ public class IngredientDAO {
         PreparedStatement ps = null;
         ResultSet rs = null;
         try {
-            if (conn == null) {
-                conn = IngredientDAO.conn;
-                conn.setAutoCommit(true);
-            }
             String sql = ADD_INGREDIENT;
             ps = conn.prepareStatement(sql);
             ps.setString(1, ingreName);
@@ -351,7 +348,7 @@ public class IngredientDAO {
      *
      * @return
      */
-    static boolean updateIngredientsRecipe(String[] ingreName, String[] ingreAmount, int recipeId, Connection conn,
+    static boolean updateIngredientsRecipe (String[] ingreName, String[] ingreAmount, int recipeId, Connection conn,
             ServletContext sc) throws SQLException {
         List<Ingredient> oldIngredientList = getListIngredient(recipeId);
         int newSize = 0;
@@ -383,19 +380,26 @@ public class IngredientDAO {
             + " IngredientID= ?,[Amount] = ?"
             + " WHERE IngredientID = ?";
 
-    private static boolean updateIngredientRecipe(String ingreName, String ingreAmount, int recipeId, int ingreId,
+    private static boolean updateIngredientRecipe (String ingreName, String ingreAmount, int recipeId, int ingreId,
             Connection conn, ServletContext sc) throws SQLException {
         String sql = UPDATE_INGREDIENT_RECIPE;
-        PreparedStatement ps = conn.prepareStatement(sql);
-        int id = getIngredientIDByName(ingreName, conn);
-        ps.setInt(1, id);
-        ps.setString(2, ingreAmount);
-        ps.setInt(3, ingreId);
-        if (ps.executeUpdate() == 1) {
-            System.out.println("Updated Ingredient Relation" + id + " " + ingreName);
+        PreparedStatement ps = null;
+        try {
+            ps = conn.prepareStatement(sql);
+            int newID = getIngredientIDByName(ingreName);
+            ps.setInt(1, newID);
+            ps.setString(2, ingreAmount);
+            ps.setInt(3, ingreId);
+            if (ps.executeUpdate() == 1) {
+                System.out.println("Updated Ingredient Recipe" + newID + " " + ingreName);
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+            if (ps != null) {
+                ps.close();
+            }
         }
-        ps.close();
-        conn.close();
         return false;
     }
     private static final String DELETE_INGREDIENT_RECIPE
@@ -413,8 +417,9 @@ public class IngredientDAO {
             }
         } catch (SQLException e) {
             e.printStackTrace();
-        }finally{
-            if(ps != null) ps.close();
+        } finally {
+            if (ps != null)
+                ps.close();
         }
         return false;
     }

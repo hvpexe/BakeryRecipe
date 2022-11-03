@@ -66,7 +66,7 @@ public class LoginPageTesting {
         }
         return null;
     }
-    public static void main(String[] args) {
+    public static void main(String[] args) throws SQLException {
         
         List<Comment> comment = CommentDAO.manageCommentList();
         for (Comment o : comment){

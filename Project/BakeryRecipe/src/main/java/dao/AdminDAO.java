@@ -23,14 +23,16 @@ public class AdminDAO {
 
     private static Connection conn = DBUtils.getConnection();
 
-    public static int getNumberUserActive() throws SQLException {
+    public static int getNumberUserActive () throws SQLException {
         String sql = "SELECT COUNT(U.ID)\n"
                 + "FROM [User] U\n"
                 + "WHERE U.IsActive = 1";
         int count = 0;
         PreparedStatement ps = null;
         ResultSet rs = null;
+        Connection conn = null;
         try {
+            conn = DBUtils.getConnection();
             ps = conn.prepareStatement(sql);
             rs = ps.executeQuery();
             if (rs.next()) {
@@ -54,14 +56,16 @@ public class AdminDAO {
         return count;
     }
 
-    public static int getNumberRecipeAvailable() throws SQLException {
+    public static int getNumberRecipeAvailable () throws SQLException {
         String sql = "SELECT COUNT(ID)\n"
                 + "FROM Recipe\n"
                 + "WHERE IsDeleted = 0";
         int count = 0;
         PreparedStatement ps = null;
         ResultSet rs = null;
+        Connection conn = null;
         try {
+            conn = DBUtils.getConnection();
             ps = conn.prepareStatement(sql);
             rs = ps.executeQuery();
             if (rs.next()) {
@@ -85,15 +89,16 @@ public class AdminDAO {
         return count;
     }
 
-    public static int getNumberCommentAvailable() throws SQLException {
+    public static int getNumberCommentAvailable () throws SQLException {
         String sql = "SELECT COUNT(ID)\n"
                 + "FROM Comment\n"
                 + "WHERE IsDeleted = 0";
         int count = 0;
         PreparedStatement ps = null;
         ResultSet rs = null;
-
+        Connection conn = null;
         try {
+            conn = DBUtils.getConnection();
             ps = conn.prepareStatement(sql);
             rs = ps.executeQuery();
             if (rs.next()) {
@@ -117,13 +122,15 @@ public class AdminDAO {
         return count;
     }
 
-    public static int getNumberLike() throws SQLException {
+    public static int getNumberLike () throws SQLException {
         String sql = "SELECT COUNT(*)\n"
                 + "FROM [Like]";
         int count = 0;
         PreparedStatement ps = null;
         ResultSet rs = null;
+        Connection conn = null;
         try {
+            conn = DBUtils.getConnection();
             ps = conn.prepareStatement(sql);
             rs = ps.executeQuery();
             if (rs.next()) {
@@ -147,13 +154,15 @@ public class AdminDAO {
         return count;
     }
 
-    public static int getNumberSave() throws SQLException {
+    public static int getNumberSave () throws SQLException {
         String sql = "SELECT COUNT(*)\n"
                 + "FROM [Save]";
         int count = 0;
         PreparedStatement ps = null;
         ResultSet rs = null;
+        Connection conn = null;
         try {
+            conn = DBUtils.getConnection();
             ps = conn.prepareStatement(sql);
             rs = ps.executeQuery();
             if (rs.next()) {
@@ -177,13 +186,15 @@ public class AdminDAO {
         return count;
     }
 
-    public static int getNumberFollow() throws SQLException {
+    public static int getNumberFollow () throws SQLException {
         String sql = "SELECT COUNT(*)\n"
                 + "FROM Follow";
         int count = 0;
         PreparedStatement ps = null;
         ResultSet rs = null;
+        Connection conn = null;
         try {
+            conn = DBUtils.getConnection();
             ps = conn.prepareStatement(sql);
             rs = ps.executeQuery();
             if (rs.next()) {
@@ -207,7 +218,7 @@ public class AdminDAO {
         return count;
     }
 
-    public static String getSumUserRegisterInMonthByYear(int year) throws SQLException {
+    public static String getSumUserRegisterInMonthByYear (int year) throws SQLException {
         String sql = "SELECT YEAR(U.DateRegister) as yyyy,\n"
                 + "       MONTH(U.DateRegister) as mm,\n"
                 + "       COUNT(U.ID) as NoUser \n"
@@ -218,7 +229,9 @@ public class AdminDAO {
         List<Integer> noUserByMonth = new ArrayList<>();
         PreparedStatement ps = null;
         ResultSet rs = null;
+        Connection conn = null;
         try {
+            conn = DBUtils.getConnection();
             ps = conn.prepareStatement(sql);
             ps.setInt(1, year);
             rs = ps.executeQuery();
@@ -286,7 +299,7 @@ public class AdminDAO {
         return check;
     }
 
-    public static void main(String[] args) throws SQLException {
+    public static void main (String[] args) throws SQLException {
         System.out.println(getSumUserRegisterInMonthByYear(2021));
     }
 }

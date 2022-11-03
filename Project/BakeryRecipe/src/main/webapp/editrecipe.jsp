@@ -65,10 +65,10 @@
                     <form action="editrecipe"  class="section-div col-12 col-md-10 align-content-center align-self-center"
                           id="add-recipe" enctype="multipart/form-data" method="post" >
                         <input name="recipe-id" type="hidden" value="${recipe.id}">
-                        <div class="title-div col-12">
-                            <b class="label">Title</b>
-                            <input name='recipe-name' class="input col-12"  type="text" placeholder="Recipe's Name "
-                                   value="${recipe.name}">
+                    <div class="title-div col-12">
+                        <b class="label">Title</b>
+                        <input name='recipe-name' class="input col-12"  type="text" placeholder="Recipe's Name "
+                               value="${recipe.name}">
                         <span class="status"><span>
                                 </div>
                                 <div class="add-recipe-input col">
@@ -174,22 +174,23 @@
                                             </div>
                                         </div>
                                         <c:forEach items="${LIST_STEP}" var="st" varStatus="i">
-                                            <div class="col align-items-center p-0 " id="inst${i.index+1}">
-                                                <h5 class="text-secondary col-12 p-0">
-                                                    Step <span>${st.insstep}</span>
-                                                    <input name="step" onclick="this.previousElementSibling.innerText = this.value" type="hidden" value="${st.insstep}">
-                                                </h5>
-                                                <div class="col hover-highlight  p-0 pr-2 d-flex align-items-center border border-secondary rounded" onclick="showDetail(this.parentElement);">
-                                                    <div class="inst-img d-inline-flex ${empty st.img?'fas fa-camera':''} position-relative align-items-center justify-content-center" 
-                                                         src="${st.img}" 
-                                                         style="background-image: url(${st.img});"
-                                                         onclick="this.querySelector('input').click();">
-                                                        <input name="inst-image" id="inst-image${i.index8}" class="d-none" readonly="" type="file" accept="image/*" onchange="changeImg(this.parentElement, window.URL.createObjectURL(this.files[0]), event)">
-                                                    </div>
-                                                    <textarea class="instruction-box-input col " value="Efad" readonly="" name="inst-description" id="inst-description1" type="text">${st.detail}</textarea>
-                                                    <div class="item-trashbin fas fa-trash ml-auto description-button" onclick="removeElem(this.parentElement)"></div>
+                                            ${st}
+                                        <div class="col align-items-center p-0 " id="inst3">
+                                            <h5 class="text-secondary col-12 p-0">
+                                                Step <span>${i.index+1}</span>
+                                                <input name="step" onclick="this.previousElementSibling.innerText = this.value" type="hidden" value="${i.index+1}">
+                                            </h5>
+                                            <div class="col hover-highlight  p-0 pr-2 d-flex align-items-center border border-secondary rounded" onclick="showDetail(this.parentElement);">
+                                                <div class="inst-img d-inline-flex ${empty st.img?'fas fa-camera':''} position-relative align-items-center justify-content-center" 
+                                                     src="${st.img}" 
+                                                     style="background-image:url(${st.img})"
+                                                     onclick="this.querySelector('input').click();">
+                                                    <input name="inst-image3" id="inst-image3" class="d-none" readonly="" type="file" accept="image/*" onchange="changeImg(this.parentElement, window.URL.createObjectURL(this.files[0]), event)">
                                                 </div>
+                                                <textarea class="instruction-box-input col " value="${st.detail}" readonly="" name="inst-description" id="inst-description3" type="text">${st.detail}</textarea>
+                                                <div class="item-trashbin fas fa-trash ml-auto description-button" onclick="removeElem(this.parentElement)"></div>
                                             </div>
+                                        </div>
                                         </c:forEach>
                                     </div>
 

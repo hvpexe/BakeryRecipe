@@ -79,7 +79,6 @@ public class PictureDAO {
             else
                 addPictureRecipe(picture, false, i, recipeId, conn, sc);
         }
-        conn.commit();
         return true;
     }
 
@@ -102,13 +101,13 @@ public class PictureDAO {
             ptm.setInt(1, recipeID);
             rs = ptm.executeQuery();
             while (rs.next()) {
-                Picture picture = new Picture(rs.getString(2), rs.getBoolean(3), rs.getString(4));
+                Picture picture = new Picture(rs.getInt(1),rs.getString(2), rs.getBoolean(3), rs.getString(4));
                 listPicture.add(picture);
             }
         } catch (Exception e) {
             System.out.println("System have error !!!");
             e.printStackTrace();
-        }finally {
+        } finally {
             if (rs != null) {
                 rs.close();
             }
@@ -146,30 +145,33 @@ public class PictureDAO {
         String filename = null;
         String sql = UPDATE_PICTURE;
         PreparedStatement ps = null;
-        if (!picture.getSubmittedFileName().isEmpty())//picture is null ignore the whole function
-        {
-            ps = conn.prepareStatement(sql);
-            filename = "picture_" + pictureIndex + "_" + recipeId;
-            ps.setString(1, Tools.getFilePath(filename, picture));
-            ps.setBoolean(2, cover);
-            ps.setInt(3, recipeId);
-            ps.setInt(4, picid);
-        } else {
-            sql = sql.replace("[Img] = ?,", "");
-            ps = conn.prepareStatement(sql);
-            ps.setBoolean(1, cover);
-            ps.setInt(2, recipeId);
-            ps.setInt(3, picid);
-        }
-        if (ps.executeUpdate() == 1) {
-            System.out.println("Picture " + picid + " Updated");
-            if (filename != null) {
-                filename = Tools.saveFile(filename, picture, sc, filename);
-                System.out.println(filename);
+        try {
+            if (!picture.getSubmittedFileName().isEmpty())//picture is null ignore the whole function
+            {
+                ps = conn.prepareStatement(sql);
+                filename = "picture_" + pictureIndex + "_" + recipeId;
+                ps.setString(1, Tools.getFilePath(filename, picture));
+                ps.setBoolean(2, cover);
+                ps.setInt(3, recipeId);
+                ps.setInt(4, picid);
+            } else {
+                sql = sql.replace("[Img] = ?,", "");
+                ps = conn.prepareStatement(sql);
+                ps.setBoolean(1, cover);
+                ps.setInt(2, recipeId);
+                ps.setInt(3, picid);
             }
+            if (ps.executeUpdate() == 1) {
+                System.out.println("Picture " + picid + " Updated");
+                if (filename != null) {
+                    filename = Tools.saveFile(filename, picture, sc, filename);
+                    System.out.println(filename);
+                }
+            }
+        } catch (Exception e) {
+            if (ps != null)
+                ps.close();
         }
-        ps.close();
-        conn.close();
         return false;
     }
 
@@ -240,11 +242,11 @@ public class PictureDAO {
             }
         } catch (SQLException e) {
             e.printStackTrace();
-        }finally{
-            if(ps != null) ps.close();
+        } finally {
+            if (ps != null)
+                ps.close();
         }
-        ps.close();
-        conn.close();
+
         return false;
     }
 

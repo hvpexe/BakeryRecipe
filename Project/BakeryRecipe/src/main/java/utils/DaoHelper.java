@@ -5,13 +5,11 @@
  */
 package utils;
 
-import java.lang.reflect.Method;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.ResultSetMetaData;
 import java.sql.SQLException;
-import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.logging.Level;
@@ -108,31 +106,43 @@ public class DaoHelper {
 //        }
 //        return obj;
 //    }
-    public static List<Object[]> execute (String SQL, Object... para) {
-        List<Object[]> list =  new LinkedList<>();
+    public static List<Object[]> execute (String SQL, Object... para) throws SQLException {
+        List<Object[]> list = new LinkedList<>();
+        Connection conn = null;
+        PreparedStatement ps = null;
+        ResultSet rs = null;
         try {
-            Connection conn = DBUtils.getConnection();
-            PreparedStatement ps = conn.prepareStatement(SQL);
+            conn = DBUtils.getConnection();
+            ps = conn.prepareStatement(SQL);
             if (SQL.contains("?")) {
                 int paramCount = ps.getParameterMetaData().getParameterCount();
                 int i = 0;
                 while (++i <= paramCount)
                     ps.setObject(i, para[i - 1]);
             }
-            ResultSet rs = ps.executeQuery();
+            rs = ps.executeQuery();
             ResultSetMetaData rsmd = rs.getMetaData();
             while (rs.next()) {
                 int column = rsmd.getColumnCount();
                 Object[] objs = new Object[column];
-                for (int i = 1; i <= column; i++)
-                {
-                    objs[i-1] = rs.getObject(i);
+                for (int i = 1; i <= column; i++) {
+                    objs[i - 1] = rs.getObject(i);
                 }
                 list.add(objs);
             }
             return list;
         } catch (SQLException ex) {
             Logger.getLogger(DaoHelper.class.getName()).log(Level.SEVERE, null, ex);
+        } finally {
+            if (conn != null) {
+                conn.close();
+            }
+            if (ps != null) {
+                ps.close();
+            }
+            if (rs != null) {
+                rs.close();
+            }
         }
         return null;
 
@@ -159,8 +169,8 @@ public class DaoHelper {
         return OTHERS;
     }
 
-    public static void main (String[] args) {
-        List<Object[]> list= execute("SELECT [RecipeID]\n"
+    public static void main (String[] args) throws SQLException {
+        List<Object[]> list = execute("SELECT [RecipeID]\n"
                 + "      ,[UserID]\n"
                 + "  FROM [Like]");
         for (Object[] objects : list) {
