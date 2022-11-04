@@ -114,7 +114,7 @@ public class ReportDAO {
         } catch (Exception e) {
             e.printStackTrace();
         } finally {
-              if (ptm != null) {
+            if (ptm != null) {
                 ptm.close();
             }
             if (cnn != null) {
@@ -126,7 +126,7 @@ public class ReportDAO {
 
     private static final String SHOW_REPORT_COMM_LIST = "SELECT [ReportComment].ID, [ReportComment].Detail, "
             + "[ReportComment].DateReport, [ReportComment].ReportType, "
-            + "[ReportComment].[Status], [ReportComment].CommentID, "
+            + "[ReportComment].[Status], "
             + "[ReportComment].UserID, [User].LastName + ' ' + [User].FirstName AS Reporter, "
             + "[Comment].Comment\n"
             + "FROM [ReportComment]\n"
@@ -150,8 +150,7 @@ public class ReportDAO {
                         rs.getString("ReportType"),
                         rs.getString("Status"),
                         rs.getString("Reporter"),
-                        rs.getString("Comment"),
-                        rs.getInt("CommentID"));
+                        rs.getString("Comment"));
                 list.add(reportCMT);
             }
             return list;
@@ -170,4 +169,52 @@ public class ReportDAO {
         return null;
     }
 
+    private static final String SHOW_REPORT_RECIPE_LIST = "SELECT [ReportRecipe].ID, [ReportRecipe].DateReport, "
+            + "[ReportRecipe].Detail, [ReportRecipe].ReportType, "
+            + "[ReportRecipe].[Status], [ReportRecipe].UserID, "
+            + "[User].LastName + ' ' + [User].FirstName AS Reporter, [Recipe].[Name], "
+            + "[Picture].Img, [ReportRecipe].RecipeID\n"
+            + "FROM [ReportRecipe]\n"
+            + "JOIN [User] ON [ReportRecipe].UserID = [User].ID\n"
+            + "JOIN [Recipe] ON [ReportRecipe].RecipeID = [Recipe].ID\n"
+            + "JOIN [Picture] ON [Picture].RecipeID = [Recipe].ID\n"
+            + "WHERE [Picture].IsCover = 1";
+
+    public static List<Report> reportRecipeList() throws SQLException {
+        Connection conn = null;
+        PreparedStatement ps = null;
+        ResultSet rs = null;
+        try {
+            conn = DBUtils.getConnection();
+            ps = conn.prepareStatement(SHOW_REPORT_RECIPE_LIST);
+            rs = ps.executeQuery();
+            List<Report> list = new ArrayList<>();
+            while(rs.next()){
+                Report report = new Report(rs.getInt("ID"), 
+                        rs.getDate("DateReport"), 
+                        rs.getString("Detail"), 
+                        rs.getInt("UserID"), 
+                        rs.getString("ReportType"), 
+                        rs.getString("Status"), 
+                        rs.getString("Reporter"), 
+                        rs.getString("Name"), 
+                        rs.getString("Img"), 
+                        rs.getInt("RecipeID"));
+                list.add(report);
+            }
+            return list;
+        } catch (Exception e) {
+        } finally {
+            if (rs != null) {
+                rs.close();
+            }
+            if (ps != null) {
+                ps.close();
+            }
+            if (conn != null) {
+                conn.close();
+            }
+        }
+        return null;
+    }
 }
