@@ -117,7 +117,7 @@ public class EditRecipeController extends HttpServlet {
 
             out.print("<hr>" + "Pictures " + cover);
             for (Part p : parts) {
-                if (p.getName().contains("video-image")) {
+                if (p.getName().contains("video-image") ) {
                     try {
                         out.print("<br>" + p.getName());
                         out.print(", " + p.getSubmittedFileName().isEmpty());
@@ -140,10 +140,11 @@ public class EditRecipeController extends HttpServlet {
             for (Part p : parts) {
                 if (p.getName().contains("inst-image")) {
                     try {
-                        out.print("<hr>" + p.getName());
+                        out.print("<br>" + p.getName());
                         out.print(", " + p.getSubmittedFileName().isEmpty());
                         out.print(", " + p.getSubmittedFileName());
                         out.print(", " + p.getContentType());
+                        out.print(", " + instDescription[iIndex++]);
                         instImgList.add(p);
                     } catch (Exception e) {
                     }

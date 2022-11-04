@@ -12,10 +12,9 @@
         <title>JSP Page</title>
     </head>
     <body>
-        <form action="test">
-            <input type="text" readonly value="hehe" name="name">
-            <input type="text" name="name">
-            <input type="text" name="name"><br>
+        <form action="debug" method="post" enctype="multipart/form-data">
+            <input type="file" value="hehe" name="name">
+         
             <input type="submit" value="Submit">
         </form>
     </body>

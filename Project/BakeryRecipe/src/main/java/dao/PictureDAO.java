@@ -44,7 +44,7 @@ public class PictureDAO {
             //picture path config
             System.out.println("--------------------------------------------------------------------------------------");
             filename = "picture_" + pictureIndex + "_" + recipeId;
-            filePath = Tools.getFilePath(filename, picture);
+            filePath = Tools.getFileType(filename, picture);
             ps = conn.prepareStatement(sql);
             ps.setString(1, filePath);
             ps.setBoolean(2, isCover);
@@ -149,7 +149,7 @@ public class PictureDAO {
             {
                 ps = conn.prepareStatement(sql);
                 filename = "picture_" + pictureIndex + "_" + recipeId;
-                ps.setString(1, Tools.getFilePath(filename, picture));
+                ps.setString(1, Tools.getFileType(filename, picture));
                 ps.setBoolean(2, cover);
                 ps.setInt(3, recipeId);
                 ps.setInt(4, picid);
@@ -238,7 +238,7 @@ public class PictureDAO {
             ps = conn.prepareStatement(REMOVE_PICTURE);
             ps.setInt(1, id);
             if (ps.executeUpdate() == 1) {
-                System.out.println("DELETED Picture Recipe " + id);
+                System.out.println("Deleted Picture Recipe " + id);
                 return true;
             }
         } catch (SQLException e) {

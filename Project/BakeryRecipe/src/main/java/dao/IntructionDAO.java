@@ -42,7 +42,7 @@ public class IntructionDAO {
             ps = conn.prepareStatement(sql);
             if (instImg != null) {
                 filename = "instruction_" + (index + 1) + "_" + recipeId;
-                filePath = Tools.getFilePath(filename, instImg);
+                filePath = Tools.getFileType(filename, instImg);
             }
             ps.setInt(1, index + 1);
             ps.setString(2, detail);
@@ -82,6 +82,7 @@ public class IntructionDAO {
         if (instDescription != null)
             newSize = instDescription.length;
         System.out.println("======   " + instImgList);
+        System.out.println("======   " + instDescription);
         System.out.println("======   " + oldSize);
         System.out.println("======   " + oldList);
         System.out.println("======   " + newSize);
@@ -158,7 +159,7 @@ public class IntructionDAO {
                 ps = conn.prepareStatement(sql);
                 filename = "instruction_" + insStep + "_" + recipeId;
                 ps.setString(1, detail);
-                ps.setString(2, Tools.getFilePath(filename, instImg));
+                ps.setString(2, Tools.getFileType(filename, instImg));
                 ps.setInt(3, recipeId);
                 ps.setInt(4, insStep);
             } else {

@@ -123,6 +123,7 @@
                                                           style='background-image: url("${pic.img}");'
                                                           src="${pic.img}"
                                                           onclick="selectContent(this.parentElement, this)">
+                                                        <input type="hidden" name="video-imgpath" class="d-none" value="${pic.img}">
                                                         <input type="file" name="video-image" class="d-none" count="${i.index}">
                                                     </span>
                                                 </c:forEach>
@@ -192,7 +193,7 @@
                                                              onclick="this.querySelector('input').click();">
                                                             <input name="inst-image${i.index}" id="inst-image3" class="d-none" readonly="" type="file" accept="image/*" onchange="changeImg(this.parentElement, window.URL.createObjectURL(this.files[0]), event)">
                                                         </div>
-                                                        <textarea class="instruction-box-input col " value="${st.detail}" readonly="" name="inst-description" id="inst-description3" type="text">${st.detail}</textarea>
+                                                        <textarea class="instruction-box-input col " value="${st.detail}" readonly="" name="inst-description" id="inst-description${i.index}" type="text">${st.detail}</textarea>
                                                         <div class="item-trashbin fas fa-trash ml-auto description-button" onclick="removeElem(this.parentElement)"></div>
                                                     </div>
                                                 </div>

@@ -91,20 +91,19 @@ public class Tools {
         return string == null || string.trim().isEmpty();
     }
 
-    public static String saveFile (String savedFileName, Part partFile, ServletContext sc, String filePath) throws IOException {
+    public static String saveFile (String fileName, Part partFile, ServletContext sc, String filePath) throws IOException {
         InputStream is = null;
+        String savedFilePath;
         try {
             is = partFile.getInputStream();
-            savedFileName = getFilePath(savedFileName, partFile);
-
-            if (savedFileName == null)
+            savedFilePath = "/" + filePath ;
+            if (fileName == null)
                 return null;
-
-            String webFilePath = sc.getRealPath("/" + filePath);
+            fileName = getFileType(fileName, partFile);
+            String webFilePath = sc.getRealPath(savedFilePath);
             String buildFilePath = webFilePath.
                     replace("\\target\\BakeryRecipe-1.0-SNAPSHOT\\", "\\src\\main\\webapp\\");
             Tools.getFolderUpload(webFilePath);
-            Tools.getFolderUpload(buildFilePath);
 //absoluteFilepath = D:\learning in FPT\Ky_5\SWP391\BakeryRecipe\Project\BakeryRecipe\target\BakeryRecipe-1.0-SNAPSHOT\assets\images\avt
 //webFilepath = D:\learning in FPT\Ky_5\SWP391\BakeryRecipe\Project\BakeryRecipe\src\main\webapp\assets\images\avt
 
@@ -112,16 +111,16 @@ public class Tools {
             if (!f.exists())
                 f.mkdirs();
             f = new File(buildFilePath);
-            partFile.write(webFilePath + savedFileName);
+            partFile.write(webFilePath+fileName);
             if (f.exists())
-                partFile.write(buildFilePath + savedFileName);
-            System.out.println("path: " + filePath + savedFileName);
+                partFile.write(buildFilePath+fileName);
+            System.out.println("path: " + savedFilePath+fileName);
 
-            return savedFileName;
+            return fileName;
         } catch (IOException ex) {
-            System.out.println("Error Cant Save to " + filePath + savedFileName + "! " + ex.getMessage());
-        }finally{
-            if(is != null){
+            System.out.println("Error Cant Save to " + filePath + fileName + "! " + ex.getMessage());
+        } finally {
+            if (is != null) {
                 is.close();
             }
         }
@@ -151,13 +150,13 @@ public class Tools {
             return savedFileName;
         } catch (IOException e) {
             e.printStackTrace();
-        }finally{
-           
+        } finally {
+
         }
         return null;
     }
 
-    public static String getFilePath (String filename, Part partFile) {
+    public static String getFileType (String filename, Part partFile) {
         String submittedFileName = null;
         File f = null;
         submittedFileName = partFile.getSubmittedFileName();

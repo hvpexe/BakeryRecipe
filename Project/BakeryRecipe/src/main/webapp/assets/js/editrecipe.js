@@ -12,6 +12,12 @@ async function submitForm(selector) {
     var smbtn = document.getElementById('submit');
     const output = document.getElementById('test');
     var cover = document.querySelector('[name=cover]');
+    var coverNode = document.querySelectorAll('#img-content [name=video-image]');
+    var i=0;
+    coverNode.forEach(x => {
+        x.parentNode.classList.contains('cover')?cover.value=i:'';
+        i++;
+    });
     if (!cover.value)
         cover.value = 0;
     for (var i = 0; i < inputs.length; i++) {
@@ -100,7 +106,7 @@ async function showBox(option) {
         }
         ;
     }
-    
+
 }
 function getLinkEmbed(value) {
     var embedUrl = value.match(/[\w\-]{11,}/)[0];
@@ -229,7 +235,7 @@ async function changeDisplayImage(elem, image) {
         image.style.backgroundSize = '';
     };
     elem.click();
-    
+
 }
 function getObjURL(file) {
     url = URL.revokeObjectURL(file);
@@ -287,7 +293,7 @@ function ItemCopy(option) {
     } else {
         console.log('error: nothing to copy');
     }
-    
+
 }
 ;
 function checkKeyEnter(e) {
@@ -381,7 +387,7 @@ $('#detail .save-btn').on('click', e => {
         changeImg(clone.parentElement, getObjURL(clone.files[0]))
         elemFile.remove();
     }
-    
+
     console.log(detail);
     console.log(elem);
     document.querySelector("#detail").classList.add('d-none');
@@ -453,10 +459,10 @@ ItemCopy({
         } else
         {
             var error = document.createElement('div');
-            error.innerHTML= 'Cannot add same ingredient!';
+            error.innerHTML = 'Cannot add same ingredient!';
             $(error).insertAfter($('#ingredient'));
             console.log(error);
-            setTimeout(()=>error.remove(),2000);
+            setTimeout(() => error.remove(), 2000);
         }
     },
     count: '#ingredient [name=count]',
