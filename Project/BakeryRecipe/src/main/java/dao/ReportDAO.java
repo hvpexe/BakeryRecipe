@@ -21,8 +21,8 @@ import utils.DBUtils;
  */
 public class ReportDAO {
 
-    private static final String ADD_REPORT_RECIPE = "insert into [dbo].[ReportRecipe]([DateReport],[Detail],[RecipeID],[UserID],[ReportType]) "
-            + "values (?,?,?,?,?)";
+    private static final String ADD_REPORT_RECIPE = "insert into [dbo].[ReportRecipe]([DateReport],[Detail],[RecipeID],[UserID],[ReportType],[Status]) \n"
+            + "            values (?,?,?,?,?,'Process')";
 
     public static boolean addReport(int bakerID, int recipeID, String detail, String reportType) throws SQLException {
         Connection cnn = null;
@@ -60,10 +60,10 @@ public class ReportDAO {
         return check;
     }
 
-    private static final String ADD_REPORT_COMMENT = "insert into [dbo].[ReportComment]([DateReport],"
-            + "[Detail],[CommentID],[UserID]) values (?,?,?,?)";
+    private static final String ADD_REPORT_COMMENT = "	insert into [dbo].[ReportComment]([DateReport],\n"
+            + "             [Detail],[CommentID],[UserID],[ReportType],[Status]) values (?,?,?,?,?,'Process')";
 
-    public static boolean reportCMT(String detailCMT, int CommentID, int userID) throws SQLException {
+    public static boolean reportCMT(String detailCMT, int CommentID, int userID, String reportType) throws SQLException {
         Connection cn = null;
         PreparedStatement ptm = null;
         boolean check = false;
@@ -77,6 +77,7 @@ public class ReportDAO {
             ptm.setString(2, detailCMT);
             ptm.setInt(3, CommentID);
             ptm.setInt(4, userID);
+            ptm.setString(5, reportType);
             check = ptm.executeUpdate() > 0 ? true : false;
         } catch (Exception e) {
         } finally {
@@ -86,6 +87,38 @@ public class ReportDAO {
             }
             if (cn != null) {
                 cn.close();
+            }
+        }
+        return check;
+    }
+
+    private static final String REPORT_USER = "	 insert into [dbo].[ReportUser]([Detail],[UserID],[UserID2],[DateReport],[ReportType],[Status])\n"
+            + "			 values (?,?,?,?,?,'Process')";
+
+    public static boolean reportUser(String detailReport, int userReport, int userReported, String reportType) throws SQLException {
+        boolean check = false;
+        Connection cnn = null;
+        PreparedStatement ptm = null;
+        Date currentDate = new Date(System.currentTimeMillis());
+        SimpleDateFormat dateFormat = new SimpleDateFormat("YYYY-MM-dd HH:mm:ss");
+        String date = dateFormat.format(currentDate);
+        try {
+            cnn = DBUtils.getConnection();
+            ptm = cnn.prepareStatement(REPORT_USER);
+            ptm.setString(1, detailReport);
+            ptm.setInt(2, userReport);
+            ptm.setInt(3, userReported);
+            ptm.setString(4, date);
+            ptm.setString(5, reportType);
+            check = ptm.executeUpdate() > 0 ? true : false;
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+              if (ptm != null) {
+                ptm.close();
+            }
+            if (cnn != null) {
+                cnn.close();
             }
         }
         return check;

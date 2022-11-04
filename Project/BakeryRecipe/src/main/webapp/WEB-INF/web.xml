@@ -124,6 +124,14 @@
         <servlet-name>ReportRecipeAjax</servlet-name>
         <servlet-class>controller.ajax.ReportRecipeAjax</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>ReportCommentAjax</servlet-name>
+        <servlet-class>controller.ajax.ReportCommentAjax</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>ReportUserAjax</servlet-name>
+        <servlet-class>controller.ajax.ReportUserAjax</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>DebugController</servlet-name>
         <url-pattern>/debug</url-pattern>
@@ -211,6 +219,14 @@
     <servlet-mapping>
         <servlet-name>ReportRecipeAjax</servlet-name>
         <url-pattern>/ReportRecipeAjax</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>ReportCommentAjax</servlet-name>
+        <url-pattern>/ReportCommentAjax</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>ReportUserAjax</servlet-name>
+        <url-pattern>/ReportUserAjax</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>
