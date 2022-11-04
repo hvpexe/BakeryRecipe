@@ -23,7 +23,7 @@ import utils.Tools;
  */
 public class PictureDAO {
 
-    private static final String INSERT_PICTURE = "INSERT INTO [dbo].[Picture]\n"
+    private static final String INSERT_PICTURE = "INSERT INTO [Picture]\n"
             + "           ([Img]\n"
             + "           ,[IsCover]\n"
             + "           ,[RecipeID])\n"
@@ -86,12 +86,11 @@ public class PictureDAO {
             + "      ,[Img]\n"
             + "      ,[IsCover]\n"
             + "      ,[RecipeID]\n"
-            + "  FROM [BakeryRecipe].[dbo].[Picture]\n"
+            + "  FROM [Picture]\n"
             + "  where RecipeID = ?";
 
     public static List<Picture> getPictureList (int recipeID) throws SQLException {
         List<Picture> listPicture = new ArrayList<>();
-        Recipe recipe = new Recipe();
         Connection conn = null;
         PreparedStatement ptm = null;
         ResultSet rs = null;
@@ -162,14 +161,16 @@ public class PictureDAO {
                 ps.setInt(3, picid);
             }
             if (ps.executeUpdate() == 1) {
-                System.out.println("Picture " + picid + " Updated");
+                System.out.println("Picture " + picid + " Updated, Cover:" +cover);
                 if (filename != null) {
-                    filename = Tools.saveFile(filename, picture, sc, filename);
+                    filename = Tools.saveFile(filename, picture, sc, Picture.IMG_PATH);
                     System.out.println(filename);
                 }
             }
         } catch (Exception e) {
-            if (ps != null)
+           e.printStackTrace();
+        }finally{
+             if (ps != null)
                 ps.close();
         }
         return false;

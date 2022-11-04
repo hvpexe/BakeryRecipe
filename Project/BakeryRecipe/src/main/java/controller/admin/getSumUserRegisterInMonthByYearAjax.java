@@ -32,13 +32,17 @@ public class getSumUserRegisterInMonthByYearAjax extends HttpServlet {
      * @throws IOException if an I/O error occurs
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException, SQLException {
-        response.setContentType("text/html;charset=UTF-8");
-
-        int year = Integer.parseInt(request.getParameter("year"));
-        String noUserByMonth = AdminDAO.getSumUserRegisterInMonthByYear(year);
-        PrintWriter out = response.getWriter();
-        out.println(noUserByMonth);
+            throws ServletException, IOException{
+        try {
+            response.setContentType("text/html;charset=UTF-8");
+            
+            int year = Integer.parseInt(request.getParameter("year"));
+            String noUserByMonth = AdminDAO.getSumUserRegisterInMonthByYear(year);
+            PrintWriter out = response.getWriter();
+            out.println(noUserByMonth);
+        } catch (SQLException ex) {
+            Logger.getLogger(getSumUserRegisterInMonthByYearAjax.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
@@ -53,11 +57,7 @@ public class getSumUserRegisterInMonthByYearAjax extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        try {
             processRequest(request, response);
-        } catch (SQLException ex) {
-            Logger.getLogger(getSumUserRegisterInMonthByYearAjax.class.getName()).log(Level.SEVERE, null, ex);
-        }
     }
 
     /**
@@ -71,11 +71,7 @@ public class getSumUserRegisterInMonthByYearAjax extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        try {
             processRequest(request, response);
-        } catch (SQLException ex) {
-            Logger.getLogger(getSumUserRegisterInMonthByYearAjax.class.getName()).log(Level.SEVERE, null, ex);
-        }
     }
 
     /**

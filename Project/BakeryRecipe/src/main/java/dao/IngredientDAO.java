@@ -10,6 +10,7 @@ import java.util.List;
 import javax.servlet.ServletContext;
 import utils.DBUtils;
 import java.util.HashMap;
+import java.util.LinkedList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -39,6 +40,7 @@ public class IngredientDAO {
         String sql = SELECT_INGREDIENT_BY_ID;
         ResultSet rs = null;
         PreparedStatement ps = null;
+        Connection conn = DBUtils.getConnection();
         try {
             ps = conn.prepareStatement(sql);
             //Set ps
@@ -73,6 +75,7 @@ public class IngredientDAO {
         String sql = SELECT_INGREDIENT_BY_NAME;
         PreparedStatement ps = null;
         ResultSet rs = null;
+        Connection conn = DBUtils.getConnection();
         try {
             ps = conn.prepareStatement(sql);
             //Set ps
@@ -119,7 +122,7 @@ public class IngredientDAO {
             //set sql
             conn.setAutoCommit(false);
             sql = INSERT_INGREDIENT_RECIPE;
-            int ingreId = IngredientDAO.getIngredientIDByName(ingreName);
+            int ingreId = IngredientDAO.getIngredientIDByName(ingreName, conn);
             if (ingreId == -1) {
                 ingreId = IngredientDAO.addIngredient(ingreName, conn);
             }
@@ -130,7 +133,7 @@ public class IngredientDAO {
             ps.setInt(2, ingreId);
             ps.setString(3, ingreAmount);
             ps.executeUpdate();
-            return false;
+            return true;
         } catch (Exception e) {
             System.out.println("Add Ingredient Recipe Error" + e.getMessage());
             e.printStackTrace();
@@ -146,15 +149,15 @@ public class IngredientDAO {
     }
 
     public static boolean addIngredientsRecipe (String[] ingreNames, String[] ingreAmounts, int recipeId,
-            Connection conn,
-            ServletContext sc) throws SQLException {
+            Connection conn, ServletContext sc) throws SQLException {
         conn.setAutoCommit(false);
         for (int i = 0; i < ingreNames.length; i++) {
             addIngredientRecipe(ingreNames[i], ingreAmounts[i], recipeId, conn, sc);
         }
         return true;
     }
-    private static final String LIST_INGREDIENT = "select ingre.[ID],ingre.[Name],ingre.[Img],ingreRe.Amount\n"
+    private static final String LIST_INGREDIENT
+            = "             select ingre.[ID],ingre.[Name],ingre.[Img],ingreRe.Amount\n"
             + "            from [dbo].[Ingredient] ingre join [dbo].[IngredientRecipe] ingreRe\n"
             + "            on ingre.ID =ingreRe.IngredientID\n"
             + "            join [dbo].[Recipe] re on ingreRe.RecipeID =re.ID\n"
@@ -197,14 +200,55 @@ public class IngredientDAO {
         return listIgre;
 
     }
+    private static final String LIST_INGREDIENT_RECIPE
+            = "SELECT i.[Name]\n"
+            + "      ,[Img]\n"
+            + "      ,ir.Amount\n"
+            + "	  ,ir.IngredientID\n"
+            + "      ,ir.RecipeID"
+            + "  FROM [Ingredient] i \n"
+            + "  join IngredientRecipe ir on ir.IngredientID=i.ID\n"
+            + "  join Recipe r on ir.RecipeID = r.ID\n"
+            + "  where RecipeID = ?";
 
+    public static List<Ingredient> getListIngredientRecipe (int recipeID, Connection conn) throws SQLException {
+        List<Ingredient> listIgre = new LinkedList<>();
+        PreparedStatement ptm = null;
+        ResultSet rs = null;
+        try {
+            ptm = conn.prepareStatement(LIST_INGREDIENT_RECIPE);
+            ptm.setInt(1, recipeID);
+            rs = ptm.executeQuery();
+            Ingredient sc;
+            while (rs.next()) {
+                int id = rs.getInt("IngredientID");
+                String name = rs.getString("Name");
+                String img = rs.getString("Img");
+                String amount = rs.getString("Amount");
+                sc = new Ingredient(id, name, img, amount);
+                listIgre.add(sc);
+            }
+        } catch (Exception e) {
+            System.out.println("System have error !!!");
+            e.printStackTrace();
+        } finally {
+            if (rs != null) {
+                rs.close();
+            }
+            if (ptm != null) {
+                ptm.close();
+            }
+        }
+        System.out.println(listIgre);
+        return listIgre;
+
+    }
     private static final String SELECT_INGREDIENT_ID_BY_NAME = "SELECT ID\n"
             + "  FROM [BakeryRecipe].[dbo].[Ingredient]\n"
             + "  WHERE [Name] = ?";
 
-    public static int getIngredientIDByName (String name) throws SQLException {
+    public static int getIngredientIDByName (String name, Connection conn) throws SQLException {
         String sql = SELECT_INGREDIENT_ID_BY_NAME;
-        Connection conn = null;
         PreparedStatement ps = null;
         ResultSet rs = null;
         try {
@@ -228,9 +272,6 @@ public class IngredientDAO {
             }
             if (ps != null) {
                 ps.close();
-            }
-            if (conn != null) {
-                conn.close();
             }
         }
         return -1;
@@ -350,7 +391,9 @@ public class IngredientDAO {
      */
     static boolean updateIngredientsRecipe (String[] ingreName, String[] ingreAmount, int recipeId, Connection conn,
             ServletContext sc) throws SQLException {
-        List<Ingredient> oldIngredientList = getListIngredient(recipeId);
+
+        List<Ingredient> oldIngredientList = null;
+        oldIngredientList = getListIngredientRecipe(recipeId, conn);
         int newSize = 0;
         if (ingreName != null) {
             newSize = ingreName.length;
@@ -359,40 +402,51 @@ public class IngredientDAO {
         int maxSize = Integer.max(newSize, oldSize);
         for (int i = 0; i < maxSize; i++) {
 
-            if (i < newSize && i < oldSize) {//update ingredient
+            Ingredient oldIngredient = null;
+            if (i < oldSize) {
+                oldIngredient = oldIngredientList.get(i);
+            }
 
-                Ingredient oldIngredient = oldIngredientList.get(i);
-                updateIngredientRecipe(ingreName[i], ingreAmount[i], recipeId, oldIngredient.getId(), conn, sc);
+            if (i < newSize && i < oldSize) {//update ingredient
+                System.out.println(newSize + " " + oldSize);
+                if (oldIngredient.getName() == ingreName[i] && oldIngredient.getAmount() == ingreAmount[i])
+                    continue;// if it's the same then continue
+                updateIngredientRecipe(ingreName[i], ingreAmount[i], recipeId, oldIngredient.getId(), conn);
             }
             if (i < newSize && i >= oldSize) { //add ingredient
                 addIngredientRecipe(ingreName[i], ingreAmount[i], recipeId, conn, sc);
             }
             if (i >= newSize && i < oldSize) { //delete ingredient
-                deleteIngredientRecipe(oldIngredientList.get(i).getId(), conn);
+                deleteIngredientRecipe(oldIngredient.getId(), recipeId, conn);
             }
 
         }
         return true;
     }
     private static final String UPDATE_INGREDIENT_RECIPE
-            = "UPDATE [IngredientRecipe]\n"
-            + "   SET "
-            + " IngredientID= ?,[Amount] = ?"
-            + " WHERE IngredientID = ?";
+            = " UPDATE IngredientRecipe\n"
+            + " SET IngredientID = ? , [Amount] = ?\n"
+            + " WHERE IngredientID = ? and RecipeID = ?";
 
     private static boolean updateIngredientRecipe (String ingreName, String ingreAmount, int recipeId, int ingreId,
-            Connection conn, ServletContext sc) throws SQLException {
+            Connection conn) throws SQLException {
         String sql = UPDATE_INGREDIENT_RECIPE;
         PreparedStatement ps = null;
+        int newID = -1;
         try {
             ps = conn.prepareStatement(sql);
-            int newID = getIngredientIDByName(ingreName);
+            newID = IngredientDAO.getIngredientIDByName(ingreName, conn);
+            if (newID == -1) {
+                newID = IngredientDAO.addIngredient(ingreName, conn);
+            }
             ps.setInt(1, newID);
             ps.setString(2, ingreAmount);
             ps.setInt(3, ingreId);
-            if (ps.executeUpdate() == 1) {
-                System.out.println("Updated Ingredient Recipe" + newID + " " + ingreName);
-            }
+            ps.setInt(4, recipeId);
+            System.out.println(newID + " " + ingreAmount + " " + ingreId + " " + recipeId);
+            ps.executeUpdate();
+            System.out.println("Updated Ingredient Recipe" + newID + " " + ingreName);
+            return true;
         } catch (Exception e) {
             e.printStackTrace();
         } finally {
@@ -402,17 +456,19 @@ public class IngredientDAO {
         }
         return false;
     }
+
     private static final String DELETE_INGREDIENT_RECIPE
             = "DELETE FROM [IngredientRecipe]\n"
-            + "      WHERE ID = ?";
+            + "      WHERE IngredientID = ? and RecipeID = ?";
 
-    private static boolean deleteIngredientRecipe (int id, Connection conn) throws SQLException {
+    private static boolean deleteIngredientRecipe (int ingreId, int recipeId, Connection conn) throws SQLException {
         PreparedStatement ps = null;
         try {
             ps = conn.prepareStatement(DELETE_INGREDIENT_RECIPE);
-            ps.setInt(1, id);
+            ps.setInt(1, ingreId);
+            ps.setInt(2, recipeId);
             if (ps.executeUpdate() == 1) {
-                System.out.println("DELETED Ingredient Recipe " + id);
+                System.out.println("DELETED Ingredient Recipe " + ingreId);
                 return true;
             }
         } catch (SQLException e) {
