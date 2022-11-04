@@ -10,6 +10,7 @@ import dto.Instruction;
 import dto.Recipe;
 import dto.RecipeSearch;
 import dto.User;
+import java.io.IOException;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -23,6 +24,8 @@ import java.text.SimpleDateFormat;
 import java.util.Collection;
 import java.util.Collections;
 import java.util.HashMap;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.servlet.ServletContext;
 import javax.servlet.http.Part;
 import org.checkerframework.common.returnsreceiver.qual.This;
@@ -313,15 +316,15 @@ public class RecipeDAO {
                     check = IngredientDAO.updateIngredientsRecipe(ingreName, ingreAmount, recipeId, conn, sc);
                     if (check) {
                         check = IntructionDAO.updateInstructionsRecipe(instImgList, instDescription, recipeId, conn, sc);
-                        if(check){
+                        if (check) {
+                            conn.commit();
                             return true;
                         }
                     }
                 }
             }
-        } catch (Exception e) {
-            System.out.println(e.getMessage());
-            e.printStackTrace();
+        } catch (IOException ex) {
+            Logger.getLogger(RecipeDAO.class.getName()).log(Level.SEVERE, null, ex);
         } finally {
             if (conn != null) {
                 conn.close();
