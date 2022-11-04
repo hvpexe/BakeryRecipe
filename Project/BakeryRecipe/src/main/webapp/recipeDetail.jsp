@@ -94,7 +94,7 @@
                             <div class="dropdown">
                                 <button style="color: white"><i class="fa-solid fa-ellipsis"></i></button>
                                 <div class="dropdown-options">
-                                    <a   class="d-inline-block text-muted hover-underline c-pointer mr-3" onclick="getReport(${RECIPE_DETAIL.getId()})" href="#">
+                                    <a   class="d-inline-block text-muted hover-underline c-pointer mr-3" onclick="getReportRecipe(${RECIPE_DETAIL.getId()})" href="#">
                                         <span class="align-middle">
                                             <strong>${re.like}</strong> Report</span></a>
                                     <a href="#">Delete</a>
@@ -239,12 +239,16 @@
                                     <!--test list_cmt-->
 
                                     <c:forEach items="${COMMENT_LIST}" var="cmt">
+                                        <input  type="hidden" id="commentID">
+                                        <input type="hidden" id="commentReportID" value="${cmt.commentID}">
+                                        
+                                    
                                         <div class="d-flex flex-start mb-4"   >
                                             <img class="rounded-circle mr-2"
                                                  src="./assets/images/avt/${cmt.avatar}" alt="avatar"
                                                  width="60" height="60" />
                                             <div class="card w-100">
-                                                <div class="card-body p-4">
+                                                <div class="card-body p-4"> 
                                                     <div class="">
                                                         <div id="baseline">
                                                         <h5>${cmt.chefName}</h5>
@@ -252,7 +256,7 @@
                                                         <div class="dropdown">
                                                             <button style="color: white"><i class="fa-solid fa-ellipsis"></i></button>
                                                             <div class="dropdown-options">
-                                                                <a   class="d-inline-block text-muted hover-underline c-pointer mr-3" onclick="getReport(${RECIPE_DETAIL.getId()})" href="#">
+                                                                <a   class="d-inline-block text-muted hover-underline c-pointer mr-3" onclick="getReportComment(${RECIPE_DETAIL.getId()})" href="#">
                                                                     <span class="align-middle">
                                                                         <strong>${re.like}</strong> Report</span></a>
                                                                 <a href="#">Delete</a>
@@ -304,15 +308,16 @@
                 </div>
 
             </div>
+                                               
         </c:catch> ${e}
 
         <!--PhuHV: nua dem fix bug cai nay, tien sư thang nao xoa script lam carousel ko chay -->
-        <!--ham container-->
-        <div class="fixed-container " id="report_list" >
+        <!--ham container report recipe-->
+        <div class="fixed-container " id="report_recipe" >
             <div class="gray-box"></div>
             <div class="content card-body col-12 col-md-4">
                 <div class="col-12 p-0">
-                    <div class="report-title h3 font-weight-bold">Report Recipe màu nhạt vl</div>
+                    <div class="report-title h3 font-weight-bold">Report Recipe </div>
                     <!--                    <form action="ReportController" class="col">-->
                     <div class="form-group">
                         <select name="typeReport" class="selectReport w-100" id="select_Rp">
@@ -332,7 +337,7 @@
                         <textarea name="txtReport" class="txtareaRp w-100"  id="txtReport" value=""></textarea>
                     </div>  
                     <div class="form-group">
-                        <button class="hover" type="submit" onclick="sendReport()">Send Report</button>
+                        <button class="hover" type="submit" onclick="sendReport('Recipe')">Send Report</button>
                     </div>
 
                     <!--</form>--> 
@@ -342,15 +347,54 @@
             </div>
         </div>
         <!--ket thuc ham container-->
+     
+        
+        
+        
+        <!--report cua comment--> 
+        <div class="fixed-container " id="report_comment" >
+            <div class="gray-box"></div>
+            <div class="content card-body col-12 col-md-4">
+                <div class="col-12 p-0">
+                    <div class="report-title h3 font-weight-bold">Report Comment</div>
+                    <!--                    <form action="ReportController" class="col">-->
+                    <div class="form-group">
+                        <select name="typeReport" class="selectReport w-100" id="select_Rp">
+                            <option value="Spam">Spam </option>
+                            <option value="Speech">Hate Speech</option>
+                            <option value="victim">Make fun of the victim</option>
+                        </select>
+                    <div class="form-group" >
+                        <textarea name="txtReport" class="txtareaRp w-100"  id="txtReportComment" value=""></textarea>
+                    </div>  
+                    <div class="form-group">
+                        <button class="hover" type="submit" onclick="sendReport('Comment')">Send Report</button>
+                    </div>
+
+                    <!--</form>--> 
+                </div>
+              
+                
+            </div>
+                  <div id="thankReport1"></div>
+        </div>
+            </div>
+                
+        <!--keu thuc report cua comment-->
+        
+      
         <script>
                               var loginID = ${sessionScope.login.id};
                               var recipeID =${RECIPE_DETAIL.id};
                               var userID = ${USER_DETAIL.id};
                               var likeNum =${RECIPE_DETAIL.getLike()};
+                          var commentID = document.querySelector('#commentReportID').value;
+                           
         </script>
         <script src="https://cdn.jsdelivr.net/npm/swiper@8/swiper-bundle.min.js"></script>
         <script src="assets/js/recipeDetail.js"></script>
         <c:import url="footer.jsp"/>
-    </body>
+ 
+         </body>
 
 </html>

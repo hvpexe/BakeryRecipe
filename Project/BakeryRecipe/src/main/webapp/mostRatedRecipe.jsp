@@ -15,7 +15,7 @@
         <title>Most Rated Recipe</title>
         <meta name="description" content="" />
 
-        <link rel="stylesheet" href="assets/css/community1.css" />
+        <link rel="stylesheet" href="assets/css/community.css" />
         <link rel="stylesheet" href="assets/css/web/bootstrap-4.3.1.min.css" />
         <link
             rel="stylesheet"

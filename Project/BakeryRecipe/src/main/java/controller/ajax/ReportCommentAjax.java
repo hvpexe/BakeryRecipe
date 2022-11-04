@@ -30,7 +30,7 @@ public class ReportCommentAjax extends HttpServlet {
        int userID = Integer.parseInt(request.getParameter("userID"));
        int cmtID= Integer.parseInt(request.getParameter("commentID"));
        String reportType = request.getParameter("reportTypeComment");
-       Report  report = new Report();
+       
               check = ReportDAO.reportCMT(detail, cmtID, userID, reportType);
        
        

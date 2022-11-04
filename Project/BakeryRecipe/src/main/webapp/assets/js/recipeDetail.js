@@ -52,7 +52,7 @@ function  saveButton(item, val1, val2, action) {
         url: "ajax/updatesaverecipe",
         type: "get", //send it through get method
         data: {
-            recipe:recipeID,
+            recipe: recipeID,
             action: action,
             user: loginID
         },
@@ -84,19 +84,19 @@ function  likeButton(item, val1, val2, action) {
     //                console.log(event.target.classList);
 
     var action = val1;
-    
+
     console.log(item);
-   if(val1==='UnLike'){
-       likeNum-=1;
-   }else{
-       likeNum+=1;
-   }
-    console.log(likeNum+"1111");
+    if (val1 === 'UnLike') {
+        likeNum -= 1;
+    } else {
+        likeNum += 1;
+    }
+    console.log(likeNum + "1111");
     $.ajax({
         url: "ajax/likerecipe",
         type: "get", //send it through get method
         data: {
-            recipe:recipeID,
+            recipe: recipeID,
             action: action,
             user: loginID
         },
@@ -152,19 +152,30 @@ function Comment(item, event) {
     }
 }
 
-function getReport(recipeID) {
+function getReportRecipe(recipeID) {
     console.log(recipeID);
-    var report = $('#report_list');
-    var graybox = $('#report_list .gray-box');
+    var report = $('#report_recipe');
+    var graybox = $('#report_recipe .gray-box');
     //       var content = $('#report_list .content');
     graybox.click(() => report.removeClass('d-flex'));
     var exit_button = document.createElement("div").classList.add('exit-btn');
     //load content
     report.addClass('d-flex');
     //
-    $('#report_list .exit-btn').click(() => report.removeClass('d-flex'));
+    $('#report_recipe .exit-btn').click(() => report.removeClass('d-flex'));
 }
-
+function getReportComment(recipeID) {
+    console.log(recipeID);
+    var report = $('#report_comment');
+    var graybox = $('#report_comment .gray-box');
+    //       var content = $('#report_list .content');
+    graybox.click(() => report.removeClass('d-flex'));
+    var exit_button = document.createElement("div").classList.add('exit-btn');
+    //load content
+    report.addClass('d-flex');
+    //
+    $('#report_comment .exit-btn').click(() => report.removeClass('d-flex'));
+}
 
 
 const swiper = new Swiper('.swiper', {
@@ -179,26 +190,25 @@ const swiper = new Swiper('.swiper', {
 });
 
 
-function sendReport(){
+function sendReport(value) {
+        
     var selectReport = document.querySelector('#select_Rp').value;
-    var txtReport =document.querySelector('#txtReport').value;
-  
-    console.log(loginID);
-   console.log(selectReport);
-   console.log(txtReport);
-     $.ajax({
+    var txtReport = document.querySelector('#txtReport').value;
+    var txtReportComment=document.querySelector('#txtReportComment').value;
+    if (value === 'Recipe') {
+        $.ajax({
             url: "ReportRecipeAjax",
             type: "get", //send it through get method
             data: {
                 typeReport: selectReport,
                 txtReport: txtReport,
                 bakerID: loginID,
-                recipeID:recipeID
+                recipeID: recipeID
             },
             success: function (response) {
                 //Do Something
                 console.log("thanh cong roi kia");
-              $('#thankReport').html("Thank for your feedback");
+                $('#thankReport').html("Thank for your feedback");
 //                var cmtShow = document.getElementById("show-comment");
 //                cmtShow.innerHTML += response;
 //                item.value = "";
@@ -210,4 +220,36 @@ function sendReport(){
                 //Do Something to handle error
             }
         });
+    } else if (value === 'Comment') {
+        $.ajax({
+            url: "ReportCommentAjax",
+            type: "get", //send it through get method
+            data: {
+                reportTypeComment: selectReport,
+                commentID: commentID,
+                detailComment:txtReportComment,
+                userID: loginID
+
+            },
+            success: function (response) {
+                //Do Something
+                console.log("thanh cong roi kia");
+                $('#thankReport1').html("Thank for your feedback");
+//                var cmtShow = document.getElementById("show-comment");
+//                cmtShow.innerHTML += response;
+//                item.value = "";
+
+            },
+            error: function (xhr) {
+                console.log("that bai");
+                console.log(xhr);
+                //Do Something to handle error
+            }
+        });
+    }
+    console.log(loginID);
+    console.log(selectReport);
+    console.log(txtReport);
+    console.log(txtReportComment);
+
 }
