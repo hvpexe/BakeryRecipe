@@ -6,26 +6,31 @@ package controller;
 
 import com.google.api.services.gmail.model.Message;
 import dao.IngredientDAO;
+import dto.Instruction;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.sql.Connection;
 import javax.mail.internet.MimeMessage;
+import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
+import javax.servlet.annotation.MultipartConfig;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.Part;
 import utilities.CreateEmail;
 import utilities.CreateMessage;
 import utilities.SendMessage;
 import utils.DBUtils;
+import utils.Tools;
 
 /**
  *
  * @author Admin
  */
 @WebServlet(name = "DebugController", urlPatterns = {"/debug"})
-
+@MultipartConfig
 public class DebugController extends HttpServlet {
 
     /**
@@ -41,16 +46,20 @@ public class DebugController extends HttpServlet {
     protected void processRequest (HttpServletRequest request, HttpServletResponse response)
             throws ServletException {
         response.setContentType("text/html;charset=UTF-8");
+        PrintWriter out = null;
         Connection conn = DBUtils.getConnection();
-        String ingreName = "eg";
+        ServletContext sc = request.getServletContext();
         try {
-            int ingreId = IngredientDAO.getIngredientIDByName(ingreName);
-            if (ingreId == -1)
-                ingreId = IngredientDAO.addIngredient(ingreName, conn);
-            System.out.println("--------------------------------------------------------------------------------------");
-            System.out.println(" " + ingreId);
+            out = response.getWriter();
+            String filepath = Instruction.IMG_PATH;
+            String filename = "debug.debug";
+            Part part = request.getPart("name");
+            out.print("<br>" + Tools.saveFile(filename, part, sc, filepath));
+            out.print("<br>" +Tools.getFileType(filepath + filename, part));
         } catch (Exception e) {
-
+            e.printStackTrace();
+        }finally{
+            out.close();
         }
     }
 

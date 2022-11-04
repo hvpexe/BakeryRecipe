@@ -23,7 +23,7 @@ import utils.Tools;
  */
 public class PictureDAO {
 
-    private static final String INSERT_PICTURE = "INSERT INTO [dbo].[Picture]\n"
+    private static final String INSERT_PICTURE = "INSERT INTO [Picture]\n"
             + "           ([Img]\n"
             + "           ,[IsCover]\n"
             + "           ,[RecipeID])\n"
@@ -44,7 +44,7 @@ public class PictureDAO {
             //picture path config
             System.out.println("--------------------------------------------------------------------------------------");
             filename = "picture_" + pictureIndex + "_" + recipeId;
-            filePath = Tools.getFilePath(filename, picture);
+            filePath = Tools.getFileType(filename, picture);
             ps = conn.prepareStatement(sql);
             ps.setString(1, filePath);
             ps.setBoolean(2, isCover);
@@ -86,12 +86,11 @@ public class PictureDAO {
             + "      ,[Img]\n"
             + "      ,[IsCover]\n"
             + "      ,[RecipeID]\n"
-            + "  FROM [BakeryRecipe].[dbo].[Picture]\n"
+            + "  FROM [Picture]\n"
             + "  where RecipeID = ?";
 
     public static List<Picture> getPictureList (int recipeID) throws SQLException {
         List<Picture> listPicture = new ArrayList<>();
-        Recipe recipe = new Recipe();
         Connection conn = null;
         PreparedStatement ptm = null;
         ResultSet rs = null;
@@ -150,7 +149,7 @@ public class PictureDAO {
             {
                 ps = conn.prepareStatement(sql);
                 filename = "picture_" + pictureIndex + "_" + recipeId;
-                ps.setString(1, Tools.getFilePath(filename, picture));
+                ps.setString(1, Tools.getFileType(filename, picture));
                 ps.setBoolean(2, cover);
                 ps.setInt(3, recipeId);
                 ps.setInt(4, picid);
@@ -162,14 +161,16 @@ public class PictureDAO {
                 ps.setInt(3, picid);
             }
             if (ps.executeUpdate() == 1) {
-                System.out.println("Picture " + picid + " Updated");
+                System.out.println("Picture " + picid + " Updated, Cover:" +cover);
                 if (filename != null) {
-                    filename = Tools.saveFile(filename, picture, sc, filename);
+                    filename = Tools.saveFile(filename, picture, sc, Picture.IMG_PATH);
                     System.out.println(filename);
                 }
             }
         } catch (Exception e) {
-            if (ps != null)
+           e.printStackTrace();
+        }finally{
+             if (ps != null)
                 ps.close();
         }
         return false;
@@ -237,7 +238,7 @@ public class PictureDAO {
             ps = conn.prepareStatement(REMOVE_PICTURE);
             ps.setInt(1, id);
             if (ps.executeUpdate() == 1) {
-                System.out.println("DELETED Picture Recipe " + id);
+                System.out.println("Deleted Picture Recipe " + id);
                 return true;
             }
         } catch (SQLException e) {

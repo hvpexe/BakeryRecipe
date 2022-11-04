@@ -64,7 +64,7 @@
                     </main>
                     <form action="editrecipe"  class="section-div col-12 col-md-10 align-content-center align-self-center"
                           id="add-recipe" enctype="multipart/form-data" method="post" >
-                        <input name="recipe-id" type="hidden" value="${recipe.id}">
+                        <input name="recipeid" type="hidden" value="${recipe.id}">
                     <div class="title-div col-12">
                         <b class="label">Title</b>
                         <input name='recipe-name' class="input col-12"  type="text" placeholder="Recipe's Name "
@@ -117,14 +117,17 @@
                                                     <input type="hidden" name="video-url" value="https://www.youtube.com/watch?v=${VIDEO_DETAIL}">
                                                 </span>
                                             </c:if>
-                                            <c:forEach items="${LIST_PIC}" var="pic" varStatus="i">
-                                                <span class="col-2 p-0 swiper-slide ${pic.isCover?'cover':''} hover-button-2 list-group-item rounded"
-                                                      style='background-image: url("${pic.img}");'
-                                                      src="${pic.img}"
-                                                      onclick="selectContent(this.parentElement, this)">
-                                                    <input type="file" name="video-image" class="d-none" count="${i.index+1}">
-                                                </span>
-                                            </c:forEach>
+                                            <c:catch var="e">
+                                                <c:forEach items="${LIST_PIC}" var="pic" varStatus="i">
+                                                    <span class="col-2 p-0 swiper-slide ${pic.isCover?'cover':''} hover-button-2 list-group-item rounded"
+                                                          style='background-image: url("${pic.img}");'
+                                                          src="${pic.img}"
+                                                          onclick="selectContent(this.parentElement, this)">
+                                                        <input type="hidden" name="video-imgpath" class="d-none" value="${pic.img}">
+                                                        <input type="file" name="video-image" class="d-none" count="${i.index}">
+                                                    </span>
+                                                </c:forEach>
+                                            </c:catch>
                                         </div>
 
                                     </div>
@@ -135,17 +138,19 @@
                                 <div class="add-recipe-input col-12">
                                     <b class="label">Ingredients</b>
                                     <div class="col p-0" id="ingredient-container">
-                                        <c:forEach items="${LIST_INGREDIENT}" var="il" varStatus="i">
-                                            <div class="col p-0  align-items-center p-0 pr-2 border border-secondary" id="item${i.index+1}">
-                                                <img src="${il.img}" alt=" "/> 
-                                                <input name="ingre-name" readonly="" class="col text-capitalize" value="${il.name}">
-                                                <span>Amount:</span> 
-                                                <input name="ingre-amount" class="col-2 bg-white ml-2 mr-4" placeholder="1 oz" value="${il.amount}"/> 
-                                                <div class="item-trashbin fas fa-trash ml-auto description-button" 
-                                                     onclick="this.parentElement.remove()">
+                                        <c:catch var="e">
+                                            <c:forEach items="${LIST_INGREDIENT}" var="il" varStatus="i">
+                                                <div class="col p-0  align-items-center p-0 pr-2 border border-secondary" id="item${i.index+1}">
+                                                    <img src="${il.img}" alt=" "/> 
+                                                    <input name="ingre-name" readonly="" class="col text-capitalize" value="${il.name}">
+                                                    <span>Amount:</span> 
+                                                    <input name="ingre-amount" class="col-2 bg-white ml-2 mr-4" placeholder="1 oz" value="${il.amount}"/> 
+                                                    <div class="item-trashbin fas fa-trash ml-auto description-button" 
+                                                         onclick="this.parentElement.remove()">
+                                                    </div>
                                                 </div>
-                                            </div>
-                                        </c:forEach>
+                                            </c:forEach>
+                                        </c:catch>
                                     </div>
                                     <div class="d-flex p-0 col align-items-center" id="ingredient"  >
                                         <input class="instruction-box-input col-7 " form="disabled" name="iname" id="name" type="text" placeholder="Add one ingredient">
@@ -158,40 +163,43 @@
                                 <div class="add-recipe-input col-12">
                                     <b class="label">Instructions</b>
                                     <div class="col d-block p-0 " id="inst-container" >
-                                        <div class="col align-items-center p-0 " id="inst">
-                                            <h5 class="text-secondary col-12 p-0">
-                                                Step <span>0</span>
-                                                <input name="step" disabled onchange="this.previousElementSibling.innerText = this.value" type="hidden" value="0">
-                                            </h5>
-                                            <div class="col hover-highlight  p-0 pr-2 d-flex align-items-center border border-secondary rounded" onclick="showDetail(this.parentElement);">
-                                                <div class="inst-img d-inline-flex fas fa-camera position-relative align-items-center justify-content-center" src="assets/images/image-29@2x.png" onclick="this.querySelector('input').click();">
-                                                    <input name="inst-image" disabled id="inst-image" class="d-none" readonly="" type="file" accept="image/*" 
-                                                           onchange="changeImg(this.parentElement, window.URL.createObjectURL(this.files[0]), event)">
+                                        <c:catch var="e">
+                                            <div class="col align-items-center p-0 " id="inst">
+                                                <h5 class="text-secondary col-12 p-0">
+                                                    Step <span>0</span>
+                                                    <input name="step" disabled onchange="this.previousElementSibling.innerText = this.value" type="hidden" value="0">
+                                                </h5>
+                                                <div class="col hover-highlight  p-0 pr-2 d-flex align-items-center border border-secondary rounded" onclick="showDetail(this.parentElement);">
+                                                    <div class="inst-img d-inline-flex fas fa-camera position-relative align-items-center justify-content-center" src="assets/images/image-29@2x.png" onclick="this.querySelector('input').click();">
+                                                        <input name="inst-image" disabled id="inst-image" class="d-none" readonly="" type="file" accept="image/*" 
+                                                               onchange="changeImg(this.parentElement, window.URL.createObjectURL(this.files[0]), event)">
+                                                    </div>
+                                                    <input class="instruction-box-input col " disabled value=""
+                                                           readonly="" name="inst-description" id="inst-description" type="text">
+                                                    <div class="item-trashbin fas fa-trash ml-auto description-button" onclick="removeElem(this.parentElement)"></div>
                                                 </div>
-                                                <input class="instruction-box-input col " disabled value=""
-                                                       readonly="" name="inst-description" id="inst-description" type="text">
-                                                <div class="item-trashbin fas fa-trash ml-auto description-button" onclick="removeElem(this.parentElement)"></div>
                                             </div>
-                                        </div>
-                                        <c:forEach items="${LIST_STEP}" var="st" varStatus="i">
-                                            ${st}
-                                        <div class="col align-items-center p-0 " id="inst3">
-                                            <h5 class="text-secondary col-12 p-0">
-                                                Step <span>${i.index+1}</span>
-                                                <input name="step" onclick="this.previousElementSibling.innerText = this.value" type="hidden" value="${i.index+1}">
-                                            </h5>
-                                            <div class="col hover-highlight  p-0 pr-2 d-flex align-items-center border border-secondary rounded" onclick="showDetail(this.parentElement);">
-                                                <div class="inst-img d-inline-flex ${empty st.img?'fas fa-camera':''} position-relative align-items-center justify-content-center" 
-                                                     src="${st.img}" 
-                                                     style="background-image:url(${st.img})"
-                                                     onclick="this.querySelector('input').click();">
-                                                    <input name="inst-image3" id="inst-image3" class="d-none" readonly="" type="file" accept="image/*" onchange="changeImg(this.parentElement, window.URL.createObjectURL(this.files[0]), event)">
+                                            <c:forEach items="${LIST_STEP}" var="st" varStatus="i">
+                                                ${st}
+                                                <div class="col align-items-center p-0 " id="inst${i.index+1}">
+                                                    <h5 class="text-secondary col-12 p-0">
+                                                        Step <span>${i.index+1}</span>
+                                                        <input name="step" onclick="this.previousElementSibling.innerText = this.value" type="hidden" value="${i.index+1}">
+                                                    </h5>
+                                                    <div class="col hover-highlight  p-0 pr-2 d-flex align-items-center border border-secondary rounded" onclick="showDetail(this.parentElement);">
+                                                        <div class="inst-img d-inline-flex ${empty st.img?'fas fa-camera':''} position-relative align-items-center justify-content-center" 
+                                                             src="${st.img}" 
+                                                             style="background-image:url(${st.img})"
+                                                             onclick="this.querySelector('input').click();">
+                                                            <input name="inst-image${i.index}" id="inst-image3" class="d-none" readonly="" type="file" accept="image/*" onchange="changeImg(this.parentElement, window.URL.createObjectURL(this.files[0]), event)">
+                                                        </div>
+                                                        <textarea class="instruction-box-input col " value="${st.detail}" readonly="" name="inst-description" id="inst-description${i.index}" type="text">${st.detail}</textarea>
+                                                        <div class="item-trashbin fas fa-trash ml-auto description-button" onclick="removeElem(this.parentElement)"></div>
+                                                    </div>
                                                 </div>
-                                                <textarea class="instruction-box-input col " value="${st.detail}" readonly="" name="inst-description" id="inst-description3" type="text">${st.detail}</textarea>
-                                                <div class="item-trashbin fas fa-trash ml-auto description-button" onclick="removeElem(this.parentElement)"></div>
-                                            </div>
-                                        </div>
-                                        </c:forEach>
+                                            </c:forEach>
+                                        </c:catch>
+                                        ${e}
                                     </div>
 
                                 </div>

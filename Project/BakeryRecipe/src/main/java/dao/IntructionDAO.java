@@ -5,6 +5,7 @@
 package dao;
 
 import dto.Instruction;
+import java.io.IOException;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -28,7 +29,7 @@ public class IntructionDAO {
             + "           (?,?,?,?)";
 
     static boolean addInstructionRecipe (Part instImg, String detail, int recipeId, int index,
-            Connection conn, ServletContext sc) throws SQLException {
+            Connection conn, ServletContext sc) throws SQLException, IOException {
         PreparedStatement ps = null;
         ResultSet rs = null;
         String sql = null;
@@ -39,15 +40,17 @@ public class IntructionDAO {
             sql = ADD_INSTRUCTION;
 
             ps = conn.prepareStatement(sql);
-            filename = "instruction_" + (index + 1) + "_" + recipeId;
-            filePath = Tools.getFilePath(filename, instImg);
-            //set prepare value
+            if (instImg != null) {
+                filename = "instruction_" + (index + 1) + "_" + recipeId;
+                filePath = Tools.getFileType(filename, instImg);
+            }
             ps.setInt(1, index + 1);
             ps.setString(2, detail);
             ps.setString(3, filePath);
             ps.setInt(4, recipeId);
             if (ps.executeUpdate() == 0)
                 throw new SQLException("Add Recipe Failed!");
+            if(filePath!=null)
             Tools.saveFile(filename, instImg, sc, Instruction.IMG_PATH);
         } finally {
             if (ps != null)
@@ -59,7 +62,7 @@ public class IntructionDAO {
     }
 
     static boolean addInstructionsRecipe (List<Part> instImgList, String[] instDescription, int recipeId,
-            Connection conn, ServletContext sc) throws SQLException {
+            Connection conn, ServletContext sc) throws SQLException, IOException {
         conn.setAutoCommit(false);
         for (int i = 0; i < instImgList.size(); i++) {
             Part instImg = instImgList.get(i);
@@ -70,27 +73,36 @@ public class IntructionDAO {
     }
 
     static boolean updateInstructionsRecipe (List<Part> instImgList, String[] instDescription, int recipeId,
-            Connection conn, ServletContext sc) throws SQLException {
-        List<Instruction> oldList = IntructionDAO.getInstructionRecipeList(recipeId);
+            Connection conn, ServletContext sc) throws SQLException, IOException {
+        List<Instruction> oldList = IntructionDAO.getInstructionRecipeList(recipeId, conn);
         int oldSize = 0;
         int newSize = 0;
         if (oldList != null)
             oldSize = oldList.size();
-        if (instImgList != null)
-            newSize = instImgList.size();
+        if (instDescription != null)
+            newSize = instDescription.length;
+        System.out.println("======   " + instImgList);
+        System.out.println("======   " + instDescription);
+        System.out.println("======   " + oldSize);
+        System.out.println("======   " + oldList);
+        System.out.println("======   " + newSize);
 
         int maxSize = Integer.max(oldSize, newSize);
         for (int i = 0; i < maxSize; i++) {
+            Instruction oldInstruction = null;
+            if (i < oldSize)
+                oldInstruction = oldList.get(i);
+            Part instImg = null;
+            if (i < newSize)
+                instImg = instImgList.get(i);
             if (i < newSize && i < oldSize) {//update Instruction
-
-                Instruction oldInstruction = oldList.get(i);
-                updateInstructionRecipe(instImgList.get(i), instDescription[i], recipeId, oldInstruction.getInsstep(), i, conn, sc);
+                updateInstructionRecipe(instImg, instDescription[i], recipeId, oldInstruction.getInsstep(), i, conn, sc);
             }
             if (i < newSize && i >= oldSize) { //add Instruction
-                addInstructionRecipe(instImgList.get(i), instDescription[i], recipeId, i, conn, sc);
+                addInstructionRecipe(instImg, instDescription[i], recipeId, i, conn, sc);
             }
             if (i >= newSize && i < oldSize) { //delete Instruction
-                deleteInstructionRecipe(oldList.get(i).getInsstep(), recipeId, conn);
+                deleteInstructionRecipe(oldInstruction.getInsstep(), recipeId, conn);
             }
         }
         return true;
@@ -103,8 +115,7 @@ public class IntructionDAO {
             + "  FROM [Instruction]\n"
             + "  Where RecipeID = ?";
 
-    private static List<Instruction> getInstructionRecipeList (int recipeId) throws SQLException {
-        Connection conn = null;
+    private static List<Instruction> getInstructionRecipeList (int recipeId, Connection conn) throws SQLException {
         PreparedStatement ps = null;
         ResultSet rs = null;
         List<Instruction> list = null;
@@ -125,8 +136,6 @@ public class IntructionDAO {
         } catch (Exception e) {
             e.printStackTrace();
         } finally {
-            if (conn != null)
-                conn.close();
             if (ps != null)
                 ps.close();
             if (rs != null)
@@ -148,9 +157,9 @@ public class IntructionDAO {
             if (!instImg.getSubmittedFileName().isEmpty())//instImg is null ignore add picture
             {
                 ps = conn.prepareStatement(sql);
-                filename = "instruction_" + (index + 1) + "_" + recipeId;
+                filename = "instruction_" + insStep + "_" + recipeId;
                 ps.setString(1, detail);
-                ps.setString(2, Tools.getFilePath(filename, instImg));
+                ps.setString(2, Tools.getFileType(filename, instImg));
                 ps.setInt(3, recipeId);
                 ps.setInt(4, insStep);
             } else {
@@ -163,14 +172,14 @@ public class IntructionDAO {
             if (ps.executeUpdate() == 1) {
                 System.out.println("Instruction " + insStep + "_" + recipeId + " Updated");
                 if (filename != null) {
-                    filename = Tools.saveFile(filename, instImg, sc, filename);
+                    filename = Tools.saveFile(filename, instImg, sc, Instruction.IMG_PATH);
                     System.out.println(filename);
                 }
             }
         } catch (Exception e) {
             e.printStackTrace();
         } finally {
-            if(ps!=null){
+            if (ps != null) {
                 ps.close();
             }
         }
