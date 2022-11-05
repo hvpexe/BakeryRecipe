@@ -181,14 +181,15 @@ public class IntructionDAO {
 //        }
         int j = 0;
         int picIndex = -1;
-        for (int i = 0; i < newSize; i++) {
+        for (int i = 0; i < newSize; i++,j++) {
             Part instImg = instImgList.get(i);
             String instDesc = instDescription[i];
             picIndex = Integer.parseInt(instImg.getName().replaceAll("[^0-9]", "")); //get picIndex
-            System.out.println(picIndex);
+            System.out.println(j+" "+picIndex);
             Instruction oldInst = null;
-            while (j++ < picIndex) {
-                deleteInstructionRecipe(oldList.get(j - 1).getInsstep(), recipeId, conn);
+            while (j < picIndex && j <oldSize) {
+                deleteInstructionRecipe(oldList.get(j).getInsstep(), recipeId, conn);
+                j++;
             }
             if (picIndex < oldSize) {
                 oldInst = oldList.get(i);

@@ -144,7 +144,7 @@
                                                     <img src="${il.img}" alt=" "/> 
                                                     <input name="ingre-name" readonly="" class="col text-capitalize" value="${il.name}">
                                                     <span>Amount:</span> 
-                                                    <input name="ingre-amount" class="col-2 bg-white ml-2 mr-4" placeholder="1 oz" value="${il.amount}"/> 
+                                                    <input name="ingre-amount" class="col-2 bg-white ml-2 mr-4" autocomplete="off" placeholder="1 Piece" value="${il.amount}"/> 
                                                     <div class="item-trashbin fas fa-trash ml-auto description-button" 
                                                          onclick="this.parentElement.remove()">
                                                     </div>

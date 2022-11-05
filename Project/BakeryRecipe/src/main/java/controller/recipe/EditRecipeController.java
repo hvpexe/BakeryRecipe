@@ -148,7 +148,7 @@ public class EditRecipeController extends HttpServlet {
             if (ingreName != null)
                 for (int i = 0; i < ingreName.length; i++) {
                     if (ingreAmount[i].isEmpty())
-                        ingreAmount[i] = "1 oz";
+                        ingreAmount[i] = "1 Piece";
                     out.print("<br>" + ingreAmount[i] + " of " + ingreName[i]);
                 }
 

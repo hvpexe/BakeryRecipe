@@ -1,3 +1,28 @@
+*::-webkit-scrollbar {
+    width: 5px;
+}
+*::-webkit-scrollbar:hover {
+    width: 10px;
+}
+
+/* Track */
+*::-webkit-scrollbar-track {
+    border-radius: 1000px;
+}
+
+/* Handle */
+*::-webkit-scrollbar-thumb {
+    background: var(--main-theme-color);
+    opacity:0.7;
+}
+
+/* Handle on hover */
+*::-webkit-scrollbar-thumb:hover {
+    background: #b30000;
+    width: 10px;
+    border-radius: 1000px;
+
+}
 .fixed-container{
     position: fixed;
     display: none;
@@ -38,7 +63,7 @@
 }
 @media (max-width:996px){
     .fixed-container {
-            padding: 0;
+        padding: 0;
 
     }
     .fixed-container .content{
@@ -46,7 +71,7 @@
         inset:0;
         border-radius: unset;
     }
-    
+
 }
 .avatar {
     object-fit: cover;

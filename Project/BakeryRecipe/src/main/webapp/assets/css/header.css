@@ -23,13 +23,40 @@
     --main-title-color: #000000;
     --web-background-color: #F7FAFC;
 }
+
 /* main */
+
 body {
     background-color: var(--web-background-color) !important;
     font-family: 'Roboto', sans-serif;
     min-height: 100vh;
     display: flex;
     flex-direction: column;
+}
+*::-webkit-scrollbar {
+    width: 5px;
+}
+*::-webkit-scrollbar:hover {
+    width: 10px;
+}
+
+/* Track */
+*::-webkit-scrollbar-track {
+    border-radius: 1000px;
+}
+
+/* Handle */
+*::-webkit-scrollbar-thumb {
+    background: var(--main-theme-color);
+    opacity:0.7;
+}
+
+/* Handle on hover */
+*::-webkit-scrollbar-thumb:hover {
+    background: #b30000;
+    width: 10px;
+    border-radius: 1000px;
+
 }
 .header-container {
     min-height: 60px;

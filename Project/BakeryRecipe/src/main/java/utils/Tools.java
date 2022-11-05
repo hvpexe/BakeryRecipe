@@ -187,10 +187,7 @@ public class Tools {
         String buildFilePath = webFilePath.
                 replace("\\target\\BakeryRecipe-1.0-SNAPSHOT\\", "\\src\\main\\webapp\\");
         File fileo1 = new File(webFilePath + oldname);
-        if (!fileo1.exists()) {
-//            System.out.println("file not exist");
-            return null;
-        }
+
         newname += oldname.substring(oldname.indexOf('.'), oldname.length());//get the '.' part
         if (oldname.equals(newname)) {
             return null;
@@ -199,6 +196,10 @@ public class Tools {
         Tools.getFolderUpload(buildFilePath);
 //        System.out.println(webFilePath + oldname);
         File fileo2 = new File(buildFilePath);
+        if (!fileo2.exists()) {
+//            System.out.println("file not exist");
+            return null;
+        }
         // File (or directory) with new name
         File fileRename = new File(webFilePath + newname);
         System.out.println("o: " + oldname);
@@ -208,9 +209,11 @@ public class Tools {
             System.out.println(fileRename.getAbsoluteFile());
             fileRename.delete();
         }
-        boolean success = fileo1.renameTo(fileRename);
-//        fileo2.renameTo(fileRename);
-        if (!success) {
+        boolean success1 = fileo1.renameTo(fileRename);
+
+        fileRename = new File(buildFilePath + newname);
+        boolean success2 = fileo2.renameTo(fileRename);
+        if (!success1 || !success2) {
             // File was not successfully renamed
             throw new IOException("File " + oldname + " was not successfully renamed");
         }

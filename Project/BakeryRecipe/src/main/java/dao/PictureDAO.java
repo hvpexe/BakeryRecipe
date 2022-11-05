@@ -253,20 +253,20 @@ public class PictureDAO {
 //        }
         int j = 0;
         int picIndex = -1;
-        for (int i = 0; i < newSize; i++) {
+        for (int i = 0; i < newSize; i++,j++) {
             //initializing
             boolean isCover = false;
             Part picture = null;
             Picture oldPicture = null;
-            picIndex = -1;
             System.out.println("-- i:" + i + " " + cover);
             if (i == cover)//check cover
                 isCover = true;
 
             picture = pictureList.get(i); //get newImg
             picIndex = Integer.parseInt(picture.getName().replaceAll("[^0-9]", "")); //get picIndex
-            while (j++ < picIndex) {
-                deletePictureRecipe(oldPictureList.get(j-1).getId(), conn);
+            while (j < picIndex && j <oldSize) {
+                deletePictureRecipe(oldPictureList.get(j).getId(), conn);
+                j++;
             }
             if (picIndex < oldSize) {
                 oldPicture = oldPictureList.get(picIndex);// get old image
