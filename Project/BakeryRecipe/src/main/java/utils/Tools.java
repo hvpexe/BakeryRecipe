@@ -96,7 +96,7 @@ public class Tools {
         String savedFilePath;
         try {
             is = partFile.getInputStream();
-            savedFilePath = "/" + filePath ;
+            savedFilePath = "/" + filePath;
             if (fileName == null)
                 return null;
             fileName = getFileType(fileName, partFile);
@@ -108,13 +108,12 @@ public class Tools {
 //webFilepath = D:\learning in FPT\Ky_5\SWP391\BakeryRecipe\Project\BakeryRecipe\src\main\webapp\assets\images\avt
 
             File f = new File(webFilePath);
-            if (!f.exists())
-                f.mkdirs();
+
             f = new File(buildFilePath);
-            partFile.write(webFilePath+fileName);
+            partFile.write(webFilePath + fileName);
             if (f.exists())
-                partFile.write(buildFilePath+fileName);
-            System.out.println("path: " + savedFilePath+fileName);
+                partFile.write(buildFilePath + fileName);
+            System.out.println("path: " + savedFilePath + fileName);
 
             return fileName;
         } catch (IOException ex) {
@@ -156,10 +155,19 @@ public class Tools {
         return null;
     }
 
+    public static String getFileType (String filename, String file) {
+        if (file == null)
+            return null;
+        file = new File(file).getName();
+        filename += file.substring(file.indexOf('.'), file.length());//get the '.' part
+        return filename;
+    }
+
     public static String getFileType (String filename, Part partFile) {
         String submittedFileName = null;
         File f = null;
         submittedFileName = partFile.getSubmittedFileName();
+
         f = new File(submittedFileName);
         if (submittedFileName.isEmpty())
             return null;
@@ -168,5 +176,47 @@ public class Tools {
         filename += submittedFileName.substring(submittedFileName.indexOf('.'), submittedFileName.length());//get the '.' part
         return filename;
 
+    }
+
+    public static String renameFile (String oldname, String newname, ServletContext sc, String filePath) throws IOException {
+        // File (or directory) with old name
+        if (oldname == null)
+            return null;
+        oldname = new File(oldname).getName();// in case of file with path name 
+        String webFilePath = sc.getRealPath(filePath);
+        String buildFilePath = webFilePath.
+                replace("\\target\\BakeryRecipe-1.0-SNAPSHOT\\", "\\src\\main\\webapp\\");
+        File fileo1 = new File(webFilePath + oldname);
+        if (!fileo1.exists()) {
+//            System.out.println("file not exist");
+            return null;
+        }
+        newname += oldname.substring(oldname.indexOf('.'), oldname.length());//get the '.' part
+        if (oldname.equals(newname)) {
+            return null;
+        }
+        Tools.getFolderUpload(webFilePath);
+        Tools.getFolderUpload(buildFilePath);
+//        System.out.println(webFilePath + oldname);
+        File fileo2 = new File(buildFilePath);
+        // File (or directory) with new name
+        File fileRename = new File(webFilePath + newname);
+        System.out.println("o: " + oldname);
+        System.out.println("n: " + newname);
+        // Rename file (or directory)
+        if (fileRename.exists()) {
+            System.out.println(fileRename.getAbsoluteFile());
+            fileRename.delete();
+        }
+        boolean success = fileo1.renameTo(fileRename);
+//        fileo2.renameTo(fileRename);
+        if (!success) {
+            // File was not successfully renamed
+            throw new IOException("File " + oldname + " was not successfully renamed");
+        }
+        return newname;
+    }
+
+    public static void main (String[] args) throws IOException {
     }
 }

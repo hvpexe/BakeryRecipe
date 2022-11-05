@@ -13,13 +13,12 @@ async function submitForm(selector) {
     const output = document.getElementById('test');
     var cover = document.querySelector('[name=cover]');
     var coverNode = document.querySelectorAll('#img-content [name=video-image]');
-    var i=0;
+    var i = 0;
+    cover.value = 0;
     coverNode.forEach(x => {
-        x.parentNode.classList.contains('cover')?cover.value=i:'';
+        x.parentNode.classList.contains('cover') ? cover.value = i : '';
         i++;
     });
-    if (!cover.value)
-        cover.value = 0;
     for (var i = 0; i < inputs.length; i++) {
         inputs[i].setAttribute('name', inputs[i].getAttribute('name') + inputs[i].getAttribute('count'));
     }
@@ -37,6 +36,10 @@ var appendNumber = 4;
 var prependNumber = 1;
 
 // video and image
+document.querySelectorAll('#img-content .image').forEach(
+        x => x.onclick
+            = e => selectContent(document.querySelector('#img-content'), e.target));
+
 document.querySelector("#add-video-btn").onclick = () => addVideo('#img-content');
 document.querySelector("#add-img-btn").onclick = () => addImage('#img-content');
 document.querySelector("#img-content .add-img").onclick = () => addImage('#img-content');
@@ -133,16 +136,18 @@ function hideVideo(option) {
     option.video.classList.remove('selected');
 }
 // add image 
+var picCount = document.querySelector('#display-img');
 function addImage(container) {
     var container = document.querySelector(container);
+    var images = container.querySelectorAll('.image');
     var span = document.createElement('span');
     var inputPicture = document.createElement('input');
     inputPicture.setAttribute('type', 'file');
     inputPicture.setAttribute('name', 'video-image');
     inputPicture.setAttribute('class', 'd-none');
-    inputPicture.setAttribute('count', '0');
+    inputPicture.setAttribute('count', picCount.getAttribute('count'));
     //    inputPicture.setAttribute('onclick', 'changeImg(this)');
-    span.classList = "col-2 p-0 swiper-slide hover-button-2 list-group-item rounded ";
+    span.classList = "col-2 p-0 swiper-slide hover-button-2 image list-group-item  rounded ";
     span.appendChild(inputPicture);
     inputPicture.click();
     container.parentElement.classList.remove("d-none");
@@ -152,6 +157,7 @@ function addImage(container) {
     inputPicture.onchange = e => {
         changeImg(e.target.parentElement, getObjURL(e.target.files[0]), e);
         swiper.appendSlide(span);
+        picCount.setAttribute('count', parseInt(picCount.getAttribute('count')) + 1);
         updateCount(container);
     };
 }
@@ -175,23 +181,25 @@ function removeImage(selector) {
     display.classList.add('d-none');
 }
 function updateCount(container) {
-    var inputs = container.querySelectorAll('input[count]');
-    for (var i = 0; i < inputs.length; i++) {
-        inputs[i].setAttribute('count', i);
-    }
+//    var inputs = container.querySelectorAll('input[count]');
+//    for (var i = 0; i < inputs.length; i++) {
+//        inputs[i].setAttribute('count', i);
+//    }
 }
 //elem the .selected picture
 //this method will run when user select an image
+var display = document.querySelector('#display-img');
+var displayImage = display.querySelector('.image');
+var displayVideo = display.querySelector('.video');
+var toCoverBtn = document.querySelector('#to-cover-btn');
+var changeImgBtn = document.querySelector('#change-img-btn');
+
 function selectContent(container, elem) {
     container.querySelector('.selected')?.classList.remove('selected');
     elem.classList.add('selected');
-    var display = document.querySelector('#display-img');
-    var displayImage = display.querySelector('.image');
-    var displayVideo = display.querySelector('.video');
     display.classList.remove('d-none');
     var img;
-    var toCoverBtn = document.querySelector('#to-cover-btn');
-    var changeImgBtn = document.querySelector('#change-img-btn');
+
     if (!elem.classList.contains('video')) {
         img = elem.getAttribute('src');
         displayImage.style.backgroundImage = 'url(' + img + ')';

@@ -12,6 +12,8 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 import javax.servlet.ServletContext;
 import javax.servlet.http.Part;
 import utils.DBUtils;
@@ -100,7 +102,7 @@ public class PictureDAO {
             ptm.setInt(1, recipeID);
             rs = ptm.executeQuery();
             while (rs.next()) {
-                Picture picture = new Picture(rs.getInt(1),rs.getString(2), rs.getBoolean(3), rs.getString(4));
+                Picture picture = new Picture(rs.getInt(1), rs.getString(2), rs.getBoolean(3), rs.getString(4));
                 listPicture.add(picture);
             }
         } catch (Exception e) {
@@ -139,38 +141,43 @@ public class PictureDAO {
      * @param conn
      * @param sc
      */
-    private static boolean updatePictureRecipe (Part picture, boolean cover, int pictureIndex, int recipeId, int picid,
+    private static boolean updatePictureRecipe (Part picture, boolean cover, int nPicIndex, int recipeId, Picture oldPicture,
             Connection conn, ServletContext sc) throws SQLException {
         String filename = null;
         String sql = UPDATE_PICTURE;
         PreparedStatement ps = null;
         try {
-            if (!picture.getSubmittedFileName().isEmpty())//picture is null ignore the whole function
+            int picid = oldPicture.getId();
+            filename = "picture_" + nPicIndex + "_" + recipeId;
+            //case 1
+            ps = conn.prepareStatement(sql);
+
             {
-                ps = conn.prepareStatement(sql);
-                filename = "picture_" + pictureIndex + "_" + recipeId;
-                ps.setString(1, Tools.getFileType(filename, picture));
+                if (picture.getSubmittedFileName().isEmpty()) //case 1
+                    ps.setString(1, Tools.getFileType(filename, oldPicture.getImg()));
+                else {
+                    ps.setString(1, Tools.getFileType(filename, picture));
+                }
+                System.out.println(Tools.getFileType(filename, oldPicture.getImg()));
+                System.out.println(Tools.getFileType(filename, picture));
                 ps.setBoolean(2, cover);
                 ps.setInt(3, recipeId);
                 ps.setInt(4, picid);
-            } else {
-                sql = sql.replace("[Img] = ?,", "");
-                ps = conn.prepareStatement(sql);
-                ps.setBoolean(1, cover);
-                ps.setInt(2, recipeId);
-                ps.setInt(3, picid);
             }
+
             if (ps.executeUpdate() == 1) {
-                System.out.println("Picture " + picid + " Updated, Cover:" +cover);
-                if (filename != null) {
+                System.out.println("Picture " + picid + " Updated, Cover:" + cover);
+                if (picture.getSubmittedFileName().isEmpty()) {//case 1
+                    filename = Tools.renameFile(oldPicture.getImg(), filename, sc, Picture.IMG_PATH);
+                } else {//case 2
                     filename = Tools.saveFile(filename, picture, sc, Picture.IMG_PATH);
-                    System.out.println(filename);
                 }
+                System.out.println(filename);
             }
         } catch (Exception e) {
-           e.printStackTrace();
-        }finally{
-             if (ps != null)
+            e.printStackTrace();
+        } finally {
+            if (ps != null)
                 ps.close();
         }
         return false;
@@ -182,10 +189,24 @@ public class PictureDAO {
      * user to update the picture section trong editrecipe.jsp
      * <hr>
      * <p>
-     * if list is null do nothing and return true </p>
-     * if image index is in the old list update it
-     * if image index is larger than the old list add more
-     * if new list is smaller than the old list delete the overflow part
+     * make a flow from 0 to newImgs size and another increasing index
+     * (npicIndex) +1 every update,add,delete
+     * take the name=video-image-n -> number as picIndex
+     * <p>
+     * if picIndex is in the oldList (picIndex &st oldSize) we have update
+     * <p>
+     * update:
+     * - case 1: newImg file is null
+     * rename the oldImg to picture_npicIndex_recipeId.*
+     * - case 2: newImg file is not null
+     * replace img to new img with the name picture_npicIndex_recipeId.*
+     * and also delete the oldimg from db
+     * <p>
+     * if picIndex is outside of oldList (picIndex &lt oldSize)
+     * <p>
+     * add:
+     * add the newImg with name picture_npicIndex_recipeId.*
+     *
      *
      * @param pictureList
      * @param cover
@@ -193,40 +214,73 @@ public class PictureDAO {
      * @param conn        Connection transaction
      * @param sc          Servlet contextD
      */
-    static boolean updatePicturesRecipe (List<Part> pictureList, int cover, int recipeId, Connection conn,
+    static boolean updatePicturesRecipe (List<Part> pictureList, String[] pictureListPath, int cover, int recipeId, Connection conn,
             ServletContext sc) throws SQLException {
         List<Picture> oldPictureList = getPictureList(recipeId);
         int newSize = 0;
         int oldSize = 0;
+        int oldRemainSize = 0;
 
         if (pictureList != null)
             newSize = pictureList.size();
-        //do nothing
         if (oldPictureList != null)
             oldSize = oldPictureList.size();
-        if (pictureList != null && cover >= pictureList.size())//if cover number bigger than the size() cover is set to 0
-            cover = 0;
+        if (pictureListPath != null)
+            oldRemainSize = pictureListPath.length;
 
         int maxSize = Integer.max(newSize, oldSize);
-        for (int i = 0; i < maxSize; i++) {
+
+//        for (int i = 0; i < maxSize; i++) {
+//            boolean isCover = false;
+//            if (i == cover)//check cover
+//                isCover = true;
+//            Part picture = null;
+//            Picture oldPicture = null;
+//            if (i < newSize)
+//                picture = pictureList.get(i); //get new image upload
+//            if (i < oldSize)
+//                oldPicture = oldPictureList.get(i);// get old image
+//
+//            if (i < newSize && i < oldSize) {//update picture
+//                updatePictureRecipe(picture, isCover, i, recipeId, oldPicture.getId(), conn, sc);
+//            }
+//            if (i < newSize && i >= oldSize) { //add picture
+//                addPictureRecipe(picture, isCover, i, recipeId, conn, sc);
+//            }
+//            if (i >= newSize && i < oldSize) { //delete picture
+//                deletePictureRecipe(oldPictureList.get(i).getId(), conn);
+//            }
+//        }
+        int j = 0;
+        int picIndex = -1;
+        for (int i = 0; i < newSize; i++) {
+            //initializing
             boolean isCover = false;
+            Part picture = null;
+            Picture oldPicture = null;
+            picIndex = -1;
+            System.out.println("-- i:" + i + " " + cover);
             if (i == cover)//check cover
                 isCover = true;
 
-            if (i < newSize && i < oldSize) {//update picture
-                Part picture = pictureList.get(i);
-                Picture oldPicture = oldPictureList.get(i);
-                updatePictureRecipe(picture, isCover, i, recipeId, oldPicture.getId(), conn, sc);
+            picture = pictureList.get(i); //get newImg
+            picIndex = Integer.parseInt(picture.getName().replaceAll("[^0-9]", "")); //get picIndex
+            while (j++ < picIndex) {
+                deletePictureRecipe(oldPictureList.get(j-1).getId(), conn);
             }
-            if (i < newSize && i >= oldSize) { //add picture
-                Part picture = pictureList.get(i);
+            if (picIndex < oldSize) {
+                oldPicture = oldPictureList.get(picIndex);// get old image
+                updatePictureRecipe(picture, isCover, i, recipeId, oldPicture, conn, sc);//update
+            } else {
                 addPictureRecipe(picture, isCover, i, recipeId, conn, sc);
             }
-            if (i >= newSize && i < oldSize) { //delete picture
-                deletePictureRecipe(oldPictureList.get(i).getId(), conn);
-            }
-
         }
+        if (oldSize > picIndex+1)
+            for (int i = picIndex+1; i < maxSize; i++) {
+                if (i >= newSize && i < oldSize) { //delete picture
+                    deletePictureRecipe(oldPictureList.get(i).getId(), conn);
+                }
+            }
         return true;
     }
     private static final String REMOVE_PICTURE = "DELETE FROM [Picture]\n"

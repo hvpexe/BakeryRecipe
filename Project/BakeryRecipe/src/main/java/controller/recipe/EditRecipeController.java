@@ -88,36 +88,40 @@ public class EditRecipeController extends HttpServlet {
                 videoUrl = videoUrl.substring(index + 3, index + 14);
                 out.print("<br>" + videoUrl);
             }
+            String[] pictureListPath = request.getParameterValues("ingre-name");//get old video-image
             String[] ingreName = request.getParameterValues("ingre-name");//get all name
             String[] ingreAmount = request.getParameterValues("ingre-amount");//get all amount
             if (ingreName != null) {
                 ingreName = Tools.toUTF8(ingreName);
                 ingreAmount = Tools.toUTF8(ingreAmount);
+                pictureListPath = Tools.toUTF8(pictureListPath);
             }
             List<Part> instImgList = new LinkedList<Part>();//get all instuction images
             String[] instDescription = request.getParameterValues("inst-description");//get all instuction descrition
             if (instDescription != null) {
                 instDescription = Tools.toUTF8(instDescription);
             }
+            //set default number
             int prepareTime = 30;
             int cookTime = 30;
+            int cover = 0;//video image cover
+
             try {
                 prepareTime = Integer.parseInt(request.getParameter("cook-time"));
                 cookTime = Integer.parseInt(request.getParameter("prepare-time"));
-            }catch(NumberFormatException e){
-                
+                cover = Integer.parseInt(request.getParameter("cover"));
+            } catch (NumberFormatException e) {
+
             }
             Collection<Part> parts = request.getParts();
             int vIndex = 0;
             int iIndex = 0;
-            int cover = Integer.parseInt(request.getParameter("cover"));//video image cover
             out.print("<br>" + recipeId);
             out.print("<br>" + recipeName);
             out.print("<br>" + recipeDescription);
-
             out.print("<hr>" + "Pictures " + cover);
             for (Part p : parts) {
-                if (p.getName().contains("video-image") ) {
+                if (p.getName().contains("video-image")) {
                     try {
                         out.print("<br>" + p.getName());
                         out.print(", " + p.getSubmittedFileName().isEmpty());
@@ -128,16 +132,6 @@ public class EditRecipeController extends HttpServlet {
                     } catch (Exception e) {
                     }
                 }
-            }
-            out.print("<hr>" + "Ingredients");
-            if (ingreName != null)
-                for (int i = 0; i < ingreName.length; i++) {
-                    if (ingreAmount[i].isEmpty())
-                        ingreAmount[i] = "1 oz";
-                    out.print("<br>" + ingreAmount[i] + " of " + ingreName[i]);
-                }
-            out.print("<hr>" + "Instructions");
-            for (Part p : parts) {
                 if (p.getName().contains("inst-image")) {
                     try {
                         out.print("<br>" + p.getName());
@@ -150,9 +144,17 @@ public class EditRecipeController extends HttpServlet {
                     }
                 }
             }
+            out.print("<hr>" + "Ingredients");
+            if (ingreName != null)
+                for (int i = 0; i < ingreName.length; i++) {
+                    if (ingreAmount[i].isEmpty())
+                        ingreAmount[i] = "1 oz";
+                    out.print("<br>" + ingreAmount[i] + " of " + ingreName[i]);
+                }
+
             boolean updateRecipe = RecipeDAO.updateRecipe(recipeName, recipeDescription, videoUrl, pictureList,
-                    ingreName, ingreAmount, instImgList, instDescription, prepareTime,
-                    cookTime, userId, recipeId, cover, sc);
+                     pictureListPath, ingreName, ingreAmount, instImgList,
+                    instDescription, prepareTime, cookTime, userId, recipeId, cover, sc);
             if (updateRecipe) {
                 System.out.println("success");
                 url = SUCCESS_POST;

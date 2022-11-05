@@ -291,7 +291,7 @@ public class RecipeDAO {
             + " WHERE Recipe.ID = ?";
 
     public static boolean updateRecipe (String recipeName, String recipeDescription, String videoUrl,
-            List<Part> pictureList, String[] ingreName, String[] ingreAmount, List<Part> instImgList,
+            List<Part> pictureList, String[] pictureListPath, String[] ingreName, String[] ingreAmount, List<Part> instImgList,
             String[] instDescription, int prepareTime, int cookTime, int userId, int recipeId, int cover,
             ServletContext sc) throws SQLException {
         String sql = UPDATE_RECIPE;
@@ -311,7 +311,7 @@ public class RecipeDAO {
             ps.setInt(7, recipeId);
             boolean check = ps.executeUpdate() > 0;
             if (check) {
-                check = PictureDAO.updatePicturesRecipe(pictureList, cover, recipeId, conn, sc);
+                check = PictureDAO.updatePicturesRecipe(pictureList, pictureListPath, cover, recipeId, conn, sc);
                 if (check) {
                     check = IngredientDAO.updateIngredientsRecipe(ingreName, ingreAmount, recipeId, conn, sc);
                     if (check) {
@@ -559,10 +559,10 @@ public class RecipeDAO {
     }
 
     private static final String LIST_INGREDIENT = "select ingre.[Name],ingre.[Img]\n"
-            + "from [dbo].[Ingredient] ingre join [dbo].[IngredientRecipe] ingreRe\n"
-            + "on ingre.ID =ingreRe.IngredientID\n"
-            + "join [dbo].[Recipe] re on ingreRe.RecipeID =re.ID\n"
-            + "where re.ID = ?";
+            + " from [dbo].[Ingredient] ingre join [dbo].[IngredientRecipe] ingreRe\n"
+            + " on ingre.ID =ingreRe.IngredientID\n"
+            + " join [dbo].[Recipe] re on ingreRe.RecipeID =re.ID\n"
+            + " where re.ID = ?";
 
     public List<Ingredient> listIngredient (int recipeID) throws SQLException {
         List<Ingredient> listIgre = new ArrayList<>();
@@ -599,9 +599,10 @@ public class RecipeDAO {
     }
 
     private static final String LIST_STEP = "SELECT [InsStep],[Detail],[Img]\n"
-            + "FROM [dbo].[Instruction] instruc join [dbo].[Recipe] recipe \n"
-            + "ON instruc.RecipeID = recipe.ID\n"
-            + "WHERE recipe.ID = ?";
+            + " FROM [dbo].[Instruction] instruc join [dbo].[Recipe] recipe \n"
+            + " ON instruc.RecipeID = recipe.ID\n"
+            + " WHERE recipe.ID = ?"
+            + " ORDER BY recipe.ID,InsStep";
 
     public static List<Instruction> listStep (int recipeID) throws SQLException {
         List<Instruction> liststep = new ArrayList<>();
@@ -764,7 +765,7 @@ public class RecipeDAO {
             + "      ,[UserID]\n"
             + "	  ,p.Img as Cover"
             + "  FROM [Recipe] r \n"
-            + "  JOIN Picture p on p.IsCover = 1 and r.ID = p.RecipeID "
+            + "  LEFT JOIN Picture p on p.IsCover = 1 and r.ID = p.RecipeID "
             + "  WHERE r.ID = ?";
 
     public static Recipe getRecipeByID (int id) throws SQLException {

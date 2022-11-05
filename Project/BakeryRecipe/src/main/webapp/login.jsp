@@ -60,12 +60,12 @@
                     </div>
                     <div class="g_id_signin" data-type="icon" data-size="large" placeholder="Email" data-theme="filled_blue" data-text="sign_in_with" data-shape="circle" data-logo_alignment="left"><div class="S9gUrf-YoZ4jf" style="position: relative;"><div></div><iframe src="https://accounts.google.com/gsi/button?type=icon&amp;size=large&amp;theme=filled_blue&amp;text=sign_in_with&amp;shape=circle&amp;logo_alignment=left&amp;client_id=243057477675-kt58mr9lav8eh6ti9bfrj8p782j7unkd.apps.googleusercontent.com&amp;iframe_id=gsi_812950_790204&amp;as=MCsvGUZ%2Fo6jE5lvjeZjhzQ" id="gsi_812950_790204" title="Sign in with Google Button" style="display: block; position: relative; top: 0px; left: 0px; height: 44px; width: 64px; border: 0px; margin: -2px -12px;"></iframe></div></div>
                     <div class="input col-10 p-0" placeholder="Email">
-                        <input class="email-input1 col rounded" type="text" value="${param.email}" placeholder="   " form="formLogin"
+                        <input class="email-input1 col rounded" type="text" tabindex="1" value="${param.email}" placeholder="   " form="formLogin"
                                name="email" value=""  >
                         <span class="status"></span> 
                     </div>
                     <div class="input col-10 p-0" placeholder="Password" regex="">
-                        <input class="password-input1 col rounded" type="password" value="${param.password}" placeholder="   "form="formLogin" 
+                        <input class="password-input1 col rounded" type="password" tabindex="1" value="${param.password}" placeholder="   "form="formLogin" 
                                name="password" value="" >
                         <span class="status"></span> 
                     </div>
@@ -92,7 +92,7 @@
                          data-logo_alignment="center">
                     </div>
                     <div class="input col-10 p-0" placeholder="Email">
-                        <input class="email-input1 col rounded" type="text" value="${param.email}" placeholder="   " form="formRegister"
+                        <input class="email-input1 col rounded" type="text" tabindex="1" value="${param.email}" placeholder="   " form="formRegister"
                                name="email" value="" >
                         <span class="status"></span> 
                     </div>

@@ -13,6 +13,7 @@ import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.servlet.http.Part;
 
 /**
  *
@@ -126,13 +127,14 @@ public class IngredientDAO {
             if (ingreId == -1) {
                 ingreId = IngredientDAO.addIngredient(ingreName, conn);
             }
-            System.out.println("--------------------------------------------------------------------------------------");
-            System.out.println(recipeId + " " + ingreId);
+
             ps = conn.prepareStatement(sql);
             ps.setInt(1, recipeId);
             ps.setInt(2, ingreId);
             ps.setString(3, ingreAmount);
-            ps.executeUpdate();
+            if (ps.executeUpdate() > 0) {
+                System.out.println("Added Ingrdient Recipe" + recipeId + " " + ingreId);
+            }
             return true;
         } catch (Exception e) {
             System.out.println("Add Ingredient Recipe Error" + e.getMessage());
@@ -344,8 +346,8 @@ public class IngredientDAO {
     private static final String ADD_INGREDIENT
             = "INSERT INTO [dbo].[Ingredient]\n"
             + "           ([Name]\n"
-            + "           ,[Img])\n"
-            + "	OUTPUT inserted.ID\n"
+            + "           ,[Img],[Point])\n"
+            + "	OUTPUT inserted.ID,inserted.Name\n"
             + "     VALUES\n"
             + "           (?,?)";
 
@@ -356,10 +358,12 @@ public class IngredientDAO {
         try {
             String sql = ADD_INGREDIENT;
             ps = conn.prepareStatement(sql);
-            ps.setString(1, ingreName);
+            ps.setString(1, ingreName.toLowerCase());
             ps.setString(2, null);
+            ps.setInt(3, 0);
             rs = ps.executeQuery();
             if (rs.next()) {
+                System.out.println("Added Ingredient " + rs.getString(2));
                 return rs.getInt(1);
             }
 
@@ -400,27 +404,32 @@ public class IngredientDAO {
         }
         int oldSize = oldIngredientList.size();
         int maxSize = Integer.max(newSize, oldSize);
-        for (int i = 0; i < maxSize; i++) {
+        for (int i = 0; i < oldSize; i++) {
+            Ingredient oldIngredient = oldIngredientList.get(i);
+            deleteIngredientRecipe(oldIngredient.getId(), recipeId, conn);
+        }
+        for (int i = 0; i < newSize; i++) {
 
             Ingredient oldIngredient = null;
             if (i < oldSize) {
                 oldIngredient = oldIngredientList.get(i);
             }
 
-            if (i < newSize && i < oldSize) {//update ingredient
-                System.out.println(newSize + " " + oldSize);
-                if (oldIngredient.getName() == ingreName[i] && oldIngredient.getAmount() == ingreAmount[i])
-                    continue;// if it's the same then continue
-                updateIngredientRecipe(ingreName[i], ingreAmount[i], recipeId, oldIngredient.getId(), conn);
-            }
-            if (i < newSize && i >= oldSize) { //add ingredient
-                addIngredientRecipe(ingreName[i], ingreAmount[i], recipeId, conn, sc);
-            }
-            if (i >= newSize && i < oldSize) { //delete ingredient
-                deleteIngredientRecipe(oldIngredient.getId(), recipeId, conn);
-            }
+//            if (i < newSize && i < oldSize) {//update ingredient
+//                System.out.println(newSize + " " + oldSize);
+//                if (oldIngredient.getName() == ingreName[i] && oldIngredient.getAmount() == ingreAmount[i])
+//                    continue;// if it's the same then continue
+//                updateIngredientRecipe(ingreName[i], ingreAmount[i], recipeId, oldIngredient.getId(), conn);
+//            }
+//            if (i < newSize && i >= oldSize) { //add ingredient
+            addIngredientRecipe(ingreName[i], ingreAmount[i], recipeId, conn, sc);
+//            }
+//            if (i >= newSize && i < oldSize) { //delete ingredient
+//                deleteIngredientRecipe(oldIngredient.getId(), recipeId, conn);
+//            }
 
         }
+
         return true;
     }
     private static final String UPDATE_INGREDIENT_RECIPE

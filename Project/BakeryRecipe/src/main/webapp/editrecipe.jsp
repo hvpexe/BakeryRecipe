@@ -85,7 +85,7 @@
                                             Add Image <i class="fa-regular fa-image"></i>
                                         </div>
                                     </div>
-                                    <div class="display-image d-none col p-0" id="display-img">
+                                    <div class="display-image d-none col p-0" count="${LIST_PIC.size()}" id="display-img">
                                         <div class='image'  src="./">
                                         </div>
                                         <iframe class="video"></iframe>
@@ -119,12 +119,12 @@
                                             </c:if>
                                             <c:catch var="e">
                                                 <c:forEach items="${LIST_PIC}" var="pic" varStatus="i">
-                                                    <span class="col-2 p-0 swiper-slide ${pic.isCover?'cover':''} hover-button-2 list-group-item rounded"
+                                                    <span class="col-2 p-0 swiper-slide ${pic.isCover?'cover':''} hover-button-2 image list-group-item rounded"
                                                           style='background-image: url("${pic.img}");'
                                                           src="${pic.img}"
                                                           onclick="selectContent(this.parentElement, this)">
-                                                        <input type="hidden" name="video-imgpath" class="d-none" value="${pic.img}">
                                                         <input type="file" name="video-image" class="d-none" count="${i.index}">
+                                                        <input type="hidden" name="video-imgpath" class="d-none" count="${st.img}">
                                                     </span>
                                                 </c:forEach>
                                             </c:catch>

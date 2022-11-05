@@ -5,6 +5,7 @@
 package dao;
 
 import dto.Instruction;
+import dto.Picture;
 import java.io.IOException;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -28,7 +29,7 @@ public class IntructionDAO {
             + "     VALUES\n"
             + "           (?,?,?,?)";
 
-    static boolean addInstructionRecipe (Part instImg, String detail, int recipeId, int index,
+    static boolean addInstructionRecipe (Part instImg, String detail, int recipeId, int insStep,
             Connection conn, ServletContext sc) throws SQLException, IOException {
         PreparedStatement ps = null;
         ResultSet rs = null;
@@ -41,17 +42,17 @@ public class IntructionDAO {
 
             ps = conn.prepareStatement(sql);
             if (instImg != null) {
-                filename = "instruction_" + (index + 1) + "_" + recipeId;
+                filename = "instruction_" + (insStep + 1) + "_" + recipeId;
                 filePath = Tools.getFileType(filename, instImg);
             }
-            ps.setInt(1, index + 1);
+            ps.setInt(1, insStep + 1);
             ps.setString(2, detail);
             ps.setString(3, filePath);
             ps.setInt(4, recipeId);
             if (ps.executeUpdate() == 0)
                 throw new SQLException("Add Recipe Failed!");
-            if(filePath!=null)
-            Tools.saveFile(filename, instImg, sc, Instruction.IMG_PATH);
+            if (filePath != null)
+                Tools.saveFile(filename, instImg, sc, Instruction.IMG_PATH);
         } finally {
             if (ps != null)
                 ps.close();
@@ -71,6 +72,79 @@ public class IntructionDAO {
         conn.commit();
         return true;
     }
+    private static final String UPDATE_INSTRUCTION
+            = "UPDATE [Instruction]\n"
+            + "   SET [Detail] = ? ,[Img] = ?, InsStep = ?\n"
+            + " WHERE [RecipeID] = ? and InsStep = ?";
+
+    private static boolean updateInstructionRecipe (Part instImg, String detail, int recipeId,
+            int insStep, Instruction oldInst, Connection conn, ServletContext sc) throws SQLException {
+        String filename = null;
+        String sql = UPDATE_INSTRUCTION;
+        PreparedStatement ps = null;
+        //1. if new != ""  then path = new
+        //2. if new == "" and old == "" then path = null
+        //3. if new == "" and old != "" then path = old 
+        try {
+            filename = "instruction_" + (insStep + 1) + "_" + recipeId;
+            String oldFileName = oldInst.getImg();
+            String fileType = null;
+            if (!instImg.getSubmittedFileName().isEmpty()) {
+                fileType = Tools.getFileType(filename, instImg);//return file.*
+            } else {
+                fileType = Tools.getFileType(filename, oldFileName);//return file.* and null if empty
+            }
+            System.out.println("File Type: " + fileType);
+            System.out.println("insStep now: " + oldInst.getInsstep());
+            System.out.println("insStep new: " + (insStep + 1));
+            System.out.println("recipeID: " + recipeId);
+            ps = conn.prepareStatement(sql);
+            ps.setString(1, detail);
+            ps.setString(2, fileType);
+            ps.setInt(3, insStep + 1);
+            ps.setInt(4, recipeId);
+            ps.setInt(5, oldInst.getInsstep());
+            if (ps.executeUpdate() == 1) {
+                if (instImg.getSubmittedFileName().isEmpty()) {
+                    filename = Tools.renameFile(oldInst.getImg(), filename, sc, Instruction.IMG_PATH);
+                } else {
+                    filename = Tools.saveFile(filename, instImg, sc, Instruction.IMG_PATH);
+                }
+                System.out.println("Updated Instruction " + insStep + " " + recipeId);
+                System.out.println(filename);
+                return true;
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+            if (ps != null) {
+                ps.close();
+            }
+        }
+        return false;
+    }
+    private static final String DELETE_INSTRUCTION
+            = "DELETE FROM [Instruction]\n"
+            + "      WHERE RecipeID= ? and InsStep = ?";
+
+    private static boolean deleteInstructionRecipe (int insStep, int recipeId, Connection conn) throws SQLException {
+        PreparedStatement ps = null;
+        try {
+            ps = conn.prepareStatement(DELETE_INSTRUCTION);
+            ps.setInt(1, recipeId);
+            ps.setInt(2, insStep);
+            if (ps.executeUpdate() == 1) {
+                System.out.println("Deleted Instruction  " + insStep + " " + recipeId);
+                return true;
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } finally {
+            if (ps != null)
+                ps.close();
+        }
+        return false;
+    }
 
     static boolean updateInstructionsRecipe (List<Part> instImgList, String[] instDescription, int recipeId,
             Connection conn, ServletContext sc) throws SQLException, IOException {
@@ -88,23 +162,48 @@ public class IntructionDAO {
         System.out.println("======   " + newSize);
 
         int maxSize = Integer.max(oldSize, newSize);
-        for (int i = 0; i < maxSize; i++) {
-            Instruction oldInstruction = null;
-            if (i < oldSize)
-                oldInstruction = oldList.get(i);
-            Part instImg = null;
-            if (i < newSize)
-                instImg = instImgList.get(i);
-            if (i < newSize && i < oldSize) {//update Instruction
-                updateInstructionRecipe(instImg, instDescription[i], recipeId, oldInstruction.getInsstep(), i, conn, sc);
+//        for (int i = 0; i < maxSize; i++) {
+//            Instruction oldInstruction = null;
+//            if (i < oldSize)
+//                oldInstruction = oldList.get(i);
+//            Part instImg = null;
+//            if (i < newSize)
+//                instImg = instImgList.get(i);
+//            if (i < newSize && i < oldSize) {//update Instruction
+//                updateInstructionRecipe(instImg, instDescription[i], recipeId, oldInstruction.getInsstep(), i, conn, sc);
+//            }
+//            if (i < newSize && i >= oldSize) { //add Instruction
+//                addInstructionRecipe(instImg, instDescription[i], recipeId, i, conn, sc);
+//            }
+//            if (i >= newSize && i < oldSize) { //delete Instruction
+//                deleteInstructionRecipe(oldInstruction.getInsstep(), recipeId, conn);
+//            }
+//        }
+        int j = 0;
+        int picIndex = -1;
+        for (int i = 0; i < newSize; i++) {
+            Part instImg = instImgList.get(i);
+            String instDesc = instDescription[i];
+            picIndex = Integer.parseInt(instImg.getName().replaceAll("[^0-9]", "")); //get picIndex
+            System.out.println(picIndex);
+            Instruction oldInst = null;
+            while (j++ < picIndex) {
+                deleteInstructionRecipe(oldList.get(j - 1).getInsstep(), recipeId, conn);
             }
-            if (i < newSize && i >= oldSize) { //add Instruction
-                addInstructionRecipe(instImg, instDescription[i], recipeId, i, conn, sc);
+            if (picIndex < oldSize) {
+                oldInst = oldList.get(i);
+                updateInstructionRecipe(instImg, instDesc, recipeId, i, oldInst, conn, sc);
+            } else {
+                addInstructionRecipe(instImg, instDesc, recipeId, i, conn, sc);
             }
-            if (i >= newSize && i < oldSize) { //delete Instruction
-                deleteInstructionRecipe(oldInstruction.getInsstep(), recipeId, conn);
-            }
+
         }
+        if (oldSize > picIndex + 1)
+            for (int i = picIndex + 1; i < maxSize; i++) {
+                if (i >= newSize && i < oldSize) { //delete picture
+                    deleteInstructionRecipe(oldList.get(i).getInsstep(), recipeId, conn);
+                }
+            }
         return true;
     }
     private static final String SELECT_ALL_INSTRUCTION = "SELECT [ID]\n"
@@ -113,7 +212,8 @@ public class IntructionDAO {
             + "      ,[Img]\n"
             + "      ,[RecipeID]\n"
             + "  FROM [Instruction]\n"
-            + "  Where RecipeID = ?";
+            + "  Where RecipeID = ?"
+            + " order by RecipeID, InsStep";
 
     private static List<Instruction> getInstructionRecipeList (int recipeId, Connection conn) throws SQLException {
         PreparedStatement ps = null;
@@ -142,70 +242,6 @@ public class IntructionDAO {
                 rs.close();
         }
         return null;
-    }
-    private static final String UPDATE_INSTRUCTION
-            = "UPDATE [Instruction]\n"
-            + "   SET [Detail] = ? ,[Img] = ?\n"
-            + " WHERE [RecipeID] = ? and InsStep = ?";
-
-    private static boolean updateInstructionRecipe (Part instImg, String detail, int recipeId,
-            int insStep, int index, Connection conn, ServletContext sc) throws SQLException {
-        String filename = null;
-        String sql = UPDATE_INSTRUCTION;
-        PreparedStatement ps = null;
-        try {
-            if (!instImg.getSubmittedFileName().isEmpty())//instImg is null ignore add picture
-            {
-                ps = conn.prepareStatement(sql);
-                filename = "instruction_" + insStep + "_" + recipeId;
-                ps.setString(1, detail);
-                ps.setString(2, Tools.getFileType(filename, instImg));
-                ps.setInt(3, recipeId);
-                ps.setInt(4, insStep);
-            } else {
-                sql = sql.replace(",[Img] = ?", "");
-                ps = conn.prepareStatement(sql);
-                ps.setString(1, detail);
-                ps.setInt(2, recipeId);
-                ps.setInt(3, insStep);
-            }
-            if (ps.executeUpdate() == 1) {
-                System.out.println("Instruction " + insStep + "_" + recipeId + " Updated");
-                if (filename != null) {
-                    filename = Tools.saveFile(filename, instImg, sc, Instruction.IMG_PATH);
-                    System.out.println(filename);
-                }
-            }
-        } catch (Exception e) {
-            e.printStackTrace();
-        } finally {
-            if (ps != null) {
-                ps.close();
-            }
-        }
-        return false;
-    }
-    private static final String DELETE_INSTRUCTION
-            = "DELETE FROM [Instruction]\n"
-            + "      WHERE RecipeID= ? and InsStep = ?";
-
-    private static boolean deleteInstructionRecipe (int insStep, int recipeId, Connection conn) throws SQLException {
-        PreparedStatement ps = null;
-        try {
-            ps = conn.prepareStatement(DELETE_INSTRUCTION);
-            ps.setInt(1, recipeId);
-            ps.setInt(2, insStep);
-            if (ps.executeUpdate() == 1) {
-                System.out.println("DELETED Instruction  " + insStep + " " + recipeId);
-                return true;
-            }
-        } catch (SQLException e) {
-            e.printStackTrace();
-        } finally {
-            if (ps != null)
-                ps.close();
-        }
-        return false;
     }
 
 }

@@ -7,6 +7,8 @@ package controller;
 import com.google.api.services.gmail.model.Message;
 import dao.IngredientDAO;
 import dto.Instruction;
+import dto.Picture;
+import java.io.File;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.sql.Connection;
@@ -24,6 +26,7 @@ import utilities.CreateMessage;
 import utilities.SendMessage;
 import utils.DBUtils;
 import utils.Tools;
+import static utils.Tools.renameFile;
 
 /**
  *
@@ -50,15 +53,13 @@ public class DebugController extends HttpServlet {
         Connection conn = DBUtils.getConnection();
         ServletContext sc = request.getServletContext();
         try {
-            out = response.getWriter();
-            String filepath = Instruction.IMG_PATH;
-            String filename = "debug.debug";
-            Part part = request.getPart("name");
-            out.print("<br>" + Tools.saveFile(filename, part, sc, filepath));
-            out.print("<br>" +Tools.getFileType(filepath + filename, part));
+            File f = new File(Picture.IMG_PATH+"file");
+            
+            String fname = f.getName();
+            renameFile(fname, "file1", sc,Picture.IMG_PATH);
         } catch (Exception e) {
             e.printStackTrace();
-        }finally{
+        } finally {
             out.close();
         }
     }

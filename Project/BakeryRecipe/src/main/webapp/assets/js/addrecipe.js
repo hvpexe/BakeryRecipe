@@ -141,7 +141,7 @@ function addImage(container) {
     inputPicture.setAttribute('class', 'd-none');
     inputPicture.setAttribute('count', '0');
     //    inputPicture.setAttribute('onclick', 'changeImg(this)');
-    span.classList = "col-2 p-0 swiper-slide hover-button-2 list-group-item rounded ";
+    span.classList = "col-2 p-0 swiper-slide hover-button-2 list-group-item rounded image";
     span.appendChild(inputPicture);
     inputPicture.click();
     container.parentElement.classList.remove("d-none");

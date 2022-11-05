@@ -12,7 +12,7 @@ public class Instruction {
 
     
 
-    public static final String IMG_PATH= "./assets/images/recipe/instruction/";
+    public static final String IMG_PATH= "assets/images/recipe/instruction/";
    
     private int insstep;
     private String detail;

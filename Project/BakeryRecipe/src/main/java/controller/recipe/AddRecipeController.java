@@ -59,7 +59,7 @@ public class AddRecipeController extends HttpServlet {
         try {
             /* TODO output your page here. You may use following sample code. */
 
-            System.out.println("running addrecipe");
+ /* TODO output your page here. You may use following sample code. */
             User user = (User) session.getAttribute("login");
             if (user == null) {
                 url = ERROR_MISSING_USER;
@@ -80,75 +80,72 @@ public class AddRecipeController extends HttpServlet {
             }
             String[] ingreName = request.getParameterValues("ingre-name");//get all name
             String[] ingreAmount = request.getParameterValues("ingre-amount");//get all amount
-            ingreName=Tools.toUTF8(ingreName);
-            ingreAmount=Tools.toUTF8(ingreAmount);
+            if (ingreName != null) {
+                ingreName = Tools.toUTF8(ingreName);
+                ingreAmount = Tools.toUTF8(ingreAmount);
+            }
             List<Part> instImgList = new LinkedList<Part>();//get all instuction images
-            String[] instDescription = Tools.toUTF8(request.getParameterValues("inst-description"));//get all instuction descrition
-            int prepareTime = Integer.parseInt(request.getParameter("prepare-time"));
-            int cookTime = Integer.parseInt(request.getParameter("cook-time"));
+            String[] instDescription = request.getParameterValues("inst-description");//get all instuction descrition
+            if (instDescription != null) {
+                instDescription = Tools.toUTF8(instDescription);
+            }
+            //set default number
+            int prepareTime = 30;
+            int cookTime = 30;
+            int cover = 0;//video image cover
+
+            try {
+                prepareTime = Integer.parseInt(request.getParameter("cook-time"));
+                cookTime = Integer.parseInt(request.getParameter("prepare-time"));
+                cover = Integer.parseInt(request.getParameter("cover"));
+            } catch (NumberFormatException e) {
+
+            }
             Collection<Part> parts = request.getParts();
             int vIndex = 0;
             int iIndex = 0;
-            int cover = Integer.parseInt(request.getParameter("cover"));//video image cover
-            for (String string : ingreName) {
-                out.print("<br>"+string);
-            }
+            out.print("<br>" + recipeName);
+            out.print("<br>" + recipeDescription);
+            out.print("<hr>" + "Pictures " + cover);
             for (Part p : parts) {
                 if (p.getName().contains("video-image")) {
                     try {
-                        out.print("<hr>" + p.getName());
-                        out.print("<br>" + p.getSubmittedFileName().isEmpty());
-                        out.print("<br>" + p.getSubmittedFileName());
-                        out.print("<br>" + p.getContentType());
-                        out.print("<br>" + (vIndex == cover));
+                        out.print("<br>" + p.getName());
+                        out.print(", " + p.getSubmittedFileName().isEmpty());
+                        out.print(", " + p.getSubmittedFileName());
+                        out.print(", " + p.getContentType());
+                        out.print(", " + (vIndex++ == cover));
                         pictureList.add(p);
                     } catch (Exception e) {
-
                     }
-                    vIndex++;
                 }
                 if (p.getName().contains("inst-image")) {
                     try {
-                        out.print("<hr>" + p.getName());
-                        out.print("<br>" + p.getSubmittedFileName().isEmpty());
-                        out.print("<br>" + p.getSubmittedFileName());
-                        out.print("<br>" + p.getContentType());
-                        out.print("<br>" + instDescription[iIndex]);
+                        out.print("<br>" + p.getName());
+                        out.print(", " + p.getSubmittedFileName().isEmpty());
+                        out.print(", " + p.getSubmittedFileName());
+                        out.print(", " + p.getContentType());
+                        out.print(", " + instDescription[iIndex++]);
                         instImgList.add(p);
                     } catch (Exception e) {
-
                     }
-                    iIndex++;
                 }
             }
-            out.print("<hr>" + pictureList);
-            out.print("<hr>" + instImgList);
-            /*http://localhost:8080/BakeryRecipe/AddRecipe
-            ?recipe-name=Baker+bake&
-            recipe-description=aaaaaaaaaaa&
-            cover=1&
-            video-url=https%3A%2F%2Fwww.youtube.com%2Fwatch%3Fv%3DZOvyn72x6kQ%26ab_channel%3DAperture&
-            video-image=56757438_868951923446849_7427423009536737280_n.jpg&
-            ingre-name=egg&
-            ingre-amount=1&
-            ingre-name=banana&
-            ingre-amount=123&
-            count=3&
-            step=1&
-            inst-image=56757438_868951923446849_7427423009536737280_n.jpg
-            inst-description=Hello
-            step=2
-            count=3
-            prepare-time=180
-            cook-time=180*/
+            out.print("<hr>" + "Ingredients");
+            if (ingreName != null)
+                for (int i = 0; i < ingreName.length; i++) {
+                    if (ingreAmount[i].isEmpty())
+                        ingreAmount[i] = "1 oz";
+                    out.print("<br>" + ingreAmount[i] + " of " + ingreName[i]);
+                }
             boolean recipeAdded
                     = RecipeDAO.addRecipe(recipeName, recipeDescription, videoUrl, pictureList, ingreName,
                             ingreAmount, instImgList, instDescription, prepareTime, cookTime, userId, cover, sc);
             if (recipeAdded) {
                 url = SUCCESS;
-                session.setAttribute("ADD_RECIPE_SUCCESS","Recipe added!");
-            }else{
-                session.setAttribute("ADD_RECIPE_FAILED","Recipe adding failed!");
+                session.setAttribute("ADD_RECIPE_SUCCESS", "Recipe added!");
+            } else {
+                session.setAttribute("ADD_RECIPE_FAILED", "Recipe adding failed!");
             }
         } catch (Exception e) {
             e.printStackTrace(out);
