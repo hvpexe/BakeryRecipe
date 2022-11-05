@@ -88,7 +88,7 @@
                 </li>
 
                 <li class="nav-item">
-                    <a class="nav-link" href="#">
+                    <a class="nav-link" href="reportrecipe">
                         <i class="fa-solid fa-bread-slice"></i>
                         <span>Recipes report</span></a>
                 </li>

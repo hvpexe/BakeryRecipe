@@ -25,6 +25,7 @@
 
         <!-- Custom styles for this template -->
         <link href="admin/css/sb-admin-2.min.css" rel="stylesheet">
+        <link href="assets/css/elestyle.css" rel="stylesheet"> 
         <!-- Custom styles for this page -->
         <link href="admin/vendor/datatables/dataTables.bootstrap4.min.css" rel="stylesheet">
         <link href="assets/css/fontawesome-free-6.1.1-web/css/all.min.css" rel="stylesheet" type="text/css">
@@ -64,7 +65,7 @@
                 </div>
 
                 <!-- Nav Item - Pages Collapse Menu -->
-                <li class="nav-item  active">
+                <li class="nav-item">
                     <a class="nav-link" href="manageuser">
                         <i class="fa-solid fa-user"></i>
                         <span>Users</span></a>
@@ -96,7 +97,7 @@
                         <span>Users report</span></a>
                 </li>
 
-                <li class="nav-item">
+                <li class="nav-item active">
                     <a class="nav-link" href="reportrecipe">
                         <i class="fa-solid fa-bread-slice"></i>
                         <span>Recipes report</span></a>
@@ -393,102 +394,75 @@
                                         <thead>
                                             <tr>
                                                 <th>Id</th>
-                                                <th>Avatar</th>
-                                                <th>Last Name</th>
-                                                <th>First Name</th>
-                                                <th>Gender</th>
-                                                <th>Birthday</th>
-                                                <th>Email</th>
-                                                <th>Role</th>
-                                                <th>Status</th>
+                                                <th class="col-1">Cover</th>
+                                                <th>Recipe</th>
+                                                <th>Report Type</th>
+                                                <th>Details</th>
+                                                <th>Date Report</th>
+                                                <th>User Report</th>
+                                                <th>Report State</th>
+                                                <th>Recipe Details</th>
                                                 <th>Action</th>
                                             </tr>
                                         </thead>
                                         <tfoot>
                                             <tr>
                                                 <th>Id</th>
-                                                <th>Avatar</th>
-                                                <th>Last Name</th>
-                                                <th>First Name</th>
-                                                <th>Gender</th>
-                                                <th>Birthday</th>
-                                                <th>Email</th>
-                                                <th>Role</th>
-                                                <th>Status</th>
+                                                <th class="col-1">Cover</th>
+                                                <th>Recipe</th>
+                                                <th>Report Type</th>
+                                                <th>Details</th>
+                                                <th>Date Report</th>
+                                                <th>User Report</th>
+                                                <th>Report State</th>
+                                                <th>Recipe Details</th>
                                                 <th>Action</th>
                                             </tr>
                                         </tfoot>
                                         <tbody>
-                                            <c:forEach items="${userlist}" var="u">
-                                                <tr class="col-12">
-                                                    <td class="align-middle col-1">${u.id}</td>
+                                            <c:forEach items="${reportrecipe}" var="u">
+                                                <tr class="col-12 ml-auto mr-auto col">
+                                                    <td class="align-middle style col-1">${u.id}</td>
                                                     <td class="col-1">
-                                                        <img class="p-1 d-block w-100" src="${u.avatar}" style="aspect-ratio: 1 / 1; border: 2px solid gray;" alt="">
+                                                        <img class="align-self-center w-100 border border-dark" src="${u.getCover()}" style="aspect-ratio: 190 / 190;" alt="">
                                                     </td>
-                                                    <td class="align-middle col-1">${u.lastName}</td>
-                                                    <td class="align-middle col-1">${u.firstName}</td>
-                                                    <td class="align-middle col-1">${u.gender}</td>
-                                                    <td class="align-middle col-2">${u.birthday}</td>
-                                                    <td class="align-middle col-2">${u.email}</td>
-                                                    <td class="align-middle col-1">${u.role}</td>  
-                                                    <td class="align-middle col-1">
-                                                        <c:if test="${u.isActive == 'false'}">
-                                                            Inactive
-                                                        </c:if>
-                                                        <c:if test="${u.isActive == 'true'}">
-                                                            Active
-                                                        </c:if>
+                                                    <td class="align-middle style col-2">${u.recipeTitle}</td>
+                                                    <td class="align-middle style col-1">${u.reportType}</td>
+                                                    <td class="align-middle style col-2">${u.detail}</td>
+                                                    <td class="align-middle style align-items-center col-2 text-nowrap">${u.getDateReport()}</td>
+                                                    <td class="align-middle style col-1">${u.reporter}</td> 
+                                                    <td class="align-middle align-items-center col-1 text-nowrap">
+                                                        <c:choose>
+                                                            <c:when test="${u.status == 'Approved'}">
+                                                                <c:set var="status" value="green"></c:set>
+                                                            </c:when>
+                                                            <c:when test="${u.status == 'Denied'}">
+                                                                <c:set var="status" value="red"></c:set>
+                                                            </c:when>
+                                                            <c:otherwise>
+                                                                <c:set var="status" value="blue"></c:set>
+                                                            </c:otherwise>
+                                                        </c:choose>
+                                                        <div style="color: ${status}"><b> ${u.status}</b></div>
                                                     </td>
                                                     <td class="align-middle col-1">
-                                                        <c:if test="${u.id eq sessionScope.login.id}">
-                                                            <form action="profile.jsp">
-                                                                <button class="bg-success">My Profile</button>
+                                                        <!--neu muon Chinh button thi cho form bao lai de edit--> 
+                                                        <form action="recipe">
+                                                            <button class="bg-side-color" style="width: max-content;">
+                                                                <a href=".\RecipeDetail?recipeID=${u.recipeID}">Recipe Details</a>
+                                                            </button>
+                                                        </form>
+                                                    </td>
+                                                    <td class="align-middle col-1">
+                                                        <div class="d-flex flex-wrap ">
+                                                            <form action="report" class="flex-grow-1">
+                                                                <input type="hidden" name="reportID" value="${u.id}">
+                                                                <c:if test="${u.status == 'Process'}">
+                                                                    <button class="bg-success" name="action" value="Approved">Approved Report</button>
+                                                                    <button class="bg-danger" name="action" value="Denied">Denied Report</button>
+                                                                </c:if>
                                                             </form>
-                                                        </c:if>
-                                                        <c:if test="${u.id ne sessionScope.login.id}">
-                                                            <c:if test="${u.role == 'admin'}">
-                                                                <form action="managestatus">
-                                                                    <button class="bg-success">Remove Admin</button>
-                                                                    <input type="hidden" name="userid" value="${u.id}">
-                                                                    <input type="hidden" name="action" value="changerole">
-                                                                    <input type="hidden" name="role" value="baker">
-                                                                </form>
-                                                                <form action="user">
-                                                                    <button class="bg-success" style="width: max-content;">
-                                                                        <a href="./profile?userid=${u.id}">User Profile</a>
-                                                                    </button>
-                                                                </form>
-                                                            </c:if>
-                                                            <c:if test="${u.role == 'baker'}">
-                                                                <c:if test="${u.isActive == 'false'}">
-                                                                    <form action="managestatus">
-                                                                        <button class="bg-success">UNBAN</button>
-                                                                        <input type="hidden" name="userid" value="${u.id}">
-                                                                        <input type="hidden" name="active" value="true">
-                                                                        <input type="hidden" name="action" value="changestatus">
-                                                                    </form>
-                                                                </c:if>
-                                                                <c:if test="${u.isActive == 'true'}">
-                                                                    <form action="managestatus">
-                                                                        <button class="bg-success">BAN</button>
-                                                                        <input type="hidden" name="userid" value="${u.id}">
-                                                                        <input type="hidden" name="active" value="false">
-                                                                        <input type="hidden" name="action" value="changestatus">
-                                                                    </form>
-                                                                </c:if>
-                                                                <form action="managestatus">
-                                                                    <button class="bg-success">Set Admin</button>
-                                                                    <input type="hidden" name="userid" value="${u.id}">
-                                                                    <input type="hidden" name="action" value="changerole">
-                                                                    <input type="hidden" name="role" value="admin">
-                                                                </form>
-                                                                <form action="user">
-                                                                    <button class="bg-success" style="width: max-content;">
-                                                                        <a href="./profile?userid=${u.id}">User Profile</a>
-                                                                    </button>
-                                                                </form>
-                                                            </c:if>
-                                                        </c:if>
+                                                        </div>
                                                     </td>
                                                 </tr>
                                             </c:forEach>
@@ -563,5 +537,8 @@
         <script src="admin/js/demo/datatables-demo.js"></script>
 
     </body>
+
+
+
 
 </html>

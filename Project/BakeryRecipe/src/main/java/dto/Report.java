@@ -4,6 +4,7 @@
  */
 package dto;
 
+import static dto.Recipe.COVER_PATH;
 import java.sql.Date;
 
 /**
@@ -11,6 +12,8 @@ import java.sql.Date;
  * @author VO MINH MAN
  */
 public class Report {
+    
+    public static final String COVER_PATH = Picture.IMG_PATH;
 
     private int id;
     private Date DateReport;
@@ -20,11 +23,14 @@ public class Report {
     private String status;
     private String reporter;
     private String comment;
-    private int cmtID;
+    private String recipeTitle;
+    private String cover;
+    private int recipeID;
+    
     public Report() {
     }
 
-    public Report(int id, Date DateReport, String detail, int userID, String reportType, String status, String reporter, String comment, int cmtID) {
+    public Report(int id, Date DateReport, String detail, int userID, String reportType, String status, String reporter, String comment) {
         this.id = id;
         this.DateReport = DateReport;
         this.detail = detail;
@@ -33,7 +39,46 @@ public class Report {
         this.status = status;
         this.reporter = reporter;
         this.comment = comment;
-        this.cmtID = cmtID;
+        
+    }
+
+    public Report(int id, Date DateReport, String detail, int userID, String reportType, String status, String reporter, String recipeTitle, String cover, int recipeID) {
+        this.id = id;
+        this.DateReport = DateReport;
+        this.detail = detail;
+        this.userID = userID;
+        this.reportType = reportType;
+        this.status = status;
+        this.reporter = reporter;
+        this.recipeTitle = recipeTitle;
+        this.cover = cover;
+        this.recipeID = recipeID;
+    }
+    
+    
+
+    public String getRecipeTitle() {
+        return recipeTitle;
+    }
+
+    public void setRecipeTitle(String recipeTitle) {
+        this.recipeTitle = recipeTitle;
+    }
+
+    public String getCover() {
+        return COVER_PATH + cover;
+    }
+
+    public void setCover(String cover) {
+        this.cover = cover;
+    }
+
+    public int getRecipeID() {
+        return recipeID;
+    }
+
+    public void setRecipeID(int recipeID) {
+        this.recipeID = recipeID;
     }
 
     
@@ -70,16 +115,7 @@ public class Report {
         this.comment = comment;
     }
 
-    public int getCmtID() {
-        return cmtID;
-    }
-
-    public void setCmtID(int cmtID) {
-        this.cmtID = cmtID;
-    }
-
     
-
     public Date getDateReport() {
         return DateReport;
     }
