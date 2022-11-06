@@ -22,8 +22,8 @@
                 <span>notification</span>
             </div>
             <div class="col d-flex border-bottom bg-white py-3" style="gap:10px">
-                <div class="button-option active hover-button-1 hl-none c-pointer">All</div>
-                <div class="button-option hover-button-1 hl-none c-pointer">Unread</div>
+                <div class="button-option active hover-button-1 hl-none c-pointer" id="btnAll">All</div>
+                <div class="button-option hover-button-1 hl-none c-pointer" id="btnUnread">Unread</div>
             </div>
             <nav class="notify-section bg-white col">
                 <% request.setAttribute("LIST", new String[]{"Like", "Comment", "Follow", "RemoveRecipe", "Saved"});%>
@@ -87,6 +87,18 @@
                 </c:forEach> 
             </nav>
         </main>
+        <script>
+            $('#notification #btnAll').click((e)=>{
+               $('#notification .notify-item').removeClass('d-none'); 
+                $(e.target).addClass('active');
+                $('#notification #btnUnread').removeClass('active');
+            });
+            $('#notification #btnUnread').click((e)=>{
+                $(e.target).addClass('active');
+                $('#notification #btnAll').removeClass('active');
+               $('#notification .notify-item.seen').addClass('d-none'); 
+            });
+        </script>        
         <c:if test="${SHOW_PAGE}">
         </section>
         <c:import url="footer.jsp"/>
