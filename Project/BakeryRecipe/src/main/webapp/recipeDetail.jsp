@@ -1,5 +1,6 @@
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="m" uri="/WEB-INF/tlds/mycustomtag.tld" %>
 
 <!DOCTYPE html>
 <html>
@@ -241,8 +242,8 @@
                                     <c:forEach items="${COMMENT_LIST}" var="cmt">
                                         <input  type="hidden" id="commentID">
                                         <input type="hidden" id="commentReportID" value="${cmt.commentID}">
-                                        
-                                    
+
+
                                         <div class="d-flex flex-start mb-4"   >
                                             <img class="rounded-circle mr-2"
                                                  src="./assets/images/avt/${cmt.avatar}" alt="avatar"
@@ -251,21 +252,22 @@
                                                 <div class="card-body p-4"> 
                                                     <div class="">
                                                         <div id="baseline">
-                                                        <h5>${cmt.chefName}</h5>
-                                                        <!--report comment--> 
-                                                        <div class="dropdown">
-                                                            <button style="color: white"><i class="fa-solid fa-ellipsis"></i></button>
-                                                            <div class="dropdown-options">
-                                                                <a   class="d-inline-block text-muted hover-underline c-pointer mr-3" onclick="getReportComment(${RECIPE_DETAIL.getId()})" href="#">
-                                                                    <span class="align-middle">
-                                                                        <strong>${re.like}</strong> Report</span></a>
-                                                                <a href="#">Delete</a>
+                                                            <h5>${cmt.chefName}</h5>
+                                                            <!--report comment--> 
+                                                            <div class="dropdown">
+                                                                <button style="color: white"><i class="fa-solid fa-ellipsis"></i></button>
+                                                                <div class="dropdown-options">
+                                                                    <a   class="d-inline-block text-muted hover-underline c-pointer mr-3" onclick="getReportComment(${RECIPE_DETAIL.getId()})" href="#">
+                                                                        <span class="align-middle">
+                                                                            <strong>${re.like}</strong> Report</span></a>
+                                                                    <a href="#">Delete</a>
+                                                                </div>
                                                             </div>
-                                                        </div>
-                                                        <!--ket thuc comment--> 
+                                                            <!--ket thuc comment--> 
                                                         </div>
                                                         <p class="small">
-                                                            <c:out value="${cmt.getDateComment()}"/></p>
+                                                            <m:ago value = "${cmt.getDateComment()}" />
+                                                        </p>
                                                         <p>
                                                             ${cmt.comment}
                                                         </p>
@@ -308,7 +310,7 @@
                 </div>
 
             </div>
-                                               
+
         </c:catch> ${e}
 
         <!--PhuHV: nua dem fix bug cai nay, tien sư thang nao xoa script lam carousel ko chay -->
@@ -347,10 +349,10 @@
             </div>
         </div>
         <!--ket thuc ham container-->
-     
-        
-        
-        
+
+
+
+
         <!--report cua comment--> 
         <div class="fixed-container " id="report_comment" >
             <div class="gray-box"></div>
@@ -364,37 +366,37 @@
                             <option value="Speech">Hate Speech</option>
                             <option value="victim">Make fun of the victim</option>
                         </select>
-                    <div class="form-group" >
-                        <textarea name="txtReport" class="txtareaRp w-100"  id="txtReportComment" value=""></textarea>
-                    </div>  
-                    <div class="form-group">
-                        <button class="hover" type="submit" onclick="sendReport('Comment')">Send Report</button>
+                        <div class="form-group" >
+                            <textarea name="txtReport" class="txtareaRp w-100"  id="txtReportComment" value=""></textarea>
+                        </div>  
+                        <div class="form-group">
+                            <button class="hover" type="submit" onclick="sendReport('Comment')">Send Report</button>
+                        </div>
+
+                        <!--</form>--> 
                     </div>
 
-                    <!--</form>--> 
+
                 </div>
-              
-                
+                <div id="thankReport1"></div>
             </div>
-                  <div id="thankReport1"></div>
         </div>
-            </div>
-                
+
         <!--keu thuc report cua comment-->
-        
-      
+
+
         <script>
-                              var loginID = ${sessionScope.login.id};
-                              var recipeID =${RECIPE_DETAIL.id};
-                              var userID = ${USER_DETAIL.id};
-                              var likeNum =${RECIPE_DETAIL.getLike()};
-                          var commentID = document.querySelector('#commentReportID').value;
-                           
+            var loginID = ${sessionScope.login.id};
+            var recipeID =${RECIPE_DETAIL.id};
+            var userID = ${USER_DETAIL.id};
+            var likeNum =${RECIPE_DETAIL.getLike()};
+            var commentID = document.querySelector('#commentReportID').value;
+
         </script>
         <script src="https://cdn.jsdelivr.net/npm/swiper@8/swiper-bundle.min.js"></script>
         <script src="assets/js/recipeDetail.js"></script>
         <c:import url="footer.jsp"/>
- 
-         </body>
+
+    </body>
 
 </html>

@@ -1198,7 +1198,8 @@ public class RecipeDAO {
     private static final String LIST_COMMENT = "select baker.FirstName +' ' + baker.LastName as fullName ,DateComment,cmt.ID,cmt.Comment,baker.Avatar\n"
             + "            from [dbo].[Comment] cmt join [dbo].[User] baker\n"
             + "            on cmt.UserID = baker.ID\n"
-            + "            where cmt.RecipeID = ?";
+            + "            where cmt.RecipeID = ?"
+            + "            ORDER BY DateComment Desc ";
 
     public static List<Comment> commentList (int recipeID) throws SQLException {
         List<Comment> cmtList = new ArrayList<>();

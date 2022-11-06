@@ -11,6 +11,7 @@ import java.io.IOException;
 import java.io.PrintWriter;
 import java.sql.Date;
 import java.sql.SQLException;
+import java.sql.Timestamp;
 import java.text.SimpleDateFormat;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -20,6 +21,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import utils.Tools;
 
 /**
  *
@@ -33,9 +35,7 @@ public class CommnetRecipeAjax extends HttpServlet {
         response.setContentType("text/html;charset=UTF-8");
         try ( PrintWriter out = response.getWriter()) {
             //        Timestamp date = new Timestamp(System.currentTimeMillis());Date currentDate = new Date (1665559539000)
-            Date currentDate = new Date(System.currentTimeMillis());
-            SimpleDateFormat dateFormat = new SimpleDateFormat("YYYY-MM-dd HH:mm:ss");
-            String date = dateFormat.format(currentDate);
+            Timestamp currentDate = new Timestamp(System.currentTimeMillis());
             int bakerID = Integer.parseInt(request.getParameter("bakerID"));
             String comment = request.getParameter("txtCmt");
             int recipeID = Integer.parseInt(request.getParameter("RecipeID"));
@@ -51,7 +51,7 @@ public class CommnetRecipeAjax extends HttpServlet {
                     + "                                            <div class=\"card-body p-4\">\n"
                     + "                                                <div class=\"\">\n"
                     + "                                                    <h5>" + baker.getName() + "</h5>\n"
-                    + "                                                    <p class=\"small\">" + date + "</p>\n"
+                    + "                                                    <p class=\"small\">" + Tools.formatDate(currentDate) + "</p>\n"
                     + "                                                    <p>\n"
                     + "                                                        " + comment + "\n"
                     + "                                                    </p>\n"
