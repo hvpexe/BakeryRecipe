@@ -7,6 +7,7 @@ section:has( #notification){
 #notification .notify-title{
     display: flex;
     align-items: center;
+    justify-content: space-between;
 }
 #notification .notify-title span{
     translate:0px 5px;
@@ -35,12 +36,15 @@ section:has( #notification){
     font-style: normal;
 
     color: #FFFFFF;
-
 }
 #notification .button-option.active{
     font-weight: 700;
     background: #DB5A42;
 
+}
+#notification .avatar{
+    width: 3rem;
+    margin-top:0;
 }
 #notification a.notify-item{
     color:inherit;

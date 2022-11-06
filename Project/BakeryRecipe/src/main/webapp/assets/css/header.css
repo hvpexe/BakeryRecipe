@@ -1,5 +1,6 @@
 @import "animation.css";
 @import "universal.css";
+@import "notification.css";
 :root {
     --main-theme-color: #DB5A42;
     --main-theme-color-hover: #c22e14;
@@ -182,6 +183,31 @@ body {
     color:white;
     background: var(--yellow-theme)
 }
+#header-notification {
+    position: relative;
+}
+#header-notification:has(.notify:not(.pe-none)) .header-notification{
+    box-shadow: 0 0 400px inset #00000020;
+}
+#header-notification .notify{
+    border-radius: 25px;
+    height: 85vh;
+    position: absolute;
+    top: 120%;
+    right: -50px;
+    min-width: 400px;
+    background: #fff;
+    box-shadow: 0 0 12px -2px #000000;
+}
+
+
+
+
+
+
+
+
+
 .header-user {
     display: flex;
     cursor: pointer;

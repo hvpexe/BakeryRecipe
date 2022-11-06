@@ -5,10 +5,7 @@
 <html>
     <head>
         <title>Your information</title>
-        <link rel="stylesheet" type="text/css" href="./assets/css/web/bootstrap-4.3.1.min.css">
-        <link rel="stylesheet" type="text/css" href="./assets/css/fontawesome-free-6.1.1-web/css/all.min.css">
-        <link rel="stylesheet" type="text/css" href="./assets/css/header.css">
-        <link rel="stylesheet" type="text/css" href="./assets/css/footer.css">
+        <c:import url="universal.jsp"/> 
         <link rel="stylesheet" href="./assets/css/profileInfo.css">
 
     </head>

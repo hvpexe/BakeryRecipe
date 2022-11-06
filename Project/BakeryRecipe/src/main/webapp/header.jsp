@@ -33,10 +33,13 @@
             </c:if>
             <c:if test="${login != null}">
                 <div class="d-inline-flex ml-auto">
-                    <div class="p-0 d-flex align-items-center justify-content-center ml-auto">
+                    <div class="p-0 d-flex align-items-center justify-content-center ml-auto" id="header-notification">
                         <div class="hover-button-1 header-notification" data-notices="1">
                             <i class="fa-solid fa-bell"></i>
-                            <!--<div class="notify"  ></div>-->
+
+                        </div>
+                        <div class="notify pe-none">
+                            hello
                         </div>
                     </div>
                     <div class="header-user position-relative ml-auto">
