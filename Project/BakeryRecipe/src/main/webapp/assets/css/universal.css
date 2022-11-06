@@ -76,8 +76,18 @@
 .avatar {
     object-fit: cover;
     object-position: center;
-    aspect-ratio:1;
+    aspect-ratio:1/1;
+    margin:auto;
 }
-
+.hl-none{
+    position:relative;
+}
+.hl-none::after{
+    content:'';
+    position:absolute;
+    inset:0;
+    z-index: 1;
+    border-radius: inherit;
+}
 
 

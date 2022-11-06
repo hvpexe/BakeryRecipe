@@ -21,7 +21,7 @@
         <div class="search-ingre">
             <div class="search-section mx-auto ">
                 <div class="title-container">
-                    <h1 class="title">Search recipes with ingredients</h1>
+                    <h1 class="notify-title">Search recipes with ingredients</h1>
                 </div>
 
                 <div class="search-container">

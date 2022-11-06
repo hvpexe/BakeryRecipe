@@ -20,7 +20,7 @@
         <div class="community">
             <div class="community-section mx-auto ">
                 <div class="title-container">
-                    <h1 class="title">Recommend For You</h1>
+                    <h1 class="notify-title">Recommend For You</h1>
                     <a href="#" class="btn seemore">See more</a>
                 </div>
                 <div class="recipe-list row ">
@@ -50,7 +50,7 @@
         <div class="community">
             <div class="community-section mx-auto ">
                 <div class="title-container">
-                    <h1 class="title">Most Popular Recipes</h1>
+                    <h1 class="notify-title">Most Popular Recipes</h1>
                     <a href="./MostRatedRecipe" class="btn seemore">See more</a>
                 </div>
                 <div class="recipe-list row ">
@@ -79,7 +79,7 @@
         <div class="community" id="newest">
             <div class="community-section mx-auto ">
                 <div class="title-container">
-                    <h1 class="title">Most Recent Recipes</h1>
+                    <h1 class="notify-title">Most Recent Recipes</h1>
                     <a href="./MostRecentRecipe" class="btn seemore">See more</a>
                 </div>
                 <div class="recipe-list row ">

@@ -66,7 +66,7 @@
     bottom:20%;
     margin:auto;
     width:8%;
-    aspect-ratio:1;    
+    aspect-ratio:1;
     border-radius: 50%;
     background: inherit;
 }
@@ -115,6 +115,22 @@
 }
 .hover-button-2:active{
     box-shadow: 0 -15px 15px 0 inset var(--brown-theme-50);
+
+}
+.hover-button-3{
+    position: relative;
+}
+.hover-button-3::before{
+    position: absolute;
+    content:'';
+    inset:0;
+    background: transparent;
+}
+.hover-button-3:hover::before{
+    background: #00000010;
+}
+.hover-button-3:active::before{
+    background: #00000020;
 
 }
 .hover-underline:hover{

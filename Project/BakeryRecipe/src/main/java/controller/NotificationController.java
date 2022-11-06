@@ -7,6 +7,7 @@ package controller;
 import java.io.IOException;
 import java.io.PrintWriter;
 import javax.servlet.ServletException;
+import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -15,9 +16,10 @@ import javax.servlet.http.HttpServletResponse;
  *
  * @author Admin
  */
+@WebServlet(name = "NotificationController", urlPatterns = {"/notification"})
 public class NotificationController extends HttpServlet {
 
-    private static final String SUCCESS = "notifcation.jsp";
+    private static final String SUCCESS = "notification.jsp";
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -39,10 +41,10 @@ public class NotificationController extends HttpServlet {
         } catch (Exception e) {
             e.printStackTrace();
         } finally {
-            out.close();
 
             request.getRequestDispatcher(url).forward(request, response);
         }
+        out.close();
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
@@ -58,7 +60,7 @@ public class NotificationController extends HttpServlet {
     @Override
     protected void doGet (HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        request.setAttribute("SHOW_PAGE", false);
+        request.setAttribute("SHOW_PAGE", true);
         processRequest(request, response);
     }
 
@@ -74,7 +76,7 @@ public class NotificationController extends HttpServlet {
     @Override
     protected void doPost (HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        request.setAttribute("SHOW_PAGE", true);
+        request.setAttribute("SHOW_PAGE", false);
         processRequest(request, response);
     }
 

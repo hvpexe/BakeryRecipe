@@ -48,7 +48,7 @@
         <div class="community container">
             <div class="community-section mx-auto ">
                 <div class="title-container">
-                    <h1 class="title">Saved</h1>
+                    <h1 class="notify-title">Saved</h1>
                 </div>
                 <div class="recipe-list row ">
                     <c:forEach items="${RecipeList}" var="cc">

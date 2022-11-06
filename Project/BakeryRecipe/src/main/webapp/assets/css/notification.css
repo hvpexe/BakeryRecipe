@@ -1,0 +1,87 @@
+section:has( #notification){
+    border-radius: 25px;
+    background: #BEBEBE;
+    max-width: 25#;
+    height: auto;
+}
+#notification .notify-title{
+    display: flex;
+    align-items: center;
+}
+#notification .notify-title span{
+    translate:0px 5px;
+}
+#notification {
+    border-top-left-radius: inherit;
+    border-top-right-radius: inherit;
+    height: auto;
+    background:#eeeeee;
+}
+#notification > div:first-child {
+    border-radius: inherit;
+}
+#notification .button-option{
+    min-width: 88px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 8px 15px;
+
+    background: rgba(219, 90, 66, 0.75);
+    border-radius: 25px;
+
+    font-family: 'Gelasio';
+    font-weight: 400;
+    font-style: normal;
+
+    color: #FFFFFF;
+
+}
+#notification .button-option.active{
+    font-weight: 700;
+    background: #DB5A42;
+
+}
+#notification a.notify-item{
+    color:inherit;
+}
+#notification .notify-item::before{
+    left:-10px;
+    right:-10px;
+    border-radius: 10px;
+    border-bottom: 4px solid #eeeeee;
+}
+a.notify-item::after {
+    background: var(--main-theme-color);
+    content: '';
+    position: absolute;
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    right: 2%;
+    top: 50%;
+    translate: 0 -50%;
+}
+a.notify-item.seen::after {
+    content: unset;
+}
+#notification .notify-item > div{
+    display: flex;
+    padding: 10px 8px;
+    gap: 8px;
+
+}
+
+#notification .fa-heart{
+    color: var(--main-theme-color);
+}
+#notification .fa-comment-dots{
+    color: var(--yellow-theme);
+}
+#notification .fa-bookmark{
+    color: var(--main-theme-color-hover);
+}
+#notification .fa-eye{
+    color: black;
+}
+

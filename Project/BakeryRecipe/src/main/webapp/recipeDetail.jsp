@@ -286,7 +286,7 @@
                     <!-- Related recipes -->
                     <div class="related-container mx-auto mt-3">
                         <div class="title-container">
-                            <h1 class="title">Related recipes</h1>
+                            <h1 class="notify-title">Related recipes</h1>
                         </div>
                         <div class="recipe-list row ">
                             <c:forEach items="${RELATED_TOPIC}" var="to">
