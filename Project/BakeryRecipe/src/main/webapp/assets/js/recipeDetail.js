@@ -125,9 +125,8 @@ function  likeButton(item, val1, val2, action) {
 
 function Comment(item, event) {
     var textCmt = item.value;
-    if (event.key === "Enter") {
-
-
+    if (event.key === "Enter" && !event.shiftKey ) {
+        event.preventDefault();//bth tui xai bien e chu ko xai event
         $.ajax({
             url: "ajax/CommnetRecipeAjax",
             type: "get", //send it through get method
@@ -142,7 +141,6 @@ function Comment(item, event) {
                 var cmtShow = document.getElementById("show-comment");
                 cmtShow.innerHTML += response;
                 item.value = "";
-
             },
             error: function (xhr) {
                 console.log("that bai");

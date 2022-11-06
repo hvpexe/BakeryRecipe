@@ -230,7 +230,7 @@
                                                  width="60" height="60" />
                                             <div class="w-100">
                                                 <div class="form-outline">
-                                                    <textarea  onkeyup="Comment(this, event)" class="form-control" id="textAreaExample" rows="4" type="textarea" name="txtCmt" value=""></textarea>
+                                                    <textarea onkeydown ="Comment(this, event)" class="form-control" id="textAreaExample" rows="4" type="textarea" name="txtCmt" value=""></textarea>
                                                 </div>
                                             </div>
                                         </div>  
