@@ -1,6 +1,7 @@
 
 
 <%@page import="utils.Tools"%>
+<%@ taglib prefix="mct" uri="/WEB-INF/tlds/mycustomtag.tld" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 
@@ -17,7 +18,6 @@
                 <div class="col-10 recipe-content">
                     <a href=".\RecipeDetail?recipeID=${r.id}" class="text-dark h5 font-weight-bold hover-underline">
                         ${r.name}
-                        <div class="h6">${r.getLastDateEdit()}</div>
                     </a>
                     <span class="h5 ">${r.description}</span>
                 </div>    

@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<taglib version="2.1" xmlns="http://java.sun.com/xml/ns/javaee" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-jsptaglibrary_2_1.xsd">
+  <tlib-version>1.0</tlib-version>
+  <jsp-version>1.2</jsp-version>
+  <uri>/tlds/mycustomtag</uri>
+  <short-name>My Custom Tag</short-name>
+  <!--    <tag>  
+        <name>cube</name>  
+        <tag-class>com.javatpoint.taghandler.CubeNumber</tag-class>  
+        <attribute>  
+            <name>number</name>  
+            <required>true</required>  
+        </attribute>  
+    </tag>  -->
+  <tag>
+    <name>ago</name>
+    <tag-class>utils.tags.MyCustomTag</tag-class>
+    <body-content>empty</body-content>
+    <attribute>
+      <description>
+                Expression to be evaluated.
+            </description>
+      <name>value</name>
+      <required>false</required>
+      <rtexprvalue>true</rtexprvalue>
+      <type>java.sql.Timestamp</type>
+    </attribute>
+  </tag>
+</taglib>

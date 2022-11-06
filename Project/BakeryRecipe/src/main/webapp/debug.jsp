@@ -3,7 +3,13 @@
     Created on : Oct 7, 2022, 4:30:00 PM
     Author     : Admin
 --%>
-
+<%@page import="dao.RecipeDAO"%>
+<%@page import="dto.Recipe"%>
+<%@page import="java.util.List"%>
+<%@page import="dto.Comment"%>
+<%@page import="dao.CommentDAO"%>
+<%@page import="utils.Tools"%>
+<%@taglib uri="/WEB-INF/tlds/mycustomtag.tld" prefix="mct" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
@@ -17,6 +23,12 @@
 
     </head>
     <body>
-        <c:import url="notification"></c:import>
+        <%
+            List<Recipe> cmtList = RecipeDAO.showRecipeList();
+            request.setAttribute("LIST", cmtList);
+        %>
+        <c:forEach items="${LIST}" var="re" >
+            <mct:ago value="${re.getDatePost()}"/><br>
+        </c:forEach>
     </body>
 </html>

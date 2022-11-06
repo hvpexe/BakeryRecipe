@@ -300,7 +300,7 @@
                                         </div>
                                     </div>
                                     <div class="related-recipe-name">${to.name}</div>
-                                    <div class="recipe-author"><a href="#">${to.username}</a><c:out value="${to.getDatePost()}"/></div>
+                                    <div class="recipe-author"><a href="#">${to.username}</a><c:out value="${to.getDatePostFormat()}"/></div>
                                 </div>
                             </c:forEach>
                         </div>

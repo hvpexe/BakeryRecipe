@@ -4,32 +4,18 @@
  */
 package utils;
 
-import java.awt.BorderLayout;
 import java.awt.image.BufferedImage;
 import java.io.File;
-import java.io.FileInputStream;
-import java.io.FileNotFoundException;
-import java.io.IOException;
-import java.io.PrintWriter;
 import java.net.URLDecoder;
 import java.net.URLEncoder;
 import java.sql.Timestamp;
-import java.text.SimpleDateFormat;
 import java.sql.Date;
 import javax.servlet.ServletContext;
 import javax.servlet.http.Part;
-import java.io.FileOutputStream;
-import java.io.FileWriter;
 import java.io.IOException;
 import java.io.InputStream;
-import java.io.OutputStream;
-import java.io.OutputStreamWriter;
-import java.net.URI;
 import java.net.URL;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javax.imageio.ImageIO;
-import org.checkerframework.checker.units.qual.A;
 
 /**
  *
@@ -79,9 +65,58 @@ public class Tools {
         return new Date(time.getTime());
     }
 
+    private static final long SECOND = 1000;
+    private static final long MINUTE = SECOND * 60;
+    private static final long HOUR = MINUTE * 60;
+    private static final long DAY = HOUR * 24;
+    private static final long WEEK = DAY * 7;
+    private static final long MONTH = DAY * 30;
+    private static final long YEAR = DAY * 365;
+
     public static String formatDate (Timestamp time) {
-        SimpleDateFormat dt = new SimpleDateFormat("mm:HH E dd-MM-yyyy");
-        return dt.format(time);
+        if(time==null) return null;
+        
+        String seperatedTimeString = "Just Now";
+        Long seperatedTime = null;
+        Timestamp currentTime = getCurrentDateTime();
+        String timeText = null;
+        Long resultTime = null;
+
+        seperatedTime = (currentTime.getTime() - time.getTime());
+        if (seperatedTime > 10 * SECOND) {
+            timeText = "seconds";
+            resultTime = seperatedTime / SECOND;
+        } else {
+            return seperatedTimeString;
+        }
+        if (seperatedTime >= MINUTE) {
+            timeText = "minute" + (seperatedTime >= 2 * MINUTE ? "s" : "");
+            resultTime = seperatedTime / MINUTE;
+
+        }
+        if (seperatedTime >= HOUR) {
+            timeText = "hour" + (seperatedTime >= 2 * HOUR ? "s" : "");
+            resultTime = seperatedTime / HOUR;
+        }
+        if (seperatedTime >= DAY) {
+            timeText = "day" + (seperatedTime >= 2 * DAY ? "s" : "");
+            resultTime = seperatedTime / DAY;
+        }
+        if (seperatedTime >= WEEK) {
+            timeText = "week" + (seperatedTime >= 2 * WEEK ? "s" : "");
+            resultTime = seperatedTime / WEEK;
+        }
+
+        if (seperatedTime >= MONTH) {
+            timeText = "month" + (seperatedTime >= 2 * MONTH ? "s" : "");
+            resultTime = seperatedTime / MONTH;
+        }
+        if (seperatedTime >= YEAR) {
+            timeText = "year" + (seperatedTime >= 2 * YEAR ? "s" : "");
+            resultTime = seperatedTime / YEAR;
+        }
+        seperatedTimeString = resultTime + " " + timeText + " ago";
+        return seperatedTimeString;
     }
 
     /**
@@ -220,6 +255,4 @@ public class Tools {
         return newname;
     }
 
-    public static void main (String[] args) throws IOException {
-    }
 }

@@ -1,6 +1,5 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib uri = "http://java.sun.com/jsp/jstl/functions" prefix = "fn" %>
-
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <c:if test="${SHOW_PAGE}">
     <!DOCTYPE html>
@@ -88,15 +87,15 @@
             </nav>
         </main>
         <script>
-            $('#notification #btnAll').click((e)=>{
-               $('#notification .notify-item').removeClass('d-none'); 
+            $('#notification #btnAll').click((e) => {
+                $('#notification .notify-item').removeClass('d-none');
                 $(e.target).addClass('active');
                 $('#notification #btnUnread').removeClass('active');
             });
-            $('#notification #btnUnread').click((e)=>{
+            $('#notification #btnUnread').click((e) => {
                 $(e.target).addClass('active');
                 $('#notification #btnAll').removeClass('active');
-               $('#notification .notify-item.seen').addClass('d-none'); 
+                $('#notification .notify-item.seen').addClass('d-none');
             });
         </script>        
         <c:if test="${SHOW_PAGE}">

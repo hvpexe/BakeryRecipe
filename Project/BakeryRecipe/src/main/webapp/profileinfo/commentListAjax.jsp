@@ -1,4 +1,4 @@
-<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"  %>
+<%@ taglib prefix="fmt" uri="/WEB-INF/tlds/mycustomtag.tld"  %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <div class="profile-header">
@@ -39,8 +39,7 @@
                             <div class="d-flex align-items-center flex-wrap">
                                 
                                 <span class="col">
-                                    <fmt:formatDate type = "both" 
-                                                    dateStyle = "short" timeStyle = "short" value = "${cm.getLastDateEdit()}" />
+                                    <fmt:ago value = "${cm.getLastDateEdit()}" />
                                 </span>
                             </div>
                         </td>

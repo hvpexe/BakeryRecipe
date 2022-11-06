@@ -5,13 +5,18 @@
 package controller;
 
 import com.google.api.services.gmail.model.Message;
+import dao.CommentDAO;
 import dao.IngredientDAO;
+import dao.UserDAO;
+import dto.Comment;
 import dto.Instruction;
 import dto.Picture;
+import dto.User;
 import java.io.File;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.sql.Connection;
+import java.sql.Timestamp;
 import javax.mail.internet.MimeMessage;
 import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
@@ -26,6 +31,8 @@ import utilities.CreateMessage;
 import utilities.SendMessage;
 import utils.DBUtils;
 import utils.Tools;
+import static utils.Tools.formatDate;
+import static utils.Tools.getCurrentDateTime;
 import static utils.Tools.renameFile;
 
 /**
@@ -53,10 +60,11 @@ public class DebugController extends HttpServlet {
         Connection conn = DBUtils.getConnection();
         ServletContext sc = request.getServletContext();
         try {
-            File f = new File(Picture.IMG_PATH+"file");
-            
-            String fname = f.getName();
-            renameFile(fname, "file1", sc,Picture.IMG_PATH);
+            out = response.getWriter();
+            Timestamp ts = new Timestamp(getCurrentDateTime().getTime() - ((long) 1000 * 60 * 60 * 24 * 365 ));
+            out.print(ts + "<br>");
+            out.print(formatDate(ts));
+
         } catch (Exception e) {
             e.printStackTrace();
         } finally {
