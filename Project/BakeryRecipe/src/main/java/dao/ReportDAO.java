@@ -5,6 +5,7 @@
 package dao;
 
 import dto.Report;
+import dto.User;
 import java.sql.Connection;
 import java.sql.Date;
 import java.sql.PreparedStatement;
@@ -189,17 +190,64 @@ public class ReportDAO {
             ps = conn.prepareStatement(SHOW_REPORT_RECIPE_LIST);
             rs = ps.executeQuery();
             List<Report> list = new ArrayList<>();
-            while(rs.next()){
+            while (rs.next()) {
+                Report report = new Report(rs.getInt("ID"),
+                        rs.getDate("DateReport"),
+                        rs.getString("Detail"),
+                        rs.getInt("UserID"),
+                        rs.getString("ReportType"),
+                        rs.getString("Status"),
+                        rs.getString("Reporter"),
+                        rs.getString("Name"),
+                        rs.getString("Img"),
+                        rs.getInt("RecipeID"));
+                list.add(report);
+            }
+            return list;
+        } catch (Exception e) {
+        } finally {
+            if (rs != null) {
+                rs.close();
+            }
+            if (ps != null) {
+                ps.close();
+            }
+            if (conn != null) {
+                conn.close();
+            }
+        }
+        return null;
+    }
+
+    private static final String SHOW_REPORT_USER_LIST = "SELECT [ReportUser].ID, [ReportUser].DateReport, "
+            + "[ReportUser].Detail, [ReportUser].ReportType, "
+            + "[ReportUser].[Status], [ReportUser].UserID AS ReporterID, "
+            + "[ReportUser].UserID2 AS UserID, [User].LastName + ' ' + [User].FirstName AS Username, "
+            + "[User].Avatar\n"
+            + "FROM [ReportUser]\n"
+            + "JOIN [User] ON [ReportUser].UserID2 = [User].ID";
+    public static List<Report> reportUserList() throws SQLException {
+        Connection conn = null;
+        PreparedStatement ps = null;
+        ResultSet rs = null;
+        try {
+            conn = DBUtils.getConnection();
+            ps = conn.prepareStatement(SHOW_REPORT_USER_LIST);
+            rs = ps.executeQuery();
+            List<Report> list = new ArrayList<>();
+            while (rs.next()) {
+                User reporter = UserDAO.getUserByID(rs.getInt("ReporterID"));
+                String fullname = reporter.getLastName() + ' ' + reporter.getFirstName();
                 Report report = new Report(rs.getInt("ID"), 
                         rs.getDate("DateReport"), 
                         rs.getString("Detail"), 
-                        rs.getInt("UserID"), 
+                        rs.getInt("ReporterID"), 
                         rs.getString("ReportType"), 
                         rs.getString("Status"), 
-                        rs.getString("Reporter"), 
-                        rs.getString("Name"), 
-                        rs.getString("Img"), 
-                        rs.getInt("RecipeID"));
+                        rs.getString(fullname), 
+                        rs.getInt("UserID"), 
+                        rs.getString("Username"), 
+                        rs.getString("Avatar"));
                 list.add(report);
             }
             return list;

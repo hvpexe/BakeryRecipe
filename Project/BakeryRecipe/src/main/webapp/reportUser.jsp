@@ -91,7 +91,7 @@
                 </div>
 
                 <!-- Nav Item - Pages Collapse Menu -->
-                <li class="nav-item">
+                <li class="nav-item active">
                     <a class="nav-link" href="reportUser">
                         <i class="fa-solid fa-user"></i>
                         <span>Users report</span></a>
@@ -102,7 +102,7 @@
                         <i class="fa-solid fa-bread-slice"></i>
                         <span>Recipes report</span></a>
                 </li>
-                <li class="nav-item active">
+                <li class="nav-item">
                     <a class="nav-link" href="reportCmtList">
                         <i class="fa-solid fa-comment"></i>
                         <span>Comments report</span></a>
@@ -394,32 +394,39 @@
                                         <thead>
                                             <tr>
                                                 <th>Id</th>
-                                                <th>Comment</th>
+                                                <th>Avatar</th>
+                                                <th>User</th>
                                                 <th>Report Type</th>
                                                 <th>Details</th>
                                                 <th>Date Report</th>
                                                 <th>User Report</th>
                                                 <th>Report State</th>
+                                                <th>User Profile</th>
                                                 <th>Action</th>
                                             </tr>
                                         </thead>
                                         <tfoot>
                                             <tr>
                                                 <th>Id</th>
-                                                <th>Comment</th>
+                                                <th>Avatar</th>
+                                                <th>User</th>
                                                 <th>Report Type</th>
                                                 <th>Details</th>
                                                 <th>Date Report</th>
                                                 <th>User Report</th>
                                                 <th>Report State</th>
+                                                <th>User Profile</th>
                                                 <th>Action</th>
                                             </tr>
                                         </tfoot>
                                         <tbody>
-                                            <c:forEach items="${reportcomment}" var="u">
+                                            <c:forEach items="${reportuser}" var="u">
                                                 <tr class="col-12 ml-auto mr-auto col">
                                                     <td class="align-middle style col-1">${u.id}</td>
-                                                    <td class="align-middle style col-3">${u.comment}</td>
+                                                    <td class="col-1">
+                                                        <img class="p-1 d-block w-100" src="${u.avatar}" style="aspect-ratio: 1 / 1; border: 2px solid gray;" alt="">
+                                                    </td>
+                                                    <td class="align-middle style col-2">${u.username}</td>
                                                     <td class="align-middle style col-1">${u.reportType}</td>
                                                     <td class="align-middle style col-2">${u.detail}</td>
                                                     <td class="align-middle style align-items-center col-2 text-nowrap">${u.getDateReport()}</td>
@@ -437,6 +444,14 @@
                                                             </c:otherwise>
                                                         </c:choose>
                                                         <div style="color: ${status}"><b> ${u.status}</b></div>
+                                                    </td>
+                                                    <td class="align-middle col-1">
+                                                        <!--neu muon Chinh button thi cho form bao lai de edit--> 
+                                                        <form action="recipe">
+                                                            <button class="bg-side-color" style="width: max-content;">
+                                                               <a href="./profile?userid=${u.userid2}">User Profile</a>
+                                                            </button>
+                                                        </form>
                                                     </td>
                                                     <td class="align-middle col-1">
                                                         <div class="d-flex flex-wrap ">

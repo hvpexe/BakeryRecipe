@@ -5,6 +5,8 @@
 package dto;
 
 import static dto.Recipe.COVER_PATH;
+import static dto.User.DEFAULT_AVATAR;
+import static dto.User.IMG_PATH;
 import java.sql.Date;
 
 /**
@@ -13,19 +15,24 @@ import java.sql.Date;
  */
 public class Report {
     
+    public static final String IMG_PATH = User.IMG_PATH;
+    public static final String DEFAULT_AVATAR = User.DEFAULT_AVATAR;
     public static final String COVER_PATH = Picture.IMG_PATH;
 
-    private int id;
+    private int id; //id cua report
     private Date DateReport;
     private String detail;
-    private int userID;
+    private int userID; //id cua reporter
     private String reportType;
     private String status;
     private String reporter;
     private String comment;
     private String recipeTitle;
-    private String cover;
+    private String cover;//anh chinh cua recipe
     private int recipeID;
+    private int userid2; //id cua user
+    private String username;
+    private String avatar;//avatar cua user
     
     public Report() {
     }
@@ -54,6 +61,21 @@ public class Report {
         this.cover = cover;
         this.recipeID = recipeID;
     }
+
+    public Report(int id, Date DateReport, String detail, int userID, String reportType, String status, String reporter, int userid2, String username, String avatar) {
+        this.id = id;
+        this.DateReport = DateReport;
+        this.detail = detail;
+        this.userID = userID;
+        this.reportType = reportType;
+        this.status = status;
+        this.reporter = reporter;
+        this.userid2 = userid2;
+        this.username = username;
+        this.avatar = avatar;
+    }
+
+    
     
     
 
@@ -79,6 +101,33 @@ public class Report {
 
     public void setRecipeID(int recipeID) {
         this.recipeID = recipeID;
+    }
+
+    public int getUserid2() {
+        return userid2;
+    }
+
+    public void setUserid2(int userid2) {
+        this.userid2 = userid2;
+    }
+
+    public String getUsername() {
+        return username;
+    }
+
+    public void setUsername(String username) {
+        this.username = username;
+    }
+
+    public String getAvatar() {
+        if (avatar == null) {
+            return DEFAULT_AVATAR;
+        }
+        return IMG_PATH + avatar;
+    }
+
+    public void setAvatar(String avatar) {
+        this.avatar = avatar;
     }
 
     
