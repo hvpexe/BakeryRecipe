@@ -21,10 +21,9 @@
             <div class="community-section mx-auto ">
                 <div class="title-container">
                     <h1 class="notify-title">Recommend For You</h1>
-                    <a href="#" class="btn seemore">See more</a>
                 </div>
                 <div class="recipe-list row ">
-                    <c:forEach items="${listRated}" var="cc">
+                    <c:forEach items="${listRecommend}" var="cc">
                         <div class="recipe col-6 col-md-4 col-lg-3">
                             <div class="img-container">
                                 <a href=".\RecipeDetail?recipeID=${cc.id}">

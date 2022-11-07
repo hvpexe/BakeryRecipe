@@ -51,7 +51,7 @@
                         </a>
                         <div class="header-user_content  position-absolute">
                             <div class="list-group flex-column justify-content-start" href="#" >
-                                <c:if test="${login.role == 'admin'}">
+                                <c:if test="${sessionScope.login.role == 'admin'}">
                                     <a class="list-group-item text-dark text-decoration-none nav-item" href="AdminDashBoard"><div>Dashboard</div></a>
                                 </c:if>
                                 <a class="list-group-item text-dark text-decoration-none nav-item" href="./profile.jsp"><div>Profile</div></a>

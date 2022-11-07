@@ -46,7 +46,7 @@ public class RecipeDAO {
             + "			                                 OFFSET ? ROWS FETCH NEXT 8 ROWS ONLY";
     private static final String SELECT_PICTURE_SQL = "SELECT img FROM Picture";
 
-    public static List<Recipe> getMostRatedRecipe (int index) throws SQLException {
+    public static List<Recipe> getMostRatedRecipe(int index) throws SQLException {
         Connection conn = null;
         PreparedStatement ps = null;
         ResultSet rs = null;
@@ -96,7 +96,7 @@ public class RecipeDAO {
             + "                                                        ORDER BY DatePost DESC\n"
             + "			                                 OFFSET ? ROWS FETCH NEXT 8 ROWS ONLY";
 
-    public static List<Recipe> getMostRecentRecipe (int index) throws SQLException {
+    public static List<Recipe> getMostRecentRecipe(int index) throws SQLException {
         Connection conn = null;
         PreparedStatement ps = null;
         ResultSet rs = null;
@@ -147,7 +147,7 @@ public class RecipeDAO {
             + "on  baker.ID =recipe.UserID\n"
             + "WHERE FREETEXT (recipe.Name , ?) and pic.IsCover =1";
 
-    public static List<Recipe> searchRecipe (String name) throws SQLException {
+    public static List<Recipe> searchRecipe(String name) throws SQLException {
         ArrayList<Recipe> listRecipe = new ArrayList<>();
         Connection conn = null;
         PreparedStatement ptm = null;
@@ -187,7 +187,7 @@ public class RecipeDAO {
         return listRecipe;
     }
 
-    public static int getAllRecipe () throws SQLException {
+    public static int getAllRecipe() throws SQLException {
         String sql = "SELECT count(Recipe.ID)\n"
                 + "                     FROM Recipe\n"
                 + "		      JOIN [User] ON Recipe.UserID = [User].ID\n"
@@ -227,7 +227,7 @@ public class RecipeDAO {
             + "           ,?           ,?           ,?           ,?           ,?\n"
             + "           ,?           ,?)";
 
-    public static boolean addRecipe (String recipeName, String recipeDescription,
+    public static boolean addRecipe(String recipeName, String recipeDescription,
             String videoUrl, List<Part> pictureList, String[] ingreName,
             String[] ingreAmount, List<Part> instImgList,
             String[] instDescription, int prepareTime, int cookTime, int userId, int cover, ServletContext sc) throws SQLException {
@@ -290,7 +290,7 @@ public class RecipeDAO {
             + "      ,[CookTime] = ?\n"
             + " WHERE Recipe.ID = ?";
 
-    public static boolean updateRecipe (String recipeName, String recipeDescription, String videoUrl,
+    public static boolean updateRecipe(String recipeName, String recipeDescription, String videoUrl,
             List<Part> pictureList, String[] pictureListPath, String[] ingreName, String[] ingreAmount, List<Part> instImgList,
             String[] instDescription, int prepareTime, int cookTime, int userId, int recipeId, int cover,
             ServletContext sc) throws SQLException {
@@ -343,7 +343,7 @@ public class RecipeDAO {
             + "WHERE IsDeleted = 0 AND IsCover = 1\n"
             + "ORDER BY [Like] DESC";
 
-    public static List<Recipe> getTop8MostRatedRecipe () throws SQLException {
+    public static List<Recipe> getTop8MostRatedRecipe() throws SQLException {
         Connection conn = null;
         PreparedStatement ps = null;
         ResultSet rs = null;
@@ -392,7 +392,7 @@ public class RecipeDAO {
             + "WHERE IsDeleted = 0 AND IsCover = 1\n"
             + "ORDER BY [DatePost] DESC";
 
-    public static List<Recipe> getTop8MostRecentRecipe () throws SQLException {
+    public static List<Recipe> getTop8MostRecentRecipe() throws SQLException {
         Connection conn = null;
         PreparedStatement ps = null;
         ResultSet rs = null;
@@ -434,6 +434,42 @@ public class RecipeDAO {
         return null;
     }
 
+    public static List<Recipe> getTop8RandomRecipes() throws SQLException {
+        String sql = "SELECT TOP 8 Recipe.ID, Name, Description, [Like], [Save], Comment, DatePost, LastDateEdit, Img, UserID, LastName + ' ' + FirstName AS Username\n"
+                + "FROM Recipe\n"
+                + "JOIN [User] ON Recipe.UserID = [User].ID\n"
+                + "JOIN Picture ON Picture.RecipeID = Recipe.ID\n"
+                + "WHERE IsDeleted = 0 AND IsCover = 1\n"
+                + "ORDER BY NEWID()";
+        ArrayList<Recipe> list = new ArrayList<Recipe>();
+        Connection conn = null;
+        PreparedStatement ps = null;
+        ResultSet rs = null;
+        try {
+            conn = DBUtils.getConnection();
+            ps = conn.prepareStatement(sql);
+            rs = ps.executeQuery();
+            while (rs.next()) {
+                Recipe recipe = new Recipe(rs.getInt("ID"), rs.getString("Name"), rs.getInt("Like"), rs.getString("Img"));
+                list.add(recipe);
+            }
+            return list;
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+        } finally {
+            if (rs != null) {
+                rs.close();
+            }
+            if (ps != null) {
+                ps.close();
+            }
+            if (conn != null) {
+                conn.close();
+            }
+        }
+        return null;
+    }
+
     private static final String SAVED_RECIPES_LIST_SQL = "SELECT Recipe.ID, Recipe.[Name], Recipe.[Description], Recipe.[Like], Recipe.[Save], Recipe.Comment, Recipe.DatePost, Recipe.LastDateEdit, Picture.Img, Recipe.UserID, LastName + ' ' + FirstName AS Username\n"
             + "            FROM [Save]\n"
             + "            JOIN [Recipe] ON [Save].RecipeID = [Recipe].ID\n"
@@ -443,7 +479,7 @@ public class RecipeDAO {
             + "            ORDER BY Recipe.[Like] DESC\n"
             + "		   OFFSET ? ROWS FETCH NEXT 8 ROWS ONLY";
 
-    public static List<Recipe> showSavedRecipe (int userID, int index) throws SQLException {
+    public static List<Recipe> showSavedRecipe(int userID, int index) throws SQLException {
         Connection conn = null;
         PreparedStatement ps = null;
         ResultSet rs = null;
@@ -486,7 +522,7 @@ public class RecipeDAO {
         return null;
     }
 
-    public static int getAllSavedRecipe (int id) throws SQLException {
+    public static int getAllSavedRecipe(int id) throws SQLException {
         String sql = "SELECT count(Recipe.ID)\n"
                 + "                     FROM [User]\n"
                 + "		      JOIN [Save] ON [Save].UserID = [User].ID\n"
@@ -525,7 +561,7 @@ public class RecipeDAO {
             + "on pic.RecipeID=recipe.ID\n"
             + "   where recipe.ID = ?";
 
-    public static ArrayList<String> listPicture (int recipeID) throws SQLException {
+    public static ArrayList<String> listPicture(int recipeID) throws SQLException {
         ArrayList<String> listPicture = new ArrayList<>();
         Recipe recipe = new Recipe();
         Connection conn = null;
@@ -564,7 +600,7 @@ public class RecipeDAO {
             + " join [dbo].[Recipe] re on ingreRe.RecipeID =re.ID\n"
             + " where re.ID = ?";
 
-    public List<Ingredient> listIngredient (int recipeID) throws SQLException {
+    public List<Ingredient> listIngredient(int recipeID) throws SQLException {
         List<Ingredient> listIgre = new ArrayList<>();
         Connection conn = null;
         PreparedStatement ptm = null;
@@ -604,7 +640,7 @@ public class RecipeDAO {
             + " WHERE recipe.ID = ?"
             + " ORDER BY recipe.ID,InsStep";
 
-    public static List<Instruction> listStep (int recipeID) throws SQLException {
+    public static List<Instruction> listStep(int recipeID) throws SQLException {
         List<Instruction> liststep = new ArrayList<>();
         Connection conn = null;
         PreparedStatement ptm = null;
@@ -655,7 +691,7 @@ public class RecipeDAO {
             + "WHERE R.UserID = ? AND R.IsDeleted = 0 AND P.IsCover = 1)\n"
             + "ORDER BY DatePost DESC";
 
-    public static ArrayList<Recipe> getPostHomeRecipes (int userID) throws SQLException {
+    public static ArrayList<Recipe> getPostHomeRecipes(int userID) throws SQLException {
         Connection conn = null;
         PreparedStatement ps = null;
         ResultSet rs = null;
@@ -707,7 +743,7 @@ public class RecipeDAO {
             + "WHERE R.UserID = ? AND R.IsDeleted = 0 AND P.IsCover = 1\n"
             + "ORDER BY DatePost DESC";
 
-    public static ArrayList<Recipe> getPostProfileRecipes (int userID) throws SQLException {
+    public static ArrayList<Recipe> getPostProfileRecipes(int userID) throws SQLException {
         Connection conn = null;
         PreparedStatement ps = null;
         ResultSet rs = null;
@@ -768,7 +804,7 @@ public class RecipeDAO {
             + "  LEFT JOIN Picture p on p.IsCover = 1 and r.ID = p.RecipeID "
             + "  WHERE r.ID = ?";
 
-    public static Recipe getRecipeByID (int id) throws SQLException {
+    public static Recipe getRecipeByID(int id) throws SQLException {
         Connection conn = null;
         PreparedStatement ps = null;
         ResultSet rs = null;
@@ -816,7 +852,7 @@ public class RecipeDAO {
             + "on recipe.UserID =baker.ID\n"
             + "WHERE  recipe.ID =?";
 
-    public Recipe recipeDetail (int recipeID) throws SQLException {
+    public Recipe recipeDetail(int recipeID) throws SQLException {
         Recipe recipe = null;
         Connection conn = null;
         PreparedStatement ptm = null;
@@ -861,7 +897,7 @@ public class RecipeDAO {
             + "ON recipe.[UserID]= baker.[ID]\n"
             + "WHERE recipe.[ID] = ?";
 
-    public static String recipeVideo (int recipeid) throws SQLException {
+    public static String recipeVideo(int recipeid) throws SQLException {
         Connection conn = null;
         PreparedStatement ptm = null;
         ResultSet rs = null;
@@ -896,7 +932,7 @@ public class RecipeDAO {
             + "FROM [dbo].[Recipe]recipe \n"
             + "WHERE  recipe.UserID = ?";
 
-    public static List<Recipe> RelatewithBaker (int recipeID) throws SQLException {
+    public static List<Recipe> RelatewithBaker(int recipeID) throws SQLException {
         Connection cnn = null;
         PreparedStatement ptm = null;
         ResultSet rs = null;
@@ -931,7 +967,7 @@ public class RecipeDAO {
     private static final String All_NAME = "SELECT   recipe.Name\n"
             + "FROM [dbo].[Recipe]recipe ";
 
-    public static List<Recipe> AnotherRecipe () throws SQLException {
+    public static List<Recipe> AnotherRecipe() throws SQLException {
         Connection cnn = null;
         PreparedStatement ptm = null;
         ResultSet rs = null;
@@ -972,7 +1008,7 @@ public class RecipeDAO {
             + "on igreRecipe.IngredientID = igre.ID\n"
             + "WHERE igre.Name = ?";
 
-    public static List<Recipe> listRelate (int recipeID) throws SQLException {
+    public static List<Recipe> listRelate(int recipeID) throws SQLException {
         List<Recipe> listRecipe = new ArrayList<>();
         HashMap<Integer, String> relateListRecipe = new HashMap<>();
         Connection cnn = null;
@@ -1043,7 +1079,7 @@ public class RecipeDAO {
             + "JOIN [Picture] ON [Picture].RecipeID = [Recipe].ID\n"
             + "WHERE [Picture].IsCover = 1 AND [Recipe].IsDeleted = 0";
 
-    public static List<Recipe> showRecipeList () throws SQLException {
+    public static List<Recipe> showRecipeList() throws SQLException {
         Connection conn = null;
         PreparedStatement ps = null;
         ResultSet rs = null;
@@ -1085,7 +1121,7 @@ public class RecipeDAO {
             + "SET IsDeleted = 1\n"
             + "WHERE Recipe.[ID] = ?";
 
-    public static boolean deleteRecipe (int id) throws SQLException {
+    public static boolean deleteRecipe(int id) throws SQLException {
         Connection conn = null;
         PreparedStatement ps = null;
 
@@ -1118,7 +1154,7 @@ public class RecipeDAO {
             + "            			on  baker.ID =recipe.UserID\n"
             + "                        WHERE recipe.Name =? and pic.IsCover ='True'";
 
-    public static Recipe searchRecipebyName (String recipeName) throws SQLException {
+    public static Recipe searchRecipebyName(String recipeName) throws SQLException {
         Connection cnn = null;
         PreparedStatement ptm = null;
         ResultSet rs = null;
@@ -1158,7 +1194,7 @@ public class RecipeDAO {
     private static final String CMT_RECIPE = "INSERT INTO [dbo].[Comment]([Comment],[DateComment],[LastDateEdit],[IsDeleted],[UserID],[RecipeID])\n"
             + "VALUES (?,?,?,?,?,?)";
 
-    public static boolean commentRecipe (String comment, int UserID,
+    public static boolean commentRecipe(String comment, int UserID,
             int RecipeID) throws SQLException {
         Connection cnn = null;
         PreparedStatement ptm = null;
@@ -1201,7 +1237,7 @@ public class RecipeDAO {
             + "            where cmt.RecipeID = ?"
             + "            ORDER BY DateComment Desc ";
 
-    public static List<Comment> commentList (int recipeID) throws SQLException {
+    public static List<Comment> commentList(int recipeID) throws SQLException {
         List<Comment> cmtList = new ArrayList<>();
         Connection cnn = null;
         PreparedStatement ptm = null;
@@ -1236,7 +1272,7 @@ public class RecipeDAO {
         return cmtList;
     }
 
-    public static ArrayList<RecipeSearch> getRecipes () throws SQLException {
+    public static ArrayList<RecipeSearch> getRecipes() throws SQLException {
         String sql1 = "SELECT P.Img, R.ID, R.Name, R.[Like], R.Comment, R.DatePost, U.ID AS UserID, U.LastName + ' ' + U.FirstName AS Username \n"
                 + "FROM Recipe R\n"
                 + "INNER JOIN Picture P ON P.RecipeID = R.ID\n"
@@ -1288,7 +1324,7 @@ public class RecipeDAO {
         return list;
     }
 
-    public static List<Recipe> getRecommnedRecipes () throws SQLException {
+    public static List<Recipe> getRecommnedRecipes() throws SQLException {
         String sql = "SELECT TOP 5 R.ID, Name, [Like], P.Img\n"
                 + "FROM Recipe R\n"
                 + "JOIN Picture P On R.ID = P.RecipeID\n"
@@ -1323,7 +1359,7 @@ public class RecipeDAO {
         return null;
     }
 
-    public static void main (String[] args) throws SQLException {
+    public static void main(String[] args) throws SQLException {
         System.out.println(getRecommnedRecipes());
     }
 }

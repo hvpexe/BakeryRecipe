@@ -47,8 +47,10 @@ public class CommunityController extends HttpServlet {
         
         List<Recipe> list = RecipeDAO.getTop8MostRatedRecipe();
         List<Recipe> list2 = RecipeDAO.getTop8MostRecentRecipe();
+        List<Recipe> list3 = RecipeDAO.getTop8RandomRecipes();
         request.setAttribute("listRated", list);
         request.setAttribute("listRecent", list2);
+        request.setAttribute("listRecommend", list3);
         request.getRequestDispatcher("community.jsp").forward(request, response);
     }
 

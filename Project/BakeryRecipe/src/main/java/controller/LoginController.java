@@ -66,7 +66,6 @@ public class LoginController extends HttpServlet {
         } finally {
             //this validation is only for people login with password
             if (loginUser != null && request.getAttribute("LOGIN_ERROR") == null) {
-                session.setAttribute("login", loginUser);
                 String roleID = loginUser.getRole();
                 Boolean isActive = loginUser.isIsActive();
                 if (isActive == false) {
@@ -77,7 +76,7 @@ public class LoginController extends HttpServlet {
                     } else if (US.equalsIgnoreCase(roleID)) {
                         url = USER_PAGE;
                     }
-                    System.out.println(url);
+                    session.setAttribute("login", loginUser);
                     response.sendRedirect(url);
                     return;
                 }
