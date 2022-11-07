@@ -1,8 +1,19 @@
 section:has( #notification){
     border-radius: 25px;
     background: #BEBEBE;
-    max-width: 25#;
     height: auto;
+    
+}
+
+#notification {
+    border-top-left-radius: inherit;
+    border-top-right-radius: inherit;
+    height: inherit;
+    background:#eeeeee;
+    align-items: center;
+    justify-content: start;
+    font-family: 'Inter';
+    padding: 0;
 }
 #notification .notify-title{
     display: flex;
@@ -11,12 +22,6 @@ section:has( #notification){
 }
 #notification .notify-title span{
     translate:0px 5px;
-}
-#notification {
-    border-top-left-radius: inherit;
-    border-top-right-radius: inherit;
-    height: auto;
-    background:#eeeeee;
 }
 #notification > div:first-child {
     border-radius: inherit;
@@ -48,6 +53,7 @@ section:has( #notification){
 }
 #notification a.notify-item{
     color:inherit;
+    height: fit-content;
 }
 #notification .notify-item::before{
     left:-10px;
@@ -76,6 +82,8 @@ a.notify-item.seen::after {
 
 }
 
+#notification .notify-section{
+}
 #notification .fa-heart{
     color: var(--main-theme-color);
 }

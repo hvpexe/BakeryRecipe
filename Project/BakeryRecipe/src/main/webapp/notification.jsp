@@ -14,25 +14,25 @@
 
     <body>
         <c:import url="header.jsp"/>
-        <section class=" col-12 col-md-6 mx-auto p-0" style="gap:10px">
+        <section class=" col-12 col-md-6 mx-auto my-3 p-0" style="gap:10px">
         </c:if>    
-
-        <main class="col-12 d-flex flex-column p-0 noselect" id="notification">
+         
+        <main class="col mx-auto p-0 noselect" id="notification">
             <div class="notify-title col h4 text-capitalize bg-white font-weight-bold border-bottom py-3 ">
                 <span>notification</span>
                 <c:if test="${not SHOW_PAGE}">
-                    <div class="button-option bg-white border text-dark hover-button-3 h6">View Page</div>
+                    <a class=" bg-white m-0 mt-auto text-dark h6" href="notification" >View Page</a>
                 </c:if>
             </div>
             <div class="col d-flex border-bottom bg-white py-3" style="gap:10px">
                 <div class="button-option active hover-button-1 hl-none c-pointer" id="btnAll">All</div>
                 <div class="button-option hover-button-1 hl-none c-pointer" id="btnUnread">Unread</div>
             </div>
-            <nav class="notify-section bg-white col">
-                <% request.setAttribute("LIST", new String[]{"Like", "Comment", "Follow", "RemoveRecipe", "Saved"});%>
+            <nav class="notify-section  bg-white col">
+                <% request.setAttribute("LIST", new String[]{"Like", "Comment", "Follow", "RemoveRecipe", "Saved", "Follow", "RemoveRecipe", "Saved", "Follow", "RemoveRecipe", "Saved", "Follow", "RemoveRecipe", "Saved", "Follow", "RemoveRecipe", "Saved", "Comment", "Follow", "RemoveRecipe", "Saved"});%>
                 <c:forEach items="${LIST}" var="noti">
                     <c:if test="${noti eq 'Like'}">
-                        <a class="notify-item  hover-button-3 seen c-pointer text-decoration-none" href="#">
+                        <a class="notify-item hover-button-3 seen c-pointer text-decoration-none" href="#">
                             <div class="col d-flex ">
                                 <img class="avatar  p-0 rounded-circle" src="assets/images/avt/37.jpg" alt="avatar"/>
                                 <div class="notify-content col d-flex flex-column">

@@ -198,6 +198,15 @@ body {
     min-width: 400px;
     background: #fff;
     box-shadow: 0 0 12px -2px #000000;
+    overflow-y: hidden;
+}
+#header-notification .notify #notification{
+    overflow-y: scroll;
+    display: block;
+
+}
+#header-notification .notify #notification nav
+{
 }
 
 

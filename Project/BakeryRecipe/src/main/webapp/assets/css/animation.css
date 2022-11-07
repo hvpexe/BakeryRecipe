@@ -125,9 +125,11 @@
     content:'';
     inset:0;
     background: transparent;
+    border-radius: inherit;
 }
 .hover-button-3:hover::before{
     background: #00000010;
+    
 }
 .hover-button-3:active::before{
     background: #00000020;

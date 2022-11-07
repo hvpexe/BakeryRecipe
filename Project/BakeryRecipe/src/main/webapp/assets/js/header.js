@@ -50,19 +50,26 @@ $.ajax({
     }
 })
 if (notify.length) {
+
     console.log("toggle");
     notify.click(() =>
     {
-        $(".notify").toggleClass("pe-none");
-        $(".notify.pe-none").stop().animate({
-            opacity: 0.25,
-            height: "toggle"
-        }, 200, function () {
-        });
-        $(".notify:not(.pe-none)").stop().animate({
-            opacity: 1,
-            height: "toggle"
-        }, 200, function () {
-        });
+        notify.blur();
+        if ($('header').width() > 992) {
+
+            $(".notify").toggleClass("pe-none");
+            $(".notify.pe-none").stop().animate({
+                opacity: 0.25,
+                height: "toggle"
+            }, 200, function () {
+            });
+            $(".notify:not(.pe-none)").stop().animate({
+                opacity: 1,
+                height: "toggle"
+            }, 200, function () {
+            });
+        }else{
+            window.location = "notification";
+        }
     });
 }
