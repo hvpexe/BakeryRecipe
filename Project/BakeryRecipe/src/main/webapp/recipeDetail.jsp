@@ -201,7 +201,7 @@
                                         <div class="instruction">
                                             <div class="step h33">Step ${ep.getInsstep()}: </div>
                                             <c:if test="${not empty ep.img}">
-                                                <img class="col-6 p-0 my-2 hover-button-3" src="${ep.img}" alt="${ep.img}" style="height:200px"/>
+                                                <img class="col-6 p-0 my-2 hover-button-3" src="${ep.img}" alt="${ep.img}" />
                                             </c:if>
                                             <p>
                                                 ${ep.getDetail()}

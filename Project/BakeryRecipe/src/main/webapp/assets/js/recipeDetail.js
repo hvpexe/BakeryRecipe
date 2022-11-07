@@ -5,11 +5,11 @@
 
 
 function  followButton(item, val1, val2, action) {
-    //                eventac.target.style.backgroundColor = 'white';
-    //                event.target.classList.toggle("button-Follower");
-    ///
-    //                console.log(event.target.classList);
-    
+//                eventac.target.style.backgroundColor = 'white';
+//                event.target.classList.toggle("button-Follower");
+///
+//                console.log(event.target.classList);
+
     var action = val1;
     $.ajax({
         url: "ajax/UpdateUserFollowAjax",
@@ -28,7 +28,7 @@ function  followButton(item, val1, val2, action) {
             else
                 txtFollow.innerText = val1;
             // console.log(action);
-            
+
             //    action = unFollow;
             console.log(action);
             //Do Something
@@ -42,11 +42,11 @@ function  followButton(item, val1, val2, action) {
 
 
 function  saveButton(item, val1, val2, action) {
-    //                eventac.target.style.backgroundColor = 'white';
-    //                event.target.classList.toggle("button-Follower");
-    ///
-    //                console.log(event.target.classList);
-    
+//                eventac.target.style.backgroundColor = 'white';
+//                event.target.classList.toggle("button-Follower");
+///
+//                console.log(event.target.classList);
+
     var action = val1;
     $.ajax({
         url: "ajax/updatesaverecipe",
@@ -65,7 +65,7 @@ function  saveButton(item, val1, val2, action) {
             else
                 txtFollow.innerText = val1;
             // console.log(action);
-            
+
             //    action = unFollow;
             console.log(action);
             //Do Something
@@ -78,13 +78,12 @@ function  saveButton(item, val1, val2, action) {
 }
 
 function  likeButton(item, val1, val2, action) {
-    //                eventac.target.style.backgroundColor = 'white';
-    //                event.target.classList.toggle("button-Follower");
-    ///
-    //                console.log(event.target.classList);
-    
+//                eventac.target.style.backgroundColor = 'white';
+//                event.target.classList.toggle("button-Follower");
+///
+//                console.log(event.target.classList);
+
     var action = val1;
-    
     console.log(item);
     if (val1 === 'UnLike') {
         likeNum -= 1;
@@ -109,7 +108,7 @@ function  likeButton(item, val1, val2, action) {
             else
                 txtFollow.innerText = val1;
             // console.log(action);
-            
+
             //    action = unFollow;
             console.log(action);
             //Do Something
@@ -126,7 +125,7 @@ function  likeButton(item, val1, val2, action) {
 function Comment(item, event) {
     var textCmt = item.value;
     if (event.key === "Enter" && !event.shiftKey) {
-        event.preventDefault();//bth tui xai bien e chu ko xai event
+        event.preventDefault(); //bth tui xai bien e chu ko xai event
         $.ajax({
             url: "ajax/CommnetRecipeAjax",
             type: "get", //send it through get method
@@ -186,10 +185,8 @@ const swiper = new Swiper('.swiper', {
         prevEl: '.swiper-button-prev',
     },
 });
-
-
 function sendReport(value) {
-    
+
     var selectReport = document.querySelector('#select_Rp').value;
     var txtReport = document.querySelector('#txtReport').value;
     var txtReportComment = document.querySelector('#txtReportComment').value;
@@ -210,7 +207,7 @@ function sendReport(value) {
 //                var cmtShow = document.getElementById("show-comment");
 //                cmtShow.innerHTML += response;
 //                item.value = "";
-                
+
             },
             error: function (xhr) {
                 console.log("that bai");
@@ -227,7 +224,7 @@ function sendReport(value) {
                 commentID: commentID,
                 detailComment: txtReportComment,
                 userID: loginID
-                        
+
             },
             success: function (response) {
                 //Do Something
@@ -236,7 +233,7 @@ function sendReport(value) {
 //                var cmtShow = document.getElementById("show-comment");
 //                cmtShow.innerHTML += response;
 //                item.value = "";
-                
+
             },
             error: function (xhr) {
                 console.log("that bai");
@@ -249,19 +246,28 @@ function sendReport(value) {
     console.log(selectReport);
     console.log(txtReport);
     console.log(txtReportComment);
-    
 }
 
-$('.instruction img').fadeIn(3000);
 $('.instruction img').click((e) => {
-    var text = e.target;
-    $(text).css(
-            {height: $(text).height() >= 250 ? '200' : 'unset'
+    var item = e.target;
+    $(item).css(
+            {height: $(item).height() >= 250 ? '200' : 'unset'
                 , transition: 500,
             });
-    if (text.style.cursor !== "zoom-out") {
-        text.style.cursor = "zoom-out";
+    if (item.style.cursor !== "auto")
+        if (item.style.cursor !== "zoom-out") {
+            item.style.cursor = "zoom-out";
+        } else {
+            item.style.cursor = "zoom-in";
+        }
+}
+);
+var item = $('.instruction img'); 
+for ( i=0;i<item.length;i++) {
+    console.log($(item[i]).height());
+    if ($(item[i]).height() < 250) {
+        $(item[i]).css('cursor', 'auto');
     } else {
-        text.style.cursor = "zoom-in";
+        $(item[i]).height(200);
     }
-});
+}
