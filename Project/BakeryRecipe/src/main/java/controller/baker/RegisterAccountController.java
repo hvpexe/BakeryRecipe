@@ -46,7 +46,8 @@ public class RegisterAccountController extends HttpServlet {
         String lastname = request.getParameter("lastname");
         firstname = Tools.toUTF8(firstname);
         lastname = Tools.toUTF8(lastname);
-        String password = request.getParameter("password");
+        String password = (String) request.getParameter("password");
+        String hashedpassword = (String) request.getAttribute("password");
         String rePassword = request.getParameter("re-password");
         Date dateRegister = new Date(System.currentTimeMillis());
         
@@ -57,8 +58,8 @@ public class RegisterAccountController extends HttpServlet {
         } else if (!rePassword.equals(password)) {
             request.setAttribute("REGISTER_ERROR", "Password mismatched");
         } else {
-            UserDAO.register(email, password, firstname, lastname);
-            User user = UserDAO.login(email, password);
+            UserDAO.register(email, hashedpassword, firstname, lastname);
+            User user = UserDAO.login(email, hashedpassword);
             HttpSession session = request.getSession();
             session.setAttribute("LOGIN_USER", user);
             response.sendRedirect("home.jsp");
