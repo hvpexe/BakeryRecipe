@@ -137,6 +137,10 @@ body {
     outline: 0;
 }
 
+.search-select {
+    margin-right: 10px;
+    border: none;
+}
 .header>[class^=header] {
     display: flex;
     row-gap: inherit;

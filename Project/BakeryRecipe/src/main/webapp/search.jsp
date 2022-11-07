@@ -13,99 +13,78 @@
         <title></title>
         <meta name="description" content="" />
         <c:import url="universal.jsp"/>
-        <link rel="stylesheet" href="assets/css/search1.css" />
+        <link rel="stylesheet" href="assets/css/search.css" />
 
     </head>
     <body>
         <c:import url="header.jsp"/>
-        <div class="saved-div">
-            <div class="section-div">
-                <form action="Search" id="searchRec" class="card-body col-12 col-md-8 m-auto">
-
-                    <div class="frame-form col px-3">
-                        <i class="iconsearch fas fa-search"></i>
-                        <input class="frame-input" type="text" placeholder="Search Recipes" name="searchKey">
+        <div>
+            <div class="community">
+                <div class="community-section mx-auto ">
+                    <div class="title-container">
+                        <h1 class="notify-title">Search Results</h1>
                     </div>
-                    <div class="mid-div2">
-                        <select name="action" class="">
-                            <option value="Recipe">
-                                Recipe      
-                            </option> 
-                            <option value="Baker">
-                                Baker
-                            </option>
-                        </select>
-                    </div>
-                    <!--                    <input type="submit" >-->
-                </form>
 
-                <div class="saved-item-div row col card-body">
-                    <c:forEach items="${requestScope.LIST_BAKER}" var="n">
-                        <div class="div1">
-                            <img
-                                class="img-icon"
-                                alt=""
-                                src="${n.avatar}"
-                                id="imgImage"
-                                /><a class="mooncake"
-                                ><p class="mooncake-p"><span>${n.name}</span></p></a
-                            ><c:if test="${sessionScope.login.id != USER_DETAIL.id}">
-                                <!--                                <div class="btn btn-style1" onclick="followButton(this, 'Follow', 'UnFollow', this.action)" >
-                                                                    <i class="fa-solid fa-user-plus"></i>
-                                                                    <span  class="txt-follow" this="">Follow</span>
-                                                                </div>-->
-                                <!--cach cua anh tú mượn mấy hôm trả-->
-                                <c:choose>
-                                    <c:when test="${CHECK_FOLLOW == 'false'}">
-                                        <div class="btn btn-style1" onclick="followButton(this, 'Follow', 'UnFollow', this.action)" >
-                                            <i class="fa-regular fa-heart"></i>
-                                            <span  class="txt-follow" this="">Follow</span>
-                                        </div>
-                                    </c:when>
-                                    <c:otherwise>
-                                        <div class="btn btn-style1 button-Follower" onclick="followButton(this, 'UnFollow', 'Follow', this.action)" >
-                                            <i class="fa-regular fa-heart"></i>
-                                            <span  class="txt-follow" this="">UnFollow</span>
-                                        </div>
-                                    </c:otherwise>
-                                </c:choose>
-                            </c:if>
+                    <form action="Search" id="search" class="col-12 col-md-8 mx-auto mb-4">
+                        <div class="search-wrap d-flex align-items-center">
+                            <i class="search-icon fas fa-search mr-3 "></i>
+                            <input class="search-input flex-grow-1" type="text" placeholder="Search Recipes" name="searchKey">
+                            <select name="action" class="search-select">
+                                <option value="Recipe">
+                                    Recipe      
+                                </option> 
+                                <option value="Baker">
+                                    Baker
+                                </option>
+                            </select>
                         </div>
-                    </c:forEach>
-                    <c:forEach items="${requestScope.LIST_RECIPE}" var="cc">
-                        <div class=" col-6 col-md-4 col-lg-3 p-2">
-                            <div class="recipe hover-highlight">
+                    </form>
+
+                    <div class="recipe-list row container-fluid">
+                        <c:forEach items="${requestScope.LIST_BAKER}" var="n">
+                            <div class="col-4 col-md-3 col-lg-2 my-3 text-center">
+                                <div class="mb-2">
+                                    <a href="profile?userid=${n.id}">
+                                        <img class="w-100 rounded-circle border" alt="avatar"
+                                             src="${n.avatar}" id="imgImage"/>
+                                    </a>
+                                </div>
+                                <a class="h5 text-decoration-none text-dark" href="profile?userid=${n.id}">${n.name}</a>
+                            </div>
+                        </c:forEach>
+                        <c:forEach items="${requestScope.LIST_RECIPE}" var="cc">
+                            <div class="recipe col-6 col-md-4 col-lg-3">
                                 <div class="img-container">
-                                    <img class="recipe-img" alt=""
-                                         src="${cc.cover}" />
-                                    <div class="bookmark">
-                                        Save <i class="fa-regular fa-bookmark"></i>
-                                    </div>
+                                    <a href=".\RecipeDetail?recipeID=${cc.id}">
+                                        <img class="recipe-img" alt=""
+                                             src="${cc.cover}" />
+                                    </a>
                                     <div class="react">
                                         <div>${cc.like} likes</div>
                                         <div>${cc.comment} comments</div>
                                     </div>
                                 </div>
-                                <div class="recipe-name col">${cc.name}</div>
-                                <div class="recipe-author col">
+                                <div class="recipe-name">${cc.name}</div>
+                                <div class="recipe-author">
                                     <a href="#" class="text-truncate">${cc.username}</a> 
-
-                                </div>
+                                    <c:out value="${cc.getDatePostFormat()}"/></div>
                             </div>
-                        </div>
-                    </c:forEach>
-
+                        </c:forEach>
+                    </div>
                 </div>
+            </div>
+        </div>
 
+        <c:import url="footer.jsp"/>
 
-                <script>
-                    var imgImage = document.getElementById("imgImage");
-                    if (imgImage) {
-                        imgImage.addEventListener("click", function (e) {
-                            window.open("./cook-detaildone.html");
-                        });
-                    }
-                </script>
-                </body>
-                </html>
+        <script>
+            var imgImage = document.getElementById("imgImage");
+            if (imgImage) {
+                imgImage.addEventListener("click", function (e) {
+                    window.open("./cook-detaildone.html");
+                });
+            }
+        </script>
+    </body>
+</html>
 

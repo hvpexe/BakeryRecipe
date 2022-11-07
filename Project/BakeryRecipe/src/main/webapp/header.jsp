@@ -21,7 +21,14 @@
                 <div class="searchbar mr-3">
                     <i class="px-1 searchbar-icon fa-solid fa-magnifying-glass"></i>
                     <input class="searchbar-input col p-0" type="text" placeholder="Search" name="searchKey" value="" size="40">
-                    <input type="hidden" name="action" value="Recipe">
+                    <select name="action" class="search-select">
+                        <option value="Recipe">
+                            Recipe      
+                        </option> 
+                        <option value="Baker">
+                            Baker
+                        </option>
+                    </select>
                 </div>
             </form> 
 
