@@ -1,7 +1,7 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Gelasio:wght@400;500;700&display=swap"/>
-<link href="assets/css/fontawesome-free-6.1.1-web/css/all.min.css" rel="stylesheet" type="text/css"/>
 <link rel="stylesheet" href="assets/css/header.css">
+<link href="assets/css/fontawesome-free-6.1.1-web/css/all.min.css" rel="stylesheet" type="text/css"/>
 
 <header class="header-container header py-2 py-md-0 ">
     <div class="header-left col-sm-12 col-md-6 p-0">

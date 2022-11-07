@@ -10,7 +10,6 @@
         <meta name="description" content="">
         <title>${USER_DETAIL.name}</title>
         <c:import url="universal.jsp" />
-
         <link rel="preconnect" href="https://fonts.googleapis.com">
         <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
         <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap" rel="stylesheet">
@@ -82,7 +81,7 @@
                                 <div class="first-div">
                                     <c:if test="${sessionScope.login.id == USER_DETAIL.id}">
                                         <span class="text-nowrap">
-                                            <a href="./editrecipe?recipeid=${param.recipeID}" class="btn btn-style2"><i class="fa-regular fa-pen-to-square"></i> Edit</a>
+                                            <a href="./editrecipe?recipeID=${param.recipeID}" class="btn btn-style2"><i class="fa-regular fa-pen-to-square"></i> Edit</a>
                                         </span>
                                     </c:if>
                                 </div>
@@ -200,7 +199,10 @@
                                 <div class="body">
                                     <c:forEach items="${requestScope.LIST_STEP}" var="ep">
                                         <div class="instruction">
-                                            <div class="step">Step ${ep.getInsstep()}: </div>
+                                            <div class="step h33">Step ${ep.getInsstep()}: </div>
+                                            <c:if test="${not empty ep.img}">
+                                                <img class="col-6 p-0 my-2 hover-button-2" src="${ep.img}" alt="${ep.img}" style="height:200px"/>
+                                            </c:if>
                                             <p>
                                                 ${ep.getDetail()}
                                             </p>
@@ -250,28 +252,26 @@
                                                  width="60" height="60" />
                                             <div class="card w-100">
                                                 <div class="card-body p-4"> 
-                                                    <div class="">
-                                                        <div id="baseline">
-                                                            <h5>${cmt.chefName}</h5>
-                                                            <!--report comment--> 
-                                                            <div class="dropdown">
-                                                                <button style="color: white"><i class="fa-solid fa-ellipsis"></i></button>
-                                                                <div class="dropdown-options">
-                                                                    <a   class="d-inline-block text-muted hover-underline c-pointer mr-3" onclick="getReportComment(${RECIPE_DETAIL.getId()})" href="#">
-                                                                        <span class="align-middle">
-                                                                            <strong>${re.like}</strong> Report</span></a>
-                                                                    <a href="#">Delete</a>
-                                                                </div>
+                                                    <div class="baseline d-flex">
+                                                        <h5 class="col p-0">${cmt.chefName}</h5>
+                                                        <!--report comment--> 
+                                                        <div class="dropdown">
+                                                            <button style="color: gray"><i class="fa-solid fa-ellipsis"></i></button>
+                                                            <div class="dropdown-options">
+                                                                <a   class="d-inline-block col text-muted hover-underline c-pointer mr-3" onclick="getReportComment(${RECIPE_DETAIL.getId()})" href="#">
+                                                                    <span class="align-middle">
+                                                                        <strong>${re.like}</strong> Report</span></a>
+                                                                <a class="col" href="#">Delete</a>
                                                             </div>
-                                                            <!--ket thuc comment--> 
                                                         </div>
-                                                        <p class="small">
-                                                            <m:ago value = "${cmt.getDateComment()}" />
-                                                        </p>
-                                                        <p>
-                                                            ${cmt.comment}
-                                                        </p>
+                                                        <!--ket thuc comment--> 
                                                     </div>
+                                                    <p class="small">
+                                                        <m:ago value = "${cmt.getDateComment()}" />
+                                                    </p>
+                                                    <p>
+                                                        ${cmt.comment}
+                                                    </p>
                                                 </div>
                                             </div>
                                         </div>

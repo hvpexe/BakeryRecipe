@@ -125,7 +125,7 @@ function  likeButton(item, val1, val2, action) {
 
 function Comment(item, event) {
     var textCmt = item.value;
-    if (event.key === "Enter" && !event.shiftKey ) {
+    if (event.key === "Enter" && !event.shiftKey) {
         event.preventDefault();//bth tui xai bien e chu ko xai event
         $.ajax({
             url: "ajax/CommnetRecipeAjax",
@@ -189,10 +189,10 @@ const swiper = new Swiper('.swiper', {
 
 
 function sendReport(value) {
-        
+
     var selectReport = document.querySelector('#select_Rp').value;
     var txtReport = document.querySelector('#txtReport').value;
-    var txtReportComment=document.querySelector('#txtReportComment').value;
+    var txtReportComment = document.querySelector('#txtReportComment').value;
     if (value === 'Recipe') {
         $.ajax({
             url: "ReportRecipeAjax",
@@ -225,7 +225,7 @@ function sendReport(value) {
             data: {
                 reportTypeComment: selectReport,
                 commentID: commentID,
-                detailComment:txtReportComment,
+                detailComment: txtReportComment,
                 userID: loginID
 
             },
@@ -251,3 +251,14 @@ function sendReport(value) {
     console.log(txtReportComment);
 
 }
+
+$('.instruction img').fadeIn(3000);
+$('.instruction img').click((e) => {
+    var text = e.target;
+    $(text).css(
+            {height: $(text).height()  >= 250 ? '200' : 'unset'
+                , transition: 500,
+            });
+
+
+});

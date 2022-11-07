@@ -150,6 +150,16 @@ body {
     font-size: 18px;
     font-weight: 500;
 }
+.instruction .showpic{
+    display: block;
+}
+.instruction img{
+    object-fit: cover;
+    object-position: top;
+    box-shadow: 0 0 4px #00000025;
+    border-radius: 15px;
+    transition: 2s;
+}
 
 .empty {
     margin: 0 auto;
@@ -339,6 +349,9 @@ body {
   display: inline-block;
   position: relative;
 }
+.dropdown button{
+    background: white;
+}
 
 button{
   border:none;
@@ -352,9 +365,10 @@ button:hover{
 .dropdown-options {
   display: none;
   position: absolute;
-  overflow: auto;
+  overflow: hidden;
   background-color: #FFFFFF;
   border-radius:5px;
+  right:0;
 /*  box-shadow: 0px 10px 10px 0px rgba(0,0,0,0.4);*/
 }
 
@@ -385,6 +399,6 @@ button:hover{
 #textAreaExample{
     width: 638px;
 }
-#baseline{
+.baseline{
     align-items: baseline;
 }

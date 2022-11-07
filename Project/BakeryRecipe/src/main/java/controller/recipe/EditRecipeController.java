@@ -45,7 +45,7 @@ public class EditRecipeController extends HttpServlet {
     private static final String SUCCESS_GET = "editrecipe.jsp";
     private static final String ERROR_GET = "RecipeDetail";
     private static final String SUCCESS_POST = "RecipeDetail";
-    private static final String ERROR_POST = "editrecipe.jsp";
+    private static final String ERROR_POST = "editrecipe";
     private static final String ERROR_POST_MISSING_USER = "login.jsp";
 
     /**
@@ -153,7 +153,7 @@ public class EditRecipeController extends HttpServlet {
                 }
 
             boolean updateRecipe = RecipeDAO.updateRecipe(recipeName, recipeDescription, videoUrl, pictureList,
-                     pictureListPath, ingreName, ingreAmount, instImgList,
+                    pictureListPath, ingreName, ingreAmount, instImgList,
                     instDescription, prepareTime, cookTime, userId, recipeId, cover, sc);
             if (updateRecipe) {
                 System.out.println("success");
@@ -164,16 +164,17 @@ public class EditRecipeController extends HttpServlet {
             e.printStackTrace();
             e.printStackTrace(out);
         } finally {
+            url += "?recipeID=" + recipeId;
+            response.sendRedirect(url);
             out.close();
-//            url += "?recipeID=" + recipeId;
-//            response.sendRedirect(url);
+
         }
     }
 
     private void loadRecipe (HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         String url = ERROR_GET;
         try {
-            int recipeID = Integer.parseInt(request.getParameter("recipeid"));
+            int recipeID = Integer.parseInt(request.getParameter("recipeID"));
             Recipe recipe = RecipeDAO.getRecipeByID(recipeID);
             request.setAttribute("recipe", recipe);
 
