@@ -2,7 +2,7 @@ section:has( #notification){
     border-radius: 25px;
     background: #BEBEBE;
     height: auto;
-    
+    max-width: 700px;
 }
 
 #notification {
