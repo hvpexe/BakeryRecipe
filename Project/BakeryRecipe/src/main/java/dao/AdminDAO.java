@@ -298,7 +298,65 @@ public class AdminDAO {
         }
         return check;
     }
+    
+    public static boolean updateStatusRecipeReport(int id, String status) throws SQLException {
+        boolean check = false;
+        Connection conn = null;
+        PreparedStatement ps = null;
+        try {
+            conn = DBUtils.getConnection();
+            if (conn != null) {
+                String sql = "UPDATE [ReportRecipe]\n"
+                        + "SET [Status] = ?\n"
+                        + "WHERE [ReportRecipe].ID = ?";
+                ps = conn.prepareStatement(sql);
+                ps.setString(1, status);
+                ps.setInt(2, id);
+                check = ps.executeUpdate() > 0;
+            }
+        } catch (Exception e) {
+            System.out.println("Error at updateStatusRecipeReport: " + e.toString());
+        } finally {
+            if (ps != null) {
+                ps.close();
+            }
+            if (conn != null) {
+                conn.close();
+            }
 
+        }
+        return check;
+    }
+    
+    public static boolean updateStatusUserReport(int id, String status) throws SQLException {
+        boolean check = false;
+        Connection conn = null;
+        PreparedStatement ps = null;
+        try {
+            conn = DBUtils.getConnection();
+            if (conn != null) {
+                String sql = "UPDATE [ReportUser]\n"
+                        + "SET [Status] = ?\n"
+                        + "WHERE [ReportUser].ID = ?";
+                ps = conn.prepareStatement(sql);
+                ps.setString(1, status);
+                ps.setInt(2, id);
+                check = ps.executeUpdate() > 0;
+            }
+        } catch (Exception e) {
+            System.out.println("Error at updateStatusUserReport: " + e.toString());
+        } finally {
+            if (ps != null) {
+                ps.close();
+            }
+            if (conn != null) {
+                conn.close();
+            }
+
+        }
+        return check;
+    }
+    
     public static void main (String[] args) throws SQLException {
         System.out.println(getSumUserRegisterInMonthByYear(2021));
     }

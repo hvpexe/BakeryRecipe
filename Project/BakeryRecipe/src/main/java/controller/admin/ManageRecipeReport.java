@@ -5,7 +5,6 @@
 package controller.admin;
 
 import dao.AdminDAO;
-import dao.ReportDAO;
 import java.io.IOException;
 import java.io.PrintWriter;
 import javax.servlet.ServletException;
@@ -18,8 +17,8 @@ import javax.servlet.http.HttpServletResponse;
  *
  * @author kichi
  */
-@WebServlet(name = "ManageReport", urlPatterns = {"/report"})
-public class ManageReport extends HttpServlet {
+@WebServlet(name = "ManageRecipeReport", urlPatterns = {"/recipeReport"})
+public class ManageRecipeReport extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -37,12 +36,12 @@ public class ManageReport extends HttpServlet {
         try {
             if(action.equals("Approved") || action.equals("Denied")){
                 int id = Integer.parseInt(request.getParameter("reportID"));
-                AdminDAO.updateStatusReport(id, action);
+                AdminDAO.updateStatusRecipeReport(id, action);
             }
         } catch (Exception e) {
             System.out.println("Error at BRecipeController: " + e.toString());
         }finally{
-            response.sendRedirect("reportCmtList");
+            response.sendRedirect("reportrecipe");
         }
     }
 

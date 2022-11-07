@@ -244,7 +244,7 @@ public class ReportDAO {
                         rs.getInt("ReporterID"), 
                         rs.getString("ReportType"), 
                         rs.getString("Status"), 
-                        rs.getString(fullname), 
+                        fullname, 
                         rs.getInt("UserID"), 
                         rs.getString("Username"), 
                         rs.getString("Avatar"));
