@@ -132,3 +132,57 @@
     aspect-ratio: 1;
     object-fit: cover;
 }
+/*//text ham d*/
+.dropdown {
+  display: inline-block;
+  position: relative;
+}
+
+button{
+  border:none;
+ 
+}
+
+button:hover{
+  background-color:#FFFFFF;
+}
+
+.dropdown-options {
+  display: none;
+  position: absolute;
+  overflow: auto;
+  background-color: #FFFFFF;
+  border-radius:5px;
+/*  box-shadow: 0px 10px 10px 0px rgba(0,0,0,0.4);*/
+}
+
+.dropdown:hover .dropdown-options {
+  display: block;
+}
+
+.dropdown-options a {
+  display: block;
+  color: #000000;
+  padding: 5px;
+  text-decoration: none;
+  padding:20px 40px;
+}
+
+.dropdown-options a:hover {
+  color: #0a0a23;
+  background-color: #ddd;
+  border-radius:5px;
+}
+
+.txtareaRp{
+    width: 340px;
+}
+.card-body{
+}   
+
+#textAreaExample{
+    width: 638px;
+}
+#baseline{
+    align-items: baseline;
+}

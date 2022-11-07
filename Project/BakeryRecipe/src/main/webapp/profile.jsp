@@ -54,6 +54,19 @@
                         <span class="follow">${requestScope.user.following} Following</span>
 
                     </div>
+                    <div class="col-3">
+                        <c:if test="${sessionScope.login.id != USER_DETAIL.id}">
+                            <div class="dropdown">
+                                <button style="color: white"><i class="fa-solid fa-ellipsis"></i></button>
+                                <div class="dropdown-options">
+                                    <a   class="d-inline-block text-muted hover-underline c-pointer mr-3" onclick="getReportUser(${requestScope.user.id})" href="#">
+                                        <span class="align-middle">
+                                            <strong>${re.like}</strong> Report</span></a>
+                                    <a href="#">Delete</a>
+                                </div>
+                            </div>
+                        </c:if>
+                    </div>
                     <c:if test="${requestScope.user == sessionScope.login}">
                         <a href="./profileInfo.jsp" class="btn edit-profile-button">Edit Profile</a>
                     </c:if>
@@ -116,6 +129,42 @@
                 </c:forEach>
             </div>
         </div>
+                               <!--report cua comment--> 
+        <div class="fixed-container " id="report_user" >
+            <div class="gray-box"></div>
+            <div class="content card-body col-12 col-md-4">
+                <div class="col-12 p-0">
+                    <div class="report-title h3 font-weight-bold">Report User</div>
+                    <!--                    <form action="ReportController" class="col">-->
+                    <div class="form-group">
+                        <select name="typeReport" class="selectReport w-100" id="select_Rp">
+                            <option value="Impersonate">Impersonate Others </option>
+                            <option value="Account">Fake Account</option>
+                            <option value="Posting">Posting inappropriate content</option>
+                        </select>
+                        <div class="form-group" >
+                            <textarea name="txtReport" class="txtareaRp w-100"  id="txtReportUser" value=""></textarea>
+                        </div>  
+                        <div class="form-group">
+                            <button class="hover" type="submit" onclick="sendReport('User')">Send Report</button>
+                        </div>
+
+                        <!--</form>--> 
+                    </div>
+
+
+                </div>
+                <div id="thankReport1"></div>
+            </div>
+        </div>
+
+        <!--keu thuc report cua comment-->
+        <script>
+            var userReport = ${sessionScope.login.id};
+            var userReported = ${user.id};
+            
+            
+        </script>
         <script src="assets/js/Jquery/jquery-core.js"></script>
         <script src="assets/js/profile.js"></script>
     </body>
