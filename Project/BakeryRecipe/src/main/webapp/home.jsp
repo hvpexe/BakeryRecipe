@@ -11,7 +11,7 @@
         <link rel="stylesheet" href="assets/css/home.css" />
         <script src="assets/js/Jquery/jquery-core.js"></script>
     </head>
-    <body>
+    <body class="noselect">
         <c:import url="header.jsp"/>
         <div class="home-container ">
             <div class="post-section">

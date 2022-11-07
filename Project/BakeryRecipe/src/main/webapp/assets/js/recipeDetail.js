@@ -259,6 +259,6 @@ $('.instruction img').click((e) => {
             {height: $(text).height()  >= 250 ? '200' : 'unset'
                 , transition: 500,
             });
-
+    text.style.cursor = "zoomout";
 
 });

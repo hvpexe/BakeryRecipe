@@ -12,37 +12,16 @@
         <meta charset="utf-8" />
         <meta name="viewport" content="initial-scale=1, width=device-width" />
         <title></title>
+        <c:import url="universal.jsp"/>
+
         <meta name="description" content="" />
 
-    <link rel="stylesheet" href="assets/css/add-video.css" />
+        <link rel="stylesheet" href="assets/css/add-video.css" />
 
-        <link
-            rel="stylesheet"
-            href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700&display=swap"
-            />
-        <link
-            rel="stylesheet"
-            href="https://fonts.googleapis.com/css2?family=Abhaya Libre:wght@700&display=swap"
-            />
-        <link
-            rel="stylesheet"
-            href="https://fonts.googleapis.com/css2?family=Abel:wght@400&display=swap"
-            />
-        <link
-            rel="stylesheet"
-            href="https://fonts.googleapis.com/css2?family=Gelasio:wght@400;500;700&display=swap"
-            />
-        <link
-            rel="stylesheet"
-            href="https://fonts.googleapis.com/css2?family=Beau Rivage:wght@400&display=swap"
-            />
-        <link
-            rel="stylesheet"
-            href="https://fonts.googleapis.com/css2?family=Arima Madurai:wght@800&display=swap"
-            />
+        
     </head>
     <body>
-   
+
         <div class="add-video-div">
             <div class="frame-div1">
                 <div class="add-recipe-video-url">Add Recipe Video URL</div>

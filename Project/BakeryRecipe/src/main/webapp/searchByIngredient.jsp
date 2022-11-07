@@ -8,9 +8,7 @@
         <meta charset="utf-8" />
         <meta name="viewport" content="initial-scale=1, width=device-width" />
         <title>Community</title>
-        <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Gelasio:wght@400;500;700&display=swap" />
-        <link rel="stylesheet" href="assets/css/web/bootstrap-4.3.1.min.css" />
-        <link rel="stylesheet" type="text/css" href="./assets/css/fontawesome-free-6.1.1-web/css/all.min.css">
+        <c:import url="universal.jsp"/>
         <link href="https://www.cssscript.com/demo/sticky.css" rel="stylesheet" type="text/css">
         <!-- Load the stylesheet -->
         <link rel="stylesheet" href="src/simple-tag-input.css" />
@@ -71,11 +69,11 @@
                                         </div>
                                         <!--                                        
                                         <div class="ingre-container">
-                                            <c:forEach items="${re.ingre}" var="ingre">
-                                            <span class="ingre-active">${ingre}</span>
-                                            </c:forEach>
-                                            ${re.match}
-                                       </div>-->
+                                        <c:forEach items="${re.ingre}" var="ingre">
+                                        <span class="ingre-active">${ingre}</span>
+                                        </c:forEach>
+                                        ${re.match}
+                                   </div>-->
                                     </div>
                                 </div>
                             </div>

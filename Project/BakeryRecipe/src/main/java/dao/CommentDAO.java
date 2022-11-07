@@ -23,7 +23,7 @@ public class CommentDAO {
             + "	  ,c.UserID\n"
             + "  FROM [Comment] c \n"
             + "  WHERE c.UserID = ? and c.IsDeleted= 0\n"
-            + "  Order By c.DateComment";
+            + "  Order By c.DateComment DESC";
 
     public static List<Integer[]> getCommentList (int userid) throws SQLException {
         String sql = SELECT_PROFILE_COMMENT_LIST;
