@@ -61,7 +61,7 @@ public class RegisterAccountController extends HttpServlet {
             UserDAO.register(email, hashedpassword, firstname, lastname);
             User user = UserDAO.login(email, hashedpassword);
             HttpSession session = request.getSession();
-            session.setAttribute("LOGIN_USER", user);
+            session.setAttribute("login", user);
             response.sendRedirect("home.jsp");
             return;
         }
