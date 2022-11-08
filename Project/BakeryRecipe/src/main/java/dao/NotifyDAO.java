@@ -161,4 +161,21 @@ public class NotifyDAO {
     public static boolean deleteNotify() {
         return true;
     }
+
+    private static final String COUNT_NOTIFY = "";
+
+    public static int countNotify(int userID) {
+        int countCheck = 0;
+        Connection cn = null;
+        PreparedStatement ptm = null;
+        ResultSet rs = null;
+
+        try {
+
+        } catch (Exception e) {
+        } finally {
+        }
+        return countCheck;
+
+    }
 }
