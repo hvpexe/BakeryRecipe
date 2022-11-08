@@ -54,8 +54,8 @@
                         <span class="follow">${requestScope.user.following} Following</span>
 
                     </div>
-                    <div class="col-3">
-                        <c:if test="${sessionScope.login.id != USER_DETAIL.id}">
+                    <c:if test="${sessionScope.login != requestScope.user}">
+                        <div class="">
                             <div class="dropdown">
                                 <button style="color: white"><i class="fa-solid fa-ellipsis"></i></button>
                                 <div class="dropdown-options">
@@ -65,8 +65,8 @@
                                     <a href="#">Delete</a>
                                 </div>
                             </div>
-                        </c:if>
-                    </div>
+                        </div>
+                    </c:if>
                     <c:if test="${requestScope.user == sessionScope.login}">
                         <a href="./profileInfo.jsp" class="btn edit-profile-button">Edit Profile</a>
                     </c:if>
@@ -129,7 +129,7 @@
                 </c:forEach>
             </div>
         </div>
-                               <!--report cua comment--> 
+        <!--report cua comment--> 
         <div class="fixed-container " id="report_user" >
             <div class="gray-box"></div>
             <div class="content card-body col-12 col-md-4">
@@ -162,8 +162,8 @@
         <script>
             var userReport = ${sessionScope.login.id};
             var userReported = ${user.id};
-            
-            
+
+
         </script>
         <script src="assets/js/Jquery/jquery-core.js"></script>
         <script src="assets/js/profile.js"></script>
