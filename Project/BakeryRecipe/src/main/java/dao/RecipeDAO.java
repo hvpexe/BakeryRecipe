@@ -1165,6 +1165,7 @@ public class RecipeDAO {
             ptm.setString(1, recipeName);
             rs = ptm.executeQuery();
             while (rs.next()) {
+                int ID = rs.getInt("ID");
                 String fullName = rs.getString("fullName");
 //                String img = rs.getString("Img");
                 int comment = rs.getInt("Comment");
@@ -1173,7 +1174,7 @@ public class RecipeDAO {
                 String cakeName = rs.getString("Name");
                 String cover = rs.getString("Img");
                 Timestamp date = rs.getTimestamp("DatePost");
-                recipe = new Recipe(cakeName, like, comment, cover, fullName, date);
+                recipe = new Recipe(ID,cakeName, like, comment, cover, fullName, date);
             }
         } catch (Exception e) {
             e.printStackTrace();

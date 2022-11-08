@@ -82,7 +82,8 @@ public class Recipe {
         this.username = username;
     }
 
-    public Recipe (String name, int like, int comment, String cover, String username, Timestamp datePost) {
+    public Recipe (int id,String name, int like, int comment, String cover, String username, Timestamp datePost) {
+        this.id = id;
         this.name = name;
         this.like = like;
         this.comment = comment;

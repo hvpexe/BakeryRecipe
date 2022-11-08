@@ -53,7 +53,7 @@
 
                             <span class="info-user">
                                 <img src="${USER_DETAIL.getAvatar()}">
-                                <span>${USER_DETAIL.getName()}</span>
+                                <a href="profile?userid=${USER_DETAIL.getId()}">${USER_DETAIL.getName()}</a>
                                 <c:if test="${sessionScope.login.id != USER_DETAIL.id}">
                                     <!--                                <div class="btn btn-style1" onclick="followButton(this, 'Follow', 'UnFollow', this.action)" >
                                                                         <i class="fa-solid fa-user-plus"></i>
@@ -294,8 +294,8 @@
                             <c:forEach items="${RELATED_TOPIC}" var="to">
                                 <div class="recipe col-6 col-md-3">
                                     <div class="img-container">
-                                        <img class="recipe-img" alt=""
-                                             src="${to.cover}" />
+                                        <a href="RecipeDetail?recipeID=${to.id}"><img class="recipe-img" alt=""
+                                             src="${to.cover}" /></a>
                                         <div class="react">
                                             <div>${to.like} likes</div>
                                             <div>${to.comment} comments</div>
