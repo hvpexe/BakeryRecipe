@@ -186,7 +186,6 @@ const swiper = new Swiper('.swiper', {
     },
 });
 function sendReport(value) {
-
     var selectReport = document.querySelector('#select_Rp').value;
     var txtReport = document.querySelector('#txtReport').value;
     var txtReportComment = document.querySelector('#txtReportComment').value;
