@@ -280,9 +280,9 @@
                                 </div>
                             </div>
                         </div>
-                        <div class="col-md-4" style="background-color: #e3a587;">
+                        <!--<div class="col-md-4">-->
                             <!-- Phần này để nội dung gợi ý shop - làm sau -->
-                        </div>
+                        <!--</div>-->
                     </div>
 
                     <!-- Related recipes -->

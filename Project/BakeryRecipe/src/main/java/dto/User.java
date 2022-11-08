@@ -4,10 +4,7 @@
  */
 package dto;
 
-import dao.UserDAO;
 import java.sql.Date;
-import java.util.ArrayList;
-import java.util.List;
 
 /**
  *
@@ -32,7 +29,6 @@ public class User {
     private int follower;
     private Date dateRegister;
     private boolean isActive;
-    private int storeID;
     private Date birthday;
 
     public User () {
@@ -40,7 +36,7 @@ public class User {
 
     public User (int id, String role, String email, String password, String avatar, String name, String firstName,
             String lastName, String gender, String phone, String address, Date dateRegister, boolean isActive,
-            int storeID, Date birthday) {
+            Date birthday) {
         this.id = id;
         this.role = role;
         this.email = email;
@@ -54,12 +50,11 @@ public class User {
         this.address = address;
         this.dateRegister = dateRegister;
         this.isActive = isActive;
-        this.storeID = storeID;
         this.birthday = birthday;
     }
 
     public User (int id, String role, String email, String password, String avatar, String name, String gender,
-            String phone, String address, Date dateRegister, boolean isActive, int storeID, Date birthday) {
+            String phone, String address, Date dateRegister, boolean isActive, Date birthday) {
         this.id = id;
         this.role = role;
         this.email = email;
@@ -71,7 +66,6 @@ public class User {
         this.address = address;
         this.dateRegister = dateRegister;
         this.isActive = isActive;
-        this.storeID = storeID;
         this.birthday = birthday;
     }
 
@@ -101,7 +95,7 @@ public class User {
     }
 
     public User (int ID, String Role, String Email, String Password, String Avatar, String FirstName, String LastName,
-            String Gender, String Phone, String Address, Date DateRegister, boolean IsActive, int StoreID) {
+            String Gender, String Phone, String Address, Date DateRegister, boolean IsActive) {
         this.id = ID;
         this.role = Role;
         this.email = Email;
@@ -114,19 +108,18 @@ public class User {
         this.address = Address;
         this.dateRegister = DateRegister;
         this.isActive = IsActive;
-        this.storeID = StoreID;
         this.name = lastName + " " + firstName;
     }
 
     public User (int ID, String Role, String Email, String Password, String Avatar,
             String FirstName, String LastName, String Gender, String Phone,
-            String Address, Date DateRegister, int StoreID) {
-        this(ID, Role, Email, Password, Avatar, FirstName, LastName, Gender, Phone, Address, DateRegister, true, StoreID);
+            String Address, Date DateRegister) {
+        this(ID, Role, Email, Password, Avatar, FirstName, LastName, Gender, Phone, Address, DateRegister, true);
     }
 
     public User (int ID, String Role, String Email, String Password, String Avatar,
             String FirstName, String LastName, String Gender, String Phone,
-            String Address, Date DateRegister, boolean IsActive, int StoreID,
+            String Address, Date DateRegister, boolean IsActive,
             Date Birthday) {
         this.id = ID;
         this.role = Role;
@@ -140,7 +133,6 @@ public class User {
         this.address = Address;
         this.dateRegister = DateRegister;
         this.isActive = IsActive;
-        this.storeID = StoreID;
         this.name = lastName + " " + firstName;
         this.birthday = Birthday;
     }
@@ -148,7 +140,7 @@ public class User {
     public User (int id, String role, String email, String password, String avatar,
             String firstName, String lastName, String gender,
             String phone, String address, int following, int follower,
-            Date dateRegister, boolean isActive, int storeID, Date birthday) {
+            Date dateRegister, boolean isActive, Date birthday) {
         this.id = id;
         this.role = role;
         this.email = email;
@@ -164,14 +156,13 @@ public class User {
         this.follower = follower;
         this.dateRegister = dateRegister;
         this.isActive = isActive;
-        this.storeID = storeID;
         this.birthday = birthday;
     }
 
     public User (int ID, String Role, String Email, String Password, String Avatar,
             String FirstName, String LastName, String Gender, String Phone,
-            String Address, Date DateRegister, int StoreID, Date Birthday) {
-        this(ID, Role, Email, Password, Avatar, FirstName, LastName, Gender, Phone, Address, DateRegister, true, StoreID, Birthday);
+            String Address, Date DateRegister, Date Birthday) {
+        this(ID, Role, Email, Password, Avatar, FirstName, LastName, Gender, Phone, Address, DateRegister, true, Birthday);
     }
 
     public int getId () {
@@ -285,14 +276,6 @@ public class User {
         this.isActive = isActive;
     }
 
-    public int getStoreID () {
-        return storeID;
-    }
-
-    public void setStoreID (int StoreID) {
-        this.storeID = StoreID;
-    }
-
     public Date getBirthday () {
         return birthday;
     }
@@ -319,7 +302,7 @@ public class User {
 
     @Override
     public String toString () {
-        return "User{" + "id=" + id + ", role=" + role + ", email=" + email + ", password=" + password + ", avatar=" + avatar + ", name=" + name + ", firstName=" + firstName + ", lastName=" + lastName + ", gender=" + gender + ", phone=" + phone + ", address=" + address + ", following=" + following + ", follower=" + follower + ", dateRegister=" + dateRegister + ", isActive=" + isActive + ", storeID=" + storeID + ", birthday=" + birthday + '}';
+        return "User{" + "id=" + id + ", role=" + role + ", email=" + email + ", password=" + password + ", avatar=" + avatar + ", name=" + name + ", firstName=" + firstName + ", lastName=" + lastName + ", gender=" + gender + ", phone=" + phone + ", address=" + address + ", following=" + following + ", follower=" + follower + ", dateRegister=" + dateRegister + ", isActive=" + isActive + ", birthday=" + birthday + '}';
     }
 
 }
