@@ -106,6 +106,14 @@ public class DaoHelper {
 //        }
 //        return obj;
 //    }
+    /**
+     * 
+     * @param SQL
+     * @param para the parameter will be inputted in
+     * @return
+     * @throws SQLException 
+     */
+    
     public static List<Object[]> execute (String SQL, Object... para) throws SQLException {
         List<Object[]> list = new LinkedList<>();
         Connection conn = null;

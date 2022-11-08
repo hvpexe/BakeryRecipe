@@ -25,7 +25,7 @@ public class UserDAO {
     private static Connection conn = DBUtils.getConnection();
     private static final String[] USER_COLUMN_NAME_LIST
             = {"ID", "Role", "Email", "Password", "Avatar", "FirstName",
-                "LastName", "Gender", "Phone", "Address", "DateRegister", "IsActive", "StoreID", "Birthday"};
+                "LastName", "Gender", "Phone", "Address", "DateRegister", "IsActive", "Birthday"};
     private static final Class[] USER_COLUMN_NAME_CLASS
             = {Integer.class, String.class, String.class, String.class, String.class, String.class,
                 String.class, Boolean.class, String.class, String.class, Timestamp.class, String.class, Integer.class};
@@ -226,7 +226,7 @@ public class UserDAO {
     private static final String SELECT_ALL_USER = "SELECT "
             + " [ID],[Role],[Email],[Password],[Avatar]"
             + ",[FirstName],[LastName],[Gender],[Phone]"
-            + ",[Address],[DateRegister],[IsActive][StoreID], [Birthday]"
+            + ",[Address],[DateRegister],[IsActive], [Birthday]"
             + " FROM [BakeryRecipe].[dbo].[User]";
 
     /**
@@ -254,7 +254,7 @@ public class UserDAO {
                 user = new User(rs.getInt(l[0]), rs.getString(l[1]), rs.getString(l[2]), rs.getString(l[3]), rs.
                         getString(l[4]), rs.getString(l[5]),
                         rs.getString(l[6]), rs.getString(l[7]), rs.getString(l[8]), rs.getString(l[9]), rs.
-                        getDate(l[10]), rs.getInt(l[12]), rs.getDate(l[13]));
+                        getDate(l[10]), rs.getDate(l[12]));
                 list.add(user);
             }
             return list;
@@ -276,7 +276,7 @@ public class UserDAO {
     }
 
     private static final String SELECT_USER_BY_ID = "SELECT [ID],[Role],[Email],[Password],[Avatar],[FirstName],[LastName],[Gender],[Phone]\n"
-            + ",[Address], [Following],[Follower],[DateRegister],[IsActive],[StoreID], [Birthday]\n"
+            + ",[Address], [Following],[Follower],[DateRegister],[IsActive], [Birthday]\n"
             + "FROM [BakeryRecipe].[dbo].[User]\n"
             + "WHERE [ID] = ?";
 
@@ -316,7 +316,6 @@ public class UserDAO {
                         rs.getInt("Follower"),
                         rs.getDate("DateRegister"),
                         rs.getBoolean("IsActive"),
-                        rs.getInt("StoreID"),
                         rs.getDate("Birthday"));
             }
             return user;
@@ -453,7 +452,7 @@ public class UserDAO {
 
     private static final String SEARCH_CHEFNAME = "SELECT [ID],[Role],[Email],[Password],"
             + "[Avatar],[FirstName],[LastName],[Gender],[Phone]"
-            + ",[Address],[DateRegister],[IsActive],[StoreID]\n"
+            + ",[Address],[DateRegister],[IsActive]\n"
             + "FROM [dbo].[User]\n"
             + "WHERE  [LastName] like ? or [FirstName] like ?";
 
@@ -482,8 +481,7 @@ public class UserDAO {
                     String address = rs.getString("Address");
                     Date DateRegister = rs.getDate("DateRegister");
                     boolean isActive = rs.getBoolean("IsActive");
-                    int StoreId = rs.getInt("StoreID");
-                    User user = new User(ID, role, email, password, avatar, FirstName, LastName, Gender, phone, address, DateRegister, isActive, StoreId);
+                    User user = new User(ID, role, email, password, avatar, FirstName, LastName, Gender, phone, address, DateRegister, isActive);
                     listName.add(user);
                 }
             }
@@ -888,7 +886,7 @@ public class UserDAO {
     private static final String SHOW_USER_LIST = "SELECT \n"
             + "[ID],[Role],[Email],[Password],[Avatar],\n"
             + "[LastName] , [FirstName],[Gender],[Phone],\n"
-            + "[Address],[DateRegister],[IsActive],[StoreID], [Birthday]\n"
+            + "[Address],[DateRegister],[IsActive], [Birthday]\n"
             + "FROM [BakeryRecipe].[dbo].[User]";
 
     public static List<User> showUserList () throws SQLException {
@@ -918,7 +916,6 @@ public class UserDAO {
 //                        rs.getString("Address"),
 //                        rs.getDate("DateRegister"),
 //                        rs.getBoolean("IsActive"),
-//                        rs.getInt("StoreID"),
 //                        rs.getDate("Birthday"));
 
                 int iD = rs.getInt("ID");
@@ -933,10 +930,8 @@ public class UserDAO {
                 String Address = rs.getString("Address");
                 Date DateRegister = rs.getDate("DateRegister");
                 boolean IsActive = rs.getBoolean("IsActive");
-                int StoreId = rs.getInt("StoreID");
                 Date Birthday = rs.getDate("Birthday");
-                //   User user = new User(iD, role, email, password, avatar, firstName, lastName, gender, phone, address, dateRegister, isActive, storeId);
-                User user = new User(iD, Role, Email, Password, Avatar, fullName, FirstName, LastName, Gender, Phone, Address, DateRegister, IsActive, StoreId, Birthday);
+                User user = new User(iD, Role, Email, Password, Avatar, fullName, FirstName, LastName, Gender, Phone, Address, DateRegister, IsActive, Birthday);
                 list.add(user);
             }
             return list;
