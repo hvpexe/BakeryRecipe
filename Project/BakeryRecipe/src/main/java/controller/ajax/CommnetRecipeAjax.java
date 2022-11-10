@@ -33,7 +33,7 @@ import utils.Tools;
 @WebServlet(name = "CommnetRecipeAjax", urlPatterns = {"/ajax/CommnetRecipeAjax"})
 public class CommnetRecipeAjax extends HttpServlet {
 
-    protected void processRequest(HttpServletRequest request, HttpServletResponse response)
+    protected void processRequest (HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException, SQLException {
         response.setContentType("text/html;charset=UTF-8");
         try ( PrintWriter out = response.getWriter()) {
@@ -43,32 +43,31 @@ public class CommnetRecipeAjax extends HttpServlet {
             String comment = request.getParameter("txtCmt");
             int recipeID = Integer.parseInt(request.getParameter("RecipeID"));
             User baker;
+            boolean check = false;
+            Integer cmtID = CommentDAO.commentRecipe(comment, bakerID, recipeID);
             baker = UserDAO.getUserByID(bakerID);
-            RecipeDAO recipeD = new RecipeDAO();
-            recipeD.commentRecipe(comment, bakerID, recipeID);
-            Comment cmt= new Comment();
 //           CommentDAO cmtD  = new CommentDAO();
-           NotifyDAO notifyD = new NotifyDAO();
-           int cmtID = CommentDAO.commentByDate(currentDate);
-           
-          notifyD.AddNotifyComment(bakerID, recipeID, cmtID);
-            out.print(" <div class=\"d-flex flex-start mb-4\"   >\n"
-                    + "                                        <img class=\"rounded-circle mr-2\"\n"
-                    + "                                             src=\"" + baker.getAvatar() + "\" alt=\"avatar\"\n"
-                    + "                                             width=\"60\" height=\"60\" />\n"
-                    + "                                        <div class=\"card w-100\">\n"
-                    + "                                            <div class=\"card-body p-4\">\n"
-                    + "                                                <div class=\"\">\n"
-                    + "                                                    <h5>" + baker.getName() + "</h5>\n"
-                    + "                                                    <p class=\"small\">" + Tools.formatDate(currentDate) + "</p>\n"
-                    + "                                                    <p>\n"
-                    + "                                                        " + comment + "\n"
-                    + "                                                    </p>\n"
-                    + "                                                </div>\n"
-                    + "                                            </div>\n"
-                    + "                                        </div>\n"
-                    + "                                    </div>");
+            if (cmtID != null) {
+                check = NotifyDAO.AddNotifyComment(bakerID, recipeID, cmtID, bakerID);
+                if (check)
+                    out.print(" <div class=\"d-flex flex-start mb-4\"   >\n"
+                            + "                                        <img class=\"rounded-circle mr-2\"\n"
+                            + "                                             src=\"" + baker.getAvatar() + "\" alt=\"avatar\"\n"
+                            + "                                             width=\"60\" height=\"60\" />\n"
+                            + "                                        <div class=\"card w-100\">\n"
+                            + "                                            <div class=\"card-body p-4\">\n"
+                            + "                                                <div class=\"\">\n"
+                            + "                                                    <h5>" + baker.getName() + "</h5>\n"
+                            + "                                                    <p class=\"small\">" + Tools.formatDate(currentDate) + "</p>\n"
+                            + "                                                    <p>\n"
+                            + "                                                        " + comment + "\n"
+                            + "                                                    </p>\n"
+                            + "                                                </div>\n"
+                            + "                                            </div>\n"
+                            + "                                        </div>\n"
+                            + "                                    </div>");
 
+            }
         }
     }
 
@@ -76,13 +75,14 @@ public class CommnetRecipeAjax extends HttpServlet {
     /**
      * Handles the HTTP <code>GET</code> method.
      *
-     * @param request servlet request
+     * @param request  servlet request
      * @param response servlet response
+     *
      * @throws ServletException if a servlet-specific error occurs
-     * @throws IOException if an I/O error occurs
+     * @throws IOException      if an I/O error occurs
      */
     @Override
-    protected void doGet(HttpServletRequest request, HttpServletResponse response)
+    protected void doGet (HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         try {
             processRequest(request, response);
@@ -94,13 +94,14 @@ public class CommnetRecipeAjax extends HttpServlet {
     /**
      * Handles the HTTP <code>POST</code> method.
      *
-     * @param request servlet request
+     * @param request  servlet request
      * @param response servlet response
+     *
      * @throws ServletException if a servlet-specific error occurs
-     * @throws IOException if an I/O error occurs
+     * @throws IOException      if an I/O error occurs
      */
     @Override
-    protected void doPost(HttpServletRequest request, HttpServletResponse response)
+    protected void doPost (HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         try {
             processRequest(request, response);
@@ -115,7 +116,7 @@ public class CommnetRecipeAjax extends HttpServlet {
      * @return a String containing servlet description
      */
     @Override
-    public String getServletInfo() {
+    public String getServletInfo () {
         return "Short description";
     }// </editor-fold>
 
