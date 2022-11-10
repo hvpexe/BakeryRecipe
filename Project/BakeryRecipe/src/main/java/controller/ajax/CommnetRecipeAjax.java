@@ -4,8 +4,11 @@
  */
 package controller.ajax;
 
+import dao.CommentDAO;
+import dao.NotifyDAO;
 import dao.RecipeDAO;
 import dao.UserDAO;
+import dto.Comment;
 import dto.User;
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -43,6 +46,12 @@ public class CommnetRecipeAjax extends HttpServlet {
             baker = UserDAO.getUserByID(bakerID);
             RecipeDAO recipeD = new RecipeDAO();
             recipeD.commentRecipe(comment, bakerID, recipeID);
+            Comment cmt= new Comment();
+//           CommentDAO cmtD  = new CommentDAO();
+           NotifyDAO notifyD = new NotifyDAO();
+           int cmtID = CommentDAO.commentByDate(currentDate);
+           
+          notifyD.AddNotifyComment(bakerID, recipeID, cmtID);
             out.print(" <div class=\"d-flex flex-start mb-4\"   >\n"
                     + "                                        <img class=\"rounded-circle mr-2\"\n"
                     + "                                             src=\"" + baker.getAvatar() + "\" alt=\"avatar\"\n"

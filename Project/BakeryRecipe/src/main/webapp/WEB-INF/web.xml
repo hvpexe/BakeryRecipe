@@ -136,6 +136,10 @@
         <servlet-name>CommentedUserListAjax</servlet-name>
         <servlet-class>controller.ajax.CommentedUserListAjax</servlet-class>
     </servlet>
+    <servlet>    
+        <servlet-name>NotificationCotroller</servlet-name>
+        <servlet-class>controller.baker.NotificationCotroller</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>DebugController</servlet-name>
         <url-pattern>/debug</url-pattern>
@@ -235,6 +239,10 @@
     <servlet-mapping>
         <servlet-name>CommentedUserListAjax</servlet-name>
         <url-pattern>/ajax/CommentedUserListAjax</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>NotificationCotroller</servlet-name>
+        <url-pattern>/NotificationCotroller</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

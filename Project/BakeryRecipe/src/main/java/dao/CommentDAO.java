@@ -6,6 +6,7 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;
@@ -204,7 +205,7 @@ public class CommentDAO {
                 Comment cmt = new Comment(rs.getInt(1), rs.getString(2), rs.getTimestamp(3),
                         rs.getTimestamp(4), rs.getBoolean(5),
                         rs.getInt(6), recipeID);
-                User user = UserDAO.getUserByID( cmt.getUserID());
+                User user = UserDAO.getUserByID(cmt.getUserID());
                 cmt.setAvatar(user.getAvatar());
                 cmt.setChefName(user.getName());
                 list.add(cmt);
@@ -224,5 +225,40 @@ public class CommentDAO {
             }
         }
         return null;
+    }
+    private static final String findbyDate = "SELECT ID\n"
+            + "FROM [dbo].[Comment]\n"
+            + "WHERE [DateComment] =?";
+
+    public static int commentByDate (Timestamp date) throws SQLException {
+        Connection cn = null;
+        PreparedStatement ptm = null;
+        ResultSet rs = null;
+        int cmtID = 0;
+        String thevalue = null;
+        long timead = date.getTime();
+        try {
+            cn = DBUtils.getConnection();
+            ptm = cn.prepareStatement(findbyDate);
+            ptm.setLong(1, date.getTime());
+            rs = ptm.executeQuery();
+            while (rs.next()) {
+//                cmtID   =Integer.parseInt(rs.getString("ID")) ;
+                thevalue = rs.getString("ID");
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+            if (rs != null) {
+                rs.close();
+            }
+            if (ptm != null) {
+                ptm.close();
+            }
+            if (cn != null) {
+                cn.close();
+            }
+        }
+        return cmtID;
     }
 }
