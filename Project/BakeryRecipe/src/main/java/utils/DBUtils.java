@@ -19,7 +19,7 @@ public class DBUtils {
     private final static String PORT = "1433";
     private final static String INSTANCE = "";//LEAVE THIS ONE EMPTY IF YOUR SQL IS A SINGLE INSTANCE
     private final static String USER_ID = "sa";
-    private final static String PASSWORD = "123";
+    private final static String PASSWORD = "12345";
 
     public static Connection getConnection () {
         try {
@@ -58,8 +58,4 @@ public class DBUtils {
 //        } 
 //        return conn;
 //    }
-
-    public static void main (String[] args) {
-        System.out.println(DBUtils.getConnection());
-    }
 }

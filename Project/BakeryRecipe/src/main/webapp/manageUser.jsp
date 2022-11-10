@@ -1,9 +1,5 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
-<!-- PhuHV
-    đây là trang dùng để hiển thị table user, recipe, comment
-    yêu cầu custom lại cho phù hợp
--->
 <!DOCTYPE html>
 <html lang="en">
 
@@ -16,6 +12,7 @@
         <meta name="author" content="">
 
         <title>User Management</title>
+        <c:import url="universal.jsp" />
 
         <!-- Custom fonts for this template -->
         <link href="admin/vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
@@ -27,7 +24,6 @@
         <link href="admin/css/sb-admin-2.min.css" rel="stylesheet">
         <!-- Custom styles for this page -->
         <link href="admin/vendor/datatables/dataTables.bootstrap4.min.css" rel="stylesheet">
-        <link href="assets/css/fontawesome-free-6.1.1-web/css/all.min.css" rel="stylesheet" type="text/css">
 
 
     </head>
@@ -141,59 +137,6 @@
                         <!-- Topbar Navbar -->
                         <ul class="navbar-nav ml-auto">
 
-                            <!-- Nav Item - Alerts -->
-                            <li class="nav-item dropdown no-arrow mx-1">
-                                <a class="nav-link dropdown-toggle" href="#" id="alertsDropdown" role="button"
-                                   data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                    <i class="fas fa-bell fa-fw"></i>
-                                    <!-- Counter - Alerts -->
-                                    <span class="badge badge-danger badge-counter">3+</span>
-                                </a>
-                                <!-- Dropdown - Alerts -->
-                                <div class="dropdown-list dropdown-menu dropdown-menu-right shadow animated--grow-in"
-                                     aria-labelledby="alertsDropdown">
-                                    <h6 class="dropdown-header">
-                                        Alerts Center
-                                    </h6>
-                                    <a class="dropdown-item d-flex align-items-center" href="#">
-                                        <div class="mr-3">
-                                            <div class="icon-circle bg-primary">
-                                                <i class="fas fa-file-alt text-white"></i>
-                                            </div>
-                                        </div>
-                                        <div>
-                                            <div class="small text-gray-500">December 12, 2019</div>
-                                            <span class="font-weight-bold">A new monthly report is ready to download!</span>
-                                        </div>
-                                    </a>
-                                    <a class="dropdown-item d-flex align-items-center" href="#">
-                                        <div class="mr-3">
-                                            <div class="icon-circle bg-success">
-                                                <i class="fas fa-donate text-white"></i>
-                                            </div>
-                                        </div>
-                                        <div>
-                                            <div class="small text-gray-500">December 7, 2019</div>
-                                            $290.29 has been deposited into your account!
-                                        </div>
-                                    </a>
-                                    <a class="dropdown-item d-flex align-items-center" href="#">
-                                        <div class="mr-3">
-                                            <div class="icon-circle bg-warning">
-                                                <i class="fas fa-exclamation-triangle text-white"></i>
-                                            </div>
-                                        </div>
-                                        <div>
-                                            <div class="small text-gray-500">December 2, 2019</div>
-                                            Spending Alert: We've noticed unusually high spending for your account.
-                                        </div>
-                                    </a>
-                                    <a class="dropdown-item text-center small text-gray-500" href="#">Show All Alerts</a>
-                                </div>
-                            </li>
-
-                            <div class="topbar-divider d-none d-sm-block"></div>
-
                             <!-- Nav Item - User Information -->
                             <li class="nav-item dropdown no-arrow">
                                 <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button"
@@ -288,60 +231,58 @@
                                                     <td class="align-middle col-1">${u.role}</td>  
                                                     <td class="align-middle col-1">
                                                         <c:if test="${u.isActive == 'false'}">
-                                                            Inactive
+                                                            <span class="text-danger">Inactive</span>
                                                         </c:if>
                                                         <c:if test="${u.isActive == 'true'}">
-                                                            Active
+                                                            <span class="text-success">Active</span>
                                                         </c:if>
                                                     </td>
                                                     <td class="align-middle col-1">
                                                         <c:if test="${u.id eq sessionScope.login.id}">
                                                             <form action="profile.jsp">
-                                                                <button class="bg-success">My Profile</button>
+                                                                <button class="btn btn-info btn-circle btn-sm" title="My Profile"><i class="fas fa-info-circle"></i></button>
                                                             </form>
                                                         </c:if>
                                                         <c:if test="${u.id ne sessionScope.login.id}">
                                                             <c:if test="${u.role == 'admin'}">
-                                                                <form action="managestatus">
-                                                                    <button class="bg-success">Remove Admin</button>
+                                                                <form action="profile" class="d-inline">
+                                                                    <input type="hidden" name="userid" value="${u.id}">
+                                                                    <button class="btn btn-info btn-circle btn-sm" title="User Profile"><i class="fas fa-info-circle"></i></button>
+                                                                </form>
+                                                                <form action="managestatus" class="d-inline" onsubmit="return confirm('Do you really want to remove this admin?');">
+                                                                    <button class="btn btn-warning btn-circle btn-sm" title="Remove Admin"><i class="fa-solid fa-user-minus"></i></button>
                                                                     <input type="hidden" name="userid" value="${u.id}">
                                                                     <input type="hidden" name="action" value="changerole">
                                                                     <input type="hidden" name="role" value="baker">
                                                                 </form>
-                                                                <form action="user">
-                                                                    <button class="bg-success" style="width: max-content;">
-                                                                        <a href="./profile?userid=${u.id}">User Profile</a>
-                                                                    </button>
-                                                                </form>
                                                             </c:if>
                                                             <c:if test="${u.role == 'baker'}">
+                                                                <form action="profile" class="d-inline">
+                                                                    <input type="hidden" name="userid" value="${u.id}">
+                                                                    <button class="btn btn-info btn-circle btn-sm" title="User Profile"><i class="fas fa-info-circle"></i></button>
+                                                                </form>
                                                                 <c:if test="${u.isActive == 'false'}">
-                                                                    <form action="managestatus">
-                                                                        <button class="bg-success">UNBAN</button>
+                                                                    <form action="managestatus" class="d-inline" onsubmit="return confirm('Do you really want to unban this user?');">
+                                                                        <button class="btn btn-success btn-circle btn-sm" title="Unban"><i class="fa-sharp fa-solid fa-arrow-rotate-right"></i></button>
                                                                         <input type="hidden" name="userid" value="${u.id}">
                                                                         <input type="hidden" name="active" value="true">
                                                                         <input type="hidden" name="action" value="changestatus">
                                                                     </form>
                                                                 </c:if>
                                                                 <c:if test="${u.isActive == 'true'}">
-                                                                    <form action="managestatus">
-                                                                        <button class="bg-success">BAN</button>
+                                                                    <form action="managestatus" class="d-inline" onsubmit="return confirm('Do you really want to ban this user?');">
+                                                                        <button class="btn btn-danger btn-circle btn-sm" title="Ban"><i class="fa-solid fa-ban"></i></button>
                                                                         <input type="hidden" name="userid" value="${u.id}">
                                                                         <input type="hidden" name="active" value="false">
                                                                         <input type="hidden" name="action" value="changestatus">
                                                                     </form>
+                                                                    <form action="managestatus" class="d-inline" onsubmit="return confirm('Do you really want to set role admin for this user?');">
+                                                                        <button class="btn btn-warning btn-circle btn-sm" title="Set Admin"><i class="fa-solid fa-user-plus"></i></button>
+                                                                        <input type="hidden" name="userid" value="${u.id}">
+                                                                        <input type="hidden" name="action" value="changerole">
+                                                                        <input type="hidden" name="role" value="admin">
+                                                                    </form>
                                                                 </c:if>
-                                                                <form action="managestatus">
-                                                                    <button class="bg-success">Set Admin</button>
-                                                                    <input type="hidden" name="userid" value="${u.id}">
-                                                                    <input type="hidden" name="action" value="changerole">
-                                                                    <input type="hidden" name="role" value="admin">
-                                                                </form>
-                                                                <form action="user">
-                                                                    <button class="bg-success" style="width: max-content;">
-                                                                        <a href="./profile?userid=${u.id}">User Profile</a>
-                                                                    </button>
-                                                                </form>
                                                             </c:if>
                                                         </c:if>
                                                     </td>

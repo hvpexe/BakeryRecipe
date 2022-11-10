@@ -7,15 +7,15 @@
 <!DOCTYPE html>
 <html lang="en">
 
-        <head>
+    <head>
 
         <meta charset="utf-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
         <meta name="description" content="">
         <meta name="author" content="">
-
         <title>Comment Management</title>
+        <c:import url="universal.jsp" />
 
         <!-- Custom fonts for this template -->
         <link href="admin/vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
@@ -28,7 +28,6 @@
         <link href="assets/css/elestyle.css" rel="stylesheet"> 
         <!-- Custom styles for this page -->
         <link href="admin/vendor/datatables/dataTables.bootstrap4.min.css" rel="stylesheet">
-        <link href="assets/css/fontawesome-free-6.1.1-web/css/all.min.css" rel="stylesheet" type="text/css">
 
 
     </head>
@@ -142,59 +141,6 @@
                         <!-- Topbar Navbar -->
                         <ul class="navbar-nav ml-auto">
 
-                            <!-- Nav Item - Alerts -->
-                            <li class="nav-item dropdown no-arrow mx-1">
-                                <a class="nav-link dropdown-toggle" href="#" id="alertsDropdown" role="button"
-                                   data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                    <i class="fas fa-bell fa-fw"></i>
-                                    <!-- Counter - Alerts -->
-                                    <span class="badge badge-danger badge-counter">3+</span>
-                                </a>
-                                <!-- Dropdown - Alerts -->
-                                <div class="dropdown-list dropdown-menu dropdown-menu-right shadow animated--grow-in"
-                                     aria-labelledby="alertsDropdown">
-                                    <h6 class="dropdown-header">
-                                        Alerts Center
-                                    </h6>
-                                    <a class="dropdown-item d-flex align-items-center" href="#">
-                                        <div class="mr-3">
-                                            <div class="icon-circle bg-primary">
-                                                <i class="fas fa-file-alt text-white"></i>
-                                            </div>
-                                        </div>
-                                        <div>
-                                            <div class="small text-gray-500">December 12, 2019</div>
-                                            <span class="font-weight-bold">A new monthly report is ready to download!</span>
-                                        </div>
-                                    </a>
-                                    <a class="dropdown-item d-flex align-items-center" href="#">
-                                        <div class="mr-3">
-                                            <div class="icon-circle bg-success">
-                                                <i class="fas fa-donate text-white"></i>
-                                            </div>
-                                        </div>
-                                        <div>
-                                            <div class="small text-gray-500">December 7, 2019</div>
-                                            $290.29 has been deposited into your account!
-                                        </div>
-                                    </a>
-                                    <a class="dropdown-item d-flex align-items-center" href="#">
-                                        <div class="mr-3">
-                                            <div class="icon-circle bg-warning">
-                                                <i class="fas fa-exclamation-triangle text-white"></i>
-                                            </div>
-                                        </div>
-                                        <div>
-                                            <div class="small text-gray-500">December 2, 2019</div>
-                                            Spending Alert: We've noticed unusually high spending for your account.
-                                        </div>
-                                    </a>
-                                    <a class="dropdown-item text-center small text-gray-500" href="#">Show All Alerts</a>
-                                </div>
-                            </li>
-
-                            <div class="topbar-divider d-none d-sm-block"></div>
-
                             <!-- Nav Item - User Information -->
                             <li class="nav-item dropdown no-arrow">
                                 <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button"
@@ -278,37 +224,29 @@
                                                     <td class="align-middle style align-items-center col-2 text-nowrap">${u.getLastDateEdit()}</td> 
                                                     <td class="align-middle style align-items-center col-1">
                                                         <c:if test="${u.userID ne sessionScope.login.id }">
-                                                            <form action="user">
-                                                                <button class="bg-success" style="width: max-content;">
-                                                                    <a href="./profile?userid=${u.userID}">User Profile</a>
-                                                                </button>
-                                                            </form>
-                                                            <form action="recipe">
-                                                                <button class="bg-side-color" style="width: max-content;">
-                                                                    <a href=".\RecipeDetail?recipeID=${u.recipeID}">Recipe Details</a>
-                                                                </button>
-                                                            </form>
-                                                            <form action="managecomment">
-                                                                <button class="bg-white">Delete</button>
-                                                                <input type="hidden" name="commentid" value="${u.commentID}">
-                                                                <input type="hidden" name="action" value="delete">
+                                                            <form action="profile" class="d-inline">
+                                                                <input type="hidden" name="userid" value="${u.userID}">
+                                                                <button class="btn btn-info btn-circle btn-sm" title="User Profile"><i class="fas fa-info-circle"></i></button>
                                                             </form>
                                                         </c:if>
                                                         <c:if test="${u.userID eq sessionScope.login.id }">
-                                                            <form action="profile.jsp">
-                                                                <button class="bg-success">My Profile</button>
-                                                            </form>
-                                                            <form action="recipe">
-                                                                <button class="bg-side-color" style="width: max-content;">
-                                                                    <a href=".\RecipeDetail?recipeID=${u.recipeID}">Recipe Details</a>
-                                                                </button>
-                                                            </form>
-                                                            <form action="managecomment">
-                                                                <button class="bg-white">Delete</button>
-                                                                <input type="hidden" name="commentid" value="${u.commentID}">
-                                                                <input type="hidden" name="action" value="delete">
+                                                            <form action="profile.jsp" class="d-inline">
+                                                                <button class="btn btn-info btn-circle btn-sm" title="My Profile"><i class="fas fa-info-circle"></i></button>
                                                             </form>
                                                         </c:if>
+
+                                                        <form action="RecipeDetail" class="d-inline">
+                                                            <input type="hidden" name="recipeID" value="${u.recipeID}">
+                                                            <button class="btn btn-primary btn-circle btn-sm" title="Recipe Details">
+                                                                <i class="fas fa-info-circle"></i>
+                                                            </button>
+                                                        </form>
+
+                                                        <form action="managecomment" class="d-inline" onsubmit="return confirm('Do you really want to set delete this comment?');">
+                                                            <button class="btn btn-danger btn-circle btn-sm" title="Delete"><i class="fa-solid fa-trash"></i></button>
+                                                            <input type="hidden" name="commentid" value="${u.commentID}">
+                                                            <input type="hidden" name="action" value="delete">
+                                                        </form>
                                                     </td>
                                                 </tr>
                                             </c:forEach>
@@ -384,7 +322,7 @@
 
     </body>
 
-    
+
 
 
 </html>
