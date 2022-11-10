@@ -242,8 +242,8 @@ public class NotifyDAO {
             ptm.setInt(3, receiverID);
             ptm.setString(4, "like");
             ptm.setDate(5, currentDate);
-            ptm.setBoolean(6, true);
-            ptm.setBoolean(7, true);
+            ptm.setBoolean(6, false);
+            ptm.setBoolean(7, false);
             check = ptm.executeUpdate() > 0 ? true : false;
 
         } catch (Exception e) {
@@ -357,10 +357,10 @@ public class NotifyDAO {
         return check;
     }
 //dùng để thông báo số notify bạn chưa coi và khi nhấn vào sẽ seen thì bị trừ đi
-    
-    private static final String COUNT_NOTIFY = "SELECT COUNT([ID]) as 'Count'\n" +
-"FROM [dbo].[Notificaition]\n" +
-"WHERE [ID] =? and  [IsSeen] = false;";
+
+    private static final String COUNT_NOTIFY = "SELECT COUNT([ID]) as 'Count'\n"
+            + "FROM [dbo].[Notificaition]\n"
+            + "WHERE [ID] =? and  [IsSeen] = false;";
 
     public static int countNotify(int userID) throws SQLException {
         int countCheck = 0;
@@ -370,12 +370,12 @@ public class NotifyDAO {
         int result = 0;
 
         try {
-            cn =DBUtils.getConnection();
-            ptm =cn.prepareStatement(COUNT_NOTIFY);
+            cn = DBUtils.getConnection();
+            ptm = cn.prepareStatement(COUNT_NOTIFY);
             ptm.setInt(1, userID);
-            rs =ptm.executeQuery();
-            while(rs.next()){
-            result = rs.getInt("Count");
+            rs = ptm.executeQuery();
+            while (rs.next()) {
+                result = rs.getInt("Count");
             }
 
         } catch (Exception e) {
@@ -395,40 +395,47 @@ public class NotifyDAO {
 
     }
 
+    private static final String GET_ALL = "SELECT	[ID],[SenderID],[RecipeID],[CommentID],[ReceiverID],[TypeofNotify],[DateReceive],[IsSeen],[IsDelete]\n"
+            + "FROM [dbo].[Notificaition]\n"
+            + "WHERE  [ReceiverID]= ? AND [IsSeen] = 'FALSE' AND [IsDelete] ='FALSE'";
 
-private static final String GET_ALL ="SELECT	[ID],[SenderID],[RecipeID],[CommentID],[ReceiverID],[TypeofNotify],[DateReceive],[IsSeen],[IsDelete]\n" +
-"FROM [dbo].[Notificaition]\n" +
-"WHERE  [ReceiverID]= ? AND [IsSeen] = 'FALSE' AND [IsDelete] ='FALSE'";
-
-public static List<Notify> getAllNotify(int receiverID) throws SQLException{
-Connection cn= null;
-PreparedStatement ptm = null;
-ResultSet rs = null;
-List<Notify> notifyList = new ArrayList<>();
-    try {
-        cn = DBUtils.getConnection();
-        ptm = cn.prepareStatement(GET_ALL);
-        ptm.setInt(1, receiverID);
-        rs = ptm.executeQuery();
-        while(rs.next()){
-        int idnotify =  rs.getInt("ID");
-        int senderID = rs.getInt("SenderID");
-        int recipeID = rs.getInt("RecipeID");
-        int commentID= rs.getInt("CommentID");
+    public static List<Notify> getAllNotify(int receiverID) throws SQLException {
+        Connection cn = null;
+        PreparedStatement ptm = null;
+        ResultSet rs = null;
+        List<Notify> notifyList = new ArrayList<>();
+        try {
+            cn = DBUtils.getConnection();
+            ptm = cn.prepareStatement(GET_ALL);
+            ptm.setInt(1, receiverID);
+            rs = ptm.executeQuery();
+            while (rs.next()) {
+                int idnotify = rs.getInt("ID");
+                int senderID = rs.getInt("SenderID");
+                int recipeID = rs.getInt("RecipeID");
+                int commentID = rs.getInt("CommentID");
 //        int receiverID =rs.getInt("ReceiverID");
-        String notifyType = rs.getString("TypeofNotify");
-            Date tmp = rs.getDate("DateReceive");
-            boolean isSeen = rs.getBoolean("IsSeen");
-            boolean isDelete = rs.getBoolean("IsDelete");
-            Notify  noti = new Notify(idnotify, senderID, recipeID, commentID, receiverID, notifyType, tmp, isSeen, isDelete);
-            notifyList.add(noti);
-            
-           
-        }
-    } catch (Exception e) {
-    e.printStackTrace();
-    } finally {
-           if (rs != null) {
+                String notifyType = rs.getString("TypeofNotify");
+                Date tmp = rs.getDate("DateReceive");
+                boolean isSeen = rs.getBoolean("IsSeen");
+                boolean isDelete = rs.getBoolean("IsDelete");
+                String nameofSender = UserDAO.getUserByID(senderID).getName();
+                String pictureofBaker = UserDAO.getUserByID(senderID).getAvatar();
+                if (recipeID != 0) {
+                    String pictureofRecipe = RecipeDAO.getRecipeByID(recipeID).getName();
+                    Notify noti1 = new Notify(idnotify, senderID, recipeID, commentID, receiverID, notifyType, tmp, isSeen, isDelete, nameofSender, pictureofBaker, pictureofRecipe);
+                    notifyList.add(noti1);
+                } else {
+                    Notify noti = new Notify(idnotify, senderID, recipeID, commentID, receiverID, notifyType, tmp, isSeen, isDelete, nameofSender, pictureofBaker, "");
+//Notify noi = new Notify            
+                    notifyList.add(noti);
+                }
+
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+            if (rs != null) {
                 rs.close();
             }
             if (ptm != null) {
@@ -437,8 +444,8 @@ List<Notify> notifyList = new ArrayList<>();
             if (cn != null) {
                 cn.close();
             }
-        
+
+        }
+        return notifyList;
     }
-    return notifyList;
-}
 }

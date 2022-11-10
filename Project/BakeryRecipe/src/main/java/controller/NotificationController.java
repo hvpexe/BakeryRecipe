@@ -4,8 +4,11 @@
  */
 package controller;
 
+import dao.NotifyDAO;
+import dto.Notify;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.List;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -37,6 +40,16 @@ public class NotificationController extends HttpServlet {
         PrintWriter out = response.getWriter();
         String url = SUCCESS;
         try {
+            int receiverID= Integer.parseInt(request.getParameter("receiverID"));
+                        List<Notify> nre = NotifyDAO.notifyLike(receiverID);
+            request.setAttribute("LIST_LIKE", nre);
+            List<Notify> listComment = NotifyDAO.followList(receiverID);
+            request.setAttribute("LIST_COMMENT", listComment);
+           
+            List<Notify> listAllNotify = NotifyDAO.getAllNotify(receiverID);
+                        request.setAttribute("LIST_ALL_NOTIFY", listAllNotify);
+
+            
             /* TODO output your page here. You may use following sample code. */
         } catch (Exception e) {
             e.printStackTrace();

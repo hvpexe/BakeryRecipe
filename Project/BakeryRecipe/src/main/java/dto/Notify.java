@@ -33,6 +33,67 @@ public class Notify {
     private Date DateReceive;
     private boolean isSeen;
     private boolean isDelete;
+    private String  nameofSender;
+    private String  coverfSender;
+    private String nameofRecipe;
+
+    public Notify(int notifyID, int senderID, int recipeID, int CommentID, int receiverID, String typeofNotify, Date DateReceive, boolean isSeen, boolean isDelete, String nameofSender, String coverfSender, String nameofRecipe) {
+        this.notifyID = notifyID;
+        this.senderID = senderID;
+        this.recipeID = recipeID;
+        this.CommentID = CommentID;
+        this.receiverID = receiverID;
+        this.typeofNotify = typeofNotify;
+        this.DateReceive = DateReceive;
+        this.isSeen = isSeen;
+        this.isDelete = isDelete;
+        this.nameofSender = nameofSender;
+        this.coverfSender = coverfSender;
+        this.nameofRecipe = nameofRecipe;
+    }
+
+    @Override
+    public String toString() {
+        return "Notify{" + "notifyID=" + notifyID + ", senderID=" + senderID + ", recipeID=" + recipeID + ", CommentID=" + CommentID + ", receiverID=" + receiverID + ", typeofNotify=" + typeofNotify + ", DateReceive=" + DateReceive + ", isSeen=" + isSeen + ", isDelete=" + isDelete + ", nameofSender=" + nameofSender + ", coverfSender=" + coverfSender + ", nameofRecipe=" + nameofRecipe + '}';
+    }
+
+    public String getNameofRecipe() {
+        return nameofRecipe;
+    }
+
+    public void setNameofRecipe(String nameofRecipe) {
+        this.nameofRecipe = nameofRecipe;
+    }
+
+    public String getNameofSender() {
+        return nameofSender;
+    }
+
+    public void setNameofSender(String nameofSender) {
+        this.nameofSender = nameofSender;
+    }
+
+    public String getCoverfSender() {
+        return coverfSender;
+    }
+
+    public void setCoverfSender(String coverfSender) {
+        this.coverfSender = coverfSender;
+    }
+
+    public Notify(int notifyID, int senderID, int recipeID, int CommentID, int receiverID, String typeofNotify, Date DateReceive, boolean isSeen, boolean isDelete, String nameofSender, String coverfSender) {
+        this.notifyID = notifyID;
+        this.senderID = senderID;
+        this.recipeID = recipeID;
+        this.CommentID = CommentID;
+        this.receiverID = receiverID;
+        this.typeofNotify = typeofNotify;
+        this.DateReceive = DateReceive;
+        this.isSeen = isSeen;
+        this.isDelete = isDelete;
+        this.nameofSender = nameofSender;
+        this.coverfSender = coverfSender;
+    }
 
     public Notify(int notifyID, int senderID, int recipeID, int CommentID, int receiverID, String typeofNotify, Date DateReceive, boolean isSeen, boolean isDelete) {
         this.notifyID = notifyID;

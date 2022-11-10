@@ -21,7 +21,7 @@
             <div class="notify-title col h4 text-capitalize bg-white font-weight-bold border-bottom py-3 ">
                 <span>notification</span>
                 <c:if test="${not SHOW_PAGE}">
-                    <a class=" bg-white m-0 mt-auto text-dark h6" href="notification" >View Page</a>
+                    <a class=" bg-white m-0 mt-auto text-dark h6" href="notification?receiverID=${sessionScope.login.id}" >View Page</a>
                 </c:if>
             </div>
             <div class="col d-flex border-bottom bg-white py-3" style="gap:10px">
@@ -73,7 +73,7 @@
                             </div>
                         </a>
                     </c:if>
-                    <c:if test="${noti eq 'Follow'}">
+                    <c:if test="${noti eq 'follow'}">
                         <a class="notify-item  hover-button-3 c-pointer text-decoration-none" href="#">
                             <div class="col d-flex">
                                 <img class="avatar  p-0 rounded-circle" src="assets/images/avt/15.png" alt="avatar"/>
@@ -82,6 +82,66 @@
                                     <div class="d-flex mt-2" style="gap:8px;">
                                         <i class="d-inline fas fa-comment-dots"></i>
                                         <span>Commented on your Recipe <span class="font-weight-bold">“Recipe Name”</span></span>
+                                    </div>
+                                </div>
+                            </div>
+                        </a>
+                    </c:if>
+                </c:forEach> 
+                <div>Real data</div>
+                <!--//real data--> 
+                     <c:forEach items="${LIST_ALL_NOTIFY}" var="noti">
+                    <c:if test="${noti.typeofNotify eq 'like'}">
+                        <a class="notify-item hover-button-3 seen c-pointer text-decoration-none" href="#">
+                            <div class="col d-flex ">
+                                <img class="avatar  p-0 rounded-circle" src="assets/images/avt/37.jpg" alt="avatar"/>
+                                <div class="notify-content col d-flex flex-column">
+                                    <span class="d-block font-weight-bold hover-underline" onclick="location = '#'">${noti.nameofSender}</span>
+                                    <div class="d-flex mt-2" style="gap:8px;">
+                                        <i class="d-inline fas fa-heart"></i>
+                                        <span class="">Liked your Recipe <span class="font-weight-bold">${noti.nameofRecipe}</span></span>
+                                    </div>
+                                </div>
+                            </div>
+                        </a>
+                    </c:if>
+                    <c:if test="${noti eq 'Comment'}">
+                        <a class="notify-item  hover-button-3 c-pointer text-decoration-none" href="#">
+                            <div class="col d-flex">
+                                <img class="avatar  p-0 rounded-circle" src="assets/images/avt/binhnguyenthanh19242yahoo.png" alt="avatar"/>
+                                <div class="notify-content col d-flex flex-column">
+                                    <span class="d-block font-weight-bold hover-underline" onclick="location = '#'">It's Morbin Time</span>
+                                    <div class="d-flex mt-2" style="gap:8px;">
+                                        <i class="d-inline far fa-eye"></i>
+                                        <span>Great Job! <span class="font-weight-bold">It's Morbin Time</span> is now following you</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </a>
+                    </c:if>
+                    <c:if test="${noti eq 'Saved'}">
+                        <a class="notify-item  hover-button-3 seen c-pointer text-decoration-none" href="#">
+                            <div class="col d-flex">
+                                <img class="avatar  p-0 rounded-circle" src="assets/images/avt/50.jpg" alt="avatar"/>
+                                <div class="notify-content col d-flex flex-column">
+                                    <span class="d-block font-weight-bold hover-underline" onclick="location = '#'">Faker</span>
+                                    <div class="d-flex mt-2" style="gap:8px;">
+                                        <i class="d-inline fas fa-bookmark"></i>
+                                        <span><span class="font-weight-bold">Faker</span> has Saved your Recipe </span>
+                                    </div>
+                                </div>
+                            </div>
+                        </a>
+                    </c:if>
+                    <c:if test="${noti.typeofNotify eq 'follow'}">
+                        <a class="notify-item  hover-button-3 c-pointer text-decoration-none" href="#">
+                            <div class="col d-flex">
+                                <img class="avatar  p-0 rounded-circle" src="assets/images/avt/15.png" alt="avatar"/>
+                                <div class="notify-content col d-flex flex-column">
+                                    <span class="d-block font-weight-bold hover-underline" onclick="location = '#'">${noti.nameofSender}</span>
+                                    <div class="d-flex mt-2" style="gap:8px;">
+                                        <i class="d-inline fas fa-comment-dots"></i>
+                                        <span>Commented on your Recipe <span class="font-weight-bold">${noti.nameofRecipe}</span></span>
                                     </div>
                                 </div>
                             </div>

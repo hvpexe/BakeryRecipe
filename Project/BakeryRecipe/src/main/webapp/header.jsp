@@ -72,5 +72,7 @@
         </div>
     </div>
 </header>
-
+            <script>
+                var loginId = ${sessionScope.login.id};
+            </script>
 <script src="assets/js/header.js"></script>

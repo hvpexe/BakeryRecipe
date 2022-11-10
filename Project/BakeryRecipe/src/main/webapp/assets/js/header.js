@@ -27,7 +27,7 @@ var notify = $('.header-notification')
 //$('.header-user').mouseout(() => {
 //    test(event);
 //})
-
+console.log(loginId);
 console.log(window.location.href);
 if (window.location.href.indexOf('/community') !== -1) {
     document.getElementById("community").className += ' active';
@@ -41,10 +41,11 @@ if (window.location.href.indexOf('/savedrecipe') !== -1) {
 $(".notify").animate({
     height: "toggle"
 }, 0);
+
 $.ajax({
     url: "./notification",
     type: "POST"
-    ,
+    ,data: {receiverID: loginId},
     success: function (data) {
         $(".notify").html(data);
     }
