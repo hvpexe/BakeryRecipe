@@ -6,6 +6,7 @@ package controller.ajax;
 
 import controller.recipe.MostRatedRecipeController;
 import dao.LikeDAO;
+import dao.NotifyDAO;
 import dto.User;
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -40,7 +41,10 @@ public class LikedUserListAjax extends HttpServlet {
         response.setContentType("text/html;charset=UTF-8");
         int recipeID = Integer.parseInt(request.getParameter("recipeid"));
         List<User> userList = LikeDAO.getLikedUserFromRecipe(recipeID);
+     
         request.setAttribute("USER_LIST", userList);
+        
+        
         request.getRequestDispatcher(SUCCESS).forward(request, response);
     }
 

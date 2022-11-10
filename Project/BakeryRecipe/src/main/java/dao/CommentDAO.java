@@ -5,6 +5,7 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;
@@ -25,14 +26,14 @@ public class CommentDAO {
             + "  WHERE c.UserID = ? and c.IsDeleted= 0\n"
             + "  Order By c.DateComment DESC";
 
-    public static List<Integer[]> getCommentList (int userid) throws SQLException {
+    public static List<Integer[]> getCommentList(int userid) throws SQLException {
         String sql = SELECT_PROFILE_COMMENT_LIST;
         List<Integer[]> list = new LinkedList<>();
         PreparedStatement ps = null;
         ResultSet rs = null;
         Connection conn = null;
         try {
-        conn = DBUtils.getConnection();
+            conn = DBUtils.getConnection();
             ps = conn.prepareStatement(sql);
             ps.setInt(1, userid);
             rs = ps.executeQuery();
@@ -68,12 +69,12 @@ public class CommentDAO {
             + "  FROM [Comment]"
             + "  WHERE ID = ?";
 
-    public static Comment getCommentByID (int id) throws SQLException {
+    public static Comment getCommentByID(int id) throws SQLException {
         String sql = SELECT_COMMENT_BY_ID;
         Comment comment = null;
         PreparedStatement ps = null;
         ResultSet rs = null;
-           Connection conn = null;    
+        Connection conn = null;
         try {
             conn = DBUtils.getConnection();
             ps = conn.prepareStatement(sql);
@@ -112,7 +113,7 @@ public class CommentDAO {
             + "JOIN [User] ON [Comment].UserID = [User].ID\n"
             + "WHERE [Comment].IsDeleted = 0;";
 
-    public static List<Comment> manageCommentList () throws SQLException {
+    public static List<Comment> manageCommentList() throws SQLException {
         Connection conn = null;
         PreparedStatement ps = null;
         ResultSet rs = null;
@@ -156,7 +157,7 @@ public class CommentDAO {
             + "            SET IsDeleted = 1\n"
             + "            WHERE Comment.[ID] = ?";
 
-    public static boolean deleteComment (int id) throws SQLException {
+    public static boolean deleteComment(int id) throws SQLException {
         Connection conn = null;
         PreparedStatement ps = null;
         try {
@@ -177,5 +178,41 @@ public class CommentDAO {
             }
         }
         return false;
+    }
+
+    private static final String findbyDate = "SELECT ID\n"
+            + "FROM [dbo].[Comment]\n"
+            + "WHERE [DateComment] =?";
+
+    public static int commentByDate(Timestamp date) throws SQLException {
+        Connection cn = null;
+        PreparedStatement   ptm = null;
+       ResultSet  rs = null;
+       int cmtID =0;
+       String thevalue = null;
+       long timead = date.getTime();
+       try {
+            cn =DBUtils.getConnection();
+            ptm = cn.prepareStatement(findbyDate);
+            ptm.setLong(1, date.getTime());
+            rs = ptm.executeQuery();
+            while (rs.next()) {                
+//                cmtID   =Integer.parseInt(rs.getString("ID")) ;
+                  thevalue =rs.getString("ID");
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+           if (rs != null) {
+                rs.close();
+            }
+            if (ptm != null) {
+                ptm.close();
+            }
+            if (cn != null) {
+                cn.close();
+            }
+        }
+return  cmtID;
     }
 }

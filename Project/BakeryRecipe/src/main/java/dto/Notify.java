@@ -4,89 +4,135 @@
  */
 package dto;
 
+import java.sql.Date;
+ 
+
 /**
  *
  * @author Admin
  */
 public class Notify {
 
-    private int id;//notify id
-    private int notifictionID;
-    private int userID;
-    private int destinationID;
-    private String typeOfNotification;
-    private boolean seen;
-    private boolean deleted;
+   
+    private int notifyID;
+    private int senderID ;
+    private int recipeID;
+    private int CommentID;
 
-    public Notify () {
+    public Notify(int notifyID, int senderID, int receiverID, String typeofNotify, Date DateReceive, boolean isSeen, boolean isDelete) {
+        this.notifyID = notifyID;
+        this.senderID = senderID;
+        this.receiverID = receiverID;
+        this.typeofNotify = typeofNotify;
+        this.DateReceive = DateReceive;
+        this.isSeen = isSeen;
+        this.isDelete = isDelete;
+    }
+    private int receiverID;
+    private String typeofNotify;
+    private Date DateReceive;
+    private boolean isSeen;
+    private boolean isDelete;
+
+    public Notify(int notifyID, int senderID, int recipeID, int CommentID, int receiverID, String typeofNotify, Date DateReceive, boolean isSeen, boolean isDelete) {
+        this.notifyID = notifyID;
+        this.senderID = senderID;
+        this.recipeID = recipeID;
+        this.CommentID = CommentID;
+        this.receiverID = receiverID;
+        this.typeofNotify = typeofNotify;
+        this.DateReceive = DateReceive;
+        this.isSeen = isSeen;
+        this.isDelete = isDelete;
     }
 
-    public Notify (int id, int notifictionID, int userID, int destinationID, String typeOfNotification, boolean seen, boolean deleted) {
-        this.id = id;
-        this.notifictionID = notifictionID;
-        this.userID = userID;
-        this.destinationID = destinationID;
-        this.typeOfNotification = typeOfNotification;
-        this.seen = seen;
-        this.deleted = deleted;
+    public Notify(int notifyID, int senderID, int recipeID, int receiverID, String typeofNotify, Date DateReceive, boolean isSeen, boolean isDelete) {
+        this.notifyID = notifyID;
+        this.senderID = senderID;
+        this.recipeID = recipeID;
+        this.receiverID = receiverID;
+        this.typeofNotify = typeofNotify;
+        this.DateReceive = DateReceive;
+        this.isSeen = isSeen;
+        this.isDelete = isDelete;
     }
 
-    public int getId () {
-        return id;
+    public Notify() {
     }
 
-    public void setId (int id) {
-        this.id = id;
+    public int getNotifyID() {
+        return notifyID;
     }
 
-    public int getNotifictionID () {
-        return notifictionID;
+    public void setNotifyID(int notifyID) {
+        this.notifyID = notifyID;
     }
 
-    public void setNotifictionID (int notifictionID) {
-        this.notifictionID = notifictionID;
+    public int getSenderID() {
+        return senderID;
     }
 
-    public int getUserID () {
-        return userID;
+    public void setSenderID(int senderID) {
+        this.senderID = senderID;
     }
 
-    public void setUserID (int userID) {
-        this.userID = userID;
+    public int getRecipeID() {
+        return recipeID;
     }
 
-    public int getDestinationID () {
-        return destinationID;
+    public void setRecipeID(int recipeID) {
+        this.recipeID = recipeID;
     }
 
-    public void setDestinationID (int destinationID) {
-        this.destinationID = destinationID;
+    public int getCommentID() {
+        return CommentID;
     }
 
-    public String getTypeOfNotification () {
-        return typeOfNotification;
+    public void setCommentID(int CommentID) {
+        this.CommentID = CommentID;
     }
 
-    public void setTypeOfNotification (String typeOfNotification) {
-        this.typeOfNotification = typeOfNotification;
+    public int getReceiverID() {
+        return receiverID;
     }
 
-    public boolean isSeen () {
-        return seen;
+    public void setReceiverID(int receiverID) {
+        this.receiverID = receiverID;
     }
 
-    public void setSeen (boolean seen) {
-        this.seen = seen;
+    public String getTypeofNotify() {
+        return typeofNotify;
     }
 
-    
-    public boolean isDeleted () {
-        return deleted;
+    public void setTypeofNotify(String typeofNotify) {
+        this.typeofNotify = typeofNotify;
     }
 
-    public void setDeleted (boolean deleted) {
-        this.deleted = deleted;
+    public Date getDateReceive() {
+        return DateReceive;
     }
+
+    public void setDateReceive(Date DateReceive) {
+        this.DateReceive = DateReceive;
+    }
+
+    public boolean isIsSeen() {
+        return isSeen;
+    }
+
+    public void setIsSeen(boolean isSeen) {
+        this.isSeen = isSeen;
+    }
+
+    public boolean isIsDelete() {
+        return isDelete;
+    }
+
+    public void setIsDelete(boolean isDelete) {
+        this.isDelete = isDelete;
+    }
+
+   
     
     
 

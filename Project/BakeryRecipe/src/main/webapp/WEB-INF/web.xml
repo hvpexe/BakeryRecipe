@@ -132,6 +132,10 @@
         <servlet-name>ReportUserAjax</servlet-name>
         <servlet-class>controller.ajax.ReportUserAjax</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>NotificationCotroller</servlet-name>
+        <servlet-class>controller.baker.NotificationCotroller</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>DebugController</servlet-name>
         <url-pattern>/debug</url-pattern>
@@ -227,6 +231,10 @@
     <servlet-mapping>
         <servlet-name>ReportUserAjax</servlet-name>
         <url-pattern>/ReportUserAjax</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>NotificationCotroller</servlet-name>
+        <url-pattern>/NotificationCotroller</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

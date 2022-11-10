@@ -4,6 +4,7 @@
  */
 package controller.ajax;
 
+import dao.NotifyDAO;
 import dao.UserDAO;
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -41,7 +42,9 @@ public class LikeRecipeAjax extends HttpServlet {
             UserDAO lr = new UserDAO();
             int userID = Integer.parseInt(request.getParameter("user"));
             int recipeID = Integer.parseInt(request.getParameter("recipe"));
+              NotifyDAO.notifyLIKE(recipeID, userID);
             boolean check = lr.LikeRecipe(recipeID, userID);
+         
             if (!check) {
                 lr.Unlike(recipeID, userID);
             }
