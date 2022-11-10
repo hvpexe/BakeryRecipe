@@ -286,7 +286,7 @@ public class CommentDAO {
             ptm.setInt(6, RecipeID);
             check = ptm.executeUpdate() > 0 ? true : false;
             if (check) {
-                return GetNewestCommentID();
+                return GetNewestCommentID(UserID);
             }
         } catch (Exception e) {
             e.printStackTrace();
@@ -340,7 +340,7 @@ public class CommentDAO {
         return cmtList;
     }
     
-    private static Integer GetNewestCommentID () throws SQLException {
+    public static Integer GetNewestCommentID (int userID) throws SQLException {
         String sql = "select max(ID) as ID from Comment";
         PreparedStatement ps = null;
         ResultSet rs = null;

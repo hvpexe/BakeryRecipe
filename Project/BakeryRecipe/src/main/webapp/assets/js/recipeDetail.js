@@ -138,7 +138,7 @@ function Comment(item, event) {
                 //Do Something
                 console.log(response);
                 var cmtShow = document.getElementById("show-comment");
-                cmtShow.innerHTML += response;
+                $(cmtShow).prepend(response);
                 item.value = "";
             },
             error: function (xhr) {

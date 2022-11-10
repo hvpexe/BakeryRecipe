@@ -134,7 +134,8 @@ public class NotifyDAO {
     }
 
     //việc like hay comment hoặc save nó sẽ đơn giản hơn với cmt
-    private static final String NOTIFY_FOLLOW = "INSERT INTO [dbo].[Notificaition]([SenderID],[ReceiverID],[TypeofNotify],"
+    private static final String NOTIFY_FOLLOW = 
+            "INSERT INTO [dbo].[Notificaition]([SenderID],[ReceiverID],[TypeofNotify],"
             + "[DateReceive],[IsSeen],[IsDelete])\n"
             + "VALUES (?,?,?,?,?,?)";
 

@@ -826,6 +826,7 @@ public class RecipeDAO {
                         rs.getTimestamp("LastDateEdit"),
                         rs.getInt("PrepTime"), rs.getInt("CookTime"));
                 recipe.setCover(rs.getString("Cover"));
+                recipe.setUserID(rs.getInt("UserID"));
                 return recipe;
             }
         } catch (SQLException ex) {

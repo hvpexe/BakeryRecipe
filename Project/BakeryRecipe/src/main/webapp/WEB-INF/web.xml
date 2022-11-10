@@ -97,10 +97,6 @@
         <servlet-class>controller.ajax.CommnetRecipeAjax</servlet-class>
     </servlet>
     <servlet>
-        <servlet-name>CommentController</servlet-name>
-        <servlet-class>controller.recipe.CommentController</servlet-class>
-    </servlet>
-    <servlet>
         <servlet-name>SearchByIngredientController</servlet-name>
         <servlet-class>controller.recipe.SearchByIngredientController</servlet-class>
     </servlet>
@@ -136,7 +132,7 @@
         <servlet-name>CommentedUserListAjax</servlet-name>
         <servlet-class>controller.ajax.CommentedUserListAjax</servlet-class>
     </servlet>
-    <servlet>    
+    <servlet>
         <servlet-name>NotificationCotroller</servlet-name>
         <servlet-class>controller.baker.NotificationCotroller</servlet-class>
     </servlet>
@@ -199,10 +195,6 @@
     <servlet-mapping>
         <servlet-name>CommnetRecipeAjax</servlet-name>
         <url-pattern>/ajax/CommnetRecipeAjax</url-pattern>
-    </servlet-mapping>
-    <servlet-mapping>
-        <servlet-name>CommentController</servlet-name>
-        <url-pattern>/CommentController</url-pattern>
     </servlet-mapping>
     <servlet-mapping>
         <servlet-name>SearchByIngredientController</servlet-name>
