@@ -4,6 +4,7 @@
  */
 package controller.recipe;
 
+import dao.CommentDAO;
 import dao.IngredientDAO;
 import dao.RecipeDAO;
 import dao.UserDAO;
@@ -75,7 +76,7 @@ public class RecipeDetailController extends HttpServlet {
             request.setAttribute("RELATED_TOPIC", relateRecipe);
 
 //            recipe.commentList(recipeID);
-            List<Comment> cmt = recipe.commentList(recipeID);
+            List<Comment> cmt = CommentDAO.commentList(recipeID);
             request.setAttribute("COMMENT_LIST", cmt);
 
 //          check save

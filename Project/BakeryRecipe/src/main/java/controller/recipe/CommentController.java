@@ -4,6 +4,7 @@
  */
 package controller.recipe;
 
+import dao.CommentDAO;
 import dao.RecipeDAO;
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -31,7 +32,7 @@ public class CommentController extends HttpServlet {
             String comment = request.getParameter("txtCmt");
             int recipeID = Integer.parseInt(request.getParameter("recipeID"));
             RecipeDAO recipeD = new RecipeDAO();
-            if (recipeD.commentRecipe(comment, bakerID, recipeID)) {
+            if (CommentDAO.commentRecipe(comment, bakerID, recipeID)) {
                 url = SUCCESS;
             }
         } catch (Exception e) {

@@ -49,27 +49,24 @@ public class NotifyDAO {
             + "VALUES (?,?,?,?,?,?,?,?)";
 //ý tưởng để lấy đc id của cmt sau khi mới cmt là ta canh vào thời gian mới nhập của cmt tạo hàm take CommentIDbyTime(String time);
 
-    public static boolean AddNotifyComment(int senderID, int recipeID, int cmtID) throws SQLException {
-        Connection cn = null;
+    public static boolean AddNotifyComment(int senderID, int recipeID, int cmtID, int userID) throws SQLException {
+        Connection conn = null;
         PreparedStatement ptm = null;
         ResultSet rs = null;
         boolean check = true;
-        Comment cmt = new Comment();
-        int senderId = UserDAO.userDetail(recipeID).getId();
-        Date currentDate = new Date(System.currentTimeMillis());
-        SimpleDateFormat dateFormat = new SimpleDateFormat("YYYY-MM-dd HH:mm:ss");
-        String date = dateFormat.format(currentDate);
+        int senderId = userID;
+        Timestamp currentDate = new Timestamp(System.currentTimeMillis());
         int receiverId = UserDAO.userDetail(recipeID).getId();
 
         try {
-            cn = DBUtils.getConnection();
-            ptm = cn.prepareStatement(NOTIFY_COMMENT);
+            conn = DBUtils.getConnection();
+            ptm = conn.prepareStatement(NOTIFY_COMMENT);
             ptm.setInt(1, senderId);
             ptm.setInt(2, recipeID);
             ptm.setInt(3, cmtID);
             ptm.setInt(4, receiverId);
             ptm.setString(5, "comment");
-            ptm.setDate(6, currentDate);
+            ptm.setTimestamp(6, currentDate);
             ptm.setBoolean(7, false);
             ptm.setBoolean(8, false);
             check = ptm.executeUpdate() > 0 ? true : false;
@@ -82,8 +79,8 @@ public class NotifyDAO {
             if (ptm != null) {
                 ptm.close();
             }
-            if (cn != null) {
-                cn.close();
+            if (conn != null) {
+                conn.close();
             }
 
         }
