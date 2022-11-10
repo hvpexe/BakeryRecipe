@@ -24,3 +24,22 @@ function getLikedList(recipeID) {
             }
     );
 }           
+function getCommentList(recipeID) {
+    var likedList = $('#liked-list');
+    var graybox = $('#liked-list .gray-box');
+    var content = $('#liked-list .content');
+    graybox.click(()=>likedList.removeClass('d-flex'));
+    $.ajax(
+            {
+                url: 'ajax/CommentedUserListAjax',
+                data: {
+                    recipeid: recipeID
+                },
+                success: function (data) {
+                    likedList.addClass('d-flex');
+                    content.html(data);
+                    $('#liked-list .exit-btn').click(()=>likedList.removeClass('d-flex'));
+                }
+            }
+    );
+}       

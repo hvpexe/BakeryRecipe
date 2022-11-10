@@ -1021,7 +1021,6 @@ public class RecipeDAO {
         cnn = DBUtils.getConnection();
         int checkNum = 0;
         List<Recipe> listF = new ArrayList<>();
-//        nameBaker = RecipeDAO.
         try {
             if (!ingre.isEmpty()) {
                 for (int i = 1; i < ingre.size(); i++) {
@@ -1036,7 +1035,6 @@ public class RecipeDAO {
                 rs = ptm.executeQuery();
                 while (rs.next()) {
                     relateListRecipe.put(checkNum, rs.getString("Name"));
-                    String nameRecipe = rs.getString("Name");
                     Recipe recipeD = RecipeDAO.searchRecipebyName(relateListRecipe.get(checkNum));
                     listRecipe.add(recipeD);
                 }

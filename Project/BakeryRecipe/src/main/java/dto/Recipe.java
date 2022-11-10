@@ -19,6 +19,7 @@ import utils.Tools;
 public class Recipe {
 
     public static final String COVER_PATH = Picture.IMG_PATH;
+    public static final String DEFAULT_COVER_IMG = Picture.IMG_PATH+"Default.png";
 
     private int id;
     private String name;
@@ -239,6 +240,7 @@ public class Recipe {
     }
 
     public String getCover () {
+        if (cover== null ) return DEFAULT_COVER_IMG;
         return COVER_PATH + cover;
     }
 

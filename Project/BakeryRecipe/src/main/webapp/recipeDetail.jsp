@@ -196,12 +196,14 @@
                                 <div class="head">
                                     INSTRUCTIONS
                                 </div>
-                                <div class="body">
+                                <div class="body" >
                                     <c:forEach items="${requestScope.LIST_STEP}" var="ep">
-                                        <div class="instruction">
+                                        <div class="instruction border-bottom" >
                                             <div class="step h33">Step ${ep.getInsstep()}: </div>
                                             <c:if test="${not empty ep.img}">
-                                                <img class="col-6 p-0 my-2 hover-button-3" src="${ep.img}" alt="${ep.img}" />
+                                                <div class="  col-auto p-0 noselect">
+                                                    <img class="col-6 p-0 hover-button-4" src="${ep.img}" alt="${ep.img}" />
+                                                </div>
                                             </c:if>
                                             <p>
                                                 ${ep.getDetail()}
@@ -281,7 +283,7 @@
                             </div>
                         </div>
                         <!--<div class="col-md-4">-->
-                            <!-- Phần này để nội dung gợi ý shop - làm sau -->
+                        <!-- Phần này để nội dung gợi ý shop - làm sau -->
                         <!--</div>-->
                     </div>
 
@@ -295,7 +297,7 @@
                                 <div class="recipe col-6 col-md-3">
                                     <div class="img-container">
                                         <a  href="RecipeDetail?recipeID=${to.id}"><img class="recipe-img" alt=""
-                                             src="${to.cover}" /></a>
+                                                                                       src="${to.cover}" /></a>
                                         <div class="react">
                                             <div>${to.like} likes</div>
                                             <div>${to.comment} comments</div>

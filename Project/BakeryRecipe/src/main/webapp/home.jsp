@@ -11,7 +11,7 @@
         <link rel="stylesheet" href="assets/css/home.css" />
         <script src="assets/js/Jquery/jquery-core.js"></script>
     </head>
-    <body class="noselect">
+    <body class="">
         <c:import url="header.jsp"/>
         <div class="home-container ">
             <div class="post-section">
@@ -52,7 +52,7 @@
                             </c:if>
                             <c:if test="${re.comment>0}">
                                 <a href="javascript:void(0)" class="d-inline-block text-muted mr-3">
-                                    <span class="align-middle">
+                                    <span class="align-middle" onclick="getCommentList('${re.id}')">
                                         <strong>${re.comment}</strong> Comments</span>
                                 </a>
                             </c:if>

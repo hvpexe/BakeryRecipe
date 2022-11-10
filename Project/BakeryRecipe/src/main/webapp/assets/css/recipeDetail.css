@@ -156,7 +156,6 @@ body {
 .instruction img{
     object-fit: cover;
     object-position: top;
-    box-shadow: 0 0 4px #00000025;
     border-radius: 15px;
     transition: 2s;
     cursor: zoom-in;

@@ -1,6 +1,7 @@
 package dao;
 
 import dto.Comment;
+import dto.User;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -26,7 +27,7 @@ public class CommentDAO {
             + "  WHERE c.UserID = ? and c.IsDeleted= 0\n"
             + "  Order By c.DateComment DESC";
 
-    public static List<Integer[]> getCommentList(int userid) throws SQLException {
+    public static List<Integer[]> getCommentList (int userid) throws SQLException {
         String sql = SELECT_PROFILE_COMMENT_LIST;
         List<Integer[]> list = new LinkedList<>();
         PreparedStatement ps = null;
@@ -69,7 +70,7 @@ public class CommentDAO {
             + "  FROM [Comment]"
             + "  WHERE ID = ?";
 
-    public static Comment getCommentByID(int id) throws SQLException {
+    public static Comment getCommentByID (int id) throws SQLException {
         String sql = SELECT_COMMENT_BY_ID;
         Comment comment = null;
         PreparedStatement ps = null;
@@ -113,7 +114,7 @@ public class CommentDAO {
             + "JOIN [User] ON [Comment].UserID = [User].ID\n"
             + "WHERE [Comment].IsDeleted = 0;";
 
-    public static List<Comment> manageCommentList() throws SQLException {
+    public static List<Comment> manageCommentList () throws SQLException {
         Connection conn = null;
         PreparedStatement ps = null;
         ResultSet rs = null;
@@ -157,7 +158,7 @@ public class CommentDAO {
             + "            SET IsDeleted = 1\n"
             + "            WHERE Comment.[ID] = ?";
 
-    public static boolean deleteComment(int id) throws SQLException {
+    public static boolean deleteComment (int id) throws SQLException {
         Connection conn = null;
         PreparedStatement ps = null;
         try {
@@ -179,31 +180,76 @@ public class CommentDAO {
         }
         return false;
     }
+    private static final String SELECT_LIST = "SELECT [ID]\n"
+            + "      ,[Comment]\n"
+            + "      ,[DateComment]\n"
+            + "      ,[LastDateEdit]\n"
+            + "      ,[IsDeleted]\n"
+            + "      ,[UserID]\n"
+            + "      ,[RecipeID]\n"
+            + "  FROM [Comment]";
 
+    public static List<Comment> getCommentedUserFromRecipe (int recipeID) throws SQLException {
+        Connection conn = null;
+        PreparedStatement ps = null;
+        ResultSet rs = null;
+        List<Comment> list = new LinkedList<>();
+
+        try {
+            String sql = SELECT_LIST + "WHERE RecipeID = ? AND IsDeleted=0";
+            conn = DBUtils.getConnection();
+            ps = conn.prepareStatement(sql);
+            ps.setInt(1, recipeID);
+            rs = ps.executeQuery();
+            while (rs.next()) {
+                Comment cmt = new Comment(rs.getInt(1), rs.getString(2), rs.getTimestamp(3),
+                        rs.getTimestamp(4), rs.getBoolean(5),
+                        rs.getInt(6), recipeID);
+                User user = UserDAO.getUserByID(cmt.getUserID());
+                cmt.setAvatar(user.getAvatar());
+                cmt.setChefName(user.getName());
+                list.add(cmt);
+            }
+            return list;
+        } catch (Exception ex) {
+            System.out.println("Query Delete Comment For User error!" + ex.getMessage());
+        } finally {
+            if (rs != null) {
+                rs.close();
+            }
+            if (ps != null) {
+                ps.close();
+            }
+            if (conn != null) {
+                conn.close();
+            }
+        }
+        return null;
+    }
     private static final String findbyDate = "SELECT ID\n"
             + "FROM [dbo].[Comment]\n"
             + "WHERE [DateComment] =?";
 
-    public static int commentByDate(Timestamp date) throws SQLException {
+    public static int commentByDate (Timestamp date) throws SQLException {
         Connection cn = null;
-        PreparedStatement   ptm = null;
-       ResultSet  rs = null;
-       int cmtID =0;
-       String thevalue = null;
-       long timead = date.getTime();
-       try {
-            cn =DBUtils.getConnection();
+        PreparedStatement ptm = null;
+        ResultSet rs = null;
+        int cmtID = 0;
+        String thevalue = null;
+        long timead = date.getTime();
+        try {
+            cn = DBUtils.getConnection();
             ptm = cn.prepareStatement(findbyDate);
             ptm.setLong(1, date.getTime());
             rs = ptm.executeQuery();
-            while (rs.next()) {                
+            while (rs.next()) {
 //                cmtID   =Integer.parseInt(rs.getString("ID")) ;
-                  thevalue =rs.getString("ID");
+                thevalue = rs.getString("ID");
             }
         } catch (Exception e) {
             e.printStackTrace();
         } finally {
-           if (rs != null) {
+            if (rs != null) {
                 rs.close();
             }
             if (ptm != null) {
@@ -213,6 +259,6 @@ public class CommentDAO {
                 cn.close();
             }
         }
-return  cmtID;
+        return cmtID;
     }
 }
