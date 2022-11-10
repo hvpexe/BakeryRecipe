@@ -1,6 +1,7 @@
 package dao;
 
 import dto.Comment;
+import dto.User;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -32,7 +33,7 @@ public class CommentDAO {
         ResultSet rs = null;
         Connection conn = null;
         try {
-        conn = DBUtils.getConnection();
+            conn = DBUtils.getConnection();
             ps = conn.prepareStatement(sql);
             ps.setInt(1, userid);
             rs = ps.executeQuery();
@@ -73,7 +74,7 @@ public class CommentDAO {
         Comment comment = null;
         PreparedStatement ps = null;
         ResultSet rs = null;
-           Connection conn = null;    
+        Connection conn = null;
         try {
             conn = DBUtils.getConnection();
             ps = conn.prepareStatement(sql);
@@ -177,5 +178,51 @@ public class CommentDAO {
             }
         }
         return false;
+    }
+    private static final String SELECT_LIST = "SELECT [ID]\n"
+            + "      ,[Comment]\n"
+            + "      ,[DateComment]\n"
+            + "      ,[LastDateEdit]\n"
+            + "      ,[IsDeleted]\n"
+            + "      ,[UserID]\n"
+            + "      ,[RecipeID]\n"
+            + "  FROM [Comment]";
+
+    public static List<Comment> getCommentedUserFromRecipe (int recipeID) throws SQLException {
+        Connection conn = null;
+        PreparedStatement ps = null;
+        ResultSet rs = null;
+        List<Comment> list = new LinkedList<>();
+
+        try {
+            String sql = SELECT_LIST + "WHERE RecipeID = ? AND IsDeleted=0";
+            conn = DBUtils.getConnection();
+            ps = conn.prepareStatement(sql);
+            ps.setInt(1, recipeID);
+            rs = ps.executeQuery();
+            while (rs.next()) {
+                Comment cmt = new Comment(rs.getInt(1), rs.getString(2), rs.getTimestamp(3),
+                        rs.getTimestamp(4), rs.getBoolean(5),
+                        rs.getInt(6), recipeID);
+                User user = UserDAO.getUserByID( cmt.getUserID());
+                cmt.setAvatar(user.getAvatar());
+                cmt.setChefName(user.getName());
+                list.add(cmt);
+            }
+            return list;
+        } catch (Exception ex) {
+            System.out.println("Query Delete Comment For User error!" + ex.getMessage());
+        } finally {
+            if (rs != null) {
+                rs.close();
+            }
+            if (ps != null) {
+                ps.close();
+            }
+            if (conn != null) {
+                conn.close();
+            }
+        }
+        return null;
     }
 }

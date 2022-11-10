@@ -265,8 +265,8 @@ public class Tools {
         filename += file.substring(file.indexOf('.'), file.length());//get the '.' part
         return filename;
     }
-/** Get File Type
-     * get the file type
+    /** Get File Type
+     * get the file type from Part
      * @param filename
      * @param partFile 
      * @return the filename with the file type
@@ -285,7 +285,15 @@ public class Tools {
         return filename;
 
     }
-
+    /** Rename file
+     * Rename the file at a file path
+     * @param oldname the old file name
+     * @param newname the new file name
+     * @param sc servlet context
+     * @param filePath file path
+     * @return <code>newname</code>
+     * @throws IOException 
+     */
     public static String renameFile (String oldname, String newname, ServletContext sc, String filePath) throws IOException {
         // File (or directory) with old name
         if (oldname == null)

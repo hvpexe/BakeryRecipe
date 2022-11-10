@@ -41,7 +41,7 @@ body {
 }
 
 .avatar-icon {
-      box-sizing: border-box;
+    box-sizing: border-box;
     padding: 0 !important;
     width: 50px;
     height: 50px;
@@ -236,6 +236,11 @@ body {
 }
 #liked-list .content {
     background: #ffffff;
+
+}
+#liked-list .content > div:nth-child(3){
+    max-height: 90%;
+    overflow-y: scroll;
 }
 #liked-list .image{
     width: 3em;
@@ -246,6 +251,17 @@ body {
     border-style: dotted;
     border-color: var(--hard-yellow-theme);
 }
+#liked-list .comment .the-comment{
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+    cursor: crosshair;
+}
+#liked-list .comment .the-comment.no-clamp{
+    -webkit-line-clamp: unset;
+}
+
 #liked-list .content .item{
     box-shadow: 0 4px 4px 0px #00000025;
     background: #DDDDDD40;

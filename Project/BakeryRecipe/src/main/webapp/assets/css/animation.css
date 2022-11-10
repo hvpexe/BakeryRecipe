@@ -90,11 +90,11 @@
 :has(.invalid) .status{
     color:var(--main-theme-color);
 }
-[class^=hover] {
+[class*=hover] {
     transition:0.3s;
     cursor: pointer;
 }
-[class^=hover] > *{
+[class*=hover] > *{
     z-index: 1;
 }
 [class~=-btn],[class~=-button] {
@@ -129,10 +129,21 @@
 }
 .hover-button-3:hover::before{
     background: #00000010;
-    
+
 }
 .hover-button-3:active::before{
     background: #00000020;
+
+}
+.hover-button-4{
+     outline: 2px ridge #00000025;
+}
+.hover-button-4:hover{
+    outline-color:#00000025;
+    outline-width: 3px;
+}
+.hover-button-4:active{
+    outline-color:#00000030;
 
 }
 .hover-underline:hover{
