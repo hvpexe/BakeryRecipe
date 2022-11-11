@@ -35,9 +35,11 @@
                                         <img src="./assets/images/recipe/picture/${cc}" alt="">
                                     </div>
                                 </c:forEach>
-                                <div class="swiper-slide">
-                                    <iframe src="https://www.youtube.com/embed/${VIDEO_DETAIL}" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
-                                </div>
+                                <c:if test="${not empty VIDEO_DETAIL}">
+                                    <div class="swiper-slide">
+                                        <iframe src="https://www.youtube.com/embed/${VIDEO_DETAIL}" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+                                    </div>
+                                </c:if>
                                 ...
                             </div>
                             <!-- If we need pagination -->
@@ -53,7 +55,7 @@
 
                             <span class="info-user">
                                 <img src="${USER_DETAIL.getAvatar()}">
-                                <a  class="text-decoration-none text-dark" href="profile?userid=${USER_DETAIL.getId()}">${USER_DETAIL.getName()}</a>
+                                <a  class="text-decoration-none hover-underline text-dark" href="profile?userid=${USER_DETAIL.getId()}">${USER_DETAIL.getName()}</a>
                                 <c:if test="${sessionScope.login.id != USER_DETAIL.id}">
                                     <!--                                <div class="btn btn-style1" onclick="followButton(this, 'Follow', 'UnFollow', this.action)" >
                                                                         <i class="fa-solid fa-user-plus"></i>
@@ -81,7 +83,7 @@
                                 <div class="first-div">
                                     <c:if test="${sessionScope.login.id == USER_DETAIL.id}">
                                         <span class="text-nowrap">
-                                            <a href="./editrecipe?recipeID=${param.recipeID}" class="btn btn-style2"><i class="fa-regular fa-pen-to-square"></i> Edit</a>
+                                            <a href="./editrecipe?recipeID=${param.recipeID}" class="btn btn-style2 hover-button-1"><i class="fa-regular fa-pen-to-square "></i> Edit</a>
                                         </span>
                                     </c:if>
 
@@ -95,10 +97,14 @@
                             <div class="dropdown">
                                 <button ><i class="fa-solid fa-ellipsis"></i></button>
                                 <div class="dropdown-options">
-                                    <a   class="d-inline-block text-muted hover-underline c-pointer mr-3" onclick="getReportRecipe(${RECIPE_DETAIL.getId()})" href="#">
-                                        <span class="align-middle">
-                                            <strong>${re.like}</strong> Report</span></a>
-                                    <a href="#">Delete</a>
+                                    <c:if test="${sessionScope.login.id != USER_DETAIL.id && sessionScope.login.role != 'admin'}">
+                                        <a   class="d-inline-block text-muted hover-underline c-pointer mr-3 col " onclick="getReportRecipe(${RECIPE_DETAIL.getId()})" href="#">
+                                            <span class="align-middle"><strong>${re.like}</strong> Report</span>
+                                        </a>
+                                    </c:if>
+                                    <c:if test="${sessionScope.login.id == USER_DETAIL.id || sessionScope.login.role == 'admin'}">
+                                        <a class="col" href="#">Delete</a>
+                                    </c:if>
                                 </div>
                             </div>
 
@@ -226,9 +232,9 @@
                                 </div>
                                 <div class="body" >
 
-                                    <div class="card-body p-2 mb-3">
+                                    <div class="card-body p-0 mb-3">
                                         <div class="d-flex flex-start w-100">
-                                            <img class="rounded-circle mr-2"
+                                            <img class="rounded-circle border mr-2"
                                                  src="${sessionScope.login.avatar}" alt="avatar"
                                                  width="60" height="60" />
                                             <div class="w-100">
@@ -248,7 +254,7 @@
 
 
                                         <div class="d-flex flex-start mb-4"   >
-                                            <img class="rounded-circle mr-2"
+                                            <img class="rounded-circle border mr-2"
                                                  src="./assets/images/avt/${cmt.avatar}" alt="avatar"
                                                  width="60" height="60" />
                                             <div class="card w-100">
@@ -259,11 +265,17 @@
                                                         <div class="dropdown">
                                                             <button ><i class="fa-solid fa-ellipsis"></i></button>
                                                             <div class="dropdown-options">
-                                                                <a   class="d-inline-block col text-muted hover-underline c-pointer mr-3" onclick="getReportComment(${RECIPE_DETAIL.getId()})" href="#">
-                                                                    <span class="align-middle">
-                                                                        <strong>${re.like}</strong> Report</span></a>
-                                                                         
-                                                                <a class="col" href="#">Delete</a>
+                                                                <c:catch var="ex">
+                                                                    
+                                                                    <c:if test="${sessionScope.login.id != cmt.userID}">
+                                                                        <a   class="d-inline-block col text-muted hover-underline c-pointer mr-3" onclick="getReportComment(${RECIPE_DETAIL.getId()})">
+                                                                            <span class="align-middle"><strong>${re.like}</strong> Report</span>
+                                                                        </a>
+                                                                    </c:if>
+                                                                    <c:if test="${(sessionScope.login.id == cmt.userID || sessionScope.login.role == 'admin')}">
+                                                                        <a class="col" >Delete</a>
+                                                                    </c:if>
+                                                                </c:catch>${ex}
                                                             </div>
                                                         </div>
                                                         <!--ket thuc comment--> 
@@ -356,7 +368,7 @@
 
 
         <!--report cua comment--> 
-        <div class="fixed-container " id="report_comment" >
+        <div class="fixed-container " comment id="report_comment" >
             <div class="gray-box"></div>
             <div class="content card-body col-12 col-md-4">
                 <div class="col-12 p-0">

@@ -131,7 +131,7 @@ public class IngredientDAO {
             ps = conn.prepareStatement(sql);
             ps.setInt(1, recipeId);
             ps.setInt(2, ingreId);
-            ps.setString(3, ingreAmount);
+            ps.setString(3, ingreAmount.isEmpty()?"1 Piece":ingreAmount);
             if (ps.executeUpdate() > 0) {
                 System.out.println("Added Ingrdient Recipe" + recipeId + " " + ingreId);
             }

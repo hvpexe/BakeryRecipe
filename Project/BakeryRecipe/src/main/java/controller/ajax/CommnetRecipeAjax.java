@@ -61,7 +61,7 @@ public class CommnetRecipeAjax extends HttpServlet {
                 if (check) {
 
                     out.print(" <div class=\"d-flex flex-start mb-4\"   >\n"
-                            + "                                        <img class=\"rounded-circle mr-2\"\n"
+                            + "                                        <img class=\"rounded-circle border mr-2\"\n"
                             + "                                             src=\"" + baker.getAvatar() + "\" alt=\"avatar\"\n"
                             + "                                             width=\"60\" height=\"60\" />\n"
                             + "                                        <div class=\"card w-100\">\n"

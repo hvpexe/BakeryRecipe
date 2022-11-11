@@ -19,7 +19,7 @@ import utils.DBUtils;
  * @author Admin
  */
 public class CommentDAO {
-    
+
     private static Connection conn = DBUtils.getConnection();
     private static final String SELECT_PROFILE_COMMENT_LIST
             = "  SELECT c.ID\n"
@@ -28,7 +28,7 @@ public class CommentDAO {
             + "  FROM [Comment] c \n"
             + "  WHERE c.UserID = ? and c.IsDeleted= 0\n"
             + "  Order By c.DateComment DESC";
-    
+
     public static List<Integer[]> getCommentList (int userid) throws SQLException {
         String sql = SELECT_PROFILE_COMMENT_LIST;
         List<Integer[]> list = new LinkedList<>();
@@ -71,7 +71,7 @@ public class CommentDAO {
             + "      ,[RecipeID]\n"
             + "  FROM [Comment]"
             + "  WHERE ID = ?";
-    
+
     public static Comment getCommentByID (int id) throws SQLException {
         String sql = SELECT_COMMENT_BY_ID;
         Comment comment = null;
@@ -105,7 +105,7 @@ public class CommentDAO {
         }
         return null;
     }
-    
+
     private static final String MANAGE_COMMENT_LIST = "SELECT [Comment].ID, [Comment].Comment, "
             + "[Comment].DateComment, [Comment].LastDateEdit, "
             + "[User].Avatar, [User].FirstName + ' ' + [User].LastName AS [Username], "
@@ -115,7 +115,7 @@ public class CommentDAO {
             + "JOIN [Recipe] ON [Comment].RecipeID = [Recipe].ID\n"
             + "JOIN [User] ON [Comment].UserID = [User].ID\n"
             + "WHERE [Comment].IsDeleted = 0;";
-    
+
     public static List<Comment> manageCommentList () throws SQLException {
         Connection conn = null;
         PreparedStatement ps = null;
@@ -155,11 +155,11 @@ public class CommentDAO {
         }
         return null;
     }
-    
+
     private static final String UPDATE_DELETE = "UPDATE Comment\n"
             + "            SET IsDeleted = 1\n"
             + "            WHERE Comment.[ID] = ?";
-    
+
     public static boolean deleteComment (int id) throws SQLException {
         Connection conn = null;
         PreparedStatement ps = null;
@@ -172,7 +172,7 @@ public class CommentDAO {
         } catch (Exception ex) {
             System.out.println("Query Delete Comment For User error!" + ex.getMessage());
         } finally {
-            
+
             if (ps != null) {
                 ps.close();
             }
@@ -190,13 +190,13 @@ public class CommentDAO {
             + "      ,[UserID]\n"
             + "      ,[RecipeID]\n"
             + "  FROM [Comment]";
-    
+
     public static List<Comment> getCommentedUserFromRecipe (int recipeID) throws SQLException {
         Connection conn = null;
         PreparedStatement ps = null;
         ResultSet rs = null;
         List<Comment> list = new LinkedList<>();
-        
+
         try {
             String sql = SELECT_LIST + "WHERE RecipeID = ? AND IsDeleted=0";
             conn = DBUtils.getConnection();
@@ -231,7 +231,7 @@ public class CommentDAO {
     private static final String findbyDate = "SELECT ID\n"
             + "FROM [dbo].[Comment]\n"
             + "WHERE [DateComment] =?";
-    
+
     public static int commentByDate (Timestamp date) throws SQLException {
         Connection cn = null;
         PreparedStatement ptm = null;
@@ -265,9 +265,8 @@ public class CommentDAO {
     }
     private static final String CMT_RECIPE
             = "INSERT INTO [dbo].[Comment]([Comment],[DateComment],[LastDateEdit],[IsDeleted],[UserID],[RecipeID])\n"
-           
             + " VALUES (?,?,?,?,?,?)";
-    
+
     public static Integer commentRecipe (String comment, int UserID, int RecipeID) throws SQLException {
         Connection cnn = null;
         PreparedStatement ptm = null;
@@ -303,8 +302,12 @@ public class CommentDAO {
         }
         return null;
     }
-    private static final String LIST_COMMENT = "select  baker.LastName+' ' +baker.FirstName  as fullName ,DateComment,cmt.ID,cmt.Comment,baker.Avatar\n" + "            from [dbo].[Comment] cmt join [dbo].[User] baker\n" + "            on cmt.UserID = baker.ID\n" + "            where cmt.RecipeID = ?" + "            ORDER BY DateComment Desc ";
-    
+    private static final String LIST_COMMENT = "select  baker.LastName+' ' +baker.FirstName  as fullName ,DateComment,cmt.ID,cmt.Comment,baker.Avatar\n" + "           "
+            + " from [dbo].[Comment] cmt join [dbo].[User] baker\n"
+            + " on cmt.UserID = baker.ID\n"
+            + "            where cmt.RecipeID = ?"
+            + "            ORDER BY DateComment Desc ";
+
     public static List<Comment> commentList (int recipeID) throws SQLException {
         List<Comment> cmtList = new ArrayList<>();
         Connection cnn = null;
@@ -339,7 +342,7 @@ public class CommentDAO {
         }
         return cmtList;
     }
-    
+
     public static Integer GetNewestCommentID (int userID) throws SQLException {
         String sql = "select max(ID) as ID from Comment";
         PreparedStatement ps = null;
@@ -367,6 +370,6 @@ public class CommentDAO {
             }
         }
         return null;
-        
+
     }
 }
