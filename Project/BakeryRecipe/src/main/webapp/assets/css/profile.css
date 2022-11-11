@@ -144,14 +144,14 @@ button{
 }
 
 button:hover{
-  background-color:black;
+  background-color:white;
 }
 
 .dropdown-options {
   display: none;
   position: absolute;
   overflow: auto;
-  background-color: black;
+  background-color: white;
   border-radius:5px;
 /*  box-shadow: 0px 10px 10px 0px rgba(0,0,0,0.4);*/
 }
@@ -192,6 +192,6 @@ button:hover{
     background: white;
 }
 
-.fa-solid{
+.fa-ellipsis{
     color: black;
 }

@@ -98,7 +98,8 @@
                                     <a   class="d-inline-block text-muted hover-underline c-pointer mr-3" onclick="getReportRecipe(${RECIPE_DETAIL.getId()})" href="#">
                                         <span class="align-middle">
                                             <strong>${re.like}</strong> Report</span></a>
-                                    <a href="#">Delete</a>
+                                            <c:if test="${sessionScope.login.id == USER_DETAIL.id}">
+                                            <a href="#">Delete</a></c:if>
                                 </div>
                             </div>
 
