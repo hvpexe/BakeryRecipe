@@ -174,6 +174,26 @@ function getReportComment(recipeID) {
     $('#report_comment .exit-btn').click(() => report.removeClass('d-flex'));
 }
 
+function deleteCMT(commentID) {
+    $.ajax({
+        url: "/ajax/DeleteCommentAjax",
+        type: "get",
+        data: {
+            commentId: commentID
+        },
+        success: function (response) {
+            //Do Something
+            console.log(response);
+            var cmtShow = document.getElementById("show-comment");
+            $(cmtShow).prepend(response);
+            item.value = "";
+        },
+        error: function (xhr) {
+            console.log("that bai");
+            //Do Something to handle error
+        }
+    });
+}
 
 const swiper = new Swiper('.swiper', {
     pagination: {
@@ -261,8 +281,8 @@ $('.instruction img').click((e) => {
         }
 }
 );
-var item = $('.instruction img'); 
-for ( i=0;i<item.length;i++) {
+var item = $('.instruction img');
+for (i = 0; i < item.length; i++) {
     console.log($(item[i]).height());
     if ($(item[i]).height() < 250) {
         $(item[i]).css('cursor', 'auto');

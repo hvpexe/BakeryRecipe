@@ -8,6 +8,7 @@ import static dto.Recipe.COVER_PATH;
 import static dto.User.DEFAULT_AVATAR;
 import static dto.User.IMG_PATH;
 import java.sql.Date;
+import java.sql.Timestamp;
 
 /**
  *
@@ -20,7 +21,7 @@ public class Report {
     public static final String COVER_PATH = Picture.IMG_PATH;
 
     private int id; //id cua report
-    private Date DateReport;
+    private Timestamp DateReport;
     private String detail;
     private int userID; //id cua reporter
     private String reportType;
@@ -37,7 +38,7 @@ public class Report {
     public Report() {
     }
 
-    public Report(int id, Date DateReport, String detail, int userID, String reportType, String status, String reporter, String comment) {
+    public Report(int id, Timestamp DateReport, String detail, int userID, String reportType, String status, String reporter, String comment) {
         this.id = id;
         this.DateReport = DateReport;
         this.detail = detail;
@@ -49,7 +50,7 @@ public class Report {
         
     }
 
-    public Report(int id, Date DateReport, String detail, int userID, String reportType, String status, String reporter, String recipeTitle, String cover, int recipeID) {
+    public Report(int id, Timestamp DateReport, String detail, int userID, String reportType, String status, String reporter, String recipeTitle, String cover, int recipeID) {
         this.id = id;
         this.DateReport = DateReport;
         this.detail = detail;
@@ -62,7 +63,7 @@ public class Report {
         this.recipeID = recipeID;
     }
 
-    public Report(int id, Date DateReport, String detail, int userID, String reportType, String status, String reporter, int userid2, String username, String avatar) {
+    public Report(int id, Timestamp DateReport, String detail, int userID, String reportType, String status, String reporter, int userid2, String username, String avatar) {
         this.id = id;
         this.DateReport = DateReport;
         this.detail = detail;
@@ -164,14 +165,16 @@ public class Report {
         this.comment = comment;
     }
 
-    
-    public Date getDateReport() {
+    public Timestamp getDateReport() {
         return DateReport;
     }
 
-    public void setDateReport(Date DateReport) {
+    public void setDateReport(Timestamp DateReport) {
         this.DateReport = DateReport;
     }
+
+    
+    
 
     public String getDetail() {
         return detail;
@@ -197,7 +200,7 @@ public class Report {
         this.reportType = reportType;
     }
 
-    public Report(int id, Date DateReport, String detail, int userID, String reportType) {
+    public Report(int id, Timestamp DateReport, String detail, int userID, String reportType) {
         this.id = id;
         this.DateReport = DateReport;
         this.detail = detail;
