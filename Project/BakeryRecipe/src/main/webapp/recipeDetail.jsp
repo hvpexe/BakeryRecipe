@@ -84,7 +84,7 @@
                                             <a href="./editrecipe?recipeID=${param.recipeID}" class="btn btn-style2"><i class="fa-regular fa-pen-to-square"></i> Edit</a>
                                         </span>
                                     </c:if>
-                                    
+
                                 </div>
 
                             </span>
@@ -117,39 +117,37 @@
                                 <span>Saved: ${RECIPE_DETAIL.getSave()}</span>
                             </div>
 
-                            <c:if test="${sessionScope.login.id != USER_DETAIL.getId()}">
-                                <div class="react-action">
-                                    <c:choose>
-                                        <c:when test="${checklike == 'false'}">
-                                            <div class="btn btn-style1" onclick="likeButton(this, 'Like', 'UnLike', this.action)" >
-                                                <i class="fa-regular fa-heart"></i>
-                                                <span  class="txt-follow" this="">Like</span>
-                                            </div>
-                                        </c:when>
-                                        <c:otherwise>
-                                            <div class="btn btn-style1 button-Follower" onclick="likeButton(this, 'UnLike', 'Like', this.action)" >
-                                                <i class="fa-regular fa-heart"></i>
-                                                <span  class="txt-follow" this="">UnLike</span>
-                                            </div>
-                                        </c:otherwise>
-                                    </c:choose>
-                                    &nbsp;
-                                    <c:choose>
-                                        <c:when test="${checksave == 'false'}">
-                                            <div class="btn btn-style1" onclick="saveButton(this, 'Save', 'UnSave', this.action)" >
-                                                <i class="fa-regular fa-bookmark"></i>
-                                                <span  class="txt-follow" this="">Save</span>
-                                            </div>
-                                        </c:when>
-                                        <c:otherwise>
-                                            <div class="btn btn-style1 button-Follower" onclick="saveButton(this, 'UnSave', 'Save', this.action)" >
-                                                <i class="fa-regular fa-bookmark"></i>
-                                                <span  class="txt-follow" this="">UnSave</span>
-                                            </div>
-                                        </c:otherwise>
-                                    </c:choose>
-                                </div>
-                            </c:if>
+                            <div class="react-action">
+                                <c:choose>
+                                    <c:when test="${checklike == 'false'}">
+                                        <div class="btn btn-style1" onclick="likeButton(this, 'Like', 'UnLike', this.action)" >
+                                            <i class="fa-regular fa-heart"></i>
+                                            <span  class="txt-follow" this="">Like</span>
+                                        </div>
+                                    </c:when>
+                                    <c:otherwise>
+                                        <div class="btn btn-style1 button-Follower" onclick="likeButton(this, 'UnLike', 'Like', this.action)" >
+                                            <i class="fa-regular fa-heart"></i>
+                                            <span  class="txt-follow" this="">UnLike</span>
+                                        </div>
+                                    </c:otherwise>
+                                </c:choose>
+                                &nbsp;
+                                <c:choose>
+                                    <c:when test="${checksave == 'false'}">
+                                        <div class="btn btn-style1" onclick="saveButton(this, 'Save', 'UnSave', this.action)" >
+                                            <i class="fa-regular fa-bookmark"></i>
+                                            <span  class="txt-follow" this="">Save</span>
+                                        </div>
+                                    </c:when>
+                                    <c:otherwise>
+                                        <div class="btn btn-style1 button-Follower" onclick="saveButton(this, 'UnSave', 'Save', this.action)" >
+                                            <i class="fa-regular fa-bookmark"></i>
+                                            <span  class="txt-follow" this="">UnSave</span>
+                                        </div>
+                                    </c:otherwise>
+                                </c:choose>
+                            </div>
                             <div class="detail">
                                 <!--                        These lemon cupcakes have an ultra soft and moist texture and are served with a fragrant white
                                                         chocolate whipped cream and strawberries. This recipe is for you if you enjoy a decadent dessert
