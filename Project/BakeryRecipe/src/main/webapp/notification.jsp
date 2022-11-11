@@ -30,69 +30,13 @@
             </div>
             <nav class="notify-section  bg-white col">
                 <% request.setAttribute("LIST", new String[]{"Like", "Comment", "Follow", "RemoveRecipe", "Saved", "Follow", "RemoveRecipe", "Saved", "Follow", "RemoveRecipe", "Saved", "Follow", "RemoveRecipe", "Saved", "Follow", "RemoveRecipe", "Saved", "Comment", "Follow", "RemoveRecipe", "Saved"});%>
-                <c:forEach items="${LIST}" var="noti">
-                    <c:if test="${noti eq 'Like'}">
-                        <a class="notify-item hover-button-3 seen c-pointer text-decoration-none" href="#">
-                            <div class="col d-flex ">
-                                <img class="avatar  p-0 rounded-circle" src="assets/images/avt/37.jpg" alt="avatar"/>
-                                <div class="notify-content col d-flex flex-column">
-                                    <span class="d-block font-weight-bold hover-underline" onclick="location = '#'">SKT T Liệt</span>
-                                    <div class="d-flex mt-2" style="gap:8px;">
-                                        <i class="d-inline fas fa-heart"></i>
-                                        <span class="">Liked your Recipe <span class="font-weight-bold">“Recipe Name”</span></span>
-                                    </div>
-                                </div>
-                            </div>
-                        </a>
-                    </c:if>
-                    <c:if test="${noti eq 'Comment'}">
-                        <a class="notify-item  hover-button-3 c-pointer text-decoration-none" href="#">
-                            <div class="col d-flex">
-                                <img class="avatar  p-0 rounded-circle" src="assets/images/avt/binhnguyenthanh19242yahoo.png" alt="avatar"/>
-                                <div class="notify-content col d-flex flex-column">
-                                    <span class="d-block font-weight-bold hover-underline" onclick="location = '#'">It's Morbin Time</span>
-                                    <div class="d-flex mt-2" style="gap:8px;">
-                                        <i class="d-inline far fa-eye"></i>
-                                        <span>Great Job! <span class="font-weight-bold">It's Morbin Time</span> is now following you</span>
-                                    </div>
-                                </div>
-                            </div>
-                        </a>
-                    </c:if>
-                    <c:if test="${noti eq 'Saved'}">
-                        <a class="notify-item  hover-button-3 seen c-pointer text-decoration-none" href="#">
-                            <div class="col d-flex">
-                                <img class="avatar  p-0 rounded-circle" src="assets/images/avt/50.jpg" alt="avatar"/>
-                                <div class="notify-content col d-flex flex-column">
-                                    <span class="d-block font-weight-bold hover-underline" onclick="location = '#'">Faker</span>
-                                    <div class="d-flex mt-2" style="gap:8px;">
-                                        <i class="d-inline fas fa-bookmark"></i>
-                                        <span><span class="font-weight-bold">Faker</span> has Saved your Recipe </span>
-                                    </div>
-                                </div>
-                            </div>
-                        </a>
-                    </c:if>
-                    <c:if test="${noti eq 'follow'}">
-                        <a class="notify-item  hover-button-3 c-pointer text-decoration-none" href="#">
-                            <div class="col d-flex">
-                                <img class="avatar  p-0 rounded-circle" src="assets/images/avt/15.png" alt="avatar"/>
-                                <div class="notify-content col d-flex flex-column">
-                                    <span class="d-block font-weight-bold hover-underline" onclick="location = '#'">A Hoàng Wibu</span>
-                                    <div class="d-flex mt-2" style="gap:8px;">
-                                        <i class="d-inline fas fa-comment-dots"></i>
-                                        <span>Commented on your Recipe <span class="font-weight-bold">“Recipe Name”</span></span>
-                                    </div>
-                                </div>
-                            </div>
-                        </a>
-                    </c:if>
-                </c:forEach> 
-                <div>Real data</div>
+               
+             
                 <!--//real data--> 
                      <c:forEach items="${LIST_ALL_NOTIFY}" var="noti">
                     <c:if test="${noti.typeofNotify eq 'like'}">
-                        <a class="notify-item hover-button-3 seen c-pointer text-decoration-none" href="#">
+                        <div onclick="changeType(${noti.notifyID})">
+                        <a class="notify-item hover-button-3 seen c-pointer text-decoration-none"  onclick="changeType(${noti.notifyID})"  href="profile?userid=${noti.senderID}">
                             <div class="col d-flex ">
                                 <img class="avatar  p-0 rounded-circle" src="${noti.coverfSender}" alt="avatar"/>
                                 <div class="notify-content col d-flex flex-column">
@@ -104,9 +48,10 @@
                                 </div>
                             </div>
                         </a>
+                                    </div>
                     </c:if>
                     <c:if test="${noti.typeofNotify eq 'follow'}">
-                        <a class="notify-item  hover-button-3 c-pointer text-decoration-none" href="#">
+                        <a class="notify-item  hover-button-3 c-pointer text-decoration-none" onclick="changeType(${noti.notifyID})" href="profile?userid=${noti.senderID}" >
                             <div class="col d-flex">
                                 <img class="avatar  p-0 rounded-circle" src="${noti.coverfSender}" alt="avatar"/>
                                 <div class="notify-content col d-flex flex-column">
@@ -120,11 +65,11 @@
                         </a>
                     </c:if>
                     <c:if test="${noti.typeofNotify eq 'comment'}">
-                        <a class="notify-item  hover-button-3 c-pointer text-decoration-none" href="#">
+                        <a class="notify-item  hover-button-3 c-pointer text-decoration-none" onclick="changeType(${noti.notifyID})" href="RecipeDetail?recipeID=${noti.recipeID}">
                             <div class="col d-flex">
                                 <img class="avatar  p-0 rounded-circle" src="${noti.coverfSender}" alt="avatar"/>
                                 <div class="notify-content col d-flex flex-column">
-                                    <span class="d-block font-weight-bold hover-underline" onclick="location = '#'">${noti.nameofSender}</span>
+                                    <span class="d-block font-weight-bold hover-underline" onclick="location = 'RecipeDetail?recipeID=${noti.recipeID}'">${noti.nameofSender}</span>
                                     <div class="d-flex mt-2" style="gap:8px;">
                                         <i class="d-inline fas fa-comment-dots"></i>
                                         <span>Commented on your Recipe <span class="font-weight-bold">${noti.nameofRecipe}</span></span>
@@ -136,6 +81,26 @@
                 </c:forEach> 
             </nav>
         </main>
+                <script>
+                    function changeType(value){
+                        console.log(value);
+                         $.ajax({
+        url: "ChangeTypeAjax",
+        type: "get", //send it through get method
+        data: {
+            notifyID :value
+        },
+        success: function () {
+        console.log("thanh cong roi kia");
+        },
+        error: function () {
+            //Do Something to handle error
+            console.log("co loi roi kia");
+        }
+    });
+                    }
+                    
+                </script>
         <script>
             $('#notification #btnAll').click((e) => {
                 $('#notification .notify-item').removeClass('d-none');

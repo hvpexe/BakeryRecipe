@@ -259,13 +259,12 @@
                                                         <h5 class="col p-0">${cmt.chefName}</h5>
                                                         <!--report comment--> 
                                                         <div class="dropdown">
-                                                            <button style="color: gray"><i class="fa-solid fa-ellipsis"></i></button>
+                                                            <button ><i class="fa-solid fa-ellipsis"></i></button>
                                                             <div class="dropdown-options">
-                                                                <c:if test="${not sessionScope.login.name  eq cmt.chefName}">
                                                                 <a   class="d-inline-block col text-muted hover-underline c-pointer mr-3" onclick="getReportComment(${RECIPE_DETAIL.getId()})" href="#">
                                                                     <span class="align-middle">
                                                                         <strong>${re.like}</strong> Report</span></a>
-                                                                            </c:if>
+                                                                         
                                                                 <a class="col" href="#">Delete</a>
                                                             </div>
                                                         </div>

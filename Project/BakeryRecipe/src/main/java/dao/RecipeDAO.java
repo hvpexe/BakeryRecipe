@@ -872,6 +872,7 @@ public class RecipeDAO {
                 int prepTime = rs.getInt("PrepTime");
                 int cookTime = rs.getInt("CookTime");
                 int comment = rs.getInt("Comment");
+//                int bakerID= rs.getInt()
 
                 recipe = new Recipe(recipeID, name, description, like, save, comment, rs.
                         getTimestamp("DatePost"), rs.

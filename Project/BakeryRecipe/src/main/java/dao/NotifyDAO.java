@@ -303,9 +303,9 @@ public class NotifyDAO {
     }
 
     //hàm dùng để cập nhật tình trạng của trạng thái khi người dùng nhấn vào thì sẽ chuyển trạng thái về true
-    private static final String UPDATE_SEEN = "UPDATE [dbo].[Instruction] \n"
-            + "SET [IsSeen] =true\n"
-            + "WHERE [ID] =? ";
+    private static final String UPDATE_SEEN = "UPDATE  [dbo].[Notificaition]\n" +
+"            SET [IsSeen] =? \n" +
+"             WHERE [ID] =?";
 
     public static boolean updateSeen(int notifyID) throws SQLException {
         Connection cn = null;
@@ -314,7 +314,8 @@ public class NotifyDAO {
         try {
             cn = DBUtils.getConnection();
             ptm = cn.prepareStatement(UPDATE_SEEN);
-            ptm.setInt(1, notifyID);
+            ptm.setString(1, "True");
+            ptm.setInt(2, notifyID);
             check = ptm.executeUpdate() > 0 ? true : false;
         } catch (Exception e) {
             e.printStackTrace();
