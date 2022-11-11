@@ -16,7 +16,7 @@
         <c:import url="header.jsp"/>
         <section class=" col-12 col-md-6 mx-auto my-3 p-0" style="gap:10px">
         </c:if>    
-         
+
         <main class="col mx-auto p-0 noselect" id="notification">
             <div class="notify-title col h4 text-capitalize bg-white font-weight-bold border-bottom py-3 ">
                 <span>notification</span>
@@ -30,25 +30,25 @@
             </div>
             <nav class="notify-section  bg-white col">
                 <% request.setAttribute("LIST", new String[]{"Like", "Comment", "Follow", "RemoveRecipe", "Saved", "Follow", "RemoveRecipe", "Saved", "Follow", "RemoveRecipe", "Saved", "Follow", "RemoveRecipe", "Saved", "Follow", "RemoveRecipe", "Saved", "Comment", "Follow", "RemoveRecipe", "Saved"});%>
-               
-             
+
+
                 <!--//real data--> 
-                     <c:forEach items="${LIST_ALL_NOTIFY}" var="noti">
+                <c:forEach items="${LIST_ALL_NOTIFY}" var="noti">
                     <c:if test="${noti.typeofNotify eq 'like'}">
                         <div onclick="changeType(${noti.notifyID})">
-                        <a class="notify-item hover-button-3 seen c-pointer text-decoration-none"  onclick="changeType(${noti.notifyID})"  href="profile?userid=${noti.senderID}">
-                            <div class="col d-flex ">
-                                <img class="avatar  p-0 rounded-circle" src="${noti.coverfSender}" alt="avatar"/>
-                                <div class="notify-content col d-flex flex-column">
-                                    <span class="d-block font-weight-bold hover-underline" onclick="location = '#'">${noti.nameofSender}</span>
-                                    <div class="d-flex mt-2" style="gap:8px;">
-                                        <i class="d-inline fas fa-heart"></i>
-                                        <span class="">Liked your Recipe <span class="font-weight-bold">${noti.nameofRecipe}</span></span>
+                            <a class="notify-item hover-button-3 seen c-pointer text-decoration-none"  onclick="changeType(${noti.notifyID})"  href="profile?userid=${noti.senderID}">
+                                <div class="col d-flex ">
+                                    <img class="avatar  p-0 rounded-circle" src="${noti.coverfSender}" alt="avatar"/>
+                                    <div class="notify-content col d-flex flex-column">
+                                        <span class="d-block font-weight-bold hover-underline" onclick="location = '#'">${noti.nameofSender}</span>
+                                        <div class="d-flex mt-2" style="gap:8px;">
+                                            <i class="d-inline fas fa-heart"></i>
+                                            <span class="">Liked your Recipe <span class="font-weight-bold">${noti.nameofRecipe}</span></span>
+                                        </div>
                                     </div>
                                 </div>
-                            </div>
-                        </a>
-                                    </div>
+                            </a>
+                        </div>
                     </c:if>
                     <c:if test="${noti.typeofNotify eq 'follow'}">
                         <a class="notify-item  hover-button-3 c-pointer text-decoration-none" onclick="changeType(${noti.notifyID})" href="profile?userid=${noti.senderID}" >
@@ -81,26 +81,26 @@
                 </c:forEach> 
             </nav>
         </main>
-                <script>
-                    function changeType(value){
-                        console.log(value);
-                         $.ajax({
-        url: "ChangeTypeAjax",
-        type: "get", //send it through get method
-        data: {
-            notifyID :value
-        },
-        success: function () {
-        console.log("thanh cong roi kia");
-        },
-        error: function () {
-            //Do Something to handle error
-            console.log("co loi roi kia");
-        }
-    });
+        <script>
+            function changeType(value) {
+                console.log(value);
+                $.ajax({
+                    url: "ChangeTypeAjax",
+                    type: "get", //send it through get method
+                    data: {
+                        notifyID: value
+                    },
+                    success: function () {
+                        console.log("thanh cong roi kia");
+                    },
+                    error: function () {
+                        //Do Something to handle error
+                        console.log("co loi roi kia");
                     }
-                    
-                </script>
+                });
+            }
+
+        </script>
         <script>
             $('#notification #btnAll').click((e) => {
                 $('#notification .notify-item').removeClass('d-none');
@@ -112,9 +112,13 @@
                 $('#notification #btnAll').removeClass('active');
                 $('#notification .notify-item.seen').addClass('d-none');
             });
+            <c:if test="${U_SIZE>0}">
+            $('.header-notification').attr('data-notices', '${U_SIZE}')
+            </c:if>
         </script>        
         <c:if test="${SHOW_PAGE}">
         </section>
+        ${U_SIZE}
         <c:import url="footer.jsp"/>
     </main>
 </body>

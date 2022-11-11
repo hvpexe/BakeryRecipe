@@ -41,7 +41,6 @@ if (window.location.href.indexOf('/savedrecipe') !== -1) {
 $(".notify").animate({
     height: "toggle"
 }, 0);
-
 $.ajax({
     url: "./notification",
     type: "POST"

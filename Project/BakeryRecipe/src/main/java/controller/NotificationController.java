@@ -40,16 +40,22 @@ public class NotificationController extends HttpServlet {
         PrintWriter out = response.getWriter();
         String url = SUCCESS;
         try {
-            int receiverID= Integer.parseInt(request.getParameter("receiverID"));
-                        List<Notify> nre = NotifyDAO.notifyLike(receiverID);
+            int receiverID = Integer.parseInt(request.getParameter("receiverID"));
+            List<Notify> nre = NotifyDAO.notifyLike(receiverID);
             request.setAttribute("LIST_LIKE", nre);
             List<Notify> listComment = NotifyDAO.followList(receiverID);
-            request.setAttribute("LIST_COMMENT", listComment);
-           
-            List<Notify> listAllNotify = NotifyDAO.getAllNotify(receiverID);
-                        request.setAttribute("LIST_ALL_NOTIFY", listAllNotify);
-
             
+            request.setAttribute("LIST_COMMENT", listComment);
+
+            List<Notify> listAllNotify = NotifyDAO.getAllNotify(receiverID);
+            int unseenSize = 0;
+            for (Notify notify : listAllNotify) {
+                if (!notify.isIsSeen())
+                    unseenSize++;
+            }
+            request.setAttribute("LIST_ALL_NOTIFY", listAllNotify);
+            request.setAttribute("U_SIZE", unseenSize);
+            System.out.println(unseenSize);
             /* TODO output your page here. You may use following sample code. */
         } catch (Exception e) {
             e.printStackTrace();
