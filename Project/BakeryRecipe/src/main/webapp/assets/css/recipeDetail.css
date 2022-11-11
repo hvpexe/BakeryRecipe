@@ -70,9 +70,23 @@ body {
     text-align: center;
 }
 
+.btn-style2 {
+    padding: 0.25rem 0.7rem ;
+    background-color: var(--side-theme-color) ;
+    color: var(--main-theme-color) ;
+    border: 2px solid var(--main-theme-color);
+    border-radius: 20px ;
+    text-align: center;
+}
+
 
 .btn-style1:hover {
     background-color: var(--main-theme-color-hover);
+    color: var(--side-theme-color) ;
+    border-radius: 20px ;
+}
+.btn-style2:hover {
+    background-color: var(--main-theme-color);
     color: var(--side-theme-color) ;
     border-radius: 20px ;
 }

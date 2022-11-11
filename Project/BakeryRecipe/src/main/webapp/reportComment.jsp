@@ -198,7 +198,7 @@
                                                 <th>User Report</th>
                                                 <th>Report State</th>
                                                 <th>Comment action</th>
-                                                <th>Action</th>
+                                                <th>Report action</th>
                                             </tr>
                                         </thead>
                                         <tfoot>
@@ -211,7 +211,7 @@
                                                 <th>User Report</th>
                                                 <th>Report State</th>
                                                 <th>Comment action</th>
-                                                <th>Action</th>
+                                                <th>Report action</th>
                                             </tr>
                                         </tfoot>
                                         <tbody>

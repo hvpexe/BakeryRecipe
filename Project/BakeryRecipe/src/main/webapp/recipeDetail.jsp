@@ -83,7 +83,7 @@
                                 <div class="first-div">
                                     <c:if test="${sessionScope.login.id == USER_DETAIL.id}">
                                         <span class="text-nowrap">
-                                            <a href="./editrecipe?recipeID=${param.recipeID}" class="btn btn-style2 hover-button-1"><i class="fa-regular fa-pen-to-square "></i> Edit</a>
+                                            <a href="./editrecipe?recipeID=${param.recipeID}" class="btn btn-style2"><i class="fa-regular fa-pen-to-square "></i> Edit</a>
                                         </span>
                                     </c:if>
 
@@ -94,7 +94,7 @@
                                                         <img src=".\assets\css\fontawesome-free-6.1.1-web\svgs\solid\ellipsis-vertical.svg" height="200px" width="100px">
                                                         </div>-->
 
-                            <div class="dropdown">
+                            <span class="dropdown float-right">
                                 <button ><i class="fa-solid fa-ellipsis"></i></button>
                                 <div class="dropdown-options">
                                     <c:if test="${sessionScope.login.id != USER_DETAIL.id && sessionScope.login.role != 'admin'}">
@@ -106,7 +106,7 @@
                                         <a class="col" href="#">Delete</a>
                                     </c:if>
                                 </div>
-                            </div>
+                            </span>
 
 
 
