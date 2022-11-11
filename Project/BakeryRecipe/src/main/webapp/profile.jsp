@@ -150,10 +150,11 @@
 
                         <!--</form>--> 
                     </div>
+          
 
 
                 </div>
-                <div id="thankReport1"></div>
+                      <div id="thankReport2"></div>
             </div>
         </div>
 

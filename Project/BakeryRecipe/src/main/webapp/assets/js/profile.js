@@ -40,7 +40,7 @@ function sendReport(value){
             success: function (response) {
                 //Do Something
                 console.log("thanh cong roi kia");
-                $('#thankReport').html("Thank for your feedback");
+                $('#thankReport2').html("Thank for your feedback");
 //                var cmtShow = document.getElementById("show-comment");
 //                cmtShow.innerHTML += response;
 //                item.value = "";
