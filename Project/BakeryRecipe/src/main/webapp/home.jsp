@@ -93,7 +93,7 @@
                     </c:forEach>
                 </div>
                 <div class="recommend-wrap">
-                    <b class="recommend-title">Trend Recipes</b>
+                    <b class="recommend-title">Trend recipes</b>
                     <c:forEach items="${listRecipe}" var="re">
                         <div class="list-container">
                             <a class="list-info" href="RecipeDetail?recipeID=${re.id}">

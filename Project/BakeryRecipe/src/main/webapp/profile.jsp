@@ -50,7 +50,7 @@
                          alt="" />
                     <div class="col-6">
                         <h3 class="profile-name">${requestScope.user.name}</h3>
-                        <span class="follow">${requestScope.user.follower} Follower</span>
+                        <span class="follow">${requestScope.user.follower} Follower</span>  
                         <span class="follow">${requestScope.user.following} Following</span>
 
                     </div>
@@ -59,10 +59,9 @@
                             <div class="dropdown">
                                 <button style="color: white"><i class="fa-solid fa-ellipsis"></i></button>
                                 <div class="dropdown-options">
-                                    <a   class="d-inline-block text-muted hover-underline c-pointer mr-3" onclick="getReportUser(${requestScope.user.id})" href="#">
+                                    <a class="d-inline-block text-muted hover-underline c-pointer mr-3 h5" onclick="getReportUser(${requestScope.user.id})" href="#">
                                         <span class="align-middle">
                                             <strong>${re.like}</strong> Report</span></a>
-                                    <a href="#">Delete</a>
                                 </div>
                             </div>
                         </div>
