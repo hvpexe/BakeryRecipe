@@ -47,6 +47,13 @@ public class ManageUserReport extends HttpServlet {
                 user.setIsActive(status);
                 UserDAO.changeStatus(user);
             }
+            if (action.equals("changerole")) {
+                String role = request.getParameter("role");
+                int userid = Integer.parseInt(request.getParameter("userid"));
+                User user = UserDAO.getUserByID(userid);
+                user.setRole(role);
+                UserDAO.changeRole(user);
+            }
         } catch (Exception e) {
             System.out.println("Error at BRecipeController: " + e.toString());
         } finally {

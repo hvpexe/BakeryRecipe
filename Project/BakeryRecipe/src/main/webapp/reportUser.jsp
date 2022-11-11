@@ -257,7 +257,7 @@
                                                             </form>
                                                         </c:if>
                                                             <c:if test="${u.userRole eq 'admin'}">
-                                                                <form action="managestatus" class="d-inline" onsubmit="return confirm('Do you really want to remove this admin?');">
+                                                                <form action="reportuser" class="d-inline" onsubmit="return confirm('Do you really want to remove this admin?');">
                                                                     <button class="btn btn-warning btn-circle btn-sm" title="Remove Admin"><i class="fa-solid fa-user-minus"></i></button>
                                                                     <input type="hidden" name="userid" value="${u.userid2}">
                                                                     <input type="hidden" name="action" value="changerole">
