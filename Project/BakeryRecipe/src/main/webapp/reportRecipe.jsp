@@ -198,8 +198,8 @@
                                                 <th>Date Report</th>
                                                 <th>User Report</th>
                                                 <th>Report State</th>
-                                                <th>Recipe Details</th>
-                                                <th>Action</th>
+                                                <th>Recipe action</th>
+                                                <th>Status action</th>
                                             </tr>
                                         </thead>
                                         <tfoot>
@@ -212,8 +212,8 @@
                                                 <th>Date Report</th>
                                                 <th>User Report</th>
                                                 <th>Report State</th>
-                                                <th>Recipe Details</th>
-                                                <th>Action</th>
+                                                <th>Recipe action</th>
+                                                <th>Status action</th>
                                             </tr>
                                         </tfoot>
                                         <tbody>
@@ -243,11 +243,17 @@
                                                         <div style="color: ${status}"><b> ${u.status}</b></div>
                                                     </td>
                                                     <td class="align-middle col-1">
-                                                        <!--neu muon Chinh button thi cho form bao lai de edit--> 
-                                                        <form action="recipe">
-                                                            <button class="bg-side-color" style="width: max-content;">
-                                                                <a href=".\RecipeDetail?recipeID=${u.recipeID}">Recipe Details</a>
+                                                        <form action="RecipeDetail" class="d-inline">
+                                                            <input type="hidden" name="recipeID" value="${u.recipeID}">
+                                                            <button class="btn btn-info btn-circle btn-sm" title="Recipe Details">
+                                                                <i class="fas fa-info-circle"></i>
                                                             </button>
+                                                        </form>
+
+                                                        <form action="recipe" class="d-inline" onsubmit="return confirm('Do you really want to set delete this recipe?');">
+                                                            <button class="btn btn-danger btn-circle btn-sm" title="Delete"><i class="fa-solid fa-trash"></i></button>
+                                                            <input type="hidden" name="recipeid" value="${u.recipeID}">
+                                                            <input type="hidden" name="action" value="delete">
                                                         </form>
                                                     </td>
                                                     <td class="align-middle col-1">
@@ -255,8 +261,8 @@
                                                             <form action="recipeReport" class="flex-grow-1">
                                                                 <input type="hidden" name="reportID" value="${u.id}">
                                                                 <c:if test="${u.status == 'Process'}">
-                                                                    <button class="bg-success" name="action" value="Approved">Approved Report</button>
-                                                                    <button class="bg-danger" name="action" value="Denied">Denied Report</button>
+                                                                    <button class="btn btn-success btn-circle btn-sm" name="action" title="Approved Report" value="Approved"><i class="fa-solid fa-check"></i></button>
+                                                                    <button class="btn btn-danger btn-circle btn-sm" name="action" title="Denied Report" value="Denied"><i class="fa-solid fa-x"></i></button>
                                                                 </c:if>
                                                             </form>
                                                         </div>

@@ -7,11 +7,11 @@
         <meta name="viewport" content="initial-scale=1, width=device-width" />
         <title>Community</title>
         <c:import url="universal.jsp" />
-        
+
         <link rel="stylesheet" href="assets/css/community.css" />
         <link rel="stylesheet"
-            href="https://fonts.googleapis.com/css2?family=Gelasio:wght@400;500;700&display=swap"
-            />
+              href="https://fonts.googleapis.com/css2?family=Gelasio:wght@400;500;700&display=swap"
+              />
 
 
     </head>
@@ -37,9 +37,8 @@
                             </div>
                             <div class="recipe-name">${cc.name}</div>
                             <div class="recipe-author">
-                                <a href="#" class="text-truncate">${cc.username}</a> 
-                                <c:out value="${cc.getDatePostFormat()}"/>
-                            </div>
+                                <a href="profile?userid=${cc.userID}" class="text-truncate">${cc.username}</a> 
+                                <c:out value="${cc.getDatePostFormat()}"/></div>
                         </div>
                     </c:forEach>
                 </div>
@@ -67,7 +66,7 @@
                             </div>
                             <div class="recipe-name">${cc.name}</div>
                             <div class="recipe-author">
-                                <a href="#" class="text-truncate">${cc.username}</a> 
+                                <a href="profile?userid=${cc.userID}" class="text-truncate">${cc.username}</a> 
                                 <c:out value="${cc.getDatePostFormat()}"/></div>
                         </div>
                     </c:forEach>
@@ -96,7 +95,7 @@
                             </div>
                             <div class="recipe-name">${cc.name}</div>
                             <div class="recipe-author">
-                                <a href="#" class="text-truncate">${cc.username}</a> 
+                                <a href="profile?userid=${cc.userID}" class="text-truncate">${cc.username}</a> 
                                 <c:out value="${cc.getDatePostFormat()}"/></div>
 
                         </div>

@@ -243,21 +243,22 @@
                                                         <div style="color: ${status}"><b> ${u.status}</b></div>
                                                     </td>
                                                     <td class="align-middle col-1">
-                                                        <!--neu muon Chinh button thi cho form bao lai de edit--> 
-                                                        <form action="recipe">
-                                                            <button class="bg-side-color" style="width: max-content;">
-                                                               <a href="./profile?userid=${u.userid2}">User Profile</a>
-                                                            </button>
+
+                                                        <form action="profile" class="d-inline">
+                                                            <input type="hidden" name="userid" value="${u.userid2}">
+                                                            <button class="btn btn-info btn-circle btn-sm" title="User Profile"><i class="fas fa-info-circle"></i></button>
                                                         </form>
+                                                        </form>
+
                                                     </td>
                                                     <td class="align-middle col-1">
                                                         <div class="d-flex flex-wrap ">
                                                             <form action="reportuser" class="flex-grow-1">
                                                                 <input type="hidden" name="reportID" value="${u.id}">
                                                                 <c:if test="${u.status == 'Process'}">
-                                                                    <button class="bg-success" name="action" value="Approved">Approved Report</button>
-                                                                    <button class="bg-danger" name="action" value="Denied">Denied Report</button>
-                                                                </c:if>
+                                                                    <button class="btn btn-success btn-circle btn-sm" name="action" title="Approved Report" value="Approved"><i class="fa-solid fa-check"></i></button>
+                                                                    <button class="btn btn-danger btn-circle btn-sm" name="action" title="Denied Report" value="Denied"><i class="fa-solid fa-x"></i></button>
+                                                                    </c:if>
                                                             </form>
                                                         </div>
                                                     </td>
