@@ -248,12 +248,12 @@
                                                     </td>
                                                     <td class="align-middle col-1">
                                                         <div class="d-flex flex-wrap ">
-                                                            <form action="report" class="flex-grow-1">
+                                                            <form action="report" class="flex-grow-1" onsubmit="return confirm('Do you really want to approve/deny this report?');">
                                                                 <input type="hidden" name="reportID" value="${u.id}">
                                                                 <c:if test="${u.status == 'Process'}">
-                                                                    <button class="bg-success" name="action" value="Approved">Approved Report</button>
-                                                                    <button class="bg-danger" name="action" value="Denied">Denied Report</button>
-                                                                </c:if>
+                                                                    <button class="btn btn-success btn-circle btn-sm" name="action" title="Approve Report" value="Approved"><i class="fa-solid fa-check"></i></button>
+                                                                    <button class="btn btn-danger btn-circle btn-sm" name="action" title="Deny Report" value="Denied"><i class="fa-solid fa-x"></i></button>
+                                                                    </c:if>
                                                             </form>
                                                         </div>
                                                     </td>

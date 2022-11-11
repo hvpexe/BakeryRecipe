@@ -199,7 +199,7 @@
                                                 <th>User Report</th>
                                                 <th>Report State</th>
                                                 <th>Recipe action</th>
-                                                <th>Action</th>
+                                                <th>Report action</th>
                                             </tr>
                                         </thead>
                                         <tfoot>
@@ -213,7 +213,7 @@
                                                 <th>User Report</th>
                                                 <th>Report State</th>
                                                 <th>Recipe action</th>
-                                                <th>Action</th>
+                                                <th>Report action</th>
                                             </tr>
                                         </tfoot>
                                         <tbody>
@@ -258,11 +258,11 @@
                                                     </td>
                                                     <td class="align-middle col-1">
                                                         <div class="d-flex flex-wrap ">
-                                                            <form action="recipeReport" class="flex-grow-1">
+                                                            <form action="recipeReport" class="flex-grow-1" onsubmit="return confirm('Do you really want to approve/deny this report?');">
                                                                 <input type="hidden" name="reportID" value="${u.id}">
                                                                 <c:if test="${u.status == 'Process'}">
-                                                                    <button class="btn btn-success btn-circle btn-sm" name="action" title="Approved Report" value="Approved"><i class="fa-solid fa-check"></i></button>
-                                                                    <button class="btn btn-danger btn-circle btn-sm" name="action" title="Denied Report" value="Denied"><i class="fa-solid fa-x"></i></button>
+                                                                    <button class="btn btn-success btn-circle btn-sm" name="action" title="Approve Report" value="Approved"><i class="fa-solid fa-check"></i></button>
+                                                                    <button class="btn btn-danger btn-circle btn-sm" name="action" title="Deny Report" value="Denied"><i class="fa-solid fa-x"></i></button>
                                                                 </c:if>
                                                             </form>
                                                         </div>
