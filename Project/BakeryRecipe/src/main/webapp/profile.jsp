@@ -150,9 +150,6 @@
 
                         <!--</form>--> 
                     </div>
-          
-
-
                 </div>
                       <div id="thankReport2"></div>
             </div>
