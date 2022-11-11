@@ -197,6 +197,7 @@
                                                 <th>Date Report</th>
                                                 <th>User Report</th>
                                                 <th>Report State</th>
+                                                <th>Comment action</th>
                                                 <th>Action</th>
                                             </tr>
                                         </thead>
@@ -209,6 +210,7 @@
                                                 <th>Date Report</th>
                                                 <th>User Report</th>
                                                 <th>Report State</th>
+                                                <th>Comment action</th>
                                                 <th>Action</th>
                                             </tr>
                                         </tfoot>
@@ -234,6 +236,15 @@
                                                             </c:otherwise>
                                                         </c:choose>
                                                         <div style="color: ${status}"><b> ${u.status}</b></div>
+                                                    </td>
+                                                    <td class="align-middle col-1">
+                                                        <div class="d-flex flex-wrap ">
+                                                            <form action="report" class="d-inline" onsubmit="return confirm('Do you really want to set delete this comment?');">
+                                                                <button class="btn btn-danger btn-circle btn-sm" title="Delete"><i class="fa-solid fa-trash"></i></button>
+                                                                <input type="hidden" name="commentid" value="${u.commentID}">
+                                                                <input type="hidden" name="action" value="delete">
+                                                            </form>
+                                                        </div>
                                                     </td>
                                                     <td class="align-middle col-1">
                                                         <div class="d-flex flex-wrap ">

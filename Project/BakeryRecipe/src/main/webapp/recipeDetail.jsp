@@ -273,7 +273,7 @@
                                                                         </a>
                                                                     </c:if>
                                                                     <c:if test="${(sessionScope.login.id == cmt.userID || sessionScope.login.role == 'admin')}">
-                                                                        <a class="col" >Delete</a>
+                                                                        <a class="col" onclick="deleteCMT(commentID)" href="#">Delete</a>
                                                                     </c:if>
                                                                 </c:catch>${ex}
                                                             </div>

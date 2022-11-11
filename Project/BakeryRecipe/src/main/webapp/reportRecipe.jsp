@@ -199,7 +199,7 @@
                                                 <th>User Report</th>
                                                 <th>Report State</th>
                                                 <th>Recipe action</th>
-                                                <th>Status action</th>
+                                                <th>Action</th>
                                             </tr>
                                         </thead>
                                         <tfoot>
@@ -213,7 +213,7 @@
                                                 <th>User Report</th>
                                                 <th>Report State</th>
                                                 <th>Recipe action</th>
-                                                <th>Status action</th>
+                                                <th>Action</th>
                                             </tr>
                                         </tfoot>
                                         <tbody>
@@ -250,7 +250,7 @@
                                                             </button>
                                                         </form>
 
-                                                        <form action="recipe" class="d-inline" onsubmit="return confirm('Do you really want to set delete this recipe?');">
+                                                        <form action="recipeReport" class="d-inline" onsubmit="return confirm('Do you really want to set delete this recipe?');">
                                                             <button class="btn btn-danger btn-circle btn-sm" title="Delete"><i class="fa-solid fa-trash"></i></button>
                                                             <input type="hidden" name="recipeid" value="${u.recipeID}">
                                                             <input type="hidden" name="action" value="delete">

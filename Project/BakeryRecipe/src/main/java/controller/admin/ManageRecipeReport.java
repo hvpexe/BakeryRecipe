@@ -5,6 +5,7 @@
 package controller.admin;
 
 import dao.AdminDAO;
+import dao.RecipeDAO;
 import java.io.IOException;
 import java.io.PrintWriter;
 import javax.servlet.ServletException;
@@ -37,6 +38,10 @@ public class ManageRecipeReport extends HttpServlet {
             if(action.equals("Approved") || action.equals("Denied")){
                 int id = Integer.parseInt(request.getParameter("reportID"));
                 AdminDAO.updateStatusRecipeReport(id, action);
+            }
+            if(action.equals("delete")){
+                int id = Integer.parseInt(request.getParameter("recipeid"));
+                RecipeDAO.deleteRecipe(id);
             }
         } catch (Exception e) {
             System.out.println("Error at BRecipeController: " + e.toString());

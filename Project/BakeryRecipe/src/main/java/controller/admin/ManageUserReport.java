@@ -5,6 +5,8 @@
 package controller.admin;
 
 import dao.AdminDAO;
+import dao.UserDAO;
+import dto.User;
 import java.io.IOException;
 import java.io.PrintWriter;
 import javax.servlet.ServletException;
@@ -34,13 +36,20 @@ public class ManageUserReport extends HttpServlet {
         response.setContentType("text/html;charset=UTF-8");
         String action = request.getParameter("action");
         try {
-            if(action.equals("Approved") || action.equals("Denied")){
+            if (action.equals("Approved") || action.equals("Denied")) {
                 int id = Integer.parseInt(request.getParameter("reportID"));
                 AdminDAO.updateStatusUserReport(id, action);
             }
+            if (action.equals("changestatus")) {
+                int userid = Integer.parseInt(request.getParameter("userid"));
+                boolean status = Boolean.parseBoolean(request.getParameter("active"));
+                User user = UserDAO.getUserByID(userid);
+                user.setIsActive(status);
+                UserDAO.changeStatus(user);
+            }
         } catch (Exception e) {
             System.out.println("Error at BRecipeController: " + e.toString());
-        }finally{
+        } finally {
             response.sendRedirect("reportUser");
         }
     }

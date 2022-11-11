@@ -125,15 +125,16 @@ public class ReportDAO {
         return check;
     }
 
-    private static final String SHOW_REPORT_COMM_LIST = "SELECT [ReportComment].ID, [ReportComment].Detail, "
-            + "[ReportComment].DateReport, [ReportComment].ReportType, "
-            + "[ReportComment].[Status], "
-            + "[ReportComment].UserID, [User].LastName + ' ' + [User].FirstName AS Reporter, "
-            + "[Comment].Comment\n"
-            + "FROM [ReportComment]\n"
-            + "JOIN [User] ON [ReportComment].UserID = [User].ID\n"
-            + "JOIN [Comment] ON [Comment].ID = [ReportComment].CommentID\n"
-            + "ORDER BY [ReportComment].DateReport ASC";
+    private static final String SHOW_REPORT_COMM_LIST = "SELECT [ReportComment].ID, [ReportComment].Detail, \n"
+            + "            [ReportComment].DateReport, [ReportComment].ReportType, \n"
+            + "            [ReportComment].[Status], \n"
+            + "            [ReportComment].UserID, [User].LastName + ' ' + [User].FirstName AS Reporter, \n"
+            + "            [Comment].Comment, [Comment].ID AS commentID\n"
+            + "            FROM [ReportComment]\n"
+            + "            JOIN [User] ON [ReportComment].UserID = [User].ID\n"
+            + "            JOIN [Comment] ON [Comment].ID = [ReportComment].CommentID\n"
+            + "			WHERE [Comment].IsDeleted = 'False'\n"
+            + "            ORDER BY [ReportComment].DateReport ASC";
 
     public static List<Report> reportCMTList() throws SQLException {
         Connection conn = null;
@@ -152,7 +153,8 @@ public class ReportDAO {
                         rs.getString("ReportType"),
                         rs.getString("Status"),
                         rs.getString("Reporter"),
-                        rs.getString("Comment"));
+                        rs.getString("Comment"),
+                        rs.getInt("commentID"));
                 list.add(reportCMT);
             }
             return list;
@@ -171,17 +173,17 @@ public class ReportDAO {
         return null;
     }
 
-    private static final String SHOW_REPORT_RECIPE_LIST = "SELECT [ReportRecipe].ID, [ReportRecipe].DateReport, "
-            + "[ReportRecipe].Detail, [ReportRecipe].ReportType, "
-            + "[ReportRecipe].[Status], [ReportRecipe].UserID, "
-            + "[User].LastName + ' ' + [User].FirstName AS Reporter, [Recipe].[Name], "
-            + "[Picture].Img, [ReportRecipe].RecipeID\n"
-            + "FROM [ReportRecipe]\n"
-            + "JOIN [User] ON [ReportRecipe].UserID = [User].ID\n"
-            + "JOIN [Recipe] ON [ReportRecipe].RecipeID = [Recipe].ID\n"
-            + "JOIN [Picture] ON [Picture].RecipeID = [Recipe].ID\n"
-            + "WHERE [Picture].IsCover = 1\n"
-            + "ORDER BY [ReportRecipe].DateReport ASC";
+    private static final String SHOW_REPORT_RECIPE_LIST = "SELECT [ReportRecipe].ID, [ReportRecipe].DateReport, \n"
+            + "            [ReportRecipe].Detail, [ReportRecipe].ReportType, \n"
+            + "            [ReportRecipe].[Status], [ReportRecipe].UserID, \n"
+            + "            [User].LastName + ' ' + [User].FirstName AS Reporter, [Recipe].[Name], \n"
+            + "            [Picture].Img, [ReportRecipe].RecipeID\n"
+            + "            FROM [ReportRecipe]\n"
+            + "            JOIN [User] ON [ReportRecipe].UserID = [User].ID\n"
+            + "            JOIN [Recipe] ON [ReportRecipe].RecipeID = [Recipe].ID\n"
+            + "            JOIN [Picture] ON [Picture].RecipeID = [Recipe].ID\n"
+            + "            WHERE [Picture].IsCover = 1 AND [Recipe].IsDeleted = 'False'\n"
+            + "            ORDER BY [ReportRecipe].DateReport ASC";
 
     public static List<Report> reportRecipeList() throws SQLException {
         Connection conn = null;
@@ -221,14 +223,16 @@ public class ReportDAO {
         return null;
     }
 
-    private static final String SHOW_REPORT_USER_LIST = "SELECT [ReportUser].ID, [ReportUser].DateReport, "
-            + "[ReportUser].Detail, [ReportUser].ReportType, "
-            + "[ReportUser].[Status], [ReportUser].UserID AS ReporterID, "
-            + "[ReportUser].UserID2 AS UserID, [User].LastName + ' ' + [User].FirstName AS Username, "
-            + "[User].Avatar\n"
-            + "FROM [ReportUser]\n"
-            + "JOIN [User] ON [ReportUser].UserID2 = [User].ID\n"
-            + "ORDER BY [ReportUser].DateReport ASC";
+    private static final String SHOW_REPORT_USER_LIST = "SELECT [ReportUser].ID, [ReportUser].DateReport, \n"
+            + "            [ReportUser].Detail, [ReportUser].ReportType, \n"
+            + "            [ReportUser].[Status], [ReportUser].UserID AS ReporterID, \n"
+            + "            [ReportUser].UserID2 AS UserID, [User].LastName + ' ' + [User].FirstName AS Username, \n"
+            + "            [User].Avatar, [User].[Role]\n"
+            + "            FROM [ReportUser]\n"
+            + "            JOIN [User] ON [ReportUser].UserID2 = [User].ID\n"
+            + "	           WHERE [User].IsActive = 'True'\n"
+            + "            ORDER BY [ReportUser].DateReport ASC";
+
     public static List<Report> reportUserList() throws SQLException {
         Connection conn = null;
         PreparedStatement ps = null;
@@ -241,16 +245,17 @@ public class ReportDAO {
             while (rs.next()) {
                 User reporter = UserDAO.getUserByID(rs.getInt("ReporterID"));
                 String fullname = reporter.getLastName() + ' ' + reporter.getFirstName();
-                Report report = new Report(rs.getInt("ID"), 
-                        rs.getTimestamp("DateReport"), 
-                        rs.getString("Detail"), 
-                        rs.getInt("ReporterID"), 
-                        rs.getString("ReportType"), 
-                        rs.getString("Status"), 
-                        fullname, 
-                        rs.getInt("UserID"), 
-                        rs.getString("Username"), 
-                        rs.getString("Avatar"));
+                Report report = new Report(rs.getInt("ID"),
+                        rs.getTimestamp("DateReport"),
+                        rs.getString("Detail"),
+                        rs.getInt("ReporterID"),
+                        rs.getString("ReportType"),
+                        rs.getString("Status"),
+                        fullname,
+                        rs.getInt("UserID"),
+                        rs.getString("Username"),
+                        rs.getString("Avatar"),
+                        rs.getString("Role"));
                 list.add(report);
             }
             return list;
