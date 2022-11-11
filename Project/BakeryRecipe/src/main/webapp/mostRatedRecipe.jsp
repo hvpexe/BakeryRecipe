@@ -1,9 +1,3 @@
-<%-- 
-    Document   : mostRatedRecipe
-    Created on : Sep 27, 2022, 7:56:56 AM
-    Author     : kichi
---%>
-
 <%@page import="dao.RecipeDAO"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
@@ -14,33 +8,10 @@
         <meta name="viewport" content="initial-scale=1, width=device-width" />
         <title>Most Rated Recipe</title>
         <meta name="description" content="" />
-
+        <c:import url="universal.jsp" />
+        
         <link rel="stylesheet" href="assets/css/community.css" />
-        <link rel="stylesheet" href="assets/css/web/bootstrap-4.3.1.min.css" />
-        <link
-            rel="stylesheet"
-            href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700&display=swap"
-            />
-        <link
-            rel="stylesheet"
-            href="https://fonts.googleapis.com/css2?family=Abhaya Libre:wght@700&display=swap"
-            />
-        <link
-            rel="stylesheet"
-            href="https://fonts.googleapis.com/css2?family=Abel:wght@400&display=swap"
-            />
-        <link
-            rel="stylesheet"
-            href="https://fonts.googleapis.com/css2?family=Gelasio:wght@400;500;700&display=swap"
-            />
-        <link
-            rel="stylesheet"
-            href="https://fonts.googleapis.com/css2?family=Beau Rivage:wght@400&display=swap"
-            />
-        <link
-            rel="stylesheet"
-            href="https://fonts.googleapis.com/css2?family=Arima Madurai:wght@800&display=swap"
-            />
+        
     </head>
     <body>
         <c:import url="header.jsp"/>
