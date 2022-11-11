@@ -302,7 +302,8 @@ public class CommentDAO {
         }
         return null;
     }
-    private static final String LIST_COMMENT = "select  baker.LastName+' ' +baker.FirstName  as fullName ,DateComment,cmt.ID,cmt.Comment,baker.Avatar\n" + "           "
+    private static final String LIST_COMMENT
+            = "select  baker.LastName+' ' +baker.FirstName  as fullName ,DateComment,cmt.ID,cmt.Comment,baker.Avatar,cmt.UserID\n"
             + " from [dbo].[Comment] cmt join [dbo].[User] baker\n"
             + " on cmt.UserID = baker.ID\n"
             + "            where cmt.RecipeID = ?"
@@ -325,6 +326,7 @@ public class CommentDAO {
                 String name = rs.getString("fullName");
                 Timestamp dateComment = rs.getTimestamp("DateComment");
                 Comment cmt = new Comment(commentID, comment, dateComment, avatar, name);
+                cmt.setUserID(rs.getInt("UserID"));
                 cmtList.add(cmt);
             }
         } catch (Exception e) {

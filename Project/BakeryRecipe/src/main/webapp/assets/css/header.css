@@ -165,7 +165,7 @@ body {
     border-radius: 50%;
 }
 
-.header-notification::after {
+.header-notification[data-notices]::after {
     content: attr(data-notices);
     position: absolute;
     top: 0;
