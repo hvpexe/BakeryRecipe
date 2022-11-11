@@ -20,7 +20,7 @@ function getReportUser(userID) {
 
 
 
-function sendReport(value){
+function sendReport1(value){
         var selectReport = document.querySelector('#select_Rp').value;
    
     var txtReportUser=document.querySelector('#txtReportUser').value;

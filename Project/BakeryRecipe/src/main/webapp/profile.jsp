@@ -145,7 +145,7 @@
                             <textarea name="txtReport" class="txtareaRp w-100"  id="txtReportUser" value=""></textarea>
                         </div>  
                         <div class="form-group">
-                            <button class="hover" type="submit" onclick="sendReport('User')">Send Report</button>
+                            <button class="hover" type="submit" onclick="sendReport1('User')">Send Report</button>
                         </div>
 
                         <!--</form>--> 
