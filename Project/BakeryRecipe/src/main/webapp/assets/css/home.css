@@ -256,7 +256,6 @@ body {
     -webkit-line-clamp: 2;
     -webkit-box-orient: vertical;
     overflow: hidden;
-    cursor: crosshair;
 }
 #liked-list .comment .the-comment.no-clamp{
     -webkit-line-clamp: unset;

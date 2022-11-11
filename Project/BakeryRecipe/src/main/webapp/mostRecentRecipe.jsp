@@ -14,32 +14,8 @@
         <meta name="viewport" content="initial-scale=1, width=device-width" />
         <title>Most Recent Recipe</title>
         <meta name="description" content="" />
-        <link
-            rel="stylesheet"
-            href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700&display=swap"
-            />
-        <link
-            rel="stylesheet"
-            href="https://fonts.googleapis.com/css2?family=Abhaya Libre:wght@700&display=swap"
-            />
-        <link
-            rel="stylesheet"
-            href="https://fonts.googleapis.com/css2?family=Abel:wght@400&display=swap"
-            />
-        <link
-            rel="stylesheet"
-            href="https://fonts.googleapis.com/css2?family=Gelasio:wght@400;500;700&display=swap"
-            />
-        <link
-            rel="stylesheet"
-            href="https://fonts.googleapis.com/css2?family=Beau Rivage:wght@400&display=swap"
-            />
-        <link
-            rel="stylesheet"
-            href="https://fonts.googleapis.com/css2?family=Arima Madurai:wght@800&display=swap"
-            />
-        <link rel="stylesheet" href="assets/css/web/bootstrap-4.3.1.min.css" />
-        <link rel="stylesheet" href="assets/css/community1.css" />
+        <c:import url="universal.jsp" />
+        <link rel="stylesheet" href="assets/css/community.css" />
 
     </head>
     <body>
@@ -55,9 +31,9 @@
                             <div class="img-container">
                                 <a href=".\RecipeDetail?recipeID=${cc.id}">
                                     <img class="recipe-img" alt=""
-                                     src="${cc.cover}" />
+                                         src="${cc.cover}" />
                                 </a>
-                                
+
                                 <div class="react">
                                     <div>${cc.like} likes</div>
                                     <div>${cc.comment} comments</div>

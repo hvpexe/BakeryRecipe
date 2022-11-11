@@ -39,10 +39,9 @@
                 </a>
             </c:if>
             <c:if test="${login != null}">
-
                 <div class="d-inline-flex ml-auto">
                     <div class="p-0 d-flex align-items-center justify-content-center ml-auto" id="header-notification">
-                        <div class="hover-button-1 header-notification" data-notices="a">
+                        <div class="hover-button-1 header-notification" data-notices="${LIST_ALL_NOTIFY.size()}">
                             <i class="fa-solid fa-bell"></i>
                         </div>
                         <div class="notify pe-none">
