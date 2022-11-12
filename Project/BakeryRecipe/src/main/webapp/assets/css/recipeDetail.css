@@ -369,6 +369,7 @@ body {
     display: inline-block;
     position: relative;
     top:-15px;
+    margin:0 clamp(50px,10vw,100px);
 }
 .dropdown button{
     background: white;
