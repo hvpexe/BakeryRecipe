@@ -258,7 +258,7 @@ function showConfirmBox(id, type, item) {
     var deleteBtn = $('#delete_confirm .delete');
     deleteBtn.click(e => {
         if (type == "comment") {
-            deleteCMT(id, item);
+            deleteCMT(id, item,confirmBox);
         }
          if (type == "recipe") {
             deleteRecipe(id, item);
@@ -266,7 +266,31 @@ function showConfirmBox(id, type, item) {
     });
 
 }
-function deleteCMT(commentID, item) {
+function deleteRecipe(recipeID, item) {
+    var infomation = document.querySelector('#delete_confirm #thankReport');
+    $(infomation).addClass('text-center font-weight-bold loading');
+    $.ajax({
+        url: "ajax/DeleteRecipeAjax",
+        type: "get",
+        data: {
+            recipeID: recipeID
+        },
+        success: function (response) {
+            //Do Something
+            setTimeout(() => {
+                console.log(response);
+                $(infomation).removeClass('loading').html(response);
+                location ="home";
+            }, 500);
+
+        },
+        error: function (xhr) {
+            console.log("that bai");
+            //Do Something to handle error
+        }
+    });
+}
+function deleteCMT(commentID, item,confirmBox) {
     var infomation = document.querySelector('#delete_confirm #thankReport');
     $(infomation).addClass('text-center font-weight-bold loading');
     $.ajax({
@@ -281,8 +305,10 @@ function deleteCMT(commentID, item) {
                 console.log(response);
                 $(infomation).removeClass('loading').html(response);
                 $(item).remove();
+            }, 500);
+setTimeout(() => {
+                confirmBox.removeClass('d-flex');
             }, 1000);
-
         },
         error: function (xhr) {
             console.log("that bai");
