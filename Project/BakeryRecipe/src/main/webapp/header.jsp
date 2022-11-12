@@ -44,8 +44,7 @@
                         <div class="hover-button-1 header-notification" ">
                             <i class="fa-solid fa-bell"></i>
                         </div>
-                        <div class="notify pe-none">
-                            this is the notify content
+                        <div class="notify pe-none loading">
                         </div>
                     </div>
                     <div class="header-user position-relative ml-auto">

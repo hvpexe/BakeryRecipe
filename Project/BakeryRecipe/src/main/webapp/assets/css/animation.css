@@ -90,9 +90,13 @@
 :has(.invalid) .status{
     color:var(--main-theme-color);
 }
+button:focus{
+    outline:none;
+}
 [class*=hover] {
     transition:0.3s;
     cursor: pointer;
+    outline: none;
 }
 [class*=hover] > *{
     z-index: 1;

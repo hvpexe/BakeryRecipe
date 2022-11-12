@@ -266,7 +266,13 @@ function sendReport(value) {
     console.log(txtReport);
     console.log(txtReportComment);
 }
-
+function showConfirmBox(id, type, item) {
+    var confirmBox = $('#delete_confirm');
+    var graybox = $('#delete_confirm .gray-box');
+    var content = $('#delete_confirm .content');
+    graybox.click(() => confirmBox.removeClass('d-flex'));
+    confirmBox.addClass('d-flex');
+}
 $('.instruction img').click((e) => {
     var item = e.target;
     $(item).css(

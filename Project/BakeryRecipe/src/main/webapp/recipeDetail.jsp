@@ -90,20 +90,16 @@
                                 </div>
 
                             </span>
-                            <!--                             <div     class="button-recipe">
-                                                        <img src=".\assets\css\fontawesome-free-6.1.1-web\svgs\solid\ellipsis-vertical.svg" height="200px" width="100px">
-                                                        </div>-->
-
                             <div class="dropdown">
                                 <button ><i class="fa-solid fa-ellipsis"></i></button>
                                 <div class="dropdown-options">
                                     <c:if test="${sessionScope.login.id != USER_DETAIL.id && sessionScope.login.role != 'admin'}">
-                                        <a   class="d-inline-block text-muted hover-underline c-pointer mr-3 col " onclick="getReportRecipe(${RECIPE_DETAIL.getId()})" href="#">
+                                        <a   class="d-inline-block text-muted hover-underline c-pointer hover-underline mr-3 col " onclick="getReportRecipe(${RECIPE_DETAIL.getId()})" href="#">
                                             <span class="align-middle"><strong>${re.like}</strong> Report</span>
                                         </a>
                                     </c:if>
                                     <c:if test="${sessionScope.login.id == USER_DETAIL.id || sessionScope.login.role == 'admin'}">
-                                        <a class="col" href="#">Delete</a>
+                                        <a class="col hover-underline" onclick="showConfirmBox(${RECIPE_DETAIL.id},'recipe')" >Delete</a>
                                     </c:if>
                                 </div>
                             </div>
@@ -266,14 +262,13 @@
                                                             <button ><i class="fa-solid fa-ellipsis"></i></button>
                                                             <div class="dropdown-options">
                                                                 <c:catch var="ex">
-                                                                    
                                                                     <c:if test="${sessionScope.login.id != cmt.userID}">
                                                                         <a   class="d-inline-block col text-muted hover-underline c-pointer mr-3" onclick="getReportComment(${RECIPE_DETAIL.getId()})">
                                                                             <span class="align-middle"><strong>${re.like}</strong> Report</span>
                                                                         </a>
                                                                     </c:if>
                                                                     <c:if test="${(sessionScope.login.id == cmt.userID || sessionScope.login.role == 'admin')}">
-                                                                        <a class="col" >Delete</a>
+                                                                        <a class="col" onclick="showConfirmBox(${cmt.commentID},'comment')" >Delete</a>
                                                                     </c:if>
                                                                 </c:catch>${ex}
                                                             </div>
@@ -397,7 +392,22 @@
         </div>
 
         <!--keu thuc report cua comment-->
-
+        <!--Delete confirm -->
+        <div class="fixed-container" id="delete_confirm" >
+            <div class="gray-box"></div>
+            <div class="content card-body col-12 col-md-4">
+                <div class="exit-btn"><i class="fas fa-x"></i></div>
+                <div class="col-12 p-0">
+                    <div class="report-title h3 font-weight-bold">Do You Want To Delete?</div>
+                    <div class="form-group d-flex justify-content-between col-12 p-4">
+                        <button class="hover-button-2 bg-success delete">Delete</button>
+                        <button class="hover-button-2 bg-danger" onclick="$('#delete_confirm').removeClass('d-flex')">Cancel</button>
+                    </div>
+                </div>
+                <div id="thankReport"></div>
+            </div>
+        </div>
+        <!--End of Delete confirm -->
 
         <script>
             var loginID = ${sessionScope.login.id};

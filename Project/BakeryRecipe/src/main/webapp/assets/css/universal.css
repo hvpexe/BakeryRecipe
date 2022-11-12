@@ -50,10 +50,10 @@ body:has(.fixed-container.d-flex){
     padding: 5px 10px;
     align-content: center;
 }
-.fixed-container .exit-btn:hover{
+.fixed-container .exit-btn:hover,.fixed-container .exit-btn:has(*:hover){
     background: var(--main-theme-color);
 }
-.fixed-container .exit-btn:active{
+.fixed-container .exit-btn:active,.fixed-container .exit-btn:has(*:active){
     background: var(--main-theme-color-hover);
 }
 .fixed-container .content{

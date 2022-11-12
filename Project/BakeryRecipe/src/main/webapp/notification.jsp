@@ -36,7 +36,7 @@
                 <c:forEach items="${LIST_ALL_NOTIFY}" var="noti">
                     <c:if test="${noti.typeofNotify eq 'like'}">
                         <div onclick="changeType(${noti.notifyID})">
-                            <a class="notify-item hover-button-3 seen c-pointer text-decoration-none"  onclick="changeType(${noti.notifyID})"  href="profile?userid=${noti.senderID}">
+                            <a class="notify-item ${noti.isSeen?'seen':''} hover-button-3 c-pointer text-decoration-none"  onclick="changeType(${noti.notifyID})"  href="profile?userid=${noti.senderID}">
                                 <div class="col d-flex ">
                                     <img class="avatar  p-0 rounded-circle" src="${noti.coverfSender}" alt="avatar"/>
                                     <div class="notify-content col d-flex flex-column">
@@ -51,7 +51,7 @@
                         </div>
                     </c:if>
                     <c:if test="${noti.typeofNotify eq 'follow'}">
-                        <a class="notify-item  hover-button-3 c-pointer text-decoration-none" onclick="changeType(${noti.notifyID})" href="profile?userid=${noti.senderID}" >
+                        <a class="notify-item ${noti.isSeen?'seen':''} hover-button-3 c-pointer text-decoration-none" onclick="changeType(${noti.notifyID})" href="profile?userid=${noti.senderID}" >
                             <div class="col d-flex">
                                 <img class="avatar  p-0 rounded-circle" src="${noti.coverfSender}" alt="avatar"/>
                                 <div class="notify-content col d-flex flex-column">
@@ -65,7 +65,7 @@
                         </a>
                     </c:if>
                     <c:if test="${noti.typeofNotify eq 'comment'}">
-                        <a class="notify-item  hover-button-3 c-pointer text-decoration-none" onclick="changeType(${noti.notifyID})" href="RecipeDetail?recipeID=${noti.recipeID}">
+                        <a class="notify-item ${noti.isSeen?'seen':''}  hover-button-3 c-pointer text-decoration-none" onclick="changeType(${noti.notifyID})" href="RecipeDetail?recipeID=${noti.recipeID}">
                             <div class="col d-flex">
                                 <img class="avatar  p-0 rounded-circle" src="${noti.coverfSender}" alt="avatar"/>
                                 <div class="notify-content col d-flex flex-column">
@@ -91,7 +91,7 @@
                         notifyID: value
                     },
                     success: function () {
-                        console.log("thanh cong roi kia");
+                        console.log("thanh cong roi kia");//lam vay chi
                     },
                     error: function () {
                         //Do Something to handle error
@@ -102,6 +102,7 @@
 
         </script>
         <script>
+            $('.notify').removeClass('loading');
             $('#notification #btnAll').click((e) => {
                 $('#notification .notify-item').removeClass('d-none');
                 $(e.target).addClass('active');

@@ -111,7 +111,7 @@ public class NotifyDAO {
                 int notifyID = rs.getInt("ID");
                 int ReceiverID = rs.getInt("ReceiverID");
                 int commentID = rs.getInt("CommentID");
-                Date date = rs.getDate("DateReceive");
+                Timestamp date = rs.getTimestamp("DateReceive");
                 boolean isSeen = rs.getBoolean("isSeen");
                 boolean isDelete = rs.getBoolean("IsDelete");
                 Notify notify = new Notify(notifyID, senderId, recipeID, commentID, ReceiverID, "comment", date, isSeen, isDelete);
@@ -194,7 +194,7 @@ public class NotifyDAO {
             while (rs.next()) {
                 int followID = rs.getInt("ID");
                 int senderId = rs.getInt("SenderID");
-                Date datefl = rs.getDate("DateReceive");
+                Timestamp datefl = rs.getTimestamp("DateReceive");
                 boolean isSeen = rs.getBoolean("IsSeen");
                 boolean isDelete = rs.getBoolean("IsDelete");
                 Notify notify = new Notify(followID, senderId, receiverID, "follow", datefl, isSeen, isDelete);
@@ -283,7 +283,7 @@ public class NotifyDAO {
                 int receiverID = rs.getInt("ReceiverID");
                 boolean isSeen = rs.getBoolean("isSeen");
                 boolean isDelete = rs.getBoolean("IsDelete");
-                Date date = rs.getDate("DateReceive");
+                Timestamp date = rs.getTimestamp("DateReceive");
                 Notify notify = new Notify(likeId, senderID, recipeID, receiverID, "like", date, isSeen, isDelete);
                 notifyLike.add(notify);
             }
@@ -314,7 +314,7 @@ public class NotifyDAO {
         try {
             cn = DBUtils.getConnection();
             ptm = cn.prepareStatement(UPDATE_SEEN);
-            ptm.setString(1, "True");
+            ptm.setBoolean(1, true);
             ptm.setInt(2, notifyID);
             check = ptm.executeUpdate() > 0 ? true : false;
         } catch (Exception e) {
@@ -396,7 +396,8 @@ public class NotifyDAO {
 
     private static final String GET_ALL = "SELECT	[ID],[SenderID],[RecipeID],[CommentID],[ReceiverID],[TypeofNotify],[DateReceive],[IsSeen],[IsDelete]\n"
             + "FROM [dbo].[Notificaition]\n"
-            + "WHERE  [ReceiverID]= ? AND [IsSeen] = 'FALSE' AND [IsDelete] ='FALSE'";
+            + "WHERE  [ReceiverID]= ? AND [IsDelete] ='FALSE'"
+            + "ORDER BY DateReceive DESC";
 
     public static List<Notify> getAllNotify(int receiverID) throws SQLException {
         Connection cn = null;
@@ -415,7 +416,7 @@ public class NotifyDAO {
                 int commentID = rs.getInt("CommentID");
 //        int receiverID =rs.getInt("ReceiverID");
                 String notifyType = rs.getString("TypeofNotify");
-                Date tmp = rs.getDate("DateReceive");
+                Timestamp tmp = rs.getTimestamp("DateReceive");
                 boolean isSeen = rs.getBoolean("IsSeen");
                 boolean isDelete = rs.getBoolean("IsDelete");
                 String nameofSender = UserDAO.getUserByID(senderID).getName();
