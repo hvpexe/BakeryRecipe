@@ -1,5 +1,6 @@
 <%@page import="dao.UserDAO"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
+
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html>
@@ -157,7 +158,6 @@
                                                 </div>
                                             </div>
                                             <c:forEach items="${LIST_STEP}" var="st" varStatus="i">
-                                                ${st}
                                                 <div class="col align-items-center p-0 " id="inst${i.index+1}">
                                                     <h5 class="text-secondary col-12 p-0">
                                                         Step <span>${i.index+1}</span>

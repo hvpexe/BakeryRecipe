@@ -88,7 +88,7 @@ input,textarea{
     border:none;
 }
 :is(input,textarea):focus{
-    outline: 2px ridge var(--main-theme-color-hover);
+    outline: 2px ridge #777;
     outline-style: solid;
 }
 

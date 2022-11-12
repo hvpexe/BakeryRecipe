@@ -40,7 +40,7 @@
 }
 .loading{
     width: 100%;
-    min-height:200px;
+    min-height:50px;
     background: white;
     position: relative;
     pointer-events: none;
@@ -115,10 +115,10 @@ button:focus{
     box-shadow: 0 0 400px inset #00000020;
 }
 .hover-button-2:hover{
-    box-shadow: 0 -10px 10px 0 inset var(--brown-theme-50);
+    box-shadow: 0 -10px 10px 0 inset var(--brown-theme-75);
 }
 .hover-button-2:active{
-    box-shadow: 0 -15px 15px 0 inset var(--brown-theme-50);
+    box-shadow: 0 -15px 15px 0 inset var(--brown-theme-75);
 
 }
 .hover-button-3{

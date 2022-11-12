@@ -13,13 +13,14 @@ body {
     background-color: var(--web-background-color) ;
     font-family: 'Roboto', sans-serif;
     scroll-behavior: smooth;
+    overflow-x: hidden;
 }
 
 .reccipe-container {
-    max-width: 1200px;
+    /*max-width: 1200px;*/
     margin: 40px auto;
     background-color: var(--side-theme-color);
-    padding: 40px;
+    padding: 40px 20px;
     box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.06);
     border-radius: 20px;
 }
@@ -35,7 +36,7 @@ body {
 } */
 
 .info-img {
-    padding: 0 ;
+    padding: 0px ;
 }
 
 .first-div {
@@ -321,7 +322,7 @@ body {
 }
 .swiper-slide iframe {
     width: 100%;
-    height: 340px;
+    aspect-ratio:1;
     border-radius: 10px;
     object-fit: contain;
 }
@@ -369,7 +370,7 @@ body {
     display: inline-block;
     position: relative;
     top:-15px;
-    margin:0 clamp(50px,10vw,100px);
+    margin:0 0 0 clamp(50px,100vw,100px);
 }
 .dropdown button{
     background: white;
@@ -411,6 +412,7 @@ button:hover{
     padding: 5px;
     text-decoration: none;
     padding:20px 40px;
+    border:1px solid #888;
 }
 
 .dropdown-options a:hover {
@@ -439,4 +441,17 @@ button:hover{
     display: flex;
     align-items: center;
     justify-content: center;
+}
+#delete_confirm button.delete{
+    background: var(--main-theme-color);
+    border:3px outset var(--main-theme-color);
+    color:white;
+
+    font-weight: bold;
+}
+#delete_confirm button.cancel{
+    border:3px outset var(--main-theme-color);
+    color:black;
+
+    font-weight: bold;
 }

@@ -101,6 +101,7 @@ public class EditRecipeController extends HttpServlet {
             if (instDescription != null) {
                 instDescription = Tools.toUTF8(instDescription);
             }
+            System.out.println(instDescription[0]);
             //set default number
             int prepareTime = 30;
             int cookTime = 30;

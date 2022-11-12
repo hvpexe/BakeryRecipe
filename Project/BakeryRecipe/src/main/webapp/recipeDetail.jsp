@@ -22,9 +22,9 @@
         <c:catch var="e"> 
             <c:import url="header.jsp"/>
             <%--<c:catch var="e">--%>
-            <div class="reccipe-container ">
+            <div class="reccipe-container container">
                 <!-- head info -->
-                <div class="row head-info">
+                <div class="row head-info px-2">
                     <div class="col-md-4 info-img">
                         <div class="swiper">
                             <!-- Additional required wrapper -->
@@ -95,7 +95,7 @@
                                         </a>
                                     </c:if>
                                     <c:if test="${sessionScope.login.id == USER_DETAIL.id || sessionScope.login.role == 'admin'}">
-                                        <a class="col hover-underline" onclick="showConfirmBox(${RECIPE_DETAIL.id},'recipe')" >Delete</a>
+                                        <a class="col hover-underline" onclick="showConfirmBox(${RECIPE_DETAIL.id}, 'recipe')" >Delete</a>
                                     </c:if>
                                 </div>
                             </span>
@@ -241,11 +241,9 @@
                                     <!--test list_cmt-->
 
                                     <c:forEach items="${COMMENT_LIST}" var="cmt">
-                                        <input  type="hidden" id="commentID">
-                                        <input type="hidden" id="commentReportID" value="${cmt.commentID}">
 
 
-                                        <div class="d-flex flex-start mb-4"   >
+                                        <div class="d-flex flex-start mb-4"  id="comment-${cmt.commentID}" >
                                             <img class="rounded-circle border mr-2"
                                                  src="./assets/images/avt/${cmt.avatar}" alt="avatar"
                                                  width="60" height="60" />
@@ -264,7 +262,7 @@
                                                                         </a>
                                                                     </c:if>
                                                                     <c:if test="${(sessionScope.login.id == cmt.userID || sessionScope.login.role == 'admin')}">
-                                                                        <a class="col" onclick="showConfirmBox(${cmt.commentID},'comment')" >Delete</a>
+                                                                        <a class="col" onclick="showConfirmBox(${cmt.commentID}, 'comment','#comment-${cmt.commentID}')" >Delete</a>
                                                                     </c:if>
                                                                 </c:catch>${ex}
                                                             </div>
@@ -391,13 +389,13 @@
         <!--Delete confirm -->
         <div class="fixed-container" id="delete_confirm" >
             <div class="gray-box"></div>
-            <div class="content card-body col-12 col-md-4">
+            <div class="content flex-column d-flex  border card-body col-12 col-md-4" style="gap:10px">
                 <div class="exit-btn"><i class="fas fa-x"></i></div>
-                <div class="col-12 p-0">
-                    <div class="report-title h3 font-weight-bold">Do You Want To Delete?</div>
-                    <div class="form-group d-flex justify-content-between col-12 p-4">
-                        <button class="hover-button-2 bg-success delete">Delete</button>
-                        <button class="hover-button-2 bg-danger" onclick="$('#delete_confirm').removeClass('d-flex')">Cancel</button>
+                <div class="col-12 d-flex flex-column justify-content-between">
+                    <div class="report-title h3 font-weight-bold text-center">Do You Want To Delete?</div>
+                    <div class="d-flex justify-content-around align-items-center col-12 ">
+                        <button class="hover-button-2  delete">Delete</button>
+                        <button class="hover-button-2  cancel" onclick="$('#delete_confirm').removeClass('d-flex')">Cancel</button>
                     </div>
                 </div>
                 <div id="thankReport"></div>

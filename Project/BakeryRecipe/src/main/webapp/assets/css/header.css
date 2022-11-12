@@ -3,6 +3,9 @@
 @import "notification.css";
 :root {
     --main-theme-color: #DB5A42;
+    --main-theme-color-25: #DB5A4225;
+    --main-theme-color-50: #DB5A4250;
+    --main-theme-color-75: #DB5A4275;
     --main-theme-color-hover: #c22e14;
     --side-theme-color: #FFFFFF;
     --yellow-theme: #FFD275;

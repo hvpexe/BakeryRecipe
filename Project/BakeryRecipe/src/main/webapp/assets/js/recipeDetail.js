@@ -174,26 +174,7 @@ function getReportComment(recipeID) {
     $('#report_comment .exit-btn').click(() => report.removeClass('d-flex'));
 }
 
-function deleteCMT(commentID) {
-    $.ajax({
-        url: "/ajax/DeleteCommentAjax",
-        type: "get",
-        data: {
-            commentId: commentID
-        },
-        success: function (response) {
-            //Do Something
-            console.log(response);
-            var cmtShow = document.getElementById("show-comment");
-            $(cmtShow).prepend(response);
-            item.value = "";
-        },
-        error: function (xhr) {
-            console.log("that bai");
-            //Do Something to handle error
-        }
-    });
-}
+
 
 const swiper = new Swiper('.swiper', {
     pagination: {
@@ -270,8 +251,44 @@ function showConfirmBox(id, type, item) {
     var confirmBox = $('#delete_confirm');
     var graybox = $('#delete_confirm .gray-box');
     var content = $('#delete_confirm .content');
+    var exitBtn = $('#delete_confirm .exit-btn');
     graybox.click(() => confirmBox.removeClass('d-flex'));
+    exitBtn.click(() => confirmBox.removeClass('d-flex'));
     confirmBox.addClass('d-flex');
+    var deleteBtn = $('#delete_confirm .delete');
+    deleteBtn.click(e => {
+        if (type == "comment") {
+            deleteCMT(id, item);
+        }
+         if (type == "recipe") {
+            deleteRecipe(id, item);
+        }
+    });
+
+}
+function deleteCMT(commentID, item) {
+    var infomation = document.querySelector('#delete_confirm #thankReport');
+    $(infomation).addClass('text-center font-weight-bold loading');
+    $.ajax({
+        url: "ajax/DeleteCommentAjax",
+        type: "get",
+        data: {
+            commentId: commentID
+        },
+        success: function (response) {
+            //Do Something
+            setTimeout(() => {
+                console.log(response);
+                $(infomation).removeClass('loading').html(response);
+                $(item).remove();
+            }, 1000);
+
+        },
+        error: function (xhr) {
+            console.log("that bai");
+            //Do Something to handle error
+        }
+    });
 }
 $('.instruction img').click((e) => {
     var item = e.target;
