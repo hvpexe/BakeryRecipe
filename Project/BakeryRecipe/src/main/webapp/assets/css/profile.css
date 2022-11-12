@@ -195,3 +195,47 @@ button:hover{
 .fa-ellipsis{
     color: black;
 }
+/*///button follow*/ 
+.info-user  {
+    display:  inline-flex;
+    gap:5px;
+    align-items: center;
+}
+.info-user span {
+    font-weight: 500;
+    font-size: 18px;
+    line-height: 22px;
+    margin: 0 5px;
+}
+
+.info-user img {
+    height: 40px;
+    width: 40px;
+    border-radius: 50%;
+    border: 0.5px solid var(--border-theme-color);
+}
+
+.btn-style1 {
+    padding: 0.25rem 0.7rem ;
+    background-color: var(--main-theme-color) ;
+    color: var(--side-theme-color) ;
+    border-radius: 20px ;
+    text-align: center;
+}
+
+
+.btn-style1:hover {
+    background-color: var(--main-theme-color-hover);
+    color: var(--side-theme-color) ;
+    border-radius: 20px ;
+}
+.btn-style1.button-Follower {
+    background-color: var(--white);
+    border: 2px solid var(--main-theme-color);
+    color: #DB5A42;
+}
+
+
+.follow_view{
+    display: block;
+}

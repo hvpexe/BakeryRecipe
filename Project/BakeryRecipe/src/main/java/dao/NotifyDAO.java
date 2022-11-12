@@ -396,7 +396,7 @@ public class NotifyDAO {
 
     private static final String GET_ALL = "SELECT	[ID],[SenderID],[RecipeID],[CommentID],[ReceiverID],[TypeofNotify],[DateReceive],[IsSeen],[IsDelete]\n"
             + "FROM [dbo].[Notificaition]\n"
-            + "WHERE  [ReceiverID]= ? AND [IsSeen] = 'FALSE' AND [IsDelete] ='FALSE'";
+            + "WHERE  [ReceiverID]= ?  AND [IsDelete] ='FALSE'";
 
     public static List<Notify> getAllNotify(int receiverID) throws SQLException {
         Connection cn = null;
@@ -447,4 +447,6 @@ public class NotifyDAO {
         }
         return notifyList;
     }
+
+   
 }

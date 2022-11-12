@@ -57,11 +57,6 @@
                                 <img src="${USER_DETAIL.getAvatar()}">
                                 <a  class="text-decoration-none hover-underline text-dark" href="profile?userid=${USER_DETAIL.getId()}">${USER_DETAIL.getName()}</a>
                                 <c:if test="${sessionScope.login.id != USER_DETAIL.id}">
-                                    <!--                                <div class="btn btn-style1" onclick="followButton(this, 'Follow', 'UnFollow', this.action)" >
-                                                                        <i class="fa-solid fa-user-plus"></i>
-                                                                        <span  class="txt-follow" this="">Follow</span>
-                                                                    </div>-->
-                                    <!--cach cua anh tú mượn mấy hôm trả-->
                                     <c:choose>
                                         <c:when test="${CHECK_FOLLOW == 'false'}">
                                             <div class="btn btn-style1" onclick="followButton(this, 'Follow', 'UnFollow', this.action)" >
