@@ -62,15 +62,18 @@ public class CommentDAO {
         return null;
     }
     private static final String SELECT_COMMENT_BY_ID
-            = "SELECT [ID]\n"
+            = "SELECT c.[ID]\n"
             + "      ,[Comment]\n"
             + "      ,[DateComment]\n"
             + "      ,[LastDateEdit]\n"
             + "      ,[IsDeleted]\n"
             + "      ,[UserID]\n"
-            + "      ,[RecipeID]\n"
-            + "  FROM [Comment]"
-            + "  WHERE ID = ?";
+            + "      ,[RecipeID],\n"
+            + "	  u.Avatar,\n"
+            + "	  u.LastName + ' ' + u.FirstName as FullName\n"
+            + "  FROM [Comment] c\n"
+            + "  join [User] u on u.ID = c.UserID"
+            + "  WHERE c.ID = ?";
 
     public static Comment getCommentByID (int id) throws SQLException {
         String sql = SELECT_COMMENT_BY_ID;
@@ -78,7 +81,6 @@ public class CommentDAO {
         PreparedStatement ps = null;
         ResultSet rs = null;
         Connection conn = null;
-        User baker = null;
         try {
             conn = DBUtils.getConnection();
             ps = conn.prepareStatement(sql);
@@ -88,9 +90,8 @@ public class CommentDAO {
                 comment = new Comment(id, rs.getString(2), rs.getTimestamp(3),
                         rs.getTimestamp(4), rs.getBoolean(5),
                         rs.getInt(6), rs.getInt(7));
-                baker =UserDAO.getUserByID(rs.getInt("UserID"));
-                comment.setAvatar(baker.getAvatar());
-                comment.setChefName(baker.getName());
+                comment.setAvatar(rs.getString("Avatar"));
+                comment.setChefName(rs.getString("FullName"));
             }
             return comment;
         } catch (Exception e) {

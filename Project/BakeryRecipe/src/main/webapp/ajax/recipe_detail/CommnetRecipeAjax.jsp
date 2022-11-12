@@ -3,7 +3,7 @@
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <div class="d-flex flex-start mb-4"  id="comment-${cmt.commentID}" >
     <img class="rounded-circle border mr-2"
-         src="${cmt.avatar}" alt="avatar"
+         src="./assets/images/avt/${cmt.avatar}" alt="avatar"
          width="60" height="60" />
     <div class="card w-100">
         <div class="card-body p-4"> 

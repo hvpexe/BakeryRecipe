@@ -30,7 +30,7 @@ import javax.servlet.http.HttpSession;
 public class RecipeDetailController extends HttpServlet {
 
     private static final String SUCCESS = "recipeDetail.jsp";
-    private static final String ERROR = "recipeDetail.jsp";
+    private static final String ERROR = "home";
 
     protected void processRequest (HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
@@ -40,6 +40,7 @@ public class RecipeDetailController extends HttpServlet {
 //            int loginID = Integer.parseInt(request.getParameter("loginID"));
             HttpSession session = request.getSession();
             User userLogin = (User) session.getAttribute("login");
+            if(userLogin == null) throw new NullPointerException("No User Logined");
 //           Recipe ID = (Recipe) session.getAttribute("RECIPE_DETAIL");
             int recipeID = Integer.parseInt(request.getParameter("recipeID"));
             RecipeDAO recipe = new RecipeDAO();

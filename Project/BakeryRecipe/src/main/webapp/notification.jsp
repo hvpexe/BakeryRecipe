@@ -36,7 +36,7 @@
                 <c:forEach items="${LIST_ALL_NOTIFY}" var="noti">
                     <c:if test="${noti.typeofNotify eq 'like'}">
                         <div onclick="changeType(${noti.notifyID})">
-                            <a class="notify-item ${noti.isSeen?'seen':''} hover-button-3 c-pointer text-decoration-none"  onclick="changeType(${noti.notifyID})"  href="profile?userid=${noti.senderID}">
+                            <a class="notify-item ${noti.isSeen?'seen':''} hover-button-3 c-pointer text-decoration-none"  onclick="changeType(${noti.notifyID})"  href="RecipeDetail?recipeID=${noti.recipeID}">
                                 <div class="col d-flex ">
                                     <img class="avatar  p-0 rounded-circle" src="${noti.coverfSender}" alt="avatar"/>
                                     <div class="notify-content col d-flex flex-column">
