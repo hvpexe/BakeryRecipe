@@ -78,6 +78,7 @@ public class CommentDAO {
         PreparedStatement ps = null;
         ResultSet rs = null;
         Connection conn = null;
+        User baker = null;
         try {
             conn = DBUtils.getConnection();
             ps = conn.prepareStatement(sql);
@@ -87,6 +88,9 @@ public class CommentDAO {
                 comment = new Comment(id, rs.getString(2), rs.getTimestamp(3),
                         rs.getTimestamp(4), rs.getBoolean(5),
                         rs.getInt(6), rs.getInt(7));
+                baker =UserDAO.getUserByID(rs.getInt("UserID"));
+                comment.setAvatar(baker.getAvatar());
+                comment.setChefName(baker.getName());
             }
             return comment;
         } catch (Exception e) {

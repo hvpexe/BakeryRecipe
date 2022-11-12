@@ -34,6 +34,8 @@ import utils.Tools;
 @WebServlet(name = "CommnetRecipeAjax", urlPatterns = {"/ajax/CommnetRecipeAjax"})
 public class CommnetRecipeAjax extends HttpServlet {
 
+    private static final String SUCCESS = "../ajax/recipe_detail/CommnetRecipeAjax.jsp";
+
     protected void processRequest (HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException, SQLException {
         response.setContentType("text/html;charset=UTF-8");
@@ -59,25 +61,26 @@ public class CommnetRecipeAjax extends HttpServlet {
                     check = true;
                 }
                 if (check) {
-
-                    out.print(" <div class=\"d-flex flex-start mb-4\"   >\n"
-                            + "                                        <img class=\"rounded-circle border mr-2\"\n"
-                            + "                                             src=\"" + baker.getAvatar() + "\" alt=\"avatar\"\n"
-                            + "                                             width=\"60\" height=\"60\" />\n"
-                            + "                                        <div class=\"card w-100\">\n"
-                            + "                                            <div class=\"card-body p-4\">\n"
-                            + "                                                <div class=\"\">\n"
-                            + "                                                    <h5>" + baker.getName() + "</h5>\n"
-                            + "                                                    <p class=\"small\">Just Now</p>\n"
-                            + "                                                    <p>\n"
-                            + "                                                        " + comment + "\n"
-                            + "                                                    </p>\n"
-                            + "                                                </div>\n"
-                            + "                                            </div>\n"
-                            + "                                        </div>\n"
-                            + "                                    </div>");
+                    request.setAttribute("cmt", CommentDAO.getCommentByID(CommentDAO.GetNewestCommentID(bakerID)));
+//                    out.print(" <div class=\"d-flex flex-start mb-4\"   >\n"
+//                            + "                                        <img class=\"rounded-circle border mr-2\"\n"
+//                            + "                                             src=\"" + baker.getAvatar() + "\" alt=\"avatar\"\n"
+//                            + "                                             width=\"60\" height=\"60\" />\n"
+//                            + "                                        <div class=\"card w-100\">\n"
+//                            + "                                            <div class=\"card-body p-4\">\n"
+//                            + "                                                <div class=\"\">\n"
+//                            + "                                                    <h5>" + baker.getName() + "</h5>\n"
+//                            + "                                                    <p class=\"small\">Just Now</p>\n"
+//                            + "                                                    <p>\n"
+//                            + "                                                        " + comment + "\n"
+//                            + "                                                    </p>\n"
+//                            + "                                                </div>\n"
+//                            + "                                            </div>\n"
+//                            + "                                        </div>\n"
+//                            + "                                    </div>");
+                    request.getRequestDispatcher(SUCCESS).forward(request, response);
                 }
-
+                
             }
         }
     }
