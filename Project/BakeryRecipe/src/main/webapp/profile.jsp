@@ -48,11 +48,31 @@
                     <img class="col-3 avt-icon"
                          src=${requestScope.user.avatar}
                          alt="" />
+                    
                     <div class="col-6">
                         <h3 class="profile-name">${requestScope.user.name}</h3>
+                        <span class="info-user">
+                                <c:if test="${sessionScope.login.id != requestScope.user.id}">
+                                    <c:choose>
+                                        <c:when test="${CHECK_FOLLOW == 'false'}">
+                                            <div class="btn btn-style1" onclick="followButton2(this, 'Follow', 'UnFollow', this.action)" >
+                                                <i class="fa-regular fa-heart"></i>
+                                                <span  class="txt-follow" this="">Follow</span>
+                                            </div>
+                                        </c:when>
+                                        <c:otherwise>
+                                            <div class="btn btn-style1 button-Follower" onclick="followButton2(this, 'UnFollow', 'Follow', this.action)" >
+                                                <i class="fa-regular fa-heart"></i>
+                                                <span  class="txt-follow" this="">UnFollow</span>
+                                            </div>
+                                        </c:otherwise>
+                                    </c:choose>
+                                </c:if>
+                            </span>
+                        <div class="follow_view">
                         <span class="follow">${requestScope.user.follower} Follower</span>  
                         <span class="follow">${requestScope.user.following} Following</span>
-
+</div>
                     </div>
                     <c:if test="${sessionScope.login != requestScope.user}">
                         <div class="">
@@ -159,8 +179,6 @@
         <script>
             var userReport = ${sessionScope.login.id};
             var userReported = ${user.id};
-
-
         </script>
         <script src="assets/js/Jquery/jquery-core.js"></script>
         <script src="assets/js/profile.js"></script>

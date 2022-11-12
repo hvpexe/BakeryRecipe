@@ -56,3 +56,39 @@ function sendReport1(value){
     
     
 }
+
+function  followButton2(item, val1, val2, action) {
+//                eventac.target.style.backgroundColor = 'white';
+//                event.target.classList.toggle("button-Follower");
+///
+//                console.log(event.target.classList);
+
+    var action = val1;
+    $.ajax({
+        url: "ajax/UpdateUserFollowAjax",
+        type: "get", //send it through get method
+        data: {
+            follower: userReported,
+            action: action,
+            followed: userReport
+        },
+        success: function () {
+            console.log(item);
+            item.classList.toggle("button-Follower");
+            let txtFollow = item.querySelector("span");
+            if (txtFollow.innerText !== val2)
+                txtFollow.innerText = val2;
+            else
+                txtFollow.innerText = val1;
+            // console.log(action);
+
+            //    action = unFollow;
+            console.log(action);
+            //Do Something
+        },
+        error: function () {
+            //Do Something to handle error
+            console.log("thanh cong roi kia");
+        }
+    });
+}

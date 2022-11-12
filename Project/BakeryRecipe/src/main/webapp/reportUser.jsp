@@ -198,8 +198,8 @@
                                                 <th>Date Report</th>
                                                 <th>User Report</th>
                                                 <th>Report State</th>
-                                                <th>User Profile</th>
-                                                <th>Action</th>
+                                                <th>User action</th>
+                                                <th>Report action</th>
                                             </tr>
                                         </thead>
                                         <tfoot>
@@ -212,8 +212,8 @@
                                                 <th>Date Report</th>
                                                 <th>User Report</th>
                                                 <th>Report State</th>
-                                                <th>User Profile</th>
-                                                <th>Action</th>
+                                                <th>User action</th>
+                                                <th>Report action</th>
                                             </tr>
                                         </tfoot>
                                         <tbody>
@@ -248,16 +248,31 @@
                                                             <input type="hidden" name="userid" value="${u.userid2}">
                                                             <button class="btn btn-info btn-circle btn-sm" title="User Profile"><i class="fas fa-info-circle"></i></button>
                                                         </form>
-                                                        </form>
+                                                        <c:if test="${u.userRole eq 'baker'}">
+                                                            <form action="reportuser" class="d-inline" onsubmit="return confirm('Do you really want to ban this user?');">
+                                                                <button class="btn btn-danger btn-circle btn-sm" title="Ban"><i class="fa-solid fa-ban"></i></button>
+                                                                <input type="hidden" name="userid" value="${u.userid2}">
+                                                                <input type="hidden" name="active" value="false">
+                                                                <input type="hidden" name="action" value="changestatus">
+                                                            </form>
+                                                        </c:if>
+                                                            <c:if test="${u.userRole eq 'admin'}">
+                                                                <form action="reportuser" class="d-inline" onsubmit="return confirm('Do you really want to remove this admin?');">
+                                                                    <button class="btn btn-warning btn-circle btn-sm" title="Remove Admin"><i class="fa-solid fa-user-minus"></i></button>
+                                                                    <input type="hidden" name="userid" value="${u.userid2}">
+                                                                    <input type="hidden" name="action" value="changerole">
+                                                                    <input type="hidden" name="role" value="baker">
+                                                                </form>
+                                                            </c:if>
 
                                                     </td>
                                                     <td class="align-middle col-1">
                                                         <div class="d-flex flex-wrap ">
-                                                            <form action="reportuser" class="flex-grow-1">
+                                                            <form action="reportuser" class="flex-grow-1" onsubmit="return confirm('Do you really want to approve/deny this report?');">
                                                                 <input type="hidden" name="reportID" value="${u.id}">
                                                                 <c:if test="${u.status == 'Process'}">
-                                                                    <button class="btn btn-success btn-circle btn-sm" name="action" title="Approved Report" value="Approved"><i class="fa-solid fa-check"></i></button>
-                                                                    <button class="btn btn-danger btn-circle btn-sm" name="action" title="Denied Report" value="Denied"><i class="fa-solid fa-x"></i></button>
+                                                                    <button class="btn btn-success btn-circle btn-sm" name="action" title="Approve Report" value="Approved"><i class="fa-solid fa-check"></i></button>
+                                                                    <button class="btn btn-danger btn-circle btn-sm" name="action" title="Deny Report" value="Denied"><i class="fa-solid fa-x"></i></button>
                                                                     </c:if>
                                                             </form>
                                                         </div>

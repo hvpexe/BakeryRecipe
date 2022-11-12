@@ -22,7 +22,7 @@
         <c:catch var="e"> 
             <c:import url="header.jsp"/>
             <%--<c:catch var="e">--%>
-            <div class="reccipe-container">
+            <div class="reccipe-container ">
                 <!-- head info -->
                 <div class="row head-info">
                     <div class="col-md-4 info-img">
@@ -51,17 +51,12 @@
                         </div>
                     </div>
                     <div class="col-md-8">
-                        <div class="first-div">
+                        <div class="first-div  col p-0">
 
                             <span class="info-user">
                                 <img src="${USER_DETAIL.getAvatar()}">
                                 <a  class="text-decoration-none hover-underline text-dark" href="profile?userid=${USER_DETAIL.getId()}">${USER_DETAIL.getName()}</a>
                                 <c:if test="${sessionScope.login.id != USER_DETAIL.id}">
-                                    <!--                                <div class="btn btn-style1" onclick="followButton(this, 'Follow', 'UnFollow', this.action)" >
-                                                                        <i class="fa-solid fa-user-plus"></i>
-                                                                        <span  class="txt-follow" this="">Follow</span>
-                                                                    </div>-->
-                                    <!--cach cua anh tú mượn mấy hôm trả-->
                                     <c:choose>
                                         <c:when test="${CHECK_FOLLOW == 'false'}">
                                             <div class="btn btn-style1" onclick="followButton(this, 'Follow', 'UnFollow', this.action)" >
@@ -83,15 +78,16 @@
                                 <div class="first-div">
                                     <c:if test="${sessionScope.login.id == USER_DETAIL.id}">
                                         <span class="text-nowrap">
-                                            <a href="./editrecipe?recipeID=${param.recipeID}" class="btn btn-style2 hover-button-1"><i class="fa-regular fa-pen-to-square "></i> Edit</a>
+                                            <a href="./editrecipe?recipeID=${param.recipeID}" class="btn btn-style2"><i class="fa-regular fa-pen-to-square "></i> Edit</a>
                                         </span>
                                     </c:if>
 
                                 </div>
 
                             </span>
-                            <div class="dropdown">
-                                <button ><i class="fa-solid fa-ellipsis"></i></button>
+
+                            <span class="dropdown"> <!-- Dung co choi float -->
+                                <button><i class="fa-solid fa-ellipsis"></i></button>
                                 <div class="dropdown-options">
                                     <c:if test="${sessionScope.login.id != USER_DETAIL.id && sessionScope.login.role != 'admin'}">
                                         <a   class="d-inline-block text-muted hover-underline c-pointer hover-underline mr-3 col " onclick="getReportRecipe(${RECIPE_DETAIL.getId()})" href="#">
@@ -102,7 +98,7 @@
                                         <a class="col hover-underline" onclick="showConfirmBox(${RECIPE_DETAIL.id},'recipe')" >Delete</a>
                                     </c:if>
                                 </div>
-                            </div>
+                            </span>
 
 
 

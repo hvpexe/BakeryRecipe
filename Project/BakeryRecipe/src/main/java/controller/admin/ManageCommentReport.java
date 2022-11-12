@@ -5,6 +5,7 @@
 package controller.admin;
 
 import dao.AdminDAO;
+import dao.CommentDAO;
 import dao.ReportDAO;
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -38,6 +39,10 @@ public class ManageCommentReport extends HttpServlet {
             if(action.equals("Approved") || action.equals("Denied")){
                 int id = Integer.parseInt(request.getParameter("reportID"));
                 AdminDAO.updateStatusReport(id, action);
+            }
+            if(action.equals("delete")){
+                int id = Integer.parseInt(request.getParameter("commentid"));
+                CommentDAO.deleteComment(id);
             }
         } catch (Exception e) {
             System.out.println("Error at BRecipeController: " + e.toString());

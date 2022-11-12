@@ -197,7 +197,8 @@
                                                 <th>Date Report</th>
                                                 <th>User Report</th>
                                                 <th>Report State</th>
-                                                <th>Action</th>
+                                                <th>Comment action</th>
+                                                <th>Report action</th>
                                             </tr>
                                         </thead>
                                         <tfoot>
@@ -209,7 +210,8 @@
                                                 <th>Date Report</th>
                                                 <th>User Report</th>
                                                 <th>Report State</th>
-                                                <th>Action</th>
+                                                <th>Comment action</th>
+                                                <th>Report action</th>
                                             </tr>
                                         </tfoot>
                                         <tbody>
@@ -237,12 +239,21 @@
                                                     </td>
                                                     <td class="align-middle col-1">
                                                         <div class="d-flex flex-wrap ">
-                                                            <form action="report" class="flex-grow-1">
+                                                            <form action="report" class="d-inline" onsubmit="return confirm('Do you really want to set delete this comment?');">
+                                                                <button class="btn btn-danger btn-circle btn-sm" title="Delete"><i class="fa-solid fa-trash"></i></button>
+                                                                <input type="hidden" name="commentid" value="${u.commentID}">
+                                                                <input type="hidden" name="action" value="delete">
+                                                            </form>
+                                                        </div>
+                                                    </td>
+                                                    <td class="align-middle col-1">
+                                                        <div class="d-flex flex-wrap ">
+                                                            <form action="report" class="flex-grow-1" onsubmit="return confirm('Do you really want to approve/deny this report?');">
                                                                 <input type="hidden" name="reportID" value="${u.id}">
                                                                 <c:if test="${u.status == 'Process'}">
-                                                                    <button class="bg-success" name="action" value="Approved">Approved Report</button>
-                                                                    <button class="bg-danger" name="action" value="Denied">Denied Report</button>
-                                                                </c:if>
+                                                                    <button class="btn btn-success btn-circle btn-sm" name="action" title="Approve Report" value="Approved"><i class="fa-solid fa-check"></i></button>
+                                                                    <button class="btn btn-danger btn-circle btn-sm" name="action" title="Deny Report" value="Denied"><i class="fa-solid fa-x"></i></button>
+                                                                    </c:if>
                                                             </form>
                                                         </div>
                                                     </td>

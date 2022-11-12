@@ -34,11 +34,13 @@ public class Report {
     private int userid2; //id cua user
     private String username;
     private String avatar;//avatar cua user
+    private int commentID;
+    private String userRole;
     
     public Report() {
     }
 
-    public Report(int id, Timestamp DateReport, String detail, int userID, String reportType, String status, String reporter, String comment) {
+    public Report(int id, Timestamp DateReport, String detail, int userID, String reportType, String status, String reporter, String comment, int commentID) {
         this.id = id;
         this.DateReport = DateReport;
         this.detail = detail;
@@ -47,7 +49,7 @@ public class Report {
         this.status = status;
         this.reporter = reporter;
         this.comment = comment;
-        
+        this.commentID = commentID;
     }
 
     public Report(int id, Timestamp DateReport, String detail, int userID, String reportType, String status, String reporter, String recipeTitle, String cover, int recipeID) {
@@ -63,7 +65,7 @@ public class Report {
         this.recipeID = recipeID;
     }
 
-    public Report(int id, Timestamp DateReport, String detail, int userID, String reportType, String status, String reporter, int userid2, String username, String avatar) {
+    public Report(int id, Timestamp DateReport, String detail, int userID, String reportType, String status, String reporter, int userid2, String username, String avatar, String userRole) {
         this.id = id;
         this.DateReport = DateReport;
         this.detail = detail;
@@ -74,6 +76,7 @@ public class Report {
         this.userid2 = userid2;
         this.username = username;
         this.avatar = avatar;
+        this.userRole = userRole;
     }
 
     
@@ -131,6 +134,14 @@ public class Report {
         this.avatar = avatar;
     }
 
+    public String getUserRole() {
+        return userRole;
+    }
+
+    public void setUserRole(String userRole) {
+        this.userRole = userRole;
+    }
+
     
 
     public int getId() {
@@ -171,6 +182,14 @@ public class Report {
 
     public void setDateReport(Timestamp DateReport) {
         this.DateReport = DateReport;
+    }
+
+    public int getCommentID() {
+        return commentID;
+    }
+
+    public void setCommentID(int commentID) {
+        this.commentID = commentID;
     }
 
     
