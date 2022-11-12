@@ -29,25 +29,30 @@ public class LikeRecipeAjax extends HttpServlet {
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
      * methods.
      *
-     * @param request servlet request
+     * @param request  servlet request
      * @param response servlet response
-     * @throws ServletException if a servlet-specific error occurs
-     * @throws IOException if an I/O error occurs
+     *
+     * @throws ServletException      if a servlet-specific error occurs
+     * @throws IOException           if an I/O error occurs
      * @throws java.sql.SQLException
      */
-    protected void processRequest(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException, SQLException {
+    protected void processRequest (HttpServletRequest request, HttpServletResponse response)
+            throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
-        try ( PrintWriter out = response.getWriter()) {
+        try {
             UserDAO lr = new UserDAO();
             int userID = Integer.parseInt(request.getParameter("user"));
             int recipeID = Integer.parseInt(request.getParameter("recipe"));
-              NotifyDAO.notifyLIKE(recipeID, userID);
+            NotifyDAO.notifyLIKE(recipeID, userID);
             boolean check = lr.LikeRecipe(recipeID, userID);
-         
+
             if (!check) {
                 lr.Unlike(recipeID, userID);
             }
+        } catch (SQLException ex) {
+            Logger.getLogger(LikeRecipeAjax.class.getName()).log(Level.SEVERE, null, ex);
+        } finally {
+
         }
     }
 
@@ -55,37 +60,31 @@ public class LikeRecipeAjax extends HttpServlet {
     /**
      * Handles the HTTP <code>GET</code> method.
      *
-     * @param request servlet request
+     * @param request  servlet request
      * @param response servlet response
+     *
      * @throws ServletException if a servlet-specific error occurs
-     * @throws IOException if an I/O error occurs
+     * @throws IOException      if an I/O error occurs
      */
     @Override
-    protected void doGet(HttpServletRequest request, HttpServletResponse response)
+    protected void doGet (HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        try {
             processRequest(request, response);
-        } catch (SQLException ex) {
-            Logger.getLogger(LikeRecipeAjax.class.getName()).log(Level.SEVERE, null, ex);
-        }
     }
 
     /**
      * Handles the HTTP <code>POST</code> method.
      *
-     * @param request servlet request
+     * @param request  servlet request
      * @param response servlet response
+     *
      * @throws ServletException if a servlet-specific error occurs
-     * @throws IOException if an I/O error occurs
+     * @throws IOException      if an I/O error occurs
      */
     @Override
-    protected void doPost(HttpServletRequest request, HttpServletResponse response)
+    protected void doPost (HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        try {
             processRequest(request, response);
-        } catch (SQLException ex) {
-            Logger.getLogger(LikeRecipeAjax.class.getName()).log(Level.SEVERE, null, ex);
-        }
     }
 
     /**
@@ -94,7 +93,7 @@ public class LikeRecipeAjax extends HttpServlet {
      * @return a String containing servlet description
      */
     @Override
-    public String getServletInfo() {
+    public String getServletInfo () {
         return "Short description";
     }// </editor-fold>
 

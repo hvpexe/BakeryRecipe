@@ -45,6 +45,7 @@
                                             <i class="d-inline fas fa-heart"></i>
                                             <span class="">Liked your Recipe <span class="font-weight-bold">${noti.nameofRecipe}</span></span>
                                         </div>
+                                        <div class="d-flex mt-2" style="gap:8px;">${noti.getDateReceive()}</div>
                                     </div>
                                 </div>
                             </a>
@@ -60,6 +61,8 @@
                                         <i class="d-inline far fa-eye"></i>
                                         <span>Great Job! <span class="font-weight-bold">${noti.nameofSender}</span> is now following you</span>
                                     </div>
+                                    <div class="d-flex mt-2" style="gap:8px;">${noti.getDateReceive()}</div>
+
                                 </div>
                             </div>
                         </a>
@@ -74,6 +77,7 @@
                                         <i class="d-inline fas fa-comment-dots"></i>
                                         <span>Commented on your Recipe <span class="font-weight-bold">${noti.nameofRecipe}</span></span>
                                     </div>
+                                    <div class="d-flex mt-2" style="gap:8px;">${noti.getDateReceive()}</div>
                                 </div>
                             </div>
                         </a>

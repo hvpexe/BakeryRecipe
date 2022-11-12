@@ -144,9 +144,7 @@ public class NotifyDAO {
         PreparedStatement ptm = null;
         ResultSet rs = null;
         boolean check = true;
-        Date currentDate = new Date(System.currentTimeMillis());
-        SimpleDateFormat dateFormat = new SimpleDateFormat("YYYY-MM-dd HH:mm:ss");
-        String date = dateFormat.format(currentDate);
+        Timestamp currentDate = new Timestamp(System.currentTimeMillis());
 //            int senderId = UserDAO.userDetail(recipeID).getId();
         try {
             cn = DBUtils.getConnection();
@@ -154,7 +152,7 @@ public class NotifyDAO {
             ptm.setInt(1, senderID);
             ptm.setInt(2, receiverID);
             ptm.setString(3, "follow");
-            ptm.setDate(4, currentDate);
+            ptm.setTimestamp(4, currentDate);
             ptm.setBoolean(5, false);
             ptm.setBoolean(6, false);
 //            ptm.setInt(7,recipeID );
@@ -228,9 +226,7 @@ public class NotifyDAO {
         PreparedStatement ptm = null;
         ResultSet rs = null;
         int receiverID = UserDAO.userDetail(recipeID).getId();
-        Date currentDate = new Date(System.currentTimeMillis());
-        SimpleDateFormat dateFormat = new SimpleDateFormat("YYYY-MM-dd HH:mm:ss");
-        String date = dateFormat.format(currentDate);
+        Timestamp currentDate = new Timestamp(System.currentTimeMillis());
         boolean check = false;
         try {
             cnn = DBUtils.getConnection();
@@ -239,7 +235,7 @@ public class NotifyDAO {
             ptm.setInt(2, recipeID);
             ptm.setInt(3, receiverID);
             ptm.setString(4, "like");
-            ptm.setDate(5, currentDate);
+            ptm.setTimestamp(5, currentDate);
             ptm.setBoolean(6, false);
             ptm.setBoolean(7, false);
             check = ptm.executeUpdate() > 0 ? true : false;
