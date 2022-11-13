@@ -19,9 +19,7 @@
                 <div class="posting-section">
                     <img class="avatar-icon rounded-circle"
                          src="${login.avatar}" alt="ava" />
-                    <button class="btn-button m-auto" id="btnButton">
-                        <i class="fa-solid fa-plus"></i> Add your recipe
-                    </button>
+                    <button class="btn-button m-auto" id="btnButton">Add your recipe</button>
                 </div>
                 <c:forEach items="${homeRecipe}" var="re">
                     <div class="user-recipe" >

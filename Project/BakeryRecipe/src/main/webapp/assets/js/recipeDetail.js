@@ -85,7 +85,7 @@ function  likeButton(item, val1, val2, action) {
 
     var action = val1;
     console.log(item);
-    if (val1 === 'UnLike') {
+    if (val1 === 'Unlike') {
         likeNum -= 1;
     } else {
         likeNum += 1;

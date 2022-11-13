@@ -52,12 +52,11 @@ body {
 .btn-button {
     border-radius: 15px;
     cursor: pointer;
-    border: 1.5px solid #d7d5d5;
+    border: 1.5px solid var(--main-theme-color);
     background-color: transparent;
-    width: 100%;
-    justify-content: center;
-    padding: 10px 12px 10px 15px;
-    /*font-size: 12px;*/
+    width: 80%;
+    padding: 8px;
+    font-size: 16px;
     color: var(--main-theme-color);
     transition: 0.3s;
 }

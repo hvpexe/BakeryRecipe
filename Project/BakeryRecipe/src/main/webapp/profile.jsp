@@ -48,50 +48,53 @@
                     <img class="col-3 avt-icon"
                          src=${requestScope.user.avatar}
                          alt="" />
-                    
-                    <div class="col-6">
-                        <h3 class="profile-name">${requestScope.user.name}</h3>
-                        <span class="info-user">
-                                <c:if test="${sessionScope.login.id != requestScope.user.id}">
-                                    <c:choose>
-                                        <c:when test="${CHECK_FOLLOW == 'false'}">
-                                            <div class="btn btn-style1" onclick="followButton2(this, 'Follow', 'UnFollow', this.action)" >
-                                                <i class="fa-regular fa-heart"></i>
-                                                <span  class="txt-follow" this="">Follow</span>
-                                            </div>
-                                        </c:when>
-                                        <c:otherwise>
-                                            <div class="btn btn-style1 button-Follower" onclick="followButton2(this, 'UnFollow', 'Follow', this.action)" >
-                                                <i class="fa-regular fa-heart"></i>
-                                                <span  class="txt-follow" this="">UnFollow</span>
-                                            </div>
-                                        </c:otherwise>
-                                    </c:choose>
-                                </c:if>
-                            </span>
-                        <div class="follow_view">
-                        <span class="follow">${requestScope.user.follower} Follower</span>  
-                        <span class="follow">${requestScope.user.following} Following</span>
-</div>
-                    </div>
-                    <c:if test="${sessionScope.login != requestScope.user}">
-                        <div class="ml-auto">
-                            <div class="dropdown">
-                                <button><i class="fa-solid fa-ellipsis"></i></button>
-                                <div class="dropdown-options">
-                                    <a class="d-inline-block text-muted hover-underline c-pointer mr-3 h5" onclick="getReportUser(${requestScope.user.id})" href="#">
-                                        <span class="align-middle">
-                                            <strong>${re.like}</strong> Report</span></a>
+
+                    <div class="col-9">
+                        <div class="d-flex justify-content-between align-items-center">
+                            <span class="profile-name">${requestScope.user.name}</span>
+
+
+                            <c:if test="${requestScope.user == sessionScope.login}">
+                                <a href="./profileInfo.jsp" class="btn edit-profile-button ">Edit Profile</a>
+                            </c:if>
+
+                            <c:if test="${sessionScope.login != requestScope.user}">
+                                <div class="dropdown ml-auto">
+                                    <a type="text" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true">
+                                        <i class="fa-solid fa-ellipsis"></i>
+                                    </a>
+                                    <div class="dropdown-menu noselect" style="min-width: inherit;" aria-labelledby="dropdownMenuLink">
+                                        <a class="dropdown-item" onclick="getReportUser(${requestScope.user.id})" href="#">Report</a>
+                                    </div>
                                 </div>
-                            </div>
+                            </c:if>
                         </div>
-                    </c:if>
-                    <c:if test="${requestScope.user == sessionScope.login}">
-                        <a href="./profileInfo.jsp" class="btn edit-profile-button">Edit Profile</a>
-                    </c:if>
+                        <c:if test="${sessionScope.login.id != requestScope.user.id}">
+                            <span class="info-user">
+                                <c:choose>
+                                    <c:when test="${CHECK_FOLLOW == 'false'}">
+                                        <div class="btn btn-style1" onclick="followButton2(this, 'Follow', 'UnFollow', this.action)" >
+                                            <i class="fa-regular fa-heart"></i>
+                                            <span class="txt-follow" this="">Follow</span>
+                                        </div>
+                                    </c:when>
+                                    <c:otherwise>
+                                        <div class="btn btn-style1 button-Follower" onclick="followButton2(this, 'Unfollow', 'Follow', this.action)" >
+                                            <i class="fa-regular fa-heart"></i>
+                                            <span  class="txt-follow" this="">Unfollow</span>
+                                        </div>
+                                    </c:otherwise>
+                                </c:choose>
+                            </span>
+                        </c:if>
+                        <div class="follow_view">
+                            <span class="follow">${requestScope.user.follower} Follower</span>  
+                            <span class="follow">${requestScope.user.following} Following</span>
+                        </div>
+                    </div>
                 </div>
                 <c:if test="${login.id eq user.id}">
-                    <a href="./addrecipe" class="btn input-button">Add your post</a>
+                    <a href="./addrecipe" class="btn input-button">Add your recipe</a>
                 </c:if>
                 <div class="profile-activity">
                     <b>Activity</b>
@@ -113,7 +116,16 @@
                                 <a href="./profile?userid=${requestScope.user.id}" class="text-dark c-pointer hover-underline">${re.username}</a>
                                 <div class="text-muted small"><c:out value="${re.getDatePostFormat()}"/></div>
                             </div>
-                            <i class="fa-solid fa-ellipsis"></i>
+                            
+                            <div class="dropdown">
+                                <a type="text" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true">
+                                    <i class="fa-solid fa-ellipsis"></i>
+                                </a>
+                                <div class="dropdown-menu" style="min-width: inherit;" aria-labelledby="dropdownMenuLink">
+                                    <a class="dropdown-item" href="#">Delete</a>
+                                    <a class="dropdown-item" href="#">Report</a>
+                                </div>
+                            </div>
                         </div>
 
                         <div class="recipe-text">
@@ -171,7 +183,7 @@
                         <!--</form>--> 
                     </div>
                 </div>
-                      <div id="thankReport2"></div>
+                <div id="thankReport2"></div>
             </div>
         </div>
 

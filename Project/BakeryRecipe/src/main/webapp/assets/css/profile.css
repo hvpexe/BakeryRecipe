@@ -1,3 +1,13 @@
+@import "universal.css";
+:root {
+    --main-theme-color: #DB5A42;
+    --main-theme-color-hover: #c22e14;
+    --side-theme-color: #FFFFFF;
+    --main-title-color: #000000;
+    --web-background-color: #F7FAFC;
+    --border-theme-color: #9c9c9c;
+}
+
 .section-container {
     background-color: #f7fafc;
     width: 100%;
@@ -7,7 +17,7 @@
 }
 
 .section-profile {
-    max-width: 650px;
+    max-width: 600px;
     display: flex;
     align-items: center;
     margin: 0 auto;
@@ -16,7 +26,7 @@
     box-shadow: 0 4px 12px rgba(79, 79, 186, 0.06);
     flex-direction: column;
     padding: 30px 0;
-    gap: 15px;
+    gap: 30px;
 }
 
 .profile-header {
@@ -34,7 +44,6 @@
 }
 
 .profile-name {
-    padding: 10px 0;
     font-size: 24px;
     font-weight: 600;
 }
@@ -56,24 +65,22 @@
 .input-button {
     margin-top: 20px;
     padding: 10px !important;
-    border: 1px solid #d7d5d5 !important;
-    color: #db5a42 !important;
+    border: 1.5px solid var(--main-theme-color);
+    color: var(--main-theme-color);
     border-radius: 20px !important;
-    width: 352px;
-    display: flex;
-    flex-direction: row;
-    align-items: center;
-    justify-content: center;
+    width: 70%;
+    transition: 0.3s;
 }
 
 .input-button:hover {
-    background-color: rgba(255, 210, 117, 0.7);
+    background-color: var(--main-theme-color-hover);
+    color: var(--side-theme-color);
 }
 
 .profile-activity {
     position: relative;
     border-bottom: 0.2px solid rgba(0,0,1,0.3);
-    width: 650px;
+    width: 600px;
     height: 45px;
     font-size: 24px;
 }
@@ -93,7 +100,7 @@
 .profile-recipe {
     border-radius: 20px;
     box-shadow: 0 0 12px rgba(0, 0, 0, 0.12);
-    width: 560px;
+    width: 540px;
     padding: 20px 20px;
     font-size: 16px;
 }
@@ -124,7 +131,7 @@
     object-fit: cover;
 }
 #profile-information .recipe{
-    
+
 }
 #profile-information .recipe img{
     max-width: 10%;
@@ -134,50 +141,24 @@
 }
 /*//text ham d*/
 .dropdown {
-  display: inline-block;
-  position: relative;
+    display: inline-block;
+    position: relative;
 }
 
 button{
-  border:none;
- 
+    border:none;
+
 }
 
 button:hover{
-  background-color:white;
-}
-
-.dropdown-options {
-  display: none;
-  position: absolute;
-  background-color: white;
-  border: 1px solid #000;
-  border-radius:5px;
-}
-
-.dropdown:hover .dropdown-options {
-  display: block;
-}
-
-.dropdown-options a {
-  display: block;
-  color: #000000;
-  padding: 5px;
-  text-decoration: none;
-  padding:10px 20px;
-}
-
-.dropdown-options a:hover {
-  color: #0a0a23;
-  background-color: #ddd;
-  border-radius:5px;
+    background-color:white;
 }
 
 .txtareaRp{
     width: 340px;
 }
 .card-body{
-}   
+}
 
 #textAreaExample{
     width: 638px;
@@ -185,16 +166,16 @@ button:hover{
 #baseline{
     align-items: baseline;
 }
- 
+
 .dropdown button{
-    
+
     background: white;
 }
 
 .fa-ellipsis{
-    color: black;
+    font-size: 20px;
 }
-/*///button follow*/ 
+/*///button follow*/
 .info-user  {
     display:  inline-flex;
     gap:5px;
@@ -230,11 +211,6 @@ button:hover{
 }
 .btn-style1.button-Follower {
     background-color: var(--white);
-    border: 2px solid var(--main-theme-color);
+    border: 1px solid var(--main-theme-color);
     color: #DB5A42;
-}
-
-
-.follow_view{
-    display: block;
 }
