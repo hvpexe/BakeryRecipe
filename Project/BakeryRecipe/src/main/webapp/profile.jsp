@@ -75,9 +75,9 @@
 </div>
                     </div>
                     <c:if test="${sessionScope.login != requestScope.user}">
-                        <div class="">
+                        <div class="ml-auto">
                             <div class="dropdown">
-                                <button style="color: white"><i class="fa-solid fa-ellipsis"></i></button>
+                                <button><i class="fa-solid fa-ellipsis"></i></button>
                                 <div class="dropdown-options">
                                     <a class="d-inline-block text-muted hover-underline c-pointer mr-3 h5" onclick="getReportUser(${requestScope.user.id})" href="#">
                                         <span class="align-middle">

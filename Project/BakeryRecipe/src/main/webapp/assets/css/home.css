@@ -25,18 +25,17 @@ body {
 
 .post-section {
     display: flex;
-    width: 450px;
+    max-width: 450px;
     flex-direction: column;
 }
 
 .posting-section {
     border-radius: 20px;
     display: flex;
-    align-items: center;
     background-color: #fff;
     box-shadow: 0 4px 12px rgba(79, 79, 186, 0.06);
-    padding: 16px 14px;
-    gap: 26px;
+    padding: 16px;
+    gap: 16px;
 }
 
 .avatar-icon {
@@ -51,28 +50,27 @@ body {
 }
 
 .btn-button {
-    border-radius: 20px;
-    flex-direction: row;
+    border-radius: 15px;
     cursor: pointer;
     border: 1.5px solid #d7d5d5;
     background-color: transparent;
-    position: relative;
-    width: 300px;
+    width: 100%;
     justify-content: center;
     padding: 10px 12px 10px 15px;
-    font-size: 12px;
+    /*font-size: 12px;*/
     color: var(--main-theme-color);
+    transition: 0.3s;
 }
 
 .btn-button:hover {
-    background-color: #e2a074;
+    background-color: var(--main-theme-color);
     color: var(--side-theme-color)
+
 }
 .user-recipe {
     border-radius: 20px;
     box-shadow: 0 0 12px rgba(0, 0, 0, 0.06);
     background-color: var(--side-theme-color);
-    width: 450px;
     padding: 20px 20px;
     margin-top: 25px;
     font-size: 14px;
@@ -232,6 +230,9 @@ body {
 @media screen and (max-width: 960px) {
     .frame-div {
         display: none;
+    }
+    .post-section {
+        margin: 0 16px;
     }
 }
 #liked-list .content {

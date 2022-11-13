@@ -10,6 +10,7 @@
         <meta name="description" content="">
         <title>${USER_DETAIL.name}</title>
         <c:import url="universal.jsp" />
+
         <link rel="preconnect" href="https://fonts.googleapis.com">
         <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
         <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap" rel="stylesheet">
@@ -22,9 +23,9 @@
         <c:catch var="e"> 
             <c:import url="header.jsp"/>
             <%--<c:catch var="e">--%>
-            <div class="reccipe-container container">
+            <div class="recipe-container container">
                 <!-- head info -->
-                <div class="row head-info px-2">
+                <div class="row head-info px-4">
                     <div class="col-md-4 info-img">
                         <div class="swiper">
                             <!-- Additional required wrapper -->
@@ -51,54 +52,51 @@
                         </div>
                     </div>
                     <div class="col-md-8">
-                        <div class="first-div  col p-0">
+                        <div class="first-div col p-0">
 
-                            <span class="info-user">
-                                <img src="${USER_DETAIL.getAvatar()}">
-                                <a  class="text-decoration-none hover-underline text-dark" href="profile?userid=${USER_DETAIL.getId()}">${USER_DETAIL.getName()}</a>
-                                <c:if test="${sessionScope.login.id != USER_DETAIL.id}">
-                                    <c:choose>
-                                        <c:when test="${CHECK_FOLLOW == 'false'}">
-                                            <div class="btn btn-style1" onclick="followButton(this, 'Follow', 'UnFollow', this.action)" >
-                                                <i class="fa-regular fa-heart"></i>
-                                                <span  class="txt-follow" this="">Follow</span>
-                                            </div>
-                                        </c:when>
-                                        <c:otherwise>
-                                            <div class="btn btn-style1 button-Follower" onclick="followButton(this, 'UnFollow', 'Follow', this.action)" >
-                                                <i class="fa-regular fa-heart"></i>
-                                                <span  class="txt-follow" this="">UnFollow</span>
-                                            </div>
-                                        </c:otherwise>
-                                    </c:choose>
-                                </c:if>
+                            <div class="info-user">
+                                <span class="d-">
+                                    <img src="${USER_DETAIL.getAvatar()}">
+                                    <a  class="text-decoration-none hover-underline text-dark ml-2" href="profile?userid=${USER_DETAIL.getId()}">${USER_DETAIL.getName()}</a>
+                                    <c:if test="${sessionScope.login.id != USER_DETAIL.id}">
+                                        <c:choose>
+                                            <c:when test="${CHECK_FOLLOW == 'false'}">
+                                                <span class="btn btn-style1" onclick="followButton(this, 'Follow', 'UnFollow', this.action)" >
+                                                    <i class="fa-regular fa-heart"></i>
+                                                    <span  class="txt-follow" this="">Follow</span>
+                                                </span>
+                                            </c:when>
+                                            <c:otherwise>
+                                                <span class="btn btn-style1 button-Follower" onclick="followButton(this, 'UnFollow', 'Follow', this.action)" >
+                                                    <i class="fa-regular fa-heart"></i>
+                                                    <span  class="txt-follow" this="">UnFollow</span>
+                                                </span>
+                                            </c:otherwise>
+                                        </c:choose>
+                                    </c:if>
+                                </span>
 
                                 <!--followButton(this,'Saved','Not Saved')-->
                                 <!--followButton(this,'Like','UnLike')-->
-                                <div class="first-div">
-                                    <c:if test="${sessionScope.login.id == USER_DETAIL.id}">
-                                        <span class="text-nowrap">
-                                            <a href="./editrecipe?recipeID=${param.recipeID}" class="btn btn-style2"><i class="fa-regular fa-pen-to-square "></i> Edit</a>
-                                        </span>
-                                    </c:if>
 
-                                </div>
 
-                            </span>
-
-                            <span class="dropdown"> <!-- Dung co choi float -->
-                                <button><i class="fa-solid fa-ellipsis"></i></button>
-                                <div class="dropdown-options">
-                                    <c:if test="${sessionScope.login.id != USER_DETAIL.id && sessionScope.login.role != 'admin'}">
-                                        <a   class="d-inline-block text-muted hover-underline c-pointer hover-underline mr-3 col " onclick="getReportRecipe(${RECIPE_DETAIL.getId()})" href="#">
-                                            <span class="align-middle"><strong>${re.like}</strong> Report</span>
-                                        </a>
-                                    </c:if>
-                                    <c:if test="${sessionScope.login.id == USER_DETAIL.id || sessionScope.login.role == 'admin'}">
-                                        <a class="col hover-underline" onclick="showConfirmBox(${RECIPE_DETAIL.id}, 'recipe')" >Delete</a>
-                                    </c:if>
-                                </div>
-                            </span>
+                                <span class="dropdown">
+                                    <a type="text" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true">
+                                        <i class="fa-solid fa-ellipsis"></i>
+                                    </a>
+                                    <div class="dropdown-menu" style="min-width: inherit;" aria-labelledby="dropdownMenuLink">
+                                        <c:if test="${sessionScope.login.id != USER_DETAIL.id && sessionScope.login.role != 'admin'}">
+                                            <a class="dropdown-item" onclick="getReportRecipe(${RECIPE_DETAIL.getId()})" href="#">Report</a>
+                                        </c:if>
+                                        <c:if test="${sessionScope.login.id == USER_DETAIL.id || sessionScope.login.role == 'admin'}">
+                                            <a class="dropdown-item" onclick="showConfirmBox(${RECIPE_DETAIL.id}, 'recipe')" >Delete</a>
+                                        </c:if>
+                                        <c:if test="${sessionScope.login.id == USER_DETAIL.id}">
+                                            <a class="dropdown-item" href="./editrecipe?recipeID=${param.recipeID}">Edit</a>
+                                        </c:if>
+                                    </div>
+                                </span>
+                            </div>
 
 
 
@@ -262,7 +260,7 @@
                                                                         </a>
                                                                     </c:if>
                                                                     <c:if test="${(sessionScope.login.id == cmt.userID || sessionScope.login.role == 'admin')}">
-                                                                        <a class="col" onclick="showConfirmBox(${cmt.commentID}, 'comment','#comment-${cmt.commentID}')" >Delete</a>
+                                                                        <a class="col" onclick="showConfirmBox(${cmt.commentID}, 'comment', '#comment-${cmt.commentID}')" >Delete</a>
                                                                     </c:if>
                                                                 </c:catch>${ex}
                                                             </div>

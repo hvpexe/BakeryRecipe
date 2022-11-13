@@ -18,7 +18,7 @@ body {
 .search-ingre {
     min-height: 84vh;
     background-color: var(--web-background-color);
-    margin-top: 40px;
+    margin: 40px 0;
 }
 
 #newest {
