@@ -1,8 +1,3 @@
-<%-- 
-    Document   : saved
-    Created on : Sep 21, 2022, 10:03:29 AM
-    Author     : VO MINH MAN
---%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
@@ -66,7 +61,7 @@
                                 </div>
                                 <div class="recipe-name">${cc.name}</div>
                                 <div class="recipe-author">
-                                    <a href="#" class="text-truncate">${cc.username}</a> 
+                                    <a href="profile?userid=${cc.userID}" class="text-truncate">${cc.username}</a> 
                                     <c:out value="${cc.getDatePostFormat()}"/></div>
                             </div>
                         </c:forEach>
@@ -76,15 +71,6 @@
         </div>
 
         <c:import url="footer.jsp"/>
-
-        <script>
-            var imgImage = document.getElementById("imgImage");
-            if (imgImage) {
-                imgImage.addEventListener("click", function (e) {
-                    window.open("./cook-detaildone.html");
-                });
-            }
-        </script>
     </body>
 </html>
 

@@ -138,16 +138,14 @@ public class RecipeDAO {
         return null;
     }
 
-    private static final String SEARCH_RECIPE = "SELECT recipe.[Name],[Description],[Like],recipe.ID\n"
-            + "[DatePost],[LastDateEdit],[PrepTime],[CookTime]\n"
-            + "[Save],[IsDeleted],[UserID],Comment,[Img],baker.FirstName +' '+baker.LastName as fullName\n"
-            + "FROM[dbo].[Recipe] recipe join [dbo].[Picture] pic\n"
-            + "on recipe.ID =pic.RecipeID\n"
-            + "join [dbo].[User]  baker\n"
-            + "on  baker.ID =recipe.UserID\n"
-            + "WHERE FREETEXT (recipe.Name , ?) and pic.IsCover =1";
+    private static final String SEARCH_RECIPE = "SELECT R.ID,R.[Name],[DatePost],[Like],Comment,[Img],[UserID],U.LastName +' '+U.FirstName as fullName\n"
+            + "FROM [dbo].[Recipe] R \n"
+            + "JOIN [dbo].[Picture] P on R.ID =P.RecipeID\n"
+            + "JOIN [dbo].[User] U\n"
+            + "on  U.ID =R.UserID\n"
+            + "WHERE FREETEXT (R.Name , ?) and P.IsCover=1 and IsDeleted = 0";
 
-    public static List<Recipe> searchRecipe(String name) throws SQLException {
+    public static List<Recipe> searchRecipe(String search) throws SQLException {
         ArrayList<Recipe> listRecipe = new ArrayList<>();
         Connection conn = null;
         PreparedStatement ptm = null;
@@ -155,18 +153,19 @@ public class RecipeDAO {
         try {
             conn = DBUtils.getConnection();
             ptm = conn.prepareStatement(SEARCH_RECIPE);
-            ptm.setString(1, name);
+            ptm.setString(1, search);
             rs = ptm.executeQuery();
             while (rs.next()) {
-                String fullName = rs.getString("fullName");
-//                String img = rs.getString("Img");
-                int comment = rs.getInt("Comment");
-                int like = rs.getInt("Like");
-                int save = rs.getInt("Save");
+                int id = rs.getInt("ID");
                 String cakeName = rs.getString("Name");
+                int like = rs.getInt("Like");
+                int comment = rs.getInt("Comment");
+                Timestamp datePost = rs.getTimestamp("DatePost");
                 String cover = rs.getString("Img");
+                int userId = rs.getInt("UserID");
+                String fullName = rs.getString("fullName");
                 Recipe recipe;
-                recipe = new Recipe(cakeName, like, comment, cover, fullName);
+                recipe = new Recipe(id, cakeName, like, comment, datePost, cover, userId, fullName);
                 listRecipe.add(recipe);
             }
 
@@ -1049,8 +1048,9 @@ public class RecipeDAO {
                 while (rs.next()) {
                     relateListRecipe.put(checkNum, rs.getString("Name"));
                     Recipe recipeD = RecipeDAO.searchRecipebyName(relateListRecipe.get(checkNum));
-                    if(recipeD != null){
-                    listRecipe.add(recipeD);}
+                    if (recipeD != null) {
+                        listRecipe.add(recipeD);
+                    }
                 }
             }
 
