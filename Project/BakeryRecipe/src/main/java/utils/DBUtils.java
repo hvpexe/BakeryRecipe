@@ -30,7 +30,6 @@ public class DBUtils {
             url += ";encrypt=true;trustServerCertificate=true;CharacterSet=UTF-8";//important to add UTF-8 format
             Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver");
             conn = DriverManager.getConnection(url, USER_ID, PASSWORD);
-            System.out.println("==================================Connected=====================================");
             return conn;
         } catch (SQLException ex) {
             System.out.println("Connection error! " + ex.getMessage());

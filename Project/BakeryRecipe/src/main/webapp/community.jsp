@@ -9,10 +9,6 @@
         <c:import url="universal.jsp" />
 
         <link rel="stylesheet" href="assets/css/community.css" />
-        <link rel="stylesheet"
-              href="https://fonts.googleapis.com/css2?family=Gelasio:wght@400;500;700&display=swap"
-              />
-
 
     </head>
     <body>

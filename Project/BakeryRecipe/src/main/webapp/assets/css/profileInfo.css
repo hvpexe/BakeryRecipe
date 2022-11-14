@@ -49,8 +49,10 @@ body {
 .info-title {
     display: flex;
     align-items: center;
-    color: var(--main-title-color);
+    color: var(--side-theme-color);
+    font-family: 'Roboto', Inter, sans-serif;
     font-size: 28px;
+    font-weight: 700;
     margin:0;
 }
 
@@ -64,38 +66,39 @@ body {
     aspect-ratio: 1;
     object-fit: cover;
     border: 10px solid #EEE;
-    
+
 }
 
 .profile-name {
     text-align: center;
-    font-weight: 500;
-    font-size: 22px;
+    font-weight: 700;
+    font-size: 24px;
     padding: 20px;
+    font-family: 'Roboto', Inter, sans-serif;
 }
 
 #profile-function li {
     padding: 8px 8px;
     box-sizing: border-box;
-    border: 5px outset var(--main-theme-color);
-    border-radius: 20px;
+    border: 4px outset var(--main-theme-color);
+    border-radius: 15px;
     margin: 6px 0;
-    color: var(--main-title-color);
+    color: var(--main-theme-color);
     cursor: pointer;
     user-select: none; /*làm cho text không thể được select.*/
-    font-size: 24px;
-    font-weight: 500;
-
+    font-size: 20px;
+    font-weight: 700;
+    font-family: 'Roboto', Inter, sans-serif;
     list-style: none;
 }
 
 .function-select {
     background: var(--main-theme-color);
-    color: var(--main-title-color) !important;
+    color: var(--side-theme-color) !important;
 }
 #profile-function li:hover {
     background: var(--main-theme-color);
-    color: var(--main-title-color);
+    color: var(--side-theme-color);
 }
 
 /*your information */
@@ -118,17 +121,25 @@ body {
     padding-top: 30px;
 }
 
-#profile-information input[type=submit] {
+.info-submit {
     background-color: var(--main-theme-color);
     border: none;
-    color: var(--main-title-color);
+    color: var(--side-theme-color);
     font-size: 24px;
-    padding: 10px 20px;
+    padding: 5px 20px;
     border-radius: 20px;
     margin: 25px auto;
     display: block;
 }
 
+.outline-none {
+    outline: none;
+    border: 0;
+}
+
+.outline-border {
+    border-radius: 15px;
+}
 #profile-information input {
     margin-bottom: 10px;
 }
@@ -187,12 +198,16 @@ body {
     overflow: hidden;
 }
 #liked-list .recipe-img{
-        background: gray;
+    background: gray;
     background-size: cover;
     background-repeat: no-repeat;
     background-position: center;
     aspect-ratio: 1;
     border: 1px solid gray;
+}
+
+.form-group {
+    width: 100%;
 }
 
 

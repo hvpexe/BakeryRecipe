@@ -14,9 +14,9 @@
         <jsp:include page="header.jsp" />
         <div class="section container row my-0">
             <!-- SECTION LEFT -->
-            <div class="col-md-6 col-lg-3">
+            <div class="col-md-3 col-lg-3">
                 <div class="profile-img ">
-                    <img class="col-3 col-lg-10 p-0 rounded-circle" src="${sessionScope.login.avatar}" alt="User Avt">
+                    <img class="p-0 rounded-circle" src="${sessionScope.login.avatar}" alt="User Avt">
                 </div>
                 <div class="profile-name">${sessionScope.login.name}</div>
                 <ul id="profile-function" class="list-group">
@@ -33,14 +33,14 @@
                     <li onclick="ajaxLoad('./profileinfo/profileChangePass.jsp')">
                         Change password
                     </li>
-                    <li onclick="window.location ='/BakeryRecipe/LogoutController'">
+                    <li onclick="window.location ='/BakeryRecipe/logout'">
                         Logout
                     </li>
                 </ul>
 
             </div>
             <!-- SECTION RIGHT -->
-            <div class="col-md-12 col-lg-9">
+            <div class="col-md-9 col-lg-9">
                 <!-- Your information -->
                 <div id="profile-information">
                     <div class="profile-header">
@@ -49,51 +49,51 @@
                     <form action="ProfileInfo" method="post" enctype="multipart/form-data">
                         <div class="infor-detail">
                             <div class="row">
-                                <div class="col-md-3">Email</div>
-                                <div class="col-md-9">
-                                    <input type="text" name="email" value="${sessionScope.login.email}" readonly="">
+                                <div class="col-3">Email</div>
+                                <div class="col-9">
+                                    <input class="outline-none" type="text" name="email" value="${sessionScope.login.email}" readonly="">
                                 </div>
                             </div>
                             <div class="row">
-                                <div class="col-md-3">Date Registered</div>
-                                <div class="col-md-9">
-                                    <input type="date" name="dateregister" value="${sessionScope.login.dateRegister}" readonly="">
+                                <div class="col-3">Date Registered</div>
+                                <div class="col-9">
+                                    <input class="outline-none" type="date" name="dateregister" value="${sessionScope.login.dateRegister}" readonly="">
                                 </div>
                             </div>
                             <div class="row">
-                                <div class="col-md-3">First Name</div>
-                                <div class="col-md-9">
-                                    <input type="text" name="firstname" value="${sessionScope.login.firstName}">
+                                <div class="col-3">Role</div>
+                                <div class="col-9">
+                                    <input class="outline-none" type="text" name="role" value="${sessionScope.login.role}" readonly="">
                                 </div>
                             </div>
                             <div class="row">
-                                <div class="col-md-3">Last Name</div>
-                                <div class="col-md-9">
-                                    <input type="text" name="lastname" value="${sessionScope.login.lastName}">
+                                <div class="col-3">First Name</div>
+                                <div class="col-9">
+                                    <input class="outline-border" type="text" name="firstname" value="${sessionScope.login.firstName}">
                                 </div>
                             </div>
                             <div class="row">
-                                <div class="col-md-3">Role</div>
-                                <div class="col-md-9">
-                                    <input type="text" name="role" value="${sessionScope.login.role}" readonly="">
+                                <div class="col-3">Last Name</div>
+                                <div class="col-9">
+                                    <input class="outline-border" type="text" name="lastname" value="${sessionScope.login.lastName}">
                                 </div>
                             </div>
                             <div class="row">
-                                <div class="col-md-3">Phone Number</div>
-                                <div class="col-md-9">
-                                    <input type="text" name="phone" value="${sessionScope.login.phone}">
+                                <div class="col-3">Phone Number</div>
+                                <div class="col-9">
+                                    <input class="outline-border" type="text" name="phone" value="${sessionScope.login.phone}">
                                 </div>
                             </div>    
                             <div class="row">
-                                <div class="col-md-3">Birthday</div>
-                                <div class="col-md-9">
-                                    <input type="date" name="birthday" value="${sessionScope.login.birthday}">
+                                <div class="col-3">Birthday</div>
+                                <div class="col-9">
+                                    <input class="outline-border" type="date" name="birthday" value="${sessionScope.login.birthday}">
                                 </div>
                             </div>
                             <div class="row">
-                                <div class="col-md-3">Gender</div>
-                                <div class="col-md-9">
-                                    <select name="gender">
+                                <div class="col-3">Gender</div>
+                                <div class="col-9">
+                                    <select class="outline-border" name="gender">
                                         <option value="Male" ${sessionScope.login.gender == 'Male'? 'selected': ''}>Male</option>
                                         <option value="Female" ${sessionScope.login.gender == 'Female'? 'selected': ''}>Female</option>
                                         <option value="Other" ${sessionScope.login.gender == 'Other'? 'selected': ''}>Other</option>
@@ -101,14 +101,14 @@
                                 </div>
                             </div>
                             <div class="row">
-                                <div class="col-md-3">Address</div>
-                                <div class="col-md-9">
-                                    <input type="text" name="address" value="${sessionScope.login.address}">
+                                <div class="col-3">Address</div>
+                                <div class="col-9">
+                                    <input class="outline-border" type="text" name="address" value="${sessionScope.login.address}">
                                 </div>
                             </div>
                             <div class="row">
-                                <div class="col-md-3">Avatar</div>
-                                <div class="col-md-9">
+                                <div class="col-3">Avatar</div>
+                                <div class="col-9">
                                     <input type="file" name='avatar' value="${sessionScope.login.avatar}">
                                 </div>
                             </div>
