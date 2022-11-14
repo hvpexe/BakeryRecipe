@@ -32,7 +32,7 @@ public class RecipeDetailController extends HttpServlet {
     private static final String SUCCESS = "recipeDetail.jsp";
     private static final String ERROR = "home";
 
-    protected void processRequest (HttpServletRequest request, HttpServletResponse response)
+    protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
         String url = ERROR;
@@ -40,7 +40,7 @@ public class RecipeDetailController extends HttpServlet {
 //            int loginID = Integer.parseInt(request.getParameter("loginID"));
             HttpSession session = request.getSession();
             User userLogin = (User) session.getAttribute("login");
-            if(userLogin == null) throw new NullPointerException("No User Logined");
+//            if(userLogin == null) throw new NullPointerException("No User Logined");
 //           Recipe ID = (Recipe) session.getAttribute("RECIPE_DETAIL");
             int recipeID = Integer.parseInt(request.getParameter("recipeID"));
             RecipeDAO recipe = new RecipeDAO();
@@ -81,13 +81,15 @@ public class RecipeDetailController extends HttpServlet {
             request.setAttribute("COMMENT_LIST", cmt);
 
 //          check save
-            boolean checksave = UserDAO.checkSaveRecipe(userLogin.getId(), recipeID);
-            request.setAttribute("checksave", checksave);
-            boolean checklike = UserDAO.checkLikeRecipe(userLogin.getId(), recipeID);
-            request.setAttribute("checklike", checklike);
+            if (userLogin != null) {
+                boolean checksave = UserDAO.checkSaveRecipe(userLogin.getId(), recipeID);
+                request.setAttribute("checksave", checksave);
+                boolean checklike = UserDAO.checkLikeRecipe(userLogin.getId(), recipeID);
+                request.setAttribute("checklike", checklike);
 
-            boolean checkfollow = UserDAO.checkFollowUser(userLogin.getId(), ID);
-            request.setAttribute("CHECK_FOLLOW", checkfollow);
+                boolean checkfollow = UserDAO.checkFollowUser(userLogin.getId(), ID);
+                request.setAttribute("CHECK_FOLLOW", checkfollow);
+            }
 
             url = SUCCESS;
 
@@ -102,14 +104,14 @@ public class RecipeDetailController extends HttpServlet {
     /**
      * Handles the HTTP <code>GET</code> method.
      *
-     * @param request  servlet request
+     * @param request servlet request
      * @param response servlet response
      *
      * @throws ServletException if a servlet-specific error occurs
-     * @throws IOException      if an I/O error occurs
+     * @throws IOException if an I/O error occurs
      */
     @Override
-    protected void doGet (HttpServletRequest request, HttpServletResponse response)
+    protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         processRequest(request, response);
     }
@@ -117,14 +119,14 @@ public class RecipeDetailController extends HttpServlet {
     /**
      * Handles the HTTP <code>POST</code> method.
      *
-     * @param request  servlet request
+     * @param request servlet request
      * @param response servlet response
      *
      * @throws ServletException if a servlet-specific error occurs
-     * @throws IOException      if an I/O error occurs
+     * @throws IOException if an I/O error occurs
      */
     @Override
-    protected void doPost (HttpServletRequest request, HttpServletResponse response)
+    protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         processRequest(request, response);
     }
@@ -135,7 +137,7 @@ public class RecipeDetailController extends HttpServlet {
      * @return a String containing servlet description
      */
     @Override
-    public String getServletInfo () {
+    public String getServletInfo() {
         return "Short description";
     }// </editor-fold>
 

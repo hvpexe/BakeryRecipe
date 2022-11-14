@@ -58,10 +58,10 @@
                         <div class="first-div col p-0">
 
                             <div class="info-user">
-                                <span class="d-">
+                                <span class="">
                                     <img src="${USER_DETAIL.getAvatar()}">
-                                    <a  class="text-decoration-none hover-underline text-dark ml-2" href="profile?userid=${USER_DETAIL.getId()}">${USER_DETAIL.getName()}</a>
-                                    <c:if test="${sessionScope.login.id != USER_DETAIL.id}">
+                                    <a class="text-decoration-none hover-underline text-dark ml-2" href="profile?userid=${USER_DETAIL.getId()}">${USER_DETAIL.getName()}</a>
+                                    <c:if test="${not empty sessionScope.login.id and sessionScope.login.id != USER_DETAIL.id}">
                                         <c:choose>
                                             <c:when test="${CHECK_FOLLOW == 'false'}">
                                                 <span class="btn btn-style1" onclick="followButton(this, 'Follow', 'UnFollow', this.action)" >
@@ -82,23 +82,24 @@
                                 <!--followButton(this,'Saved','Not Saved')-->
                                 <!--followButton(this,'Like','UnLike')-->
 
-
-                                <span class="dropdown">
-                                    <a type="text" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true">
-                                        <i class="fa-solid fa-ellipsis"></i>
-                                    </a>
-                                    <div class="dropdown-menu noselect" style="min-width: inherit;" aria-labelledby="dropdownMenuLink">
-                                        <c:if test="${sessionScope.login.id != USER_DETAIL.id && sessionScope.login.role != 'admin'}">
-                                            <a class="dropdown-item" onclick="getReportRecipe(${RECIPE_DETAIL.getId()})" href="#">Report</a>
-                                        </c:if>
-                                        <c:if test="${sessionScope.login.id == USER_DETAIL.id || sessionScope.login.role == 'admin'}">
-                                            <a class="dropdown-item" onclick="showConfirmBox(${RECIPE_DETAIL.id}, 'recipe')" >Delete</a>
-                                        </c:if>
-                                        <c:if test="${sessionScope.login.id == USER_DETAIL.id}">
-                                            <a class="dropdown-item" href="./editrecipe?recipeID=${param.recipeID}">Edit</a>
-                                        </c:if>
-                                    </div>
-                                </span>
+                                <c:if test="${not empty sessionScope.login.id}">
+                                    <span class="dropdown">
+                                        <a type="text" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true">
+                                            <i class="fa-solid fa-ellipsis"></i>
+                                        </a>
+                                        <div class="dropdown-menu noselect" style="min-width: inherit;" aria-labelledby="dropdownMenuLink">
+                                            <c:if test="${sessionScope.login.id != USER_DETAIL.id && sessionScope.login.role != 'admin'}">
+                                                <a class="dropdown-item" onclick="getReportRecipe(${RECIPE_DETAIL.getId()})" href="#">Report</a>
+                                            </c:if>
+                                            <c:if test="${sessionScope.login.id == USER_DETAIL.id || sessionScope.login.role == 'admin'}">
+                                                <a class="dropdown-item" onclick="showConfirmBox(${RECIPE_DETAIL.id}, 'recipe')" >Delete</a>
+                                            </c:if>
+                                            <c:if test="${sessionScope.login.id == USER_DETAIL.id}">
+                                                <a class="dropdown-item" href="./editrecipe?recipeID=${param.recipeID}">Edit</a>
+                                            </c:if>
+                                        </div>
+                                    </span>
+                                </c:if>
                             </div>
 
 
@@ -117,38 +118,41 @@
                             </div>
 
                             <div class="react-action">
-                                <c:if test="${sessionScope.login.id != USER_DETAIL.id}">
+                                <c:if test="${not empty sessionScope.login.id}">
+
+                                    <c:if test="${sessionScope.login.id != USER_DETAIL.id}">
+                                        <c:choose>
+                                            <c:when test="${checklike == 'false'}">
+                                                <div class="btn btn-style1" onclick="likeButton(this, 'Like', 'UnLike', this.action)" >
+                                                    <i class="fa-solid fa-heart"></i>
+                                                    <span  class="txt-follow" this="">Like</span>
+                                                </div>
+                                            </c:when>
+                                            <c:otherwise>
+                                                <div class="btn btn-style1 button-Follower" onclick="likeButton(this, 'Unlike', 'Like', this.action)" >
+                                                    <i class="fa-solid fa-heart"></i>
+                                                    <span  class="txt-follow" this="">Unlike</span>
+                                                </div>
+                                            </c:otherwise>
+                                        </c:choose>
+                                        &nbsp;
+                                    </c:if>
+
                                     <c:choose>
-                                        <c:when test="${checklike == 'false'}">
-                                            <div class="btn btn-style1" onclick="likeButton(this, 'Like', 'UnLike', this.action)" >
-                                                <i class="fa-solid fa-heart"></i>
-                                                <span  class="txt-follow" this="">Like</span>
+                                        <c:when test="${checksave == 'false'}">
+                                            <div class="btn btn-style1" onclick="saveButton(this, 'Save', 'Unsave', this.action)" >
+                                                <i class="fa-solid fa-bookmark"></i>
+                                                <span  class="txt-follow" this="">Save</span>
                                             </div>
                                         </c:when>
                                         <c:otherwise>
-                                            <div class="btn btn-style1 button-Follower" onclick="likeButton(this, 'Unlike', 'Like', this.action)" >
-                                                <i class="fa-solid fa-heart"></i>
-                                                <span  class="txt-follow" this="">Unlike</span>
+                                            <div class="btn btn-style2" onclick="saveButton(this, 'UnSave', 'Save', this.action)" >
+                                                <i class="fa-solid fa-bookmark"></i>
+                                                <span  class="txt-follow" this="">Unsave</span>
                                             </div>
                                         </c:otherwise>
                                     </c:choose>
-                                    &nbsp;
                                 </c:if>
-
-                                <c:choose>
-                                    <c:when test="${checksave == 'false'}">
-                                        <div class="btn btn-style1" onclick="saveButton(this, 'Save', 'Unsave', this.action)" >
-                                            <i class="fa-solid fa-bookmark"></i>
-                                            <span  class="txt-follow" this="">Save</span>
-                                        </div>
-                                    </c:when>
-                                    <c:otherwise>
-                                        <div class="btn btn-style2" onclick="saveButton(this, 'UnSave', 'Save', this.action)" >
-                                            <i class="fa-solid fa-bookmark"></i>
-                                            <span  class="txt-follow" this="">Unsave</span>
-                                        </div>
-                                    </c:otherwise>
-                                </c:choose>
                             </div>
                             <div class="detail">
                                 <!--                        These lemon cupcakes have an ultra soft and moist texture and are served with a fragrant white
@@ -157,7 +161,8 @@
                                 ${RECIPE_DETAIL.getDescription()}
                             </div>
                             <div class="time">
-                                <i class="fa-regular fa-clock"></i> Prep: ${RECIPE_DETAIL.getPrepTime()}min &nbsp; &nbsp; &nbsp; Cook: ${RECIPE_DETAIL.getCookTime()}min
+                                <i class="fa-regular fa-clock"></i> Prep: ${RECIPE_DETAIL.getPrepTime()}min &nbsp; &nbsp; &nbsp; 
+                                <i class="fa-regular fa-clock"></i> Cook: ${RECIPE_DETAIL.getCookTime()}min
                             </div>
                         </div>
 
@@ -227,19 +232,21 @@
                                     COMMENTS
                                 </div>
                                 <div class="body" >
-
-                                    <div class="card-body p-0 mb-3">
-                                        <div class="d-flex flex-start w-100">
-                                            <img class="rounded-circle border"
-                                                 src="${sessionScope.login.avatar}" alt="avatar"
-                                                 width="60" height="60" />
-                                            <div class="w-100">
-                                                <div class="form-outline">
-                                                    <textarea onkeydown="Comment(this, event)" class="form-control" id="textAreaExample" rows="4" type="textarea" name="txtCmt" value=""></textarea>
+                                    <c:if test="${not empty sessionScope.login.id}">
+                                        <div class="card-body p-0 mb-3">
+                                            <div class="d-flex flex-start w-100">
+                                                <img class="rounded-circle border"
+                                                     src="${sessionScope.login.avatar}" alt="avatar"
+                                                     width="60" height="60" />
+                                                <div class="w-100">
+                                                    <div class="form-outline">
+                                                        <textarea onkeydown="Comment(this, event)" class="form-control" id="textAreaExample" rows="4" type="textarea" name="txtCmt" value=""></textarea>
+                                                    </div>
                                                 </div>
-                                            </div>
-                                        </div>  
-                                    </div>
+                                            </div>  
+                                        </div>
+                                    </c:if>
+
 
                                     <c:forEach items="${COMMENT_LIST}" var="cmt">
                                   <input  type="hidden" id="commentID">
@@ -257,7 +264,7 @@
                                                             <a type="text" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true">
                                                                 <i class="fa-solid fa-ellipsis"></i>
                                                             </a>
-                                                            <div class="dropdown-menu noselect" style="min-width: inherit;" aria-labelledby="dropdownMenuLink">
+                                                            <div class="dropdown-menu c-pointer noselect" style="min-width: inherit;" aria-labelledby="dropdownMenuLink">
                                                                 <c:if test="${sessionScope.login.id != cmt.userID}">
                                                                     <a class="dropdown-item" onclick="getReportComment(${RECIPE_DETAIL.getId()})">
                                                                         <span class="align-middle"><strong>${re.like}</strong> Report</span>

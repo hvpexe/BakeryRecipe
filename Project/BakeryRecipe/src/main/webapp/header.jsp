@@ -68,7 +68,9 @@
         </div>
     </div>
 </header>
-            <script>
-                var loginId = ${sessionScope.login.id};
-            </script>
+<script>
+    <c:if test="${not empty sessionScope.login.id}">
+    var loginId = ${sessionScope.login.id};
+    </c:if>
+</script>
 <script src="assets/js/header.js"></script>

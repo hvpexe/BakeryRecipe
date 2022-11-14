@@ -150,9 +150,9 @@ body {
     color: inherit;
 }
 
-//------------------
-.user-avatar {
-    /*width: 100%;*/
+#imgImage {
+    aspect-ratio: 1;
+
 }
 @media screen and (max-width: 992px) {
 }
@@ -199,3 +199,4 @@ body {
         border-radius: 5px;
     }
 }
+

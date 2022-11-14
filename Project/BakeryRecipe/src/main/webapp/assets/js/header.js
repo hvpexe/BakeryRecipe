@@ -27,7 +27,6 @@ var notify = $('.header-notification')
 //$('.header-user').mouseout(() => {
 //    test(event);
 //})
-console.log(loginId);
 console.log(window.location.href);
 if (window.location.href.indexOf('/community') !== -1) {
     document.getElementById("community").className += ' active';
