@@ -42,20 +42,22 @@ public class ProfileController extends HttpServlet {
         response.setContentType("text/html;charset=UTF-8");
         HttpSession session = request.getSession();
         String userId = request.getParameter("userid");
-                    User userLogin = (User) session.getAttribute("login");
+                   
+
 
         User user;
 
-        if (userId != null)
+        if (userId != null){
             user = UserDAO.getUserByID(Integer.parseInt(userId));
+           boolean checkfollow = UserDAO.checkFollowUser(user.getId(), Integer.parseInt(userId));
+            request.setAttribute("CHECK_FOLLOW", checkfollow);}
         else
             user = (User) session.getAttribute("login");
         request.setAttribute("user", user);
 
-        
-          boolean checkfollow = UserDAO.checkFollowUser(userLogin.getId(), Integer.parseInt(userId));
-            request.setAttribute("CHECK_FOLLOW", checkfollow);
-            
+
+     
+      
         ArrayList<Recipe> list = RecipeDAO.getPostProfileRecipes(user.getId());
         request.setAttribute("profileRecipe", list);
         request.getRequestDispatcher("profile.jsp").forward(request, response);
