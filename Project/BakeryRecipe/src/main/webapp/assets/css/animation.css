@@ -78,11 +78,9 @@
 }
 .valid {
     border-color: var(--success);
-    color:var(--success)!important;
 }
 .invalid {
     border-color: var(--main-theme-color);
-    color:var(--main-theme-color)!important;
 }
 :has(.valid) .status{
     color:var(--success);

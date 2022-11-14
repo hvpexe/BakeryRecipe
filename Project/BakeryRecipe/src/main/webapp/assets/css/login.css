@@ -73,7 +73,10 @@ body {
     pointer-events: none;
     background: inherit;
 }
-#form-object .input:focus-within, #form-object .input:has( input:not(:placeholder-shown),input.invalid){
+#form-object .input:focus-within{
+    color: goldenrod;
+}
+#form-object .input:has( input.invalid){
     color: var(--main-theme-color-hover);
 }
 #form-object .input:focus-within:before,#form-object .input:has( input:not(:placeholder-shown)):before{
@@ -106,7 +109,11 @@ body {
     pointer-events: none;
     width: auto;
 }
-#form-object .input:focus-within input, #form-object .input:has( input:not(:placeholder-shown),input.invalid) input{
+#form-object .input:focus-within input{
+    box-shadow: 0 0 0 2px gold;
+
+}
+#form-object .input:has( input.invalid) input{
     box-shadow: 0 0 0 2px var(--main-theme-color-hover);
 }
 #form-object .input:has(input.valid){
