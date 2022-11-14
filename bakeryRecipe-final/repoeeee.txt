@@ -1,0 +1,117 @@
+Thuyết trình mở màn
+
+Phần trình bày mở đầu (3p)
+
+Trả lời cho câu hỏi thứ nhất app tạo ra để giải quyết vấn đề gì
+
+Khi người dùng muốn có một nơi chia sẻ và học hỏi về những công thức làm bánh khắp thế giới hoặc chia sẻ niềm đam mê làm bánh của mình với mọi người 
+
+Một mạng xã hội dành riêng cho người làm bánh
+
+Giải pháp 
+
+Chúng tôi tạo ra một trang xã hội nơi người dùng cho thể tự do chia sẻ học hỏi tìm tòi với những lọai bánh những đầu bếp mà họ yêu thích 
+
+Nơi những người đầu bếp có thể chia sẻ những công thức làm bánh của họ 
+
+Họ có thể làm bánh với những nguyên liệu có sẵn
+Việc tương tác với giữa những người dùng với nhau là điều tiên quyết của mọi trang mạng xã hội phải có 
+Và chúng tôi không phải là ngoại lệ
+
+Ai tham gia vào trang mạng xã hội này
+
++ Những người làm bánh 
++Admin kiểm soát toàn bộ những bài viết đồng thời là người sẽ giúp mang lại sự lành mạnh của trang mạng xã hội
+ 
+
+Trình bày theo flow
+
+Flow 1 user is  guest (Phú)
+
+
+Vào trang landing.jsp 
+
+Kéo xuống bấm vào explore(trang sẽ nhảy qua community.jsp)
+
+Giới thiệu  3 thành phần chính của trang để người dùng có thể  chọn bánh muốn tham khảo và muốn coi thêm thì nhấn vào nút see more (có phân trang) để có thể coi thêm nhiều loại bánh hơn
+ 
+Tiếp theo đó,muốn xem công thức nhấn vào(viewdetail.jsp)
+(soft and chewy peanut butter cookies)
+
+Kéo tới phần related tiếp theo chọn
+(cinamon  vanila glazed donuts)
+
+Nhấn theo tên của baker (vào trang profile của baker) 
+
+(Lời dẫn muốn tìm kiếm tên của một công thức hay tên của một đầu bếp ta nhấn vào thanh search để kiếm)
+
+ Tra từ khóa bakery apple 
+trỏ vào bên bakery
+
+Tra với từ khóa "Nguyễn" để coi hết tất cả user
+
+(Khi người dùng không có đủ nguyên liệu để làm một món ăn họ muốn ,họ có thể làm với những nguyên liệu có sẵn)
+Nhấn về  "Landing.jsp"
+tới phần “Open your  refrigerator”
+bấm start 
+
+(Gõ từ khóa)
+egg -baking sode - (all purpose) -sugar
+bấm search thì hiện ra công thức mà họ muốn tìm
+ 
+
+vào xem tk Nguyễn Bình thực hiện các
+ chức năng để notification cho tk Nguyễn Bình 
+flow 2 user have account(Mẫn)
+
+
+Đăng nhập với user
+Trang follow trước một để thực hiện follow và unfollow
+
+register bấm vào user để follow 
+nó sẽ load công thức người nấu ở trang home
+
+ở trang home có thể xem đc người like 
+hoặc comment để coi đc người comment
+bấm vào bất kỳ(view detail) 
+
+có thể follow like save hoặc unfollow unlike unsave của 1 recipe 
+xem những comment hoắc report nếu có vấn đề vền nội dung
+chưa comment xong
+
+delete comment cuả bản thân 
+và report cmt của user khác
+report bài nếu muốn
+bấm vô saved để coi lại công thức 
+bấm vào profile có thể thay đổi thông tin của người dùng bấm vào edit 
+đổi tên ....thực hiện các tác vụ muốn thay đổi
+bug in Address(chưa utf8)
+xem đc comment cũ của bản thân
+coi đc bài viết mình đã thích 
+thay đổi mật khẩu 
+và logout
+
+Flow 3 đăng nhập bằng tk gg(Bình)
+
+xử lý với 2 user khác nhau 
+để thể hiện được chức năng notification
+
+bắt đầu chức năng với add recipe
+
+demo add recipe của thanh Bình
+
+edit recipe của thanh Bình 
+
+quay về trang home mới delete 
+
+có thể report user 
+
+flow 4 của Admin (Tuấn Tú )
+giới thiệu kỹ phần của Phú về chart 
+chỉ view thôi chưa xử lý
+Thử xử lý những user có lỗi gì
+
+user report
+ban user thì user sẽ bị xóa 
+deny recipe 
+và commnet

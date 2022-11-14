@@ -1,0 +1,7 @@
+Register
+gmail: phuongnek@gmail.com
+Name :  Nhật  Phương
+pass: phuong2111
+re-pass: phuong2111
+
+
