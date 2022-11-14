@@ -144,6 +144,9 @@ body {
     margin-right: 10px;
     border: none;
 }
+.search-select:focus {
+    outline: none;
+}
 .header>[class^=header] {
     display: flex;
     row-gap: inherit;

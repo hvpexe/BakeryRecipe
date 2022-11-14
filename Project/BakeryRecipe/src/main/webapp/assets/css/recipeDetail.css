@@ -16,11 +16,11 @@ body {
     overflow-x: hidden;
 }
 
-.reccipe-container {
+.recipe-container {
     /*max-width: 1200px;*/
     margin: 40px auto;
     background-color: var(--side-theme-color);
-    padding: 40px 20px;
+    padding: 30px 20px;
     box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.06);
     border-radius: 20px;
 }
@@ -39,21 +39,10 @@ body {
     padding: 0px ;
 }
 
-.first-div {
-    display: inline-block;
-    justify-content: space-between;
-}
-
 .info-user  {
-    display:  inline-flex;
-    gap:5px;
+    display: flex;
     align-items: center;
-}
-.info-user span {
-    font-weight: 500;
-    font-size: 18px;
-    line-height: 22px;
-    margin: 0 5px;
+    justify-content: space-between;
 }
 
 .info-user img {
@@ -312,6 +301,7 @@ body {
 .swiper {
     width: 100%;
     border-radius: 10px;
+    aspect-ratio: 1;
 }
 
 .swiper-slide img {
@@ -335,22 +325,6 @@ body {
     background: var(--main-theme-color);
 }
 
-.form-control {
-    display: block;
-    width: 100%;
-
-    padding: 0.375rem 0.75rem;
-    font-size: 1rem;
-    font-weight: 1000;
-
-    color: #495057;
-    background-color: #fff;
-    background-clip: padding-box;
-    border: 1px solid #ced4da;
-
-    transition: border-color .15s ease-in-out,box-shadow .15s ease-in-out;
-
-}
 .button-recipe img{
     height: 30px;
     width: 30px;
@@ -363,24 +337,11 @@ body {
     display: inline-block;
 }
 .form-control{
-    margin-left: 10px;
+    margin-left: 5px;
 }
-/*//text ham d*/
-.dropdown {
-    display: inline-block;
-    position: relative;
-    top:-15px;
-    margin:0 0 0 clamp(50px,100vw,100px);
-}
-.dropdown button{
-    background: white;
-    outline: none;
-}
-.dropdown button:hover{
-    outline:2px solid #000000;
-}
+
 button{
-    border:none;
+    border: none;
 
 }
 
@@ -388,48 +349,10 @@ button:hover{
     background-color:#FFFFFF;
 }
 
-.dropdown-options {
-    display: none;
-    position: absolute;
-    overflow: hidden;
-    background-color: #FFFFFF;
-    border-radius:5px;
-    right:0;
-    /*  box-shadow: 0px 10px 10px 0px rgba(0,0,0,0.4);*/
-}
-.dropdown-options.u {
-    right:unset;
-    left:0;
-}
-
-.dropdown:hover .dropdown-options {
-    display: block;
-}
-
-.dropdown-options a {
-    display: block;
-    color: #000000;
-    padding: 5px;
-    text-decoration: none;
-    padding:20px 40px;
-    border:1px solid #888;
-}
-
-.dropdown-options a:hover {
-    color: #0a0a23;
-    background-color: #ddd;
-    border-radius:5px;
-}
-
 .txtareaRp{
     width: 340px;
 }
-.card-body{
-}
 
-#textAreaExample{
-    width: 638px;
-}
 .baseline{
     align-items: baseline;
 }

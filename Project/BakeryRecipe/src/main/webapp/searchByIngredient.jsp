@@ -10,7 +10,6 @@
         <title>Community</title>
         <c:import url="universal.jsp"/>
         <link href="https://www.cssscript.com/demo/sticky.css" rel="stylesheet" type="text/css">
-        <!-- Load the stylesheet -->
         <link rel="stylesheet" href="src/simple-tag-input.css" />
     </head>
 
@@ -38,7 +37,7 @@
                     <c:forEach items="${searchByIngre}" var="re" begin="0" end="19">
                         <c:if test="${re.match > 0}">
                             <div class="recipe row">
-                                <div class="col-md-3">
+                                <div class="col-md-3 col-sm-4">
                                     <div class="img-container">
                                         <a href=".\RecipeDetail?recipeID=${re.id}">
                                             <img class="recipe-img" alt=""
@@ -50,7 +49,7 @@
                                         </div>
                                     </div>
                                 </div>
-                                <div class="col-md-9">
+                                <div class="col-md-9 col-sm-8">
                                     <div class="recipe-detail"> 
                                         <div class="recipe-name">${re.name}</div>
                                         <div class="recipe-author">

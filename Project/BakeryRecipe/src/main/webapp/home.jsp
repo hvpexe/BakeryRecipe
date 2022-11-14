@@ -8,6 +8,7 @@
         <meta name="viewport" content="initial-scale=1, width=device-width" />
         <title>Home</title>
         <c:import url="universal.jsp" />
+
         <link rel="stylesheet" href="assets/css/home.css" />
         <script src="assets/js/Jquery/jquery-core.js"></script>
     </head>
@@ -18,12 +19,10 @@
                 <div class="posting-section">
                     <img class="avatar-icon rounded-circle"
                          src="${login.avatar}" alt="ava" />
-                    <button class="btn-button m-auto" id="btnButton">
-                        <i class="fa-solid fa-plus"></i> Add your recipe
-                    </button>
+                    <button class="btn-button m-auto" id="btnButton">Add your recipe</button>
                 </div>
                 <c:forEach items="${homeRecipe}" var="re">
-                    <div class="user-recipe">
+                    <div class="user-recipe" >
                         <div class="media recipe-header">
                             <img class="recipe-ava c-pointer"
                                  src="<c:out value="${re.getAvatar()}"/>"
@@ -32,7 +31,16 @@
                                 <a class="text-dark c-pointer hover-underline" href="./profile?userid=${re.userID}">${re.username}</a>
                                 <div class="text-muted small"><c:out value="${re.getDatePostFormat()}"/></div>
                             </div>
-                            <i class="fa-solid fa-ellipsis"></i>
+                            <div class="dropdown">
+                                <a type="text" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true">
+                                    <i class="fa-solid fa-ellipsis"></i>
+                                </a>
+                                <div class="dropdown-menu" style="min-width: inherit;" aria-labelledby="dropdownMenuLink">
+                                    <a class="dropdown-item" href="#">Delete</a>
+                                    <a class="dropdown-item" href="#">Report</a>
+                                </div>
+                            </div>
+
                         </div>
 
                         <div class="recipe-text">
@@ -112,8 +120,8 @@
             <div class="content card-body col-12 col-md-6">
             </div>
         </div>
-        <script src="assets/js/home.js">
-
+        <script src="assets/js/home.js"></script>
+        <script>
         </script>
     </body>
 </html>
