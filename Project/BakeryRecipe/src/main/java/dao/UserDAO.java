@@ -31,7 +31,7 @@ public class UserDAO {
                 String.class, Boolean.class, String.class, String.class, Timestamp.class, String.class, Integer.class};
 
     //ay da ko xem database code sai r
-    public static boolean checkOldPassword (String userID, String password) throws SQLException {
+    public static boolean checkOldPassword(String userID, String password) throws SQLException {
         String sql = "SELECT ID\n"
                 + "FROM [User]\n"
                 + "WHERE ID = ? AND Password = ?";
@@ -52,18 +52,21 @@ public class UserDAO {
         } catch (Exception e) {
             System.out.println("Error at checkOldPassword: " + e.toString());
         } finally {
-            if (conn != null)
+            if (conn != null) {
                 conn.close();
-            if (ps != null)
+            }
+            if (ps != null) {
                 ps.close();
-            if (rs != null)
+            }
+            if (rs != null) {
                 rs.close();
+            }
 
         }
         return false;
     }
 
-    public static boolean changeStatus (User user) throws SQLException {
+    public static boolean changeStatus(User user) throws SQLException {
         String sql = "UPDATE [User]\n"
                 + "SET [IsActive] = ?\n"
                 + "WHERE [ID] = ?";
@@ -91,7 +94,7 @@ public class UserDAO {
         return false;
     }
 
-    public static boolean changeRole (User user) throws SQLException {
+    public static boolean changeRole(User user) throws SQLException {
         String sql = "UPDATE [User]\n"
                 + "SET [Role] = ?\n"
                 + "WHERE [ID] = ?";
@@ -121,7 +124,7 @@ public class UserDAO {
 
     private static final String UPDATE_USER_PASSWORD = " UPDATE [User] SET Password = ? WHERE ID= ?";
 
-    public static boolean changePassword (String userID, String password) throws SQLException {
+    public static boolean changePassword(String userID, String password) throws SQLException {
         String sql = UPDATE_USER_PASSWORD;
         Connection conn = null;
         PreparedStatement ps = null;
@@ -149,7 +152,7 @@ public class UserDAO {
         return false;
     }
 
-    public static User loginWithGoogle (String email) throws SQLException {
+    public static User loginWithGoogle(String email) throws SQLException {
         String sql = SELECT_USER_BY_EMAIL;
         PreparedStatement ps = null;
         ResultSet rs = null;
@@ -187,7 +190,7 @@ public class UserDAO {
             + "WHERE Email = ? AND Password = ?";
 
     //ham nay tim user su dung email va password
-    public static User login (String email, String password) throws SQLException {
+    public static User login(String email, String password) throws SQLException {
         String sql = SELECT_LOGIN;
         PreparedStatement ps = null;
         ResultSet rs = null;
@@ -238,7 +241,7 @@ public class UserDAO {
      *
      * @throws java.sql.SQLException
      */
-    public static List<User> getAllUser () throws SQLException {
+    public static List<User> getAllUser() throws SQLException {
         String sql = SELECT_ALL_USER;
         PreparedStatement ps = null;
         ResultSet rs = null;
@@ -288,7 +291,7 @@ public class UserDAO {
      *
      * @return the User Object with the same <b>id</b> as the inputted <b>id</b>
      */
-    public static User getUserByID (int id) throws SQLException {
+    public static User getUserByID(int id) throws SQLException {
         String sql = SELECT_USER_BY_ID;
         PreparedStatement ps = null;
         ResultSet rs = null;
@@ -339,7 +342,7 @@ public class UserDAO {
     private static final String SELECT_USER_BY_EMAIL = "SELECT ID FROM [User] WHERE Email = ?";
 
     //ham nay dung de kiem tra email co bi trung ko, ap dung khi tao tk moi
-    public static boolean checkDuplicateEmail (String email) throws SQLException {
+    public static boolean checkDuplicateEmail(String email) throws SQLException {
         String sql = SELECT_USER_BY_EMAIL;
         PreparedStatement ps = null;
         ResultSet rs = null;
@@ -372,7 +375,7 @@ public class UserDAO {
             + "(?, ?, ?, ?, ?, ?, 1);";
 
     //dang ki mot tk moi
-    public static boolean register (String email, String password, String firstname, String lastname) throws SQLException {
+    public static boolean register(String email, String password, String firstname, String lastname) throws SQLException {
         String sql = INSERT_NEW_USER;
         PreparedStatement ps = null;
         Connection conn = null;
@@ -409,14 +412,14 @@ public class UserDAO {
      * @param email
      * @param password
      * @param firstname
-     * @param avatar    the avatar of the user
+     * @param avatar the avatar of the user
      * @param lastname
      *
      * @return true if login success
      *
      * @throws java.sql.SQLException
      */
-    public static boolean register (String email, String password, String firstname, String lastname, String avatar) throws SQLException {
+    public static boolean register(String email, String password, String firstname, String lastname, String avatar) throws SQLException {
         if (register(email, password, firstname, lastname)) {
             updateAvatar(email, avatar);
             return true;
@@ -425,7 +428,7 @@ public class UserDAO {
     }
     private static final String UPDATE_USER_IMAGE = "UPDATE [User] SET [Avatar] = ? WHERE Email= ?";
 
-    public static boolean updateAvatar (String email, String avatar) throws SQLException {
+    public static boolean updateAvatar(String email, String avatar) throws SQLException {
         String sql = UPDATE_USER_IMAGE;
         PreparedStatement ps = null;
         Connection conn = null;
@@ -450,13 +453,13 @@ public class UserDAO {
         return false;
     }
 
-    private static final String SEARCH_CHEFNAME = "SELECT [ID],[Role],[Email],[Password],"
-            + "[Avatar],[FirstName],[LastName],[Gender],[Phone]"
-            + ",[Address],[DateRegister],[IsActive]\n"
+    private static final String SEARCH_CHEFNAME = "SELECT [ID],[Role],[Email],[Password],\n"
+            + "[Avatar],[FirstName],[LastName],[Gender],[Phone],\n"
+            + "[Address],[DateRegister],[IsActive]\n"
             + "FROM [dbo].[User]\n"
-            + "WHERE  [LastName] like ? or [FirstName] like ?";
+            + "WHERE  [LastName]+ ' ' +[FirstName] like ?";
 
-    public List<User> searchName (String search) throws SQLException {
+    public List<User> searchName(String search) throws SQLException {
         ArrayList<User> listName = new ArrayList<>();
         Connection conn = null;
         PreparedStatement ptm = null;
@@ -466,7 +469,6 @@ public class UserDAO {
             if (conn != null) {
                 ptm = conn.prepareStatement(SEARCH_CHEFNAME);
                 ptm.setString(1, "%" + search + "%");
-                ptm.setString(2, "%" + search + "%");
                 rs = ptm.executeQuery();
                 while (rs.next()) {
                     int ID = rs.getInt("ID");
@@ -502,7 +504,7 @@ public class UserDAO {
         return listName;
     }
 
-    public static boolean EditInfo (User user) throws SQLException {
+    public static boolean EditInfo(User user) throws SQLException {
         String sql = "UPDATE [User]\n"
                 + "SET FirstName = ?,\n"
                 + "    LastName = ?,\n"
@@ -546,7 +548,7 @@ public class UserDAO {
     }
 
     //ham nay bi loi, tam thoi comment - PhuHV
-    public static String saveAvatar (String filename, Part file, ServletContext sc) {
+    public static String saveAvatar(String filename, Part file, ServletContext sc) {
         try {
             String fileName = file.getSubmittedFileName();
             if (fileName.isEmpty()) {
@@ -575,7 +577,7 @@ public class UserDAO {
             + " on userRep.ID=recipe.UserID  \n"
             + " where recipe.ID = ?";
 
-    public static User userDetail (int recipeID) throws SQLException, SQLException {
+    public static User userDetail(int recipeID) throws SQLException, SQLException {
         User user = null;
         Connection conn = null;
         PreparedStatement ptm = null;
@@ -616,7 +618,7 @@ public class UserDAO {
 
     private static final String FOLLOW = "INSERT INTO [dbo].[Follow]([UserID],[UserID2]) VALUES(?,?)";
 
-    public static boolean followUSer (int IDUser1, int IDUser2) throws SQLException {
+    public static boolean followUSer(int IDUser1, int IDUser2) throws SQLException {
         boolean check = false;
         Connection conn = null;
         PreparedStatement ptm = null;
@@ -644,7 +646,7 @@ public class UserDAO {
 
     private static final String UN_FOLLOW = "delete [dbo].[Follow] where UserID =? and UserID2 = ?";
 
-    public boolean UNFollow (int userID1, int userID2) throws SQLException {
+    public boolean UNFollow(int userID1, int userID2) throws SQLException {
         boolean check = false;
         Connection conn = null;
         PreparedStatement ptm = null;
@@ -672,7 +674,7 @@ public class UserDAO {
 
     private static final String SAVE = "INSERT INTO [Save] (RecipeID, UserID) VALUES (?, ?)";
 
-    public boolean SaveRecipe (int recipeID, int userID) throws SQLException {
+    public boolean SaveRecipe(int recipeID, int userID) throws SQLException {
         boolean check = false;
         Connection conn = null;
         PreparedStatement ptm = null;
@@ -701,7 +703,7 @@ public class UserDAO {
 
     private static final String UN_SAVED = "DELETE [Save] WHERE [Save].RecipeID = ? AND [Save].UserID = ?";
 
-    public boolean Unsave (int recipeID, int userID) throws SQLException {
+    public boolean Unsave(int recipeID, int userID) throws SQLException {
         boolean check = false;
         Connection conn = null;
         PreparedStatement ptm = null;
@@ -731,7 +733,7 @@ public class UserDAO {
             + "FROM [Save]\n"
             + "WHERE UserID = ? AND RecipeID = ?";
 
-    public static boolean checkSaveRecipe (int userID, int recipeID) throws SQLException {
+    public static boolean checkSaveRecipe(int userID, int recipeID) throws SQLException {
         boolean check = false;
         Connection conn = null;
         PreparedStatement ps = null;
@@ -762,7 +764,7 @@ public class UserDAO {
             + "FROM [Follow]\n"
             + "WHERE UserID = ? AND UserID2 = ?";
 
-    public static boolean checkFollowUser (int userID, int userID2) throws SQLException {
+    public static boolean checkFollowUser(int userID, int userID2) throws SQLException {
         boolean check = false;
         Connection conn = null;
         PreparedStatement ps = null;
@@ -794,7 +796,7 @@ public class UserDAO {
 
     private static final String LIKE = "INSERT INTO [Like] (RecipeID, UserID) VALUES (?, ?)";
 
-    public boolean LikeRecipe (int recipeID, int userID) throws SQLException {
+    public boolean LikeRecipe(int recipeID, int userID) throws SQLException {
         boolean check = false;
         Connection conn = null;
         PreparedStatement ptm = null;
@@ -823,7 +825,7 @@ public class UserDAO {
 
     private static final String UN_LIKE = "DELETE [Like] WHERE [Like].RecipeID = ? AND [Like].UserID = ?";
 
-    public boolean Unlike (int recipeID, int userID) throws SQLException {
+    public boolean Unlike(int recipeID, int userID) throws SQLException {
         boolean check = false;
         Connection conn = null;
         PreparedStatement ptm = null;
@@ -853,7 +855,7 @@ public class UserDAO {
             + "FROM [Like]\n"
             + "WHERE UserID = ? AND RecipeID = ?";
 
-    public static boolean checkLikeRecipe (int userID, int recipeID) throws SQLException {
+    public static boolean checkLikeRecipe(int userID, int recipeID) throws SQLException {
         boolean check = false;
         Connection conn = null;
         PreparedStatement ps = null;
@@ -889,7 +891,7 @@ public class UserDAO {
             + "[Address],[DateRegister],[IsActive], [Birthday]\n"
             + "FROM [BakeryRecipe].[dbo].[User]";
 
-    public static List<User> showUserList () throws SQLException {
+    public static List<User> showUserList() throws SQLException {
         Connection conn = null;
         PreparedStatement ps = null;
         ResultSet rs = null;
@@ -952,7 +954,7 @@ public class UserDAO {
         return null;
     }
 
-    public static List<User> getRecommendUsers (int userID) throws SQLException {
+    public static List<User> getRecommendUsers(int userID) throws SQLException {
         String sql = "SELECT TOP 5 U.ID, U.Avatar, U.LastName + ' ' + U.FirstName as FullName, U.LastName , U.FirstName , U.Follower\n"
                 + "FROM [User] U\n"
                 + "WHERE U.ID != ? AND U.IsActive = 1\n"
