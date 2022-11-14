@@ -58,7 +58,7 @@
                         <div class="first-div col p-0">
 
                             <div class="info-user">
-                                <span class="">
+                                <span class="noselect">
                                     <img src="${USER_DETAIL.getAvatar()}">
                                     <a class="text-decoration-none hover-underline text-dark ml-2" href="profile?userid=${USER_DETAIL.getId()}">${USER_DETAIL.getName()}</a>
                                     <c:if test="${not empty sessionScope.login.id and sessionScope.login.id != USER_DETAIL.id}">
@@ -83,7 +83,7 @@
                                 <!--followButton(this,'Like','UnLike')-->
 
                                 <c:if test="${not empty sessionScope.login.id}">
-                                    <span class="dropdown">
+                                    <span class="dropdown noselect">
                                         <a type="text" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true">
                                             <i class="fa-solid fa-ellipsis"></i>
                                         </a>
@@ -111,7 +111,7 @@
                             <div class="date-post">
                                 <c:out value="${RECIPE_DETAIL.getDatePostFormat()}"/>
                             </div>
-                            <div class="recipe-react">
+                            <div class="recipe-react noselect">
                                 <span id="like-data" val>Like: ${RECIPE_DETAIL.getLike()}</span>
                                 <span>Comment: ${RECIPE_DETAIL.getComment()}</span>
                                 <span>Saved: ${RECIPE_DETAIL.getSave()}</span>

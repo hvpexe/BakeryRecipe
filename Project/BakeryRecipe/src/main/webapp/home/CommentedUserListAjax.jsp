@@ -7,7 +7,7 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 
-<c:if test="${USER_LIST!=null}" var="test"></c:if>
+<c:if test="${not empty USER_LIST}" var="test"></c:if>
 <c:if test="${test}">
     <div class="h3 col-12 text-center">People Commented</div>
     <div class="exit-btn fas fa-x"></div>

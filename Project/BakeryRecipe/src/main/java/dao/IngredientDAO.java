@@ -159,6 +159,7 @@ public class IngredientDAO {
     public static boolean addIngredientsRecipe (String[] ingreNames, String[] ingreAmounts, int recipeId,
             Connection conn, ServletContext sc) throws SQLException {
         conn.setAutoCommit(false);
+        if(ingreNames != null)
         for (int i = 0; i < ingreNames.length; i++) {
             addIngredientRecipe(ingreNames[i], ingreAmounts[i], recipeId, conn, sc);
         }

@@ -110,7 +110,7 @@ body {
 .recipe-text {
     /* text-align: justify; */
     margin-bottom: 10px;
-
+    word-break: break-word;
 }
 
 .recipe-img {

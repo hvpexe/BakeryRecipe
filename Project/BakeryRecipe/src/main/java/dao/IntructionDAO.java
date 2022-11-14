@@ -65,10 +65,11 @@ public class IntructionDAO {
     static boolean addInstructionsRecipe (List<Part> instImgList, String[] instDescription, int recipeId,
             Connection conn, ServletContext sc) throws SQLException, IOException {
         conn.setAutoCommit(false);
-        for (int i = 0; i < instImgList.size(); i++) {
-            Part instImg = instImgList.get(i);
-            addInstructionRecipe(instImg, instDescription[i], recipeId, i, conn, sc);
-        }
+        if (instDescription != null)
+            for (int i = 0; i < instImgList.size(); i++) {
+                Part instImg = instImgList.get(i);
+                addInstructionRecipe(instImg, instDescription[i], recipeId, i, conn, sc);
+            }
         conn.commit();
         return true;
     }
@@ -98,7 +99,7 @@ public class IntructionDAO {
             System.out.println("insStep now: " + oldInst.getInsstep());
             System.out.println("insStep new: " + (insStep + 1));
             System.out.println("recipeID: " + recipeId);
-            ps = conn.prepareStatement(sql);       
+            ps = conn.prepareStatement(sql);
             ps.setString(1, detail);
             ps.setString(2, fileType);
             ps.setInt(3, insStep + 1);
@@ -181,13 +182,13 @@ public class IntructionDAO {
 //        }
         int j = 0;
         int picIndex = -1;
-        for (int i = 0; i < newSize; i++,j++) {
+        for (int i = 0; i < newSize; i++, j++) {
             Part instImg = instImgList.get(i);
             String instDesc = instDescription[i];
             picIndex = Integer.parseInt(instImg.getName().replaceAll("[^0-9]", "")); //get picIndex
-            System.out.println(j+" "+picIndex);
+            System.out.println(j + " " + picIndex);
             Instruction oldInst = null;
-            while (j < picIndex && j <oldSize) {
+            while (j < picIndex && j < oldSize) {
                 deleteInstructionRecipe(oldList.get(j).getInsstep(), recipeId, conn);
                 j++;
             }
