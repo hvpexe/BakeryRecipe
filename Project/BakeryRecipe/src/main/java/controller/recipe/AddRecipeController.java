@@ -4,15 +4,18 @@
  */
 package controller.recipe;
 
+import dao.IngredientDAO;
 import dao.RecipeDAO;
 import dto.Recipe;
 import dto.User;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.LinkedList;
 import java.util.List;
+import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
@@ -68,6 +71,10 @@ public class AddRecipeController extends HttpServlet {
             int userId = user.getId();
 
             String recipeName = Tools.toUTF8(request.getParameter("recipe-name"));
+            if (recipeName.isEmpty()) {
+                request.setAttribute("ADD_RECIPE_FAILED", "Please Add Recipe Name");
+                throw new Exception("Recipe Name Empty");
+            }
             String recipeDescription = Tools.toUTF8(request.getParameter("recipe-description"));
             String videoUrl = request.getParameter("video-url");
             List<Part> pictureList = new ArrayList<Part>();//get all video-image
@@ -170,7 +177,18 @@ public class AddRecipeController extends HttpServlet {
     protected void doGet (HttpServletRequest request,
             HttpServletResponse response)
             throws ServletException, IOException {
-        request.getRequestDispatcher(ERROR).forward(request, response);
+        HttpSession session = request.getSession();
+
+        try {
+            String[] measurements = {"oz", "tbsp", "c", "g", "ml", "lb", "fl,oz", "l", "gram", "cup",
+                 "tablespoon", "teaspoon", "ounce", "pound", "liter", "pint", "gallon"};
+            session.setAttribute("IP_INGREDIENTS", IngredientDAO.getAllIngredients());
+            session.setAttribute("IP_INGAMOUNTS", measurements);
+        } catch (SQLException ex) {
+            Logger.getLogger(AddRecipeController.class.getName()).log(Level.SEVERE, null, ex);
+        } finally {
+            request.getRequestDispatcher(ERROR).forward(request, response);
+        }
     }
 
     /**

@@ -53,6 +53,11 @@ body > * {
     margin-right: 15px;
 }
 .create-recipe-main {
+    position: sticky;
+    top: 40px;
+    font-size: 20px;
+    z-index: 1;
+    background: #fff;
     align-self: stretch;
     display: flex;
     flex-direction: row;
@@ -166,6 +171,7 @@ body > * {
 }
 .video-and-image  {
     gap: 10px;
+    z-index: 0;
     display: flex;
 }
 .video-and-image span{
@@ -307,7 +313,7 @@ body > * {
     padding-left: 76px;
     position:relative;
 }
-.add-recipe-input:has(.pre-box-input):before {
+.add-recipe-input:has(>.pre-box-input):before {
     content: 'Minute :';
     position:absolute;
     z-index: 1;
@@ -370,7 +376,9 @@ body > * {
     color: #000;
     font-family: Gelasio;
     border-radius: 25px;
-    margin-top: 25px;
+    margin-top: 40px;
+    margin-bottom: 40px;
+
     box-shadow:0 0 12px -4px #ff00ff25;
 }
 
@@ -401,6 +409,11 @@ div[id^=item] input {
     background: var(--pink-theme);
     display: flex;
     align-items: center;
+}
+:is(div[id^=item],div[id^=inst]) [readonly] {
+    box-shadow: unset;
+    border:unset;
+    outline: unset;
 }
 div[id^=item] .item-trashbin:hover {
     outline-color: var(--brown-theme-75);
@@ -455,7 +468,17 @@ div[id^=inst] [id^=inst-desc] {
     outline-style: solid;
     transition: outline 0.3s;
 }
-
+#ingredient {
+    z-index:3;
+}
+#ingredient .ingredient-amount-suggestion{
+    z-index:1;
+}
+#ingredient span.list-group-item{
+    width: fit-content;
+    min-width: 105%;
+    white-space: nowrap;
+}
 #instruction textarea{
     height:5em;
     margin: 0;
@@ -478,7 +501,7 @@ div[id$=container] input{
 }
 :is(#detail, #img-box) {
     font-family: 'Gelasio';
-
+    z-index: 500;
 }
 :is(#detail, #img-box) .gray-box{
     position: fixed;

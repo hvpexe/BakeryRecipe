@@ -29,83 +29,99 @@
                     <button class="save-button d-none" id="submit" form="add-recipe" >
                         <b class="save-b2">Save</b>
                     </button>
-                    <c:if test="${ADD_RECIPE_SUCCESS !=null}">
-                        <div class="text-success h6 my-auto mr-4 font-weight-bold">${ADD_RECIPE_SUCCESS}</div>
-                    </c:if>
-                    <c:if test="${ADD_RECIPE_FAILED !=null}">
-                        <div class="text-danger h6 my-auto mr-4 font-weight-bold">${ADD_RECIPE_FAILED}</div>
-                    </c:if>
-                    <c:remove scope="session" var="ADD_RECIPE_FAILED"></c:remove>
-                    <c:remove scope="session" var="ADD_RECIPE_SUCCESS"></c:remove>
+                    <div class="save-button ml-auto" onclick="submitForm('form#add-recipe')">
+                        <b class="save-b2">Save</b>
+                    </div>
                 </main>
-                <form action="addrecipe"  class="section-div col-12 col-md-10 align-content-center align-self-center"
-                      id="add-recipe" enctype="multipart/form-data" method="post" >
-                    <div class="title-div col-12">
-                        <b class="label">Title</b>
-                        <input name='recipe-name' class="input col-12"  type="text" placeholder="Recipe's Name ">
-                        <span class="status"><span>
-                                </div>
-                                <div class="add-recipe-input col">
-                                    <b class="label">Description</b>
-                                    <textarea name="recipe-description" 
-                                              class="boxdes-textarea  py-3 col" 
-                                              placeholder="Add your recipe description"></textarea>
-                                </div>    
-                                <!--                Video And Image Picture                            -->
-                                <div class="add-recipe-input col" style="gap: 10px;">
-                                    <div class="d-flex col p-0 justify-content-start" style="gap: 10px;">
-                                        <div class="description-button"  id="add-video-btn">
-                                            Add Video <i class="fa-brands fa-youtube"></i>
-                                        </div>
-                                        <div class="description-button"  id="add-img-btn">
-                                            Add Image <i class="fa-regular fa-image"></i>
-                                        </div>
+                <c:if test="${ADD_RECIPE_FAILED !=null}">
+                    <div class="text-danger h6 my-auto mr-4 font-weight-bold">${ADD_RECIPE_FAILED}</div>
+                </c:if>
+                <c:remove scope="session" var="ADD_RECIPE_FAILED"></c:remove>
+                    <form action="addrecipe"  class="section-div col-12 col-md-10 align-content-center align-self-center"
+                          id="add-recipe" enctype="multipart/form-data" method="post" >
+                        <div class="title-div col-12">
+                            <b class="label">Title</b>
+                            <input name='recipe-name' class="input col-12"  type="text" placeholder="Recipe's Name ">
+                            <span class="status"><span>
                                     </div>
-                                    <div class="display-image d-none col p-0" id="display-img">
-                                        <div class='image'  src="./">
-                                        </div>
-                                        <iframe class="video"></iframe>
-                                        <div class="display-image-options mb-3">
-                                            <div class="fas fa-trash description-button" id='remove-image'></div>
-                                            <div class="col-5 d-inline-flex"></div>
-                                            <div class="description-button" form="dissabled" id="to-cover-btn">
-                                                Set As Cover
+                                    <div class="add-recipe-input col">
+                                        <b class="label">Description</b>
+                                        <textarea name="recipe-description" 
+                                                  class="boxdes-textarea  py-3 col" 
+                                                  placeholder="Add your recipe description"></textarea>
+                                    </div>    
+                                    <!--                Video And Image Picture                            -->
+                                    <div class="add-recipe-input col" style="gap: 10px;">
+                                        <div class="d-flex col p-0 justify-content-start" style="gap: 10px;">
+                                            <div class="description-button"  id="add-video-btn">
+                                                Add Video <i class="fa-brands fa-youtube"></i>
                                             </div>
-                                            <input type="hidden" name="cover" value="0">
-                                            <div class="description-button ml-2" form="dissabled" id="change-img-btn">
-                                                Change Image
+                                            <div class="description-button"  id="add-img-btn">
+                                                Add Image <i class="fa-regular fa-image"></i>
                                             </div>
                                         </div>
-                                    </div>
-
-                                    <div class="video-and-image swiper d-none col-12 p-0">
-                                        <div class="swiper-wrapper col p-0" id="img-content">
-                                            <span class="col-2 p-0 swiper-slide hover-button-2 list-group-item rounded add-img"></span>
-                                            <span class="col-2 d-none p-0 swiper-slide hover-button-2 list-group-item rounded video" onclick="selectContent(this.parentElement, this)">
-                                                <input type="hidden" name="video-url">
-                                            </span>
-
+                                        <div class="display-image d-none col p-0" id="display-img">
+                                            <div class='image'  src="./">
+                                            </div>
+                                            <iframe class="video"></iframe>
+                                            <div class="display-image-options mb-3">
+                                                <div class="fas fa-trash description-button" id='remove-image'></div>
+                                                <div class="col-5 d-inline-flex"></div>
+                                                <div class="description-button" form="dissabled" id="to-cover-btn">
+                                                    Set As Cover
+                                                </div>
+                                                <input type="hidden" name="cover" value="0">
+                                                <div class="description-button ml-2" form="dissabled" id="change-img-btn">
+                                                    Change Image
+                                                </div>
+                                            </div>
                                         </div>
-                                    </div>
 
+                                        <div class="video-and-image swiper d-none col-12 p-0">
+                                            <div class="swiper-wrapper col p-0" id="img-content">
+                                                <span class="col-2 p-0 swiper-slide hover-button-2 list-group-item rounded add-img"></span>
+                                                <span class="col-2 d-none p-0 swiper-slide hover-button-2 list-group-item rounded video" onclick="selectContent(this.parentElement, this)">
+                                                    <input type="hidden" name="video-url">
+                                                </span>
 
-                                </div>
-                                <!--                INGREDIENTS                            -->
-                                <div class="add-recipe-input col-12">
-                                    <b class="label">Ingredients</b>
-                                    <div class="col p-0" id="ingredient-container">
-                                        <div class="col p-0 hover-highlight align-items-center p-0 pr-2 border border-secondary" id="item">
-                                            <img src="assets/images/image-261@2x.png" alt=' ' > 
-                                            <input name="ingre-name" class="col" disabled value="black grapes">
-                                            <span>Amount:</span> 
-                                            <input name="ingre-amount" disabled class="col-2 bg-white ml-2 mr-4" placeholder="1 piece" value=""> 
-                                            <div class="item-trashbin fas fa-trash ml-auto description-button"></div>
+                                            </div>
                                         </div>
+
+
                                     </div>
-                                    <div class="d-flex p-0 col align-items-center" id="ingredient"  >
-                                        <input class="instruction-box-input col-7 " form="disabled" name="iname" id="name" type="text" placeholder="Add one ingredient">
+                                    <!--                INGREDIENTS                            -->
+                                    <div class="add-recipe-input col-12">
+                                        <b class="label">Ingredients</b>
+                                        <div class="col p-0" id="ingredient-container">
+                                            <div class="col p-0 hover-highlight align-items-center p-0 pr-2 border border-secondary" id="item">
+                                                <img src="assets/images/image-261@2x.png" alt=' ' > 
+                                                <input name="ingre-name" class="col" disabled value="black grapes">
+                                                <span>Amount:</span> 
+                                                <input name="ingre-amount" disabled class="col-2 bg-white ml-2 mr-4" placeholder="1 piece" value=""> 
+                                                <div class="item-trashbin fas fa-trash ml-auto description-button"></div>
+                                            </div>
+                                        </div>
+                                        <div class="d-flex p-0 col align-items-center" id="ingredient"  >
+                                            <div class="form-group col-7 p-0 bg-white">
+                                                <input class="instruction-box-input col " autocomplete="off" form="disabled" name="iname" id="name" type="text" placeholder="Add one ingredient">
+                                                <div class="ingredient-suggestion d-none position-absolute list-group col p-0" 
+                                                     id="ingredient-suggestion">
+                                                <c:forEach items="${sessionScope.IP_INGREDIENTS}" var="ing">
+                                                    <span class="list-group-item hover-button-1 hover-bold">${ing}</span>
+                                                </c:forEach>
+                                            </div>
+                                        </div>
                                         <span class="col d-flex align-items-center pr-0">Amount:</span>
-                                        <input class="instruction-box-input col-3 ml-1" form="disabled"  name="iamount" id="amount"  type="text" placeholder="1 Piece">
+                                        <div class="form-group col-3 p-0">
+                                            <input class="instruction-box-input col "  autocomplete="off" form="disabled"  name="iamount" id="amount"  type="text" placeholder="1 Piece">
+                                            <div class="ingredient-amount-suggestion d-none position-absolute list-group p-0"\
+                                                 id="ingredient-amount-suggestion">
+                                                <div class="list-group-item font-weight-bold font-italic">Suggestion:</div>
+                                                <c:forEach items="${sessionScope.IP_INGAMOUNTS}" var="ing">
+                                                    <span class="list-group-item hover-button-1 hover-bold"><a class="p-0"></a> ${ing}</span>
+                                                    </c:forEach>
+                                            </div>
+                                        </div>
                                         <input type="hidden" name="count" value="1">
                                     </div>
                                 </div>                    
@@ -151,9 +167,7 @@
                                         <input class="pre-box-input col" type="number" name="cook-time" placeholder="30">
                                     </div>
                                 </div>
-                                <div class="save-button ml-auto" onclick="submitForm('form#add-recipe')">
-                                    <b class="save-b2">Add recipe</b>
-                                </div>
+
                                 </form>
 
                                 </main>
@@ -172,8 +186,8 @@
                                                 <div class="status w-100"></div>
                                             </div>
                                             <div class="ml-auto mt-auto d-flex justify-content-end gap-3">
-                                                <div class="save-btn hover-button-1 col-auto font-weight-bold rounded">Save</div><!-- comment -->
-                                                <div class="cancel-btn hover-button-1 col-auto font-weight-bold rounded">Cancel</div>
+                                                <div class="cancel-btn hover-button-1 col-auto font-weight-bold rounded my-2">Cancel</div>
+                                                <div class="save-btn hover-button-1 col-auto font-weight-bold rounded my-2">Save</div><!-- comment -->
                                             </div>
                                         </div>
                                     </div>
@@ -195,8 +209,8 @@
                                         <h5>Instruction</h5>
                                         <textarea class="rounded col border py-3 "  value="" style="min-height:7rem"></textarea> 
                                         <div class="mt-auto d-flex justify-content-end gap-3">
-                                            <div class="save-btn hover-button-1 col-auto font-weight-bold rounded">Save</div>
-                                            <div class="cancel-btn hover-button-1 col-auto font-weight-bold rounded">Cancel</div>
+                                            <div class="cancel-btn hover-button-1 col-auto font-weight-bold rounded my-2">Cancel</div>
+                                            <div class="save-btn hover-button-1 col-auto font-weight-bold rounded my-2">Save</div>
                                         </div>
                                     </div>
                                 </div>
@@ -206,5 +220,7 @@
                                 <script>
 
                                 </script>
+                                <c:import url="footer.jsp"/>
+
                                 </body>
                                 </html>
