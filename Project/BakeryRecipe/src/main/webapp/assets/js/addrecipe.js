@@ -425,7 +425,40 @@ $('#detail :is(.gray-box, .exit-btn, .cancel-btn, .save-btn)').click(e => {
     document.querySelector("#detail").classList.add('d-none');
 }
 );
-
+//------------------------ INGREDIENTS -------------------------------
+$('#ingredient [name=iname]').keyup(e => {
+    if (e.target.value == "") {
+        $('#ingredient-suggestion').addClass('d-none');
+    } else {
+        $('#ingredient-suggestion').removeClass('d-none');
+        $("#ingredient-suggestion span").addClass("d-none");
+        $("#ingredient-suggestion span:contains('" + e.target.value + "')").slice(0, 6).removeClass("d-none");
+    }
+});
+$('#ingredient-suggestion span').click(e => {
+    $(e.target).text();
+    $('#ingredient [name=iname]').val($(e.target).text());
+    $('#ingredient [name=iamount]').focus();
+    $('#ingredient-suggestion').addClass('d-none');
+});
+$('#ingredient [name=iamount]').keyup(e => {
+    if (e.target.value == "") {
+        $('#ingredient-amount-suggestion').addClass('d-none');
+    } else {
+        var values = e.target.value.split(' ');
+        $('#ingredient-amount-suggestion').removeClass('d-none');
+        $("#ingredient-amount-suggestion span").addClass("d-none");
+        $("#ingredient-amount-suggestion span .p-0").text(values[0]);
+        console.log((values[1] || ''));
+        $("#ingredient-amount-suggestion span:contains('" + (values[1] || '') + "')").slice(0, 6).removeClass("d-none");
+    }
+});
+$('#ingredient-amount-suggestion span').click(e => {
+    $(e.target).html();
+    $('#ingredient [name=iamount]').val($(e.target).text());
+    $('#ingredient [name=iname]').focus();
+    $('#ingredient-amount-suggestion').addClass('d-none');
+});
 
 
 

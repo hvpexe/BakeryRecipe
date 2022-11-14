@@ -11,6 +11,7 @@ import java.io.PrintWriter;
 import java.sql.SQLException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -41,14 +42,17 @@ public class LikeRecipeAjax extends HttpServlet {
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
         try {
+            ServletContext sc = request.getServletContext();
             UserDAO lr = new UserDAO();
             int userID = Integer.parseInt(request.getParameter("user"));
             int recipeID = Integer.parseInt(request.getParameter("recipe"));
-            NotifyDAO.notifyLIKE(recipeID, userID);
             boolean check = lr.LikeRecipe(recipeID, userID);
 
             if (!check) {
                 lr.Unlike(recipeID, userID);
+            } else if (sc.getAttribute("LIKE" + userID + "_" + recipeID) == null) {
+                NotifyDAO.notifyLIKE(recipeID, userID);
+                sc.setAttribute("LIKE" + userID + "_" + recipeID, "YES");
             }
         } catch (SQLException ex) {
             Logger.getLogger(LikeRecipeAjax.class.getName()).log(Level.SEVERE, null, ex);
@@ -70,7 +74,7 @@ public class LikeRecipeAjax extends HttpServlet {
     @Override
     protected void doGet (HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-            processRequest(request, response);
+        processRequest(request, response);
     }
 
     /**
@@ -85,7 +89,7 @@ public class LikeRecipeAjax extends HttpServlet {
     @Override
     protected void doPost (HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-            processRequest(request, response);
+        processRequest(request, response);
     }
 
     /**

@@ -4,15 +4,18 @@
  */
 package controller.recipe;
 
+import dao.IngredientDAO;
 import dao.RecipeDAO;
 import dto.Recipe;
 import dto.User;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.LinkedList;
 import java.util.List;
+import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
@@ -170,7 +173,16 @@ public class AddRecipeController extends HttpServlet {
     protected void doGet (HttpServletRequest request,
             HttpServletResponse response)
             throws ServletException, IOException {
-        request.getRequestDispatcher(ERROR).forward(request, response);
+        try {
+            String[] measurements = {"oz","tbsp","c","g","ml","lb","fl,oz","l","gram","cup"
+                    ,"tablespoon","teaspoon","ounce","pound","liter","pint","gallon"};
+            request.setAttribute("IP_INGREDIENTS", IngredientDAO.getAllIngredients());
+            request.setAttribute("IP_INGAMOUNTS", measurements);
+        } catch (SQLException ex) {
+            Logger.getLogger(AddRecipeController.class.getName()).log(Level.SEVERE, null, ex);
+        } finally {
+            request.getRequestDispatcher(ERROR).forward(request, response);
+        }
     }
 
     /**

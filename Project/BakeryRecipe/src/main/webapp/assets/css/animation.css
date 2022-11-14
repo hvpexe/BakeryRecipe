@@ -94,7 +94,8 @@ button:focus{
     outline:none;
 }
 [class*=hover] {
-    transition:0.3s;
+    transition: box-shadow 0.3s, outline 0.3s,background 0.3s,translate 0.3s
+        ,border-radius 0.3s;
     cursor: pointer;
     outline: none;
 }
@@ -140,7 +141,7 @@ button:focus{
 
 }
 .hover-button-4{
-     outline: 2px ridge #00000025;
+    outline: 2px ridge #00000025;
 }
 .hover-button-4:hover{
     outline-color:#00000025;
@@ -152,6 +153,9 @@ button:focus{
 }
 .hover-underline:hover{
     text-decoration: underline!important;
+}
+.hover-bold:hover{
+    font-weight: bold!important;
 }
 input {
     outline-width: 0px;

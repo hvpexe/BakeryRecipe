@@ -196,6 +196,10 @@ public class EditRecipeController extends HttpServlet {
             String videoDetail = RecipeDAO.recipeVideo(recipeID);
             request.setAttribute("VIDEO_DETAIL", videoDetail);
 //            recipe.commentList(recipeID);
+            String[] measurements = {"oz", "tbsp", "c", "g", "ml", "lb", "fl,oz", "l", "gram", "cup",
+                 "tablespoon", "teaspoon", "ounce", "pound", "liter", "pint", "gallon"};
+            request.setAttribute("IP_INGREDIENTS", IngredientDAO.getAllIngredients());
+            request.setAttribute("IP_INGAMOUNTS", measurements);
             url = SUCCESS_GET;
         } catch (Exception e) {
             e.printStackTrace();

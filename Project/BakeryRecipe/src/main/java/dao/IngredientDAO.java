@@ -246,7 +246,7 @@ public class IngredientDAO {
 
     }
     private static final String SELECT_INGREDIENT_ID_BY_NAME = "SELECT ID\n"
-            + "  FROM [BakeryRecipe].[dbo].[Ingredient]\n"
+            + "  FROM [Ingredient]\n"
             + "  WHERE [Name] = ?";
 
     public static int getIngredientIDByName (String name, Connection conn) throws SQLException {
@@ -278,8 +278,9 @@ public class IngredientDAO {
         }
         return -1;
     }
-    private static final String ALL_INGREDIENT = "SELECT Name\n"
-            + "FROM Ingredient";
+    private static final String ALL_INGREDIENT = "SELECT LOWER(Name) as Name\n"
+            + " FROM Ingredient"
+            + " ORDER BY LEN(NAME)";
 
     public static List<String> getAllIngredients () throws SQLException {
         List<String> list = new ArrayList<String>();
