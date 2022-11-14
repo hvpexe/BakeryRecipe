@@ -120,12 +120,12 @@
 
                         <div class="recipe-react">
                             <c:if test="${re.like>0}">
-                                <a href="javascript:void(0)" class="d-inline-block text-muted">
+                                <a href="javascript:void(0)" class="d-inline-block text-muted" onclick="getLikedList('${re.id}')">
                                     <span class="align-middle"><strong>${re.like}</strong> Likes</span>
                                 </a>
                             </c:if>
                             <c:if test="${re.comment>0}">
-                                <a href="javascript:void(0)" class="d-inline-block text-muted ml-3">
+                                <a href="javascript:void(0)" class="d-inline-block text-muted ml-3" onclick="getCommentList('${re.id}')">
                                     <span class="align-middle"><strong>${re.comment}</strong> Comments</span>
                                 </a>
                             </c:if>
@@ -215,6 +215,11 @@
             </div>
         </div>
         <!--ket thuc ham container-->
+        <div class="fixed-container " id="liked-list" >
+            <div class="gray-box"></div>
+            <div class="content card-body col-12 col-md-6">
+            </div>
+        </div>
         <script>
             var userReport = ${sessionScope.login.id};
             var userReported = ${user.id};

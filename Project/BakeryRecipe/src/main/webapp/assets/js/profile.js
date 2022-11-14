@@ -1,5 +1,5 @@
 console.log($('#addrecipe'));
-$('#addrecipe').click(()=>{
+$('#addrecipe').click(() => {
     console.log(this);
     window.location.href = 'addrecipe.jsp';
 });
@@ -20,41 +20,41 @@ function getReportUser(userID) {
 
 
 
-function sendReport1(value){
-        var selectReport = document.querySelector('#select_Rp').value;
-   
-    var txtReportUser=document.querySelector('#txtReportUser').value;
+function sendReport1(value) {
+    var selectReport = document.querySelector('#select_Rp').value;
+
+    var txtReportUser = document.querySelector('#txtReportUser').value;
     console.log(txtReportUser);
     console.log(userReport);
     console.log(userReported);
     console.log(selectReport);
-        $.ajax({
-            url: "ReportUserAjax",
-            type: "get", //send it through get method
-            data: {
-               detailUSerComment:txtReportUser,
-               userID1:userReport,
-               userID2:userReported,
-               reportTypeUSer:selectReport
-            },
-            success: function (response) {
-                //Do Something
-                console.log("thanh cong roi kia");
-                $('#thankReport2').html("Thank for your feedback");
+    $.ajax({
+        url: "ReportUserAjax",
+        type: "get", //send it through get method
+        data: {
+            detailUSerComment: txtReportUser,
+            userID1: userReport,
+            userID2: userReported,
+            reportTypeUSer: selectReport
+        },
+        success: function (response) {
+            //Do Something
+            console.log("thanh cong roi kia");
+            $('#thankReport2').html("Thank for your feedback");
 //                var cmtShow = document.getElementById("show-comment");
 //                cmtShow.innerHTML += response;
 //                item.value = "";
 
-            },
-            error: function (xhr) {
-                console.log("that bai");
-                console.log(xhr);
-                //Do Something to handle error
-            }
-        });
-    
-    
-    
+        },
+        error: function (xhr) {
+            console.log("that bai");
+            console.log(xhr);
+            //Do Something to handle error
+        }
+    });
+
+
+
 }
 
 function  followButton2(item, val1, val2, action) {
@@ -108,9 +108,9 @@ function showConfirmBoxProfile(id, type, item) {
     var deleteBtn = $('#delete_confirm .delete');
     deleteBtn.click(e => {
         if (type == "comment") {
-            deleteCMT(id, item,confirmBox);
+            deleteCMT(id, item, confirmBox);
         }
-         if (type == "recipe") {
+        if (type == "recipe") {
             deleteRecipe(id, item);
         }
     });
@@ -131,7 +131,7 @@ function deleteRecipe(recipeID, item) {
             setTimeout(() => {
                 console.log(response);
                 $(infomation).removeClass('loading').html(response);
-                location ="profile";
+                location = "profile";
             }, 500);
 
         },
@@ -185,8 +185,47 @@ function sendReportProfile(value) {
                 //Do Something to handle error
             }
         });
-    } 
+    }
 
-  
-  
+
+
+}
+function getLikedList(recipeID) {
+    console.log("2");
+    var likedList = $('#liked-list');
+    var graybox = $('#liked-list .gray-box');
+    var content = $('#liked-list .content');
+    graybox.click(() => likedList.removeClass('d-flex'));
+    $.ajax(
+            {
+                url: 'ajax/LikedUserListAjax',
+                data: {
+                    recipeid: recipeID
+                },
+                success: function (data) {
+                    likedList.addClass('d-flex');
+                    content.html(data);
+                    $('#liked-list .exit-btn').click(() => likedList.removeClass('d-flex'));
+                }
+            }
+    );
+}
+function getCommentList(recipeID) {
+    var likedList = $('#liked-list');
+    var graybox = $('#liked-list .gray-box');
+    var content = $('#liked-list .content');
+    graybox.click(() => likedList.removeClass('d-flex'));
+    $.ajax(
+            {
+                url: 'ajax/CommentedUserListAjax',
+                data: {
+                    recipeid: recipeID
+                },
+                success: function (data) {
+                    likedList.addClass('d-flex');
+                    content.html(data);
+                    $('#liked-list .exit-btn').click(() => likedList.removeClass('d-flex'));
+                }
+            }
+    );
 }
