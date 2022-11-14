@@ -145,6 +145,25 @@ body {
     color: inherit;
 }
 
+.save-empty {
+    text-align: center;
+    font-size: 20px;
+    font-style: italic;
+}
+
+.save-empty img {
+    opacity: 0.5;
+}
+.main-btn {
+    background-color: var(--main-theme-color);
+    color: var(--web-background-color);
+    border-radius: 20px;
+    white-space: nowrap;
+}
+.main-btn:hover {
+    background-color: var(--main-theme-color-hover);
+    color: var(--web-background-color);
+}
 @media screen and (max-width: 992px) {
 }
 

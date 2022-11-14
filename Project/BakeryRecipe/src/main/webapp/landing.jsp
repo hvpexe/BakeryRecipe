@@ -16,7 +16,7 @@
             <div class="container">
                 <div class="masthead-subheading">BakeryRecipe - Website for sharing bakery recipe!</div>
                 <div class="masthead-heading text-uppercase">It's Nice To Meet You</div>
-                <a class="btn btn-main-color btn-xl text-uppercase" href="login.jsp">Register Now</a>
+                <a class="btn btn-main-color btn-xl text-uppercase" href="login.jsp">Login Now</a>
             </div>
         </header>
         <!-- Search -->

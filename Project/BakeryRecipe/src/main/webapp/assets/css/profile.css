@@ -40,8 +40,7 @@
     /* width: 120px; */
     aspect-ratio: 1/1;
     border-radius: 50%;
-    outline: 5px solid lightgray;
-    outline-style: double;
+    border: 10px solid #EEE;
 }
 
 .profile-name {
@@ -141,45 +140,6 @@
     object-fit: cover;
 }
 /*//text ham d*/
-.dropdown {
-    display: inline-block;
-    position: relative;
-}
-
-button{
-    border:none;
-
-}
-
-button:hover{
-    background-color:white;
-}
-
-.dropdown-options {
-    display: none;
-    position: absolute;
-    background-color: white;
-    border: 1px solid #000;
-    border-radius:5px;
-}
-
-.dropdown:hover .dropdown-options {
-    display: block;
-}
-
-.dropdown-options a {
-    display: block;
-    color: #000000;
-    padding: 5px;
-    text-decoration: none;
-    padding:10px 20px;
-}
-
-.dropdown-options a:hover {
-    color: #0a0a23;
-    background-color: #ddd;
-    border-radius:5px;
-}
 
 .txtareaRp{
     width: 340px;
