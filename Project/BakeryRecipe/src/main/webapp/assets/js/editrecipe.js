@@ -436,7 +436,7 @@ $('#ingredient [name=iname]').keyup(e => {
     } else {
         $('#ingredient-suggestion').removeClass('d-none');
         $("#ingredient-suggestion span").addClass("d-none");
-        $("#ingredient-suggestion span:contains('" + e.target.value + "')").slice(0, 6).removeClass("d-none");
+        $("#ingredient-suggestion span:contains('" + e.target.value + "')").removeClass("d-none");
     }
 });
 $('#ingredient-suggestion span').click(e => {
@@ -454,7 +454,7 @@ $('#ingredient [name=iamount]').keyup(e => {
         $("#ingredient-amount-suggestion span").addClass("d-none");
         $("#ingredient-amount-suggestion span .p-0").text(values[0]);
         console.log((values[1] || ''));
-        $("#ingredient-amount-suggestion span:contains('" + (values[1] || '') + "')").slice(0, 6).removeClass("d-none");
+        $("#ingredient-amount-suggestion span:contains('" + (values[1] || '') + "')").removeClass("d-none");
     }
 });
 $('#ingredient-amount-suggestion span').click(e => {

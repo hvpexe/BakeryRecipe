@@ -474,9 +474,17 @@ div[id^=inst] [id^=inst-desc] {
 #ingredient .ingredient-amount-suggestion{
     z-index:1;
 }
+#ingredient #ingredient-amount-suggestion {
+    max-height: calc(46px*6);
+    overflow: auto;
+}
+#ingredient #ingredient-suggestion {
+    max-height: calc(46px*6);
+    overflow: auto;
+}
 #ingredient span.list-group-item{
     width: fit-content;
-    min-width: 105%;
+    min-width: 100%;
     white-space: nowrap;
 }
 #instruction textarea{

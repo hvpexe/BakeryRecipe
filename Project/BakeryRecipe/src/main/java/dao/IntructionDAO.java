@@ -98,7 +98,7 @@ public class IntructionDAO {
             System.out.println("insStep now: " + oldInst.getInsstep());
             System.out.println("insStep new: " + (insStep + 1));
             System.out.println("recipeID: " + recipeId);
-            ps = conn.prepareStatement(sql);
+            ps = conn.prepareStatement(sql);       
             ps.setString(1, detail);
             ps.setString(2, fileType);
             ps.setInt(3, insStep + 1);

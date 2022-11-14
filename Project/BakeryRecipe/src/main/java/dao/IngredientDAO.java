@@ -345,12 +345,12 @@ public class IngredientDAO {
     }
 
     private static final String ADD_INGREDIENT
-            = "INSERT INTO [dbo].[Ingredient]\n"
+            = "INSERT INTO [Ingredient]\n"
             + "           ([Name]\n"
             + "           ,[Img],[Point])\n"
             + "	OUTPUT inserted.ID,inserted.Name\n"
             + "     VALUES\n"
-            + "           (?,?)";
+            + "           (?,?,?)";
 
     public static int addIngredient (String ingreName, Connection conn) throws SQLException {
 
