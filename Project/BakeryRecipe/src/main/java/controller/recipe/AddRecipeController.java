@@ -71,6 +71,10 @@ public class AddRecipeController extends HttpServlet {
             int userId = user.getId();
 
             String recipeName = Tools.toUTF8(request.getParameter("recipe-name"));
+            if (recipeName.isEmpty()) {
+                request.setAttribute("ADD_RECIPE_FAILED", "Please Add Recipe Name");
+                throw new Exception("Recipe Name Empty");
+            }
             String recipeDescription = Tools.toUTF8(request.getParameter("recipe-description"));
             String videoUrl = request.getParameter("video-url");
             List<Part> pictureList = new ArrayList<Part>();//get all video-image
@@ -173,11 +177,13 @@ public class AddRecipeController extends HttpServlet {
     protected void doGet (HttpServletRequest request,
             HttpServletResponse response)
             throws ServletException, IOException {
+        HttpSession session = request.getSession();
+
         try {
-            String[] measurements = {"oz","tbsp","c","g","ml","lb","fl,oz","l","gram","cup"
-                    ,"tablespoon","teaspoon","ounce","pound","liter","pint","gallon"};
-            request.setAttribute("IP_INGREDIENTS", IngredientDAO.getAllIngredients());
-            request.setAttribute("IP_INGAMOUNTS", measurements);
+            String[] measurements = {"oz", "tbsp", "c", "g", "ml", "lb", "fl,oz", "l", "gram", "cup",
+                 "tablespoon", "teaspoon", "ounce", "pound", "liter", "pint", "gallon"};
+            session.setAttribute("IP_INGREDIENTS", IngredientDAO.getAllIngredients());
+            session.setAttribute("IP_INGAMOUNTS", measurements);
         } catch (SQLException ex) {
             Logger.getLogger(AddRecipeController.class.getName()).log(Level.SEVERE, null, ex);
         } finally {

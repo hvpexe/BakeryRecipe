@@ -171,6 +171,7 @@ body > * {
 }
 .video-and-image  {
     gap: 10px;
+    z-index: 0;
     display: flex;
 }
 .video-and-image span{
@@ -312,7 +313,7 @@ body > * {
     padding-left: 76px;
     position:relative;
 }
-.add-recipe-input:has(.pre-box-input):before {
+.add-recipe-input:has(>.pre-box-input):before {
     content: 'Minute :';
     position:absolute;
     z-index: 1;
@@ -375,7 +376,9 @@ body > * {
     color: #000;
     font-family: Gelasio;
     border-radius: 25px;
-    margin-top: 25px;
+    margin-top: 40px;
+    margin-bottom: 40px;
+
     box-shadow:0 0 12px -4px #ff00ff25;
 }
 

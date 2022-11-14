@@ -78,6 +78,10 @@ public class EditRecipeController extends HttpServlet {
 
             recipeId = Integer.parseInt(request.getParameter("recipeid"));
             String recipeName = Tools.toUTF8(request.getParameter("recipe-name"));
+            if (recipeName.isEmpty()) {
+                request.setAttribute("ADD_RECIPE_FAILED", "Please Add Recipe Name");
+                throw new Exception("Recipe Name Empty");
+            }
             String recipeDescription = Tools.toUTF8(request.getParameter("recipe-description"));
             String videoUrl = request.getParameter("video-url");
             List<Part> pictureList = new ArrayList<Part>();//get all video-image
@@ -100,8 +104,8 @@ public class EditRecipeController extends HttpServlet {
             String[] instDescription = request.getParameterValues("inst-description");//get all instuction descrition
             if (instDescription != null) {
                 instDescription = Tools.toUTF8(instDescription);
+                System.out.println(instDescription[0]);
             }
-            System.out.println(instDescription[0]);
             //set default number
             int prepareTime = 30;
             int cookTime = 30;
@@ -174,11 +178,17 @@ public class EditRecipeController extends HttpServlet {
 
     private void loadRecipe (HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         String url = ERROR_GET;
+        HttpSession session = request.getSession();
+        
         try {
             int recipeID = Integer.parseInt(request.getParameter("recipeID"));
             Recipe recipe = RecipeDAO.getRecipeByID(recipeID);
             request.setAttribute("recipe", recipe);
-
+            User user = (User) session.getAttribute("login");
+            if (user == null) {
+                url = ERROR_POST_MISSING_USER;
+                throw new NullPointerException("User not Exist");
+            }
             IngredientDAO dao = new IngredientDAO();
 
             List<Picture> picRecp;
@@ -197,9 +207,9 @@ public class EditRecipeController extends HttpServlet {
             request.setAttribute("VIDEO_DETAIL", videoDetail);
 //            recipe.commentList(recipeID);
             String[] measurements = {"oz", "tbsp", "c", "g", "ml", "lb", "fl,oz", "l", "gram", "cup",
-                 "tablespoon", "teaspoon", "ounce", "pound", "liter", "pint", "gallon"};
-            request.setAttribute("IP_INGREDIENTS", IngredientDAO.getAllIngredients());
-            request.setAttribute("IP_INGAMOUNTS", measurements);
+                "tablespoon", "teaspoon", "ounce", "pound", "liter", "pint", "gallon"};
+            session.setAttribute("IP_INGREDIENTS", IngredientDAO.getAllIngredients());
+            session.setAttribute("IP_INGAMOUNTS", measurements);
             url = SUCCESS_GET;
         } catch (Exception e) {
             e.printStackTrace();

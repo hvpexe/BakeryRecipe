@@ -23,7 +23,11 @@ async function submitForm(selector) {
         inputs[i].setAttribute('name', inputs[i].getAttribute('name') + inputs[i].getAttribute('count'));
     }
     console.log(output);
-    smbtn.click();
+    if ($('[name=recipe-name]').val() != "")
+        smbtn.click();
+    else {
+        $('[name=recipe-name]').addClass("invalid").focus().next('.status').html('Please add recipe name');
+    }
 }
 //add video and picture
 var swiper = new Swiper(".swiper", {

@@ -31,22 +31,21 @@
                     <button class="save-button d-none" id="submit" form="add-recipe" >
                         <b class="save-b2">Save</b>
                     </button>
-                    <c:if test="${ADD_RECIPE_SUCCESS !=null}">
-                        <div class="text-success h6 my-auto mr-4 font-weight-bold">${ADD_RECIPE_SUCCESS}</div>
-                    </c:if>
-                    <c:if test="${ADD_RECIPE_FAILED !=null}">
-                        <div class="text-danger h6 my-auto mr-4 font-weight-bold">${ADD_RECIPE_FAILED}</div>
-                    </c:if>
-                    <c:remove scope="session" var="ADD_RECIPE_FAILED"></c:remove>
-                    <c:remove scope="session" var="ADD_RECIPE_SUCCESS"></c:remove>
-                    </main>
-                    <form action="editrecipe"  class="section-div col-12 col-md-10 align-content-center align-self-center"
-                          id="add-recipe" enctype="multipart/form-data" method="post" >
-                        <input name="recipeid" type="hidden" value="${recipe.id}">
+                    <div class="save-button ml-auto" onclick="submitForm('form#add-recipe')">
+                        <b class="save-b2" style="font-size: 16px" >Save</b>
+                    </div>
+                </main>
+                <c:if test="${ADD_RECIPE_FAILED !=null}">
+                    <div class="text-danger h6 my-auto mr-4 font-weight-bold">${ADD_RECIPE_FAILED}</div>
+                </c:if>
+                <c:remove scope="session" var="ADD_RECIPE_FAILED"/>
+                <form action="editrecipe"  class="section-div col-12 col-md-10 align-content-center align-self-center"
+                      id="add-recipe" enctype="multipart/form-data" method="post">
+                    <input name="recipeid" type="hidden" value="${recipe.id}">
                     <div class="title-div col-12">
                         <b class="label">Title</b>
                         <input name='recipe-name' class="input col-12"  type="text" placeholder="Recipe's Name "
-                               value="${recipe.name}">
+                               value="${recipe.name}"/>
                         <span class="status"><span>
                                 </div>
                                 <div class="add-recipe-input col">
@@ -57,7 +56,7 @@
                                 <div class="add-recipe-input col" style="gap: 10px;">
                                     <div class="d-flex col p-0 justify-content-start" style="gap: 10px;">
                                         <div class="description-button"  id="add-video-btn">
-                                            Add Video <i class="fa-brands fa-youtube"></i>
+                                            ${empty VIDEO_DETAIL?'Add Video':'Update Video'} <i class="fa-brands fa-youtube"></i>
                                         </div>
                                         <div class="description-button"  id="add-img-btn">
                                             Add Image <i class="fa-regular fa-image"></i>
@@ -88,7 +87,7 @@
                                                     <input type="hidden" name="video-url">
                                                 </span>
                                             </c:if>
-                                            <c:if test="${!(empty VIDEO_DETAIL)}">
+                                            <c:if test="${not empty VIDEO_DETAIL}">
                                                 <span class="col-2 p-0 swiper-slide hover-button-2 list-group-item rounded video"
                                                       style='background-image: url("https://img.youtube.com/vi/${VIDEO_DETAIL}/0.jpg");'
                                                       onclick="selectContent(this.parentElement, this)">
@@ -136,7 +135,7 @@
                                                 <input class="instruction-box-input col " autocomplete="off" form="disabled" name="iname" id="name" type="text" placeholder="Add one ingredient">
                                                 <div class="ingredient-suggestion d-none position-absolute list-group col p-0" 
                                                      id="ingredient-suggestion">
-                                                    <c:forEach items="${IP_INGREDIENTS}" var="ing">
+                                                    <c:forEach items="${sessionScope.IP_INGREDIENTS}" var="ing">
                                                         <span class="list-group-item hover-button-1 hover-bold">${ing}</span>
                                                     </c:forEach>
                                                 </div>
@@ -147,7 +146,7 @@
                                                 <div class="ingredient-amount-suggestion d-none position-absolute list-group p-0"\
                                                      id="ingredient-amount-suggestion">
                                                     <div class="list-group-item font-weight-bold font-italic">Suggestion:</div>
-                                                    <c:forEach items="${IP_INGAMOUNTS}" var="ing">
+                                                    <c:forEach items="${sessionScope.IP_INGAMOUNTS}" var="ing">
                                                         <span class="list-group-item hover-button-1 hover-bold"><a class="p-0"></a> ${ing}</span>
                                                     </c:forEach>
                                                 </div>
@@ -214,9 +213,7 @@
                                             <input class="pre-box-input col" type="number" name="cook-time" value="${recipe.cookTime}" placeholder="30">
                                         </div>
                                     </div>
-                                    <div class="save-button ml-auto" onclick="submitForm('form#add-recipe')">
-                                        <b class="save-b2" style="font-size: 16px" >Save</b>
-                                    </div>
+
                                     </form>
 
                                     </main>
@@ -234,9 +231,9 @@
                                                     <input class="col-10 p-2" placeholder="Input Your Youtube URL" name="vurl">
                                                     <div class="status w-100"></div>
                                                 </div>
-                                                <div class="col-12 d-flex justify-content-end">
-                                                    <div class="cancel-btn hover-button-1 col-auto font-weight-bold rounded m-2">Cancel</div>
-                                                    <div class="save-btn hover-button-1 col-auto font-weight-bold rounded m-2">Save</div><!-- comment -->
+                                                <div class="mt-auto d-flex col-12 justify-content-end gap-3 p-0">
+                                                    <div class="cancel-btn hover-button-1 col-auto font-weight-bold rounded my-2">Cancel</div>
+                                                    <div class="save-btn hover-button-1 col-auto font-weight-bold rounded my-2">Save</div><!-- comment -->
                                                 </div>
                                             </div>
                                         </div>
@@ -257,9 +254,9 @@
                                             </div>
                                             <h5>Instruction</h5>
                                             <textarea class="rounded col border py-3 "  value="" style="min-height:7rem"></textarea> 
-                                            <div class="mt-auto d-flex justify-content-end">
-                                                <div class="cancel-btn hover-button-1 col-auto font-weight-bold rounded m-2">Cancel</div>
-                                                <div class="save-btn hover-button-1 col-auto font-weight-bold rounded m-2">Save</div>
+                                            <div class="mt-auto d-flex col-12 justify-content-end gap-3 p-0">
+                                                <div class="cancel-btn hover-button-1 col-auto font-weight-bold rounded my-2">Cancel</div>
+                                                <div class="save-btn hover-button-1 col-auto font-weight-bold rounded my-2">Save</div>
                                             </div>
                                         </div>
                                     </div>

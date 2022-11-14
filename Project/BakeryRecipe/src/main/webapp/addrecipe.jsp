@@ -32,15 +32,11 @@
                     <div class="save-button ml-auto" onclick="submitForm('form#add-recipe')">
                         <b class="save-b2">Save</b>
                     </div>
-                    <c:if test="${ADD_RECIPE_SUCCESS !=null}">
-                        <div class="text-success h6 my-auto mr-4 font-weight-bold">${ADD_RECIPE_SUCCESS}</div>
-                    </c:if>
-                    <c:if test="${ADD_RECIPE_FAILED !=null}">
-                        <div class="text-danger h6 my-auto mr-4 font-weight-bold">${ADD_RECIPE_FAILED}</div>
-                    </c:if>
-                    <c:remove scope="session" var="ADD_RECIPE_FAILED"></c:remove>
-                    <c:remove scope="session" var="ADD_RECIPE_SUCCESS"></c:remove>
-                    </main>
+                </main>
+                <c:if test="${ADD_RECIPE_FAILED !=null}">
+                    <div class="text-danger h6 my-auto mr-4 font-weight-bold">${ADD_RECIPE_FAILED}</div>
+                </c:if>
+                <c:remove scope="session" var="ADD_RECIPE_FAILED"></c:remove>
                     <form action="addrecipe"  class="section-div col-12 col-md-10 align-content-center align-self-center"
                           id="add-recipe" enctype="multipart/form-data" method="post" >
                         <div class="title-div col-12">
@@ -110,7 +106,7 @@
                                                 <input class="instruction-box-input col " autocomplete="off" form="disabled" name="iname" id="name" type="text" placeholder="Add one ingredient">
                                                 <div class="ingredient-suggestion d-none position-absolute list-group col p-0" 
                                                      id="ingredient-suggestion">
-                                                <c:forEach items="${IP_INGREDIENTS}" var="ing">
+                                                <c:forEach items="${sessionScope.IP_INGREDIENTS}" var="ing">
                                                     <span class="list-group-item hover-button-1 hover-bold">${ing}</span>
                                                 </c:forEach>
                                             </div>
@@ -121,9 +117,9 @@
                                             <div class="ingredient-amount-suggestion d-none position-absolute list-group p-0"\
                                                  id="ingredient-amount-suggestion">
                                                 <div class="list-group-item font-weight-bold font-italic">Suggestion:</div>
-                                                <c:forEach items="${IP_INGAMOUNTS}" var="ing">
+                                                <c:forEach items="${sessionScope.IP_INGAMOUNTS}" var="ing">
                                                     <span class="list-group-item hover-button-1 hover-bold"><a class="p-0"></a> ${ing}</span>
-                                                </c:forEach>
+                                                    </c:forEach>
                                             </div>
                                         </div>
                                         <input type="hidden" name="count" value="1">
@@ -190,8 +186,8 @@
                                                 <div class="status w-100"></div>
                                             </div>
                                             <div class="ml-auto mt-auto d-flex justify-content-end gap-3">
-                                                <div class="save-btn hover-button-1 col-auto font-weight-bold rounded">Save</div><!-- comment -->
-                                                <div class="cancel-btn hover-button-1 col-auto font-weight-bold rounded">Cancel</div>
+                                                <div class="cancel-btn hover-button-1 col-auto font-weight-bold rounded my-2">Cancel</div>
+                                                <div class="save-btn hover-button-1 col-auto font-weight-bold rounded my-2">Save</div><!-- comment -->
                                             </div>
                                         </div>
                                     </div>
@@ -213,8 +209,8 @@
                                         <h5>Instruction</h5>
                                         <textarea class="rounded col border py-3 "  value="" style="min-height:7rem"></textarea> 
                                         <div class="mt-auto d-flex justify-content-end gap-3">
-                                            <div class="save-btn hover-button-1 col-auto font-weight-bold rounded">Save</div>
-                                            <div class="cancel-btn hover-button-1 col-auto font-weight-bold rounded">Cancel</div>
+                                            <div class="cancel-btn hover-button-1 col-auto font-weight-bold rounded my-2">Cancel</div>
+                                            <div class="save-btn hover-button-1 col-auto font-weight-bold rounded my-2">Save</div>
                                         </div>
                                     </div>
                                 </div>
@@ -222,7 +218,9 @@
                                 <script src="assets/js/validator.js"></script>
                                 <script src="assets/js/addrecipe.js"></script>
                                 <script>
-                                                     
+
                                 </script>
+                                <c:import url="footer.jsp"/>
+
                                 </body>
                                 </html>
