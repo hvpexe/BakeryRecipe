@@ -95,13 +95,21 @@ public class Recipe {
         this.datePost = datePost;
     }
 
-    public Recipe (String name, int like, int comment, String cover, String username) {
+    /**
+     * constructor này dành cho search recipe
+     */
+    public Recipe(int id, String name, int like, int comment, Timestamp datePost, String cover, int userID, String username) {
+        this.id = id;
         this.name = name;
         this.like = like;
         this.comment = comment;
+        this.datePost = datePost;
         this.cover = cover;
+        this.userID = userID;
         this.username = username;
     }
+
+    
 
     public Recipe (int id, String name, String description, int like, int save, int comment, Timestamp datePost, Timestamp lastDateEdit, int prepTime, int cookTime) {
         this.id = id;
