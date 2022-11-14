@@ -15,6 +15,7 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.LinkedList;
 import java.util.List;
+import java.util.SortedSet;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.servlet.ServletContext;
@@ -180,10 +181,9 @@ public class AddRecipeController extends HttpServlet {
         HttpSession session = request.getSession();
 
         try {
-            String[] measurements = {"oz", "tbsp", "c", "g", "ml", "lb", "fl,oz", "l", "gram", "cup",
-                 "tablespoon", "teaspoon", "ounce", "pound", "liter", "pint", "gallon","piece"};
+            
             session.setAttribute("IP_INGREDIENTS", IngredientDAO.getAllIngredients());
-            session.setAttribute("IP_INGAMOUNTS", measurements);
+            session.setAttribute("IP_INGAMOUNTS", IngredientDAO.MEASUREMENTS);
         } catch (SQLException ex) {
             Logger.getLogger(AddRecipeController.class.getName()).log(Level.SEVERE, null, ex);
         } finally {

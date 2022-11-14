@@ -21,6 +21,8 @@ import javax.servlet.http.Part;
  */
 public class IngredientDAO {
 
+    public static String[] MEASUREMENTS = {"oz", "tbsp", "c", "g", "ml", "lb", "fl,oz", "l", "gram", "cup",
+        "tablespoon", "teaspoon", "ounce", "pound", "liter", "pint", "gallon", "piece"};
     private static Connection conn = DBUtils.getConnection();
 
     private static final String SELECT_ALL_INGREDIENT = "SELECT [Name]"
@@ -131,7 +133,7 @@ public class IngredientDAO {
             ps = conn.prepareStatement(sql);
             ps.setInt(1, recipeId);
             ps.setInt(2, ingreId);
-            ps.setString(3, ingreAmount.isEmpty()?"1 Piece":ingreAmount);
+            ps.setString(3, ingreAmount.isEmpty() ? "1 Piece" : ingreAmount);
             if (ps.executeUpdate() > 0) {
                 System.out.println("Added Ingrdient Recipe" + recipeId + " " + ingreId);
             }
@@ -280,6 +282,7 @@ public class IngredientDAO {
     }
     private static final String ALL_INGREDIENT = "SELECT LOWER(Name) as Name\n"
             + " FROM Ingredient"
+            + " WHERE Img is not null"
             + " ORDER BY LEN(NAME)";
 
     public static List<String> getAllIngredients () throws SQLException {
