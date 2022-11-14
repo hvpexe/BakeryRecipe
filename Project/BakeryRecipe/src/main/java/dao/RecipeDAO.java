@@ -1086,10 +1086,10 @@ public class RecipeDAO {
     }
 
     private static final String SHOW_RECIPE_LIST = "SELECT [Recipe].ID, [Recipe].[Name], [Recipe].DatePost, [Recipe].LastDateEdit, [Recipe].IsDeleted, [Picture].Img, [Recipe].UserID, [User].LastName + ' ' + [User].FirstName AS UserName\n"
-            + "FROM [Recipe]\n"
-            + "JOIN [User] ON [Recipe].[UserID] = [User].ID\n"
-            + "JOIN [Picture] ON [Picture].RecipeID = [Recipe].ID\n"
-            + "WHERE [Picture].IsCover = 1 AND [Recipe].IsDeleted = 0";
+            + "            FROM [Recipe]\n"
+            + "            JOIN [User] ON [Recipe].[UserID] = [User].ID\n"
+            + "            JOIN [Picture] ON [Picture].RecipeID = [Recipe].ID\n"
+            + "            WHERE [Picture].IsCover = 1 AND [Recipe].IsDeleted = 0\n";
 
     public static List<Recipe> showRecipeList() throws SQLException {
         Connection conn = null;

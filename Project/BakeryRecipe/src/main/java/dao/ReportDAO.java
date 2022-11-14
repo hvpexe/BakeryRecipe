@@ -133,7 +133,6 @@ public class ReportDAO {
             + "            FROM [ReportComment]\n"
             + "            JOIN [User] ON [ReportComment].UserID = [User].ID\n"
             + "            JOIN [Comment] ON [Comment].ID = [ReportComment].CommentID\n"
-            + "			WHERE [Comment].IsDeleted = 'False'\n"
             + "            ORDER BY [ReportComment].DateReport ASC";
 
     public static List<Report> reportCMTList() throws SQLException {
@@ -182,7 +181,7 @@ public class ReportDAO {
             + "            JOIN [User] ON [ReportRecipe].UserID = [User].ID\n"
             + "            JOIN [Recipe] ON [ReportRecipe].RecipeID = [Recipe].ID\n"
             + "            JOIN [Picture] ON [Picture].RecipeID = [Recipe].ID\n"
-            + "            WHERE [Picture].IsCover = 1 AND [Recipe].IsDeleted = 'False'\n"
+            + "            WHERE [Picture].IsCover = 1\n"
             + "            ORDER BY [ReportRecipe].DateReport ASC";
 
     public static List<Report> reportRecipeList() throws SQLException {
@@ -230,7 +229,6 @@ public class ReportDAO {
             + "            [User].Avatar, [User].[Role]\n"
             + "            FROM [ReportUser]\n"
             + "            JOIN [User] ON [ReportUser].UserID2 = [User].ID\n"
-            + "	           WHERE [User].IsActive = 'True'\n"
             + "            ORDER BY [ReportUser].DateReport ASC";
 
     public static List<Report> reportUserList() throws SQLException {
