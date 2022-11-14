@@ -213,7 +213,7 @@
                                                     <td class="align-middle style col-3">${u.comment}</td>
                                                     <td class="align-middle style col-2">${u.recipeName}</td>
                                                     <td class="align-middle style align-items-center col-2 text-nowrap">${u.getDateComment()}</td>
-                                                    <td class="align-middle style align-items-center col-2 text-nowrap">${u.getLastDateEdit()}</td> 
+                                                    <td class="align-middle style align-items-center col-2 text-nowrap">${u.lastDateEdit}</td> 
                                                     <td class="align-middle style align-items-center col-1">
                                                         <c:if test="${u.userID ne sessionScope.login.id }">
                                                             <form action="profile" class="d-inline">
@@ -311,7 +311,11 @@
 
         <!-- Page level custom scripts -->
         <script src="admin/js/demo/datatables-demo.js"></script>
-
+        <script>
+                                                            $('#dataTable').dataTable({
+                                                                "order": [0, "desc"]
+                                                            });
+        </script>
     </body>
 
 

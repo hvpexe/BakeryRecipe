@@ -298,7 +298,11 @@
 
         <!-- Page level custom scripts -->
         <script src="admin/js/demo/datatables-demo.js"></script>
-
+        <script>
+                                                            $('#dataTable').dataTable({
+                                                                "order": [0, "desc"]
+                                                            });
+        </script>
     </body>
 
 </html>
