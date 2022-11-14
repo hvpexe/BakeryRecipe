@@ -311,7 +311,7 @@ public class CommentDAO {
             = "select  baker.LastName+' ' +baker.FirstName  as fullName ,DateComment,cmt.ID,cmt.Comment,baker.Avatar,cmt.UserID\n"
             + " from [dbo].[Comment] cmt join [dbo].[User] baker\n"
             + " on cmt.UserID = baker.ID\n"
-            + "            where cmt.RecipeID = ?"
+            + "            where cmt.RecipeID = ? and IsDeleted = 0 "
             + "            ORDER BY DateComment Desc ";
 
     public static List<Comment> commentList (int recipeID) throws SQLException {

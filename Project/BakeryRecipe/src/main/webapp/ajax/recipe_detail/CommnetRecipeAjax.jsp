@@ -18,11 +18,6 @@
                                                                     <i class="fa-solid fa-ellipsis"></i>
                                                                 </a>
                                                                 <div class="dropdown-menu c-pointer noselect" style="min-width: inherit;" aria-labelledby="dropdownMenuLink">
-                                                                    <c:if test="${sessionScope.login.id != cmt.userID}">
-                                                                        <a class="dropdown-item" onclick="getReportComment(${RECIPE_DETAIL.getId()})">
-                                                                            <span class="align-middle"><strong>${re.like}</strong> Report</span>
-                                                                        </a>
-                                                                    </c:if>
                                                                     <c:if test="${(sessionScope.login.id == cmt.userID || sessionScope.login.role == 'admin')}">
                                                                         <a class="dropdown-item" onclick="showConfirmBox(${cmt.commentID}, 'comment', '#comment-${cmt.commentID}')" >Delete</a>
                                                                     </c:if>

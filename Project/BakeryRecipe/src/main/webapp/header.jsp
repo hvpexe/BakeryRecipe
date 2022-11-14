@@ -2,7 +2,7 @@
 <link rel="stylesheet" href="assets/css/header.css">
 <link href="assets/css/fontawesome-free-6.1.1-web/css/all.min.css" rel="stylesheet" type="text/css"/>
 <header class="header-container header py-2 py-md-0 ">
-    <div class="header-left col-sm-12 col-md-6 p-0">
+    <div class="header-left col-sm-12 col-md-6">
         <nav class="navbar d-flex align-items-center justify-content-around col-md col p-0 ">
             <a class="header-logo p-0 border-0" href="./home">
                 <img class="mx-auto" src="assets/images/logo/logo2.png" alt="">
@@ -13,7 +13,7 @@
             <a id="shopping" class="header-link p-0 border-0" href="./shopping.jsp">Shopping</a>
         </nav>
     </div>
-    <div class="header-right align-items-center flex-md-nowrap col-sm-12 col-md px-2 justify-content-md-center">
+    <div class="header-right align-items-center flex-md-nowrap col-sm-12 col-md-6 col-md px-2 justify-content-md-center">
         <div class="col-sm d-flex align-items-center">
             <form action="Search"> 
                 <div class="searchbar mr-3">
