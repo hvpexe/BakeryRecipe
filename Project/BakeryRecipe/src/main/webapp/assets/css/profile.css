@@ -39,8 +39,9 @@
     padding: 0 !important;
     /* width: 120px; */
     aspect-ratio: 1/1;
-    border: 10px solid #EEE;
     border-radius: 50%;
+    outline: 5px solid lightgray;
+    outline-style: double;
 }
 
 .profile-name {
@@ -67,7 +68,7 @@
     padding: 10px !important;
     border: 1.5px solid var(--main-theme-color);
     color: var(--main-theme-color);
-    border-radius: 20px !important;
+    border-radius:1000px!important;
     width: 70%;
     transition: 0.3s;
 }
@@ -152,6 +153,32 @@ button{
 
 button:hover{
     background-color:white;
+}
+
+.dropdown-options {
+    display: none;
+    position: absolute;
+    background-color: white;
+    border: 1px solid #000;
+    border-radius:5px;
+}
+
+.dropdown:hover .dropdown-options {
+    display: block;
+}
+
+.dropdown-options a {
+    display: block;
+    color: #000000;
+    padding: 5px;
+    text-decoration: none;
+    padding:10px 20px;
+}
+
+.dropdown-options a:hover {
+    color: #0a0a23;
+    background-color: #ddd;
+    border-radius:5px;
 }
 
 .txtareaRp{

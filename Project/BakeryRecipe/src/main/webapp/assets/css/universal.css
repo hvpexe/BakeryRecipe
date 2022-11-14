@@ -1,9 +1,9 @@
 *::-webkit-scrollbar {
     width: 5px;
+    cursor: pointer;
+
 }
-*::-webkit-scrollbar:hover {
-    width: 10px;
-}
+
 
 /* Track */
 *::-webkit-scrollbar-track {
@@ -14,15 +14,13 @@
 *::-webkit-scrollbar-thumb {
     background: var(--main-theme-color);
     opacity:0.7;
-}
+    cursor: pointer;
 
-/* Handle on hover */
+}
 *::-webkit-scrollbar-thumb:hover {
-    background: #b30000;
-    width: 10px;
-    border-radius: 1000px;
-
+    background: var(--main-theme-color-hover);
 }
+/* Handle on hover */
 body:has(.fixed-container.d-flex){
     overflow-y:hidden;
 }
@@ -108,7 +106,24 @@ body:has(.fixed-container.d-flex){
     user-select: none; /* Non-prefixed version, currently
                           supported by Chrome, Edge, Opera and Firefox */
 }
-
+.gap-0{
+    gap: 0!important;
+}
+.gap-1{
+    gap: 0.25rem!important;
+}
+.gap-2{
+    gap: .5rem!important;
+}
+.gap-3{
+    gap: 1rem!important;
+}
+.gap-4{
+    gap: 1.5rem!important;
+}
+.gap-5{
+    gap: 2rem!important;
+}
 .pe-none{
     pointer-events: none;
 }

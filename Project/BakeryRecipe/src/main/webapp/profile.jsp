@@ -9,34 +9,9 @@
         <meta name="description" content="" />
         <c:import url="universal.jsp" />
 
-        <link
-            rel="stylesheet"
-            href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700&display=swap"
-            />
-        <link
-            rel="stylesheet"
-            href="https://fonts.googleapis.com/css2?family=Abhaya Libre:wght@700&display=swap"
-            />
-        <link
-            rel="stylesheet"
-            href="https://fonts.googleapis.com/css2?family=Abel:wght@400&display=swap"
-            />
-        <link
-            rel="stylesheet"
-            href="https://fonts.googleapis.com/css2?family=Gelasio:wght@400;500;700&display=swap"
-            />
-        <link
-            rel="stylesheet"
-            href="https://fonts.googleapis.com/css2?family=Arima Madurai:wght@800&display=swap"
-            />
-        <link
-            rel="stylesheet"
-            href="https://fonts.googleapis.com/css2?family=Archivo Narrow:wght@700&display=swap"
-            />
-        <link
-            rel="stylesheet"
-            href="https://fonts.googleapis.com/css2?family=Beau Rivage:wght@400&display=swap"
-            />
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+        
         <link rel="stylesheet" href="assets/css/profile.css">
     </head>
     <body>
@@ -94,7 +69,9 @@
                     </div>
                 </div>
                 <c:if test="${login.id eq user.id}">
-                    <a href="./addrecipe" class="btn input-button">Add your recipe</a>
+                    <a href="./addrecipe" class="btn input-button">
+                        <i class="fa-solid fa-circle-plus"></i>&nbsp;Add your recipe
+                    </a>
                 </c:if>
                 <div class="profile-activity">
                     <b>Activity</b>
@@ -116,7 +93,7 @@
                                 <a href="./profile?userid=${requestScope.user.id}" class="text-dark c-pointer hover-underline">${re.username}</a>
                                 <div class="text-muted small"><c:out value="${re.getDatePostFormat()}"/></div>
                             </div>
-                            
+
                             <div class="dropdown">
                                 <a type="text" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true">
                                     <i class="fa-solid fa-ellipsis"></i>

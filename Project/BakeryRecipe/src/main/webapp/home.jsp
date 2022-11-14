@@ -9,8 +9,10 @@
         <title>Home</title>
         <c:import url="universal.jsp" />
 
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+
         <link rel="stylesheet" href="assets/css/home.css" />
-        <script src="assets/js/Jquery/jquery-core.js"></script>
     </head>
     <body class="">
         <c:import url="header.jsp"/>
@@ -19,7 +21,9 @@
                 <div class="posting-section">
                     <img class="avatar-icon rounded-circle"
                          src="${login.avatar}" alt="ava" />
-                    <button class="btn-button m-auto" id="btnButton">Add your recipe</button>
+                    <button class="btn-button m-auto" id="btnButton">
+                        <i class="fa-solid fa-circle-plus"></i>  Add your recipe
+                    </button>
                 </div>
                 <c:forEach items="${homeRecipe}" var="re">
                     <div class="user-recipe" >
@@ -31,7 +35,7 @@
                                 <a class="text-dark c-pointer hover-underline" href="./profile?userid=${re.userID}">${re.username}</a>
                                 <div class="text-muted small"><c:out value="${re.getDatePostFormat()}"/></div>
                             </div>
-                            <div class="dropdown">
+                            <div class="dropdown c-pointer noselect">
                                 <a type="text" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true">
                                     <i class="fa-solid fa-ellipsis"></i>
                                 </a>

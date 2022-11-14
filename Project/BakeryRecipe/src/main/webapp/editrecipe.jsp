@@ -22,8 +22,8 @@
         <main class="add-recipedone-main">
             <main class="cook2-main">
                 <main class="create-recipe-main col-md-10 col-12 align-self-center px-0">
-                    <div class="create-recipe-div ">
-                        <h2 class="text-h2" onclick="history.go(-1);">
+                    <div class="create-recipe-div">
+                        <h2 class="text-h2">
                             <i class="fas fa-arrow-left"></i>
                             <b class="create-recipe-b d-inline-block ">Your's Recipe</b>
                         </h2>
@@ -180,7 +180,7 @@
                                     </div>
 
                                 </div>
-                                <div class="col" id="instruction">
+                                <div class="col d-flex flex-nowrap" id="instruction">
                                     <textarea class="instruction-box-input col-11  py-3 pr-3" form="disabled" name="idetail" type="text" placeholder="Paste one or multiple steps (e.g. Finely chop the garlic)"></textarea>
                                     <input type="hidden" name="count" value="${LIST_STEP.size()}">
                                     <div class="accept-input fas fa-check d-flex align-items-center justify-content-center col-1 hover-button-1"></div>

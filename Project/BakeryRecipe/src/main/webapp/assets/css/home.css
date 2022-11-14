@@ -50,7 +50,7 @@ body {
 }
 
 .btn-button {
-    border-radius: 15px;
+    border-radius: 1000px;
     cursor: pointer;
     border: 1.5px solid var(--main-theme-color);
     background-color: transparent;
