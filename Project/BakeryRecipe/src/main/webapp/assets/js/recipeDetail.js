@@ -140,6 +140,7 @@ function Comment(item, event) {
                 var cmtShow = document.getElementById("show-comment");
                 $(cmtShow).prepend(response);
                 item.value = "";
+            
             },
             error: function (xhr) {
                 console.log("that bai");

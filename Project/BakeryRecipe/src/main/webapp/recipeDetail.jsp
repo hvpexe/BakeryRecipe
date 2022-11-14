@@ -247,7 +247,7 @@
                                         </div>
                                     </c:if>
 
-
+                                    <div id="show-comment"></div>
                                     <c:forEach items="${COMMENT_LIST}" var="cmt">
                                         <input  type="hidden" id="commentID">
                                         <input type="hidden" id="commentReportID" value="${cmt.commentID}">
