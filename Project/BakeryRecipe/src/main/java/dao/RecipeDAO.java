@@ -976,8 +976,9 @@ public class RecipeDAO {
         return listR;
     }
 
-    private static final String All_NAME = "SELECT   recipe.Name\n"
-            + "FROM [dbo].[Recipe]recipe ";
+    private static final String ALL_NAME = "SELECT   recipe.Name \n"
+            + "            FROM [dbo].[Recipe]recipe \n"
+            + "			WHERE recipe.IsDeleted ='false' ";
 
     public static List<Recipe> AnotherRecipe() throws SQLException {
         Connection cnn = null;
@@ -987,7 +988,7 @@ public class RecipeDAO {
 
         try {
             cnn = DBUtils.getConnection();
-            ptm = cnn.prepareStatement(All_NAME);
+            ptm = cnn.prepareStatement(ALL_NAME);
             rs = ptm.executeQuery();
             while (rs.next()) {
                 String name = rs.getString("Name");
@@ -1018,7 +1019,7 @@ public class RecipeDAO {
             + "on recipe.[ID] =igreRecipe.[RecipeID]\n"
             + "join [dbo].[Ingredient] igre\n"
             + "on igreRecipe.IngredientID = igre.ID\n"
-            + "WHERE igre.Name = ?";
+            + "WHERE recipe.IsDeleted = 'False' and igre.Name = ?";
 
     public static List<Recipe> listRelate(int recipeID) throws SQLException {
         List<Recipe> listRecipe = new ArrayList<>();
@@ -1048,7 +1049,8 @@ public class RecipeDAO {
                 while (rs.next()) {
                     relateListRecipe.put(checkNum, rs.getString("Name"));
                     Recipe recipeD = RecipeDAO.searchRecipebyName(relateListRecipe.get(checkNum));
-                    listRecipe.add(recipeD);
+                    if(recipeD != null){
+                    listRecipe.add(recipeD);}
                 }
             }
 
@@ -1162,7 +1164,7 @@ public class RecipeDAO {
             + "            			on recipe.ID =pic.RecipeID\n"
             + "            			join [dbo].[User]  baker\n"
             + "            			on  baker.ID =recipe.UserID\n"
-            + "                        WHERE recipe.Name =? and pic.IsCover ='True'";
+            + "                        WHERE recipe.Name =? and pic.IsCover ='True'  and recipe.IsDeleted = 'False'";
 
     public static Recipe searchRecipebyName(String recipeName) throws SQLException {
         Connection cnn = null;
@@ -1320,9 +1322,4 @@ public class RecipeDAO {
 //
 //        return check;
 //    }
-
-    public static void main(String[] args) throws SQLException {
-        System.out.println(getRecommnedRecipes());
-        RecipeDAO.deleteRecipe(2);
-    }
 }

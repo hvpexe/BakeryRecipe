@@ -5,11 +5,13 @@
 package dto;
 
 import dao.RecipeDAO;
+import static dao.RecipeDAO.getRecommnedRecipes;
 import static dto.User.DEFAULT_AVATAR;
 import static dto.User.IMG_PATH;
 import java.sql.SQLException;
 import java.sql.Timestamp;
 import java.util.ArrayList;
+import java.util.List;
 import utils.Tools;
 
 /**
@@ -280,4 +282,13 @@ public class Recipe {
         return "Recipe{" + "id=" + id + ", name=" + name + ", description=" + description + ", like=" + like + ", save=" + save + ", comment=" + comment + ", datePost=" + datePost + ", lastDateEdit=" + lastDateEdit + ", prepTime=" + prepTime + ", cookTime=" + cookTime + ", isDeleted=" + isDeleted + ", userID=" + userID + ", img=" + img + ", cover=" + cover + ", username=" + username + '}';
     }
 
+    
+      public static void main(String[] args) throws SQLException {
+//        System.out.println(getRecommnedRecipes());
+//          System.out.println(RecipeDAO.RelatewithBaker(4));
+          List<Recipe> recipE = RecipeDAO.listRelate(4);
+         recipE.toString();
+         
+//        RecipeDAO.RelatewithBaker(4);
+    }
 }
