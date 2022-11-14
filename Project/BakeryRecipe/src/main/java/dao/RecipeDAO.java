@@ -939,9 +939,9 @@ public class RecipeDAO {
         return theVideo;
     }
 
-    private static final String RLATED_BAKER = "SELECT   recipe.Name\n"
-            + "FROM [dbo].[Recipe]recipe \n"
-            + "WHERE  recipe.UserID = ?";
+    private static final String RLATED_BAKER = "SELECT   recipe.Name\n" +
+"            FROM [dbo].[Recipe]recipe \n" +
+"            WHERE  recipe.IsDeleted ='false' and recipe.UserID = ?";
 
     public static List<Recipe> RelatewithBaker(int recipeID) throws SQLException {
         Connection cnn = null;
@@ -1032,6 +1032,7 @@ public class RecipeDAO {
         List<Ingredient> ingre = dao.listIngredient(recipeID);
         cnn = DBUtils.getConnection();
         int checkNum = 0;
+        int checkNum1 = 0;
         List<Recipe> listF = new ArrayList<>();
         try {
             if (!ingre.isEmpty()) {
@@ -1050,8 +1051,10 @@ public class RecipeDAO {
                     Recipe recipeD = RecipeDAO.searchRecipebyName(relateListRecipe.get(checkNum));
                     if (recipeD != null) {
                         listRecipe.add(recipeD);
+                        checkNum++;
                     }
                 }
+                checkNum1 =checkNum;
             }
 
             List<Recipe> recipeDL = RecipeDAO.RelatewithBaker(recipeID);
