@@ -325,8 +325,6 @@
                             <option value="Community">The recipe is not suitable for the community</option>
                         </select>
 
-
-
                         <input  type="hidden" id="loginID">
                         <!--                            <input type="hidden" name="bakerID" id="loginID" value="">
                                                     <input type="hidden" name="recipeID" id="recipeID" value="">-->

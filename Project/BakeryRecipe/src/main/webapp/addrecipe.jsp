@@ -17,12 +17,12 @@
     <body>
         <c:import url="header.jsp"/>
 
-        <main class="add-recipedone-main">
+        <main class="add-recipedone-main ">
             <main class="cook2-main">
                 <main class="create-recipe-main col-md-10 col-12 align-self-center px-0">
                     <div class="create-recipe-div ">
-                        <h2 class="text-h2" onclick="history.go(-1);">
-                            <i class="fas fa-arrow-left"></i>
+                        <h2 class="text-h2">
+                            <i class="fas fa-arrow-left ml-0 ml-md-2"></i>
                             <b class="create-recipe-b d-inline-block ">Create Recipe</b>
                         </h2>
                     </div>
@@ -47,7 +47,9 @@
                                 </div>
                                 <div class="add-recipe-input col">
                                     <b class="label">Description</b>
-                                    <textarea name="recipe-description" class="boxdes-textarea  py-3 col-12" placeholder="Add description"></textarea>
+                                    <textarea name="recipe-description" 
+                                              class="boxdes-textarea  py-3 col" 
+                                              placeholder="Add your recipe description"></textarea>
                                 </div>    
                                 <!--                Video And Image Picture                            -->
                                 <div class="add-recipe-input col" style="gap: 10px;">
@@ -130,10 +132,11 @@
                                     </div>
 
                                 </div>
-                                <div id="test"></div>
-
-                                <div class="col" id="instruction">
-                                    <textarea class="instruction-box-input col-11  py-3 pr-3" form="disabled" name="idetail" type="text" placeholder="Paste one or multiple steps (e.g. Finely chop the garlic)"></textarea>
+                                <div class="col gap-0 d-flex flex-nowrap" id="instruction">
+                                    <textarea class="instruction-box-input mr-2 col py-3 pr-3" 
+                                              form="disabled" name="idetail" 
+                                              type="text" 
+                                              placeholder="Paste one or multiple steps (e.g. Finely chop the garlic)"></textarea>
                                     <input type="hidden" name="count" value="1">
                                     <div class="accept-input fas fa-check d-flex align-items-center justify-content-center col-1 hover-button-1"></div>
                                 </div>
@@ -168,9 +171,9 @@
                                                 <input class="col-10 p-2" placeholder="Input Your Youtube URL" name="vurl">
                                                 <div class="status w-100"></div>
                                             </div>
-                                            <div class="col-12 d-flex justify-content-end">
-                                                <div class="cancel-btn hover-button-1 col-auto font-weight-bold rounded m-2">Cancel</div>
-                                                <div class="save-btn hover-button-1 col-auto font-weight-bold rounded m-2">Save</div><!-- comment -->
+                                            <div class="ml-auto mt-auto d-flex justify-content-end gap-3">
+                                                <div class="save-btn hover-button-1 col-auto font-weight-bold rounded">Save</div><!-- comment -->
+                                                <div class="cancel-btn hover-button-1 col-auto font-weight-bold rounded">Cancel</div>
                                             </div>
                                         </div>
                                     </div>
@@ -191,9 +194,9 @@
                                         </div>
                                         <h5>Instruction</h5>
                                         <textarea class="rounded col border py-3 "  value="" style="min-height:7rem"></textarea> 
-                                        <div class="mt-auto d-flex justify-content-end">
-                                            <div class="cancel-btn hover-button-1 col-auto font-weight-bold rounded m-2">Cancel</div>
-                                            <div class="save-btn hover-button-1 col-auto font-weight-bold rounded m-2">Save</div>
+                                        <div class="mt-auto d-flex justify-content-end gap-3">
+                                            <div class="save-btn hover-button-1 col-auto font-weight-bold rounded">Save</div>
+                                            <div class="cancel-btn hover-button-1 col-auto font-weight-bold rounded">Cancel</div>
                                         </div>
                                     </div>
                                 </div>

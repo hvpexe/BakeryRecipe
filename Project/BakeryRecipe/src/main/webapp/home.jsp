@@ -31,7 +31,7 @@
                                 <a class="text-dark c-pointer hover-underline" href="./profile?userid=${re.userID}">${re.username}</a>
                                 <div class="text-muted small"><c:out value="${re.getDatePostFormat()}"/></div>
                             </div>
-                            <div class="dropdown">
+                            <div class="dropdown c-pointer noselect">
                                 <a type="text" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true">
                                     <i class="fa-solid fa-ellipsis"></i>
                                 </a>
