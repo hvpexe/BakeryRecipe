@@ -129,7 +129,7 @@ public class ReportDAO {
             + "            [ReportComment].DateReport, [ReportComment].ReportType, \n"
             + "            [ReportComment].[Status], \n"
             + "            [ReportComment].UserID, [User].LastName + ' ' + [User].FirstName AS Reporter, \n"
-            + "            [Comment].Comment, [Comment].ID AS commentID\n"
+            + "            [Comment].Comment, [Comment].ID AS commentID, Comment.IsDeleted\n"
             + "            FROM [ReportComment]\n"
             + "            JOIN [User] ON [ReportComment].UserID = [User].ID\n"
             + "            JOIN [Comment] ON [Comment].ID = [ReportComment].CommentID\n"
@@ -153,7 +153,8 @@ public class ReportDAO {
                         rs.getString("Status"),
                         rs.getString("Reporter"),
                         rs.getString("Comment"),
-                        rs.getInt("commentID"));
+                        rs.getInt("commentID"),
+                        rs.getBoolean("IsActive"));
                 list.add(reportCMT);
             }
             return list;
@@ -176,7 +177,7 @@ public class ReportDAO {
             + "            [ReportRecipe].Detail, [ReportRecipe].ReportType, \n"
             + "            [ReportRecipe].[Status], [ReportRecipe].UserID, \n"
             + "            [User].LastName + ' ' + [User].FirstName AS Reporter, [Recipe].[Name], \n"
-            + "            [Picture].Img, [ReportRecipe].RecipeID\n"
+            + "            [Picture].Img, [ReportRecipe].RecipeID, [Recipe].IsDeleted\n"
             + "            FROM [ReportRecipe]\n"
             + "            JOIN [User] ON [ReportRecipe].UserID = [User].ID\n"
             + "            JOIN [Recipe] ON [ReportRecipe].RecipeID = [Recipe].ID\n"
@@ -203,7 +204,8 @@ public class ReportDAO {
                         rs.getString("Reporter"),
                         rs.getString("Name"),
                         rs.getString("Img"),
-                        rs.getInt("RecipeID"));
+                        rs.getInt("RecipeID"),
+                        rs.getBoolean("IsDeleted"));
                 list.add(report);
             }
             return list;
@@ -226,7 +228,7 @@ public class ReportDAO {
             + "            [ReportUser].Detail, [ReportUser].ReportType, \n"
             + "            [ReportUser].[Status], [ReportUser].UserID AS ReporterID, \n"
             + "            [ReportUser].UserID2 AS UserID, [User].LastName + ' ' + [User].FirstName AS Username, \n"
-            + "            [User].Avatar, [User].[Role]\n"
+            + "            [User].Avatar, [User].[Role], [User].IsActive\n"
             + "            FROM [ReportUser]\n"
             + "            JOIN [User] ON [ReportUser].UserID2 = [User].ID\n"
             + "            ORDER BY [ReportUser].DateReport ASC";
@@ -253,7 +255,8 @@ public class ReportDAO {
                         rs.getInt("UserID"),
                         rs.getString("Username"),
                         rs.getString("Avatar"),
-                        rs.getString("Role"));
+                        rs.getString("Role"),
+                        rs.getBoolean("IsActive"));
                 list.add(report);
             }
             return list;

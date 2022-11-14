@@ -119,7 +119,7 @@ public class CommentDAO {
             + "FROM [Comment]\n"
             + "JOIN [Recipe] ON [Comment].RecipeID = [Recipe].ID\n"
             + "JOIN [User] ON [Comment].UserID = [User].ID\n"
-            + "WHERE [Comment].IsDeleted = 0;";
+            + "WHERE [Comment].IsDeleted = 0";
 
     public static List<Comment> manageCommentList () throws SQLException {
         Connection conn = null;

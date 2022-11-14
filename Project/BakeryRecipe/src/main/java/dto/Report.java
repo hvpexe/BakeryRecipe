@@ -36,11 +36,12 @@ public class Report {
     private String avatar;//avatar cua user
     private int commentID;
     private String userRole;
+    private boolean checkStatus; //status của recipe, comment, user
     
     public Report() {
     }
 
-    public Report(int id, Timestamp DateReport, String detail, int userID, String reportType, String status, String reporter, String comment, int commentID) {
+    public Report(int id, Timestamp DateReport, String detail, int userID, String reportType, String status, String reporter, String comment, int commentID, boolean checkStatus) {
         this.id = id;
         this.DateReport = DateReport;
         this.detail = detail;
@@ -50,9 +51,10 @@ public class Report {
         this.reporter = reporter;
         this.comment = comment;
         this.commentID = commentID;
+        this.checkStatus = checkStatus;
     }
 
-    public Report(int id, Timestamp DateReport, String detail, int userID, String reportType, String status, String reporter, String recipeTitle, String cover, int recipeID) {
+    public Report(int id, Timestamp DateReport, String detail, int userID, String reportType, String status, String reporter, String recipeTitle, String cover, int recipeID, boolean checkStatus) {
         this.id = id;
         this.DateReport = DateReport;
         this.detail = detail;
@@ -63,9 +65,10 @@ public class Report {
         this.recipeTitle = recipeTitle;
         this.cover = cover;
         this.recipeID = recipeID;
+        this.checkStatus = checkStatus;
     }
 
-    public Report(int id, Timestamp DateReport, String detail, int userID, String reportType, String status, String reporter, int userid2, String username, String avatar, String userRole) {
+    public Report(int id, Timestamp DateReport, String detail, int userID, String reportType, String status, String reporter, int userid2, String username, String avatar, String userRole, boolean checkStatus) {
         this.id = id;
         this.DateReport = DateReport;
         this.detail = detail;
@@ -77,6 +80,7 @@ public class Report {
         this.username = username;
         this.avatar = avatar;
         this.userRole = userRole;
+        this.checkStatus = checkStatus;
     }
 
     
@@ -190,6 +194,14 @@ public class Report {
 
     public void setCommentID(int commentID) {
         this.commentID = commentID;
+    }
+
+    public boolean isCheckStatus() {
+        return checkStatus;
+    }
+
+    public void setCheckStatus(boolean checkStatus) {
+        this.checkStatus = checkStatus;
     }
 
     

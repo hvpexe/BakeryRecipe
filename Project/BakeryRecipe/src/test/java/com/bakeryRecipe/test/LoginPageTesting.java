@@ -68,8 +68,8 @@ public class LoginPageTesting {
     }
     public static void main(String[] args) throws SQLException {
         
-        List<Recipe> listrecipe = RecipeDAO.showRecipeList();
-        for (Recipe o : listrecipe){
+        List<Comment> commentList = CommentDAO.manageCommentList();
+        for (Comment o : commentList){
             System.out.println(o);
         }
         

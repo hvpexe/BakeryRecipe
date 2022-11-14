@@ -193,6 +193,7 @@
                                                 <th>Details</th>
                                                 <th>Date Report</th>
                                                 <th>User Report</th>
+                                                <th>User status</th>
                                                 <th>Report State</th>
                                                 <th>User action</th>
                                                 <th>Report action</th>
@@ -207,6 +208,7 @@
                                                 <th>Details</th>
                                                 <th>Date Report</th>
                                                 <th>User Report</th>
+                                                <th>User status</th>
                                                 <th>Report State</th>
                                                 <th>User action</th>
                                                 <th>Report action</th>
@@ -224,6 +226,14 @@
                                                     <td class="align-middle style col-2">${u.detail}</td>
                                                     <td class="align-middle style align-items-center col-2 text-nowrap">${u.getDateReport()}</td>
                                                     <td class="align-middle style col-1">${u.reporter}</td> 
+                                                    <td class="align-middle col-1">
+                                                        <c:if test="${u.checkStatus == 'false'}">
+                                                            <span class="text-danger">Banned</span>
+                                                        </c:if>
+                                                        <c:if test="${u.checkStatus == 'true'}">
+                                                            <span class="text-success">Active</span>
+                                                        </c:if>
+                                                    </td>
                                                     <td class="align-middle align-items-center col-1 text-nowrap">
                                                         <c:choose>
                                                             <c:when test="${u.status == 'Approved'}">
