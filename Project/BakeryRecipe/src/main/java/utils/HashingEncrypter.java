@@ -39,6 +39,7 @@ public class HashingEncrypter {
     //Encrypt a source string uding a hashing method
     public static String getHexaDigest(String algorithmName, String src) {
         // Convert Unicode source string to bytes
+        if(src == null) return null;
         byte[] inputBytes = src.getBytes(UTF_8);
         byte[] encryptedBytes = getDigest(algorithmName, inputBytes);
         return bytesToHex(encryptedBytes);

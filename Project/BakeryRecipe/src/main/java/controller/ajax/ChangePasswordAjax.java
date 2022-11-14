@@ -12,6 +12,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 import static utils.HashingEncrypter.MD5;
 import static utils.HashingEncrypter.getHexaDigest;
 
@@ -22,26 +23,29 @@ import static utils.HashingEncrypter.getHexaDigest;
 @WebServlet(name = "CommnetRecipeAjax", urlPatterns = {"/ChangePasswordAjax"})
 public class ChangePasswordAjax extends HttpServlet {
 
-
-    protected void processRequest(HttpServletRequest request, HttpServletResponse response)
+    protected void processRequest (HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
+        PrintWriter out = null;
         try {
+            out = response.getWriter();
             String userID = request.getParameter("userID");
             String oldPassword = request.getParameter("oldPassword");
             String newPassword = request.getParameter("newPassword");
+            System.out.println(newPassword);
             String confirmNewPassword = request.getParameter("confirmNewPassword");
             String encryptedOldPassword = getHexaDigest(MD5, oldPassword);
             String encryptedNewPassword = getHexaDigest(MD5, newPassword);
-            if (!UserDAO.checkOldPassword(userID, encryptedOldPassword)) {
-                request.setAttribute("PASSWORD_ERROR", "Old password wrong!");
+            if (!UserDAO.checkOldPassword(userID, encryptedOldPassword) && oldPassword != null) {
+                out.print("Old password wrong!");
             } else if (newPassword.length() < 8 && newPassword.length() > 40) {
-                request.setAttribute("PASSWORD_ERROR", "Password must be 8 to 40 characters!");
+                out.print("Password must be 8 to 40 characters!");
             } else if (!newPassword.equals(confirmNewPassword)) {
-                request.setAttribute("PASSWORD_ERROR", "Confirmation mismatched");
+                out.print("Confirmation mismatched");
             } else if (UserDAO.changePassword(userID, encryptedNewPassword)) {
-                request.setAttribute("PASSWORD_SUCCESS", "Change password successfully");
-                
+                out.print("Change password successfully");
+                HttpSession session = request.getSession();
+                session.setAttribute("login", UserDAO.getUserByID(Integer.parseInt(userID)));
             }
         } catch (Exception e) {
             System.out.println("Error at ChangePasswordController: " + e.toString());
@@ -53,13 +57,14 @@ public class ChangePasswordAjax extends HttpServlet {
     /**
      * Handles the HTTP <code>GET</code> method.
      *
-     * @param request servlet request
+     * @param request  servlet request
      * @param response servlet response
+     *
      * @throws ServletException if a servlet-specific error occurs
-     * @throws IOException if an I/O error occurs
+     * @throws IOException      if an I/O error occurs
      */
     @Override
-    protected void doGet(HttpServletRequest request, HttpServletResponse response)
+    protected void doGet (HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         processRequest(request, response);
     }
@@ -67,13 +72,14 @@ public class ChangePasswordAjax extends HttpServlet {
     /**
      * Handles the HTTP <code>POST</code> method.
      *
-     * @param request servlet request
+     * @param request  servlet request
      * @param response servlet response
+     *
      * @throws ServletException if a servlet-specific error occurs
-     * @throws IOException if an I/O error occurs
+     * @throws IOException      if an I/O error occurs
      */
     @Override
-    protected void doPost(HttpServletRequest request, HttpServletResponse response)
+    protected void doPost (HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         processRequest(request, response);
     }
@@ -84,7 +90,7 @@ public class ChangePasswordAjax extends HttpServlet {
      * @return a String containing servlet description
      */
     @Override
-    public String getServletInfo() {
+    public String getServletInfo () {
         return "Short description";
     }// </editor-fold>
 
