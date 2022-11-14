@@ -30,7 +30,7 @@
 
 
                             <c:if test="${requestScope.user == sessionScope.login}">
-                                <a href="./profileInfo.jsp" class="btn edit-profile-button ">Edit Profile</a>
+                                <a href="./profileInfo.jsp" class="btn edit-profile-button">Edit Profile</a>
                             </c:if>
 
                             <c:if test="${not empty sessionScope.login and sessionScope.login != requestScope.user}">

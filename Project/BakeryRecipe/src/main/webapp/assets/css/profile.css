@@ -60,6 +60,7 @@
     color: #db5a42 !important;
     border-radius: 20px !important;
     height: 40px;
+    white-space: nowrap;
 }
 
 .input-button {
@@ -92,8 +93,8 @@
 }
 
 .activity-empty {
-    padding: 50px 0;
-    font-size: 24px;
+    padding: 60px 10px;
+    font-size: 20px;
     opacity: 0.7;
     font-style: italic;
 }

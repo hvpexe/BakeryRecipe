@@ -54,13 +54,13 @@
         <c:if test="${ not empty sessionScope.login.password }"> 
             <div class="form-group">
                 <label for="inputPasswordOld">Current Password</label>
-                <input type="password" name="oldPassword" class="form-control" id="inputPasswordOld"
+                <input type="password" name="oldPassword" class="form-control" style="max-width: 400px" id="inputPasswordOld"
                        required="">
             </div>
         </c:if> 
         <div class="form-group">
             <label for="inputPasswordNew">New Password</label>
-            <input type="password" name="newPassword" class="form-control" id="inputPasswordNew"
+            <input type="password" name="newPassword" class="form-control" style="max-width: 400px" id="inputPasswordNew"
                    required="">
             <span class="form-text small text-muted">
                 password must be at least 8 characters.
@@ -68,7 +68,7 @@
         </div>
         <div class="form-group">
             <label for="inputPasswordNewVerify">Verify</label>
-            <input type="password" name="confirmNewPassword" class="form-control"
+            <input type="password" name="confirmNewPassword" class="form-control " style="max-width: 400px"
                    id="inputPasswordNewVerify" required="">
             <span class="form-text small text-muted">
                 To confirm, type the new password again.
@@ -76,26 +76,22 @@
         </div>
         <div class="form-group">
             <input type="hidden" name="userID" value="${sessionScope.login.id}">
-            <button type="submit" class="btn info-submit" id="frameButton" onclick="ajaxChangePass()">
+            <button type="submit" class="btn save-pass" id="frameButton" onclick="ajaxChangePass()">
                 Save
             </button>
-            <div id="message_changePass"></div>
-            <c:if test="${not empty requestScope.PASSWORD_ERROR}"><span
-                    class="pass-error">${requestScope.PASSWORD_ERROR}</span></c:if>
-            <c:if test="${not empty requestScope.PASSWORD_SUCCESS}"><span
-                    class="pass-success">${requestScope.PASSWORD_SUCCESS}</span></c:if>
-
-            </div>
-            <!--</form>-->
+            <div id="pass-success"></div>
+            <div id="pass-error"></div>
         </div>
+        <!--</form>-->
     </div>
-    <!--test pass-->
+</div>
+<!--test pass-->
 
-    <!--</div>-->
-    <!--        </div>
-        </div>
-        </div>
-    
+<!--</div>-->
+<!--        </div>
+    </div>
+    </div>
+
 <%--<jsp:include page="footer.jsp" />--%>
 
 
@@ -106,7 +102,7 @@
     function ajaxChangePass() {
         var verifyPass = document.querySelector('#inputPasswordNewVerify');
         var newpass = document.getElementById('inputPasswordNew');
-        var oldpass = document.getElementById('inputPasswordOld')||'';
+        var oldpass = document.getElementById('inputPasswordOld') || '';
 
 
         $.ajax({
@@ -119,11 +115,11 @@
                 userID: '${sessionScope.login.id}'
             },
             success: function (refe) {
-                $('#message_changePass').html(refe);
-                
+                $('#pass-success').html(refe);
+
             },
             error: function () {
-                $('#message_changePass').html('Change password Fail');
+                $('#pass-error').html('Change password Fail');
             }
         });
 

@@ -107,7 +107,7 @@ body {
     border-radius: 0 0 20px 20px;
     padding: 20px;
     line-height: 40px;
-    font-size: 24px;
+    font-size: 20px;
 
 
 }
@@ -132,6 +132,23 @@ body {
     display: block;
 }
 
+.save-pass {
+    background-color: var(--main-theme-color);
+    border: none;
+    color: var(--side-theme-color);
+    font-size: 20px;
+    padding: 5px 20px;
+    border-radius: 20px;
+    margin: 25px 0;
+    display: block;
+}
+
+.save-pass:hover {
+    background-color: var(--main-theme-color-hover);
+    color: var(--side-theme-color);
+
+}
+
 .outline-none {
     outline: none;
     border: 0;
@@ -141,7 +158,7 @@ body {
     border-radius: 15px;
 }
 #profile-information input {
-    margin-bottom: 10px;
+    margin-bottom: 5px;
 }
 
 #profile-change-password .btn-main-theme {
@@ -161,16 +178,14 @@ body {
     width: 50%;
 }
 
-.pass-error {
+#pass-error {
     color: red;
-    font-size: 24px;
-    margin-left: 30px;
+    font-size: 20px;
 }
 
-.pass-success {
+#pass-success {
     color: green;
-    font-size: 24px;
-    margin-left: 30px;
+    font-size: 20px;
 }
 
 #liked-list  {

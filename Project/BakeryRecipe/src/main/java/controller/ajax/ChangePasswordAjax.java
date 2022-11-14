@@ -37,11 +37,12 @@ public class ChangePasswordAjax extends HttpServlet {
             String encryptedOldPassword = getHexaDigest(MD5, oldPassword);
             String encryptedNewPassword = getHexaDigest(MD5, newPassword);
             if (!UserDAO.checkOldPassword(userID, encryptedOldPassword) && oldPassword != null) {
-                out.print("Old password wrong!");
+//                out.print("Old password wrong!");
+                out.print("<div id=\"pass-error\">Old password wrong!</div>");
             } else if (newPassword.length() < 8 && newPassword.length() > 40) {
-                out.print("Password must be 8 to 40 characters!");
+                out.print("<div id=\"pass-error\">Password must be 8 to 40 characters!</div>");
             } else if (!newPassword.equals(confirmNewPassword)) {
-                out.print("Confirmation mismatched");
+                out.print("<div id=\"pass-error\">Confirmation mismatched!</div>");
             } else if (UserDAO.changePassword(userID, encryptedNewPassword)) {
                 out.print("Change password successfully");
                 HttpSession session = request.getSession();
