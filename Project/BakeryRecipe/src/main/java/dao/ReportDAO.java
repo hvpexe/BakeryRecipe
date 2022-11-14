@@ -154,7 +154,7 @@ public class ReportDAO {
                         rs.getString("Reporter"),
                         rs.getString("Comment"),
                         rs.getInt("commentID"),
-                        rs.getBoolean("IsActive"));
+                        rs.getBoolean("IsDeleted"));
                 list.add(reportCMT);
             }
             return list;
