@@ -1131,7 +1131,7 @@ public class RecipeDAO {
             + "SET IsDeleted = 1\n"
             + "WHERE Recipe.[ID] = ?";
 
-    public static boolean deleteRecipe(int id) throws SQLException {
+    public static boolean deleteRecipe(int id) throws SQLException, SQLException {
         Connection conn = null;
         PreparedStatement ps = null;
 
@@ -1184,7 +1184,7 @@ public class RecipeDAO {
                 String cakeName = rs.getString("Name");
                 String cover = rs.getString("Img");
                 Timestamp date = rs.getTimestamp("DatePost");
-                recipe = new Recipe(ID,cakeName, like, comment, cover, fullName, date);
+                recipe = new Recipe(ID, cakeName, like, comment, cover, fullName, date);
             }
         } catch (Exception e) {
             e.printStackTrace();
@@ -1201,7 +1201,6 @@ public class RecipeDAO {
         }
         return recipe;
     }
-
 
     public static ArrayList<RecipeSearch> getRecipes() throws SQLException {
         String sql1 = "SELECT P.Img, R.ID, R.Name, R.[Like], R.Comment, R.DatePost, U.ID AS UserID, U.LastName + ' ' + U.FirstName AS Username \n"
@@ -1290,7 +1289,40 @@ public class RecipeDAO {
         return null;
     }
 
+//    private static final String DELETE_RECIPE = "			UPDATE [dbo].[Recipe] \n"
+//            + "			SET [IsDeleted] =1 \n"
+//            + "			WHERE [dbo].[Recipe].ID =?";
+//
+//    public static boolean deleteRecipe(int recipeID) {
+//        Connection cn = null;
+//        PreparedStatement ptm = null;
+////ResultSet rs = null;
+//        boolean check = false;
+//
+//        try {
+//            cn = DBUtils.getConnection();
+//            ptm = cn.prepareStatement(DELETE_RECIPE);
+//            ptm.setInt(1, recipeID);
+//
+//        } catch (Exception e) {
+//            System.out.println("co loi o deleteRecipe");
+//            e.printStackTrace();
+//        } finally {
+//
+//            if (ptm != null) {
+//                ptm.close();
+//            }
+//            if (cn != null) {
+//                cn.close();
+//            }
+//
+//        }
+//
+//        return check;
+//    }
+
     public static void main(String[] args) throws SQLException {
         System.out.println(getRecommnedRecipes());
+        RecipeDAO.deleteRecipe(2);
     }
 }

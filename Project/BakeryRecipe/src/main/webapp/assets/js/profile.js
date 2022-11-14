@@ -92,3 +92,52 @@ function  followButton2(item, val1, val2, action) {
         }
     });
 }
+
+
+
+
+
+function showConfirmBoxProfile(id, type, item) {
+    var confirmBox = $('#delete_confirm');
+    var graybox = $('#delete_confirm .gray-box');
+    var content = $('#delete_confirm .content');
+    var exitBtn = $('#delete_confirm .exit-btn');
+    graybox.click(() => confirmBox.removeClass('d-flex'));
+    exitBtn.click(() => confirmBox.removeClass('d-flex'));
+    confirmBox.addClass('d-flex');
+    var deleteBtn = $('#delete_confirm .delete');
+    deleteBtn.click(e => {
+        if (type == "comment") {
+            deleteCMT(id, item,confirmBox);
+        }
+         if (type == "recipe") {
+            deleteRecipe(id, item);
+        }
+    });
+
+}
+
+function deleteRecipe(recipeID, item) {
+    var infomation = document.querySelector('#delete_confirm #thankReport');
+    $(infomation).addClass('text-center font-weight-bold loading');
+    $.ajax({
+        url: "ajax/DeleteRecipeAjax",
+        type: "get",
+        data: {
+            recipeID: recipeID
+        },
+        success: function (response) {
+            //Do Something
+            setTimeout(() => {
+                console.log(response);
+                $(infomation).removeClass('loading').html(response);
+                location ="profile";
+            }, 500);
+
+        },
+        error: function (xhr) {
+            console.log("that bai");
+            //Do Something to handle error
+        }
+    });
+}

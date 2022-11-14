@@ -36,7 +36,7 @@
                                     <i class="fa-solid fa-ellipsis"></i>
                                 </a>
                                 <div class="dropdown-menu" style="min-width: inherit;" aria-labelledby="dropdownMenuLink">
-                                    <a class="dropdown-item" href="#">Delete</a>
+                                    <a class="dropdown-item" onclick="showConfirmBoxHome(${re.getId()}, 'recipe')">Delete</a>
                                     <a class="dropdown-item" href="#">Report</a>
                                 </div>
                             </div>
@@ -115,6 +115,22 @@
             </div>
         </div>
         <!--fixed Container-->
+         <!--Delete confirm -->
+        <div class="fixed-container" id="delete_confirm" >
+            <div class="gray-box"></div>
+            <div class="content flex-column d-flex  border card-body col-12 col-md-4" style="gap:10px">
+                <div class="exit-btn"><i class="fas fa-x"></i></div>
+                <div class="col-12 d-flex flex-column justify-content-between">
+                    <div class="report-title h3 font-weight-bold text-center">Do You Want To Delete?</div>
+                    <div class="d-flex justify-content-around align-items-center col-12 ">
+                        <button class="hover-button-2  delete">Delete</button>
+                        <button class="hover-button-2  cancel" onclick="$('#delete_confirm').removeClass('d-flex')">Cancel</button>
+                    </div>
+                </div>
+                <div id="thankReport"></div>
+            </div>
+        </div>
+        <!--End of Delete confirm -->
         <div class="fixed-container " id="liked-list" >
             <div class="gray-box"></div>
             <div class="content card-body col-12 col-md-6">

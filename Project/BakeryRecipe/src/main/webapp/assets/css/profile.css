@@ -214,3 +214,26 @@ button:hover{
     border: 1px solid var(--main-theme-color);
     color: #DB5A42;
 }
+
+
+/*css cua phan delete*/
+#delete_confirm .content button{
+    padding:  6px 10px;
+    border-radius: 100px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+#delete_confirm button.delete{
+    background: var(--main-theme-color);
+    border:3px outset var(--main-theme-color);
+    color:white;
+
+    font-weight: bold;
+}
+#delete_confirm button.cancel{
+    border:3px outset var(--main-theme-color);
+    color:black;
+
+    font-weight: bold;
+}
