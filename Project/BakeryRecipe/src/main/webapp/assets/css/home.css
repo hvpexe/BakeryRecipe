@@ -75,6 +75,25 @@ body {
     font-size: 14px;
 }
 
+.user-recipe-empty {
+    border-radius: 20px;
+    box-shadow: 0 0 12px rgba(0, 0, 0, 0.06);
+    background-color: var(--side-theme-color);
+    padding: 30px;
+    margin-top: 25px;
+    font-size: 14px;
+    max-width: 450px;
+    text-align: center;
+    font-size: 16px;
+}
+
+.user-recipe-empty img {
+    opacity: 0.5;
+}
+
+.empty-mess {
+    font-style: italic;
+}
 .recipe-header {
     margin-bottom: 10px;
 
@@ -232,6 +251,9 @@ body {
     }
     .post-section {
         margin: 0 16px;
+    }
+    .user-recipe-empty {
+        width: 100%;
     }
 }
 #liked-list .content {

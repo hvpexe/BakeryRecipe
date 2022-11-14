@@ -63,8 +63,7 @@ body {
     width: 100%;
     aspect-ratio: 1;
     object-fit: cover;
-    outline: 5px solid lightgray;
-    outline-style: double;
+    border: 10px solid #EEE;
     
 }
 
@@ -192,7 +191,7 @@ body {
     background-size: cover;
     background-repeat: no-repeat;
     background-position: center;
-    aspect-ratio:1/1;
+    aspect-ratio: 1;
     border: 1px solid gray;
 }
 

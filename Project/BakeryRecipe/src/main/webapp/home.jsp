@@ -25,56 +25,69 @@
                         <i class="fa-solid fa-circle-plus"></i>  Add your recipe
                     </button>
                 </div>
-                <c:forEach items="${homeRecipe}" var="re">
-                    <div class="user-recipe" >
-                        <div class="media recipe-header">
-                            <img class="recipe-ava c-pointer"
-                                 src="<c:out value="${re.getAvatar()}"/>"
-                                 alt="avatar" onclick='location = "./profile?userid=${re.userID}"'/>
-                            <div class="media-body ml-3">
-                                <a class="text-dark c-pointer hover-underline" href="./profile?userid=${re.userID}">${re.username}</a>
-                                <div class="text-muted small"><c:out value="${re.getDatePostFormat()}"/></div>
-                            </div>
-                            <div class="dropdown c-pointer noselect">
-                                <a type="text" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true">
-                                    <i class="fa-solid fa-ellipsis"></i>
-                                </a>
-                                <div class="dropdown-menu" style="min-width: inherit;" aria-labelledby="dropdownMenuLink">
-                                    <a class="dropdown-item" onclick="showConfirmBoxHome(${re.getId()}, 'recipe')">Delete</a>
-                                    <a class="dropdown-item" href="#">Report</a>
+                <c:if test="${not empty homeRecipe}">
+                    <c:forEach items="${homeRecipe}" var="re">
+                        <div class="user-recipe" >
+                            <div class="media recipe-header">
+                                <img class="recipe-ava c-pointer"
+                                     src="<c:out value="${re.getAvatar()}"/>"
+                                     alt="avatar" onclick='location = "./profile?userid=${re.userID}"'/>
+                                <div class="media-body ml-3">
+                                    <a class="text-dark c-pointer hover-underline" href="./profile?userid=${re.userID}">${re.username}</a>
+                                    <div class="text-muted small"><c:out value="${re.getDatePostFormat()}"/></div>
                                 </div>
+                                <div class="dropdown c-pointer noselect">
+                                    <a type="text" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true">
+                                        <i class="fa-solid fa-ellipsis"></i>
+                                    </a>
+                                    <div class="dropdown-menu" style="min-width: inherit;" aria-labelledby="dropdownMenuLink">
+                                        <a class="dropdown-item" onclick="showConfirmBoxHome(${re.getId()}, 'recipe')">Delete</a>
+                                        <a class="dropdown-item" href="#">Report</a>
+                                    </div>
+                                </div>
+
                             </div>
 
-                        </div>
-
-                        <div class="recipe-text">
-                            ${re.description}
-                        </div>
-                        <a href=".\RecipeDetail?recipeID=${re.getId()}">
-                            <img  class="recipe-img" alt=""
-                                  src="${re.cover}" />
-                        </a>
-                        <div class="recipe-react">
-                            <c:if test="${re.like>0}">
-                                <a  class="d-inline-block text-muted hover-underline c-pointer mr-3" onclick="getLikedList('${re.id}')">
-                                    <span class="align-middle">
-                                        <strong>${re.like}</strong> Likes</span>
-
-                                </a>
-                            </c:if>
-                            <c:if test="${re.comment>0}">
-                                <a href="javascript:void(0)" class="d-inline-block text-muted mr-3">
-                                    <span class="align-middle" onclick="getCommentList('${re.id}')">
-                                        <strong>${re.comment}</strong> Comments</span>
-                                </a>
-                            </c:if>
-                            <a href=".\RecipeDetail?recipeID=${re.getId()}" class="d-inline-block text-muted">
-                                <i class="fas fa-eye"></i>
-                                <span class="align-middle">View detail</span>
+                            <div class="recipe-text">
+                                ${re.description}
+                            </div>
+                            <a href=".\RecipeDetail?recipeID=${re.getId()}">
+                                <img  class="recipe-img" alt=""
+                                      src="${re.cover}" />
                             </a>
+                            <div class="recipe-react">
+                                <c:if test="${re.like>0}">
+                                    <a  class="d-inline-block text-muted hover-underline c-pointer mr-3" onclick="getLikedList('${re.id}')">
+                                        <span class="align-middle">
+                                            <strong>${re.like}</strong> Likes</span>
+
+                                    </a>
+                                </c:if>
+                                <c:if test="${re.comment>0}">
+                                    <a href="javascript:void(0)" class="d-inline-block text-muted mr-3">
+                                        <span class="align-middle" onclick="getCommentList('${re.id}')">
+                                            <strong>${re.comment}</strong> Comments</span>
+                                    </a>
+                                </c:if>
+                                <a href=".\RecipeDetail?recipeID=${re.getId()}" class="d-inline-block text-muted">
+                                    <i class="fas fa-eye"></i>
+                                    <span class="align-middle">View detail</span>
+                                </a>
+                            </div>
                         </div>
+                    </c:forEach>
+                </c:if> 
+                <c:if test="${empty homeRecipe}">
+                    <div class="user-recipe-empty" >
+                        <div class="empty-mess ">
+                            Welcome to the home page. This page shows the recipes of your follower.
+                            You haven't followed any bakers, let's discover!
+                        </div>
+                        <img class="mx-auto d-block w-75" src="assets/images/logo/norecipe.png">
+                        <a class="btn main-btn btn-sm" href="community">Discover</a>
                     </div>
-                </c:forEach>
+                </c:if>
+
 
 
             </div>

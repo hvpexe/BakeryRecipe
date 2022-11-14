@@ -50,32 +50,45 @@
                 <div class="title-container">
                     <h1 class="notify-title">Saved</h1>
                 </div>
-                <div class="recipe-list row ">
-                    <c:forEach items="${RecipeList}" var="cc">
-                        <div class="recipe col-6 col-md-4 col-lg-3">
-                            <div class="img-container">
-                                <a href=".\RecipeDetail?recipeID=${cc.id}">
-                                    <img class="recipe-img" alt=""
-                                         src="${cc.cover}" />
-                                </a>
+                <c:if test="${not empty RecipeList}">
+                    <div class="recipe-list row ">
+                        <c:forEach items="${RecipeList}" var="cc">
+                            <div class="recipe col-6 col-md-4 col-lg-3">
+                                <div class="img-container">
+                                    <a href=".\RecipeDetail?recipeID=${cc.id}">
+                                        <img class="recipe-img" alt=""
+                                             src="${cc.cover}" />
+                                    </a>
 
-                                <div class="react">
-                                    <div>${cc.like} likes</div>
-                                    <div>${cc.comment} comments</div>
+                                    <div class="react">
+                                        <div>${cc.like} likes</div>
+                                        <div>${cc.comment} comments</div>
+                                    </div>
                                 </div>
+                                <div class="recipe-name">${cc.name}</div>
+                                <div class="recipe-author">
+                                    <a href="#" class="text-truncate">${cc.username}</a> 
+                                    <c:out value="${cc.getDatePostFormat()}"/></div>
                             </div>
-                            <div class="recipe-name">${cc.name}</div>
-                            <div class="recipe-author">
-                                <a href="#" class="text-truncate">${cc.username}</a> 
-                                <c:out value="${cc.getDatePostFormat()}"/></div>
+                        </c:forEach>
+                    </div>
+                    <div class="paging col my-4">
+                        <c:forEach begin="1" end="${totalPage}" var="i">
+                            <a href="savedrecipe?index=${i}" class="paging col">${i}</a>
+                        </c:forEach>
+                    </div> 
+                </c:if>
+
+                <c:if test="${empty RecipeList}">
+                    <div class="save-empty container" >
+                        <div class="">
+                            Welcome to the saved page. This page shows the recipes that you saved. <br>
+                            You haven't saved any recipes, let's discover!
                         </div>
-                    </c:forEach>
-                </div>
-                <div class="paging col my-4">
-                    <c:forEach begin="1" end="${totalPage}" var="i">
-                        <a href="savedrecipe?index=${i}" class="paging col">${i}</a>
-                    </c:forEach>
-                </div> 
+                        <img class="mx-auto d-block w-25" src="assets/images/logo/norecipe.png">
+                        <a class="btn main-btn btn-sm mb-5" href="community">Discover</a>
+                    </div>
+                </c:if>
             </div>
         </div>
 
