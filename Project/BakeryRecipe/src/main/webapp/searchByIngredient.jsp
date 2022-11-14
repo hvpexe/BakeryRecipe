@@ -27,9 +27,10 @@
                         <!-- Create an empty list to hold the tags -->
                         <ul id="tagsList"></ul>
                         <!-- Create a text field for the tags input -->
-                        <input type="text" name="txt" class="form-control rounded" id="tagsInput" spellcheck="false"
+                        <input type="text" class="form-control rounded" id="tagsInput" spellcheck="false"
                                placeholder="Type an ingredient and Hit ENTER" />
                         <button class="btn" type="submit" id="search">Search</button>
+                        &nbsp;<span class="text-danger">${ERROR_MESSAGE}</span>
                     </form>
                 </div>
 

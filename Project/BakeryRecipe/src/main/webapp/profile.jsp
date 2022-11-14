@@ -11,7 +11,7 @@
 
         <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
         <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
-        
+
         <link rel="stylesheet" href="assets/css/profile.css">
     </head>
     <body>
@@ -33,7 +33,7 @@
                                 <a href="./profileInfo.jsp" class="btn edit-profile-button ">Edit Profile</a>
                             </c:if>
 
-                            <c:if test="${sessionScope.login != requestScope.user}">
+                            <c:if test="${not empty sessionScope.login and sessionScope.login != requestScope.user}">
                                 <div class="dropdown ml-auto">
                                     <a type="text" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true">
                                         <i class="fa-solid fa-ellipsis"></i>
@@ -44,7 +44,7 @@
                                 </div>
                             </c:if>
                         </div>
-                        <c:if test="${sessionScope.login.id != requestScope.user.id}">
+                        <c:if test="${not empty sessionScope.login and sessionScope.login.id != requestScope.user.id}">
                             <span class="info-user">
                                 <c:choose>
                                     <c:when test="${CHECK_FOLLOW_HOME == 'False'}">
@@ -94,16 +94,17 @@
                                 <a href="./profile?userid=${requestScope.user.id}" class="text-dark c-pointer hover-underline">${re.username}</a>
                                 <div class="text-muted small"><c:out value="${re.getDatePostFormat()}"/></div>
                             </div>
-
-                            <div class="dropdown">
-                                <a type="text" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true">
-                                    <i class="fa-solid fa-ellipsis"></i>
-                                </a>
-                                <div class="dropdown-menu" style="min-width: inherit;" aria-labelledby="dropdownMenuLink">
-                                    <a class="dropdown-item" onclick="showConfirmBoxProfile(${re.getId()}, 'recipe')">Delete</a>
-                                    <a class="dropdown-item" onclick="getReportRecipeProfile(${re.getId()})">Report</a>
+                            <c:if test="${not empty sessionScope.login}">
+                                <div class="dropdown">
+                                    <a type="text" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true">
+                                        <i class="fa-solid fa-ellipsis"></i>
+                                    </a>
+                                    <div class="dropdown-menu" style="min-width: inherit;" aria-labelledby="dropdownMenuLink">
+                                        <a class="dropdown-item" onclick="showConfirmBoxProfile(${re.getId()}, 'recipe')">Delete</a>
+                                        <a class="dropdown-item" onclick="getReportRecipeProfile(${re.getId()})">Report</a>
+                                    </div>
                                 </div>
-                            </div>
+                            </c:if>
                         </div>
 
                         <div class="recipe-text">
@@ -124,14 +125,9 @@
                                     <span class="align-middle"><strong>${re.comment}</strong> Comments</span>
                                 </a>
                             </c:if>
-
-                            <a href="#" class="d-inline-block text-muted ml-3">
-                                <i class="fas fa-bookmark align-middle"></i>
-                                <span class="align-middle">Save</span>
-                            </a>
-                            <a href="#" class="d-inline-block text-muted ml-3">
+                            <a href="RecipeDetail?recipeID=${re.id}" class="d-inline-block text-muted ml-3">
                                 <i class="fas fa-eye align-middle"></i>
-                                <span class="align-middle" onclick="location = './RecipeDetail?recipeID=${re.id}'">View detail</span>
+                                <span class="align-middle">View detail</span>
                             </a>
                         </div>
                     </div>
@@ -166,7 +162,7 @@
         </div>
 
         <!--keu thuc report cua comment-->
-         <!--Delete confirm -->
+        <!--Delete confirm -->
         <div class="fixed-container" id="delete_confirm" >
             <div class="gray-box"></div>
             <div class="content flex-column d-flex  border card-body col-12 col-md-4" style="gap:10px">
@@ -182,7 +178,7 @@
             </div>
         </div>
         <!--End of Delete confirm -->
-           <!--ham container report recipe-->
+        <!--ham container report recipe-->
         <div class="fixed-container " id="report_recipe" >
             <div class="gray-box"></div>
             <div class="content card-body col-12 col-md-4">
@@ -218,11 +214,11 @@
         <script>
             var userReport = ${sessionScope.login.id};
             var userReported = ${user.id};
-             var recipeID =document.querySelector('#recipeidinprofile').value;
-            
+            var recipeID = document.querySelector('#recipeidinprofile').value;
+
         </script>
         <script src="assets/js/Jquery/jquery-core.js"></script>
         <script src="assets/js/profile.js"></script>
-              
+
     </body>
 </html>

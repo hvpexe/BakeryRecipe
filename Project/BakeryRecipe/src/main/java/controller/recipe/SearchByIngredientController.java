@@ -30,11 +30,13 @@ import javax.servlet.http.HttpSession;
  * @author PhuHV
  */
 public class SearchByIngredientController extends HttpServlet {
+
     HashMap<String, Integer> listIngre;
 
     public SearchByIngredientController() throws SQLException {
         this.listIngre = IngredientDAO.getAllIngredientsWithPoint();
     }
+
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
      * methods.
@@ -49,6 +51,10 @@ public class SearchByIngredientController extends HttpServlet {
             throws ServletException, IOException, SQLException {
         response.setContentType("text/html;charset=UTF-8");
         String[] ingresSearchTemp = request.getParameterValues("ingre");
+        if (ingresSearchTemp == null) {
+            request.setAttribute("ERROR_MESSAGE", "Please enter some ingredients");
+            request.getRequestDispatcher("searchByIngredient.jsp").forward(request, response);
+        }
         List<String> ingresSearch = Arrays.asList(ingresSearchTemp);
 
         ArrayList<RecipeSearch> listRecipe = RecipeDAO.getRecipes();
@@ -61,11 +67,11 @@ public class SearchByIngredientController extends HttpServlet {
         request.setAttribute("searchByIngre", listRecipe);
         request.getRequestDispatcher("searchByIngredient.jsp").forward(request, response);
     }
-    
+
     private int calculateTotalPointOfIngres(HashMap<String, Integer> ingresRecipe) {
         int total = 0;
         for (String ingre : ingresRecipe.keySet()) {
-            if (listIngre.containsKey(ingre)){
+            if (listIngre.containsKey(ingre)) {
                 total += listIngre.get(ingre);
             }
         }

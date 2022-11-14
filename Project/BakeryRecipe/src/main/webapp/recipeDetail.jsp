@@ -249,7 +249,7 @@
 
 
                                     <c:forEach items="${COMMENT_LIST}" var="cmt">
-                                  <input  type="hidden" id="commentID">
+                                        <input  type="hidden" id="commentID">
                                         <input type="hidden" id="commentReportID" value="${cmt.commentID}">
                                         <div class="d-flex flex-start mb-4"  id="comment-${cmt.commentID}" >
                                             <img class="rounded-circle border mr-2"
@@ -260,21 +260,24 @@
                                                     <div class="baseline d-flex">
                                                         <h5 class="col p-0">${cmt.chefName}</h5>
                                                         <!--report comment--> 
-                                                        <span class="dropdown">
-                                                            <a type="text" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true">
-                                                                <i class="fa-solid fa-ellipsis"></i>
-                                                            </a>
-                                                            <div class="dropdown-menu c-pointer noselect" style="min-width: inherit;" aria-labelledby="dropdownMenuLink">
-                                                                <c:if test="${sessionScope.login.id != cmt.userID}">
-                                                                    <a class="dropdown-item" onclick="getReportComment(${RECIPE_DETAIL.getId()})">
-                                                                        <span class="align-middle"><strong>${re.like}</strong> Report</span>
-                                                                    </a>
-                                                                </c:if>
-                                                                <c:if test="${(sessionScope.login.id == cmt.userID || sessionScope.login.role == 'admin')}">
-                                                                    <a class="dropdown-item" onclick="showConfirmBox(${cmt.commentID}, 'comment', '#comment-${cmt.commentID}')" >Delete</a>
-                                                                </c:if>
-                                                            </div>
-                                                        </span>
+                                                        <c:if test="${not empty sessionScope.login.id}">
+                                                            <span class="dropdown">
+                                                                <a type="text" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true">
+                                                                    <i class="fa-solid fa-ellipsis"></i>
+                                                                </a>
+                                                                <div class="dropdown-menu c-pointer noselect" style="min-width: inherit;" aria-labelledby="dropdownMenuLink">
+                                                                    <c:if test="${sessionScope.login.id != cmt.userID}">
+                                                                        <a class="dropdown-item" onclick="getReportComment(${RECIPE_DETAIL.getId()})">
+                                                                            <span class="align-middle"><strong>${re.like}</strong> Report</span>
+                                                                        </a>
+                                                                    </c:if>
+                                                                    <c:if test="${(sessionScope.login.id == cmt.userID || sessionScope.login.role == 'admin')}">
+                                                                        <a class="dropdown-item" onclick="showConfirmBox(${cmt.commentID}, 'comment', '#comment-${cmt.commentID}')" >Delete</a>
+                                                                    </c:if>
+                                                                </div>
+                                                            </span>
+                                                        </c:if>
+
                                                         <!--ket thuc comment--> 
                                                     </div>
                                                     <p class="small">
