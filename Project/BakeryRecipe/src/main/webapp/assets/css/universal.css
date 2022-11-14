@@ -57,7 +57,7 @@ body:has(.fixed-container.d-flex){
 .fixed-container .content{
     min-height: 150px;
     height: fit-content;
-    max-height: 75vh;
+    max-height: 80vh;
     margin-inline:auto;
     border-radius: 15px;
     background: var(--web-background-color);

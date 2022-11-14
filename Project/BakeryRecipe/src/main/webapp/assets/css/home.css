@@ -261,7 +261,7 @@ body {
 
 }
 #liked-list .content > div:nth-child(3){
-    max-height: 90%;
+    max-height: 65vh;
     overflow-y: scroll;
 }
 #liked-list .image{

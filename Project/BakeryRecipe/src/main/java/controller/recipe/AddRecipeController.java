@@ -159,9 +159,8 @@ public class AddRecipeController extends HttpServlet {
             e.printStackTrace(out);
             e.printStackTrace();
         } finally {
-//            response.sendRedirect(url);
+            response.sendRedirect(url);
         }
-//        request.getRequestDispatcher("addrecipe.jsp").forward(request, response);
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
