@@ -155,7 +155,7 @@
                                         </div>
                                     </div>                    
                                     <!--                INSTRUCTION                            -->
-                                    <div class="add-recipe-input col-12">
+                                    <div class="add-recipe-input col-12 p-0">
                                         <b class="label">Instructions</b>
                                         <div class="col d-block p-0 " id="inst-container" >
                                             <c:catch var="e">
@@ -197,13 +197,13 @@
                                         </div>
 
                                     </div>
-                                    <div class="col d-flex flex-nowrap" id="instruction">
+                                    <div class="col p-0 d-flex flex-nowrap" id="instruction">
                                         <textarea class="instruction-box-input col-11  py-3 pr-3" form="disabled" name="idetail" type="text" placeholder="Paste one or multiple steps (e.g. Finely chop the garlic)"></textarea>
                                         <input type="hidden" name="count" value="${LIST_STEP.size()}">
                                         <div class="accept-input fas fa-check d-flex align-items-center justify-content-center col-1 hover-button-1"></div>
                                     </div>
                                     <!-- Prepare Time and Cook Time-->
-                                    <div class="time-to-cook-div col">
+                                    <div class="time-to-cook-div col p-0">
                                         <div class="add-recipe-input col">
                                             <label class="label col p-0">Prepare Time</label>
                                             <input class="pre-box-input col" type="number" name="prepare-time" value="${recipe.prepTime}" placeholder="30">

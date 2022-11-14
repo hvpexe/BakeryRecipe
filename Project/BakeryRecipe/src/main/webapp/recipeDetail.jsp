@@ -8,7 +8,7 @@
         <meta charset="utf-8" />
         <meta name="viewport" content="initial-scale=1, width=device-width" />
         <meta name="description" content="">
-        <title>${USER_DETAIL.name}</title>
+        <title>${RECIPE_DETAIL.name}</title>
         <c:import url="universal.jsp" />
 
         <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
@@ -204,7 +204,7 @@
                                 </div>
                                 <div class="body" >
                                     <c:forEach items="${requestScope.LIST_STEP}" var="ep">
-                                        <div class="instruction border-bottom" >
+                                        <div class="instruction border-bottom d-flex flex-column gap-3">
                                             <div class="step h33">Step ${ep.getInsstep()}: </div>
                                             <c:if test="${not empty ep.img}">
                                                 <div class="  col-auto p-0 noselect">
