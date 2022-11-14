@@ -145,7 +145,6 @@
                                                 <input class="instruction-box-input col "  autocomplete="off" form="disabled"  name="iamount" id="amount"  type="text" placeholder="1 Piece">
                                                 <div class="ingredient-amount-suggestion d-none position-absolute list-group p-0"\
                                                      id="ingredient-amount-suggestion">
-                                                    <div class="list-group-item font-weight-bold font-italic">Suggestion:</div>
                                                     <c:forEach items="${sessionScope.IP_INGAMOUNTS}" var="ing">
                                                         <span class="list-group-item hover-button-1 hover-bold"><a class="p-0"></a> ${ing}</span>
                                                     </c:forEach>

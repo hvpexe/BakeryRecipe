@@ -101,7 +101,8 @@
                                                 <div class="item-trashbin fas fa-trash ml-auto description-button"></div>
                                             </div>
                                         </div>
-                                        <div class="d-flex p-0 col align-items-center" id="ingredient"  >
+                                        <div class="d-flex p-0 col align-items-center" id="ingredient">
+                                            <!--Ingredient name-->
                                             <div class="form-group col-7 p-0 bg-white">
                                                 <input class="instruction-box-input col " autocomplete="off" form="disabled" name="iname" id="name" type="text" placeholder="Add one ingredient">
                                                 <div class="ingredient-suggestion d-none position-absolute list-group col p-0" 
@@ -112,14 +113,14 @@
                                             </div>
                                         </div>
                                         <span class="col d-flex align-items-center pr-0">Amount:</span>
+                                        <!--Ingredient amount-->
                                         <div class="form-group col-3 p-0">
                                             <input class="instruction-box-input col "  autocomplete="off" form="disabled"  name="iamount" id="amount"  type="text" placeholder="1 Piece">
                                             <div class="ingredient-amount-suggestion d-none position-absolute list-group p-0"\
                                                  id="ingredient-amount-suggestion">
-                                                <div class="list-group-item font-weight-bold font-italic">Suggestion:</div>
                                                 <c:forEach items="${sessionScope.IP_INGAMOUNTS}" var="ing">
                                                     <span class="list-group-item hover-button-1 hover-bold"><a class="p-0"></a> ${ing}</span>
-                                                    </c:forEach>
+                                                </c:forEach>
                                             </div>
                                         </div>
                                         <input type="hidden" name="count" value="1">
