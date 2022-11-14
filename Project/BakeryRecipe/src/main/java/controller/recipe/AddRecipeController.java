@@ -181,7 +181,7 @@ public class AddRecipeController extends HttpServlet {
 
         try {
             String[] measurements = {"oz", "tbsp", "c", "g", "ml", "lb", "fl,oz", "l", "gram", "cup",
-                 "tablespoon", "teaspoon", "ounce", "pound", "liter", "pint", "gallon"};
+                 "tablespoon", "teaspoon", "ounce", "pound", "liter", "pint", "gallon","piece"};
             session.setAttribute("IP_INGREDIENTS", IngredientDAO.getAllIngredients());
             session.setAttribute("IP_INGAMOUNTS", measurements);
         } catch (SQLException ex) {

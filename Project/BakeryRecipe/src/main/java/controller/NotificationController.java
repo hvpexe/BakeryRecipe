@@ -6,6 +6,7 @@ package controller;
 
 import dao.NotifyDAO;
 import dto.Notify;
+import dto.User;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.List;
@@ -14,6 +15,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 /**
  *
@@ -39,8 +41,11 @@ public class NotificationController extends HttpServlet {
         response.setContentType("text/html;charset=UTF-8");
         PrintWriter out = response.getWriter();
         String url = SUCCESS;
+        HttpSession session = request.getSession();
+
         try {
-            int receiverID = Integer.parseInt(request.getParameter("receiverID"));
+            User baker = (User) session.getAttribute("login");
+            int receiverID = baker.getId();
             List<Notify> nre = NotifyDAO.notifyLike(receiverID);
             request.setAttribute("LIST_LIKE", nre);
             List<Notify> listComment = NotifyDAO.followList(receiverID);
@@ -60,7 +65,6 @@ public class NotificationController extends HttpServlet {
         } catch (Exception e) {
             e.printStackTrace();
         } finally {
-
             request.getRequestDispatcher(url).forward(request, response);
         }
         out.close();

@@ -106,7 +106,7 @@
     function ajaxChangePass() {
         var verifyPass = document.querySelector('#inputPasswordNewVerify');
         var newpass = document.getElementById('inputPasswordNew');
-        var oldpass = document.getElementById('inputPasswordOld');
+        var oldpass = document.getElementById('inputPasswordOld')||'';
 
 
         $.ajax({
@@ -119,7 +119,8 @@
                 userID: '${sessionScope.login.id}'
             },
             success: function (refe) {
-                $('#message_changePass').html('Change password Success');
+                $('#message_changePass').html(refe);
+                
             },
             error: function () {
                 $('#message_changePass').html('Change password Fail');

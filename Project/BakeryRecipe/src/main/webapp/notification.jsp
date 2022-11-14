@@ -21,7 +21,7 @@
             <div class="notify-title col h4 text-capitalize bg-white font-weight-bold border-bottom py-3 ">
                 <span>notification</span>
                 <c:if test="${not SHOW_PAGE}">
-                    <a class=" bg-white m-0 mt-auto text-dark h6" href="notification?receiverID=${sessionScope.login.id}" >View Page</a>
+                    <a class=" bg-white m-0 mt-auto text-dark h6" href="notification" >View Page</a>
                 </c:if>
             </div>
             <div class="col d-flex border-bottom bg-white py-3" style="gap:10px">
