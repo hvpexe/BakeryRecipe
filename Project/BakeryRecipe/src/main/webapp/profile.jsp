@@ -100,8 +100,12 @@
                                         <i class="fa-solid fa-ellipsis"></i>
                                     </a>
                                     <div class="dropdown-menu" style="min-width: inherit;" aria-labelledby="dropdownMenuLink">
-                                        <a class="dropdown-item" onclick="showConfirmBoxProfile(${re.getId()}, 'recipe')">Delete</a>
-                                        <a class="dropdown-item" onclick="getReportRecipeProfile(${re.getId()})">Report</a>
+                                        <c:if test="${sessionScope.login.id == re.userID || sessionScope.login.role == 'admin'}">
+                                            <a class="dropdown-item" onclick="showConfirmBoxProfile(${re.getId()}, 'recipe')">Delete</a>
+                                        </c:if>
+                                        <c:if test="${sessionScope.login.id != re.userID && sessionScope.login.role != 'admin'}">
+                                            <a class="dropdown-item" onclick="getReportRecipeProfile(${re.getId()})">Report</a>
+                                        </c:if>
                                     </div>
                                 </div>
                             </c:if>
@@ -151,7 +155,7 @@
                             <textarea name="txtReport" class="txtareaRp w-100"  id="txtReportUser" value=""></textarea>
                         </div>  
                         <div class="form-group">
-                            <button class="hover" type="submit" onclick="sendReport1('User')">Send Report</button>
+                            <button class="btn btn-report" type="submit" onclick="sendReport1('User')">Send Report</button>
                         </div>
 
                         <!--</form>--> 
@@ -169,7 +173,7 @@
                 <div class="exit-btn"><i class="fas fa-x"></i></div>
                 <div class="col-12 d-flex flex-column justify-content-between">
                     <div class="report-title h3 font-weight-bold text-center">Do You Want To Delete?</div>
-                    <div class="d-flex justify-content-around align-items-center col-12 ">
+                    <div class="d-flex justify-content-around align-items-center col-12 mt-3">
                         <button class="hover-button-2  delete">Delete</button>
                         <button class="hover-button-2  cancel" onclick="$('#delete_confirm').removeClass('d-flex')">Cancel</button>
                     </div>
@@ -201,7 +205,7 @@
                         <textarea name="txtReport" class="txtareaRp w-100"  id="txtReport" value=""></textarea>
                     </div>  
                     <div class="form-group">
-                        <button class="hover" type="submit" onclick="sendReportProfile('Recipe')">Send Report</button>
+                        <button class="btn btn-report" type="submit" onclick="sendReportProfile('Recipe')">Send Report</button>
                     </div>
 
                     <!--</form>--> 

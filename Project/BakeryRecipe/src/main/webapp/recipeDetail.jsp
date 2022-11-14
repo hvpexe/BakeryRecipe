@@ -344,10 +344,10 @@
                                                     <input type="hidden" name="recipeID" id="recipeID" value="">-->
                     </div>
                     <div class="form-group" >
-                        <textarea name="txtReport" class="txtareaRp w-100"  id="txtReport" value=""></textarea>
+                        <textarea name="txtReport" class="txtareaRp w-100"  id="txtReport" value="" required=""></textarea>
                     </div>  
                     <div class="form-group">
-                        <button class="hover" type="submit" onclick="sendReport('Recipe')">Send Report</button>
+                        <button class="btn btn-report" type="submit" onclick="sendReport('Recipe')">Send Report</button>
                     </div>
 
                     <!--</form>--> 
@@ -378,7 +378,7 @@
                             <textarea name="txtReport" class="txtareaRp w-100"  id="txtReportComment" value=""></textarea>
                         </div>  
                         <div class="form-group">
-                            <button class="hover" type="submit" onclick="sendReport('Comment')">Send Report</button>
+                            <button class="btn btn-report" type="submit" onclick="sendReport('Comment')">Send Report</button>
                         </div>
 
                         <!--</form>--> 
@@ -398,7 +398,7 @@
                 <div class="exit-btn"><i class="fas fa-x"></i></div>
                 <div class="col-12 d-flex flex-column justify-content-between">
                     <div class="report-title h3 font-weight-bold text-center">Do You Want To Delete?</div>
-                    <div class="d-flex justify-content-around align-items-center col-12 ">
+                    <div class="d-flex justify-content-around align-items-center col-12 mt-3">
                         <button class="hover-button-2  delete">Delete</button>
                         <button class="hover-button-2  cancel" onclick="$('#delete_confirm').removeClass('d-flex')">Cancel</button>
                     </div>

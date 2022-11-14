@@ -262,14 +262,14 @@
                                                                 <input type="hidden" name="action" value="changestatus">
                                                             </form>
                                                         </c:if>
-                                                            <c:if test="${u.userRole eq 'admin'}">
-                                                                <form action="reportuser" class="d-inline" onsubmit="return confirm('Do you really want to remove this admin?');">
-                                                                    <button class="btn btn-warning btn-circle btn-sm" title="Remove Admin"><i class="fa-solid fa-user-minus"></i></button>
-                                                                    <input type="hidden" name="userid" value="${u.userid2}">
-                                                                    <input type="hidden" name="action" value="changerole">
-                                                                    <input type="hidden" name="role" value="baker">
-                                                                </form>
-                                                            </c:if>
+                                                        <c:if test="${u.userRole eq 'admin'}">
+                                                            <form action="reportuser" class="d-inline" onsubmit="return confirm('Do you really want to remove this admin?');">
+                                                                <button class="btn btn-warning btn-circle btn-sm" title="Remove Admin"><i class="fa-solid fa-user-minus"></i></button>
+                                                                <input type="hidden" name="userid" value="${u.userid2}">
+                                                                <input type="hidden" name="action" value="changerole">
+                                                                <input type="hidden" name="role" value="baker">
+                                                            </form>
+                                                        </c:if>
 
                                                     </td>
                                                     <td class="align-middle col-1">
@@ -355,5 +355,10 @@
         <!-- Page level custom scripts -->
         <script src="admin/js/demo/datatables-demo.js"></script>
 
+        <script>
+                                                                $('#dataTable').dataTable({
+                                                                    "order": [0, "desc"]
+                                                                });
+        </script>
     </body>
 </html>

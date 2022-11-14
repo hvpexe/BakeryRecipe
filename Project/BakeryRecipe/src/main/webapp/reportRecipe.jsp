@@ -269,7 +269,7 @@
                                                                 <c:if test="${u.status == 'Process'}">
                                                                     <button class="btn btn-success btn-circle btn-sm" name="action" title="Approve Report" value="Approved"><i class="fa-solid fa-check"></i></button>
                                                                     <button class="btn btn-danger btn-circle btn-sm" name="action" title="Deny Report" value="Denied"><i class="fa-solid fa-x"></i></button>
-                                                                </c:if>
+                                                                    </c:if>
                                                             </form>
                                                         </div>
                                                     </td>
@@ -344,7 +344,11 @@
 
         <!-- Page level custom scripts -->
         <script src="admin/js/demo/datatables-demo.js"></script>
-
+        <script>
+                                                                $('#dataTable').dataTable({
+                                                                    "order": [0, "desc"]
+                                                                });
+        </script>
     </body>
 
 

@@ -225,3 +225,15 @@
 
     font-weight: bold;
 }
+
+.btn-report {
+    background: var(--main-theme-color);
+    border:1px solid var(--main-theme-color);
+    color: white;
+    border-radius: 10px;
+}
+
+.btn-report:hover {
+    background: var(--main-theme-color-hover);
+    color: white;
+}
