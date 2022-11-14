@@ -42,17 +42,17 @@ public class ProfileController extends HttpServlet {
         response.setContentType("text/html;charset=UTF-8");
         HttpSession session = request.getSession();
         String userId = request.getParameter("userid");
-                   
-
-
         User user;
-
+User userLogin = (User) session.getAttribute("login");
         if (userId != null){
+             
             user = UserDAO.getUserByID(Integer.parseInt(userId));
-           boolean checkfollow = UserDAO.checkFollowUser(user.getId(), Integer.parseInt(userId));
-            request.setAttribute("CHECK_FOLLOW", checkfollow);}
-        else
-            user = (User) session.getAttribute("login");
+           boolean checkfollow = UserDAO.checkFollowUser(userLogin.getId(), user.getId());
+            request.setAttribute("CHECK_FOLLOW_HOME", checkfollow);}
+        else{
+            user = (User) session.getAttribute("login");}
+       
+        
         request.setAttribute("user", user);
 
 

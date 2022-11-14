@@ -27,6 +27,7 @@
                 </div>
                 <c:if test="${not empty homeRecipe}">
                     <c:forEach items="${homeRecipe}" var="re">
+                        <input type="hidden" id="recipeidinhome" value="${re.getId()}">
                         <div class="user-recipe" >
                             <div class="media recipe-header">
                                 <img class="recipe-ava c-pointer"
@@ -42,7 +43,7 @@
                                     </a>
                                     <div class="dropdown-menu" style="min-width: inherit;" aria-labelledby="dropdownMenuLink">
                                         <a class="dropdown-item" onclick="showConfirmBoxHome(${re.getId()}, 'recipe')">Delete</a>
-                                        <a class="dropdown-item" href="#">Report</a>
+                                        <a class="dropdown-item" onclick="getReportRecipeHome(${re.getId()})">Report</a>
                                     </div>
                                 </div>
 
@@ -148,11 +149,49 @@
             </div>
         </div>
         <!--End of Delete confirm -->
+        
+          <!--ham container report recipe-->
+        <div class="fixed-container " id="report_recipe" >
+            <div class="gray-box"></div>
+            <div class="content card-body col-12 col-md-4">
+                <div class="col-12 p-0">
+                    <div class="report-title h3 font-weight-bold">Report Recipe </div>
+                    <!--                    <form action="ReportController" class="col">-->
+                    <div class="form-group">
+                        <select name="typeReport" class="selectReport w-100" id="select_Rp">
+                            <option value="Content">Inappropriate Content</option>
+                            <option value="Intellectual">Infringement on intellectual property</option>
+                            <option value="Spamming">Spamming or misleading</option>
+                            <option value="Community">The recipe is not suitable for the community</option>
+                        </select>
+
+                        <input  type="hidden" id="loginID">
+                        <!--                            <input type="hidden" name="bakerID" id="loginID" value="">
+                                                    <input type="hidden" name="recipeID" id="recipeID" value="">-->
+                    </div>
+                    <div class="form-group" >
+                        <textarea name="txtReport" class="txtareaRp w-100"  id="txtReport" value=""></textarea>
+                    </div>  
+                    <div class="form-group">
+                        <button class="hover" type="submit" onclick="sendReportHome('Recipe')">Send Report</button>
+                    </div>
+
+                    <!--</form>--> 
+                </div>
+                <div id="thankReportHome"></div>
+
+            </div>
+        </div>
+        <!--ket thuc ham container-->
         <div class="fixed-container " id="liked-list" >
             <div class="gray-box"></div>
             <div class="content card-body col-12 col-md-6">
             </div>
         </div>
+        <script>
+            var recipeID =document.querySelector('#recipeidinhome').value;
+            var loginID = ${sessionScope.login.id};
+        </script>
         <script src="assets/js/home.js"></script>
         <script>
         </script>

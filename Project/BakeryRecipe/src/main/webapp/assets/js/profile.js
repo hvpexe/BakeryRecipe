@@ -141,3 +141,52 @@ function deleteRecipe(recipeID, item) {
         }
     });
 }
+
+
+function getReportRecipeProfile(recipeID) {
+    console.log(recipeID);
+    var report = $('#report_recipe');
+    var graybox = $('#report_recipe .gray-box');
+    //       var content = $('#report_list .content');
+    graybox.click(() => report.removeClass('d-flex'));
+    var exit_button = document.createElement("div").classList.add('exit-btn');
+    //load content
+    report.addClass('d-flex');
+    //
+    $('#report_recipe .exit-btn').click(() => report.removeClass('d-flex'));
+}
+
+function sendReportProfile(value) {
+    var selectReport = document.querySelector('#select_Rp').value;
+    var txtReport = document.querySelector('#txtReport').value;
+
+    if (value === 'Recipe') {
+        $.ajax({
+            url: "ReportRecipeAjax",
+            type: "get", //send it through get method
+            data: {
+                typeReport: selectReport,
+                txtReport: txtReport,
+                bakerID: userReport,
+                recipeID: recipeID
+            },
+            success: function (response) {
+                //Do Something
+                console.log("thanh cong roi kia");
+                $('#thankReportProfile').html("Thank for your feedback");
+//                var cmtShow = document.getElementById("show-comment");
+//                cmtShow.innerHTML += response;
+//                item.value = "";
+
+            },
+            error: function (xhr) {
+                console.log("that bai");
+                console.log(xhr);
+                //Do Something to handle error
+            }
+        });
+    } 
+
+  
+  
+}

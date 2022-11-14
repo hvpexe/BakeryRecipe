@@ -242,7 +242,8 @@
                                     </div>
 
                                     <c:forEach items="${COMMENT_LIST}" var="cmt">
-
+                                  <input  type="hidden" id="commentID">
+                                        <input type="hidden" id="commentReportID" value="${cmt.commentID}">
                                         <div class="d-flex flex-start mb-4"  id="comment-${cmt.commentID}" >
                                             <img class="rounded-circle border mr-2"
                                                  src="./assets/images/avt/${cmt.avatar}" alt="avatar"
