@@ -145,7 +145,6 @@
                                                 <input class="instruction-box-input col "  autocomplete="off" form="disabled"  name="iamount" id="amount"  type="text" placeholder="1 Piece">
                                                 <div class="ingredient-amount-suggestion d-none position-absolute list-group p-0"\
                                                      id="ingredient-amount-suggestion">
-                                                    <div class="list-group-item font-weight-bold font-italic">Suggestion:</div>
                                                     <c:forEach items="${sessionScope.IP_INGAMOUNTS}" var="ing">
                                                         <span class="list-group-item hover-button-1 hover-bold"><a class="p-0"></a> ${ing}</span>
                                                     </c:forEach>
@@ -185,7 +184,8 @@
                                                                  src="${st.img}" 
                                                                  style="background-image:url(${st.img})"
                                                                  onclick="this.querySelector('input').click();">
-                                                                <input name="inst-image${i.index}" id="inst-image3" class="d-none" readonly="" type="file" accept="image/*" onchange="changeImg(this.parentElement, window.URL.createObjectURL(this.files[0]), event)">
+                                                                <input name="inst-image${i.index}" id="inst-image3" class="d-none" readonly="" type="file" accept="image/*" 
+                                                                       onchange="changeImg(this.parentElement, window.URL.createObjectURL(this.files[0]), event)">
                                                             </div>
                                                             <textarea class="instruction-box-input col " value="${st.detail}" readonly="" name="inst-description" id="inst-description${i.index}" type="text">${st.detail}</textarea>
                                                             <div class="item-trashbin fas fa-trash ml-auto description-button" onclick="removeElem(this.parentElement)"></div>

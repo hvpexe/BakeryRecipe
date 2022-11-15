@@ -148,6 +148,7 @@ function addImage(container) {
     var inputPicture = document.createElement('input');
     inputPicture.setAttribute('type', 'file');
     inputPicture.setAttribute('name', 'video-image');
+    inputPicture.setAttribute('accept', 'image/*');
     inputPicture.setAttribute('class', 'd-none');
     inputPicture.setAttribute('count', picCount.getAttribute('count'));
     //    inputPicture.setAttribute('onclick', 'changeImg(this)');
@@ -338,11 +339,12 @@ function showDetail(elem) {
     detail.classList.remove('d-none');
     detail.querySelector('[name=step]').value = elem.querySelector('[name=step]').value;
     detail.querySelector('[name=step]').click();
-    let imgValue = elem.querySelector('input[type=file]').value;
+    let imgValue = elem.querySelector('input[type=file]').parentElement.getAttribute('src');
     if (imgValue) {
         detail.querySelector('img').parentElement.classList.remove('fas', 'fa-camera');
         detail.querySelector('img').classList.remove('d-none');
-        detail.querySelector('img').src = elem.querySelector('input[type=file]').parentElement.getAttribute('src');
+//        detail.querySelector('img').setAttribute('src',elem.querySelector('input[type=file]').parentElement.getAttribute('src'));
+        detail.querySelector('img').setAttribute('src',elem.querySelector('input[type=file]').parentElement.getAttribute('src'));
     } else {
         detail.querySelector('img').parentElement.classList.add('fas', 'fa-camera');
         detail.querySelector('img').classList.add('d-none');
@@ -444,6 +446,8 @@ $('#ingredient-suggestion span').click(e => {
     $('#ingredient [name=iname]').val($(e.target).text());
     $('#ingredient [name=iamount]').focus();
     $('#ingredient-suggestion').addClass('d-none');
+    $('#ingredient-amount-suggestion').addClass('d-none');
+
 });
 $('#ingredient [name=iamount]').keyup(e => {
     if (e.target.value == "") {
@@ -462,8 +466,8 @@ $('#ingredient-amount-suggestion span').click(e => {
     $('#ingredient [name=iamount]').val($(e.target).text());
     $('#ingredient [name=iname]').focus();
     $('#ingredient-amount-suggestion').addClass('d-none');
+    $('#ingredient-suggestion').addClass('d-none');
 });
-
 
 
 
@@ -499,6 +503,9 @@ ItemCopy({
         var doc = new DOMParser().parseFromString(result, "text/html");
         var name = doc.querySelector('div input').value;
         console.log(checkIngredient(name));
+
+        $('#ingredient-suggestion').addClass('d-none');
+        $('#ingredient-amount-suggestion').addClass('d-none');
         if (checkIngredient(name)) {
             $(container).append(result);
         } else

@@ -1049,7 +1049,7 @@ public class RecipeDAO {
                 while (rs.next()) {
                     relateListRecipe.put(checkNum, rs.getString("Name"));
                     Recipe recipeD = RecipeDAO.searchRecipebyName(relateListRecipe.get(checkNum));
-                    if (recipeD != null) {
+                    if (recipeD != null && listRecipe.size() < 8) {
                         listRecipe.add(recipeD);
                         checkNum++;
                     }
@@ -1059,6 +1059,7 @@ public class RecipeDAO {
 
             List<Recipe> recipeDL = RecipeDAO.RelatewithBaker(recipeID);
             for (int i = 0; i < recipeDL.size(); i++) {
+                if (listRecipe.size() < 8) 
                 listRecipe.add(recipeDL.get(i));
             }
 
